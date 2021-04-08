@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="https://demo.voidcoders.com/htmldemo/fitgear/main-files/assets/css/animate.css">
     <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1.css">
+    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/theme-2.css">
 
 </head>
 
