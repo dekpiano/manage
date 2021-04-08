@@ -17,13 +17,14 @@ var  $title = "ผลการเรียน";
     public function score(){      
         $data['title'] = "ผลการเรียน";
         $data['scoreYear'] = $this->db->select('
+                                    tb_register.RegisterClass,
                                     tb_register.RegisterYear,
-                                    tb_register.StudentID,
-                                    tb_register.RegisterClass')
+                                    tb_register.StudentID
+                                    ')
                                     ->from('tb_register')
                                     ->where('StudentID',$this->session->userdata('login_id'))
                                     ->group_by('tb_register.RegisterYear')
-                                    ->order_by('tb_register.RegisterClass asc','(tb_register.RegisterYear) asc')
+                                    ->order_by('tb_register.RegisterClass asc','tb_register.RegisterYear asc')
                                     ->get()->result();
          //echo '<pre>';print_r($data['scoreYear']); exit();
         $data['scoreStudent'] = $this->db->select('tb_register.StudentID,

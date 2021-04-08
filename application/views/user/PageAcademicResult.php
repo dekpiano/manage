@@ -131,9 +131,10 @@
             <?php if($CheckOnOff[0]->onoff_status == "true") : ?>
 
             <div class="row">
-                <?php 
+                <?php asort($scoreYear);
+                
                 foreach ($scoreYear as $key_year => $v_scoreYear) : 
-                    
+                
                 ?>
                 <div class="col-md-6">
 
