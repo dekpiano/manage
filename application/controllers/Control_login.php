@@ -30,9 +30,6 @@ class Control_login extends CI_Controller {
 			$data = $this->dataAll();
 					$this->load->view('login/loginMain.php');
 		}
-		
-
-		
 	}
 
 	public function validlogin()
@@ -87,7 +84,7 @@ class Control_login extends CI_Controller {
 
 					$this->session->set_userdata(array('login_id' => $result->pers_id,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_firstname,'status'=> 'admin','img' => $result->pers_img));
 
-				 redirect('AdminHome');
+				 redirect('Teacher/Home');
 					//echo "Yes";
 
 				}

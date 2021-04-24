@@ -32,35 +32,45 @@
     .btn-xs {
         line-height: 1.5;
     }
-    .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20rem; }
-  .toggle.ios .toggle-handle { border-radius: 20rem; }
-  /* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
+    .toggle.ios,
+    .toggle-on.ios,
+    .toggle-off.ios {
+        border-radius: 20rem;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-header{
-    overflow: auto;
-}
-.form-control{
-    padding-top: 0rem; 
-    padding-bottom: 0rem;
-}
-    
+    .toggle.ios .toggle-handle {
+        border-radius: 20rem;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    header {
+        overflow: auto;
+    }
+
+    .form-control {
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+    }
     </style>
 </head>
 
@@ -94,7 +104,8 @@ header{
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('AdminHome');?>"><i
                                     class="fas fa-home fa-fw mr-2"></i>หน้าแรก </a>
-                        </li>
+                        </li>                       
+                       
                         <hr>
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('Admin/AcademicResult');?>"><i
@@ -117,7 +128,7 @@ header{
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i
                                     class="fas fa-qrcode fa-fw mr-2"></i>QR Code </a>
                         </li>
-                      
+
 
                     </ul>
 

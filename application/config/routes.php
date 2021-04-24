@@ -71,6 +71,13 @@ $route['Admin/ClassRoom'] = "admin/ConAdminClassRoom/AdminClassMain";
 $route['Logout'] = "Control_login/logout";
 $route['Login'] = "Control_login/Login_main";
 
+// Teacher
+$route['Teacher/Home'] = "teacher/ConTeacherHome/TeacherHome";
+$route['Teacher/Course'] = "teacher/ConTeacherCourse/Course";
+$route['Teacher/Course/SendPlan'] = "teacher/ConTeacherCourse/send_plan";
+$route['Teacher/Course/CheckPlan'] = "teacher/ConTeacherCourse/check_plan";
+$route['Teacher/Course/CheckPlan/(:any)'] = "teacher/ConTeacherCourse/check_plan/$1";
+
 // User
 $route['Home'] = "user/ConUser_Home/Home";
 $route['AcademicResult'] = "user/ConAcademicResult/score";
