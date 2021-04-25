@@ -6,12 +6,11 @@ var  $title = "หน้าแรก";
 	public function __construct() {
 		parent::__construct();
 		
-		if ($this->session->userdata('fullname') == '' && $this->session->userdata('status') == "user") {      
-			redirect('Login','refresh');
+		if (empty($this->session->userdata('fullname')) && !$this->session->userdata('status') == 'admin') {      
+			redirect('welcome','refresh');
 		}
-
+//echo $this->session->userdata('fullname'); exit();
     }
-
 
     public function TeacherHome(){      
         $DBpersonnel = $this->load->database('personnel', TRUE); 

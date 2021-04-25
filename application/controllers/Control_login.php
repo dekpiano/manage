@@ -77,7 +77,7 @@ class Control_login extends CI_Controller {
 				{
 
 					$result = $this->Model_login->fetch_admin_login($username, $password);
-					$this->session->set_userdata(array('login_id' => $result->pers_id,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_firstname,'status'=> 'admin','class' => $result->StudentClass));
+					$this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_firstname,'status'=> 'admin','class' => $result->StudentClass));
 
 					set_cookie('username_cookie',$username,'3600'); 
 					set_cookie('password_cookie',$password,'3600');
@@ -106,6 +106,14 @@ class Control_login extends CI_Controller {
 		delete_cookie('password_cookie'); 
 		$this->session->sess_destroy();
 		redirect('Login', 'refresh');
+	}
+
+	public function LogoutTeacher()
+	{
+		delete_cookie('username_cookie'); 
+		delete_cookie('password_cookie'); 
+		$this->session->sess_destroy();
+		redirect('welcome', 'refresh');
 	}
 
 }

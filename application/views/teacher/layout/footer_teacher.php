@@ -29,13 +29,40 @@
           <!-- DataTable -->
           <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
           <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=2"></script>
 
           </body>
 
           <script>
-                $(document).ready(function() {
-                    $('#example').DataTable();
-                });
+$(document).ready(function() {
+    $('#example').DataTable({
+        "order": [[ 4, "desc" ]]
+    });
+});
+
+
+    // Disable form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Get the forms we want to add validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+    
+
+
           </script>
 
           </html>

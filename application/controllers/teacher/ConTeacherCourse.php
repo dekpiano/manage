@@ -7,15 +7,18 @@ var  $title = "หน้าแรก";
 		parent::__construct();
 		
 		if ($this->session->userdata('fullname') == '' && $this->session->userdata('status') == "user") {      
-			redirect('Login','refresh');
+			redirect('welcome','refresh');
 		}
+
+        $this->load->model('teacher/ModTeacherCourse');
 
     }
 
 
     public function Course(){      
         
-        $this->load->view('teacher/layout/header_teacher.php');
+        $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->get('tb_send_plan')->result();
+        $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_main.php');
         $this->load->view('teacher/layout/footer_teacher.php');
@@ -39,7 +42,38 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/course/plan/plan_check.php');
         $this->load->view('teacher/layout/footer_teacher.php');
     }
+    
+    function insert_plan(){
 
+        $config['upload_path']= "uploads/academic/course/plan/";
+        $config['allowed_types'] = '*';
+        //$config['encrypt_name'] = TRUE;
+         
+        $this->load->library('upload',$config);
+        $this->upload->initialize($config); 
+        if($this->upload->do_upload("seplan_file")){
+            $data = array('upload_data' => $this->upload->data());
+ 
+            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
+                            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
+                            'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
+                            'seplan_createdate'=> date('Y-m-d H:i:s'),
+                            'seplan_year'=> '',
+                            'seplan_term'=> '',
+                            'seplan_file'=> $data['upload_data']['file_name'],
+                            'seplan_usersend'=> $this->session->userdata('login_id'),
+                            'seplan_learning'  => $this->session->userdata('pers_learning') 
+                         );
+             
+            $result= $this->ModTeacherCourse->plan_insert($insert);
+            echo $result;
+            
+        }else{
+            $error = $this->upload->display_errors();
+            echo $error;
+        }
+        
+     }
 
 
 }

@@ -25,28 +25,32 @@
                 </div>
                 <div class="card-body">
                    
-                    <form>
+                    <form class="needs-validation" novalidate id="form_insert_plan">
                         <div class="form-group">
                             <label class="form-control-label">ชื่อวิชา</label>
-                            <input type="text" placeholder="" class="form-control">
+                            <input type="text" id="seplan_namesubject" name="seplan_namesubject" placeholder="" class="form-control" required>
+                            <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">รหัสวิชา</label>
-                            <input type="text" placeholder="" class="form-control">
+                            <input type="text" id="seplan_coursecode" name="seplan_coursecode" placeholder="" class="form-control" required>
+                            <div class="invalid-feedback">กรุณากรอกรหัสวิชา</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">ประเภทการส่ง</label>
-                            <select name="account" class="form-control mb-3">
-                              <option>เลือก...</option>
-                              <option>โครงการสอน</option>
-                              <option>แผนการสอนหน้าเดียว</option>
-                              <option>แผนการสอนเต็ม</option>
-                              <option>บันทึกหลังสอน</option>
+                            <select id="seplan_typeplan" name="seplan_typeplan" class="form-control mb-3" required>
+                              <option value="">เลือก...</option>
+                              <option value="โครงการสอน">โครงการสอน</option>
+                              <option value="แผนการสอนหน้าเดียว">แผนการสอนหน้าเดียว</option>
+                              <option value="แผนการสอนเต็ม">แผนการสอนเต็ม</option>
+                              <option value="บันทึกหลังสอน">บันทึกหลังสอน</option>
                             </select>
+                            <div class="invalid-feedback">กรุณาเลือกประเภทการส่ง</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">ไฟล์งาน</label>
-                            <input type="file" placeholder="Password" class="form-control">
+                            <input type="file" id="seplan_file" name="seplan_file" placeholder="Password" class="form-control" required>
+                            <div class="invalid-feedback">กรุณาเลือกไฟล์</div>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="ส่งงาน" class="btn btn-primary">
