@@ -19,13 +19,17 @@
                         class="icon-interface-windows"></i>งานหลักสูตร </a>
                 <ul id="exampledropdownDropdown"
                     class="collapse list-unstyled  <?=$this->uri->segment(2) == 'Course' ? 'show' : '' ?>">
-                    <li><a href="<?=base_url('Teacher/Course');?>">แผนการสอน</a></li>
+                    <li><a href="<?=base_url('Teacher/Course');?>">แผนการสอน</a>
+                    </li>
                     <span class="heading">สำหรับหัวหน้างาน</span>
-                    <li> <a href="<?=base_url('Teacher/Course/CheckPlan');?>"> <i class="icon-flask"></i>ตรวจงาน </a></li>
+                    <li>
+                        <a href="<?=base_url('Teacher/Course/CheckPlan');?>"> <i class="icon-flask"></i>ตรวจงาน </a>
+                        <a href="<?=base_url('Teacher/Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่า </a>
+                    </li>
                 </ul>
             </li>
         </ul>
-       
+
     </nav>
 
     <div class="content-inner">

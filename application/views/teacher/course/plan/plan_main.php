@@ -21,11 +21,12 @@
                         <tr>
                             <th>ภาคเรียน</th>
                             <th>ปีการศึกษา</th>
+                            <th>ประเภท</th>
                             <th>รหัสวิชา</th>
                             <th>ชื่อวิชา</th>
                             <th>วันที่ส่ง</th>
                             <th>หน.กลุ่มสาระ</th>
-                            <th>หน.วิชาการ</th>
+                            <th>หน.งานพัฒนาหลักสูตร</th>
                             <th>คำสั่ง</th>
                         </tr>
                     </thead>
@@ -35,6 +36,7 @@
                         <tr>
                             <td>2<?=$v_plan->seplan_term;?></td>
                             <td>2563<?=$v_plan->seplan_year;?></td>
+                            <td><?=$v_plan->seplan_typeplan;?></td>
                             <td><?=$v_plan->seplan_coursecode;?></td>
                             <td><?=$v_plan->seplan_namesubject;?></td>
                             <td><?=$v_plan->seplan_createdate;?></td>

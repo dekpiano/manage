@@ -35,51 +35,34 @@
         <?php if(isset($ID)) : ?>
         <div class="card">
             <div class="card-body">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <table id="tb_checkplan" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>ภาคเรียน</th>
                             <th>ปีการศึกษา</th>
+                            <th>ประเภท</th>
                             <th>รหัสวิชา</th>
                             <th>ชื่อวิชา</th>
+                            <th>ผู้ส่ง</th>
                             <th>วันที่ส่ง</th>
                             <th>หน.กลุ่มสาระ</th>
-                            <th>หน.วิชาการ</th>
-                            <th>คำสั่ง</th>
+                            <th>หน.งานพัฒนาหลักสูตร</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php foreach ($checkplan as $key => $v_checkplan): ?>
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>$320,800</td>
-                            <td>61</td>
+                            <td><?=$v_checkplan->seplan_year;?></td>
+                            <td><?=$v_checkplan->seplan_term;?></td>
+                            <td><?=$v_checkplan->seplan_typeplan;?></td>
+                            <td><?=$v_checkplan->seplan_coursecode;?></td>
+                            <td><?=$v_checkplan->seplan_namesubject;?></td>
+                            <td><?=$v_checkplan->pers_prefix.$v_checkplan->pers_firstname.' '.$v_checkplan->pers_lastname;?></td>
+                            <td><?=$v_checkplan->seplan_createdate;?></td>
+                            <td><?=$v_checkplan->seplan_status1;?></td>
+                            <td><?=$v_checkplan->seplan_status2;?></td>
                         </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                            <td>$320,800</td>
-                            <td>61</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                            <td>$320,800</td>
-                            <td>61</td>
-                        </tr>
-
+                    <?php endforeach; ?>
                     </tbody>
 
                 </table>

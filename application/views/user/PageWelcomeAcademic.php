@@ -197,9 +197,9 @@
                  <!-- Column -->
                  <div class="col-md-4  ">
                     <div class="card card-shadow border-0 mb-4">
-                        <a href="<?=base_url('Students');?>" class="card-hover py-4 text-center d-block rounded">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="card-hover py-4 text-center d-block rounded">
                             <span class="bg-success-grediant"><i class="far fa-calendar-alt"></i></span>
-                            <h6 class="ser-title">นักเรียน</h6>
+                            <h6 class="ser-title">สำหรับครู</h6>
                         </a>
                     </div>
                 </div>     

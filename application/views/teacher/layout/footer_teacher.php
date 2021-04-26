@@ -26,6 +26,8 @@
           <script src="<?=base_url()?>assets/js/charts-home.js"></script>
           <!-- Main File-->
           <script src="<?=base_url()?>assets/js/front.js"></script>
+          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+          
           <!-- DataTable -->
           <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
           <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -39,6 +41,13 @@ $(document).ready(function() {
     $('#example').DataTable({
         "order": [[ 4, "desc" ]]
     });
+    $('#tb_checkplan').DataTable({
+        "order": [[ 5, "desc" ]]
+    });
+
+    
+    $( "#seplanset_startdate" ).datepicker($.extend($.datepicker.regional.th, { dateFormat: "dd/mm/yy" }));
+    $( "#seplanset_enddate" ).datepicker({ dateFormat: "dd/mm/yy" });
 });
 
 

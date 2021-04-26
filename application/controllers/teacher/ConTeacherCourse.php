@@ -37,6 +37,13 @@ var  $title = "หน้าแรก";
         $data['lean'] = $DBskj->get('tb_learning')->result();
         $data['ID'] = $id;
         //echo '<pre>'; print_r($lean); exit();
+        $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_prefix,
+                                                skjacth_personnel.tb_personnel.pers_firstname,
+                                                skjacth_personnel.tb_personnel.pers_lastname")
+                                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                            ->where('seplan_learning',$id)
+                            ->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_check.php');
@@ -73,6 +80,15 @@ var  $title = "หน้าแรก";
             echo $error;
         }
         
+     }
+
+
+     function setting_plan(){
+        $data['title'] = "ตั้งค่า";
+        $this->load->view('teacher/layout/header_teacher.php',$data);
+        $this->load->view('teacher/layout/navbar_teaher.php');
+        $this->load->view('teacher/course/plan/plan_setting_plan.php');
+        $this->load->view('teacher/layout/footer_teacher.php');
      }
 
 
