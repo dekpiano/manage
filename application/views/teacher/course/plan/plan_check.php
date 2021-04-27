@@ -36,57 +36,74 @@
         <?php if(isset($ID)) : ?>
         <div class="card">
             <div class="card-body">
-                <table id="tb_checkplan" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ภาคเรียน</th>
-                            <th>ปีการศึกษา</th>
-                            <th>ประเภท</th>
-                            <th>รหัสวิชา</th>
-                            <th>ชื่อวิชา</th>
-                            <th>ผู้ส่ง</th>
-                            <th>วันที่ส่ง</th>
-                            <th>ไฟล์</th>
-                            <th style="width:100px;">หน.กลุ่มสาระ</th>
-                            <th style="width:100px;">หน.งานพัฒนาหลักสูตร</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($checkplan as $key => $v_checkplan): ?>
-                        <tr>
-                            <td><?=$v_checkplan->seplan_term;?></td>
-                            <td><?=$v_checkplan->seplan_year;?></td>
-                            <td><?=$v_checkplan->seplan_typeplan;?></td>
-                            <td><?=$v_checkplan->seplan_coursecode;?></td>
-                            <td><?=$v_checkplan->seplan_namesubject;?></td>
-                            <td><?=$v_checkplan->pers_prefix.$v_checkplan->pers_firstname.' '.$v_checkplan->pers_lastname;?>
-                            </td>
-                            <td><?=$v_checkplan->seplan_createdate;?></td>
-                            <td><a target="_blank"
-                                    href="<?=base_url('uploads/academic/course/plan/').$v_checkplan->seplan_file;?>">เปิดดู</a>
-                            </td>
-                            <td>
-                                <select name="account" class="form-control mb-3">
-                                    <option value="รอตรวจ">รอตรวจ</option>
-                                    <option value="ผ่าน">ผ่าน</option>
-                                    <option value="ไม่ผ่าน">ไม่ผ่าน</option>
-                                </select>
-                                <?=$v_checkplan->seplan_status1;?>
-                            </td>
-                            <td>
-                                <select name="account" class="form-control mb-3">
-                                    <option value="รอตรวจ">รอตรวจ</option>
-                                    <option value="ผ่าน">ผ่าน</option>
-                                    <option value="ไม่ผ่าน">ไม่ผ่าน</option>
-                                </select>
-                                <?=$v_checkplan->seplan_status2;?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                <div class="table-responsive">
+                    <table id="tb_checkplan" class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ภาคเรียน</th>
+                                <th>ปีการศึกษา</th>
+                                <th>ประเภท</th>
+                                <th>รหัสวิชา</th>
+                                <th>ชื่อวิชา</th>
+                                <th>ผู้ส่ง</th>
+                                <th>วันที่ส่ง</th>
+                                <th>ไฟล์</th>
+                                <th style="width:100px;">หน.กลุ่มสาระ</th>
+                                <th style="width:100px;">หน.งานพัฒนาหลักสูตร</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <?php foreach ($checkplan as $key => $v_checkplan):
+                                $bg_alert = '';
+                                if($v_checkplan->seplan_status1 == "ผ่าน" && $v_checkplan->seplan_status2 == "ผ่าน"){
+                                    $bg_alert = "table-success";
+                                }
+                            ?>
 
-                </table>
+                            <tr id="bgC<?=$v_checkplan->seplan_ID;?>" class="<?=$bg_alert;?>">
+                                <td><?=$v_checkplan->seplan_term;?></td>
+                                <td><?=$v_checkplan->seplan_year;?></td>
+                                <td><?=$v_checkplan->seplan_typeplan;?></td>
+                                <td><?=$v_checkplan->seplan_coursecode;?></td>
+                                <td><?=$v_checkplan->seplan_namesubject;?></td>
+                                <td><?=$v_checkplan->pers_prefix.$v_checkplan->pers_firstname.' '.$v_checkplan->pers_lastname;?>
+                                </td>
+                                <td><?=$v_checkplan->seplan_createdate;?></td>
+                                <td><a target="_blank"
+                                        href="<?=base_url('uploads/academic/course/plan/').$v_checkplan->seplan_file;?>">เปิดดู</a>
+                                </td>
+                                <td>
+                                    <select id="seplan_status1" name="seplan_status1"
+                                        data-planId="<?=$v_checkplan->seplan_ID;?>"
+                                        class="form-control mb-3 seplan_status1">
+                                        <option <?=$v_checkplan->seplan_status1 == "รอตรวจ" ? 'selected' : ''?>
+                                            value="รอตรวจ">รอตรวจ</option>
+                                        <option <?=$v_checkplan->seplan_status1 == "ผ่าน" ? 'selected' : ''?>
+                                            value="ผ่าน">ผ่าน</option>
+                                        <option <?=$v_checkplan->seplan_status1 == "ไม่ผ่าน" ? 'selected' : ''?>
+                                            value="ไม่ผ่าน">ไม่ผ่าน</option>
+                                    </select>
 
+                                </td>
+                                <td>
+                                    <select id="seplan_status2" name="seplan_status2"
+                                        data-planId="<?=$v_checkplan->seplan_ID;?>"
+                                        class="form-control mb-3 seplan_status2">
+                                        <option <?=$v_checkplan->seplan_status2 == "รอตรวจ" ? 'selected' : ''?>
+                                            value="รอตรวจ">รอตรวจ</option>
+                                        <option <?=$v_checkplan->seplan_status2 == "ผ่าน" ? 'selected' : ''?>
+                                            value="ผ่าน">ผ่าน</option>
+                                        <option <?=$v_checkplan->seplan_status2 == "ไม่ผ่าน" ? 'selected' : ''?>
+                                            value="ไม่ผ่าน">ไม่ผ่าน</option>
+                                    </select>
+
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
         </div>
         <?php endif; ?>

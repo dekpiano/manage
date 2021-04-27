@@ -107,4 +107,78 @@ $(document).on('submit','#form_insert_plan', function(e){
 
 
 
+$(document).on("change",".seplan_status1",function(){
+    
+    // console.log($(this).val());
+    // console.log($(this).attr('data-planId'));
+    var status1 = $(this).val();
+    var planId = $(this).attr('data-planId');
+    
+
+    $.ajax({
+        type: 'POST',
+        url: "../../../teacher/ConTeacherCourse/UpdateStatus1",
+        data: {status1:status1,planId:planId},
+        dataType:'json',
+        beforeSend: function() {
+           
+        },
+        success: function(data) {
+            console.log(data[0].seplan_status1);
+
+            if(data[0].seplan_status2 == data[0].seplan_status1){
+                $("#bgC"+planId).addClass('table-success');
+              }else{
+                $("#bgC"+planId).removeClass('table-success');
+              }
+            Swal.fire(
+                'แจ้งเตือน',
+                'คุณเปลี่ยนสถานะเรียบร้อย',
+                'success'
+              )
+            
+        },
+        error: function(xhr) { 
+            alert("Error occured.please try again");
+            console.log(xhr.statusText + xhr.responseText);           
+        }
+    });
+});
+
+$(document).on("change",".seplan_status2",function(){
+    // console.log($(this).val());
+    // console.log($(this).attr('data-planId'));
+    var status2 = $(this).val();
+    var planId = $(this).attr('data-planId');
+
+    $.ajax({
+        type: 'POST',
+        url: "../../../teacher/ConTeacherCourse/UpdateStatus2",
+        data: {status2:status2,planId:planId},
+        dataType:'json',
+        beforeSend: function() {
+           
+        },
+        success: function(data) {
+            
+            if(data[0].seplan_status2 == data[0].seplan_status1){
+                $("#bgC"+planId).addClass('table-success');
+              }else{
+                $("#bgC"+planId).removeClass('table-success');
+              }
+            Swal.fire(
+                'แจ้งเตือน',
+                'คุณเปลี่ยนสถานะเรียบร้อย',
+                'success'
+              )
+              
+        },
+        error: function(xhr) { 
+            alert("Error occured.please try again");
+            console.log(xhr.statusText + xhr.responseText);           
+        }
+    });
+});
+
+
 });
