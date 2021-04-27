@@ -55,7 +55,8 @@ var  $title = "หน้าแรก";
         $config['upload_path']= "uploads/academic/course/plan/";
         $config['allowed_types'] = '*';
         //$config['encrypt_name'] = TRUE;
-         
+        $SetPlan = $this->db->get('tb_send_plan_setup')->result();
+        //print_r($SetPlan); exit();
         $this->load->library('upload',$config);
         $this->upload->initialize($config); 
         if($this->upload->do_upload("seplan_file")){
@@ -65,8 +66,8 @@ var  $title = "หน้าแรก";
                             'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
                             'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
                             'seplan_createdate'=> date('Y-m-d H:i:s'),
-                            'seplan_year'=> '',
-                            'seplan_term'=> '',
+                            'seplan_year'=> $SetPlan[0]->seplanset_year,
+                            'seplan_term'=> $SetPlan[0]->seplanset_term,
                             'seplan_file'=> $data['upload_data']['file_name'],
                             'seplan_usersend'=> $this->session->userdata('login_id'),
                             'seplan_learning'  => $this->session->userdata('pers_learning') 
@@ -82,13 +83,36 @@ var  $title = "หน้าแรก";
         
      }
 
-
      function setting_plan(){
         $data['title'] = "ตั้งค่า";
+        $data['SetPlan'] = $this->db->get('tb_send_plan_setup')->result();
+        //print_r($date['SetPlan']); exit();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_setting_plan.php');
         $this->load->view('teacher/layout/footer_teacher.php');
+     }
+
+     function setting_UpdatePlan(){
+         $dateS = str_replace('/', '-', $this->input->post('seplanset_startdate'));
+         $startdate = date('Y-m-d H:i:s',strtotime($this->input->post('seplanset_startdate')));
+         $dateE = str_replace('/', '-', $this->input->post('seplanset_enddate'));
+         $enddate = date('Y-m-d H:i:s',strtotime($this->input->post('seplanset_enddate')));
+            $data = array('seplanset_startdate' => $startdate,
+            'seplanset_enddate' => $enddate,
+            'seplanset_usersetup' => $this->session->userdata('login_id'),
+            'seplanset_year' => $this->input->post('seplanset_year'),
+            'seplanset_term' => $this->input->post('seplanset_term'));
+        //print_r($data); exit();
+            $result = $this->ModTeacherCourse->plan_setting($data,1);
+            if($result > 0){
+                $this->session->set_flashdata(array('status'=>'success','msg'=> 'YES','messge' => "ตั้งค่าสำเร็จ"));
+               
+            }else{
+                $this->session->set_flashdata(array('status'=>'error','msg'=> 'YES','messge' => "ตั้งค่าไม่สำเร็จ".$result));
+               
+            }
+            redirect('Teacher/Course/Setting','refresh');
      }
 
 

@@ -24,10 +24,9 @@
           <script src="<?=base_url()?>assets/vendor/chart.js/Chart.min.js"></script>
           <script src="<?=base_url()?>assets/vendor/jquery-validation/jquery.validate.min.js"></script>
           <script src="<?=base_url()?>assets/js/charts-home.js"></script>
-          <!-- Main File-->
+          <!-- Main File -->
           <script src="<?=base_url()?>assets/js/front.js"></script>
-          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-          
+          <script src="<?=base_url()?>assets/js/jquery.datetimepicker.js"></script>
           <!-- DataTable -->
           <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
           <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -36,42 +35,56 @@
 
           </body>
 
+          <?php if($this->session->flashdata('msg') == 'YES'):?>
+          <script>
+Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge');?>", "<?=$this->session->flashdata('status');?>");
+          </script>
+          <?php endif; $this->session->mark_as_temp('msg',20); ?>
+
+
           <script>
 $(document).ready(function() {
     $('#example').DataTable({
-        "order": [[ 4, "desc" ]]
+        "order": [
+            [5, "desc"]
+        ]
     });
     $('#tb_checkplan').DataTable({
-        "order": [[ 5, "desc" ]]
+        "order": [
+            [6, "desc"]
+        ]
     });
 
-    
-    $( "#seplanset_startdate" ).datepicker($.extend($.datepicker.regional.th, { dateFormat: "dd/mm/yy" }));
-    $( "#seplanset_enddate" ).datepicker({ dateFormat: "dd/mm/yy" });
+    jQuery('#seplanset_startdate').datetimepicker({
+        lang: 'th',
+        format:'d-m-Y H:i:s'
+    });
+    jQuery('#seplanset_enddate').datetimepicker({
+        lang: 'th',
+        format:'d-m-Y H:i:s'
+    });
+
 });
 
 
-    // Disable form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Get the forms we want to add validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-    
-
-
+// Disable form submissions if there are invalid fields
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        // Get the forms we want to add validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
           </script>
 
           </html>

@@ -25,6 +25,7 @@
                             <th>รหัสวิชา</th>
                             <th>ชื่อวิชา</th>
                             <th>วันที่ส่ง</th>
+                            <th>ไฟล์</th>
                             <th>หน.กลุ่มสาระ</th>
                             <th>หน.งานพัฒนาหลักสูตร</th>
                             <th>คำสั่ง</th>
@@ -34,12 +35,13 @@
 
                     <?php foreach ($plan as $key => $v_plan) : ?>
                         <tr>
-                            <td>2<?=$v_plan->seplan_term;?></td>
-                            <td>2563<?=$v_plan->seplan_year;?></td>
+                            <td><?=$v_plan->seplan_term;?></td>
+                            <td><?=$v_plan->seplan_year;?></td>
                             <td><?=$v_plan->seplan_typeplan;?></td>
                             <td><?=$v_plan->seplan_coursecode;?></td>
                             <td><?=$v_plan->seplan_namesubject;?></td>
                             <td><?=$v_plan->seplan_createdate;?></td>
+                            <td><a target="_blank" href="<?=base_url('uploads/academic/course/plan/').$v_plan->seplan_file;?>">เปิดดู</a></td>
                             <td class="text-center"><span class="badge badge-success">ผ่าน</span><?=$v_plan->seplan_status1;?></td>
                             <td class="text-center"><span class="badge badge-danger">ไม่ผ่าน</span><?=$v_plan->seplan_status2;?></td>
                             <td><a href="" class="btn btn-warning btn-sm text-white">แก้ไข</a> <a href="" class="btn btn-danger btn-sm text-white">ลบ</a></td>

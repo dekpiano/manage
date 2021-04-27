@@ -25,15 +25,15 @@
                 </div>
                 <div class="card-body">
                    
-                    <form class="needs-validation" novalidate id="form_insert_settingplan">
+                    <form method="post" action="<?=base_url('teacher/ConTeacherCourse/setting_UpdatePlan')?>" class="needs-validation" novalidate id="form_insert_settingplan">
                         <div class="form-group">
                             <label class="form-control-label">วันเริ่มต้น</label>
-                            <input type="text"  id="seplanset_startdate" name="seplanset_startdate" placeholder="" class="form-control" required>
+                            <input type="text"  id="seplanset_startdate" name="seplanset_startdate" placeholder="" class="form-control" required autocomplete="off" value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_startdate));?>">
                             <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">วันสิ้นสุด</label>
-                            <input type="text" id="seplanset_enddate" name="seplanset_enddate" placeholder="" class="form-control" required>
+                            <input type="text" id="seplanset_enddate" name="seplanset_enddate" placeholder="" class="form-control" required autocomplete="off" value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_enddate));?>">
                             <div class="invalid-feedback">กรุณากรอกรหัสวิชา</div>
                         </div>
                         <div class="form-group">
@@ -44,7 +44,7 @@
                                     $d = date('Y')+543;  
                                     for($i = $d-2; $i <= $d+2; $i++):
                               ?>
-                              <option value="<?=$i?>"><?=$i?></option>
+                              <option <?=$SetPlan[0]->seplanset_year == $i ? 'selected' : ''?> value="<?=$i?>"><?=$i?></option>
                               <?php endfor; ?>
                             </select>
                             <div class="invalid-feedback">กรุณาเลือกประเภทการส่ง</div>
@@ -53,9 +53,9 @@
                             <label class="form-control-label">ภาคเรียน</label>
                             <select id="seplanset_term" name="seplanset_term" class="form-control mb-3" required>
                               <option value="">เลือก...</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
+                              <option <?=$SetPlan[0]->seplanset_term == '1' ? 'selected' : ''?> value="1">1</option>
+                              <option <?=$SetPlan[0]->seplanset_term == '2' ? 'selected' : ''?> value="2">2</option>
+                              <option <?=$SetPlan[0]->seplanset_term == '3' ? 'selected' : ''?> value="3">3</option>
                             </select>
                             <div class="invalid-feedback">กรุณาเลือกประเภทการส่ง</div>
                         </div>
