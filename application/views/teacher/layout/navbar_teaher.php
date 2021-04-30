@@ -3,7 +3,7 @@
     <nav class="side-navbar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="avatar"><img src="https://skj.ac.th/uploads/personnel/<?=$this->session->userdata('img');?>" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
                 <h1 class="h4"><?=$this->session->userdata('fullname');?></h1>
                 <p><?=$this->session->userdata('class');?></p>
@@ -19,13 +19,16 @@
                         class="icon-interface-windows"></i>งานหลักสูตร </a>
                 <ul id="exampledropdownDropdown"
                     class="collapse list-unstyled  <?=$this->uri->segment(2) == 'Course' ? 'show' : '' ?>">
-                    <li><a href="<?=base_url('Teacher/Course');?>">แผนการสอน</a>
+                    <li><a href="<?=base_url('Teacher/Course');?>"><i class="fa fa-file" aria-hidden="true"></i> แผนการสอน</a>
                     </li>
+                    <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_003') : ?>
                     <span class="heading">สำหรับหัวหน้างาน</span>
                     <li>
                         <a href="<?=base_url('Teacher/Course/CheckPlan');?>"> <i class="icon-flask"></i>ตรวจงาน </a>
                         <a href="<?=base_url('Teacher/Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่า </a>
                     </li>
+                    <?php endif; ?>
+
                 </ul>
             </li>
         </ul>

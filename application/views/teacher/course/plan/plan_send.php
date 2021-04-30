@@ -52,9 +52,16 @@
                             <input type="file" id="seplan_file" name="seplan_file" placeholder="Password" class="form-control" required>
                             <div class="invalid-feedback">กรุณาเลือกไฟล์</div>
                         </div>
+                        <?php if($OnOff[0]->seplanset_status == "on"):?>
                         <div class="form-group">
                             <input type="submit" value="ส่งงาน" class="btn btn-primary">
                         </div>
+                        <?php else: ?>
+                            <div class="form-group">
+                            <button type="button" class="btn btn-primary" disabled>หมดเวลาส่ง</button>
+                        </div>
+                        <?php endif; ?>
+                        
                     </form>
                 </div>
             </div>

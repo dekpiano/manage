@@ -24,38 +24,54 @@
                     <h3 class="h4">ฟอร์ม<?=$title;?></h3>
                 </div>
                 <div class="card-body">
-                   
-                    <form method="post" action="<?=base_url('teacher/ConTeacherCourse/setting_UpdatePlan')?>" class="needs-validation" novalidate id="form_insert_settingplan">
+
+                    <form method="post" action="<?=base_url('teacher/ConTeacherCourse/setting_UpdatePlan')?>"
+                        class="needs-validation" novalidate id="form_insert_settingplan">
+                        <div class="form-group">
+                        <div class="i-checks">
+                              <input id="seplanset_status" name="seplanset_status" type="radio"  value="on"  class="radio-template" <?=$SetPlan[0]->seplanset_status == 'on' ? 'checked=""' : ''?>>
+                              <label for="seplanset_status">ระบบเปิด</label>
+                              <input id="seplanset_status" name="seplanset_status" type="radio" value="off" class="radio-template ml-3" <?=$SetPlan[0]->seplanset_status == 'off' ? 'checked=""' : ''?>>
+                              <label for="seplanset_status">ระบบปิด</label>
+                            </div>
+                            
+                            <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
+                        </div>
                         <div class="form-group">
                             <label class="form-control-label">วันเริ่มต้น</label>
-                            <input type="text"  id="seplanset_startdate" name="seplanset_startdate" placeholder="" class="form-control" required autocomplete="off" value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_startdate));?>">
+                            <input type="text" id="seplanset_startdate" name="seplanset_startdate" placeholder=""
+                                class="form-control" required autocomplete="off"
+                                value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_startdate));?>">
                             <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">วันสิ้นสุด</label>
-                            <input type="text" id="seplanset_enddate" name="seplanset_enddate" placeholder="" class="form-control" required autocomplete="off" value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_enddate));?>">
+                            <input type="text" id="seplanset_enddate" name="seplanset_enddate" placeholder=""
+                                class="form-control" required autocomplete="off"
+                                value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_enddate));?>">
                             <div class="invalid-feedback">กรุณากรอกรหัสวิชา</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">ปีการศึกษา</label>
                             <select id="seplanset_year" name="seplanset_year" class="form-control mb-3" required>
-                              <option value="">เลือก...</option>
-                              <?php 
+                                <option value="">เลือก...</option>
+                                <?php 
                                     $d = date('Y')+543;  
                                     for($i = $d-2; $i <= $d+2; $i++):
                               ?>
-                              <option <?=$SetPlan[0]->seplanset_year == $i ? 'selected' : ''?> value="<?=$i?>"><?=$i?></option>
-                              <?php endfor; ?>
+                                <option <?=$SetPlan[0]->seplanset_year == $i ? 'selected' : ''?> value="<?=$i?>"><?=$i?>
+                                </option>
+                                <?php endfor; ?>
                             </select>
                             <div class="invalid-feedback">กรุณาเลือกประเภทการส่ง</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">ภาคเรียน</label>
                             <select id="seplanset_term" name="seplanset_term" class="form-control mb-3" required>
-                              <option value="">เลือก...</option>
-                              <option <?=$SetPlan[0]->seplanset_term == '1' ? 'selected' : ''?> value="1">1</option>
-                              <option <?=$SetPlan[0]->seplanset_term == '2' ? 'selected' : ''?> value="2">2</option>
-                              <option <?=$SetPlan[0]->seplanset_term == '3' ? 'selected' : ''?> value="3">3</option>
+                                <option value="">เลือก...</option>
+                                <option <?=$SetPlan[0]->seplanset_term == '1' ? 'selected' : ''?> value="1">1</option>
+                                <option <?=$SetPlan[0]->seplanset_term == '2' ? 'selected' : ''?> value="2">2</option>
+                                <option <?=$SetPlan[0]->seplanset_term == '3' ? 'selected' : ''?> value="3">3</option>
                             </select>
                             <div class="invalid-feedback">กรุณาเลือกประเภทการส่ง</div>
                         </div>
