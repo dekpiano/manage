@@ -166,7 +166,7 @@
                 <!-- Column -->
                 <div class="col-md-4 ">
                     <div class="card rounded card-shadow border-0 mb-4">
-                        <a href="<?=base_url('Login');?>" class="card-hover py-4 text-center d-block rounded">
+                        <a href="<?=base_url('LoginStudent');?>" class="card-hover py-4 text-center d-block rounded">
                             <span class="bg-success-grediant"><i class="fas fa-calculator"></i></span>
                             <h6 class="ser-title">ผลการเรียน</h6>
                             <small class="ser-title">อัพเดพข้อมูล 12/01/2564</small>
@@ -197,7 +197,7 @@
                  <!-- Column -->
                  <div class="col-md-4  ">
                     <div class="card card-shadow border-0 mb-4">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="card-hover py-4 text-center d-block rounded">
+                        <a href="<?=base_url('LoginTeacher');?>"  class="card-hover py-4 text-center d-block rounded">
                             <span class="bg-success-grediant"><i class="far fa-calendar-alt"></i></span>
                             <h6 class="ser-title">สำหรับครู</h6>
                         </a>

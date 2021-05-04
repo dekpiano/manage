@@ -32,7 +32,15 @@ class Control_login extends CI_Controller {
 		}
 	}
 
-	public function validlogin()
+	public function LoginStudent(){
+		$this->load->view('login/loginStudent.php');
+	}
+
+	public function LoginTeacher(){
+		$this->load->view('login/loginTeacher.php');
+	}
+
+	public function check_student()
 	{	
 	
 			$username = $this->input->post('username');
@@ -40,9 +48,9 @@ class Control_login extends CI_Controller {
 			
  
 			if($this->input->server('REQUEST_METHOD') == TRUE){
-				if($this->Model_login->record_count($username, $password) == 1)
+				if($this->Model_login->record_count_student($username, $password) == 1)
 				{
-					$result = $this->Model_login->fetch_user_login($username, $password);
+					$result = $this->Model_login->fetch_student_login($username, $password);
 					$this->session->set_userdata(array('login_id' => $result->StudentID,'StudentCode' => $result->StudentCode,'fullname'=> $result->StudentPrefix.$result->StudentFirstName.' '.$result->StudentLastName,'status'=> 'user','class' => $result->StudentClass));
 
 					set_cookie('username_cookie',$username,'3600'); 
@@ -56,28 +64,26 @@ class Control_login extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata(array('msgerr'=> 'NO'));
+					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง','alert'=>'error'));
 					// redirect('login');
 
-					redirect('Login', 'refresh');
+					redirect('LoginStudent');
 				}
 			}
 	}
 
-	public function LoginAdmin()
+	public function check_teacher()
 	{	
-		
-	
 			$username = $this->input->post('username');
 			$password = md5(md5($this->input->post('password')));
 			
 			
 			if($this->input->server('REQUEST_METHOD') == TRUE){
-				if($this->Model_login->record_count_admin($username, $password) == 1)
+				if($this->Model_login->record_count_teacher($username, $password) == 1)
 				{
 
-					$result = $this->Model_login->fetch_admin_login($username, $password);
-					$this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','class' => $result->StudentClass,'img' => $result->pers_img));
+					$result = $this->Model_login->fetch_teacher_login($username, $password);
+					$this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','class' => $result->StudentClass,'img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
 
 					set_cookie('username_cookie',$username,'3600'); 
 					set_cookie('password_cookie',$password,'3600');
@@ -87,11 +93,10 @@ class Control_login extends CI_Controller {
 
 				}
 				else
-				{
-					
-					$this->session->set_flashdata(array('msgerr'=> 'NO'));
+				{					
+					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง','alert'=>'error'));
 					// redirect('login');
-					redirect('Home', 'refresh');
+					redirect('LoginTeacher');
 				}
 			}
 	}		
@@ -103,7 +108,7 @@ class Control_login extends CI_Controller {
 		delete_cookie('username_cookie'); 
 		delete_cookie('password_cookie'); 
 		$this->session->sess_destroy();
-		redirect('Login', 'refresh');
+		redirect('LoginStudent', 'refresh');
 	}
 
 	public function LogoutTeacher()

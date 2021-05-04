@@ -13,6 +13,7 @@
 
         <div class="row">
             <?php foreach ($lean as $key => $v_lean): ?>
+            <?php if($this->session->userdata('pers_learning') == $v_lean->lear_id || $this->session->userdata('login_id') == 'pers_014'): ?>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body statistic">
@@ -29,7 +30,7 @@
                 </div>
 
             </div>
-            <?php endforeach; ?>
+            <?php endif; endforeach; ?>
 
         </div>
 
@@ -52,7 +53,7 @@
                                 <th style="width:100px;">หน.งานพัฒนาหลักสูตร</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                             <?php foreach ($checkplan as $key => $v_checkplan):
                                 $bg_alert = '';
                                 if($v_checkplan->seplan_status1 == "ผ่าน" && $v_checkplan->seplan_status2 == "ผ่าน"){
@@ -85,7 +86,9 @@
                                     </select>
 
                                 </td>
+
                                 <td>
+                                    <?php if($this->session->userdata('login_id') == 'pers_014'):?>
                                     <select id="seplan_status2" name="seplan_status2"
                                         data-planId="<?=$v_checkplan->seplan_ID;?>"
                                         class="form-control mb-3 seplan_status2">
@@ -96,7 +99,8 @@
                                         <option <?=$v_checkplan->seplan_status2 == "ไม่ผ่าน" ? 'selected' : ''?>
                                             value="ไม่ผ่าน">ไม่ผ่าน</option>
                                     </select>
-
+                                    <?php else: echo $v_checkplan->seplan_status2; ?>                                    
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

@@ -21,11 +21,13 @@
                     class="collapse list-unstyled  <?=$this->uri->segment(2) == 'Course' ? 'show' : '' ?>">
                     <li><a href="<?=base_url('Teacher/Course');?>"><i class="fa fa-file" aria-hidden="true"></i> แผนการสอน</a>
                     </li>
-                    <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_003') : ?>
-                    <span class="heading">สำหรับหัวหน้างาน</span>
+                    <?php if($this->session->userdata('groupleade') == 1 || $this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002') : ?>
+                    <span class="heading">สำหรับหัวหน้า</span>
                     <li>
                         <a href="<?=base_url('Teacher/Course/CheckPlan');?>"> <i class="icon-flask"></i>ตรวจงาน </a>
+                        <?php if($this->session->userdata('login_id') == 'pers_014'): ?>
                         <a href="<?=base_url('Teacher/Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่า </a>
+                        <?php endif; ?>
                     </li>
                     <?php endif; ?>
 

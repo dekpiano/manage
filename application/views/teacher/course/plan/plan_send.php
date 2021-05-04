@@ -24,32 +24,50 @@
                     <h3 class="h4">ฟอร์มส่งงาน</h3>
                 </div>
                 <div class="card-body">
-                   
+
                     <form class="needs-validation" novalidate id="form_insert_plan">
                         <div class="form-group">
                             <label class="form-control-label">ชื่อวิชา</label>
-                            <input type="text" id="seplan_namesubject" name="seplan_namesubject" placeholder="" class="form-control" required>
+                            <input type="text" id="seplan_namesubject" name="seplan_namesubject" placeholder=""
+                                class="form-control" required>
                             <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">รหัสวิชา</label>
-                            <input type="text" id="seplan_coursecode" name="seplan_coursecode" placeholder="" class="form-control" required>
+                            <input type="text" id="seplan_coursecode" name="seplan_coursecode" placeholder=""
+                                class="form-control" required>
                             <div class="invalid-feedback">กรุณากรอกรหัสวิชา</div>
                         </div>
+
+                        <div class="form-group">
+                        <label class="form-control-label">ประเภทวิชา</label>
+                            <div class="i-checks">
+                                <input  id="seplan_typesubject" name="seplan_typesubject" type="radio" value="พื้นฐาน"
+                                    class="radio-template" required>
+                                <label for="seplan_typesubject">พื้นฐาน</label>
+                                <input  id="seplan_typesubject1" name="seplan_typesubject" type="radio" value="เพิ่มเติม"
+                                    class="radio-template ml-3" required>                                   
+                                <label for="seplan_typesubject1">เพิ่มเติม</label>
+                                <div class="invalid-feedback">กรุณาเลือก</div>
+                            </div>
+                            
+                        </div>
+
                         <div class="form-group">
                             <label class="form-control-label">ประเภทการส่ง</label>
                             <select id="seplan_typeplan" name="seplan_typeplan" class="form-control mb-3" required>
-                              <option value="">เลือก...</option>
-                              <option value="โครงการสอน">โครงการสอน</option>
-                              <option value="แผนการสอนหน้าเดียว">แผนการสอนหน้าเดียว</option>
-                              <option value="แผนการสอนเต็ม">แผนการสอนเต็ม</option>
-                              <option value="บันทึกหลังสอน">บันทึกหลังสอน</option>
+                                <option value="">เลือก...</option>
+                                <option value="โครงการสอน">โครงการสอน</option>
+                                <option value="แผนการสอนหน้าเดียว">แผนการสอนหน้าเดียว</option>
+                                <option value="แผนการสอนเต็ม">แผนการสอนเต็ม</option>
+                                <option value="บันทึกหลังสอน">บันทึกหลังสอน</option>
                             </select>
                             <div class="invalid-feedback">กรุณาเลือกประเภทการส่ง</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">ไฟล์งาน</label>
-                            <input type="file" id="seplan_file" name="seplan_file" placeholder="Password" class="form-control" required>
+                            <input type="file" id="seplan_file" name="seplan_file" placeholder="Password"
+                                class="form-control" required>
                             <div class="invalid-feedback">กรุณาเลือกไฟล์</div>
                         </div>
                         <?php if($OnOff[0]->seplanset_status == "on"):?>
@@ -57,11 +75,11 @@
                             <input type="submit" value="ส่งงาน" class="btn btn-primary">
                         </div>
                         <?php else: ?>
-                            <div class="form-group">
+                        <div class="form-group">
                             <button type="button" class="btn btn-primary" disabled>หมดเวลาส่ง</button>
                         </div>
                         <?php endif; ?>
-                        
+
                     </form>
                 </div>
             </div>

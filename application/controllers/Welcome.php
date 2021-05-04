@@ -24,7 +24,7 @@ class Welcome extends CI_Controller {
         $this->load->view('user/PageWelcomeAcademic.php');
 	}
 
-	public function Login()
+	public function LoginStudent()
 	{
 		$this->load->view('login/loginMain.php');
 	}

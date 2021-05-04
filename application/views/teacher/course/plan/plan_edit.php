@@ -38,6 +38,19 @@
                             <div class="invalid-feedback">กรุณากรอกรหัสวิชา</div>
                         </div>
                         <div class="form-group">
+                        <label class="form-control-label">ประเภทวิชา</label>
+                            <div class="i-checks">
+                                <input id="seplan_typesubject" name="seplan_typesubject" type="radio" value="พื้นฐาน"
+                                    class="radio-template" <?=$plan[0]->seplan_typesubject == 'พื้นฐาน' ? 'checked=""' : ''?>>
+                                <label for="seplan_typesubject">พื้นฐาน</label>
+                                <input id="seplan_typesubject" name="seplan_typesubject" type="radio" value="เพิ่มเติม"
+                                    class="radio-template ml-3" <?=$plan[0]->seplan_typesubject == 'เพิ่มเติม' ? 'checked=""' : ''?>>
+                                <label for="seplan_typesubject">เพิ่มเติม</label>
+                            </div>
+
+                            <div class="invalid-feedback">กรุณาเลือก</div>
+                        </div>
+                        <div class="form-group">
                             <label class="form-control-label">ประเภทการส่ง</label>
                             <select id="seplan_typeplan" name="seplan_typeplan" class="form-control mb-3" required>
                               <option value="">เลือก...</option>

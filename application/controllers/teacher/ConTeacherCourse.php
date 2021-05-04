@@ -6,7 +6,7 @@ var  $title = "หน้าแรก";
 	public function __construct() {
 		parent::__construct();
 		
-		if ($this->session->userdata('fullname') == '' && $this->session->userdata('status') == "user") {      
+		if ($this->session->userdata('fullname') == '' && !$this->session->userdata('status') == 'admin') {      
 			redirect('welcome','refresh');
 		}
 
@@ -78,6 +78,7 @@ var  $title = "หน้าแรก";
             $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
                             'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
                             'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
+                            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
                             'seplan_createdate'=> date('Y-m-d H:i:s'),
                             'seplan_year'=> $SetPlan[0]->seplanset_year,
                             'seplan_term'=> $SetPlan[0]->seplanset_term,
@@ -121,6 +122,7 @@ var  $title = "หน้าแรก";
                                 'seplan_createdate'=> date('Y-m-d H:i:s'),
                                 'seplan_year'=> $SetPlan[0]->seplanset_year,
                                 'seplan_term'=> $SetPlan[0]->seplanset_term,
+                                'seplan_typesubject'=> $SetPlan[0]->seplan_typesubject,
                                 'seplan_file'=> $data['upload_data']['file_name'],
                                 'seplan_usersend'=> $this->session->userdata('login_id'),
                                 'seplan_learning'  => $this->session->userdata('pers_learning'),
@@ -144,6 +146,7 @@ var  $title = "หน้าแรก";
                                 'seplan_createdate'=> date('Y-m-d H:i:s'),
                                 'seplan_year'=> $SetPlan[0]->seplanset_year,
                                 'seplan_term'=> $SetPlan[0]->seplanset_term,
+                                'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
                                 'seplan_usersend'=> $this->session->userdata('login_id'),
                                 'seplan_learning'  => $this->session->userdata('pers_learning'),
                                 'seplan_status1' => "รอตรวจ",

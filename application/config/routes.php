@@ -70,7 +70,8 @@ $route['Admin/ClassRoom'] = "admin/ConAdminClassRoom/AdminClassMain";
 // Login
 $route['Logout'] = "Control_login/logout";
 $route['LogoutTeacher'] = "Control_login/LogoutTeacher";
-$route['Login'] = "Control_login/Login_main";
+$route['LoginStudent'] = "Control_login/LoginStudent";
+$route['LoginTeacher'] = "Control_login/LoginTeacher";
 
 // Teacher
 $route['Teacher/Home'] = "teacher/ConTeacherHome/TeacherHome";

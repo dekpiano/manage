@@ -28,14 +28,18 @@
                     <form method="post" action="<?=base_url('teacher/ConTeacherCourse/setting_UpdatePlan')?>"
                         class="needs-validation" novalidate id="form_insert_settingplan">
                         <div class="form-group">
-                        <div class="i-checks">
-                              <input id="seplanset_status" name="seplanset_status" type="radio"  value="on"  class="radio-template" <?=$SetPlan[0]->seplanset_status == 'on' ? 'checked=""' : ''?>>
-                              <label for="seplanset_status">ระบบเปิด</label>
-                              <input id="seplanset_status" name="seplanset_status" type="radio" value="off" class="radio-template ml-3" <?=$SetPlan[0]->seplanset_status == 'off' ? 'checked=""' : ''?>>
-                              <label for="seplanset_status">ระบบปิด</label>
+                            <div class="i-checks">
+                                <input id="seplanset_status" name="seplanset_status" type="radio" value="on"
+                                    class="radio-template"
+                                    <?=$SetPlan[0]->seplanset_status == 'on' ? 'checked=""' : ''?>>
+                                <label for="seplanset_status">ระบบเปิด</label>
+                                <input id="seplanset_status" name="seplanset_status" type="radio" value="off"
+                                    class="radio-template ml-3"
+                                    <?=$SetPlan[0]->seplanset_status == 'off' ? 'checked=""' : ''?>>
+                                <label for="seplanset_status">ระบบปิด</label>
                             </div>
-                            
-                            <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
+
+                            <div class="invalid-feedback">กรุณาเลือก</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">วันเริ่มต้น</label>
