@@ -13,6 +13,7 @@ var  $title = "หน้าแรก";
     }
 
     public function TeacherHome(){      
+        $data['title']  = "หน้าแรก";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);

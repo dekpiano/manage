@@ -5,7 +5,7 @@
         <div class="sidebar-header d-flex align-items-center">
             <div class="avatar"><img src="https://skj.ac.th/uploads/personnel/<?=$this->session->userdata('img');?>" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-                <h1 class="h4"><?=$this->session->userdata('fullname');?></h1>
+                <h1 class="h4"><?=$this->session->userdata('fullname');?> </h1>
                 <p><?=$this->session->userdata('class');?></p>
             </div>
         </div>

@@ -36,7 +36,7 @@ class Control_login extends CI_Controller {
 		$this->load->view('login/loginStudent.php');
 	}
 
-	public function LoginTeacher(){
+	public function LoginTeacher1(){
 		$this->load->view('login/loginTeacher.php');
 	}
 
@@ -79,10 +79,10 @@ class Control_login extends CI_Controller {
 			
 			
 			if($this->input->server('REQUEST_METHOD') == TRUE){
-				if($this->Model_login->record_count_teacher($username, $password) == 1)
+				if($this->Model_login->record_count_teacher1($username, $password) == 1)
 				{
 
-					$result = $this->Model_login->fetch_teacher_login($username, $password);
+					$result = $this->Model_login->fetch_teacher_login1($username, $password);
 					$this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','class' => $result->StudentClass,'img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
 
 					set_cookie('username_cookie',$username,'3600'); 
@@ -94,12 +94,70 @@ class Control_login extends CI_Controller {
 				}
 				else
 				{					
-					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง','alert'=>'error'));
+					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'ชื่อผู้ใช้งานหรือรหัสผ่าน ไม่ถูกต้อง หรือ ไม่ข้อมูลในระบบ กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
 					// redirect('login');
 					redirect('LoginTeacher');
 				}
 			}
-	}		
+	}	
+	
+	function LoginTeacher(){
+		include_once APPPATH . "libraries/vendor/autoload.php";
+		$google_client = new Google_Client();
+
+		$google_client->setClientId('29638025169-aeobhq04v0lvimcjd27osmhlpua380gl.apps.googleusercontent.com');
+		$google_client->setClientSecret('RSANANTRl84lnYm54Hi0icGa');
+		$google_client->setRedirectUri('http://localhost/skj_academic/LoginTeacher');
+		$google_client->addScope('email');
+		$google_client->addScope('profile');
+
+		if(isset($_GET["code"])){
+			$token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+			if(!isset($token["error"])){
+				$google_client->setAccessToken($token['access_token']);
+				$google_service = new Google_Service_Oauth2($google_client);
+
+				$data = $google_service->userinfo->get();
+				$current_datetime = date('Y-m-d H:i:s');
+
+				// echo $this->Model_login->check_login_teacher($data['email']); 
+				if($this->Model_login->check_login_teacher($data['email']) == 1)
+   				 {
+						
+				$this->session->set_userdata('access_token',$token['access_token']);
+
+					$user_data = array(				 
+						'pers_username' => $data['email'],
+						'updated_at' => $current_datetime,
+						'login_oauth_uid' => $data['id']
+					);			
+				   $this->Model_login->Update_user_data($user_data, $data['email']);
+
+				   $result = $this->Model_login->fetch_teacher_login($data['email']);
+				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
+				}else{
+					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'Email ของคุณไม่สามารถใช้ในระบบนี้ได้ ติดต่อเจ้าหน้าที่คอมเพื่อใช้งานระบบ','alert'=>'error'));
+					redirect('LoginTeacher');
+				}
+			}
+			
+		}
+		$login_button = '';
+			if(!$this->session->userdata('access_token'))
+			{
+			$login_button = '
+			<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
+			';
+			$data['login_button'] = $login_button;
+			$this->load->view('login/loginTeacher.php',$data);
+			
+			}
+			else
+			{
+			//$this->load->view('login/loginTeacher.php',$data);
+			redirect('Teacher/Home');
+			}
+	}
 
 
 
@@ -117,6 +175,17 @@ class Control_login extends CI_Controller {
 		delete_cookie('password_cookie'); 
 		$this->session->sess_destroy();
 		redirect('welcome', 'refresh');
+	}
+
+
+	function logoutGoogle()
+	{
+	$this->session->unset_userdata('access_token');
+
+	$this->session->unset_userdata('user_data');
+	$this->session->sess_destroy();
+
+	redirect('welcome', 'refresh');
 	}
 
 }

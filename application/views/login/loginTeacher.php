@@ -18,13 +18,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun:300,400,700">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="<?=base_url();?>assets/css/style.default.css" id="theme-stylesheet">
-  
+
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        
 </head>
 
 <body style="font-family:Sarabun;">
@@ -40,7 +41,7 @@
                             <div class="content">
                                 <div class="logo">
                                     <span style="font-size: 3rem;">
-                                    <i class="fas fa-chalkboard-teacher"></i>
+                                        <i class="fas fa-chalkboard-teacher"></i>
                                     </span>
                                     <h1>สำหรับครู / อาจารย์</h1>
                                 </div>
@@ -53,24 +54,40 @@
                     <!-- Form Panel    -->
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
-                            <div class="content">
-                                <h3 class="mb-3">เข้าสู่ระบบ งานวิชาการ</h3>
+                            <div class="content ">
+                                <h3 class="mb-3 ">เข้าสู่ระบบ งานวิชาการ </h3>
                                 <form method="post" action="<?=base_url('control_login/check_teacher');?>"
                                     class="form-validate">
                                     <div class="form-group">
                                         <input id="login-username" type="email" name="username" id="username" required
-                                            data-msg="กรุณากรอกชื่อผู้ใช้งาน Email" class="input-material">
+                                            data-msg="กรุณากรอกชื่อผู้ใช้งาน Email" class="input-material" autocomplete="off">
                                         <label for="login-username" class="label-material">ชื่อผู้ใช้งาน Email</label>
                                     </div>
                                     <div class="form-group">
                                         <input id="login-password" type="password" name="password" id="password"
                                             required data-msg="กรุณากรอกรหัสผ่าน" class="input-material">
                                         <label for="login-password" class="label-material">รหัสผ่าน</label>
-                                    </div><button id="login" type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
-                                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                                    </div><button id="login" type="submit" class="btn btn-primary"><i
+                                            class="fas fa-sign-in-alt"></i> Login</button>
+                                  
                                 </form>
+                                <hr>
+                                <?php
+                                // if(!isset($login_button))
+                                // {                                
+                                //     echo '<h3><a href="'.base_url().'Control_login/logoutGoogle">Logout</h3></div>';
+                                // }
+                                // else
+                                // {
+                                //     echo '<div align="center">'.$login_button . '</div>';
+                                // }
+                            ?>
+                            
+                            <a href="<?=base_url();?>">กลับสู่หน้าหลัก</a> 
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
