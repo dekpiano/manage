@@ -36,8 +36,10 @@
                                 <th>ประเภท</th>
                                 <th>รหัสวิชา</th>
                                 <th>ชื่อวิชา</th>
+                                <th>ระดับชั้น</th>
                                 <th>วันที่ส่ง</th>
                                 <th>ไฟล์</th>
+                                <th>หมายเหตุ</th>
                                 <th>หน.กลุ่มสาระ</th>
                                 <th>หน.งานพัฒนาหลักสูตร</th>
                                 <th>คำสั่ง</th>
@@ -52,10 +54,12 @@
                                 <td><?=$v_plan->seplan_typeplan;?></td>
                                 <td><?=$v_plan->seplan_coursecode;?></td>
                                 <td><?=$v_plan->seplan_namesubject;?></td>
+                                <td>ม.<?=$v_plan->seplan_gradelevel;?></td>
                                 <td><?=$v_plan->seplan_createdate;?></td>
                                 <td><a target="_blank"
                                         href="<?=base_url('uploads/academic/course/plan/').$v_plan->seplan_file;?>">เปิดดู</a>
                                 </td>
+                                <td><?=$v_plan->seplan_sendcomment;?></td>
                                 <td class="text-center">
                                     <?php if($v_plan->seplan_status1 == "ผ่าน") : ?>
                                     <span class="badge badge-success h5 text-white"><?=$v_plan->seplan_status1;?>

@@ -258,5 +258,29 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on("click", ".show_comment1", function() {        
+        var planId = $(this).attr('data-planId');
+        //console.log(planId);
+        $.ajax({
+            type: 'POST',
+            url: "../../../teacher/ConTeacherCourse/CheckComment1",
+            data: { planId: planId },
+            dataType: 'json',
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                
+               $('textarea.seplan_comment1').html(data[0].seplan_comment1);
+               
+            },
+            error: function(xhr) {
+                alert("Error occured.please try again");
+                console.log(xhr.statusText + xhr.responseText);
+            }
+        });
+    });
+
+
 
 });

@@ -25,6 +25,7 @@
                     <span class="heading">สำหรับหัวหน้า</span>
                     <li>
                         <a href="<?=base_url('Teacher/Course/CheckPlan');?>"> <i class="icon-flask"></i>ตรวจงาน </a>
+                        <a href="<?=base_url('Teacher/Course/ReportPlan');?>"> <i class="fa fa-print" aria-hidden="true"></i>รายงาน </a>
                         <?php if($this->session->userdata('login_id') == 'pers_014'): ?>
                         <a href="<?=base_url('Teacher/Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่า </a>
                         <?php endif; ?>

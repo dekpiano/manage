@@ -6,8 +6,7 @@
                           <p>ระบบงานวิชาการ โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์ &copy; 2021</p>
                       </div>
                       <div class="col-sm-6 text-right">
-                          <p>Design by <a href="https://www.facebook.com/dekpiano/"
-                                  class="external">Dekpiano</a></p>
+                          <p>Design by <a href="https://www.facebook.com/dekpiano/" class="external">Dekpiano</a></p>
                           <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
                       </div>
                   </div>
@@ -30,8 +29,15 @@
           <!-- DataTable -->
           <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
           <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+          <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=6"></script>
+          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=9"></script>
 
           </body>
 
@@ -55,13 +61,28 @@ $(document).ready(function() {
         ]
     });
 
+    $('#tb_reprotplan').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o"></i> ',
+                title: 'รายงาน',
+                titleAttr: 'Exportar a Excel',
+                className: 'btn btn-success'
+            }
+        ]
+    });
+
+    
+
     jQuery('#seplanset_startdate').datetimepicker({
         lang: 'th',
-        format:'d-m-Y H:i:s'
+        format: 'd-m-Y H:i:s'
     });
     jQuery('#seplanset_enddate').datetimepicker({
         lang: 'th',
-        format:'d-m-Y H:i:s'
+        format: 'd-m-Y H:i:s'
     });
 
 });

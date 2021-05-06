@@ -46,9 +46,11 @@
                                 <th>ประเภท</th>
                                 <th>รหัสวิชา</th>
                                 <th>ชื่อวิชา</th>
+                                <th>ระดับชั้น</th>
                                 <th>ผู้ส่ง</th>
                                 <th>วันที่ส่ง</th>
                                 <th>ไฟล์</th>
+                                <th>หมายเหตุ</th>
                                 <th style="width:100px;">หน.กลุ่มสาระ</th>
                                 <th style="width:100px;">หน.งานพัฒนาหลักสูตร</th>
                             </tr>
@@ -67,12 +69,14 @@
                                 <td><?=$v_checkplan->seplan_typeplan;?></td>
                                 <td><?=$v_checkplan->seplan_coursecode;?></td>
                                 <td><?=$v_checkplan->seplan_namesubject;?></td>
+                                <td>ม.<?=$v_checkplan->seplan_gradelevel;?></td>
                                 <td><?=$v_checkplan->pers_prefix.$v_checkplan->pers_firstname.' '.$v_checkplan->pers_lastname;?>
                                 </td>
                                 <td><?=$v_checkplan->seplan_createdate;?></td>
                                 <td><a target="_blank"
                                         href="<?=base_url('uploads/academic/course/plan/').$v_checkplan->seplan_file;?>">เปิดดู</a>
                                 </td>
+                                <td><?=$v_checkplan->seplan_sendcomment;?></td>
                                 <td>
                                     <select id="seplan_status1" name="seplan_status1"
                                         data-planId="<?=$v_checkplan->seplan_ID;?>"
@@ -84,6 +88,11 @@
                                         <option <?=$v_checkplan->seplan_status1 == "ไม่ผ่าน" ? 'selected' : ''?>
                                             value="ไม่ผ่าน">ไม่ผ่าน</option>
                                     </select>
+                                    <div class="text-center">
+                                        <?=$v_checkplan->seplan_status1 == "ไม่ผ่าน" ? '<a href="#" class="show_comment1" data-toggle="modal" data-planId="'.$v_checkplan->seplan_ID.'" data-target="#addcomment1">หมายเหตุ</a>' : ''?>
+                                    </div>
+
+
 
                                 </td>
 
@@ -99,7 +108,7 @@
                                         <option <?=$v_checkplan->seplan_status2 == "ไม่ผ่าน" ? 'selected' : ''?>
                                             value="ไม่ผ่าน">ไม่ผ่าน</option>
                                     </select>
-                                    <?php else: echo $v_checkplan->seplan_status2; ?>                                    
+                                    <?php else: echo $v_checkplan->seplan_status2; ?>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -114,3 +123,27 @@
 
     </div>
 </section>
+
+<div id="addcomment1" tabindex="-1" aria-labelledby="exampleModalLabel" class="modal fade text-left" aria-hidden="true"
+    style="display: none;">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label for="seplan_comment1">หมายเหตุ:</label>
+                        <textarea wrap="hard" class="form-control seplan_comment1" rows="5" name="seplan_comment1"
+                            id="seplan_comment1"
+                            placeholder="ไม่ผ่านเพราะ เช่น ปรับชื่อรายชื่อ หน้า 5 หรือ ลืมใส่ข้อมูลต้องกรอก"></textarea>
+                    </div>
+                    <div class="form-group">
+                    <button type="button" id="sub_comment1" class="btn btn-primary">บันทึก</button>
+                       
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
