@@ -53,6 +53,8 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
+$route['ClosePage'] = "welcome/ClosePage";
 // admin
 $route['LogoutAdmin'] = "Control_login/";
 $route['AdminHome'] = "admin/ConAdminHome/AdminHome";
@@ -84,6 +86,7 @@ $route['Teacher/Course/CheckPlan/(:any)'] = "teacher/ConTeacherCourse/check_plan
 $route['Teacher/Course/Delete/(:any)']['delete'] = "teacher/ConTeacherCourse/delete_plan/$1";
 $route['Teacher/Course/ReportPlan'] = "teacher/ConTeacherCourse/report_plan";
 $route['Teacher/Course/ReportPlan/(:any)'] = "teacher/ConTeacherCourse/report_plan/$1";
+$route['Teacher/Profile'] = "teacher/ConTeacherProfile/ProfileMain";
 
 // User
 $route['Home'] = "user/ConUser_Home/Home";

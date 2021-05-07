@@ -12,6 +12,9 @@ var  $title = "หน้าแรก";
 		if ($this->session->userdata('fullname') == '' && !$this->session->userdata('status') == 'admin') {      
 			redirect('welcome','refresh');
 		}
+        if($this->session->userdata('CheckStatusPassword') == ""){
+            redirect('Teacher/Profile','refresh');
+        }
 
         $this->load->model('teacher/ModTeacherCourse');
 
@@ -248,6 +251,32 @@ var  $title = "หน้าแรก";
         $result = $this->db->select('seplan_ID,seplan_comment1')->where('seplan_ID',$id)->get('tb_send_plan')->result();
         
         echo json_encode($result);
+      }
+
+      function UpdateComment1(){
+        // echo $this->input->post('status1');
+         $id =  $this->input->post('planId');
+         $seplan_comment1 =  $this->input->post('seplan_comment1');
+         $data = array('seplan_comment1' =>  $seplan_comment1);
+         $result = $this->ModTeacherCourse->plan_UpdateStatus1($data,$id);
+         echo ($result);
+      }
+
+      function CheckComment2(){
+        // echo $this->input->post('status1');
+         $id =  $this->input->post('planId');
+        $result = $this->db->select('seplan_ID,seplan_comment2')->where('seplan_ID',$id)->get('tb_send_plan')->result();
+        
+        echo json_encode($result);
+      }
+
+      function UpdateComment2(){
+        // echo $this->input->post('status1');
+         $id =  $this->input->post('planId');
+         $seplan_comment2 =  $this->input->post('seplan_comment2');
+         $data = array('seplan_comment2' =>  $seplan_comment2);
+         $result = $this->ModTeacherCourse->plan_UpdateStatus2($data,$id);
+         echo ($result);
       }
 
 

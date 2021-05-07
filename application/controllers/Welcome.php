@@ -28,4 +28,9 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('login/loginMain.php');
 	}
+
+	public function ClosePage()
+	{
+		$this->load->view('errors/ClosePage.php');
+	}
 }

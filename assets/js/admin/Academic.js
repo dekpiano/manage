@@ -187,11 +187,8 @@ $(document).ready(function() {
 
     $(document).on("change", ".seplan_status1", function() {
 
-        // console.log($(this).val());
-        // console.log($(this).attr('data-planId'));
         var status1 = $(this).val();
         var planId = $(this).attr('data-planId');
-
 
         $.ajax({
             type: 'POST',
@@ -204,7 +201,7 @@ $(document).ready(function() {
             success: function(data) {
                 console.log(data[0].seplan_status1);
 
-                if (data[0].seplan_status2 == data[0].seplan_status1) {
+                if (data[0].seplan_status2 == data[0].seplan_status1 && data[0].seplan_status1 == "ผ่าน" && data[0].seplan_status2 == "ผ่าน") {
                     $("#bgC" + planId).addClass('table-success');
                 } else {
                     $("#bgC" + planId).removeClass('table-success');
@@ -214,6 +211,13 @@ $(document).ready(function() {
                     'คุณเปลี่ยนสถานะเรียบร้อย',
                     'success'
                 )
+                if(data[0].seplan_status1 == "ไม่ผ่าน"){
+                    $('#bgC'+planId+' .TbShowComment1').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment1">หมายเหตุ</a>');
+                }
+                if(data[0].seplan_status1 == "ผ่าน"){
+                    $('#bgC'+planId+' .TbShowComment1').html('');
+                }
+               
 
             },
             error: function(xhr) {
@@ -239,7 +243,7 @@ $(document).ready(function() {
             },
             success: function(data) {
 
-                if (data[0].seplan_status2 == data[0].seplan_status1) {
+                if (data[0].seplan_status2 == data[0].seplan_status1 && data[0].seplan_status1 == "ผ่าน" && data[0].seplan_status2 == "ผ่าน") {
                     $("#bgC" + planId).addClass('table-success');
                 } else {
                     $("#bgC" + planId).removeClass('table-success');
@@ -249,6 +253,12 @@ $(document).ready(function() {
                     'คุณเปลี่ยนสถานะเรียบร้อย',
                     'success'
                 )
+                if(data[0].seplan_status2 == "ไม่ผ่าน"){
+                    $('#bgC'+planId+' .TbShowComment2').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment2">หมายเหตุ</a>');
+                }
+                if(data[0].seplan_status2 == "ผ่าน"){
+                    $('#bgC'+planId+' .TbShowComment2').html('');
+                }
 
             },
             error: function(xhr) {
@@ -272,6 +282,90 @@ $(document).ready(function() {
             success: function(data) {
                 
                $('textarea.seplan_comment1').html(data[0].seplan_comment1);
+               $('#sub_comment1').attr('data-planId',planId);
+               
+            },
+            error: function(xhr) {
+                alert("Error occured.please try again");
+                console.log(xhr.statusText + xhr.responseText);
+            }
+        });
+    });
+
+    $(document).on("click", "#sub_comment1", function() { 
+        var planId = $(this).attr('data-planId');       
+        var seplan_comment1 = $('#seplan_comment1').val();
+        
+        $.ajax({
+            type: 'POST',
+            url: "../../../teacher/ConTeacherCourse/UpdateComment1",
+            data: { planId: planId,seplan_comment1:seplan_comment1 },
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                
+               if(data == 1){
+                Swal.fire(
+                    'แจ้งเตือน',
+                    'คุณเพิ่มหมายเหตุเรียบร้อย',
+                    'success'
+                )
+               }
+               
+            },
+            error: function(xhr) {
+                alert("Error occured.please try again");
+                console.log(xhr.statusText + xhr.responseText);
+            }
+        });
+    });
+
+
+    $(document).on("click", ".show_comment2", function() {        
+        var planId = $(this).attr('data-planId');
+        //console.log(planId);
+        $.ajax({
+            type: 'POST',
+            url: "../../../teacher/ConTeacherCourse/CheckComment2",
+            data: { planId: planId },
+            dataType: 'json',
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                
+               $('textarea.seplan_comment2').html(data[0].seplan_comment2);
+               $('#sub_comment2').attr('data-planId',planId);
+               
+            },
+            error: function(xhr) {
+                alert("Error occured.please try again");
+                console.log(xhr.statusText + xhr.responseText);
+            }
+        });
+    });
+
+    $(document).on("click", "#sub_comment2", function() { 
+        var planId = $(this).attr('data-planId');       
+        var seplan_comment2 = $('#seplan_comment2').val();
+        
+        $.ajax({
+            type: 'POST',
+            url: "../../../teacher/ConTeacherCourse/UpdateComment2",
+            data: { planId: planId,seplan_comment2:seplan_comment2 },
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                
+               if(data == 1){
+                Swal.fire(
+                    'แจ้งเตือน',
+                    'คุณเพิ่มหมายเหตุเรียบร้อย',
+                    'success'
+                )
+               }
                
             },
             error: function(xhr) {

@@ -37,7 +37,9 @@
           <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=9"></script>
+          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=10"></script>
+          <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=2"></script>
+          <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
 
           </body>
 

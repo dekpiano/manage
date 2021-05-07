@@ -88,7 +88,7 @@
                                         <option <?=$v_checkplan->seplan_status1 == "ไม่ผ่าน" ? 'selected' : ''?>
                                             value="ไม่ผ่าน">ไม่ผ่าน</option>
                                     </select>
-                                    <div class="text-center">
+                                    <div class="text-center TbShowComment1">
                                         <?=$v_checkplan->seplan_status1 == "ไม่ผ่าน" ? '<a href="#" class="show_comment1" data-toggle="modal" data-planId="'.$v_checkplan->seplan_ID.'" data-target="#addcomment1">หมายเหตุ</a>' : ''?>
                                     </div>
 
@@ -108,6 +108,9 @@
                                         <option <?=$v_checkplan->seplan_status2 == "ไม่ผ่าน" ? 'selected' : ''?>
                                             value="ไม่ผ่าน">ไม่ผ่าน</option>
                                     </select>
+                                    <div class="text-center TbShowComment2">
+                                        <?=$v_checkplan->seplan_status2 == "ไม่ผ่าน" ? '<a href="#" class="show_comment2" data-toggle="modal" data-planId="'.$v_checkplan->seplan_ID.'" data-target="#addcomment2">หมายเหตุ</a>' : ''?>
+                                    </div>
                                     <?php else: echo $v_checkplan->seplan_status2; ?>
                                     <?php endif; ?>
                                 </td>
@@ -138,7 +141,31 @@
                             placeholder="ไม่ผ่านเพราะ เช่น ปรับชื่อรายชื่อ หน้า 5 หรือ ลืมใส่ข้อมูลต้องกรอก"></textarea>
                     </div>
                     <div class="form-group">
-                    <button type="button" id="sub_comment1" class="btn btn-primary">บันทึก</button>
+                    <button type="button" id="sub_comment1" data-planId class="btn btn-primary">บันทึก</button>
+                       
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="addcomment2" tabindex="-1" aria-labelledby="exampleModalLabel" class="modal fade text-left" aria-hidden="true"
+    style="display: none;">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label for="seplan_comment2">หมายเหตุ:</label>
+                        <textarea wrap="hard" class="form-control seplan_comment2" rows="5" name="seplan_comment2"
+                            id="seplan_comment2"
+                            placeholder="ไม่ผ่านเพราะ เช่น ปรับชื่อรายชื่อ หน้า 5 หรือ ลืมใส่ข้อมูลต้องกรอก"></textarea>
+                    </div>
+                    <div class="form-group">
+                    <button type="button" id="sub_comment2" data-planId class="btn btn-primary">บันทึก</button>
                        
                     </div>
                 </form>

@@ -70,6 +70,7 @@
                                     <?php else: ?>
                                     <span class="badge badge-danger h5 text-white"><?=$v_plan->seplan_status1;?>
                                     </span>
+                                    <p><?=$v_plan->seplan_comment1;?></p>
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center">
@@ -82,6 +83,7 @@
                                     <?php else: ?>
                                     <span class="badge badge-danger h5 text-white"><?=$v_plan->seplan_status2;?>
                                     </span>
+                                    <p><?=$v_plan->seplan_comment2;?></p>
                                     <?php endif; ?>
                                 </td>
                                 <td>
