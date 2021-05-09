@@ -23,7 +23,7 @@ var  $title = "หน้าแรก";
 
     public function Course(){      
         $data['title'] = "แผนการสอน";
-        $data['OnOff'] = $this->db->select('seplanset_status')->get('tb_send_plan_setup')->result();
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -32,13 +32,22 @@ var  $title = "หน้าแรก";
         
     }
 
-    public function send_plan(){
+    public function send_plan(){ 
         $data['title'] = "ส่งงาน";
-        $data['OnOff'] = $this->db->select('seplanset_status')->get('tb_send_plan_setup')->result();
-        $this->load->view('teacher/layout/header_teacher.php',$data);
-        $this->load->view('teacher/layout/navbar_teaher.php');
-        $this->load->view('teacher/course/plan/plan_send.php');
-        $this->load->view('teacher/layout/footer_teacher.php');
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $tiemstart = $data['OnOff'][0]->seplanset_startdate;
+        $tiemEnd = $data['OnOff'][0]->seplanset_enddate;
+        $timeNow = date('Y-m-d H:i:s');
+        if($tiemstart < $timeNow  &&  $tiemEnd > $timeNow && $data['OnOff'][0]->seplanset_status == "on"){   
+            $this->load->view('teacher/layout/header_teacher.php',$data);
+            $this->load->view('teacher/layout/navbar_teaher.php');
+            $this->load->view('teacher/course/plan/plan_send.php');
+            $this->load->view('teacher/layout/footer_teacher.php');
+        }else{
+            $this->session->set_flashdata(array('status'=>'warning','msg'=> 'YES','messge' => "<h2>ระบบปิดอยู่ </h2><br>ยังไม่ถึงกำหนดส่งงาน  หรือ เกินกำหนดส่งงาน<br>ติดต่อหัวงานหลักสูตร"));         
+            redirect('Teacher/Course','refresh');       
+        }
+       
     }
 
     public function edit_plan($id){
@@ -133,10 +142,9 @@ var  $title = "หน้าแรก";
                 $update =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
                                 'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
                                 'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
-                                'seplan_createdate'=> date('Y-m-d H:i:s'),
                                 'seplan_year'=> $SetPlan[0]->seplanset_year,
                                 'seplan_term'=> $SetPlan[0]->seplanset_term,
-                                'seplan_typesubject'=> $SetPlan[0]->seplan_typesubject,
+                                'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
                                 'seplan_file'=> $data['upload_data']['file_name'],
                                 'seplan_usersend'=> $this->session->userdata('login_id'),
                                 'seplan_learning'  => $this->session->userdata('pers_learning'),
@@ -159,7 +167,6 @@ var  $title = "หน้าแรก";
             $update =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
                                 'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
                                 'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
-                                'seplan_createdate'=> date('Y-m-d H:i:s'),
                                 'seplan_year'=> $SetPlan[0]->seplanset_year,
                                 'seplan_term'=> $SetPlan[0]->seplanset_term,
                                 'seplan_typesubject'=> $this->input->post('seplan_typesubject'),

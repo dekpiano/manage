@@ -70,6 +70,8 @@
                                 <label class="form-control-label">ประเภทการส่ง</label>
                                 <select id="seplan_typeplan" name="seplan_typeplan" class="form-control mb-3" required>
                                     <option value="">เลือก...</option>
+                                    <option value="แบบตรวจแผนการจัดการเรียนรู้">แบบตรวจแผนการจัดการเรียนรู้</option>
+                                    <option value="บันทึกตรวจใช้แผน">บันทึกตรวจใช้แผน</option>                                    
                                     <option value="โครงการสอน">โครงการสอน</option>
                                     <option value="แผนการสอนหน้าเดียว">แผนการสอนหน้าเดียว</option>
                                     <option value="แผนการสอนเต็ม">แผนการสอนเต็ม</option>

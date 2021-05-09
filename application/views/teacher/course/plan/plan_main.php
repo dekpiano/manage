@@ -14,17 +14,22 @@
 <!-- Dashboard Counts Section-->
 <section class="">
     <div class="container-fluid">
-        <?php if($OnOff[0]->seplanset_status == "on"):?>
-            <div class="alert alert-success">
-            <strong>แจ้งเตือน!</strong> ขณะนี้ระบบยังเปิดให้ส่งงานอยู่ <a
-                href="<?=base_url('Teacher/Course/SendPlan');?>" class="alert-link">ส่งงาน</a>
-        </div>
-        <?php else: ?>
+        <?php  if($OnOff[0]->seplanset_startdate < date('Y-m-d H:i:s') && $OnOff[0]->seplanset_enddate >  date('Y-m-d H:i:s') && $OnOff[0]->seplanset_status == "on"):?>
+        <div class="alert alert-success">
+            <strong>แจ้งเตือน!</strong> ขณะนี้ระบบเปิดให้ส่งงาน
+            <strong> ระหว่าง (<?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_startdate));?> ถึง
+                <?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_enddate));?>) </strong>
+                </div>
+            <?php else: ?>
             <div class="alert alert-danger">
-            <strong>แจ้งเตือน!</strong> ขณะนี้ระบบยังปิดไม่ให้ส่งงานแล้ว 
-        </div>
-        <?php endif; ?>
+                <strong>แจ้งเตือน!</strong> ขณะนี้ระบบปิด <strong>เนื่องจากยังไม่ถึงกำหนดส่งงาน หรือ
+                    เกินกำหนดส่งงาน</strong>  กำหนดส่งงาน (<?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_startdate));?> ถึง
+                <?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_enddate));?>)
+            </div>
+
         
+        <?php endif; ?>
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">

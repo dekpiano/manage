@@ -54,7 +54,7 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 $(document).ready(function() {
     $('#example').DataTable({
         "order": [
-            [5, "desc"]
+            [6, "desc"]
         ]
     });
     $('#tb_checkplan').DataTable({

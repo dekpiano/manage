@@ -72,7 +72,7 @@
                                 <label class="form-control-label">ประเภทการส่ง</label>
                                 <select id="seplan_typeplan" name="seplan_typeplan" class="form-control mb-3" required>
                                     <option value="">เลือก...</option>
-                                    <?php $type = array('โครงการสอน','แผนการสอนหน้าเดียว','แผนการสอนเต็ม','บันทึกหลังสอน' );
+                                    <?php $type = array('แบบตรวจแผนการจัดการเรียนรู้','บันทึกตรวจใช้แผน','โครงการสอน','แผนการสอนหน้าเดียว','แผนการสอนเต็ม','บันทึกหลังสอน' );
                               foreach ($type as $key => $v_type) :
                               ?>
                                     <option <?=$v_type==$plan[0]->seplan_typeplan ? 'selected' : ''?>
