@@ -37,7 +37,7 @@
           <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=10"></script>
+          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=13"></script>
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=2"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
 
@@ -52,6 +52,7 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 
           <script>
 $(document).ready(function() {
+   
     $('#example').DataTable({
         "order": [
             [6, "desc"]
@@ -65,18 +66,16 @@ $(document).ready(function() {
 
     $('#tb_reprotplan').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            {
-                extend:    'excelHtml5',
-                text:      '<i class="fa fa-file-excel-o"></i> ',
-                title: 'รายงาน',
-                titleAttr: 'Exportar a Excel',
-                className: 'btn btn-success'
-            }
-        ]
+        buttons: [{
+            extend: 'excelHtml5',
+            text: '<i class="fa fa-file-excel-o"></i> ',
+            title: 'รายงาน',
+            titleAttr: 'Exportar a Excel',
+            className: 'btn btn-success'
+        }]
     });
 
-    
+
 
     jQuery('#seplanset_startdate').datetimepicker({
         lang: 'th',

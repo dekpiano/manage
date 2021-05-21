@@ -9,17 +9,11 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-close">
-                        <div class="dropdown">
-                            <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                            <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a
-                                    href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
-                                    href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                        </div>
-                    </div>
+            <div class="col-lg-6 ">
+            
+                <div class="card ld-over">
+                <div class="ld ld-ring ld-spin"></div>
+                    
                     <div class="card-header d-flex align-items-center">
                         <h3 class="h4">ฟอร์มแก้ไขการส่งงาน</h3>
                     </div>
@@ -95,7 +89,8 @@
                                     placeholder="เช่น ส่งแผนครบแล้ว หรือ ส่งแผนที่ 1 - 4 แล้ว"><?=str_replace('<br>',"",$plan[0]->seplan_sendcomment);?></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="ส่งงาน" class="btn btn-primary">
+                                <button type="submit"  class="btn btn-primary" >ส่งงาน</button>
+                                
                             </div>
                         </form>
                     </div>

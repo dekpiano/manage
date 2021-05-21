@@ -99,7 +99,7 @@
                                 <td>
                                     <?php if($this->session->userdata('login_id') == 'pers_014'):?>
                                     <select id="seplan_status2" name="seplan_status2"
-                                        data-planId="<?=$v_checkplan->seplan_ID;?>"
+                                        planId="<?=$v_checkplan->seplan_ID;?>"
                                         class="form-control mb-3 seplan_status2">
                                         <option <?=$v_checkplan->seplan_status2 == "รอตรวจ" ? 'selected' : ''?>
                                             value="รอตรวจ">รอตรวจ</option>
@@ -133,7 +133,7 @@
         <div class="modal-content">
             <div class="modal-body">
 
-                <form>
+            <form id="form-comment1" class="form-comment1">
                     <div class="form-group">
                         <label for="seplan_comment1">หมายเหตุ:</label>
                         <textarea wrap="hard" class="form-control seplan_comment1" rows="5" name="seplan_comment1"
@@ -157,7 +157,7 @@
         <div class="modal-content">
             <div class="modal-body">
 
-                <form>
+                <form id="form-comment2" class="form-comment2">
                     <div class="form-group">
                         <label for="seplan_comment2">หมายเหตุ:</label>
                         <textarea wrap="hard" class="form-control seplan_comment2" rows="5" name="seplan_comment2"

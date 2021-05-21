@@ -228,10 +228,18 @@ var  $title = "หน้าแรก";
      function UpdateStatus1(){
        // echo $this->input->post('status1');
         $id =  $this->input->post('planId');
-        $data = array('seplan_status1' => $this->input->post('status1'),
-                        'seplan_checkdate1' => date('Y-m-d H:i:s'),
-                        'seplan_inspector1' => $this->session->userdata('login_id')
-                        );
+        if($this->input->post('status1') == "ผ่าน"){
+            $data = array('seplan_status1' => $this->input->post('status1'),
+            'seplan_checkdate1' => date('Y-m-d H:i:s'),
+            'seplan_inspector1' => $this->session->userdata('login_id'),
+            'seplan_comment1' => ""
+            );
+         }else{
+            $data = array('seplan_status1' => $this->input->post('status1'),
+            'seplan_checkdate1' => date('Y-m-d H:i:s'),
+            'seplan_inspector1' => $this->session->userdata('login_id')
+            );
+         }
         $result = $this->ModTeacherCourse->plan_UpdateStatus1($data,$id);
         if($result == 1){
             $data = $this->db->select('seplan_status1,seplan_status2')->where('seplan_ID',$id)->get('tb_send_plan')->result();
@@ -241,10 +249,20 @@ var  $title = "หน้าแรก";
      function UpdateStatus2(){
         // echo $this->input->post('status1');
          $id =  $this->input->post('planId');
-         $data = array('seplan_status2' => $this->input->post('status2'),
-                         'seplan_checkdate2' => date('Y-m-d H:i:s'),
-                         'seplan_inspector2' => $this->session->userdata('login_id')
-                         );
+         if($this->input->post('status2') == "ผ่าน"){
+            $data = array('seplan_status2' => $this->input->post('status2'),
+            'seplan_checkdate2' => date('Y-m-d H:i:s'),
+            'seplan_inspector2' => $this->session->userdata('login_id'),
+            'seplan_comment2' => ""
+            );
+         }else{
+            $data = array('seplan_status2' => $this->input->post('status2'),
+            'seplan_checkdate2' => date('Y-m-d H:i:s'),
+            'seplan_inspector2' => $this->session->userdata('login_id')
+            );
+         }
+         
+                         
          $result = $this->ModTeacherCourse->plan_UpdateStatus2($data,$id);
          if($result == 1){
             $data = $this->db->select('seplan_status1,seplan_status2')->where('seplan_ID',$id)->get('tb_send_plan')->result();

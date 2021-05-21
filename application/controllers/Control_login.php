@@ -96,7 +96,8 @@ class Control_login extends CI_Controller {
 				{					
 					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'ชื่อผู้ใช้งานหรือรหัสผ่าน ไม่ถูกต้อง หรือ ไม่ข้อมูลในระบบ กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
 					// redirect('login');
-					redirect('LoginTeacher');
+					//redirect('LoginTeacher');
+					print($this->Model_login->record_count_teacher1($username, $password));
 				}
 			}
 	}	

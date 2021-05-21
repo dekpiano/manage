@@ -95,6 +95,7 @@ $(document).ready(function() {
 
     // update plan
     $(document).on('submit', '#form_update_plan', function(e) {
+        var $this = $('button[type="submit"]');
         e.preventDefault();
         $.ajax({
             type: 'POST',
@@ -105,7 +106,10 @@ $(document).ready(function() {
             cache: false,
             async: false,
             beforeSend: function() {
-                $('.submitBtn').attr("disabled", "disabled");
+                
+                var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> กำลังส่ง...';             
+                $this.html(loadingText);
+                
             },
             success: function(response) { //console.log(response);
                 if (response == 1) {
@@ -121,13 +125,16 @@ $(document).ready(function() {
                         }
                     })
 
-
                 } else {
                     console.log(response);
+                    var loadingText = 'ส่งงาน';             
+                    $this.html(loadingText);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus);
+                var loadingText = 'ส่งงาน';             
+                $this.html(loadingText);
             }
         });
     });
@@ -217,7 +224,7 @@ $(document).ready(function() {
                 if(data[0].seplan_status1 == "ผ่าน"){
                     $('#bgC'+planId+' .TbShowComment1').html('');
                 }
-               
+                $(".form-comment1")[0].reset();
 
             },
             error: function(xhr) {
@@ -231,13 +238,14 @@ $(document).ready(function() {
         // console.log($(this).val());
         // console.log($(this).attr('data-planId'));
         var status2 = $(this).val();
-        var planId = $(this).attr('data-planId');
-
+        var planId = $(this).attr('planId');
+        
         $.ajax({
             type: 'POST',
             url: "../../../teacher/ConTeacherCourse/UpdateStatus2",
             data: { status2: status2, planId: planId },
             dataType: 'json',
+            cache: false,
             beforeSend: function() {
 
             },
@@ -254,11 +262,12 @@ $(document).ready(function() {
                     'success'
                 )
                 if(data[0].seplan_status2 == "ไม่ผ่าน"){
-                    $('#bgC'+planId+' .TbShowComment2').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment2">หมายเหตุ</a>');
+                    $('#bgC'+planId+' .TbShowComment2').html('<a href="#" class="show_comment2" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment2">หมายเหตุ</a>');
                 }
                 if(data[0].seplan_status2 == "ผ่าน"){
                     $('#bgC'+planId+' .TbShowComment2').html('');
                 }
+                $(".form-comment2")[0].reset();
 
             },
             error: function(xhr) {
@@ -312,7 +321,8 @@ $(document).ready(function() {
                     'success'
                 )
                }
-               
+               $(".form-comment1")[0].reset();
+               $("#addcomment1").modal('hide');
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -324,12 +334,13 @@ $(document).ready(function() {
 
     $(document).on("click", ".show_comment2", function() {        
         var planId = $(this).attr('data-planId');
-        //console.log(planId);
+        
         $.ajax({
             type: 'POST',
             url: "../../../teacher/ConTeacherCourse/CheckComment2",
             data: { planId: planId },
             dataType: 'json',
+            cache: false,
             beforeSend: function() {
 
             },
@@ -366,7 +377,8 @@ $(document).ready(function() {
                     'success'
                 )
                }
-               
+               $(".form-comment2")[0].reset();
+               $("#addcomment2").modal('hide');
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
