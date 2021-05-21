@@ -115,9 +115,9 @@
                         <a class="btn btn-primary" href="<?=base_url('teacher/ConTeacherCourse/report_plan_print/'.$thai)?>"><i
                                 class="fa fa-print" aria-hidden="true"></i> ดาวโหลดรายงาน .xlsx</a>                        
                     </div>
-                    <div class="text-red text-center mt-3">
+                    <!-- <div class="text-red text-center mt-3">
                                 หมายเหตุ**  ข้อมูลจะปรากฏในตารางก็ต่อเมื่อ หัวหน้ากลุ่มสาระและหัวหน้ากลุ่มงานหลักสูตร ตรวจว่าผ่าน ทั้งคู่
-                    </div>
+                    </div> -->
 
 
                 </div>

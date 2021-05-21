@@ -322,8 +322,6 @@ var  $title = "หน้าแรก";
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                             ->where('seplan_learning',$idLearn)
                             ->where('seplan_typeplan',$data['thai'])
-                            ->where('seplan_status1','ผ่าน')
-                            ->where('seplan_status2','ผ่าน')
                             ->group_by('seplan_coursecode')
                             ->order_by('pers_firstname')
                             ->get('tb_send_plan')->result();
@@ -350,8 +348,6 @@ var  $title = "หน้าแรก";
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                             ->where('seplan_learning',$idLearn)
                             ->where('seplan_typeplan',$data['thai'])
-                            ->where('seplan_status1','ผ่าน')
-                            ->where('seplan_status2','ผ่าน')
                             ->group_by('seplan_coursecode')
                             ->order_by('pers_firstname')
                             ->get('tb_send_plan')->result();
