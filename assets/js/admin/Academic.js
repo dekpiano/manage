@@ -213,11 +213,7 @@ $(document).ready(function() {
                 } else {
                     $("#bgC" + planId).removeClass('table-success');
                 }
-                Swal.fire(
-                    'แจ้งเตือน',
-                    'คุณเปลี่ยนสถานะเรียบร้อย',
-                    'success'
-                )
+                
                 if(data[0].seplan_status1 == "ไม่ผ่าน"){
                     $('#bgC'+planId+' .TbShowComment1').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment1">หมายเหตุ</a>');
                 }
@@ -225,6 +221,9 @@ $(document).ready(function() {
                     $('#bgC'+planId+' .TbShowComment1').html('');
                 }
                 $(".form-comment1")[0].reset();
+
+                alertify.set('notifier','position', 'top-right');
+                alertify.success('เปลี่ยนสถานะสำเร็จ');
 
             },
             error: function(xhr) {
@@ -256,11 +255,7 @@ $(document).ready(function() {
                 } else {
                     $("#bgC" + planId).removeClass('table-success');
                 }
-                Swal.fire(
-                    'แจ้งเตือน',
-                    'คุณเปลี่ยนสถานะเรียบร้อย',
-                    'success'
-                )
+               
                 if(data[0].seplan_status2 == "ไม่ผ่าน"){
                     $('#bgC'+planId+' .TbShowComment2').html('<a href="#" class="show_comment2" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment2">หมายเหตุ</a>');
                 }
@@ -268,6 +263,9 @@ $(document).ready(function() {
                     $('#bgC'+planId+' .TbShowComment2').html('');
                 }
                 $(".form-comment2")[0].reset();
+
+                alertify.set('notifier','position', 'top-right');
+                alertify.success('เปลี่ยนสถานะสำเร็จ');
 
             },
             error: function(xhr) {

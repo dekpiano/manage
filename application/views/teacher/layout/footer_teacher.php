@@ -26,6 +26,7 @@
           <!-- Main File -->
           <script src="<?=base_url()?>assets/js/front.js"></script>
           <script src="<?=base_url()?>assets/js/jquery.datetimepicker.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
           <!-- DataTable -->
           <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
           <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -37,7 +38,7 @@
           <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=13"></script>
+          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=14"></script>
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
 
