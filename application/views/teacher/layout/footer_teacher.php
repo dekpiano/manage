@@ -38,7 +38,7 @@
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
           <script src="<?=base_url()?>assets/js/admin/Academic.js?v=13"></script>
-          <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=2"></script>
+          <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
 
           </body>

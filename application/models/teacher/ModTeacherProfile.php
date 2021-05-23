@@ -7,6 +7,11 @@ class ModTeacherProfile extends CI_Model
 		parent::__construct();	
 		$this->DBPers = $this->load->database('personnel', TRUE);	
 	}
+
+	public function personnel_update($data)	{
+	
+		return $this->DBPers->update('tb_personnel',$data,"pers_id='".$this->session->userdata('login_id')."'");
+	}
 		
 
 	public function teacher_resetpassword($data,$id)

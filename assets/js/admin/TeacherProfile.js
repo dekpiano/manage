@@ -46,3 +46,22 @@ $(document).on('click','#submit_password',function(){
        
     });
 });
+
+$(document).on('click', '#update_Privateinfo', function() {
+    $.post('../teacher/ConTeacherProfile/profile_update_Privateinfo_personnel', $('form#Privateinfo').serialize(), function(response) {
+        console.log("Response: " + response);
+        // Log the response to the console
+        if (response == 1) {
+            Swal.fire({
+                    title: "แจ้งเตือน",
+                    text: "เปลี่ยนข้อมูลเรียบร้อย",
+                    icon: "success"
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        location.reload();
+                    }
+                });
+        }
+
+    });
+});

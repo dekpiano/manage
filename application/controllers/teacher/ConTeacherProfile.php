@@ -27,6 +27,31 @@ class ConTeacherProfile extends CI_Controller {
         
     }
 
+	public function chang_date_thai($value)
+	{		
+		$date  = explode(" ",$value);
+		list($d,$m,$y) = explode("-",$date[0]);			
+		$date1 = ($y-543).'-'.$m.'-'.$d;
+		return $date1;	
+	}
+
+	public function chang_date_thai_pass($value)
+	{		
+		$date  = explode(" ",$value);
+		list($d,$m,$y) = explode("-",$date[0]);			
+		$date1 = $d.$m.($y);
+		return $date1;	
+	}
+
+	public function chang_date_eng($value)
+	{
+		$date  = explode(" ",$value);
+		list($y,$m,$d) = explode("-",$date[0]);			
+		$date1 = $d.$m.($y+543);
+		return $date1;
+		
+	}
+
     	
 	public function reset_password($id)
 	{	
@@ -83,7 +108,25 @@ class ConTeacherProfile extends CI_Controller {
 		redirect('Teacher/Profile');
 	}
 
+	function profile_update_Privateinfo_personnel(){
+		$data = array(	
+			'pers_prefix' => $this->input->post('pers_prefix'),
+			'pers_firstname' => $this->input->post('pers_firstname'),
+			'pers_lastname' => $this->input->post('pers_lastname'),
+			'pers_britday' => $this->chang_date_thai($this->input->post('pers_britday')),
+			'pers_address' => $this->input->post('pers_address'),
+			'pers_phone' => $this->input->post('pers_phone'),
+			'pers_userEdit' => $this->session->userdata('login_id')
+		);
+			if($this->ModTeacherProfile->personnel_update($data) == 1){
+				echo "1";
+			}
+
+	}
+
 }
+
+
 
 
 ?>

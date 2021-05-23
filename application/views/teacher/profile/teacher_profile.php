@@ -109,7 +109,7 @@
                                 <h5 class="card-title mb-0">Private info</h5>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form id="Privateinfo">
                                     <div class="form-row">
                                         <div class="form-group col-md-2">
                                             <label for="pers_prefix">ชื่อคำนำหน้า</label>
@@ -160,8 +160,10 @@
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="pers_phone">เบอร์โทร</label>
-                                            <input type="text" class="form-control" id="pers_phone" placeholder="Email"
-                                                name="pers_phone" value="<?=$pers[0]->pers_phone?>">
+                                            <input type="text" class="form-control" id="pers_phone"
+                                                placeholder="เบอร์โทรศัพท์" name="pers_phone"
+                                                value="<?=$pers[0]->pers_phone?>"
+                                                data-inputmask="'mask': '99-9999-9999'">
                                         </div>
                                     </div>
 
@@ -172,7 +174,7 @@
                                     </div>
 
                             </div>
-                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                            <button type="button" id="update_Privateinfo" class="btn btn-primary">Save changes</button>
                             </form>
 
                         </div>
@@ -185,10 +187,8 @@
 
                                 <form>
                                     <div class="form-group">
-
                                         <input type="password" class="form-control" id="password" name="password"
                                             placeholder="รหัสผ่าน" minlength=8>
-
                                     </div>
                                     <div class="form-group">
 
