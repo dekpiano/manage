@@ -2,7 +2,7 @@
 <header class="page-header">
     <div class="container-fluid">
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center ">
-            <h2 class="no-margin-bottom">ตรวจสอบงาน</h2>
+            <h2 class="no-margin-bottom">รายงาน</h2>
 
         </div>
     </div>
@@ -78,7 +78,7 @@
                                 <td colspan="9">ทะเบียนส่ง<?=$thai;?></td>
                             </tr>
                             <tr class="text-center">
-                                <td colspan="9">กลุ่มสาระการเรียนรู้<?=$lean[0]->lear_namethai?></td>
+                                <td colspan="9">กลุ่มสาระการเรียนรู้<?=$leanUser[0]->lear_namethai?></td>
                             </tr>
                             <tr class="text-center">
                                 <td colspan="9">ภาคเรียนที่ <?=$setupplan[0]->seplanset_term?> ปีการศึกษา

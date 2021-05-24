@@ -17,7 +17,9 @@ var  $title = "หน้าแรก";
         }
 
         $this->load->model('teacher/ModTeacherCourse');
+        $this->DBPers = $this->load->database('personnel', TRUE);
 
+        
     }
 
 
@@ -312,9 +314,11 @@ var  $title = "หน้าแรก";
         $data['title'] = "รายงาน";       
         $DBskj = $this->load->database('skj', TRUE); 
         $data['lean'] = $DBskj->get('tb_learning')->result();
+        $data['leanUser'] = $DBskj->where('lear_id',$this->session->userdata('pers_learning'))->get('tb_learning')->result();
         $data['setupplan'] = $this->db->get('tb_send_plan_setup')->result();
         
         if(isset($_GET['select_lean'])){
+            $data['leanUser'] = $DBskj->where('lear_id',$_GET['select_lean'])->get('tb_learning')->result();
             $idLearn = $_GET['select_lean'];
         }else{
             $idLearn = $this->session->userdata('pers_learning');
@@ -326,6 +330,7 @@ var  $title = "หน้าแรก";
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                             ->where('seplan_learning',$idLearn)
                             ->where('seplan_typeplan',$data['thai'])
+                            ->group_by('seplan_namesubject')
                             ->group_by('seplan_coursecode')
                             ->order_by('pers_firstname')
                             ->get('tb_send_plan')->result();
@@ -336,7 +341,7 @@ var  $title = "หน้าแรก";
     }
 
     public function report_plan_print($key = null,$leanKey = null){
-        //echo urldecode($key); exit();
+       
         $data['ID'] = $key;
         $data['thai'] = urldecode($key);
         $data['title'] = "รายงาน";
@@ -346,8 +351,15 @@ var  $title = "หน้าแรก";
 
         if($leanKey){
             $idLearn = $leanKey;
+
+        $leade = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_groupleade,pers_learning') ->where('pers_groupleade','1')
+                        ->where('pers_learning',$leanKey)
+						->get('tb_personnel')->result();
+         $groupleade = $leade[0]->pers_prefix.$leade[0]->pers_firstname.' '.$leade[0]->pers_lastname;
+         
         }else{
             $idLearn = $this->session->userdata('pers_learning');
+            $groupleade = $this->session->userdata('fullname');
         }
         $lean = $DBskj->where('lear_id',$idLearn)->get('tb_learning')->result();
 
@@ -359,6 +371,7 @@ var  $title = "หน้าแรก";
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                             ->where('seplan_learning',$idLearn)
                             ->where('seplan_typeplan',$data['thai'])
+                            ->group_by('seplan_namesubject')
                             ->group_by('seplan_coursecode')
                             ->order_by('pers_firstname')
                             ->get('tb_send_plan')->result();
@@ -454,7 +467,7 @@ var  $title = "หน้าแรก";
             ->setWrapText(true); //Set wrap
             $sheet->setCellValue('D'.($start_row+2), 'ลงชื่อ…………………………………………………….หัวหน้ากลุ่มสาระการเรียนรู้'.$lean[0]->lear_namethai);
             $sheet->mergeCells('D'.($start_row+2).':I'.($start_row+2));
-            $sheet->setCellValue('D'.($start_row+3), '('.$this->session->userdata('fullname').')');
+            $sheet->setCellValue('D'.($start_row+3), '('.$groupleade.')');
             $sheet->mergeCells('D'.($start_row+3).':F'.($start_row+3));
             $sheet->setCellValue('D'.($start_row+4), $this->datethai->thai_date_fullmonth(strtotime(date("Y-m-d"))));
             $sheet->mergeCells('D'.($start_row+4).':F'.($start_row+4));
