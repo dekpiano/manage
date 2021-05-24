@@ -10,7 +10,6 @@
 <!-- Dashboard Counts Section-->
 <section class="">
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
@@ -48,11 +47,28 @@
                         </div><a href="<?=base_url('Teacher/Course/ReportPlan/บันทึกหลังสอน');?>" class="tile-link"></a>
                     </div>
                 </div>
-            </div>
+            </div>           
         </div>
-
+        
 
         <?php if(isset($ID)): ?>
+            <?php if($this->session->userdata('login_id') == 'pers_014'): ?>
+        <form method="get" action="<?=base_url('Teacher/Course/ReportPlan/'.$this->uri->segment('4'));?>">
+        <div class="form-row justify-content-center">
+            <div class="col-auto my-1">
+            <select class="form-control" id="select_lean" name="select_lean" >
+                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                            <?php foreach ($lean as $key => $v_lean) : ?>
+                            <option value="<?=$v_lean->lear_id?>"><?=$v_lean->lear_namethai?></option>
+                            <?php endforeach; ?>
+                            </select>
+            </div>  
+            <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary">ค้นหา</button>
+            </div>
+        </div>
+        </form>
+        <?php endif; ?>
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -79,8 +95,8 @@
                                 <th rowspan="2">หมายเหตุ</th>
                             </tr>
                             <tr class="text-center">
-                                <th>เพิ่มเติม</th>
                                 <th>พื้นฐาน</th>
+                                <th>เพิ่มเติม</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,8 +128,13 @@
 
                     </table>
                     <div class="text-center">
-                        <a class="btn btn-primary" href="<?=base_url('teacher/ConTeacherCourse/report_plan_print/'.$thai)?>"><i
-                                class="fa fa-print" aria-hidden="true"></i> ดาวโหลดรายงาน .xlsx</a>                        
+                        <?php if(isset($_GET['select_lean'])): ?>
+                        <a class="btn btn-primary" href="<?=base_url('teacher/ConTeacherCourse/report_plan_print/'.$thai.'/'.$_GET['select_lean'])?>"><i
+                                class="fa fa-print" aria-hidden="true"></i> ดาวโหลดรายงาน .xlsx</a> 
+                        <?php else: ?>  
+                            <a class="btn btn-primary" href="<?=base_url('teacher/ConTeacherCourse/report_plan_print/'.$thai)?>"><i
+                                class="fa fa-print" aria-hidden="true"></i> ดาวโหลดรายงาน .xlsx</a> 
+                        <?php endif; ?>                   
                     </div>
                     <!-- <div class="text-red text-center mt-3">
                                 หมายเหตุ**  ข้อมูลจะปรากฏในตารางก็ต่อเมื่อ หัวหน้ากลุ่มสาระและหัวหน้ากลุ่มงานหลักสูตร ตรวจว่าผ่าน ทั้งคู่

@@ -306,15 +306,19 @@ var  $title = "หน้าแรก";
 
 
       public function report_plan($key = null){
+        
         $data['ID'] = $key;
         $data['thai'] = urldecode($key);
-        $data['title'] = "รายงาน";
-        $idLearn = $this->session->userdata('pers_learning');
+        $data['title'] = "รายงาน";       
         $DBskj = $this->load->database('skj', TRUE); 
-        $data['lean'] = $DBskj->where('lear_id',$idLearn)->get('tb_learning')->result();
+        $data['lean'] = $DBskj->get('tb_learning')->result();
         $data['setupplan'] = $this->db->get('tb_send_plan_setup')->result();
         
-        //echo '<pre>'; print_r($lean); exit();
+        if(isset($_GET['select_lean'])){
+            $idLearn = $_GET['select_lean'];
+        }else{
+            $idLearn = $this->session->userdata('pers_learning');
+        }
         $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
                                                 skjacth_personnel.tb_personnel.pers_firstname,
@@ -331,15 +335,22 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');
     }
 
-    public function report_plan_print($key = null){
+    public function report_plan_print($key = null,$leanKey = null){
+        //echo urldecode($key); exit();
         $data['ID'] = $key;
         $data['thai'] = urldecode($key);
         $data['title'] = "รายงาน";
-        $idLearn = $this->session->userdata('pers_learning');
         $DBskj = $this->load->database('skj', TRUE); 
-        $lean = $DBskj->where('lear_id',$idLearn)->get('tb_learning')->result();
-        $setupplan = $this->db->get('tb_send_plan_setup')->result();
         
+        $setupplan = $this->db->get('tb_send_plan_setup')->result();
+
+        if($leanKey){
+            $idLearn = $leanKey;
+        }else{
+            $idLearn = $this->session->userdata('pers_learning');
+        }
+        $lean = $DBskj->where('lear_id',$idLearn)->get('tb_learning')->result();
+
         //echo '<pre>'; print_r($lean); exit();
         $checkplan = $this->db->select("skjacth_academic.tb_send_plan.*,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
@@ -398,8 +409,8 @@ var  $title = "หน้าแรก";
             $sheet->mergeCells('B4:B5');
             $sheet->setCellValue('C4', 'รายวิชา');
             $sheet->mergeCells('C4:D4');
-            $sheet->setCellValue('C5', 'เพิ่มเติม');
-            $sheet->setCellValue('D5', 'พื้นฐาน');
+            $sheet->setCellValue('C5', 'พื้นฐาน');
+            $sheet->setCellValue('D5', 'เพิ่มเติม');
             $sheet->setCellValue('E4', 'ชื่อวิชา');
             $sheet->mergeCells('E4:E5');
             $sheet->setCellValue('F4', 'รหัสวิชา');

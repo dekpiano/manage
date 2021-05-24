@@ -35,27 +35,25 @@
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
-                            <tr>
-                                <th>ภาคเรียน</th>
+                            <tr>                                
                                 <th>ปีการศึกษา</th>
                                 <th>ประเภท</th>
                                 <th>รหัสวิชา</th>
                                 <th>ชื่อวิชา</th>
-                                <th>ระดับชั้น</th>
+                                <th>ชั้น</th>
                                 <th>วันที่ส่ง</th>
                                 <th>ไฟล์</th>
                                 <th>หมายเหตุ</th>
                                 <th>หน.กลุ่มสาระ</th>
                                 <th>หน.งานพัฒนาหลักสูตร</th>
-                                <th>คำสั่ง</th>
+                                <th style="width:56px;">คำสั่ง</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <?php foreach ($plan as $key => $v_plan) : ?>
                             <tr id="<?=$v_plan->seplan_ID;?>">
-                                <td><?=$v_plan->seplan_term;?></td>
-                                <td><?=$v_plan->seplan_year;?></td>
+                                <td><?=$v_plan->seplan_term;?>/<?=$v_plan->seplan_year;?></td>
                                 <td><?=$v_plan->seplan_typeplan;?></td>
                                 <td><?=$v_plan->seplan_coursecode;?></td>
                                 <td><?=$v_plan->seplan_namesubject;?></td>
@@ -93,8 +91,8 @@
                                 </td>
                                 <td>
                                     <a href="<?=base_url('Teacher/Course/EditPlan/'.$v_plan->seplan_ID)?>"
-                                        class="btn btn-warning btn-sm text-white">แก้ไข</a>
-                                    <a href="#" class="btn btn-danger btn-sm text-white delete_plan">ลบ</a>
+                                        class="btn btn-warning btn-sm text-white"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm text-white delete_plan"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
