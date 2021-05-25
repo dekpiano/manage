@@ -58,7 +58,7 @@
                                 <td><?=$v_plan->seplan_coursecode;?></td>
                                 <td><?=$v_plan->seplan_namesubject;?></td>
                                 <td>ม.<?=$v_plan->seplan_gradelevel;?></td>
-                                <td><?=$v_plan->seplan_createdate;?></td>
+                                <td><?=$this->datethai->thai_date_fullmonth(strtotime($v_plan->seplan_createdate));?>
                                 <td><a target="_blank"
                                         href="<?=base_url('uploads/academic/course/plan/').$v_plan->seplan_file;?>">เปิดดู</a>
                                 </td>

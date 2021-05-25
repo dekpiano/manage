@@ -406,10 +406,8 @@ var  $title = "หน้าแรก";
                     ],
                 ],
             ];
-           
-            
 
-            $sheet->setCellValue('A1', 'ทะเบียนส่งโครงการสอน');
+            $sheet->setCellValue('A1', 'ทะเบียนส่ง'.$data['thai']);
             $sheet->mergeCells('A1:I1');
             $sheet->setCellValue('A2', 'กลุ่มสาระการเรียนรู้'.$lean[0]->lear_namethai);
             $sheet->mergeCells('A2:I2');

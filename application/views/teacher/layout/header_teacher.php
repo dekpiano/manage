@@ -54,7 +54,7 @@
                             <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
                                 <div class="brand-text d-none d-lg-inline-block"><span>ระบบงาน
                                     </span><strong>วิชาการ</strong></div>
-                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>ACDM</strong></div>
                             </a>
                             <!-- Toggle Button--><a id="toggle-btn" href="#"
                                 class="menu-btn active"><span></span><span></span><span></span></a>
@@ -64,7 +64,7 @@
                             <li class="nav-item">
                                 <a href="<?=base_url('Teacher/Profile');?>" class="nav-link logout"> <i
                                         class="fa fa-pencil-square-o" aria-hidden="true"></i><span
-                                        class="d-none d-sm-inline">ข้อมูลส่วนตัว </span></a>
+                                        class="d-none d-sm-inline"> ข้อมูลส่วนตัว </span></a>
                             </li>
                             <!-- Logout    -->
                             <li class="nav-item">

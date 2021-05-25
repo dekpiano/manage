@@ -72,7 +72,8 @@
                                 <td>ม.<?=$v_checkplan->seplan_gradelevel;?></td>
                                 <td><?=$v_checkplan->pers_prefix.$v_checkplan->pers_firstname.' '.$v_checkplan->pers_lastname;?>
                                 </td>
-                                <td><?=$v_checkplan->seplan_createdate;?></td>
+                                <td><?=$this->datethai->thai_date_fullmonth(strtotime($v_checkplan->seplan_createdate));?>
+                               </td>
                                 <td><a target="_blank"
                                         href="<?=base_url('uploads/academic/course/plan/').$v_checkplan->seplan_file;?>">เปิดดู</a>
                                 </td>

@@ -17,6 +17,30 @@
                         <div class="media align-items-center">
                             <div class="icon bg-red"><i class="fa fa-file-text" aria-hidden="true"></i></div>
                             <div class="media-body overflow-hidden">
+                                <h5 class="card-text mb-0"> รายงานแบบตรวจแผนการจัดการเรียนรู้</h5>
+                            </div>
+                        </div><a href="<?=base_url('Teacher/Course/ReportPlan/แบบตรวจแผนการจัดการเรียนรู้');?>" class="tile-link"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body statistic">
+                        <div class="media align-items-center">
+                            <div class="icon bg-red"><i class="fa fa-file-text" aria-hidden="true"></i></div>
+                            <div class="media-body overflow-hidden">
+                                <h5 class="card-text mb-0"> รายงานแบบบันทึกตรวจใช้แผน</h5>
+                            </div>
+                        </div><a href="<?=base_url('Teacher/Course/ReportPlan/บันทึกตรวจใช้แผน');?>" class="tile-link"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body statistic">
+                        <div class="media align-items-center">
+                            <div class="icon bg-red"><i class="fa fa-file-text" aria-hidden="true"></i></div>
+                            <div class="media-body overflow-hidden">
                                 <h5 class="card-text mb-0"> รายงานโครงการสอน</h5>
                             </div>
                         </div><a href="<?=base_url('Teacher/Course/ReportPlan/โครงการสอน');?>" class="tile-link"></a>
@@ -53,15 +77,16 @@
 
         <?php if(isset($ID)): ?>
             <?php if($this->session->userdata('login_id') == 'pers_014'): ?>
-        <form method="get" action="<?=base_url('Teacher/Course/ReportPlan/'.$this->uri->segment('4'));?>">
+        <form method="get" action="<?=base_url('Teacher/Course/ReportPlan/'.$this->uri->segment('4'));?>" class="needs-validation" novalidate>
         <div class="form-row justify-content-center">
             <div class="col-auto my-1">
-            <select class="form-control" id="select_lean" name="select_lean" >
+            <select class="form-control" id="select_lean" name="select_lean" required>
                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
                             <?php foreach ($lean as $key => $v_lean) : ?>
                             <option value="<?=$v_lean->lear_id?>"><?=$v_lean->lear_namethai?></option>
                             <?php endforeach; ?>
                             </select>
+                            <div class="invalid-feedback">กรุณาเลือกกลุ่มสาระการเรียนรู้</div>
             </div>  
             <div class="col-auto my-1">
             <button type="submit" class="btn btn-primary">ค้นหา</button>
