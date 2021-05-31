@@ -15,7 +15,7 @@
                 <div class="ld ld-ring ld-spin"></div>
                     
                     <div class="card-header d-flex align-items-center">
-                        <h3 class="h4">ฟอร์มแก้ไขการส่งงาน</h3>
+   <h3 class="h4">ฟอร์มแก้ไขการส่งงาน</h3>
                     </div>
                     <div class="card-body">
 
