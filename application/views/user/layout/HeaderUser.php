@@ -11,7 +11,13 @@
     <meta name="description" content="Blog Template">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <link rel="shortcut icon" href="favicon.ico">
-
+    
+    <meta property="og:url" content="<?= $full_url ?>" />
+    <meta property="og:title" content="<?= $title ?> | SKJ" />
+    <meta property="og:description" content="<?= $description ?>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="<?=base_url('assets/images/StudentList/logo_studentlist.png')?>" />
+    <link rel="image_src" href="images/content/content-37.png" />
     <!-- FontAwesome JS-->
 
     <link rel="preconnect" href="https://fonts.gstatic.com">

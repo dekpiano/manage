@@ -11,6 +11,7 @@
     <meta name="description" content="Blog Template">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <link rel="shortcut icon" href="favicon.ico">
+    
 
     <!-- FontAwesome JS-->
 
@@ -20,6 +21,8 @@
     <link rel="stylesheet" href="https://demo.voidcoders.com/htmldemo/fitgear/main-files/assets/css/animate.css">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/theme-2.css">
+
+    
 
 </head>
 
