@@ -56,7 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['ClosePage'] = "welcome/ClosePage";
 // admin
-$route['LogoutAdmin'] = "Control_login/";
+$route['LogoutAdmin'] = "Control_login";
 $route['AdminHome'] = "admin/ConAdminHome/AdminHome";
 
 $route['Admin/AcademicResult'] = "admin/ConAdminAcademinResult/AdminAcademinResultMain";
@@ -94,3 +94,4 @@ $route['AcademicResult'] = "user/ConAcademicResult/score";
 $route['ExamSchedule'] = "user/ConStudents/ExamSchedule";
 $route['Students'] = "user/ConStudents";
 $route['StudentsList'] = "user/ConStudents/StudentsList";
+$route['ClassSchedule'] = "user/ConStudents/ClassSchedule";

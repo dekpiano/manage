@@ -6,4 +6,4 @@ swal("แจ้งเตือน", "<?=$this->session->flashdata('messge');?>",
 <script>
 swal("แจ้งเตือน", "<?=$this->session->flashdata('messge');?>", "error");
 </script>
-<?php endif; ?>
+<?php endif; $this->session->mark_as_temp('alert',20);?>

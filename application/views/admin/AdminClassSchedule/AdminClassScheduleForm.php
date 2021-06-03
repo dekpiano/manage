@@ -27,11 +27,34 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="schestu_id" class="col-sm-2 col-form-label">ภาคเรียน</label>
+                                <div class="col-sm-10">
+                                <select name="schestu_term" id="schestu_term" class="form-control">                                       
+                                        <option value="1"> 1</option>
+                                        <option value="2"> 2</option>
+                                        <option value="3"> 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="schestu_classname" class="col-sm-2 col-form-label">ปีการศึกษา</label>
+                                <?php $toYear = date("Y",strtotime(date('Y')))+543;?>
+                                <div class="col-sm-10">
+                                    <select name="schestu_year" id="schestu_year" class="form-control">
+                                        <?php for ($i = $toYear-2; $i <= $toYear+2; $i++): ?>
+                                        <option <?=$toYear==$i?'selected':''?> value="<?=$i;?>"><?=$i;?>
+                                        </option>
+                                        <?php endfor; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="schestu_classname" class="col-sm-2 col-form-label">ชั้น ม.</label>
                                 <div class="col-sm-10">
                                     <select name="schestu_classname" id="schestu_classname" class="form-control">
-                                        <?php foreach ($ClassRoom as $key => $v_ClassRoom): ?>
-                                        <option value="<?=$v_ClassRoom->Reg_Class;?>"><?=$v_ClassRoom->Reg_Class;?>
+                                        <?php $room = array('1/1'=>'1.1','1/2'=>'1.2', '1/3'=>'1.3', '1/4'=>'1.4', '2/1'=>'2.1', '2/2'=>'2.2', '2/3'=>'2.3', '2/4'=>'2.4', '3/1'=>'3.1', '3/2'=>'3.2', '3/3'=>'3.3', '3/4'=>'3.4', '4/1'=>'4.1', '4/2'=>'4.2', '4/3'=>'4.3', '4/4'=>'4.4', '5/1'=>'5.1', '5/2'=>'5.2', '5/3'=>'5.3', '5/4'=>'5.4', '6/1'=>'6.1', '6/2'=>'6.2','6/3'=>'6.3','6/4'=>'6.4');
+                                        foreach ($room as $key => $v_ClassRoom): ?>
+                                        <option value="<?=$key;?>"><?=$key;?>
                                         </option>
                                         <?php endforeach; ?>
                                     </select>

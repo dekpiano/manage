@@ -51,7 +51,32 @@ var  $title = "แผงควบคุม";
         $this->load->view('user/layout/Footer.php');
     }
 
+    public function ClassSchedule(){
+        $data['title'] = "ตารางเรียน";
+        $data['description'] = "ตารางเรียน";  
+        $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['schedule'] = $this->db->order_by('schestu_id','DESC')->get('tb_class_schedule')->result();
+        $this->load->view('user/layout/HeaderUser.php',$data);
+        $this->load->view('user/PageClassSchedule.php');
+        $this->load->view('user/layout/Footer.php');
+    }
 
+    public function SearchClassSchedule(){
+
+       $key_studentList = $this->input->get('studentList');
+       $data['schedule'] = $this->db->where('schestu_classname', $key_studentList)->get('tb_class_schedule')->result();
+      //echo '<pre>'; print_r( $data['schedule'] ); exit();
+        $data['title'] = "ตารางเรียน";
+        $data['description'] = "ตารางเรียน";  
+        $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $this->load->view('user/layout/HeaderUser.php',$data);
+        $this->load->view('user/PageClassSchedule.php');
+        $this->load->view('user/layout/Footer.php');
+    }
+
+
+
+    
 
 }
 

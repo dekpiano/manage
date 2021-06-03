@@ -83,6 +83,8 @@ var  $title = "แผงควบคุม";
 						'schestu_id' => $this->input->post('schestu_id'),
 						'schestu_classname' => $this->input->post('schestu_classname'),
 						'schestu_filename' => $data['upload_data']['file_name'],
+						'schestu_term' => $this->input->post('schestu_term'),
+						'schestu_year' => $this->input->post('schestu_year'),
 						'schestu_datetime' => date('Y-m-d H:i:s'),
 						'schestu_user' => $this->session->userdata('login_id')
 					);
@@ -95,7 +97,7 @@ var  $title = "แผงควบคุม";
 			{
 				$error = array('error' => $this->upload->display_errors());
 				//print_r($error['error']);
-				$this->session->set_flashdata(array('alert'=> 'error','messge' => 'เพิ่มได้แค่ไฟล์ PDF ไม่เกิ้น 2 mb'));
+				$this->session->set_flashdata(array('alert'=> 'error','messge' => 'เพิ่มได้แค่ไฟล์ PDF ไม่เกิ้น 2 mb'.$error['error']));
 				redirect('Admin/ClassSchedule/add', 'refresh');
 			}
 		

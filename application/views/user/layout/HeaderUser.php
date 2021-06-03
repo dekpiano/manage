@@ -16,7 +16,13 @@
     <meta property="og:title" content="<?= $title ?> | SKJ" />
     <meta property="og:description" content="<?= $description ?>" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="<?=base_url('assets/images/StudentList/logo_studentlist.png')?>" />
+
+    <?php if($this->uri->segment(1) == "ClassSchedule"): ?>
+        <meta property="og:image" content="<?=base_url('assets/images/ClassSchedule/logo_ClassSchedule.png')?>" />
+        <?php else: ?>
+            <meta property="og:image" content="<?=base_url('assets/images/StudentList/logo_studentlist.png')?>" />
+    <?php endif; ?>
+    
     <link rel="image_src" href="images/content/content-37.png" />
     <!-- FontAwesome JS-->
 
@@ -50,11 +56,15 @@
                     <ul class="navbar-nav flex-column text-left">
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('');?>"><i
-                                    class="fas fa-home fa-fw mr-2"></i>หน้าแรก </a>
+                                    class="fas fa-home fa-fw mr-2"></i>หน้าแรก <?=$this->uri->segment(1);?> </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('StudentsList');?>"><i
                                     class="fas fa-calculator fa-fw mr-2"></i>รายชื่อนักเรียน </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="<?=base_url('ClassSchedule');?>"><i
+                                    class="fas fa-calculator fa-fw mr-2"></i>ตารางเรียน </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('ExamSchedule');?>"><i

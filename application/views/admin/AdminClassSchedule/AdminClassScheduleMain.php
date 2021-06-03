@@ -16,7 +16,8 @@
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>                      
-                      <th>ชั้น</th>
+                      <th>ชั้น/ห้อง</th>
+                      <th>ปีการศึกษา</th>
                       <th>ไฟล์ตัวอย่าง</th>
                       <th>วันที่ลง</th>
                       <th>คำสั่ง</th>
@@ -25,6 +26,7 @@
                   <?php foreach ($class_schedule as $key => $v_class_schedule) : ?>             
                     <tr>                     
                       <td><?=$v_class_schedule->schestu_classname;?></td>
+                      <td><?=$v_class_schedule->schestu_term.'/'.$v_class_schedule->schestu_year;?></td>
                       <td><a href="<?=base_url('uploads/academic/class_schedule/'.$v_class_schedule->schestu_filename);?>" target="_blank" rel="noopener noreferrer">ดูไฟล์ <?=$v_class_schedule->schestu_classname;?></a></td>
                       <td><?=$v_class_schedule->schestu_datetime;?></td>
                       <td>                     
