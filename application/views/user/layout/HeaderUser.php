@@ -11,18 +11,18 @@
     <meta name="description" content="Blog Template">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <link rel="shortcut icon" href="favicon.ico">
-    
+
     <meta property="og:url" content="<?= $full_url ?>" />
     <meta property="og:title" content="<?= $title ?> | SKJ" />
     <meta property="og:description" content="<?= $description ?>" />
     <meta property="og:type" content="website" />
 
     <?php if($this->uri->segment(1) == "ClassSchedule"): ?>
-        <meta property="og:image" content="<?=base_url('assets/images/ClassSchedule/logo_ClassSchedule.png')?>" />
-        <?php else: ?>
-            <meta property="og:image" content="<?=base_url('assets/images/StudentList/logo_studentlist.png')?>" />
+    <meta property="og:image" content="<?=base_url('assets/images/ClassSchedule/logo_ClassSchedule.png')?>" />
+    <?php else: ?>
+    <meta property="og:image" content="<?=base_url('assets/images/StudentList/logo_studentlist.png')?>" />
     <?php endif; ?>
-    
+
     <link rel="image_src" href="images/content/content-37.png" />
     <!-- FontAwesome JS-->
 
@@ -38,10 +38,10 @@
 <body style="font-family: 'Sarabun', sans-serif;" class="theme-bg-light ">
 
     <header class="header text-center">
-    
+
         <h1 class="blog-name pt-lg-4 mb-0">
-        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-        <a href="<?=base_url('Home');?>">งานนักเรียน SKJ</a>
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <a href="<?=base_url('Home');?>">งานนักเรียน SKJ</a>
         </h1>
 
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -55,20 +55,21 @@
                 <div class="profile-section pt-3 pt-lg-0">
                     <ul class="navbar-nav flex-column text-left">
                         <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('');?>"><i
-                                    class="fas fa-home fa-fw mr-2"></i>หน้าแรก <?=$this->uri->segment(1);?> </a>
+                            <a class="nav-link" href="<?=base_url('');?>"><i class="fas fa-home fa-fw mr-2"></i>หน้าแรก
+                            </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('StudentsList');?>"><i
-                                    class="fas fa-calculator fa-fw mr-2"></i>รายชื่อนักเรียน </a>
+                            <a class="nav-link" href="<?=base_url('StudentsList');?>">
+                                <i class="fas fa-address-book fa-fw mr-2"></i>รายชื่อนักเรียน 
+                                </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('ClassSchedule');?>"><i
-                                    class="fas fa-calculator fa-fw mr-2"></i>ตารางเรียน </a>
+                                    class="fas fa-calendar-alt fa-fw mr-2"></i>ตารางเรียน </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('ExamSchedule');?>"><i
-                                    class="fas fa-calculator fa-fw mr-2"></i>ตารางสอบ </a>
+                                    class="fas fa-calendar-alt fa-fw mr-2"></i>ตารางสอบ </a>
                         </li>
 
 
