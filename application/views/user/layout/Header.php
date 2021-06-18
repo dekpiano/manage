@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="https://demo.voidcoders.com/htmldemo/fitgear/main-files/assets/css/animate.css">
     <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/theme-2.css">
+    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/theme-1.css">
 
     
 
@@ -29,7 +29,7 @@
 <body style="font-family: 'Sarabun', sans-serif;" class="theme-bg-light ">
 
     <header class="header text-center">
-        <h1 class="blog-name pt-lg-4 mb-0"><a href="<?=base_url('Home');?>">ระบบงานวิชาการ</a></h1>
+        <h1 class="blog-name pt-lg-4 mb-0"><a href="<?=base_url('Student');?>">ระบบงานวิชาการ (นักเรียน)</a></h1>
 
         <nav class="navbar navbar-expand-lg navbar-dark">
 
@@ -53,20 +53,13 @@
 
                     <ul class="navbar-nav flex-column text-left">
                     <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('Home');?>"><i
+                            <a class="nav-link" href="<?=base_url('Student');?>"><i
                                     class="fas fa-home fa-fw mr-2"></i>หน้าแรก </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('AcademicResult');?>"><i class="fas fa-calculator fa-fw mr-2"></i>ผลการเรียน </a>
+                            <a class="nav-link" href="<?=base_url('Student/AcademicResult');?>"><i class="fas fa-calculator fa-fw mr-2"></i>ผลการเรียน </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('AcademicResult');?>"><i
-                                    class="fas fa-table fa-fw mr-2"></i>ตารางเรียน </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('AcademicResult');?>"><i
-                                    class="fas fa-table fa-fw mr-2"></i>ตารางสอบ </a>
-                        </li>
+                     
                         <hr>
                         <li class="nav-item ">
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i

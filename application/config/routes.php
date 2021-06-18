@@ -88,9 +88,13 @@ $route['Teacher/Course/ReportPlan'] = "teacher/ConTeacherCourse/report_plan";
 $route['Teacher/Course/ReportPlan/(:any)'] = "teacher/ConTeacherCourse/report_plan/$1";
 $route['Teacher/Profile'] = "teacher/ConTeacherProfile/ProfileMain";
 
+//Student
+$route['Student'] = "user/ConStudents/Home";
+$route['Student/AcademicResult'] = "user/ConAcademicResult/score";
+
 // User
-$route['Home'] = "user/ConUser_Home/Home";
-$route['AcademicResult'] = "user/ConAcademicResult/score";
+
+
 $route['ExamSchedule'] = "user/ConStudents/ExamSchedule";
 $route['Students'] = "user/ConStudents";
 $route['StudentsList'] = "user/ConStudents/StudentsList";

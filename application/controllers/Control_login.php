@@ -58,7 +58,7 @@ class Control_login extends CI_Controller {
 
 					$this->session->set_userdata(array('login_id' => $result->StudentID,'StudentCode' => $result->StudentCode,'fullname'=> $result->StudentPrefix.$result->StudentFirstName.' '.$result->StudentLastName,'status'=> 'user'));
 
-				 redirect('Home');
+				 redirect('Student');
 					//echo "Yes";
 
 				}

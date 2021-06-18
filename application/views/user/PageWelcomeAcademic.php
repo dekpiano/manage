@@ -163,16 +163,7 @@
 
             <div class="row wrap-service-24">
 
-                <!-- Column -->
-                <div class="col-md-4 ">
-                    <div class="card rounded card-shadow border-0 mb-4">
-                        <a href="<?=base_url('LoginStudent');?>" class="card-hover py-4 text-center d-block rounded">
-                            <span class="bg-success-grediant"><i class="fas fa-calculator"></i></span>
-                            <h6 class="ser-title">ผลการเรียน</h6>
-                            <small class="ser-title">อัพเดพข้อมูล 12/01/2564</small>
-                        </a>
-                    </div>
-                </div>
+
                 <!-- Column -->
                 <!-- Column -->
                 <div class="col-md-4  ">
@@ -192,25 +183,35 @@
                             <h6 class="ser-title">ตารางสอบ</h6>
                         </a>
                     </div>
-                </div>      
+                </div>
                 <div class="col-md-4  ">
                     <div class="card card-shadow border-0 mb-4">
                         <a href="<?=base_url('StudentsList');?>" class="card-hover py-4 text-center d-block rounded">
-                            <span class="bg-success-grediant"><i class="far fa-calendar-alt"></i></span>
+                            <span class="bg-success-grediant"><i class="fas fa-clipboard-list"></i></i></span>
                             <h6 class="ser-title">รายชื่อนักเรียน</h6>
                         </a>
                     </div>
-                </div>      
+                </div>
 
-                 <!-- Column -->
-                 <div class="col-md-4  ">
+                <!-- Column -->
+                <div class="col-md-4 ">
+                    <div class="card rounded card-shadow border-0 mb-4">
+                        <a href="<?=base_url('LoginStudent');?>" class="card-hover py-4 text-center d-block rounded">
+                            <span class="bg-success-grediant"><i class="fas fa-user-graduate"></i></span>
+                            <h6 class="ser-title">สำหรับนักเรียน</h6>
+                            <!-- <small class="ser-title">อัพเดพข้อมูล 12/01/2564</small> -->
+                        </a>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="col-md-4  ">
                     <div class="card card-shadow border-0 mb-4">
-                        <a href="<?=base_url('LoginTeacher');?>"  class="card-hover py-4 text-center d-block rounded">
+                        <a href="<?=base_url('LoginTeacher');?>" class="card-hover py-4 text-center d-block rounded">
                             <span class="bg-success-grediant"><i class="fas fa-chalkboard-teacher"></i></span>
                             <h6 class="ser-title">สำหรับครู</h6>
                         </a>
                     </div>
-                </div>     
+                </div>
             </div>
         </div>
     </div>
@@ -240,10 +241,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
-                <form class="form-signin" method="post" action="<?=base_url('Control_login/LoginAdmin');?>">                  
+                <form class="form-signin" method="post" action="<?=base_url('Control_login/LoginAdmin');?>">
                     <div class="form-label-group">
-                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
-                            autofocus="">
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+                            required="" autofocus="">
                         <label for="username"></label>
                     </div>
 
@@ -253,7 +254,7 @@
                         <label for="password"></label>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                   
+
                 </form>
             </div>
 

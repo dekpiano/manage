@@ -23,6 +23,19 @@ var  $title = "แผงควบคุม";
         
     }
 
+    public function Home(){      
+        
+        $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $this->load->view('user/layout/Header.php',$data);
+        $this->load->view('user/Students/PageStudentsHome.php');
+        $this->load->view('user/layout/Footer.php');
+
+        // delete_cookie('username_cookie'); 
+		// delete_cookie('password_cookie'); 
+        // $this->session->sess_destroy();
+        
+    }
+
     public function StudentsList(){  
         $data['title'] = "รายชื่อนักเรียนและที่ปรึกษา";
         $data['description'] = "ตรวจสอบรายชื่อนักเรียนและครูที่ปรึกษา";
