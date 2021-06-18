@@ -2,7 +2,7 @@
     <section class="cta-section theme-bg-light py-5">
         <div class="container text-center">
             <h2 class="heading">รายชื่อนักเรียน ปีการศึกษา 2564  </h2>
-            <div class="intro">Welcome to Student System</div>
+            <div class="intro"></div>
         </div>
         <!--//container-->
         
@@ -24,16 +24,18 @@
     </section>
     <section class="we-offer-area text-center ">
         <div class="container-fluid">
+        <?php if(isset($_GET['studentList']) && $_GET['studentList'] != '') :?>   
             <div class="row justify-content-center">
                 <div class="col-md-4 col-6 mb-5">               
-                <?php if(isset($_GET['studentList']) && $_GET['studentList'] != '') :?>   
+              
                     <h2>qr code ห้อง ม.<?php $d =  explode(".",$_GET['studentList']) ; echo $d[0].'/'.$d[1];?></h2>
                     แสกน Qr Code เข้ากลุ่มห้องครูที่ปรึกษา
                     <img src="<?=base_url('uploads/academic/studentList/qrcode/'.$_GET['studentList'].'.jpg');?>" alt="" class="w-100">
                    
-                    <?php endif; ?>
+                    
                 </div>
-            </div>       
+            </div>  
+            <?php endif; ?>
             <?php if(isset($_GET['studentList'])) :             
                 if($_GET['studentList'] == ""){
                     echo "<h2>กรุณาเลือกห้องเรียน</h2>"; 
