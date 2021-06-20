@@ -160,9 +160,28 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row wrap-service-24 justify-content-center">
+                <!-- Column -->
+                <div class="col-md-4 ">
+                    <div class="card rounded card-shadow border-0 mb-4">
+                        <a href="<?=base_url('LoginStudent');?>" class="card-hover py-4 text-center d-block rounded">
+                            <span class="bg-success-grediant"><i class="fas fa-user-graduate"></i></span>
+                            <h6 class="ser-title">สำหรับนักเรียน</h6>
+                            <!-- <small class="ser-title">อัพเดพข้อมูล 12/01/2564</small> -->
+                        </a>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="col-md-4  ">
+                    <div class="card card-shadow border-0 mb-4">
+                        <a href="<?=base_url('LoginTeacher');?>" class="card-hover py-4 text-center d-block rounded">
+                            <span class="bg-success-grediant"><i class="fas fa-chalkboard-teacher"></i></span>
+                            <h6 class="ser-title">สำหรับครู</h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="row wrap-service-24">
-
 
                 <!-- Column -->
                 <!-- Column -->
@@ -193,33 +212,15 @@
                     </div>
                 </div>
 
-                <!-- Column -->
-                <div class="col-md-4 ">
-                    <div class="card rounded card-shadow border-0 mb-4">
-                        <a href="<?=base_url('LoginStudent');?>" class="card-hover py-4 text-center d-block rounded">
-                            <span class="bg-success-grediant"><i class="fas fa-user-graduate"></i></span>
-                            <h6 class="ser-title">สำหรับนักเรียน</h6>
-                            <!-- <small class="ser-title">อัพเดพข้อมูล 12/01/2564</small> -->
-                        </a>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-4  ">
-                    <div class="card card-shadow border-0 mb-4">
-                        <a href="<?=base_url('LoginTeacher');?>" class="card-hover py-4 text-center d-block rounded">
-                            <span class="bg-success-grediant"><i class="fas fa-chalkboard-teacher"></i></span>
-                            <h6 class="ser-title">สำหรับครู</h6>
-                        </a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
 
     <footer class="footer mt-auto py-3">
         <div class="container">
-            <span class="text-muted">Powered by Dekpiano © โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์ 2020 | <a
-                    href="#" data-toggle="modal" data-target="#exampleModal">สำหรับเจ้าหน้าที่</a> </span>
+            <span class="text-muted">Powered by Dekpiano © โรงเรียนสวนกุหลาบวิทยาลัย (จิรประวัติ) นครสวรรค์ 2020 |
+                <a href="#" data-toggle="modal" data-target="#exampleModal">สำหรับเจ้าหน้าที่</a> </span>
         </div>
     </footer>
     <!-- Optional JavaScript; choose one of the two! -->

@@ -88,7 +88,7 @@
 
             <div id="navigation" class="collapse navbar-collapse flex-column">
                 <div class="profile-section pt-3 pt-lg-0">
-                    <img class="profile-image mb-3 rounded-circle mx-auto"
+                    <img class="profile-image mb-3 rounded-circle mx-auto w-50"
                         src="https://skj.ac.th/uploads/personnel/<?=$admin[0]->pers_img;?>" alt="image">
 
                     <div class="bio mb-3"><?=$this->session->userdata('fullname');?><br>
@@ -122,6 +122,10 @@
                         <li class="nav-item ">
                             <a class="nav-link" href="<?=base_url('Admin/ClassRoom');?>"><i
                                     class="fas fa-table fa-fw mr-2"></i>ห้องเรียน / ที่ปรึกษา </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="<?=base_url('Admin/ExtraSubject');?>"><i
+                                    class="fas fa-table fa-fw mr-2"></i>ลงทะเบียนวิชาเพิ่มเติม </a>
                         </li>
                         <hr>
                         <li class="nav-item ">

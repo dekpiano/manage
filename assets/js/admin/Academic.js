@@ -386,5 +386,37 @@ $(document).ready(function() {
     });
 
 
+    // ----------------------------วิชาเพิ่มติม-----------------------------------
+    $(document).on("submit", "#AddExtraSubject", function(e) { 
+        e.preventDefault();
+        var formadd = $('#AddExtraSubject').serialize();
+        console.log(formadd);
+        $.ajax({
+            type: 'POST',
+            url: "../../../admin/ConAdminExtraSubject/AddExtraSubject",
+            data: formadd,
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                
+               if(data == 1){
+                Swal.fire(
+                    'แจ้งเตือน',
+                    'คุณเพิ่มหมายเหตุเรียบร้อย',
+                    'success'
+                )
+               }
+               $(".form-comment2")[0].reset();
+               $("#addcomment2").modal('hide');
+            },
+            error: function(xhr) {
+                alert("Error occured.please try again");
+                console.log(xhr.statusText + xhr.responseText);
+            }
+        });
+    });
+
+
 
 });

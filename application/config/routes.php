@@ -58,16 +58,13 @@ $route['ClosePage'] = "welcome/ClosePage";
 // admin
 $route['LogoutAdmin'] = "Control_login";
 $route['AdminHome'] = "admin/ConAdminHome/AdminHome";
-
 $route['Admin/AcademicResult'] = "admin/ConAdminAcademinResult/AdminAcademinResultMain";
-
 $route['Admin/ClassSchedule'] = "admin/ConAdminClassSchedule/AdminClassScheduleMain";
 $route['Admin/ClassSchedule/add'] = "admin/ConAdminClassSchedule/add";
-
 $route['Admin/ExamSchedule'] = "admin/ConAdminExamSchedule/AdminExamScheduleMain";
 $route['Admin/ExamSchedule/add'] = "admin/ConAdminExamSchedule/add";
-
 $route['Admin/ClassRoom'] = "admin/ConAdminClassRoom/AdminClassMain";
+$route['Admin/ExtraSubject'] = "admin/ConAdminExtraSubject";
 
 // Login
 $route['Logout'] = "Control_login/logout";
