@@ -1,35 +1,11 @@
 $(document).ready(function() {
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
 
     var ta = $('#tb-classroom').DataTable({
         "order": [
             [0, "desc"],
             [1, "asc"]
-        ],
+        ]
 
-    });
-
-    $('#ModalAddClassRoom').on('click', function() {
-        $('#myModal').modal('show');
     });
 
     $('#AddClassRoom').on('submit', function(e) {
@@ -52,7 +28,6 @@ $(document).ready(function() {
         });
 
     });
-
 
     // Submit form data via Ajax
     $(document).on('submit', '#form_insert_plan', function(e) {
@@ -387,28 +362,111 @@ $(document).ready(function() {
 
 
     // ----------------------------วิชาเพิ่มติม-----------------------------------
-    $(document).on("submit", "#AddExtraSubject", function(e) { 
-        e.preventDefault();
-        var formadd = $('#AddExtraSubject').serialize();
-        console.log(formadd);
+    $('#ModalAddExtraSubject').on('click', function() {
+        $('#myModal').modal('show');       
+        $("#UpdateExtraSubject").attr('id',"AddExtraSubject");
+        $("#AddExtraSubject")[0].reset();
+    });
+
+    $('.ModalExtraSubject').on('click', function() {
+        $('#myModal').modal('show');  
+        $('.extra_grade_level').prop('checked', false);    
         $.ajax({
             type: 'POST',
-            url: "../../../admin/ConAdminExtraSubject/AddExtraSubject",
-            data: formadd,
+            url: "../admin/ConAdminExtraSubject/EditExtraSubject",
+            data: {Extraid:$(this).attr('Extraid')},
+            dataType:"json",
             beforeSend: function() {
 
             },
             success: function(data) {
-                
+                //console.log(data[0].extra_year);
+                $('#extra_id').val(data[0].extra_id);
+                $('#extra_year').val(data[0].extra_year);
+                $('#extra_term').val(data[0].extra_term);
+                $('#extra_course_code').val(data[0].extra_course_code);
+                $('#extra_course_name').val(data[0].extra_course_name);
+                $('#extra_course_teacher').val(data[0].extra_course_teacher);
+                $('#extra_number_students').val(data[0].extra_number_students);
+                $('#extra_comment').val(data[0].extra_comment);
+                var n = data[0].extra_grade_level.split('|');
+                for( var i=0; i<n.length; i++ ){                  
+                    $('#extra_grade_level'+n[i]).prop('checked', true);
+                }
+                $("#AddExtraSubject").attr('id',"UpdateExtraSubject");
+            },
+            error: function(xhr) {
+                alert("Error occured.please try again");
+                console.log(xhr.statusText + xhr.responseText);
+            }
+        });
+    });
+
+    $(document).on("submit", "#AddExtraSubject", function(e) { 
+        e.preventDefault();               
+        var formadd = $('#AddExtraSubject').serialize();        
+        $.ajax({
+            type: 'POST',
+            url: "../admin/ConAdminExtraSubject/AddExtraSubject",
+            data: formadd,
+            beforeSend: function() {
+
+            },
+            success: function(data) {               
                if(data == 1){
                 Swal.fire(
                     'แจ้งเตือน',
-                    'คุณเพิ่มหมายเหตุเรียบร้อย',
+                    'คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย',
                     'success'
                 )
-               }
-               $(".form-comment2")[0].reset();
-               $("#addcomment2").modal('hide');
+                Swal.fire({
+                    title: 'แจ้งเตือน',
+                    text: "คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย",
+                    icon: 'success'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                  })
+               }              
+            },
+            error: function(xhr) {
+                alert("Error occured.please try again");
+                console.log(xhr.statusText + xhr.responseText);
+            }
+        });
+    });
+
+    $(document).on("submit", "#UpdateExtraSubject", function(e) { 
+        e.preventDefault();    
+        var formadd = $('#UpdateExtraSubject').serialize(); 
+       
+        $.ajax({
+            type: 'POST',
+            url: "../admin/ConAdminExtraSubject/UpdateExtraSubject",
+            data: formadd,
+            beforeSend: function() {
+
+            },
+            success: function(data) {   
+                console.log(data);   
+               if(data == 1){
+
+                Swal.fire(
+                    'แจ้งเตือน',
+                    'คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย',
+                    'success'
+                )
+                Swal.fire({
+                    title: 'แจ้งเตือน',
+                    text: "คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย",
+                    icon: 'success'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                  })
+               }              
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
