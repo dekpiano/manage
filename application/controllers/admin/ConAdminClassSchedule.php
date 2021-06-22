@@ -20,7 +20,7 @@ var  $title = "แผงควบคุม";
 		$data['title'] = "ตารางเรียน";		
 		$this->db->select('*');
 		$this->db->from('tb_class_schedule');
-		$this->db->order_by('schestu_id','DESC');
+		$this->db->order_by('schestu_classname','ASC');
 		$data['class_schedule'] = $this->db->get()->result();
 
 		
@@ -81,6 +81,7 @@ var  $title = "แผงควบคุม";
 
 				$data_insert = array(
 						'schestu_id' => $this->input->post('schestu_id'),
+						'schestu_name' => $this->input->post('schestu_name'),
 						'schestu_classname' => $this->input->post('schestu_classname'),
 						'schestu_filename' => $data['upload_data']['file_name'],
 						'schestu_term' => $this->input->post('schestu_term'),

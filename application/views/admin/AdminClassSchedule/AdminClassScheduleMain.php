@@ -15,7 +15,8 @@
               <a href="<?=base_url('Admin/ClassSchedule/add');?>" class="btn btn-primary btn-sm float-right mb-3"> <i class="far fa-plus-square"></i> เพิ่ม<?=$title;?></a>
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
-                    <tr>                      
+                    <tr>       
+                    <th>ชื่อห้องเรียน</th>               
                       <th>ชั้น/ห้อง</th>
                       <th>ปีการศึกษา</th>
                       <th>ไฟล์ตัวอย่าง</th>
@@ -24,7 +25,8 @@
                     </tr>
                   </thead>    
                   <?php foreach ($class_schedule as $key => $v_class_schedule) : ?>             
-                    <tr>                     
+                    <tr>                  
+                     <td><?=$v_class_schedule->schestu_name;?></td>   
                       <td><?=$v_class_schedule->schestu_classname;?></td>
                       <td><?=$v_class_schedule->schestu_term.'/'.$v_class_schedule->schestu_year;?></td>
                       <td><a href="<?=base_url('uploads/academic/class_schedule/'.$v_class_schedule->schestu_filename);?>" target="_blank" rel="noopener noreferrer">ดูไฟล์ <?=$v_class_schedule->schestu_classname;?></a></td>

@@ -63,6 +63,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="schestu_id" class="col-sm-2 col-form-label">ชื่อห้องเรียน</label>
+                                <div class="col-sm-10">
+                                    <input type="text"  class="form-control" id="schestu_name" name="schestu_name" value=""  required>
+                                    <small id="emailHelp" class="form-text text-muted">Ex. ดนตรี, ภาษา</small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="schestu_filename" class="col-sm-2 col-form-label">รูป<?=$title;?></label>
                                 <div class="col-sm-10">
                                     <input type="file" name="schestu_filename" id="schestu_filename" />

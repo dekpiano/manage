@@ -29,7 +29,7 @@
                     echo "<h2>กรุณาเลือกห้องเรียน</h2>"; 
                 }  else{ ?>
                 <?php foreach ($schedule as $key => $v_schedule) :?>
-                    <h4 class="mt-4">ตารางเรียนห้อง ม.<?=$v_schedule->schestu_classname?></h4>
+                    <h4 class="mt-4">ตารางเรียนห้อง ม.<?=$v_schedule->schestu_classname?> หลักสูตร (<?=$v_schedule->schestu_name?>)</h4>
                 <h5>                
                 <a href="<?=base_url();?>uploads/academic/class_schedule/<?=$v_schedule->schestu_filename?>">
                ==> กรณีไฟล์ไม่โหลดให้คลิกดูรายชื่อที่นี่ <==
