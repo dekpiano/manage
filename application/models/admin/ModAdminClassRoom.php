@@ -11,4 +11,10 @@ class ModAdminClassRoom extends CI_Model
 	{		
 		return $this->db->insert('tb_regclass',$data);
 	}
+
+	public function ClassRoom_Delete($data)
+	{		
+				$this->db->where('class_teacher', $data);
+		return 	$this->db->delete('tb_regclass');
+	}
 }

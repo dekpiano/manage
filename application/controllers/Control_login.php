@@ -33,7 +33,15 @@ class Control_login extends CI_Controller {
 	}
 
 	public function LoginStudent(){
-		$this->load->view('login/loginStudent.php');
+		
+        $data['title'] = "Login สำหรับนักเรียน";
+        $data['description'] = "Login สำหรับนักเรียน";  
+        $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $this->load->view('user/layout/HeaderUser.php',$data);
+        $this->load->view('user/Login/PageLoginStudent.php');
+        $this->load->view('user/layout/FooterUser.php');
+		
+		// $this->load->view('login/loginStudent.php');
 	}
 
 	public function LoginTeacher1(){
@@ -58,7 +66,7 @@ class Control_login extends CI_Controller {
 
 					$this->session->set_userdata(array('login_id' => $result->StudentID,'StudentCode' => $result->StudentCode,'fullname'=> $result->StudentPrefix.$result->StudentFirstName.' '.$result->StudentLastName,'status'=> 'user'));
 
-				 redirect('Student');
+				 redirect('Student/Home');
 					//echo "Yes";
 
 				}
@@ -108,10 +116,10 @@ class Control_login extends CI_Controller {
 
 		$google_client->setClientId('29638025169-aeobhq04v0lvimcjd27osmhlpua380gl.apps.googleusercontent.com');
 		$google_client->setClientSecret('RSANANTRl84lnYm54Hi0icGa');
-		$google_client->setRedirectUri('http://localhost/skj_academic/LoginTeacher');
+		$google_client->setRedirectUri('https://academic.skj.ac.th/LoginTeacher');
 		$google_client->addScope('email');
 		$google_client->addScope('profile');
-
+		
 		if(isset($_GET["code"])){
 			$token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
 			if(!isset($token["error"])){
@@ -136,12 +144,12 @@ class Control_login extends CI_Controller {
 
 				   $result = $this->Model_login->fetch_teacher_login($data['email']);
 				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
+				  
 				}else{
 					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'Email ของคุณไม่สามารถใช้ในระบบนี้ได้ ติดต่อเจ้าหน้าที่คอมเพื่อใช้งานระบบ','alert'=>'error'));
 					redirect('LoginTeacher');
 				}
 			}
-			
 		}
 		$login_button = '';
 			if(!$this->session->userdata('access_token'))
@@ -150,14 +158,19 @@ class Control_login extends CI_Controller {
 			<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
 			';
 			$data['login_button'] = $login_button;
+
+			$data['title'] = "Login สำหรับครูผู้สอน";
+			$data['description'] = "Login สำหรับครูผู้สอน";  
+			// $this->load->view('user/layout/HeaderUser.php',$data);
+			// $this->load->view('user/Login/PageLoginTeacher.php');
+			// $this->load->view('user/layout/FooterUser.php');
 			$this->load->view('login/loginTeacher.php',$data);
-			
 			}
 			else
 			{
 			//$this->load->view('login/loginTeacher.php',$data);
 			redirect('Teacher/Home');
-			}
+			}	
 	}
 
 
@@ -177,7 +190,7 @@ class Control_login extends CI_Controller {
 					set_cookie('username_cookie',$username,'3600'); 
 					set_cookie('password_cookie',$password,'3600');
 
-				 redirect('AdminHome');
+				 redirect('Admin/Home');
 					//echo "Yes";
 
 				}

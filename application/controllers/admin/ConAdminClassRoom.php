@@ -6,9 +6,11 @@ class ConAdminClassRoom extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('admin/ModAdminClassRoom');
-		if ($this->session->userdata('fullname') == '' && $this->session->userdata('status') == "user") {		
-			redirect('Login','refresh');
+		if (empty($this->session->userdata('fullname'))) {		
+			redirect('LoginAdmin','refresh');
 		}
+
+        $this->load->library('Classroom');
 
     }
 
@@ -17,7 +19,7 @@ class ConAdminClassRoom extends CI_Controller {
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         
-		$data['title'] = "ห้องเรียน/ที่ปรึกษา";		
+		$data['title'] = "ห้องเรียน / ที่ปรึกษา / ครูหัวหน้าระดับ";		
 		$this->db->select('*');
         $this->db->from('tb_regclass');
         $this->db->join($DBpersonnel->database.'.tb_personnel','tb_personnel.pers_id = tb_regclass.class_teacher');
@@ -28,18 +30,14 @@ class ConAdminClassRoom extends CI_Controller {
         ->from('tb_personnel')
         ->where('pers_position !=','posi_001')
         ->where('pers_position !=','posi_002')
-        ->where('pers_position !=','posi_007')
+        ->where('pers_position <','posi_007')
         ->order_by('pers_learning')
         ->get()->result();
 
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/AdminClassRoom/AdminClassRoomMain.php');
         $this->load->view('admin/layout/Footer.php');
-
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
-        
+            
     }
     
     public function AddClassRoom(){   
@@ -47,6 +45,12 @@ class ConAdminClassRoom extends CI_Controller {
                                 'Reg_Class'=>$this->input->post('classroom'),
                                 'class_teacher'=>$this->input->post('teacher'));
         print_r($this->ModAdminClassRoom->ClassRoom_Add($dataClassRoom));
+    }
+
+    public function DeleteClassRoom($data){           
+        //echo $data; exit();
+        print_r($this->ModAdminClassRoom->ClassRoom_Delete($data));
+        redirect('Admin/ClassRoom');
     }
 
 }

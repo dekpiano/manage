@@ -2,32 +2,35 @@
 <html lang="en">
 
 <head>
-    <title>ระบบงานวิชาการ | SKJ</title>
+    <title><?=$title?> | ระบบงานวิชาการสำหรับนักเรียน</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog Template">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+
+    <meta name="description" content="ระบบงานวิชาการสำหรับนักเรียน">
+    <meta name="author" content="Dekpiano">
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- FontAwesome JS-->
+    <script defer src="<?=base_url();?>assets/plugins/fontawesome/js/all.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/portal.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" href="https://demo.voidcoders.com/htmldemo/fitgear/main-files/assets/css/animate.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
-    <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/theme-2.css">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
-    <style>
-    .btn {
-        height: 2.2rem;
-    }
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet">
+    </link>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <style>
     .btn-group-xs>.btn,
     .btn-xs {
         line-height: 1.5;
@@ -42,119 +45,202 @@
     .toggle.ios .toggle-handle {
         border-radius: 20rem;
     }
-
-    /* width */
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-    header {
-        overflow: auto;
-    }
-
-    .form-control {
-        padding-top: 0rem;
-        padding-bottom: 0rem;
-    }
     </style>
 </head>
 
-<body style="font-family: 'Sarabun', sans-serif;" class="theme-bg-light ">
+<body class="app" style="font-family: 'Sarabun', sans-serif;">
+    <header class="app-header fixed-top">
+        <div class="app-header-inner">
+            <div class="container-fluid py-2">
+                <div class="app-header-content">
+                    <div class="row justify-content-between align-items-center">
 
-    <header class="header text-center">
-        <h1 class="blog-name pt-lg-4 mb-0"><a href="<?=base_url('Home');?>">ระบบงานวิชาการ (Admin)</a></h1>
-
-        <nav class="navbar navbar-expand-lg navbar-dark">
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div id="navigation" class="collapse navbar-collapse flex-column">
-                <div class="profile-section pt-3 pt-lg-0">
-                    <img class="profile-image mb-3 rounded-circle mx-auto w-50"
-                        src="https://skj.ac.th/uploads/personnel/<?=$admin[0]->pers_img;?>" alt="image">
-
-                    <div class="bio mb-3"><?=$this->session->userdata('fullname');?><br>
-                        <?=$this->session->userdata('class');?>
+                        <div class="col-auto">
+                            <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                    role="img">
+                                    <title>Menu</title>
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                                        stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="app-search-box col">
+                            ระบบงานวิชาการสำหรับแอดมิน
+                        </div>
 
 
-
-                        <hr>
+                        <div class="app-utilities col-auto">
+                            <div class="app-utility-item app-user-dropdown dropdown">
+                                <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                    role="button" aria-expanded="false">
+                                    <?=$this->session->userdata('fullname');?> <img
+                                        src="<?=base_url();?>uploads/usericon.png" alt="user profile"></a>
+                                <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+                                    <li><a class="dropdown-item" href="account.html">Account</a></li>
+                                    <li><a class="dropdown-item" href="settings.html">Settings</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="<?=base_url('Logout');?>">Log Out</a></li>
+                                </ul>
+                            </div>
+                            <!--//app-user-dropdown-->
+                        </div>
+                        <!--//app-utilities-->
                     </div>
-                    <!--//profile-section-->
+                    <!--//row-->
+                </div>
+                <!--//app-header-content-->
+            </div>
+            <!--//container-fluid-->
+        </div>
+        <!--//app-header-inner-->
+        <div id="app-sidepanel" class="app-sidepanel">
+            <div id="sidepanel-drop" class="sidepanel-drop"></div>
+            <div class="sidepanel-inner d-flex flex-column">
+                <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+                <div class="app-branding">
+                    <a class="app-logo" href="<?=base_url('Admin/Home');?>"><img class="logo-icon me-2"
+                            src="<?=base_url();?>assets/images/app-logo.svg" alt="logo"><span class="logo-text">ACDM
+                            SKJ</span></a>
+                </div>
+                <!--//app-branding-->
 
-                    <ul class="navbar-nav flex-column text-left">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('AdminHome');?>"><i
-                                    class="fas fa-home fa-fw mr-2"></i>หน้าแรก </a>
-                        </li>                       
+                <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+                    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link  <?=$this->uri->segment('2')=="Home" ? "active" :""?>"
+                                href="<?=base_url('Admin/Home');?>">
+                                <span class="nav-icon">
+                                <i class="bi bi-house-fill" style="font-size: 1.2rem;"></i>
+                                </span>
+                                <span class="nav-link-text">หน้าแรก</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
+                                href="<?=base_url('Admin/AcademicResult');?>">
+                                <span class="nav-icon">
+                                <i class="bi bi-newspaper" style="font-size: 1.2rem;"></i>
+                                </span>
+                                <span class="nav-link-text">ผลการเรียน</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
+                                href="<?=base_url('Admin/RegisterSubject');?>">
+                                <span class="nav-icon">
+                                <i class="bi bi-journal-check" style="font-size: 1.2rem;"></i>
+                                </span>
+                                <span class="nav-link-text">วิชาเรียน</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link <?=$this->uri->segment('2')=="ClassSchedule" ? "active" :""?>"
+                                href="<?=base_url('Admin/ClassSchedule');?>">
+                                <span class="nav-icon">
+                                <i class="bi bi-table" style="font-size: 1.2rem;"></i>
+                                </span>
+                                <span class="nav-link-text">ตารางเรียน</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link <?=$this->uri->segment('2')=="ExamSchedule" ? "active" :""?>"
+                                href="<?=base_url('Admin/ExamSchedule');?>">
+                                <span class="nav-icon">
+                                <i class="bi bi-table" style="font-size: 1.2rem;"></i>
+                                </span>
+                                <span class="nav-link-text">ตารางสอบ</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link <?=$this->uri->segment('2')=="ClassRoom" ? "active" :""?>"
+                                href="<?=base_url('Admin/ClassRoom');?>">
+                                <span class="nav-icon">
+                                <i class="bi bi-box" style="font-size: 1.2rem;"></i>
+                                </span>
+                                <span class="nav-link-text">ห้องเรียน / ที่ปรึกษา</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link <?=$this->uri->segment('2')=="Students" ? "active" :""?>"
+                                href="<?=base_url('Admin/Students');?>">
+                                <span class="nav-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-text">นักเรียน</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <li class="nav-item has-submenu">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link submenu-toggle <?=$this->uri->segment('2')=="Extra" ? "active" :""?>"
+                                href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false"
+                                aria-controls="submenu-1">
+                                <span class="nav-icon">
+                                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z" />
+                                        <path
+                                            d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-text">ลงทะเบียนวิชาเพิ่มเติม</span>
+                                <span class="submenu-arrow">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                    </svg>
+                                </span>
+                                <!--//submenu-arrow-->
+                            </a>
+                            <!--//nav-link-->
+                            <div id="submenu-1"
+                                class="collapse submenu submenu-1 <?=$this->uri->segment('2')=="Extra" ? "show" :""?>"
+                                data-bs-parent="#menu-accordion">
+                                <ul class="submenu-list list-unstyled">
+                                    <li class="submenu-item ">
+                                        <a class="submenu-link <?=$this->uri->segment('3')=="Subject" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Extra/Subject')?>">ตั้งค่าวิชาเพิ่มเติม</a>
+                                        <a class="submenu-link <?=$this->uri->segment('3')=="SettingSystem" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Extra/SettingSystem')?>">ตั้งค่าระบบ</a>
+                                        <a class="submenu-link <?=$this->uri->segment('3')=="Report" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Extra/Report')?>">รายงาน</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--//nav-item-->
                        
-                        <hr>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('Admin/AcademicResult');?>"><i
-                                    class="fas fa-table fa-fw mr-2"></i>ผลการเรียน </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('Admin/ClassSchedule');?>"><i
-                                    class="fas fa-table fa-fw mr-2"></i>ตารางเรียน </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('Admin/ExamSchedule');?>"><i
-                                    class="fas fa-table fa-fw mr-2"></i>ตารางสอบ </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('Admin/ClassRoom');?>"><i
-                                    class="fas fa-table fa-fw mr-2"></i>ห้องเรียน / ที่ปรึกษา </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<?=base_url('Admin/ExtraSubject');?>"><i
-                                    class="fas fa-table fa-fw mr-2"></i>ลงทะเบียนวิชาเพิ่มเติม </a>
-                        </li>
-                        <hr>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i
-                                    class="fas fa-qrcode fa-fw mr-2"></i>QR Code </a>
-                        </li>
-
 
                     </ul>
-
-                    <div class="my-2 my-md-3">
-                        <a class="btn btn-primary" href="<?=base_url('Logout');?>">ออกจากระบบ</a>
-                    </div>
-                </div>
-
-        </nav>
-    </header>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-
-                <img src="https://chart.googleapis.com/chart?chs=500x300&cht=qr&chl=<?=$this->session->userdata('StudentCode');?>&choe=UTF-8"
-                    title="Link to my Website" />
-
+                    <!--//app-menu-->
+                </nav>
 
             </div>
+            <!--//sidepanel-inner-->
         </div>
-    </div>
+        <!--//app-sidepanel-->
+    </header>
+    <!--//app-header-->

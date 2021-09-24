@@ -5,7 +5,13 @@ $(document).ready(function() {
             [0, "desc"],
             [1, "asc"]
         ]
+    });
 
+    var ta = $('#ReportExtraSubject').DataTable({
+        "order": [
+            [3, "asc"],
+            [4, "asc"]
+        ]
     });
 
     $('#AddClassRoom').on('submit', function(e) {
@@ -143,8 +149,6 @@ $(document).ready(function() {
                         )
                     }
                 });
-
-
             }
         })
     });
@@ -359,8 +363,6 @@ $(document).ready(function() {
             }
         });
     });
-
-
     // ----------------------------วิชาเพิ่มติม-----------------------------------
     $('#ModalAddExtraSubject').on('click', function() {
         $('#myModal').modal('show');       
@@ -368,12 +370,20 @@ $(document).ready(function() {
         $("#AddExtraSubject")[0].reset();
     });
 
-    $('.ModalExtraSubject').on('click', function() {
+    const slim = new SlimSelect({
+        select: '.multiple'
+    })
+    const slimTeacher = new SlimSelect({
+        select: '.single'
+    })
+
+    $('.ModalExtraSubject').on('click', function(e) {
+        e.preventDefault();
         $('#myModal').modal('show');  
         $('.extra_grade_level').prop('checked', false);    
         $.ajax({
             type: 'POST',
-            url: "../admin/ConAdminExtraSubject/EditExtraSubject",
+            url: "../../admin/ConAdminExtraSubject/EditExtraSubject",
             data: {Extraid:$(this).attr('Extraid')},
             dataType:"json",
             beforeSend: function() {
@@ -384,15 +394,16 @@ $(document).ready(function() {
                 $('#extra_id').val(data[0].extra_id);
                 $('#extra_year').val(data[0].extra_year);
                 $('#extra_term').val(data[0].extra_term);
+                $('#extra_key_room').val(data[0].extra_key_room);''
                 $('#extra_course_code').val(data[0].extra_course_code);
                 $('#extra_course_name').val(data[0].extra_course_name);
                 $('#extra_course_teacher').val(data[0].extra_course_teacher);
                 $('#extra_number_students').val(data[0].extra_number_students);
                 $('#extra_comment').val(data[0].extra_comment);
                 var n = data[0].extra_grade_level.split('|');
-                for( var i=0; i<n.length; i++ ){                  
-                    $('#extra_grade_level'+n[i]).prop('checked', true);
-                }
+                slim.set(n);
+                slimTeacher.set(data[0].extra_course_teacher);   
+
                 $("#AddExtraSubject").attr('id',"UpdateExtraSubject");
             },
             error: function(xhr) {
@@ -407,7 +418,7 @@ $(document).ready(function() {
         var formadd = $('#AddExtraSubject').serialize();        
         $.ajax({
             type: 'POST',
-            url: "../admin/ConAdminExtraSubject/AddExtraSubject",
+            url: "../../admin/ConAdminExtraSubject/AddExtraSubject",
             data: formadd,
             beforeSend: function() {
 
@@ -443,7 +454,7 @@ $(document).ready(function() {
        
         $.ajax({
             type: 'POST',
-            url: "../admin/ConAdminExtraSubject/UpdateExtraSubject",
+            url: "../../admin/ConAdminExtraSubject/UpdateExtraSubject",
             data: formadd,
             beforeSend: function() {
 
@@ -459,7 +470,7 @@ $(document).ready(function() {
                 )
                 Swal.fire({
                     title: 'แจ้งเตือน',
-                    text: "คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย",
+                    text: "คุณแก้ไขวิชาเพิ่มเติมเรียบร้อย",
                     icon: 'success'
                   }).then((result) => {
                     if (result.isConfirmed) {
@@ -475,6 +486,56 @@ $(document).ready(function() {
         });
     });
 
-
-
 });
+
+$(document).on("change", "#extra_setting_onoff", function() {    
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingOnoff", {onoff : $(this).prop('checked')}, function(data, status){
+        if(data == 1){
+            alertify.success('เปลี่ยนแปลงข้อมูลเปิด - ปิดระบบสำเร็จ');
+        }else{
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }
+    });
+  });
+
+  $(document).on("change", "#extra_setting_term", function() {    
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingTerm", {Term : $(this).val()}, function(data, status){
+        if(data == 0){
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }else{
+            alertify.success('คุณเปลี่ยนภาคเรียน '+data+' เรียบร้อย');            
+        }
+    });
+  });
+
+  $(document).on("change", "#extra_setting_year", function() {    
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingYear", {Year : $(this).val()}, function(data, status){
+        if(data == 0){
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }else{
+            alertify.success('คุณเปลี่ยนภาคเรียน '+data+' เรียบร้อย');            
+        }
+    });
+  });
+
+  $(document).on("change", "#extra_setting_datestart", function() {    
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateStart", {DateStart : $(this).val()}, function(data, status){
+       console.log(data);
+        if(data == 0){
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }else{
+            alertify.success('คุณเปลี่ยนวันเริ่มต้นเป็น '+data+' เรียบร้อย');            
+        }
+    });
+  });
+
+  $(document).on("change", "#extra_setting_dateend", function() {    
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateEnd", {DateEnd : $(this).val()}, function(data, status){
+       console.log(data);
+        if(data == 0){
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }else{
+            alertify.success('คุณเปลี่ยนวันสิ้นสุดเป็น '+data+' เรียบร้อย');            
+        }
+    });
+  });

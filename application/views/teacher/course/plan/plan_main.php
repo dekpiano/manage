@@ -33,7 +33,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example" class="table  table-hover " style="width:100%">
                         <thead>
                             <tr>                                
                                 <th>ปีการศึกษา</th>
@@ -51,8 +51,8 @@
                         </thead>
                         <tbody>
 
-                            <?php foreach ($plan as $key => $v_plan) : ?>
-                            <tr id="<?=$v_plan->seplan_ID;?>">
+                            <?php foreach ($plan as $key => $v_plan) :  ?>
+                            <tr id="<?=$v_plan->seplan_ID;?>" >
                                 <td><?=$v_plan->seplan_term;?>/<?=$v_plan->seplan_year;?></td>
                                 <td><?=$v_plan->seplan_typeplan;?></td>
                                 <td><?=$v_plan->seplan_coursecode;?></td>

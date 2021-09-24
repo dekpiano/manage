@@ -6,14 +6,15 @@ var  $title = "แผงควบคุม";
 	public function __construct() {
 		parent::__construct();
 		
-		if ($this->session->userdata('fullname') == '' && $this->session->userdata('status') == "user") {      
-			redirect('Login','refresh');
+		if (empty($this->session->userdata('fullname'))) {		
+			redirect('LoginAdmin','refresh');
 		}
 
     }
 
 
     public function AdminHome(){      
+        $data['title'] = "หน้าแรก";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $this->load->view('admin/layout/Header.php',$data);

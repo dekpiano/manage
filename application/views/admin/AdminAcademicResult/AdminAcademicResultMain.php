@@ -3,9 +3,9 @@
     border-left: .25rem solid #5BC3D5!important;
 }
 </style>
-<div class="main-wrapper">
-    <section class="cta-section theme-bg-light py-5">
-        <div class="container text-center">
+<div class="app-wrapper">
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
 
             <h2 class="heading">จัดการข้อมูล<?=$title;?></h2>
 

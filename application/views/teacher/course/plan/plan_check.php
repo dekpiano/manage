@@ -13,7 +13,7 @@
 
         <div class="row">
             <?php foreach ($lean as $key => $v_lean): ?>
-            <?php if($this->session->userdata('pers_learning') == $v_lean->lear_id || $this->session->userdata('login_id') == 'pers_014'): ?>
+            <?php if($this->session->userdata('pers_learning') == $v_lean->lear_id || $this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_002' || $this->session->userdata('login_id') == 'pers_003'): ?>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body statistic">
@@ -43,7 +43,7 @@
                             <tr>
                                 <th>ภาคเรียน</th>
                                 <th>ปีการศึกษา</th>
-                                <th>ประเภท</th>
+                                <th style="width:100px;">ประเภท</th>
                                 <th>รหัสวิชา</th>
                                 <th style="width:100px;">ชื่อวิชา</th>
                                 <th>ระดับชั้น</th>
@@ -75,7 +75,7 @@
                                 <td><?=$this->datethai->thai_date_fullmonth(strtotime($v_checkplan->seplan_createdate));?>
                                </td>
                                 <td><a target="_blank"
-                                        href="<?=base_url('uploads/academic/course/plan/').$v_checkplan->seplan_file;?>">เปิดดู</a>
+                                        href="<?=base_url('uploads/academic/course/plan/').$v_checkplan->seplan_file;?>">เปิดดู / ดาวน์โหลด</a>
                                 </td>
                                 <td><?=$v_checkplan->seplan_sendcomment;?></td>
                                 <td>
@@ -92,8 +92,6 @@
                                     <div class="text-center TbShowComment1">
                                         <?=$v_checkplan->seplan_status1 == "ไม่ผ่าน" ? '<a href="#" class="show_comment1" data-toggle="modal" data-planId="'.$v_checkplan->seplan_ID.'" data-target="#addcomment1">หมายเหตุ</a>' : ''?>
                                     </div>
-
-
 
                                 </td>
 

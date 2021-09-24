@@ -41,6 +41,7 @@
           <script src="<?=base_url()?>assets/js/admin/Academic.js?v=14"></script>
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
+          <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=5"></script>
 
           </body>
 
@@ -53,7 +54,7 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 
           <script>
 $(document).ready(function() {
-   
+    $('[data-toggle="popover"]').popover();   
     $('#example').DataTable({
         "order": [
             [6, "desc"]

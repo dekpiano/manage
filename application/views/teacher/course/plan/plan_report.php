@@ -76,7 +76,7 @@
         
 
         <?php if(isset($ID)): ?>
-            <?php if($this->session->userdata('login_id') == 'pers_014'): ?>
+            <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_003'): ?>
         <form method="get" action="<?=base_url('Teacher/Course/ReportPlan/'.$this->uri->segment('4'));?>" class="needs-validation" novalidate>
         <div class="form-row justify-content-center">
             <div class="col-auto my-1">
@@ -103,7 +103,7 @@
                                 <td colspan="9">ทะเบียนส่ง<?=$thai;?></td>
                             </tr>
                             <tr class="text-center">
-                                <td colspan="9">กลุ่มสาระการเรียนรู้<?=$leanUser[0]->lear_namethai?></td>
+                                <td colspan="9">กลุ่มสาระการเรียนรู้<?=@$leanUser[0]->lear_namethai?></td>
                             </tr>
                             <tr class="text-center">
                                 <td colspan="9">ภาคเรียนที่ <?=$setupplan[0]->seplanset_term?> ปีการศึกษา

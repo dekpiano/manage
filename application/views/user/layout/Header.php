@@ -61,6 +61,29 @@
                         </li>
                      
                         <hr>
+                        <li class="nav-item">
+							<a data-toggle="collapse" href="#tables" class="collapsed" aria-expanded="false">
+								<i class="fas fa-table"></i>
+								<p>Tables</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="tables" style="">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="tables/tables.html">
+											<span class="sub-item">Basic Table</span>
+										</a>
+									</li>
+									<li>
+										<a href="tables/datatables.html">
+											<span class="sub-item">Datatables</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+                     
+                        <hr>
                         <li class="nav-item ">
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i
                                     class="fas fa-qrcode fa-fw mr-2"></i>QR Code </a>

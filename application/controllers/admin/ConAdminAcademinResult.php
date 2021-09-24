@@ -7,8 +7,8 @@ var  $title = "แผงควบคุม";
         parent::__construct();
         $this->load->model('admin/ModAdminAcademinResult');
 		
-		if ($this->session->userdata('fullname') == '' && $this->session->userdata('status') == "user") {		
-			redirect('Login','refresh');
+		if (empty($this->session->userdata('fullname'))) {		
+			redirect('LoginAdmin','refresh');
 		}
 
     }

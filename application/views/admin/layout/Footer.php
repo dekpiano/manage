@@ -1,39 +1,55 @@
 
-<!-- Javascript -->
+	    
+    </div><!--//app-wrapper-->    					
+
 <script src="<?=base_url();?>assets/plugins/jquery-3.4.1.min.js"></script>
+<!-- Javascript -->          
 <script src="<?=base_url();?>assets/plugins/popper.min.js"></script>
 <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-<!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="<?=base_url();?>assets/js/demo/style-switcher.js"></script>
-<script src="<?=base_url();?>assets/js/admin/Academic.js?v=14"></script>
-<?php $this->load->view('admin/layout/Alert.php'); ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- Page Specific JS -->
 <script>
- // Example starter JavaScript for disabling form submissions if there are invalid fields
- (function() {
-        'use strict';
+ $('#example').DataTable({
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+      } );
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
 
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
 
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+<script src="<?=base_url();?>assets/js/app.js"></script> 
+<script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script> 
+
+<script src="<?=base_url();?>assets/js/admin/Academic.js?v=20"></script>
+
+<script>
 
 $(function() {
-    $('#checkOnOff').change(function() {
+    $('#extra_setting_onoff').change(function() {
         $.post("<?=base_url('admin/ConAdminAcademinResult/CheckOnOff');?>", {
                 check: $(this).prop('checked')
             },
@@ -42,13 +58,10 @@ $(function() {
                 //alert("Data: " + data + "\nStatus: " + status);
             });
     })
-
-    
 })
 
 
+
 </script>
-
 </body>
-
-</html>
+</html> 

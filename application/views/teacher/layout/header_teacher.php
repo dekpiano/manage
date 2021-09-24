@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?=$title;?> | ระบบงานวิชาการ</title>
+    <title><?=$title;?> | ระบบงานสารสนเทศ SKJ</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -52,9 +52,9 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header">
                             <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
-                                <div class="brand-text d-none d-lg-inline-block"><span>ระบบงาน
-                                    </span><strong>วิชาการ</strong></div>
-                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>ACDM</strong></div>
+                                <div class="brand-text d-none d-lg-inline-block"><span>ระบบงานสารสนเทศ 
+                                    </span><strong> SKJ</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>INFO SKJ</strong></div>
                             </a>
                             <!-- Toggle Button--><a id="toggle-btn" href="#"
                                 class="menu-btn active"><span></span><span></span><span></span></a>

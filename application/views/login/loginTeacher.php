@@ -25,7 +25,7 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-        
+
 </head>
 
 <body style="font-family:Sarabun;">
@@ -55,7 +55,7 @@
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content ">
-                                <h3 class="mb-3 ">เข้าสู่ระบบ งานวิชาการ </h3>
+                                <h3 class="mb-3 text-center">เข้าสู่ระบบ งานวิชาการ </h3>
                                 <form method="post" action="<?=base_url('control_login/check_teacher');?>"
                                     class="form-validate">
                                     <div class="form-group">
@@ -73,17 +73,20 @@
                                 </form>
                                 <hr>
                                 <?php
-                                // if(!isset($login_button))
-                                // {                                
-                                //     echo '<h3><a href="'.base_url().'Control_login/logoutGoogle">Logout</h3></div>';
-                                // }
-                                // else
-                                // {
-                                //     echo '<div align="center">'.$login_button . '</div>';
-                                // }
-                            ?>
-                            
-                            <a href="<?=base_url();?>">กลับสู่หน้าหลัก</a> 
+                                if(!isset($login_button))
+                                {                                
+                                    echo '<h3><a href="'.base_url().'Control_login/LoginGoogleTeacher">Logout</h3></div>';
+                                }
+                                else
+                                {
+                                    echo '<div align="center">'.$login_button . '</div>';
+                                }
+                                ?>
+                                <div class="text-center mt-5">
+                                <a class="btn btn-outline-primary"
+                                    href="<?=base_url();?>">กลับสู่หน้าหลัก</a>
+                                </div>
+                               
                             </div>
 
                         </div>

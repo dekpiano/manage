@@ -12,14 +12,12 @@ var  $title = "หน้าแรก";
 		if ($this->session->userdata('fullname') == '' && !$this->session->userdata('status') == 'admin') {      
 			redirect('welcome','refresh');
 		}
-        if($this->session->userdata('CheckStatusPassword') == ""){
-            redirect('Teacher/Profile','refresh');
-        }
+        // if($this->session->userdata('CheckStatusPassword') == ""){
+        //     redirect('Teacher/Profile','refresh');
+        // }
 
         $this->load->model('teacher/ModTeacherCourse');
         $this->DBPers = $this->load->database('personnel', TRUE);
-
-        
     }
 
 
@@ -66,7 +64,7 @@ var  $title = "หน้าแรก";
         $DBskj = $this->load->database('skj', TRUE); 
         $data['lean'] = $DBskj->get('tb_learning')->result();
         $data['ID'] = $id;
-        //echo '<pre>'; print_r($lean); exit();
+        //echo '<pre>'; print_r($data['ID']); exit();
         $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
                                                 skjacth_personnel.tb_personnel.pers_firstname,
@@ -82,44 +80,183 @@ var  $title = "หน้าแรก";
     
     function insert_plan(){
 
+        $insert = array();
         $status=$this->input->post('seplan_sendcomment');
-       $textToStore = nl2br(htmlentities($status, ENT_QUOTES, 'UTF-8'));
+        $textToStore = nl2br(htmlentities($status, ENT_QUOTES, 'UTF-8'));     
+        $SetPlan = $this->db->get('tb_send_plan_setup')->result();
+           
         
+
+        if($_FILES['seplan_file_CLMP1']['error']==0){           
+
+            $filename = $_FILES["seplan_file_CLMP1"]['name'];
+            $do_upload = 'seplan_file_CLMP1';
+            $FileType = strtolower(pathinfo($_FILES['seplan_file_CLMP1']['name'],PATHINFO_EXTENSION));
+            $NewFile = $this->input->post('seplan_coursecode').'_แบบตรวจแผนการจัดการเรียนรู้.'.$FileType;
+            $this->Uplodas_file($filename,$do_upload,$NewFile);  
+
+            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
+            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
+            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
+            'seplan_createdate'=> date('Y-m-d H:i:s'),
+            'seplan_year'=> $SetPlan[0]->seplanset_year,
+            'seplan_term'=> $SetPlan[0]->seplanset_term,
+            'seplan_usersend'=> $this->session->userdata('login_id'),
+            'seplan_learning'  => $this->session->userdata('pers_learning'),
+            'seplan_status1' => "รอตรวจ",
+            'seplan_status2' => "รอตรวจ",
+            'seplan_sendcomment' =>  $textToStore,
+            'seplan_gradelevel' => $this->input->post('seplan_gradelevel'),
+            'seplan_file' => $NewFile,
+            'seplan_typeplan'=> 'แบบตรวจแผนการจัดการเรียนรู้');
+
+            $result= $this->ModTeacherCourse->plan_insert($insert);         
+        }
+        if($_FILES['seplan_file_PAR2']['error']==0){
+            $filename = $_FILES["seplan_file_PAR2"]['name'];
+            $do_upload = 'seplan_file_PAR2';
+            $FileType = strtolower(pathinfo($_FILES['seplan_file_PAR2']['name'],PATHINFO_EXTENSION));
+            $NewFile = $this->input->post('seplan_coursecode').'_บันทึกตรวจใช้แผน.'.$FileType;
+            $this->Uplodas_file($filename,$do_upload,$NewFile);
+
+            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
+            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
+            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
+            'seplan_createdate'=> date('Y-m-d H:i:s'),
+            'seplan_year'=> $SetPlan[0]->seplanset_year,
+            'seplan_term'=> $SetPlan[0]->seplanset_term,
+            'seplan_usersend'=> $this->session->userdata('login_id'),
+            'seplan_learning'  => $this->session->userdata('pers_learning'),
+            'seplan_status1' => "รอตรวจ",
+            'seplan_status2' => "รอตรวจ",
+            'seplan_sendcomment' =>  $textToStore,
+            'seplan_gradelevel' => $this->input->post('seplan_gradelevel'),
+            'seplan_file' => $NewFile,
+            'seplan_typeplan'=> 'บันทึกตรวจใช้แผน');
+            $result= $this->ModTeacherCourse->plan_insert($insert);
+        }
+        if($_FILES['seplan_file_TP3']['error']==0){
+            $filename = $_FILES["seplan_file_TP3"]['name'];
+            $do_upload = 'seplan_file_TP3';
+            $FileType = strtolower(pathinfo($_FILES['seplan_file_TP3']['name'],PATHINFO_EXTENSION));
+            $NewFile = $this->input->post('seplan_coursecode').'_โครงการสอน.'.$FileType;
+            $this->Uplodas_file($filename,$do_upload,$NewFile);
+
+            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
+            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
+            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
+            'seplan_createdate'=> date('Y-m-d H:i:s'),
+            'seplan_year'=> $SetPlan[0]->seplanset_year,
+            'seplan_term'=> $SetPlan[0]->seplanset_term,
+            'seplan_usersend'=> $this->session->userdata('login_id'),
+            'seplan_learning'  => $this->session->userdata('pers_learning'),
+            'seplan_status1' => "รอตรวจ",
+            'seplan_status2' => "รอตรวจ",
+            'seplan_sendcomment' =>  $textToStore,
+            'seplan_gradelevel' => $this->input->post('seplan_gradelevel'),
+            'seplan_file' => $NewFile,
+            'seplan_typeplan'=> 'โครงการสอน');
+            $result= $this->ModTeacherCourse->plan_insert($insert);
+        }
+        if($_FILES['seplan_file_OPLP4']['error']==0){
+            $filename = $_FILES["seplan_file_OPLP4"]['name'];
+            $do_upload = 'seplan_file_OPLP4';
+            $FileType = strtolower(pathinfo($_FILES['seplan_file_OPLP4']['name'],PATHINFO_EXTENSION));
+            $NewFile = $this->input->post('seplan_coursecode').'_แผนการสอนหน้าเดียว.'.$FileType;
+            $this->Uplodas_file($filename,$do_upload,$NewFile);
+
+            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
+            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
+            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
+            'seplan_createdate'=> date('Y-m-d H:i:s'),
+            'seplan_year'=> $SetPlan[0]->seplanset_year,
+            'seplan_term'=> $SetPlan[0]->seplanset_term,
+            'seplan_usersend'=> $this->session->userdata('login_id'),
+            'seplan_learning'  => $this->session->userdata('pers_learning'),
+            'seplan_status1' => "รอตรวจ",
+            'seplan_status2' => "รอตรวจ",
+            'seplan_sendcomment' =>  $textToStore,
+            'seplan_gradelevel' => $this->input->post('seplan_gradelevel'),
+            'seplan_file' => $NewFile,
+            'seplan_typeplan'=> 'แผนการสอนหน้าเดียว');
+            $result= $this->ModTeacherCourse->plan_insert($insert);
+        }
+        if($_FILES['seplan_file_FLP5']['error']==0){
+            $filename = $_FILES["seplan_file_FLP5"]['name'];
+            $do_upload = 'seplan_file_FLP5';
+            $FileType = strtolower(pathinfo($_FILES['seplan_file_FLP5']['name'],PATHINFO_EXTENSION));
+            $NewFile = $this->input->post('seplan_coursecode').'_แผนการสอนเต็ม.'.$FileType;
+            $this->Uplodas_file($filename,$do_upload,$NewFile);
+
+            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
+            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
+            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
+            'seplan_createdate'=> date('Y-m-d H:i:s'),
+            'seplan_year'=> $SetPlan[0]->seplanset_year,
+            'seplan_term'=> $SetPlan[0]->seplanset_term,
+            'seplan_usersend'=> $this->session->userdata('login_id'),
+            'seplan_learning'  => $this->session->userdata('pers_learning'),
+            'seplan_status1' => "รอตรวจ",
+            'seplan_status2' => "รอตรวจ",
+            'seplan_sendcomment' =>  $textToStore,
+            'seplan_gradelevel' => $this->input->post('seplan_gradelevel'),
+            'seplan_file' => $NewFile,
+            'seplan_typeplan'=> 'แผนการสอนเต็ม');
+            $result= $this->ModTeacherCourse->plan_insert($insert);
+        }
+        if($_FILES['seplan_file_NAT6']['error']==0){
+            $filename = $_FILES["seplan_file_NAT6"]['name'];
+            $do_upload = 'seplan_file_NAT6';
+            $FileType = strtolower(pathinfo($_FILES['seplan_file_NAT6']['name'],PATHINFO_EXTENSION));
+            $NewFile = $this->input->post('seplan_coursecode').'_บันทึกหลังสอน.'.$FileType;
+            $this->Uplodas_file($filename,$do_upload,$NewFile);
+
+            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
+            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
+            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
+            'seplan_createdate'=> date('Y-m-d H:i:s'),
+            'seplan_year'=> $SetPlan[0]->seplanset_year,
+            'seplan_term'=> $SetPlan[0]->seplanset_term,
+            'seplan_usersend'=> $this->session->userdata('login_id'),
+            'seplan_learning'  => $this->session->userdata('pers_learning'),
+            'seplan_status1' => "รอตรวจ",
+            'seplan_status2' => "รอตรวจ",
+            'seplan_sendcomment' =>  $textToStore,
+            'seplan_gradelevel' => $this->input->post('seplan_gradelevel'),
+            'seplan_file' => $NewFile,
+            'seplan_typeplan'=> 'บันทึกหลังสอน');
+            $result= $this->ModTeacherCourse->plan_insert($insert);
+        }
+        //exit();
+
+       
+
+            
+            echo $result;
+       
+        
+     }
+
+     function Uplodas_file($filename,$do_upload,$NewFile){
+
         $config['upload_path']= "uploads/academic/course/plan/";
         $config['allowed_types'] = '*';
-        //$config['encrypt_name'] = TRUE;
-        $SetPlan = $this->db->get('tb_send_plan_setup')->result();
-        //print_r($SetPlan); exit();
+        $config['remove_spaces'] = TRUE;
+        $new_name = $NewFile;
+        $config['file_name'] = $new_name;
+
         $this->load->library('upload',$config);
         $this->upload->initialize($config); 
-        if($this->upload->do_upload("seplan_file")){
+        if($this->upload->do_upload($do_upload)){
             $data = array('upload_data' => $this->upload->data());
  
-            $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
-                            'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
-                            'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
-                            'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
-                            'seplan_createdate'=> date('Y-m-d H:i:s'),
-                            'seplan_year'=> $SetPlan[0]->seplanset_year,
-                            'seplan_term'=> $SetPlan[0]->seplanset_term,
-                            'seplan_file'=> $data['upload_data']['file_name'],
-                            'seplan_usersend'=> $this->session->userdata('login_id'),
-                            'seplan_learning'  => $this->session->userdata('pers_learning'),
-                            'seplan_status1' => "รอตรวจ",
-                            'seplan_status2' => "รอตรวจ",
-                            'seplan_sendcomment' =>  $textToStore,
-                            'seplan_gradelevel' => $this->input->post('seplan_gradelevel')
-                         );
-             
-            $result= $this->ModTeacherCourse->plan_insert($insert);
-            echo $result;
             
         }else{
             $error = $this->upload->display_errors();
             echo $error;
         }
-        
      }
+
 
      function update_plan(){
         $status=$this->input->post('seplan_sendcomment');
@@ -479,6 +616,71 @@ var  $title = "หน้าแรก";
             header('Cache-Control: max-age=0');
             
             $writer->save('php://output'); // download file 
+    }
+
+
+    public function DownloadPlan(){
+
+        $data['title'] = "ดาวน์โหลดแผน";   
+        $data['teacher'] = $this->DBPers->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_groupleade,pers_learning') 
+                                ->where('pers_learning !=','')
+						        ->get('tb_personnel')->result();    
+        $this->load->view('teacher/layout/header_teacher.php',$data);
+        $this->load->view('teacher/layout/navbar_teaher.php');
+        $this->load->view('teacher/course/plan/plan_download.php');
+        $this->load->view('teacher/layout/footer_teacher.php');
+    }
+
+    public function DownloadPlanZip($UserId = null){
+        // Load zip library
+        header('Content-Type: text/html; charset=utf-8');
+        $this->load->library('zip');
+        $this->load->helper('download');
+       
+        $DataFile = $this->db->select('seplan_usersend,seplan_file')->where('seplan_usersend',$UserId)->get('tb_send_plan')->result();
+        $teacher= $this->DBPers->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_groupleade,pers_learning') 
+        ->where('pers_id',$UserId)
+        ->get('tb_personnel')->result();  
+        
+        foreach ($DataFile as $key => $v_DataFile) {
+           // echo $v_DataFile->seplan_file;
+          // echo '<iframe src="'.FCPATH.'/uploads/academic/course/plan/'.$v_DataFile->seplan_file.'"></iframe>';
+           //force_download(FCPATH.'/uploads/academic/course/plan/'.$v_DataFile->seplan_file, NULL);
+           //$this->beautify_filename($v_DataFile->seplan_file);
+          
+            $filepath1 = FCPATH.'/uploads/academic/course/plan/'.$v_DataFile->seplan_file;
+           
+            $fname = iconv('utf-8', 'tis-620', basename($filepath1));
+           $this->zip->read_file($filepath1);
+           
+        }     
+        //exit();
+        // Download
+        $filename = $teacher[0] ->pers_prefix.$teacher[0] ->pers_firstname.'_'.$teacher[0] ->pers_lastname;
+        $this->zip->download($filename);
+    }
+
+    function beautify_filename($filename) {
+        // reduce consecutive characters
+        $filename = preg_replace(array(
+            // "file   name.zip" becomes "file-name.zip"
+            '/ +/',
+            // "file___name.zip" becomes "file-name.zip"
+            '/_+/',
+            // "file---name.zip" becomes "file-name.zip"
+            '/-+/'
+        ), '-', $filename);
+        $filename = preg_replace(array(
+            // "file--.--.-.--name.zip" becomes "file.name.zip"
+            '/-*\.-*/',
+            // "file...name..zip" becomes "file.name.zip"
+            '/\.{2,}/'
+        ), '.', $filename);
+        // lowercase for windows/unix interoperability http://support.microsoft.com/kb/100625
+        $filename = mb_strtolower($filename, mb_detect_encoding($filename));
+        // ".file-name.-" becomes "file-name"
+        $filename = trim($filename, '.-');
+        return $filename;
     }
 
 }

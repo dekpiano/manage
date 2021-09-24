@@ -9,9 +9,9 @@ var  $title = "หน้าแรก";
 		if (empty($this->session->userdata('fullname')) && !$this->session->userdata('status') == 'admin') {      
 			redirect('welcome','refresh');
 		}
-        if($this->session->userdata('CheckStatusPassword') == ""){
-            redirect('Teacher/Profile','refresh');
-        }
+        // if($this->session->userdata('CheckStatusPassword') == ""){
+        //     redirect('Teacher/Profile','refresh');
+        // }
 //echo $this->session->userdata('fullname'); exit();
     }
 
