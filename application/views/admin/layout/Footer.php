@@ -16,6 +16,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <!-- Page Specific JS -->
+<script src="<?=base_url();?>assets/js/app.js?v=1"></script> 
+
+<?php if($this->session->flashdata('msg') == 'YES'):?>
+          <script>
+Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge');?>", "<?=$this->session->flashdata('status');?>");
+          </script>
+          <?php endif; $this->session->mark_as_temp('msg',20); ?>
+
 <script>
  $('#example').DataTable({
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
@@ -41,10 +49,11 @@
     })
 })()
 </script>
-<script src="<?=base_url();?>assets/js/app.js"></script> 
+
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script> 
 
-<script src="<?=base_url();?>assets/js/admin/Academic.js?v=20"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic.js?v=21"></script>
+<script src="<?=base_url();?>assets/js/admin/Affairs.js?v=2"></script>
 
 <script>
 

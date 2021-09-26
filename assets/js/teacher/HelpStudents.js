@@ -2,7 +2,7 @@
 $('.add_filecoversheet').change(function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../teacher/ConTeacherStudentSupport/Add_filecoversheet',
+        url: '../../teacher/ConTeacherStudentSupport/Add_filecoversheet',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
@@ -32,7 +32,7 @@ $('.add_filecoversheet').change(function(e) {
 $('.add_homevisit_fileSDQ').change(function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../teacher/ConTeacherStudentSupport/Add_homevisit_fileSDQ',
+        url: '../../teacher/ConTeacherStudentSupport/Add_homevisit_fileSDQ',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
@@ -62,7 +62,7 @@ $('.add_homevisit_fileSDQ').change(function(e) {
 $('.add_homevisit_filerecordform').change(function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../teacher/ConTeacherStudentSupport/Add_homevisit_filerecordform',
+        url: '../../teacher/ConTeacherStudentSupport/Add_homevisit_filerecordform',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
@@ -92,7 +92,7 @@ $('.add_homevisit_filerecordform').change(function(e) {
 $('.add_homevisit_filesummary').change(function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../teacher/ConTeacherStudentSupport/Add_homevisit_filesummary',
+        url: '../../teacher/ConTeacherStudentSupport/Add_homevisit_filesummary',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
@@ -122,7 +122,7 @@ $('.add_homevisit_filesummary').change(function(e) {
 $('.ConfrimStatus').change(function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../teacher/ConTeacherStudentSupport/confrim_status',
+        url: '../../teacher/ConTeacherStudentSupport/confrim_statuslevelhead',
         type: "post",
         data: new FormData(this), //this is formData
         processData: false,
@@ -130,7 +130,16 @@ $('.ConfrimStatus').change(function(e) {
         cache: false,
         async: false,
         success: function(data) {
-            if (data > 0) {
+            
+            if (data) {
+                if(data[1] == 'ผ่าน'){
+                    $('#s_homevisit_statuslevelhead'+data[0]).addClass('is-valid');
+                    $('#s_homevisit_statuslevelhead'+data[0]).removeClass('is-invalid');
+                }else{
+                    $('#s_homevisit_statuslevelhead'+data[0]).addClass('is-invalid');
+                    $('#s_homevisit_statuslevelhead'+data[0]).removeClass('is-valid');
+                }
+             
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -142,7 +151,48 @@ $('.ConfrimStatus').change(function(e) {
                         // window.location.reload();
                     }
                 })
+                
+                
 
+            }
+        }
+    });
+});
+
+$('.ConfrimStatusManager').change(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '../../teacher/ConTeacherStudentSupport/confrim_statusmanager',
+        type: "post",
+        data: new FormData(this), //this is formData
+        processData: false,
+        contentType: false,
+        cache: false,
+        async: false,
+        success: function(data) {
+            
+            if (data) {
+                if(data[1] == 'ผ่าน'){
+                    $('#s_homevisit_statusmanager'+data[0]).addClass('is-valid');
+                    $('#s_homevisit_statusmanager'+data[0]).removeClass('is-invalid');
+                }else{
+                    $('#s_homevisit_statusmanager'+data[0]).addClass('is-invalid');
+                    $('#s_homevisit_statusmanager'+data[0]).removeClass('is-valid');
+                }
+             
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'บันทึกข้อมูลไว้แล้ว',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // window.location.reload();
+                    }
+                })
+                
+                
 
             }
         }

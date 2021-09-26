@@ -14,6 +14,8 @@
                     <div class="card-body">
                         <button class="btn app-btn-primary btn-sm text-right mb-3" id="ModalAddExtraSubject"> <i
                                 class="far fa-plus-square"></i> เพิ่ม<?=$title;?></button>
+                                <a href="<?=base_url('Admin/Acade/SettingSystem')?>" class="btn btn-secondary btn-sm text-right mb-3" id="ModalAddExtraSubject"> <i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่าระบบ</a>
+                                <a href="<?=base_url('Admin/Acade/Report')?>" class="btn btn-info btn-sm text-right mb-3" id="ModalAddExtraSubject"> <i class="fa fa-print" aria-hidden="true"></i> รายงาน</a>
                         <div class="table-responsive">
                             <table class="table mb-0" id="example">
                                 <thead>

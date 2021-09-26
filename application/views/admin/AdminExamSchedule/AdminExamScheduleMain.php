@@ -16,7 +16,9 @@
                             <div class="table-responsive">
                                 <a href="<?=base_url('Admin/ExamSchedule/add');?>"
                                     class="btn btn-primary btn-sm float-right mb-3"> <i class="far fa-plus-square"></i>
-                                    เพิ่ม<?=$title;?></a>
+                                    เพิ่ม<?=$title;?>
+                                </a>
+
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>

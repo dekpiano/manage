@@ -18,11 +18,14 @@ var  $title = "หน้าแรก";
 
         $this->load->model('teacher/ModTeacherCourse');
         $this->DBPers = $this->load->database('personnel', TRUE);
+        $this->DBaffairs = $this->load->database('affairs', TRUE);
+        $this->CheckHomeVisitManager = $this->DBaffairs->select('homevisit_set_id,homevisit_set_manager')->where('homevisit_set_id',1)->get('tb_homevisit_setting')->first_row();
     }
 
 
     public function Course(){      
         $data['title'] = "แผนการสอน";
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
@@ -34,6 +37,7 @@ var  $title = "หน้าแรก";
 
     public function send_plan(){ 
         $data['title'] = "ส่งงาน";
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $tiemstart = $data['OnOff'][0]->seplanset_startdate;
         $tiemEnd = $data['OnOff'][0]->seplanset_enddate;
@@ -52,6 +56,7 @@ var  $title = "หน้าแรก";
 
     public function edit_plan($id){
         $data['title'] = "แก้ไขงาน";
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['plan'] = $this->db->where('seplan_ID',$id)->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -61,6 +66,7 @@ var  $title = "หน้าแรก";
 
     public function check_plan($id = null){
         $data['title'] = "ตรวจสอบงาน";
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $DBskj = $this->load->database('skj', TRUE); 
         $data['lean'] = $DBskj->get('tb_learning')->result();
         $data['ID'] = $id;
@@ -333,6 +339,7 @@ var  $title = "หน้าแรก";
 
      function setting_plan(){         
         $data['title'] = "ตั้งค่า";
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['SetPlan'] = $this->db->get('tb_send_plan_setup')->result();
         //print_r($date['SetPlan']); exit();
         $this->load->view('teacher/layout/header_teacher.php',$data);
@@ -445,7 +452,7 @@ var  $title = "หน้าแรก";
 
 
       public function report_plan($key = null){
-        
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['ID'] = $key;
         $data['thai'] = urldecode($key);
         $data['title'] = "รายงาน";       
@@ -621,7 +628,8 @@ var  $title = "หน้าแรก";
 
     public function DownloadPlan(){
 
-        $data['title'] = "ดาวน์โหลดแผน";   
+        $data['title'] = "ดาวน์โหลดแผน";  
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager; 
         $data['teacher'] = $this->DBPers->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_groupleade,pers_learning') 
                                 ->where('pers_learning !=','')
 						        ->get('tb_personnel')->result();    

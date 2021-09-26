@@ -10,9 +10,9 @@
                             <div class="col-md-3">
                                 <img src="<?=base_url('assets/images/welcome.svg');?>" alt="" class="img-fluid">
                             </div>
-                            <div class="col-md-3 text-center align-self-center">
-                                <h2 class="heading">วิชาการยินดีต้อนรับ</h2>
-                                <div class="intro">Welcome to Academic System</div>
+                            <div class="col-md-7 text-center align-self-center">
+                                <h2 class="heading">ยินดีต้อนรับที่คุณกลับมา</h2>
+                                <div class="intro">ระบบงานสารสนเทศโรงเรียน สำหรับ Admin และเจ้าหน้าที่</div>
                             </div>
                         </div>
 

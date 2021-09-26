@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title><?=$title?> | ระบบงานวิชาการสำหรับนักเรียน</title>
+    <title><?=$title?> | ระบบงานสารสนเทศโรงเรียน</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -66,7 +66,7 @@
                             </a>
                         </div>
                         <div class="app-search-box col">
-                            ระบบงานวิชาการสำหรับแอดมิน
+                            ระบบงานสารสนเทศโรงเรียน สำหรับ Admin และเจ้าหน้าที่
                         </div>
 
 
@@ -114,82 +114,65 @@
                             <a class="nav-link  <?=$this->uri->segment('2')=="Home" ? "active" :""?>"
                                 href="<?=base_url('Admin/Home');?>">
                                 <span class="nav-icon">
-                                <i class="bi bi-house-fill" style="font-size: 1.2rem;"></i>
+                                    <i class="bi bi-house-fill" style="font-size: 1.2rem;"></i>
                                 </span>
                                 <span class="nav-link-text">หน้าแรก</span>
                             </a>
                             <!--//nav-link-->
                         </li>
-                        <li class="nav-item">
+
+                        <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
-                                href="<?=base_url('Admin/AcademicResult');?>">
+                            <a class="nav-link submenu-toggle <?=$this->uri->segment('2')=="Acade" ? "active" :""?>"
+                                href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false"
+                                aria-controls="submenu-2">
                                 <span class="nav-icon">
-                                <i class="bi bi-newspaper" style="font-size: 1.2rem;"></i>
-                                </span>
-                                <span class="nav-link-text">ผลการเรียน</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
-                                href="<?=base_url('Admin/RegisterSubject');?>">
-                                <span class="nav-icon">
-                                <i class="bi bi-journal-check" style="font-size: 1.2rem;"></i>
-                                </span>
-                                <span class="nav-link-text">วิชาเรียน</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link <?=$this->uri->segment('2')=="ClassSchedule" ? "active" :""?>"
-                                href="<?=base_url('Admin/ClassSchedule');?>">
-                                <span class="nav-icon">
-                                <i class="bi bi-table" style="font-size: 1.2rem;"></i>
-                                </span>
-                                <span class="nav-link-text">ตารางเรียน</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link <?=$this->uri->segment('2')=="ExamSchedule" ? "active" :""?>"
-                                href="<?=base_url('Admin/ExamSchedule');?>">
-                                <span class="nav-icon">
-                                <i class="bi bi-table" style="font-size: 1.2rem;"></i>
-                                </span>
-                                <span class="nav-link-text">ตารางสอบ</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link <?=$this->uri->segment('2')=="ClassRoom" ? "active" :""?>"
-                                href="<?=base_url('Admin/ClassRoom');?>">
-                                <span class="nav-icon">
-                                <i class="bi bi-box" style="font-size: 1.2rem;"></i>
-                                </span>
-                                <span class="nav-link-text">ห้องเรียน / ที่ปรึกษา</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link <?=$this->uri->segment('2')=="Students" ? "active" :""?>"
-                                href="<?=base_url('Admin/Students');?>">
-                                <span class="nav-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z" />
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">นักเรียน</span>
+                                <span class="nav-link-text">งานวิชาการ</span>
+                                <span class="submenu-arrow">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                    </svg>
+                                </span>
+                                <!--//submenu-arrow-->
                             </a>
                             <!--//nav-link-->
+                            <div id="submenu-2" class="collapse submenu submenu-2 <?=$this->uri->segment('2')=="Acade" ? "show" :""?>" data-bs-parent="#menu-accordion">
+                                <ul class="submenu-list list-unstyled">
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="AcademicResult" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/AcademicResult');?>">ผลการเรียน</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="RegisterSubject" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/RegisterSubject');?>">วิชาเรียน</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ClassSchedule" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/ClassSchedule');?>">ตารางเรียน</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ExamSchedule" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/ExamSchedule');?>">ตารางสอบ</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ClassRoom" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/ClassRoom');?>">ห้องเรียน / ที่ปรึกษา</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="Students" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/Students');?>">นักเรียน</a></li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/ExtraSubject');?>">ลงทะเบียนวิชาเพิ่มเติม</a></li>
+                                </ul>
+                            </div>
                         </li>
+                        <!--//nav-item-->
+
                         <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle <?=$this->uri->segment('2')=="Extra" ? "active" :""?>"
@@ -205,7 +188,7 @@
                                             d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z" />
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">ลงทะเบียนวิชาเพิ่มเติม</span>
+                                <span class="nav-link-text">งานกิจการนักเรียน</span>
                                 <span class="submenu-arrow">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -217,22 +200,19 @@
                             </a>
                             <!--//nav-link-->
                             <div id="submenu-1"
-                                class="collapse submenu submenu-1 <?=$this->uri->segment('2')=="Extra" ? "show" :""?>"
+                                class="collapse submenu submenu-1 <?=$this->uri->segment('4')=="HomeVisit" ? "show" :""?>"
                                 data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
                                     <li class="submenu-item ">
-                                        <a class="submenu-link <?=$this->uri->segment('3')=="Subject" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Extra/Subject')?>">ตั้งค่าวิชาเพิ่มเติม</a>
-                                        <a class="submenu-link <?=$this->uri->segment('3')=="SettingSystem" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Extra/SettingSystem')?>">ตั้งค่าระบบ</a>
-                                        <a class="submenu-link <?=$this->uri->segment('3')=="Report" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Extra/Report')?>">รายงาน</a>
+                                        <a class="submenu-link <?=$this->uri->segment('5')=="Setting" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Affairs/StudentSupport/HomeVisit/Setting')?>">จัดการระบบเยี่ยมบ้าน/SDQ</a>
+                                       
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <!--//nav-item-->
-                       
+
 
                     </ul>
                     <!--//app-menu-->

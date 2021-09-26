@@ -19,7 +19,7 @@ $(document).ready(function() {
         var formadd = $('#AddClassRoom').serialize();
         $.ajax({
             type: 'post',
-            url: "ConAdminClassRoom/AddClassRoom",
+            url: "../../admin/ConAdminClassRoom/AddClassRoom",
             data: formadd,
             beforeSend: function() {
                 console.log("กำลังโหลด");
@@ -29,7 +29,18 @@ $(document).ready(function() {
             },
             success: function(result) {
                 $('#myModal').modal('hide');
-                location.reload();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'บันทึกข้อมูลสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        window.location.reload();
+                    }
+                })
+                
             }
         });
 

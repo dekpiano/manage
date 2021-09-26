@@ -1,16 +1,18 @@
 <!-- Page Header-->
 <header class="page-header">
     <div class="container-fluid">
-        <h2 class="no-margin-bottom">หน้าแรก</h2>
+        <h2 class="no-margin-bottom"><?=$title;?></h2>
     </div>
 </header>
 <!-- Dashboard Counts Section-->
 <section class="dashboard-counts no-padding-bottom">
     <div class="container-fluid">
 
+    <?php  if(isset($CClass[0]->Reg_Class)):
+    $IfLen = strlen($CClass[0]->Reg_Class); 
+    ?>
         <div class="statistic d-flex align-items-center bg-white has-shadow">
-            <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
-            <?php $IfLen = strlen($CClass[0]->Reg_Class); ?>
+            <div class="icon bg-red"><i class="fa fa-tasks"></i></div>            
             <div class="text"><strong>คุณใช้งานในสถานะ :
                     <?=$IfLen != 1 ? 'ครูที่ปรึกษา '.$CClass[0]->Reg_Class : 'หัวหน้าระดับ ม.'.$CClass[0]->Reg_Class ?>
                 </strong></div>
@@ -40,7 +42,7 @@
                         </thead>
                         <!-- สำหรับหัวหน้าระดับ -->
                         <?php if($IfLen == 1):?>
-                            <tbody>
+                        <tbody>
                             <?php 
                                 foreach ($AllAffairs as $key => $v_Aff) : 
                                     $c = explode('/',$v_Aff->s_homevisit_class);
@@ -75,7 +77,7 @@
                                                 <input id="s_homevisit_filecoversheet" name="s_homevisit_filecoversheet"
                                                     type="file" class="d-none">
                                             </label>
-                                                <?php endif; ?>
+                                            <?php endif; ?>
                                         </div>
                                     </form>
 
@@ -169,17 +171,28 @@
                                     </form>
                                 </td>
                                 <td>
-                                <?php if($IfLen == 1):?>
+                                    <?php 
+                                    if($IfLen == 1):
+                                        $statuslevelhead = $v_Aff->s_homevisit_statuslevelhead;
+                                      if($statuslevelhead == "รอตรวจ" || $statuslevelhead == "ไม่ผ่าน") {
+                                            $valid = 'is-invalid';
+                                      }elseif($statuslevelhead == "ผ่าน"){
+                                        $valid = 'is-valid';
+                                      }
+                                    ?>
                                     <form class="ConfrimStatus" method="post">
-                                    <input type="hidden" id="AffID" name="AffID"
-                                                value="<?=$v_Aff->s_homevisit_id?>">
-                                    <select name="s_homevisit_status" id="s_homevisit_status" class="form-control mb-3">
-                                        <option value="รอตรวจ">รอตรวจ</option>
-                                        <option <?=$v_Aff->s_homevisit_status == "ผ่าน" ? "selected" : "" ?> value="ผ่าน">ผ่าน</option>
-                                        <option <?=$v_Aff->s_homevisit_status == "ไม่ผ่าน" ? "selected" : "" ?> value="ไม่ผ่าน">ไม่ผ่าน</option>
-                                    </select>
+                                        <input type="hidden" id="AffID" name="AffID"
+                                            value="<?=$v_Aff->s_homevisit_id?>">
+                                        <select name="s_homevisit_statuslevelhead" id="s_homevisit_statuslevelhead<?=$v_Aff->s_homevisit_id?>"
+                                            class="form-control mb-3 <?=$valid?>">
+                                            <option <?=$statuslevelhead == "รอตรวจ" ? "selected" : "" ?> value="รอตรวจ">รอตรวจ</option>
+                                            <option <?=$statuslevelhead == "ผ่าน" ? "selected" : "" ?>
+                                                value="ผ่าน">ผ่าน</option>
+                                            <option <?=$statuslevelhead == "ไม่ผ่าน" ? "selected" : "" ?>
+                                                value="ไม่ผ่าน">ไม่ผ่าน</option>
+                                        </select>
                                     </form>
-                                    <?php else : echo $v_Aff->s_homevisit_status; ?>
+                                    <?php else : echo $statuslevelhead; ?>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -223,7 +236,7 @@
                                                 <input id="s_homevisit_filecoversheet" name="s_homevisit_filecoversheet"
                                                     type="file" class="d-none">
                                             </label>
-                                                <?php endif; ?>
+                                            <?php endif; ?>
                                         </div>
                                     </form>
 
@@ -317,17 +330,20 @@
                                     </form>
                                 </td>
                                 <td>
-                                <?php if($IfLen == 1):?>
-                                    <form class="ConfrimStatus" method="post">
-                                    <input type="hidden" id="AffID" name="AffID"
-                                                value="<?=$v_Aff->s_homevisit_id?>">
-                                    <select name="s_homevisit_status" id="s_homevisit_status" class="form-control mb-3">
-                                        <option value="">รอตรวจ</option>
-                                        <option <?=$v_Aff->s_homevisit_status == "ผ่าน" ? "selected" : "" ?> value="ผ่าน">ผ่าน</option>
-                                        <option <?=$v_Aff->s_homevisit_status == "ไม่ผ่าน" ? "selected" : "" ?> value="ไม่ผ่าน">ไม่ผ่าน</option>
-                                    </select>
+                                    <?php if($IfLen == 1):?>
+                                    <form class="ConfrimStatus needs-validation" method="post" novalidate>
+                                        <input type="hidden" id="AffID" name="AffID"
+                                            value="<?=$v_Aff->s_homevisit_id?>">
+                                        <select name="s_homevisit_statuslevelhead" id="s_homevisit_statuslevelhead"
+                                            class="form-control mb-3 ">
+                                            <option <?=$v_Aff->s_homevisit_statuslevelhead == "รอตรวจ" ? "selected" : "" ?> value="รอตรวจ">รอตรวจ</option>
+                                            <option <?=$v_Aff->s_homevisit_statuslevelhead == "ผ่าน" ? "selected" : "" ?>
+                                                value="ผ่าน">ผ่าน</option>
+                                            <option <?=$v_Aff->s_homevisit_statuslevelhead == "ไม่ผ่าน" ? "selected" : "" ?>
+                                                value="ไม่ผ่าน">ไม่ผ่าน</option>
+                                        </select>
                                     </form>
-                                    <?php else : echo $v_Aff->s_homevisit_status; ?>
+                                    <?php else : echo $v_Aff->s_homevisit_statuslevelhead; ?>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -338,7 +354,14 @@
                 </div>
             </div>
         </div>
+        <?php else: ?>
+            <div class="statistic d-flex align-items-center bg-white has-shadow">
+            <div class="icon bg-red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>            
+            <div class="text"><strong>คุณยังไม่ได้ประจำชั้นเรียน กรุณาเพิ่มเข้าประจำชั้นเรียนก่อน โดยติดต่อผู้ดูแลระบบ
+                </strong></div>
+        </div>
 
+        <?php endif; ?>
     </div>
 </section>
 

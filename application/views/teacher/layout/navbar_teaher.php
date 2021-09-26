@@ -60,10 +60,19 @@
                 <a href="#HelpStudent" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>ระบบดูแลช่วยเหลือนักเรียน </a>
                 <ul id="HelpStudent"
-                    class="collapse list-unstyled <?=$this->uri->segment(2) == 'SupStdMain' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(2) == 'SupStdMain' ? 'active' : '' ?>">
-                        <a href="<?=base_url('Teacher/SupStdMain');?>">เยี่ยมบ้าน / SDQ</a>
+                    class="collapse list-unstyled <?=$this->uri->segment(2) == 'SupStd' ? 'show' : '' ?>">
+                    <li class="<?=$this->uri->segment(3) == 'Main' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Teacher/SupStd/Main');?>">เยี่ยมบ้าน / SDQ</a>
                     </li>
+                    <?php if($CheckHomeVisitManager->homevisit_set_manager == $this->session->userdata('login_id')): ?>
+                    <span class="heading">ตรวจงาน</span>
+                    <li class="<?=$this->uri->segment(3) == 'CheckWorkManager' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Teacher/SupStd/CheckWorkManager');?>">หัวหน้างาน</a>
+                    </li>
+                    <li class="<?=$this->uri->segment(3) == 'CheckWorkExecutive' ? 'active' : '' ?>">
+                        <a href="<?=base_url('Teacher/SupStd/CheckWorkExecutive');?>">ผู้บริหาร</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </li>
         </ul>

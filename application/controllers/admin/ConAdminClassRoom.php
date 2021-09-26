@@ -50,7 +50,8 @@ class ConAdminClassRoom extends CI_Controller {
     public function DeleteClassRoom($data){           
         //echo $data; exit();
         print_r($this->ModAdminClassRoom->ClassRoom_Delete($data));
-        redirect('Admin/ClassRoom');
+        $this->session->set_flashdata(array('msg'=> 'YES','status'=> 'success','messge' => 'ลบข้อมูลสำเร็จ'));
+        redirect('Admin/Acade/ClassRoom');
     }
 
 }

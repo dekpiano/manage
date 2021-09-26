@@ -58,18 +58,19 @@ $route['ClosePage'] = "welcome/ClosePage";
 // admin
 $route['LoginAdmin'] = "Control_login/LoginAdmin";
 $route['Admin/Home'] = "admin/ConAdminHome/AdminHome";
-$route['Admin/AcademicResult'] = "admin/ConAdminAcademinResult/AdminAcademinResultMain";
-$route['Admin/ClassSchedule'] = "admin/ConAdminClassSchedule/AdminClassScheduleMain";
+$route['Admin/Acade/AcademicResult'] = "admin/ConAdminAcademinResult/AdminAcademinResultMain";
+$route['Admin/Acade/ClassSchedule'] = "admin/ConAdminClassSchedule/AdminClassScheduleMain";
 $route['Admin/ClassSchedule/add'] = "admin/ConAdminClassSchedule/add";
-$route['Admin/ExamSchedule'] = "admin/ConAdminExamSchedule/AdminExamScheduleMain";
+$route['Admin/Acade/ExamSchedule'] = "admin/ConAdminExamSchedule/AdminExamScheduleMain";
 $route['Admin/ExamSchedule/add'] = "admin/ConAdminExamSchedule/add";
-$route['Admin/ClassRoom'] = "admin/ConAdminClassRoom/AdminClassMain";
-$route['Admin/Students'] = "admin/ConAdminStudents/AdminStudentsMain";
-$route['Admin/RegisterSubject'] = "admin/ConAdminRegisterSubject/AdminRegisterSubjectMain";
+$route['Admin/Acade/ClassRoom'] = "admin/ConAdminClassRoom/AdminClassMain";
+$route['Admin/Acade/Students'] = "admin/ConAdminStudents/AdminStudentsMain";
+$route['Admin/Acade/RegisterSubject'] = "admin/ConAdminRegisterSubject/AdminRegisterSubjectMain";
+$route['Admin/Acade/ExtraSubject'] = "admin/ConAdminExtraSubject";
+$route['Admin/Acade/SettingSystem'] = "admin/ConAdminExtraSubject/SystemMainExtraSubject";
+$route['Admin/Acade/Report'] = "admin/ConAdminExtraSubject/ExtraReport";
 
-$route['Admin/Extra/Subject'] = "admin/ConAdminExtraSubject";
-$route['Admin/Extra/SettingSystem'] = "admin/ConAdminExtraSubject/SystemMainExtraSubject";
-$route['Admin/Extra/Report'] = "admin/ConAdminExtraSubject/ExtraReport";
+$route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
 
 // Login
 $route['Logout'] = "Control_login/logout";
@@ -94,7 +95,9 @@ $route['Teacher/Profile'] = "teacher/ConTeacherProfile/ProfileMain";
 $route['Teacher/CheckHomeRoom'] = "teacher/ConTeacherCheckName/CheckHomeRoom";
 $route['Teacher/CheckTeaching'] = "teacher/ConTeacherCheckName/CheckTeaching";
 
-$route['Teacher/SupStdMain'] = "teacher/ConTeacherStudentSupport/SupStdMain";
+$route['Teacher/SupStd/Main'] = "teacher/ConTeacherStudentSupport/SupStdMain";
+$route['Teacher/SupStd/CheckWorkManager'] = "teacher/ConTeacherStudentSupport/SupStdCheckWorkManager";
+$route['Teacher/SupStd/CheckWorkExecutive'] = "teacher/ConTeacherStudentSupport/SupStdCheckWorkExecutive";
 $route['Teacher/SupStdMain/Add'] = "teacher/ConTeacherStudentSupport/SupStdAdd";
 
 

@@ -41,13 +41,18 @@
           <script src="<?=base_url()?>assets/js/admin/Academic.js?v=14"></script>
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
-          <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=5"></script>
+          <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=9"></script>
 
           </body>
 
           <?php if($this->session->flashdata('msg') == 'YES'):?>
           <script>
-Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge');?>", "<?=$this->session->flashdata('status');?>");
+             Swal.fire( {
+                icon: '<?=$this->session->flashdata('status');?>',
+                title: "แจ้งเตือน", 
+                html: '<?=$this->session->flashdata('messge');?>',  
+                confirmButtonText: "ตกลง", 
+                });
           </script>
           <?php endif; $this->session->mark_as_temp('msg',20); ?>
 

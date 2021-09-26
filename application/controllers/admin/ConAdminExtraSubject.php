@@ -17,7 +17,7 @@ class ConAdminExtraSubject extends CI_Controller {
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         
-		$data['title'] = "วิชาเพิ่มเติม";
+		$data['title'] = "ลงทะเบียนวิชาเพิ่มเติม";
         $data['ExtraSubject'] = $this->db->get('tb_extra_subject')->result();
         $data['CountStudentRegister'] = $this->db->select('tb_extra_register.fk_std_id,
                                                         COUNT(tb_extra_register.fk_std_id) AS CountAll,
