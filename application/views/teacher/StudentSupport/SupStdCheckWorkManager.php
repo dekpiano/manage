@@ -137,7 +137,7 @@
                                 <td>
                                 <?php 
                                    
-                                        $statusmanager = $v_Aff->s_homevisit_statusmanager;
+                                    $statusmanager = $v_Aff->s_homevisit_statusmanager;
                                       if($statusmanager == "รอตรวจ" || $statusmanager == "ไม่ผ่าน") {
                                             $valid = 'is-invalid';
                                       }elseif($statusmanager == "ผ่าน"){

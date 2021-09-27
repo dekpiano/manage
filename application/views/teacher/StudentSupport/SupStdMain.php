@@ -37,7 +37,8 @@
                                 <th>SDQ</th>
                                 <th>แบบบันทึก</th>
                                 <th>สรุปข้อมูล</th>
-                                <th>สถานะ</th>
+                                <th>หัวหน้าระดับ</th>
+                                <th>หัวหน้างาน</th>
                             </tr>
                         </thead>
                         <!-- สำหรับหัวหน้าระดับ -->
@@ -195,6 +196,9 @@
                                     <?php else : echo $statuslevelhead; ?>
                                     <?php endif; ?>
                                 </td>
+                                <td>
+                                <?php echo $v_Aff->s_homevisit_statusmanager; ?>
+                                </td>
                             </tr>
                             <?php endif; ?>
                             <?php endforeach; ?>
@@ -345,6 +349,9 @@
                                     </form>
                                     <?php else : echo $v_Aff->s_homevisit_statuslevelhead; ?>
                                     <?php endif; ?>
+                                </td>
+                                <td>
+                                <?php echo $v_Aff->s_homevisit_statusmanager; ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

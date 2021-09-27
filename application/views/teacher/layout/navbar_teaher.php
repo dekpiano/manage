@@ -69,9 +69,9 @@
                     <li class="<?=$this->uri->segment(3) == 'CheckWorkManager' ? 'active' : '' ?>">
                         <a href="<?=base_url('Teacher/SupStd/CheckWorkManager');?>">หัวหน้างาน</a>
                     </li>
-                    <li class="<?=$this->uri->segment(3) == 'CheckWorkExecutive' ? 'active' : '' ?>">
+                    <!-- <li class="<?=$this->uri->segment(3) == 'CheckWorkExecutive' ? 'active' : '' ?>">
                         <a href="<?=base_url('Teacher/SupStd/CheckWorkExecutive');?>">ผู้บริหาร</a>
-                    </li>
+                    </li> -->
                     <?php endif; ?>
                 </ul>
             </li>

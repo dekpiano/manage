@@ -53,6 +53,8 @@ var  $title = "ผลการเรียน";
                                     ->get()->result();
       
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        //echo '<pre>'; print_r($this->session->userdata('login_id')); exit();
+
         $this->load->view('student/layout/HeaderStudent.php',$data);
         $this->load->view('student/PageAcademicResult.php');
         $this->load->view('student/layout/FooterStudent.php');

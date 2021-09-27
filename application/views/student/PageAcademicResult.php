@@ -1,6 +1,7 @@
 <div class="app-wrapper">
 
-<?php 
+
+    <?php 
             $AllUnit = 0; $AllGrade = 0; 
             foreach ($scoreYear as $key_year => $v_scoreYear) {
                 $SubGrade = 0;
@@ -19,7 +20,8 @@
                         }
                     }
                    
-                }$AllGrade += $SubGrade; //echo $SubGrade.'<br>'; 
+                }$AllGrade += $SubGrade; 
+                //echo $AllUnit.'<br>'; 
                 
             }            
             ?>
@@ -32,50 +34,59 @@
             <div class="app-card app-card-orders-table shadow-sm mb-5">
                 <?php if($CheckOnOff[0]->onoff_status == "true") : ?>
 
-                    <div class="row g-4 mb-4">
-                <div class="col-6 col-lg-3">
-                    <div class="app-card app-card-stat shadow-sm h-100">
-                        <div class="app-card-body p-3 p-lg-4">
-                            <h4 class="stats-type mb-1">จำนวนเทอม</h4>
-                            <div class="stats-figure"><?php  print_r(count($scoreYear)); ?></div>
-                            <div class="stats-meta">คือ จำนวนที่ภาคเรียน</div>
+                <div class="row g-4 mb-4">
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4">
+                                <h4 class="stats-type mb-1">จำนวนเทอม</h4>
+                                <div class="stats-figure"><?php  print_r(count($scoreYear)); ?></div>
+                                <div class="stats-meta">คือ จำนวนที่ภาคเรียน</div>
+                            </div>
+                            <!--//app-card-body-->
+                            <a class="app-card-link-mask" href="#"></a>
                         </div>
-                        <!--//app-card-body-->
-                        <a class="app-card-link-mask" href="#"></a>
+                        <!--//app-card-->
                     </div>
-                    <!--//app-card-->
-                </div>
-                <!--//col-->
+                    <!--//col-->
 
-                <div class="col-6 col-lg-3">
-                    <div class="app-card app-card-stat shadow-sm h-100">
-                        <div class="app-card-body p-3 p-lg-4">
-                            <h4 class="stats-type mb-1">หน่วยกิตทั้งหมด</h4>
-                            <div class="stats-figure"><?php  echo $AllUnit;?></div>
-                            <div class="stats-meta">หน่วยกิตรวมทุกภาค</div>
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4">
+                                <h4 class="stats-type mb-1">หน่วยกิตทั้งหมด</h4>
+                                <div class="stats-figure"><?php  echo $AllUnit;?></div>
+                                <div class="stats-meta">หน่วยกิตรวมทุกภาค</div>
+                            </div>
+                            <!--//app-card-body-->
+                            <a class="app-card-link-mask" href="#"></a>
                         </div>
-                        <!--//app-card-body-->
-                        <a class="app-card-link-mask" href="#"></a>
+                        <!--//app-card-->
                     </div>
-                    <!--//app-card-->
+                    <!--//col-->
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4">
+                                <h4 class="stats-type mb-1">ค่าเฉลี่ย CGPA</h4>
+                                <div class="stats-figure">
+
+                                    <?php
+                                    if($AllGrade && $AllUnit){
+                                        $All = $AllGrade/$AllUnit; 
+                                        echo substr($All,0,strpos($All,'.')+3);
+                                    }
+                                    
+                            ?>
+
+                                </div>
+                                <div class="stats-meta">เกรดเฉลี่ยรวมทุกภาค</div>
+                            </div>
+                            <!--//app-card-body-->
+                            <a class="app-card-link-mask" href="#"></a>
+                        </div>
+                        <!--//app-card-->
+                    </div>
+
                 </div>
-                <!--//col-->
-                <div class="col-6 col-lg-3">
-                    <div class="app-card app-card-stat shadow-sm h-100">
-                        <div class="app-card-body p-3 p-lg-4">
-                            <h4 class="stats-type mb-1">ค่าเฉลี่ย CGPA</h4>
-                            <div class="stats-figure"><?php $All = $AllGrade/$AllUnit; 
-                            echo substr($All,0,strpos($All,'.')+3);?></div>
-                            <div class="stats-meta">เกรดเฉลี่ยรวมทุกภาค</div>
-                        </div>
-                        <!--//app-card-body-->
-                        <a class="app-card-link-mask" href="#"></a>
-                    </div>
-                    <!--//app-card-->
-                </div>             
-             
-            </div>
-            <!--//row-->
+                <!--//row-->
                 <div class="row">
                     <?php asort($scoreYear);
                 
@@ -101,7 +112,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php    $SumUnit = 0; $SumGrade = 0;$scoreLevel=0;
+                                            <?php  $SumUnit = 0; $SumGrade = 0; $scoreLevel=0;
                                         foreach ($scoreStudent as $key => $score ):                                         
                                             if($v_scoreYear->RegisterYear == $score->RegisterYear && $v_scoreYear->RegisterYear == $score->SubjectYear):
                                             $c = $score->Score100;
@@ -148,11 +159,15 @@
                                          endforeach;?>
                                             <tr class="text-center">
                                                 <th colspan=3>รวม</th>
-                                                <th><?php echo  $SumUnit; ?></th>
-                                                <th>
-                                                    <?php $a = @($SumGrade/$SumUnit);
-                                            echo substr($a,0,strpos($a,'.')+3);
-                                            ?>
+                                                <th><?php echo  $SumGrade; ?></th>
+                                                <th>                                                    
+                                                    <?php 
+                                                    if($SumGrade && $SumUnit){
+                                                        $a = ($SumGrade/$SumUnit);
+                                                        echo substr($a,0,strpos($a,'.')+3);
+                                                    }
+                                                   
+                                                        ?>
 
                                                 </th>
                                             </tr>
@@ -178,20 +193,10 @@
 
                 <?php endif; ?>
             </div>
-           
-        
+
+
 
         </div>
         <!--//container-fluid-->
     </div>
     <!--//app-content-->
-
-
-
-
-
-
-
-
-
-
