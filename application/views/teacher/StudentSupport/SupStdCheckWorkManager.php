@@ -16,6 +16,9 @@
             <div class="text">
                 <strong>
                     สำหรับหัวหน้างาน
+                    <div class="float-right">
+                       <small><a target="_blank" href="<?=base_url('uploads/affairs/helpstd/คู่มือ/คู่มือการใช้งานระบบส่งงานเยี่ยมบ้านSDQ.pdf')?>">คู่มือการใช้งาน</a>  | <a target="_blank" href="https://drive.google.com/file/d/1H3Y4uPQ-2kV6T1CsoPn0wvPo3kABFULd/view?fbclid=IwAR2RsE-vTgd4ocwToAzgynJorRX2h2mCkXBZOgAuwB0xns2SK2MAj7wLX5k">โหลดไฟล์ต้นฉบับ</a></small> 
+                    </div>
                 </strong>
             </div>
         </div>

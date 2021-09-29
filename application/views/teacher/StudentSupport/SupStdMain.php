@@ -8,14 +8,22 @@
 <section class="dashboard-counts no-padding-bottom">
     <div class="container-fluid">
 
-    <?php  if(isset($CClass[0]->Reg_Class)):
+        <?php  if(isset($CClass[0]->Reg_Class)):
     $IfLen = strlen($CClass[0]->Reg_Class); 
     ?>
-        <div class="statistic d-flex align-items-center bg-white has-shadow">
-            <div class="icon bg-red"><i class="fa fa-tasks"></i></div>            
-            <div class="text"><strong>คุณใช้งานในสถานะ :
+
+        <div class="statistic align-items-center bg-white has-shadow">
+            <div class="text">
+                <strong>คุณใช้งานในสถานะ :
                     <?=$IfLen != 1 ? 'ครูที่ปรึกษา '.$CClass[0]->Reg_Class : 'หัวหน้าระดับ ม.'.$CClass[0]->Reg_Class ?>
-                </strong></div>
+                    <div class="float-right">
+                       <small><a target="_blank" href="<?=base_url('uploads/affairs/helpstd/คู่มือ/คู่มือการใช้งานระบบส่งงานเยี่ยมบ้านSDQ.pdf')?>">คู่มือการใช้งาน</a>  | <a target="_blank" href="https://drive.google.com/file/d/1H3Y4uPQ-2kV6T1CsoPn0wvPo3kABFULd/view?fbclid=IwAR2RsE-vTgd4ocwToAzgynJorRX2h2mCkXBZOgAuwB0xns2SK2MAj7wLX5k">โหลดไฟล์ต้นฉบับ</a></small> 
+                    </div>
+                </strong>
+
+            </div>
+
+
         </div>
 
         <div class="card">
@@ -184,11 +192,13 @@
                                     <form class="ConfrimStatus" method="post">
                                         <input type="hidden" id="AffID" name="AffID"
                                             value="<?=$v_Aff->s_homevisit_id?>">
-                                        <select name="s_homevisit_statuslevelhead" id="s_homevisit_statuslevelhead<?=$v_Aff->s_homevisit_id?>"
+                                        <select name="s_homevisit_statuslevelhead"
+                                            id="s_homevisit_statuslevelhead<?=$v_Aff->s_homevisit_id?>"
                                             class="form-control mb-3 <?=$valid?>">
-                                            <option <?=$statuslevelhead == "รอตรวจ" ? "selected" : "" ?> value="รอตรวจ">รอตรวจ</option>
-                                            <option <?=$statuslevelhead == "ผ่าน" ? "selected" : "" ?>
-                                                value="ผ่าน">ผ่าน</option>
+                                            <option <?=$statuslevelhead == "รอตรวจ" ? "selected" : "" ?> value="รอตรวจ">
+                                                รอตรวจ</option>
+                                            <option <?=$statuslevelhead == "ผ่าน" ? "selected" : "" ?> value="ผ่าน">ผ่าน
+                                            </option>
                                             <option <?=$statuslevelhead == "ไม่ผ่าน" ? "selected" : "" ?>
                                                 value="ไม่ผ่าน">ไม่ผ่าน</option>
                                         </select>
@@ -197,7 +207,7 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                <?php echo $v_Aff->s_homevisit_statusmanager; ?>
+                                    <?php echo $v_Aff->s_homevisit_statusmanager; ?>
                                 </td>
                             </tr>
                             <?php endif; ?>
@@ -340,10 +350,14 @@
                                             value="<?=$v_Aff->s_homevisit_id?>">
                                         <select name="s_homevisit_statuslevelhead" id="s_homevisit_statuslevelhead"
                                             class="form-control mb-3 ">
-                                            <option <?=$v_Aff->s_homevisit_statuslevelhead == "รอตรวจ" ? "selected" : "" ?> value="รอตรวจ">รอตรวจ</option>
-                                            <option <?=$v_Aff->s_homevisit_statuslevelhead == "ผ่าน" ? "selected" : "" ?>
+                                            <option
+                                                <?=$v_Aff->s_homevisit_statuslevelhead == "รอตรวจ" ? "selected" : "" ?>
+                                                value="รอตรวจ">รอตรวจ</option>
+                                            <option
+                                                <?=$v_Aff->s_homevisit_statuslevelhead == "ผ่าน" ? "selected" : "" ?>
                                                 value="ผ่าน">ผ่าน</option>
-                                            <option <?=$v_Aff->s_homevisit_statuslevelhead == "ไม่ผ่าน" ? "selected" : "" ?>
+                                            <option
+                                                <?=$v_Aff->s_homevisit_statuslevelhead == "ไม่ผ่าน" ? "selected" : "" ?>
                                                 value="ไม่ผ่าน">ไม่ผ่าน</option>
                                         </select>
                                     </form>
@@ -351,7 +365,7 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                <?php echo $v_Aff->s_homevisit_statusmanager; ?>
+                                    <?php echo $v_Aff->s_homevisit_statusmanager; ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -362,8 +376,8 @@
             </div>
         </div>
         <?php else: ?>
-            <div class="statistic d-flex align-items-center bg-white has-shadow">
-            <div class="icon bg-red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>            
+        <div class="statistic d-flex align-items-center bg-white has-shadow">
+            <div class="icon bg-red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
             <div class="text"><strong>คุณยังไม่ได้ประจำชั้นเรียน กรุณาเพิ่มเข้าประจำชั้นเรียนก่อน โดยติดต่อผู้ดูแลระบบ
                 </strong></div>
         </div>

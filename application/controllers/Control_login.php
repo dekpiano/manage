@@ -164,6 +164,7 @@ class Control_login extends CI_Controller {
 			// $this->load->view('user/layout/HeaderUser.php',$data);
 			// $this->load->view('user/Login/PageLoginTeacher.php');
 			// $this->load->view('user/layout/FooterUser.php');
+		
 			$this->load->view('login/loginTeacher.php',$data);
 			}
 			else
