@@ -41,7 +41,7 @@
           <script src="<?=base_url()?>assets/js/admin/Academic.js?v=14"></script>
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
-          <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=9"></script>
+          <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
 
           </body>
 

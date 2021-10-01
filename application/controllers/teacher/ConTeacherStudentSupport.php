@@ -215,6 +215,12 @@ var  $title = "หน้าแรก";
     }
 
 
+    // ตั้งค่าระบบ
+    public function Setting_Helpstd_OnOff(){
+            $data = array('homevisit_set_onoff' => $this->input->post('onoff'));
+      echo  $this->DBaffairs->update('tb_homevisit_setting',$data,'homevisit_set_id=1');
+    }
+
    
 }
 

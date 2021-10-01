@@ -130,16 +130,16 @@ $('.ConfrimStatus').change(function(e) {
         cache: false,
         async: false,
         success: function(data) {
-            
+
             if (data) {
-                if(data[1] == 'ผ่าน'){
-                    $('#s_homevisit_statuslevelhead'+data[0]).addClass('is-valid');
-                    $('#s_homevisit_statuslevelhead'+data[0]).removeClass('is-invalid');
-                }else{
-                    $('#s_homevisit_statuslevelhead'+data[0]).addClass('is-invalid');
-                    $('#s_homevisit_statuslevelhead'+data[0]).removeClass('is-valid');
+                if (data[1] == 'ผ่าน') {
+                    $('#s_homevisit_statuslevelhead' + data[0]).addClass('is-valid');
+                    $('#s_homevisit_statuslevelhead' + data[0]).removeClass('is-invalid');
+                } else {
+                    $('#s_homevisit_statuslevelhead' + data[0]).addClass('is-invalid');
+                    $('#s_homevisit_statuslevelhead' + data[0]).removeClass('is-valid');
                 }
-             
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -151,8 +151,8 @@ $('.ConfrimStatus').change(function(e) {
                         // window.location.reload();
                     }
                 })
-                
-                
+
+
 
             }
         }
@@ -170,16 +170,16 @@ $('.ConfrimStatusManager').change(function(e) {
         cache: false,
         async: false,
         success: function(data) {
-            
+
             if (data) {
-                if(data[1] == 'ผ่าน'){
-                    $('#s_homevisit_statusmanager'+data[0]).addClass('is-valid');
-                    $('#s_homevisit_statusmanager'+data[0]).removeClass('is-invalid');
-                }else{
-                    $('#s_homevisit_statusmanager'+data[0]).addClass('is-invalid');
-                    $('#s_homevisit_statusmanager'+data[0]).removeClass('is-valid');
+                if (data[1] == 'ผ่าน') {
+                    $('#s_homevisit_statusmanager' + data[0]).addClass('is-valid');
+                    $('#s_homevisit_statusmanager' + data[0]).removeClass('is-invalid');
+                } else {
+                    $('#s_homevisit_statusmanager' + data[0]).addClass('is-invalid');
+                    $('#s_homevisit_statusmanager' + data[0]).removeClass('is-valid');
                 }
-             
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -191,10 +191,32 @@ $('.ConfrimStatusManager').change(function(e) {
                         // window.location.reload();
                     }
                 })
-                
-                
+
+
 
             }
+        }
+    });
+});
+
+
+$(document).on("change", "#homevisit_set_onoff", function() {
+    //alert($(this).prop('checked'));
+    $.post("../../teacher/ConTeacherStudentSupport/Setting_Helpstd_OnOff", { onoff: $(this).prop('checked') }, function(data, status) {
+        if (data == 1) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'เปลี่ยนแปลงสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    // window.location.reload();
+                }
+            })
+        } else {
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
         }
     });
 });

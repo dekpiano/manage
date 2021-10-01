@@ -10,8 +10,8 @@
 
         <?php  if(isset($CClass[0]->Reg_Class)):
     $IfLen = strlen($CClass[0]->Reg_Class); 
+    $CheckOnOffSystem = "NO"; //ตัวแปรเพิ่มปิดระบบ
     ?>
-
         <div class="statistic align-items-center bg-white has-shadow">
             <div class="text">
                 <strong>คุณใช้งานในสถานะ :
@@ -28,11 +28,10 @@
 
         <div class="card">
             <div class="card-close">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAddHelp">+
-                    ส่งงาน</button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAddHelp">+ ส่งงาน</button>
             </div>
             <div class="card-header d-flex align-items-center">
-                <h3 class="h4">งานเยี่ยมบ้าน / SDQ</h3>
+                <h3 class="h4">ตารางส่งงานเยี่ยมบ้าน / SDQ</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -241,6 +240,7 @@
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
                                             <?php if($IfLen == 3):?>
+                                                <?php if($CheckOnOffSystem === "YES"):?>
                                             <input type="hidden" id="AffID" name="AffID"
                                                 value="<?=$v_Aff->s_homevisit_id?>">
                                             <label class="badge badge-warning h6" style="cursor: pointer;"
@@ -250,6 +250,11 @@
                                                 <input id="s_homevisit_filecoversheet" name="s_homevisit_filecoversheet"
                                                     type="file" class="d-none">
                                             </label>
+                                                <?php else :?>
+                                                   <span class="badge badge-warning h6" data-toggle="modal" data-target="#ModalAddHelp">
+                                                   <i class="fa fa-upload" aria-hidden="true"></i>
+                                                   </span>
+                                                <?php endif;?>
                                             <?php endif; ?>
                                         </div>
                                     </form>
@@ -271,6 +276,7 @@
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
                                             <?php if($IfLen == 3):?>
+                                                <?php if($CheckOnOffSystem === "YES"):?>
                                             <input type="hidden" id="AffID" name="AffID"
                                                 value="<?=$v_Aff->s_homevisit_id?>">
                                             <label class="badge badge-warning h6" style="cursor: pointer;"
@@ -280,6 +286,11 @@
                                                 <input id="s_homevisit_fileSDQ" name="s_homevisit_fileSDQ" type="file"
                                                     class="d-none">
                                             </label>
+                                            <?php else :?>
+                                                   <span class="badge badge-warning h6" data-toggle="modal" data-target="#ModalAddHelp">
+                                                   <i class="fa fa-upload" aria-hidden="true"></i>
+                                                   </span>
+                                                <?php endif;?>
                                             <?php endif; ?>
                                         </div>
                                     </form>
@@ -301,6 +312,7 @@
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
                                             <?php if($IfLen == 3):?>
+                                                <?php if($CheckOnOffSystem === "YES"):?>
                                             <input type="hidden" id="AffID" name="AffID"
                                                 value="<?=$v_Aff->s_homevisit_id?>">
                                             <label class="badge badge-warning h6" style="cursor: pointer;"
@@ -310,6 +322,11 @@
                                                 <input id="s_homevisit_filerecordform" name="s_homevisit_filerecordform"
                                                     type="file" class="d-none">
                                             </label>
+                                            <?php else :?>
+                                                   <span class="badge badge-warning h6" data-toggle="modal" data-target="#ModalAddHelp">
+                                                   <i class="fa fa-upload" aria-hidden="true"></i>
+                                                   </span>
+                                                <?php endif;?>
                                             <?php endif; ?>
                                         </div>
                                     </form>
@@ -330,6 +347,7 @@
                                             <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                             <?php endif; ?>
                                             <?php if($IfLen == 3):?>
+                                                <?php if($CheckOnOffSystem === "YES"):?>
                                             <input type="hidden" id="AffID" name="AffID"
                                                 value="<?=$v_Aff->s_homevisit_id?>">
                                             <label class="badge badge-warning h6" style="cursor: pointer;"
@@ -339,6 +357,11 @@
                                                 <input id="s_homevisit_filesummary" name="s_homevisit_filesummary"
                                                     type="file" class="d-none">
                                             </label>
+                                            <?php else :?>
+                                                   <span class="badge badge-warning h6" data-toggle="modal" data-target="#ModalAddHelp">
+                                                   <i class="fa fa-upload" aria-hidden="true"></i>
+                                                   </span>
+                                                <?php endif;?>
                                             <?php endif; ?>
                                         </div>
                                     </form>
@@ -397,6 +420,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <?php if($CheckOnOffSystem === "YES"): ?>
             <form action="<?=base_url('Teacher/SupStdMain/Add')?>" method="post">
                 <div class="modal-body">
                     <select class="form-control mb-3" id="s_homevisit_year" name="s_homevisit_year">
@@ -411,6 +435,11 @@
                     <button type="submit" class="btn btn-primary">บันทึก</button>
                 </div>
             </form>
+            <?php else: ?>
+                <div class="modal-body">
+                <h2>ระบบปิดให้ส่งงาน ไม่สามารถเพิ่มงานหรือแก้ไขงานได้ในขณะนี้ (ติดต่อหัวหน้างาน)</h2>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
