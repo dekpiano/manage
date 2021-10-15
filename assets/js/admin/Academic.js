@@ -40,50 +40,13 @@ $(document).ready(function() {
                         window.location.reload();
                     }
                 })
-                
+
             }
         });
 
     });
 
-    // Submit form data via Ajax
-    $(document).on('submit', '#form_insert_plan', function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '../../teacher/ConTeacherCourse/insert_plan',
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            cache: false,
-            async: false,
-            beforeSend: function() {
-                $('.submitBtn').attr("disabled", "disabled");
-            },
-            success: function(response) { //console.log(response);
-                if (response == 1) {
-                    //$('#form_insert_plan')[0].reset();
-                    Swal.fire({
-                        title: 'แจ้งเตือน',
-                        text: "คุณส่งงานเรียบร้อยแล้ว",
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "../../Teacher/Course";
-                        }
-                    })
 
-
-                } else {
-                    console.log(response);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
-            }
-        });
-    });
 
     // update plan
     $(document).on('submit', '#form_update_plan', function(e) {
@@ -98,10 +61,10 @@ $(document).ready(function() {
             cache: false,
             async: false,
             beforeSend: function() {
-                
-                var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> กำลังส่ง...';             
+
+                var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> กำลังส่ง...';
                 $this.html(loadingText);
-                
+
             },
             success: function(response) { //console.log(response);
                 if (response == 1) {
@@ -119,13 +82,13 @@ $(document).ready(function() {
 
                 } else {
                     console.log(response);
-                    var loadingText = 'ส่งงาน';             
+                    var loadingText = 'ส่งงาน';
                     $this.html(loadingText);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus);
-                var loadingText = 'ส่งงาน';             
+                var loadingText = 'ส่งงาน';
                 $this.html(loadingText);
             }
         });
@@ -203,16 +166,16 @@ $(document).ready(function() {
                 } else {
                     $("#bgC" + planId).removeClass('table-success');
                 }
-                
-                if(data[0].seplan_status1 == "ไม่ผ่าน"){
-                    $('#bgC'+planId+' .TbShowComment1').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment1">หมายเหตุ</a>');
+
+                if (data[0].seplan_status1 == "ไม่ผ่าน") {
+                    $('#bgC' + planId + ' .TbShowComment1').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="' + planId + '" data-target="#addcomment1">หมายเหตุ</a>');
                 }
-                if(data[0].seplan_status1 == "ผ่าน"){
-                    $('#bgC'+planId+' .TbShowComment1').html('');
+                if (data[0].seplan_status1 == "ผ่าน") {
+                    $('#bgC' + planId + ' .TbShowComment1').html('');
                 }
                 $(".form-comment1")[0].reset();
 
-                alertify.set('notifier','position', 'top-right');
+                alertify.set('notifier', 'position', 'top-right');
                 alertify.success('เปลี่ยนสถานะสำเร็จ');
 
             },
@@ -228,7 +191,7 @@ $(document).ready(function() {
         // console.log($(this).attr('data-planId'));
         var status2 = $(this).val();
         var planId = $(this).attr('planId');
-        
+
         $.ajax({
             type: 'POST',
             url: "../../../teacher/ConTeacherCourse/UpdateStatus2",
@@ -245,16 +208,16 @@ $(document).ready(function() {
                 } else {
                     $("#bgC" + planId).removeClass('table-success');
                 }
-               
-                if(data[0].seplan_status2 == "ไม่ผ่าน"){
-                    $('#bgC'+planId+' .TbShowComment2').html('<a href="#" class="show_comment2" data-toggle="modal" data-planId="'+planId+'" data-target="#addcomment2">หมายเหตุ</a>');
+
+                if (data[0].seplan_status2 == "ไม่ผ่าน") {
+                    $('#bgC' + planId + ' .TbShowComment2').html('<a href="#" class="show_comment2" data-toggle="modal" data-planId="' + planId + '" data-target="#addcomment2">หมายเหตุ</a>');
                 }
-                if(data[0].seplan_status2 == "ผ่าน"){
-                    $('#bgC'+planId+' .TbShowComment2').html('');
+                if (data[0].seplan_status2 == "ผ่าน") {
+                    $('#bgC' + planId + ' .TbShowComment2').html('');
                 }
                 $(".form-comment2")[0].reset();
 
-                alertify.set('notifier','position', 'top-right');
+                alertify.set('notifier', 'position', 'top-right');
                 alertify.success('เปลี่ยนสถานะสำเร็จ');
 
             },
@@ -265,7 +228,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", ".show_comment1", function() {        
+    $(document).on("click", ".show_comment1", function() {
         var planId = $(this).attr('data-planId');
         //console.log(planId);
         $.ajax({
@@ -277,10 +240,10 @@ $(document).ready(function() {
 
             },
             success: function(data) {
-                
-               $('textarea.seplan_comment1').html(data[0].seplan_comment1);
-               $('#sub_comment1').attr('data-planId',planId);
-               
+
+                $('textarea.seplan_comment1').html(data[0].seplan_comment1);
+                $('#sub_comment1').attr('data-planId', planId);
+
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -289,28 +252,28 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", "#sub_comment1", function() { 
-        var planId = $(this).attr('data-planId');       
+    $(document).on("click", "#sub_comment1", function() {
+        var planId = $(this).attr('data-planId');
         var seplan_comment1 = $('#seplan_comment1').val();
-        
+
         $.ajax({
             type: 'POST',
             url: "../../../teacher/ConTeacherCourse/UpdateComment1",
-            data: { planId: planId,seplan_comment1:seplan_comment1 },
+            data: { planId: planId, seplan_comment1: seplan_comment1 },
             beforeSend: function() {
 
             },
             success: function(data) {
-                
-               if(data == 1){
-                Swal.fire(
-                    'แจ้งเตือน',
-                    'คุณเพิ่มหมายเหตุเรียบร้อย',
-                    'success'
-                )
-               }
-               $(".form-comment1")[0].reset();
-               $("#addcomment1").modal('hide');
+
+                if (data == 1) {
+                    Swal.fire(
+                        'แจ้งเตือน',
+                        'คุณเพิ่มหมายเหตุเรียบร้อย',
+                        'success'
+                    )
+                }
+                $(".form-comment1")[0].reset();
+                $("#addcomment1").modal('hide');
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -320,9 +283,9 @@ $(document).ready(function() {
     });
 
 
-    $(document).on("click", ".show_comment2", function() {        
+    $(document).on("click", ".show_comment2", function() {
         var planId = $(this).attr('data-planId');
-        
+
         $.ajax({
             type: 'POST',
             url: "../../../teacher/ConTeacherCourse/CheckComment2",
@@ -333,10 +296,10 @@ $(document).ready(function() {
 
             },
             success: function(data) {
-                
-               $('textarea.seplan_comment2').html(data[0].seplan_comment2);
-               $('#sub_comment2').attr('data-planId',planId);
-               
+
+                $('textarea.seplan_comment2').html(data[0].seplan_comment2);
+                $('#sub_comment2').attr('data-planId', planId);
+
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -345,28 +308,28 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", "#sub_comment2", function() { 
-        var planId = $(this).attr('data-planId');       
+    $(document).on("click", "#sub_comment2", function() {
+        var planId = $(this).attr('data-planId');
         var seplan_comment2 = $('#seplan_comment2').val();
-        
+
         $.ajax({
             type: 'POST',
             url: "../../../teacher/ConTeacherCourse/UpdateComment2",
-            data: { planId: planId,seplan_comment2:seplan_comment2 },
+            data: { planId: planId, seplan_comment2: seplan_comment2 },
             beforeSend: function() {
 
             },
             success: function(data) {
-                
-               if(data == 1){
-                Swal.fire(
-                    'แจ้งเตือน',
-                    'คุณเพิ่มหมายเหตุเรียบร้อย',
-                    'success'
-                )
-               }
-               $(".form-comment2")[0].reset();
-               $("#addcomment2").modal('hide');
+
+                if (data == 1) {
+                    Swal.fire(
+                        'แจ้งเตือน',
+                        'คุณเพิ่มหมายเหตุเรียบร้อย',
+                        'success'
+                    )
+                }
+                $(".form-comment2")[0].reset();
+                $("#addcomment2").modal('hide');
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -376,8 +339,8 @@ $(document).ready(function() {
     });
     // ----------------------------วิชาเพิ่มติม-----------------------------------
     $('#ModalAddExtraSubject').on('click', function() {
-        $('#myModal').modal('show');       
-        $("#UpdateExtraSubject").attr('id',"AddExtraSubject");
+        $('#myModal').modal('show');
+        $("#UpdateExtraSubject").attr('id', "AddExtraSubject");
         $("#AddExtraSubject")[0].reset();
     });
 
@@ -390,13 +353,13 @@ $(document).ready(function() {
 
     $('.ModalExtraSubject').on('click', function(e) {
         e.preventDefault();
-        $('#myModal').modal('show');  
-        $('.extra_grade_level').prop('checked', false);    
+        $('#myModal').modal('show');
+        $('.extra_grade_level').prop('checked', false);
         $.ajax({
             type: 'POST',
             url: "../../admin/ConAdminExtraSubject/EditExtraSubject",
-            data: {Extraid:$(this).attr('Extraid')},
-            dataType:"json",
+            data: { Extraid: $(this).attr('Extraid') },
+            dataType: "json",
             beforeSend: function() {
 
             },
@@ -405,7 +368,8 @@ $(document).ready(function() {
                 $('#extra_id').val(data[0].extra_id);
                 $('#extra_year').val(data[0].extra_year);
                 $('#extra_term').val(data[0].extra_term);
-                $('#extra_key_room').val(data[0].extra_key_room);''
+                $('#extra_key_room').val(data[0].extra_key_room);
+                ''
                 $('#extra_course_code').val(data[0].extra_course_code);
                 $('#extra_course_name').val(data[0].extra_course_name);
                 $('#extra_course_teacher').val(data[0].extra_course_teacher);
@@ -413,9 +377,9 @@ $(document).ready(function() {
                 $('#extra_comment').val(data[0].extra_comment);
                 var n = data[0].extra_grade_level.split('|');
                 slim.set(n);
-                slimTeacher.set(data[0].extra_course_teacher);   
+                slimTeacher.set(data[0].extra_course_teacher);
 
-                $("#AddExtraSubject").attr('id',"UpdateExtraSubject");
+                $("#AddExtraSubject").attr('id', "UpdateExtraSubject");
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -424,9 +388,9 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("submit", "#AddExtraSubject", function(e) { 
-        e.preventDefault();               
-        var formadd = $('#AddExtraSubject').serialize();        
+    $(document).on("submit", "#AddExtraSubject", function(e) {
+        e.preventDefault();
+        var formadd = $('#AddExtraSubject').serialize();
         $.ajax({
             type: 'POST',
             url: "../../admin/ConAdminExtraSubject/AddExtraSubject",
@@ -434,23 +398,23 @@ $(document).ready(function() {
             beforeSend: function() {
 
             },
-            success: function(data) {               
-               if(data == 1){
-                Swal.fire(
-                    'แจ้งเตือน',
-                    'คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย',
-                    'success'
-                )
-                Swal.fire({
-                    title: 'แจ้งเตือน',
-                    text: "คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย",
-                    icon: 'success'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                  })
-               }              
+            success: function(data) {
+                if (data == 1) {
+                    Swal.fire(
+                        'แจ้งเตือน',
+                        'คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย',
+                        'success'
+                    )
+                    Swal.fire({
+                        title: 'แจ้งเตือน',
+                        text: "คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย",
+                        icon: 'success'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    })
+                }
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -459,10 +423,10 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("submit", "#UpdateExtraSubject", function(e) { 
-        e.preventDefault();    
-        var formadd = $('#UpdateExtraSubject').serialize(); 
-       
+    $(document).on("submit", "#UpdateExtraSubject", function(e) {
+        e.preventDefault();
+        var formadd = $('#UpdateExtraSubject').serialize();
+
         $.ajax({
             type: 'POST',
             url: "../../admin/ConAdminExtraSubject/UpdateExtraSubject",
@@ -470,25 +434,25 @@ $(document).ready(function() {
             beforeSend: function() {
 
             },
-            success: function(data) {   
-                console.log(data);   
-               if(data == 1){
+            success: function(data) {
+                console.log(data);
+                if (data == 1) {
 
-                Swal.fire(
-                    'แจ้งเตือน',
-                    'คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย',
-                    'success'
-                )
-                Swal.fire({
-                    title: 'แจ้งเตือน',
-                    text: "คุณแก้ไขวิชาเพิ่มเติมเรียบร้อย",
-                    icon: 'success'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                  })
-               }              
+                    Swal.fire(
+                        'แจ้งเตือน',
+                        'คุณเพิ่มวิชาเพิ่มเติมเรียบร้อย',
+                        'success'
+                    )
+                    Swal.fire({
+                        title: 'แจ้งเตือน',
+                        text: "คุณแก้ไขวิชาเพิ่มเติมเรียบร้อย",
+                        icon: 'success'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    })
+                }
             },
             error: function(xhr) {
                 alert("Error occured.please try again");
@@ -499,54 +463,54 @@ $(document).ready(function() {
 
 });
 
-$(document).on("change", "#extra_setting_onoff", function() {    
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingOnoff", {onoff : $(this).prop('checked')}, function(data, status){
-        if(data == 1){
+$(document).on("change", "#extra_setting_onoff", function() {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingOnoff", { onoff: $(this).prop('checked') }, function(data, status) {
+        if (data == 1) {
             alertify.success('เปลี่ยนแปลงข้อมูลเปิด - ปิดระบบสำเร็จ');
-        }else{
+        } else {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
         }
     });
-  });
+});
 
-  $(document).on("change", "#extra_setting_term", function() {    
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingTerm", {Term : $(this).val()}, function(data, status){
-        if(data == 0){
+$(document).on("change", "#extra_setting_term", function() {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingTerm", { Term: $(this).val() }, function(data, status) {
+        if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }else{
-            alertify.success('คุณเปลี่ยนภาคเรียน '+data+' เรียบร้อย');            
+        } else {
+            alertify.success('คุณเปลี่ยนภาคเรียน ' + data + ' เรียบร้อย');
         }
     });
-  });
+});
 
-  $(document).on("change", "#extra_setting_year", function() {    
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingYear", {Year : $(this).val()}, function(data, status){
-        if(data == 0){
+$(document).on("change", "#extra_setting_year", function() {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingYear", { Year: $(this).val() }, function(data, status) {
+        if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }else{
-            alertify.success('คุณเปลี่ยนภาคเรียน '+data+' เรียบร้อย');            
+        } else {
+            alertify.success('คุณเปลี่ยนภาคเรียน ' + data + ' เรียบร้อย');
         }
     });
-  });
+});
 
-  $(document).on("change", "#extra_setting_datestart", function() {    
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateStart", {DateStart : $(this).val()}, function(data, status){
-       console.log(data);
-        if(data == 0){
+$(document).on("change", "#extra_setting_datestart", function() {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateStart", { DateStart: $(this).val() }, function(data, status) {
+        console.log(data);
+        if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }else{
-            alertify.success('คุณเปลี่ยนวันเริ่มต้นเป็น '+data+' เรียบร้อย');            
+        } else {
+            alertify.success('คุณเปลี่ยนวันเริ่มต้นเป็น ' + data + ' เรียบร้อย');
         }
     });
-  });
+});
 
-  $(document).on("change", "#extra_setting_dateend", function() {    
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateEnd", {DateEnd : $(this).val()}, function(data, status){
-       console.log(data);
-        if(data == 0){
+$(document).on("change", "#extra_setting_dateend", function() {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateEnd", { DateEnd: $(this).val() }, function(data, status) {
+        console.log(data);
+        if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }else{
-            alertify.success('คุณเปลี่ยนวันสิ้นสุดเป็น '+data+' เรียบร้อย');            
+        } else {
+            alertify.success('คุณเปลี่ยนวันสิ้นสุดเป็น ' + data + ' เรียบร้อย');
         }
     });
-  });
+});

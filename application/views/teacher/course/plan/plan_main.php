@@ -6,7 +6,7 @@
             <p class="mb-0">
 
                 <a href="<?=base_url('Teacher/Course/SendPlan');?>" class="btn btn-primary mb-2 mb-sm-0 text-white">+
-                    ส่งงาน</a>
+                    ลงทะเบียนวิชา</a>
             </p>
         </div>
     </div>
@@ -19,89 +19,141 @@
             <strong>แจ้งเตือน!</strong> ขณะนี้ระบบเปิดให้ส่งงาน
             <strong> ระหว่าง (<?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_startdate));?> ถึง
                 <?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_enddate));?>) </strong>
-                </div>
-            <?php else: ?>
-            <div class="alert alert-danger">
-                <strong>แจ้งเตือน!</strong> ขณะนี้ระบบปิด <strong>เนื่องจากยังไม่ถึงกำหนดส่งงาน หรือ
-                    เกินกำหนดส่งงาน</strong>  กำหนดส่งงาน (<?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_startdate));?> ถึง
-                <?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_enddate));?>)
-            </div>
+        </div>
+        <?php else: ?>
+        <div class="alert alert-danger">
+            <strong>แจ้งเตือน!</strong> ขณะนี้ระบบปิด <strong>เนื่องจากยังไม่ถึงกำหนดส่งงาน หรือ
+                เกินกำหนดส่งงาน</strong> กำหนดส่งงาน
+            (<?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_startdate));?> ถึง
+            <?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_enddate));?>)
+        </div>
 
-        
+
         <?php endif; ?>
-
+        <?php  $typeplan = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
         <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="example" class="table  table-hover " style="width:100%">
+            <div cass="card-body">
+                <div class="">
+                    <table class="table table-hover" id="tb_plan">
                         <thead>
-                            <tr>                                
-                                <th>ปีการศึกษา</th>
-                                <th>ประเภท</th>
-                                <th>รหัสวิชา</th>
-                                <th>ชื่อวิชา</th>
-                                <th>ชั้น</th>
-                                <th>วันที่ส่ง</th>
-                                <th>ไฟล์</th>
-                                <th>หมายเหตุ</th>
-                                <th>หน.กลุ่มสาระ</th>
-                                <th>หน.งานพัฒนาหลักสูตร</th>
-                                <th style="width:56px;">คำสั่ง</th>
+                            <tr>
+                                <th scope="col">ปีการศึกษา</th>
+                                <th scope="col">รหัสชื่อวิชา</th>
+                                <th scope="col">ระดับ</th>
+                                <th scope="col">ประเภท</th>
+                                <th scope="col">แบบตรวจแผน</th>
+                                <th scope="col">บันทึกตรวจใช้แผน</th>
+                                <th scope="col">โครงการสอน</th>
+                                <th scope="col">แผนการสอนหน้าเดียว</th>
+                                <th scope="col">บันทึกหลังสอน</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                           
+                            foreach ($planNew as $key => $v_planNew):?>
+                            <tr>
+                                <td scope="row"><?=$v_planNew->seplan_term?>/<?=$v_planNew->seplan_year?></td>
+                                <td><?=$v_planNew->seplan_coursecode.' '.$v_planNew->seplan_namesubject?></td>
+                                <td>ม.<?=$v_planNew->seplan_gradelevel?></td>
+                                <td><?=$v_planNew->seplan_typesubject?></td>
 
-                            <?php foreach ($plan as $key => $v_plan) :  ?>
-                            <tr id="<?=$v_plan->seplan_ID;?>" >
-                                <td><?=$v_plan->seplan_term;?>/<?=$v_plan->seplan_year;?></td>
-                                <td><?=$v_plan->seplan_typeplan;?></td>
-                                <td><?=$v_plan->seplan_coursecode;?></td>
-                                <td><?=$v_plan->seplan_namesubject;?></td>
-                                <td>ม.<?=$v_plan->seplan_gradelevel;?></td>
-                                <td><?=$this->datethai->thai_date_fullmonth(strtotime($v_plan->seplan_createdate));?>
-                                <td><a target="_blank"
-                                        href="<?=base_url('uploads/academic/course/plan/').$v_plan->seplan_file;?>">เปิดดู</a>
-                                </td>
-                                <td><?=$v_plan->seplan_sendcomment;?></td>
-                                <td class="text-center">
-                                    <?php if($v_plan->seplan_status1 == "ผ่าน") : ?>
-                                    <span class="badge badge-success h5 text-white"><?=$v_plan->seplan_status1;?>
-                                    </span>
-                                    <?php elseif($v_plan->seplan_status1 == "รอตรวจ") :?>
-                                    <span class="badge badge-warning h5 text-white"><?=$v_plan->seplan_status1;?>
-                                    </span>
-                                    <?php else: ?>
-                                    <span class="badge badge-danger h5 text-white"><?=$v_plan->seplan_status1;?>
-                                    </span>
-                                    <p><?=$v_plan->seplan_comment1;?></p>
-                                    <?php endif; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?php if($v_plan->seplan_status2 == "ผ่าน") : ?>
-                                    <span class="badge badge-success h5 text-white"><?=$v_plan->seplan_status2;?>
-                                    </span>
-                                    <?php elseif($v_plan->seplan_status2 == "รอตรวจ") :?>
-                                    <span class="badge badge-warning h5 text-white"><?=$v_plan->seplan_status2;?>
-                                    </span>
-                                    <?php else: ?>
-                                    <span class="badge badge-danger h5 text-white"><?=$v_plan->seplan_status2;?>
-                                    </span>
-                                    <p><?=$v_plan->seplan_comment2;?></p>
-                                    <?php endif; ?>
-                                </td>
+                                <?php foreach($typeplan as $key => $v_typeplan): ?>
+                                <?php foreach($plan as $key => $v_plan): ?>
+                                <?php if($v_plan->seplan_coursecode == $v_planNew->seplan_coursecode && $v_plan->seplan_typeplan == $v_typeplan):  ?>
                                 <td>
-                                    <a href="<?=base_url('Teacher/Course/EditPlan/'.$v_plan->seplan_ID)?>"
-                                        class="btn btn-warning btn-sm text-white"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm text-white delete_plan"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <?php if($v_plan->seplan_file == null): ?>
+                                    <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
+                                    <?php else: ?>
+                                    <span class="badge badge-success h6 text-white">ส่งแล้ว</span>
+                                    <a href="<?=base_url('uploads/academic/course/plan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term.'/'.$v_plan->seplan_file)?>"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <span class="badge badge-primary h6 text-white"><i class="fa fa-eye"
+                                                aria-hidden="true" data-toggle="popover" data-trigger="hover"
+                                                data-content="เปิดดู" data-placement="top"></i></span>
+                                    </a>
+                                    <?php endif; ?>
+
+                                    <label class="badge badge-warning h6" style="cursor: pointer;" data-toggle="popover"
+                                        data-trigger="hover" data-content="เพิ่มหรือแก้ไขไฟล์" data-placement="top">
+                                        <i class="fa fa-upload Model_update" aria-hidden="true" data-toggle="modal"
+                                            data-target="#ModalUpdatePlan" seplanID="<?=$v_plan->seplan_ID?>"
+                                            seplanCoursecode="<?=$v_plan->seplan_coursecode?>"
+                                            seplanTypeplan="<?=$v_plan->seplan_typeplan?>" seplan_sendcomment="<?=$v_plan->seplan_sendcomment?>"></i>
+
+                                    </label>
+                                    <br>
+                                    <small>ผู้ส่ง : <?=$v_plan->seplan_sendcomment?></small> <br>
+                                    <small>ผู้ตรวจ :
+                                        <?php if($v_plan->seplan_status2 == ""){
+                                           echo 'รอตรวจ';
+                                       }else{                                       
+                                            if($v_plan->seplan_status2 == 'ผ่าน'){
+                                                echo '<span class="text-success">'.$v_plan->seplan_status2.'</span>';
+                                            }else{
+                                                echo '<span class="text-danger">'.$v_plan->seplan_status2." (".$v_plan->seplan_comment2.")".'</span>';
+                                            }
+                                       } ?>
+                                    </small>
                                 </td>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?php endforeach; ?>
                             </tr>
                             <?php endforeach; ?>
-
                         </tbody>
-
                     </table>
                 </div>
             </div>
         </div>
+
+
     </div>
+
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalUpdatePlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">เลือกไฟล์</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php if($OnOff[0]->seplanset_startdate < date('Y-m-d H:i:s') && $OnOff[0]->seplanset_enddate >  date('Y-m-d H:i:s') && $OnOff[0]->seplanset_status == "on"): ?>
+            <form class="update_seplan" style="display: contents;">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="hidden" id="seplan_ID" name="seplan_ID" value="">
+                        <input type="hidden" id="seplan_typeplan" name="seplan_typeplan" value="">
+                        <input type="hidden" id="seplan_coursecode" name="seplan_coursecode" value="">
+                        <input id="seplan_file" name="seplan_file" type="file" class="">
+                    </div>
+                    <div class="form-group">
+                        <label for="seplan_sendcomment">หมายเหตุ</label>
+                        <textarea class="form-control" id="seplan_sendcomment" name="seplan_sendcomment" rows="5"
+                            placeholder="เช่น ส่งแผนครบแล้ว หรือ ส่งแผนที่ 1 - 4 แล้ว"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">ส่งไฟล์</button>
+                </div>
+            </form>
+
+
+            <?php else: ?>
+            <div class="modal-body">
+                ระบบปิดอยู่  ยังไม่ถึงกำหนดส่งงาน หรือ เกินกำหนดส่งงาน <br>
+                ไม่สามารถเพิ่มไฟล์หรือแก้ไขไฟล์ได้ <br>
+                ติดต่อหัวงานหลักสูตร
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

@@ -50,8 +50,10 @@
                         <?php endif; ?>
                     </li>
                     <?php endif; ?>
-
                 </ul>
+            </li>
+            <li class=" <?=$this->uri->segment(2) == 'p' ? 'active' : '' ?>">
+                <a href="#"> <i class="icon-interface-windows"></i>งานประกันภายใน </a>
             </li>
         </ul>
         <span class="heading">งานกิจการนักเรียน</span>

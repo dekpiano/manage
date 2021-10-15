@@ -42,7 +42,8 @@
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
           <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
-
+          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=2"></script>
+          
           </body>
 
           <?php if($this->session->flashdata('msg') == 'YES'):?>
@@ -68,6 +69,11 @@ $(document).ready(function() {
     $('#tb_checkplan').DataTable({
         "order": [
             [6, "desc"]
+        ]
+    });
+    $('#tb_plan').DataTable({
+        "order": [
+            [0, "desc"]
         ]
     });
 
