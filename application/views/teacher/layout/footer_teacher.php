@@ -38,11 +38,11 @@
           <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=14"></script>
+          <script src="<?=base_url()?>assets/js/admin/Academic.js?v=15"></script>
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
           <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
-          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=2"></script>
+          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=4"></script>
           
           </body>
 
@@ -71,11 +71,13 @@ $(document).ready(function() {
             [6, "desc"]
         ]
     });
-    $('#tb_plan').DataTable({
+    var table = $('#tb_plan').DataTable({
         "order": [
             [0, "desc"]
         ]
     });
+
+    new $.fn.dataTable.FixedHeader( table );
 
     $('#tb_reprotplan').DataTable({
         dom: 'Bfrtip',
@@ -87,8 +89,6 @@ $(document).ready(function() {
             className: 'btn btn-success'
         }]
     });
-
-
 
     jQuery('#seplanset_startdate').datetimepicker({
         lang: 'th',

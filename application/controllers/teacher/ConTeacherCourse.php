@@ -70,9 +70,17 @@ var  $title = "หน้าแรก";
     public function check_plan($id = null){
         $data['title'] = "ตรวจสอบงาน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $DBskj = $this->load->database('skj', TRUE); 
-        $data['lean'] = $DBskj->get('tb_learning')->result();
+        $data['lean'] = $DBskj->get('tb_learning')->result();       
         $data['ID'] = $id;
+        $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_prefix,
+                                                skjacth_personnel.tb_personnel.pers_firstname,
+                                                skjacth_personnel.tb_personnel.pers_lastname")
+                                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                                        ->where('seplan_learning',$id)
+                                        ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
         //echo '<pre>'; print_r($data['ID']); exit();
         $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
@@ -104,8 +112,7 @@ var  $title = "หน้าแรก";
                     
                 $insert =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
                     'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
-                    'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
-                    'seplan_createdate'=> date('Y-m-d H:i:s'),
+                    'seplan_typesubject'=> $this->input->post('seplan_typesubject'),                   
                     'seplan_year'=> $SetPlan[0]->seplanset_year,
                     'seplan_term'=> $SetPlan[0]->seplanset_term,
                     'seplan_usersend'=> $this->session->userdata('login_id'),
@@ -132,11 +139,14 @@ var  $title = "หน้าแรก";
         $textToStore = $status;
         $seplan_ID = $this->input->post('seplan_ID');
         $year = $this->db->get('tb_send_plan_setup')->row();
-        $plan = $this->db->select('seplan_coursecode,seplan_namesubject,seplan_typeplan,seplan_file')->where('seplan_ID',$seplan_ID)->get('tb_send_plan')->row();
+        $plan = $this->db->select('seplan_coursecode,seplan_namesubject,seplan_typeplan,seplan_file,seplan_createdate')->where('seplan_ID',$seplan_ID)->get('tb_send_plan')->row();
         $seplan_typeplan = $plan->seplan_typeplan;
         $seplan_coursecode = $plan->seplan_coursecode; 
         $seplan_namesubject = $plan->seplan_namesubject;     
+        $seplan_createdate = $plan->seplan_createdate;
         $folder = $year->seplanset_year.'/'.$year->seplanset_term;
+
+        //echo strtotime($seplan_createdate); exit();
         
         if (!is_dir('uploads/academic/course/plan/'.$folder)) {
             mkdir('./uploads/academic/course/plan/'.$folder, 0777, TRUE);
@@ -162,8 +172,14 @@ var  $title = "หน้าแรก";
             $this->upload->initialize($config); 
             if($this->upload->do_upload('seplan_file')){
                 $data = array($this->upload->data());
-                $array = array('seplan_file' =>$data[0]['file_name'],'seplan_sendcomment' =>  $textToStore);
+                if($seplan_createdate === "0000-00-00 00:00:00"){
+                    $array = array('seplan_file' =>$data[0]['file_name'],'seplan_sendcomment' =>  $textToStore,'seplan_createdate' => date("Y-m-d H:i:s"));
+                    echo $upS = $this->db->update('tb_send_plan',$array,'seplan_ID='.$seplan_ID);
+                }else{
+                    $array = array('seplan_file' =>$data[0]['file_name'],'seplan_sendcomment' =>  $textToStore);
                 echo $upS = $this->db->update('tb_send_plan',$array,'seplan_ID='.$seplan_ID);
+                }
+                
             
             }else{
                 $error = $this->upload->display_errors();
@@ -178,69 +194,6 @@ var  $title = "หน้าแรก";
      }
     
 
-     function update_plan(){
-        $status=$this->input->post('seplan_sendcomment');
-        $textToStore = $status;
-
-        $id_plan = $this->input->post('seplan_ID');
-        $checkdata = $this->db->select('seplan_ID,seplan_file')->where('seplan_ID',$id_plan)->get('tb_send_plan')->result();
-        $SetPlan = $this->db->get('tb_send_plan_setup')->result();
-
-        //echo $_FILES['seplan_file']['error']; exit();
-        if($_FILES['seplan_file']['error'] <= 0){
-            $config['upload_path']= "uploads/academic/course/plan/";
-            $config['allowed_types'] = '*';
-            //$config['encrypt_name'] = TRUE;
-            
-            //print_r($SetPlan); exit();
-            $this->load->library('upload',$config);
-            $this->upload->initialize($config); 
-            if($this->upload->do_upload("seplan_file")){
-                $data = array('upload_data' => $this->upload->data());
-     
-                $update =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
-                                'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
-                                'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
-                                'seplan_year'=> $SetPlan[0]->seplanset_year,
-                                'seplan_term'=> $SetPlan[0]->seplanset_term,
-                                'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
-                                'seplan_file'=> $data['upload_data']['file_name'],
-                                'seplan_usersend'=> $this->session->userdata('login_id'),
-                                'seplan_learning'  => $this->session->userdata('pers_learning'),
-                                'seplan_status1' => "รอตรวจ",
-                                'seplan_status2' => "รอตรวจ",
-                                'seplan_sendcomment' =>  $textToStore,
-                                'seplan_gradelevel' => $this->input->post('seplan_gradelevel')
-                             );
-              
-                @unlink("./uploads/academic/course/plan/".$checkdata[0]->seplan_file);
-                 
-                $result= $this->ModTeacherCourse->plan_update($update,$id_plan);
-                echo $result;
-                
-            }else{
-                $error = $this->upload->display_errors();
-                echo $error;
-            }
-        }else{
-            $update =  array('seplan_namesubject'=> $this->input->post('seplan_namesubject'),
-                                'seplan_coursecode'=> $this->input->post('seplan_coursecode'),
-                                'seplan_typeplan'=> $this->input->post('seplan_typeplan'),
-                                'seplan_year'=> $SetPlan[0]->seplanset_year,
-                                'seplan_term'=> $SetPlan[0]->seplanset_term,
-                                'seplan_typesubject'=> $this->input->post('seplan_typesubject'),
-                                'seplan_usersend'=> $this->session->userdata('login_id'),
-                                'seplan_learning'  => $this->session->userdata('pers_learning'),
-                                'seplan_status1' => "รอตรวจ",
-                                'seplan_status2' => "รอตรวจ",
-                                'seplan_sendcomment' =>  $textToStore,
-                                'seplan_gradelevel' => $this->input->post('seplan_gradelevel')
-                             );
-                            
-                $result= $this->ModTeacherCourse->plan_update($update,$id_plan);
-                echo $result;
-        }
-     }
 
      public function delete_plan($id)
    {

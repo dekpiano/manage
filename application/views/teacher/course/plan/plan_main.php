@@ -27,13 +27,38 @@
             (<?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_startdate));?> ถึง
             <?=$this->datethai->thai_date_and_time(strtotime($OnOff[0]->seplanset_enddate));?>)
         </div>
-
-
         <?php endif; ?>
+        <div class="recent-updates card">
+                    <div class="card-close">
+                      <div class="dropdown">
+                        <button type="button" id="closeCard6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                        <div aria-labelledby="closeCard6" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                      </div>
+                    </div>
+                    <div class="card-header">
+                      <h3 class="h4">คำแนะนำ</h3>
+                    </div>
+                    <div class="card-body no-padding">
+                      <!-- Item-->
+                      <div class="item d-flex justify-content-between">
+                        <div class="info d-flex">
+                          <div class="icon"><i class="icon-rss-feed"></i></div>
+                          <div class="title">
+                            <h5>- ก่อนจะเพิ่มไฟล์งาน ให้ลงทะเบียนวิชาที่สอนก่อน ที่ปุ่มเมนู + ลงทะเบียนวิชา ขวามือบน</h5>
+                            <h5>- แต่ละรายการที่ส่ง ส่งได้แค่ไฟล์เดียวเท่านั้น ไม่สามารถส่งแยกไฟล์ได้</h5>
+                            <h5>- ให้รวมไฟล์เป็นไฟล์เดียวในแต่ละรายการ ของแต่ละวิชา เช่น แผนการสอนก็รวมตั้งแต่ แผนที่ 1 - แผนที่ 20 เป็นต้น</h5>
+                            
+                          </div>
+                        </div>
+                        <div class="date text-right"><strong>24</strong><span>ต.ค.</span></div>
+                      </div>
+                                                      
+                    </div>
+                  </div>
         <?php  $typeplan = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
         <div class="card">
             <div cass="card-body">
-                <div class="">
+                <div class="p-3">
                     <table class="table table-hover" id="tb_plan">
                         <thead>
                             <tr>
@@ -50,7 +75,6 @@
                         </thead>
                         <tbody>
                             <?php 
-                           
                             foreach ($planNew as $key => $v_planNew):?>
                             <tr>
                                 <td scope="row"><?=$v_planNew->seplan_term?>/<?=$v_planNew->seplan_year?></td>

@@ -145,46 +145,7 @@ $(document).ready(function() {
 
 
 
-    $(document).on("change", ".seplan_status1", function() {
 
-        var status1 = $(this).val();
-        var planId = $(this).attr('data-planId');
-
-        $.ajax({
-            type: 'POST',
-            url: "../../../teacher/ConTeacherCourse/UpdateStatus1",
-            data: { status1: status1, planId: planId },
-            dataType: 'json',
-            beforeSend: function() {
-
-            },
-            success: function(data) {
-                console.log(data[0].seplan_status1);
-
-                if (data[0].seplan_status2 == data[0].seplan_status1 && data[0].seplan_status1 == "ผ่าน" && data[0].seplan_status2 == "ผ่าน") {
-                    $("#bgC" + planId).addClass('table-success');
-                } else {
-                    $("#bgC" + planId).removeClass('table-success');
-                }
-
-                if (data[0].seplan_status1 == "ไม่ผ่าน") {
-                    $('#bgC' + planId + ' .TbShowComment1').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="' + planId + '" data-target="#addcomment1">หมายเหตุ</a>');
-                }
-                if (data[0].seplan_status1 == "ผ่าน") {
-                    $('#bgC' + planId + ' .TbShowComment1').html('');
-                }
-                $(".form-comment1")[0].reset();
-
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success('เปลี่ยนสถานะสำเร็จ');
-
-            },
-            error: function(xhr) {
-                alert("Error occured.please try again");
-                console.log(xhr.statusText + xhr.responseText);
-            }
-        });
-    });
 
     $(document).on("change", ".seplan_status2", function() {
         // console.log($(this).val());
