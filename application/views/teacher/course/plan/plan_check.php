@@ -34,7 +34,7 @@
 
         </div>
 
-        <?php if(isset($ID)) : ?>
+        <?php if(isset($IDlear)) : ?>
         <?php  $typeplan = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
         <div class="card">
             <div class="card-body">
@@ -90,7 +90,19 @@
                                         }else{
                                             $textColor="";
                                         } 
+
+                                        if($v_plan->seplan_status2 == "ผ่าน"){
+                                            $textColor2="text-success";
+                                        }elseif($v_plan->seplan_status2 == "ไม่ผ่าน"){
+                                            $textColor2="text-danger";
+                                        }
+                                        else{
+                                            $textColor2="";
+                                        }
                                         ?>
+                                        <?php if($this->session->userdata('login_id') == 'pers_014' && $this->session->userdata('pers_learning') != $IDlear): ?>
+                                        <span class="<?=$textColor;?>"> <?php echo $v_plan->seplan_status1;?></span>
+                                        <?php else: ?>
                                         <select id="seplan_status1" name="seplan_status1"
                                             data-planId="<?=$v_plan->seplan_ID;?>"
                                             class="bgC<?=$v_plan->seplan_ID;?> seplan_status1 <?=$textColor;?> ">
@@ -101,7 +113,26 @@
                                             <option <?=$v_plan->seplan_status1 == "ไม่ผ่าน" ? 'selected' : ''?>
                                                 value="ไม่ผ่าน">ไม่ผ่าน</option>
                                         </select>
+                                        <?php endif; ?>
                                     </small>
+                                    <br>
+                                    <small><b>หัวหน้างาน : </b>
+                                        <?php if($this->session->userdata('login_id') == 'pers_014'):?>
+                                        <select id="seplan_status2" name="seplan_status2"
+                                            planId="<?=$v_plan->seplan_ID;?>"
+                                            class="bgCC<?=$v_plan->seplan_ID;?>  seplan_status2 <?=$textColor2;?>">
+                                            <option <?=$v_plan->seplan_status2 == "รอตรวจ" ? 'selected' : ''?>
+                                                value="รอตรวจ">รอตรวจ</option>
+                                            <option <?=$v_plan->seplan_status2 == "ผ่าน" ? 'selected' : ''?>
+                                                value="ผ่าน">ผ่าน</option>
+                                            <option <?=$v_plan->seplan_status2 == "ไม่ผ่าน" ? 'selected' : ''?>
+                                                value="ไม่ผ่าน">ไม่ผ่าน</option>
+                                        </select>
+                                        <div class="IDCom<?=$v_plan->seplan_ID;?> TbShowComment2">
+                                            <?=$v_plan->seplan_status2 == "ไม่ผ่าน" ? '<a href="#" class="show_comment2" data-toggle="modal" data-planId="'.$v_plan->seplan_ID.'" data-target="#addcomment2">หมายเหตุ</a>' : ''?>
+                                        </div>
+                                        <?php else: echo $v_plan->seplan_status2; ?>
+                                        <?php endif; ?>
                                 </td>
                                 <?php endif; ?>
                                 <?php endforeach; ?>

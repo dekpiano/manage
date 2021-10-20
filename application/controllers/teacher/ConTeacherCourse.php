@@ -67,19 +67,19 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');
     }
 
-    public function check_plan($id = null){
+    public function check_plan($idlear = null){
         $data['title'] = "ตรวจสอบงาน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $DBskj = $this->load->database('skj', TRUE); 
         $data['lean'] = $DBskj->get('tb_learning')->result();       
-        $data['ID'] = $id;
+        $data['IDlear'] = $idlear;
         $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
                                                 skjacth_personnel.tb_personnel.pers_firstname,
                                                 skjacth_personnel.tb_personnel.pers_lastname")
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
-                                        ->where('seplan_learning',$id)
+                                        ->where('seplan_learning',$idlear)
                                         ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
         //echo '<pre>'; print_r($data['ID']); exit();
         $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
@@ -87,7 +87,7 @@ var  $title = "หน้าแรก";
                                                 skjacth_personnel.tb_personnel.pers_firstname,
                                                 skjacth_personnel.tb_personnel.pers_lastname")
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
-                            ->where('seplan_learning',$id)
+                            ->where('seplan_learning',$idlear)
                             ->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -341,6 +341,7 @@ var  $title = "หน้าแรก";
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                             ->where('seplan_learning',$idLearn)
                             ->where('seplan_typeplan',$data['thai'])
+                            ->where('seplan_file !=','')
                             ->group_by('seplan_namesubject')
                             ->group_by('seplan_coursecode')
                             ->order_by('pers_firstname')

@@ -209,18 +209,60 @@ $(document).on("change", ".seplan_status1", function() {
 
             if (data[0].seplan_status1 == "ผ่าน") {
                 $(".bgC" + planId).addClass('text-success');
-                $(".bgC" + planId).removeClass('table-danger');
+                $(".bgC" + planId).removeClass('text-danger');
             }
 
             if (data[0].seplan_status1 == "ไม่ผ่าน") {
                 $(".bgC" + planId).addClass('text-danger');
-                $(".bgC" + planId).removeClass('table-success');
+                $(".bgC" + planId).removeClass('text-success');
                 $('#bgC' + planId + ' .TbShowComment1').html('<a href="#" class="show_comment1" data-toggle="modal" data-planId="' + planId + '" data-target="#addcomment1">หมายเหตุ</a>');
             }
             if (data[0].seplan_status1 == "ผ่าน") {
                 $('#bgC' + planId + ' .TbShowComment1').html('');
             }
             $(".form-comment1")[0].reset();
+
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success('เปลี่ยนสถานะสำเร็จ');
+
+        },
+        error: function(xhr) {
+            alert("Error occured.please try again");
+            console.log(xhr.statusText + xhr.responseText);
+        }
+    });
+});
+
+$(document).on("change", ".seplan_status2", function() {
+    // console.log($(this).val());
+    // console.log($(this).attr('data-planId'));
+    var status2 = $(this).val();
+    var planId = $(this).attr('planId');
+
+    $.ajax({
+        type: 'POST',
+        url: "../../../teacher/ConTeacherCourse/UpdateStatus2",
+        data: { status2: status2, planId: planId },
+        dataType: 'json',
+        cache: false,
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+
+            if (data[0].seplan_status2 == "ผ่าน") {
+                $(".bgCC" + planId).addClass('text-success');
+                $(".bgCC" + planId).removeClass('text-danger');
+                $('.IDCom' + planId).html('');
+            }
+
+            if (data[0].seplan_status2 == "ไม่ผ่าน") {
+                $(".bgCC" + planId).addClass('text-danger');
+                $(".bgCC" + planId).removeClass('text-success');
+                $('.IDCom' + planId).html('<a href="#" class="show_comment2" data-toggle="modal" data-planId="' + planId + '" data-target="#addcomment2">หมายเหตุ</a>');
+            }
+
+            $(".form-comment2")[0].reset();
 
             alertify.set('notifier', 'position', 'top-right');
             alertify.success('เปลี่ยนสถานะสำเร็จ');
