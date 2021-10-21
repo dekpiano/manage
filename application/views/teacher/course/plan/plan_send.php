@@ -70,6 +70,17 @@
                             </div>
                         
                         </div>
+                        <div class="col-12 text-center mb-4">
+                    <?php if($OnOff[0]->seplanset_status == "on"):?>
+
+                    <input type="submit" value="ลงทะเบียน" class="btn btn-primary btn-block">
+
+                    <?php else: ?>
+
+                    <button type="button" class="btn btn-primary btn-block" disabled>หมดเวลาส่ง</button>
+
+                    <?php endif; ?>
+                </div>
                     </div>
                 </div>
 
@@ -84,22 +95,17 @@
                             <h4 class="card-title">ระบบอัพเดทเป็นเวอร์ชั่นที่ 2</h4>
                             <p class="card-text">
                                 ระบบพัฒนาให้สามารถใช้งานในการเพิ่มไฟล์สะดวกขึ้น และดูการส่งงานได้ง่ายขึ้น
-                            </p>
-                          
+                            </p>                          
+                        </div>
+                    </div>
+                    <div class="card ">
+                        <div class="card-header text-white bg-danger">คำเตือน</div>
+                        <div class="card-body">
+                            <h4 class="card-title">เมื่อการลงทะเบียนแล้วนั้น ไม่สามารถแก้ข้อมูลได้อีก กรุณาตรวจสอบข้อมูลให้ถูกต้อง</h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 text-center mb-4">
-                    <?php if($OnOff[0]->seplanset_status == "on"):?>
-
-                    <input type="submit" value="ลงทะเบียน" class="btn btn-primary btn-block">
-
-                    <?php else: ?>
-
-                    <button type="button" class="btn btn-primary btn-block" disabled>หมดเวลาส่ง</button>
-
-                    <?php endif; ?>
-                </div>
+               
         </form>
     </div>
 
