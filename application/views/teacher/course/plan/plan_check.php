@@ -71,7 +71,7 @@
                                     <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                     <?php else: ?>
                                     <span class="badge badge-success h6 text-white">ส่งแล้ว</span>
-                                    <a href="<?=base_url('uploads/academic/course/plan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term.'/'.$v_plan->seplan_file)?>"
+                                    <a href="<?=base_url('uploads/academic/course/plan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term.'/'.$v_plan->seplan_namesubject.'/'.$v_plan->seplan_file)?>"
                                         target="_blank" rel="noopener noreferrer">
                                         <span class="badge badge-primary h6 text-white"><i class="fa fa-eye"
                                                 aria-hidden="true" data-toggle="popover" data-trigger="hover"

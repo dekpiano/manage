@@ -148,21 +148,21 @@ var  $title = "หน้าแรก";
 
         //echo strtotime($seplan_createdate); exit();
         
-        if (!is_dir('uploads/academic/course/plan/'.$folder)) {
-            mkdir('./uploads/academic/course/plan/'.$folder, 0777, TRUE);
+        if (!is_dir('uploads/academic/course/plan/'.$folder.'/'.$seplan_namesubject)) {
+            mkdir('./uploads/academic/course/plan/'.$folder.'/'.$seplan_namesubject, 0777, TRUE);
         }
 
         if($_FILES['seplan_file']['error'] <= 0){
 
             if($plan->seplan_file != null){
-                unlink("./uploads/academic/course/plan/".$folder."/".$plan->seplan_file);
+                unlink("./uploads/academic/course/plan/".$folder."/".$seplan_namesubject."/".$plan->seplan_file);
             }
 
             $filename = $_FILES["seplan_file"]['name'];
             $FileType = strtolower(pathinfo($_FILES['seplan_file']['name'],PATHINFO_EXTENSION));
             $NewFile = $seplan_coursecode."_".$seplan_namesubject."_".$seplan_typeplan;       
 
-            $config['upload_path']= "uploads/academic/course/plan/".$folder."/";
+            $config['upload_path']= "uploads/academic/course/plan/".$folder."/".$seplan_namesubject."/";
             $config['allowed_types'] = '*';
             $config['remove_spaces'] = TRUE;
             $new_name = $NewFile;

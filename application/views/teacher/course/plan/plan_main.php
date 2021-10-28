@@ -29,11 +29,8 @@
         </div>
         <?php endif; ?>
         <div class="recent-updates card">
-                    <div class="card-close">
-                      <div class="dropdown">
-                        <button type="button" id="closeCard6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                        <div aria-labelledby="closeCard6" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                      </div>
+                    <div class="card-close">                     
+                      <a target="_blank" href="<?=base_url('uploads/academic/course/คู่มือการส่งแผนการสอนออนไลน์2.0.pdf')?>" class="btn btn-outline-dark">คู่มือการใช้งาน</a>                    
                     </div>
                     <div class="card-header">
                       <h3 class="h4">คำแนะนำ</h3>
@@ -47,10 +44,9 @@
                             <h5>- ก่อนจะเพิ่มไฟล์งาน ให้ลงทะเบียนวิชาที่สอนก่อน ที่ปุ่มเมนู + ลงทะเบียนวิชา ขวามือบน</h5>
                             <h5>- แต่ละรายการที่ส่ง ส่งได้แค่ไฟล์เดียวเท่านั้น ไม่สามารถส่งแยกไฟล์ได้</h5>
                             <h5>- ให้รวมไฟล์เป็นไฟล์เดียวในแต่ละรายการ ของแต่ละวิชา เช่น แผนการสอนก็รวมตั้งแต่ แผนที่ 1 - แผนที่ 20 เป็นต้น</h5>
-                            
                           </div>
                         </div>
-                        <div class="date text-right"><strong>24</strong><span>ต.ค.</span></div>
+                       
                       </div>
                                                       
                     </div>
@@ -90,7 +86,7 @@
                                     <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>
                                     <?php else: ?>
                                     <span class="badge badge-success h6 text-white">ส่งแล้ว</span>
-                                    <a href="<?=base_url('uploads/academic/course/plan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term.'/'.$v_plan->seplan_file)?>"
+                                    <a href="<?=base_url('uploads/academic/course/plan/'.$OnOff[0]->seplanset_year.'/'.$OnOff[0]->seplanset_term.'/'.$v_plan->seplan_namesubject.'/'.$v_plan->seplan_file)?>"
                                         target="_blank" rel="noopener noreferrer">
                                         <span class="badge badge-primary h6 text-white"><i class="fa fa-eye"
                                                 aria-hidden="true" data-toggle="popover" data-trigger="hover"
