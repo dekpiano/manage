@@ -92,8 +92,9 @@ $route['Teacher/Course/ReportPlan/(:any)'] = "teacher/ConTeacherCourse/report_pl
 $route['Teacher/Course/DownloadPlan'] = "teacher/ConTeacherCourse/DownloadPlan";
 $route['Teacher/Course/DownloadPlanZip/(:any)'] = "teacher/ConTeacherCourse/DownloadPlanZip/$1";
 $route['Teacher/Profile'] = "teacher/ConTeacherProfile/ProfileMain";
-$route['Teacher/CheckHomeRoom'] = "teacher/ConTeacherCheckName/CheckHomeRoom";
-$route['Teacher/CheckTeaching'] = "teacher/ConTeacherCheckName/CheckTeaching";
+$route['Teacher/Teaching/CheckHomeRoom'] = "teacher/ConTeacherTeaching/CheckHomeRoom";
+$route['Teacher/Teaching/CheckTeaching'] = "teacher/ConTeacherTeaching/CheckTeaching";
+$route['Teacher/Teaching/RoomOnlineMain'] = "teacher/ConTeacherTeaching/RoomOnlineMain";
 
 $route['Teacher/SupStd/Main'] = "teacher/ConTeacherStudentSupport/SupStdMain";
 $route['Teacher/SupStd/CheckWorkManager'] = "teacher/ConTeacherStudentSupport/SupStdCheckWorkManager";

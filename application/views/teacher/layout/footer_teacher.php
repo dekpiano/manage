@@ -43,24 +43,25 @@
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
           <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=5"></script>
-          
+          <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
+
           </body>
 
           <?php if($this->session->flashdata('msg') == 'YES'):?>
           <script>
-             Swal.fire( {
-                icon: '<?=$this->session->flashdata('status');?>',
-                title: "แจ้งเตือน", 
-                html: '<?=$this->session->flashdata('messge');?>',  
-                confirmButtonText: "ตกลง", 
-                });
+Swal.fire({
+    icon: '<?=$this->session->flashdata('status');?>',
+    title: "แจ้งเตือน",
+    html: '<?=$this->session->flashdata('messge');?>',
+    confirmButtonText: "ตกลง",
+});
           </script>
           <?php endif; $this->session->mark_as_temp('msg',20); ?>
 
 
           <script>
 $(document).ready(function() {
-    $('[data-toggle="popover"]').popover();   
+    $('[data-toggle="popover"]').popover();
     $('#example').DataTable({
         "order": [
             [6, "desc"]
@@ -76,8 +77,13 @@ $(document).ready(function() {
             [0, "desc"]
         ]
     });
-
-    new $.fn.dataTable.FixedHeader( table );
+    new $.fn.dataTable.FixedHeader(table);
+    
+    $('#tb_RoomOnline').DataTable({
+        "order": [
+            [2, "desc"]
+        ]
+    });
 
     $('#tb_reprotplan').DataTable({
         dom: 'Bfrtip',
@@ -100,8 +106,9 @@ $(document).ready(function() {
     });
 
 });
+          </script>
 
-
+          <script>
 // Disable form submissions if there are invalid fields
 (function() {
     'use strict';

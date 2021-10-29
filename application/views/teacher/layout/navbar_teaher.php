@@ -18,13 +18,14 @@
         </ul>
         <span class="heading">งานวิชาการ</span>
         <ul class="list-unstyled">
-            <!-- <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
+            <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูผู้สอน </a>
-                <ul id="TeacherLarn" class="collapse list-unstyled ">
-                    <li><a href="<?=base_url('Teacher/CheckHomeRoom');?>">เช็ตชื่อโฮมรูม</a></li>
-                    <li><a href="<?=base_url('Teacher/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
+                <ul id="TeacherLarn" class="collapse list-unstyled <?=$this->uri->segment(2) == 'Teaching' ? 'show' : '' ?>">
+                    <li class="<?=$this->uri->segment(3) == 'CheckHomeRoom' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckHomeRoom');?>">เช็ตชื่อโฮมรูม</a></li>
+                    <li class="<?=$this->uri->segment(3) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
+                    <li class="<?=$this->uri->segment(3) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li>
                 </ul>
-            </li> -->
+            </li>
             <li class=" <?=$this->uri->segment(2) == 'Course' ? 'active' : '' ?>">
                 <a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานหลักสูตร </a>
