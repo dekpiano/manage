@@ -3,11 +3,11 @@
     <div class="container-fluid">
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center ">
             <h2 class="no-margin-bottom">แผนการสอน</h2>
-            <p class="mb-0">
+            <!-- <p class="mb-0">
 
                 <a href="<?=base_url('Teacher/Course/SendPlan');?>" class="btn btn-primary mb-2 mb-sm-0 text-white">+
                     ลงทะเบียนวิชา</a>
-            </p>
+            </p> -->
         </div>
     </div>
 </header>
@@ -40,8 +40,7 @@
                       <div class="item d-flex justify-content-between">
                         <div class="info d-flex">
                           <div class="icon"><i class="icon-rss-feed"></i></div>
-                          <div class="title">
-                            <h5>- ก่อนจะเพิ่มไฟล์งาน ให้ลงทะเบียนวิชาที่สอนก่อน ที่ปุ่มเมนู + ลงทะเบียนวิชา ขวามือบน</h5>
+                          <div class="title">                          
                             <h5>- แต่ละรายการที่ส่ง ส่งได้แค่ไฟล์เดียวเท่านั้น ไม่สามารถส่งแยกไฟล์ได้</h5>
                             <h5>- ให้รวมไฟล์เป็นไฟล์เดียวในแต่ละรายการ ของแต่ละวิชา เช่น แผนการสอนก็รวมตั้งแต่ แผนที่ 1 - แผนที่ 20 เป็นต้น</h5>
                           </div>

@@ -9,7 +9,8 @@ class ModTeacherCourse extends CI_Model
 
     function plan_insert($data){        
         $result = $this->db->insert('tb_send_plan',$data);
-        return $result;
+        return $this->db->insert_id();
+;
     }
 
     function plan_update($data,$id){        

@@ -9,7 +9,7 @@
     <div class="container-fluid">
 
 
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-close">
                     <div class="dropdown">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="h4">ฟอร์ม<?=$title;?></h3>
+                    <h3 class="h4">ฟอร์ม<?=$title;?>ระบบ</h3>
                 </div>
                 <div class="card-body">
 
@@ -46,14 +46,14 @@
                             <input type="text" id="seplanset_startdate" name="seplanset_startdate" placeholder=""
                                 class="form-control" required autocomplete="off"
                                 value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_startdate));?>">
-                            <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
+                            <div class="invalid-feedback">กรุณาเลือกวันเริ่มต้น</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">วันสิ้นสุด</label>
                             <input type="text" id="seplanset_enddate" name="seplanset_enddate" placeholder=""
                                 class="form-control" required autocomplete="off"
                                 value="<?=date('d-m-Y H:i:s',strtotime($SetPlan[0]->seplanset_enddate));?>">
-                            <div class="invalid-feedback">กรุณากรอกรหัสวิชา</div>
+                            <div class="invalid-feedback">กรุณาเลือกวันสิ้นสุด</div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">ปีการศึกษา</label>

@@ -21,8 +21,8 @@
             <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูผู้สอน </a>
                 <ul id="TeacherLarn" class="collapse list-unstyled <?=$this->uri->segment(2) == 'Teaching' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(3) == 'CheckHomeRoom' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckHomeRoom');?>">เช็ตชื่อโฮมรูม</a></li>
-                    <li class="<?=$this->uri->segment(3) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
+                    <!-- <li class="<?=$this->uri->segment(3) == 'CheckHomeRoom' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckHomeRoom');?>">เช็ตชื่อโฮมรูม</a></li>
+                    <li class="<?=$this->uri->segment(3) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li> -->
                     <li class="<?=$this->uri->segment(3) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li>
                 </ul>
             </li>
@@ -46,8 +46,9 @@
                         <a href="<?=base_url('Teacher/Course/ReportPlan');?>"> <i class="fa fa-print"
                                 aria-hidden="true"></i>รายงาน </a>
                         <!-- <a href="<?=base_url('Teacher/Course/DownloadPlan');?>"> <i class="fa fa-print" aria-hidden="true"></i>ดาวน์โหลดแผน </a> -->
-                        <?php if($this->session->userdata('login_id') == 'pers_014'): ?>
-                        <a href="<?=base_url('Teacher/Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่า </a>
+                        <?php if($this->session->userdata('login_id') == 'pers_014' || $this->session->userdata('login_id') == 'pers_021'): ?>
+                        <a  href="<?=base_url('Teacher/Course/SettingTeacher');?>"> <i class="fa fa-cogs"></i>ตั้งค่าครูผู้สอน </a>
+                        <a href="<?=base_url('Teacher/Course/Setting');?>"> <i class="fa fa-cogs"></i>ตั้งค่าระบบ </a>
                         <?php endif; ?>
                     </li>
                     <?php endif; ?>

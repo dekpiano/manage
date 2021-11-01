@@ -85,6 +85,7 @@ $route['Teacher/Course/SendPlan'] = "teacher/ConTeacherCourse/send_plan";
 $route['Teacher/Course/EditPlan/(:num)'] = "teacher/ConTeacherCourse/edit_plan/$1";
 $route['Teacher/Course/CheckPlan'] = "teacher/ConTeacherCourse/check_plan";
 $route['Teacher/Course/Setting'] = "teacher/ConTeacherCourse/setting_plan";
+$route['Teacher/Course/SettingTeacher'] = "teacher/ConTeacherCourse/setting_teacher";
 $route['Teacher/Course/CheckPlan/(:any)'] = "teacher/ConTeacherCourse/check_plan/$1";
 $route['Teacher/Course/Delete/(:any)']['delete'] = "teacher/ConTeacherCourse/delete_plan/$1";
 $route['Teacher/Course/ReportPlan'] = "teacher/ConTeacherCourse/report_plan";
@@ -115,5 +116,8 @@ $route['ExamSchedule'] = "user/ConStudents/ExamSchedule";
 $route['Students'] = "user/ConStudents";
 $route['StudentsList'] = "user/ConStudents/StudentsList";
 $route['ClassSchedule'] = "user/ConStudents/ClassSchedule";
+
 $route['LearningOnline'] = "user/ConStudents/LearningOnline";
+$route['LearningOnline/(:any)'] = "user/ConStudents/LearningOnline/$1";
+
 $route['ReportLearnOnline'] = "user/ConStudents/PageReportLearnOnline";

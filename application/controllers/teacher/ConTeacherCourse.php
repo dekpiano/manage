@@ -96,9 +96,12 @@ var  $title = "หน้าแรก";
     }
 
     function insert_plan(){
-        $Checkplan = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))
-                        ->where('seplan_coursecode',$this->input->post('seplan_coursecode'))   
+        $Checkplan = $this->db->where('seplan_coursecode',$this->input->post('seplan_coursecode'))   
                         ->get('tb_send_plan')->num_rows();
+       $pers = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_id,pers_position,pers_learning')
+                        ->where('pers_id',$this->input->post('seplan_usersend'))
+                        ->get('tb_personnel')->result();
+
         if($Checkplan <= 0){
 
             $insert = array();
@@ -115,8 +118,8 @@ var  $title = "หน้าแรก";
                     'seplan_typesubject'=> $this->input->post('seplan_typesubject'),                   
                     'seplan_year'=> $SetPlan[0]->seplanset_year,
                     'seplan_term'=> $SetPlan[0]->seplanset_term,
-                    'seplan_usersend'=> $this->session->userdata('login_id'),
-                    'seplan_learning'  => $this->session->userdata('pers_learning'),
+                    'seplan_usersend'=> $this->input->post('seplan_usersend'),
+                    'seplan_learning'  => $pers[0]->pers_learning,
                     'seplan_status1' => "รอตรวจ",
                     'seplan_status2' => "รอตรวจ",
                     'seplan_sendcomment' =>  $textToStore,
@@ -126,7 +129,17 @@ var  $title = "หน้าแรก";
 
                 $result= $this->ModTeacherCourse->plan_insert($insert); 
             }
-            echo 1;
+           $json = $this->db->select('skjacth_personnel.tb_personnel.pers_id,
+           skjacth_personnel.tb_personnel.pers_prefix,
+           skjacth_personnel.tb_personnel.pers_firstname,
+           skjacth_personnel.tb_personnel.pers_lastname,
+           skjacth_personnel.tb_personnel.pers_learning,
+           skjacth_academic.tb_send_plan.*')
+           ->from('skjacth_academic.tb_send_plan')
+           ->join('skjacth_personnel.tb_personnel','skjacth_academic.tb_send_plan.seplan_usersend = skjacth_personnel.tb_personnel.pers_id')
+           ->where('seplan_ID',$result)->get()->result();
+           //$this->output->set_content_type('application/json')->set_output($result);
+            echo json_encode($json);
         
         }else{
             echo 2;
@@ -203,6 +216,31 @@ var  $title = "หน้าแรก";
        $this->db->delete('tb_send_plan', array('seplan_ID' => $id));
        echo 'Deleted successfully.';
    }
+
+   // ------------------------------ ตั้งค่า -----------------------------
+
+   function setting_teacher(){         
+    $data['title'] = "ตั้งค่าครูผู้สอน";
+    $array = array('pers_position >=' => 'posi_003', 'pers_position <=' => 'posi_006');
+    $data['pers'] = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_id,pers_position,pers_learning')
+                            ->where($array)
+                            ->order_by('pers_learning')
+                            ->get('tb_personnel')->result();
+    $data['Plan'] = $this->db->select('skjacth_personnel.tb_personnel.pers_id,
+                                        skjacth_personnel.tb_personnel.pers_prefix,
+                                        skjacth_personnel.tb_personnel.pers_firstname,
+                                        skjacth_personnel.tb_personnel.pers_lastname,
+                                        skjacth_personnel.tb_personnel.pers_learning,
+                                        skjacth_academic.tb_send_plan.*')
+                                        ->from('skjacth_academic.tb_send_plan')
+                                        ->join('skjacth_personnel.tb_personnel','skjacth_academic.tb_send_plan.seplan_usersend = skjacth_personnel.tb_personnel.pers_id')
+                                        ->group_by('seplan_coursecode')->get()->result();
+    //print_r($date['SetPlan']); exit();
+    $this->load->view('teacher/layout/header_teacher.php',$data);
+    $this->load->view('teacher/layout/navbar_teaher.php');
+    $this->load->view('teacher/course/plan/plan_setting_teacher.php');
+    $this->load->view('teacher/layout/footer_teacher.php');
+ }
 
      function setting_plan(){         
         $data['title'] = "ตั้งค่า";

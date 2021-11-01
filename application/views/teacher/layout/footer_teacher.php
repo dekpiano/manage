@@ -61,7 +61,17 @@ Swal.fire({
 
           <script>
 $(document).ready(function() {
+    jQuery('#seplanset_startdate').datetimepicker({
+        lang: 'th',
+        format: 'd-m-Y H:i:s'
+    });
+    jQuery('#seplanset_enddate').datetimepicker({
+        lang: 'th',
+        format: 'd-m-Y H:i:s'
+    });
+    
     $('[data-toggle="popover"]').popover();
+
     $('#example').DataTable({
         "order": [
             [6, "desc"]
@@ -72,18 +82,22 @@ $(document).ready(function() {
             [6, "desc"]
         ]
     });
-    var table = $('#tb_plan').DataTable({
+    $('#TableShoowPlan').DataTable({
+        "order": [
+            [1, "desc"]
+        ]
+    });
+    $('#tb_plan').DataTable({
         "order": [
             [0, "desc"]
         ]
     });
-    new $.fn.dataTable.FixedHeader(table);
-    
     $('#tb_RoomOnline').DataTable({
         "order": [
             [2, "desc"]
         ]
     });
+
 
     $('#tb_reprotplan').DataTable({
         dom: 'Bfrtip',
@@ -96,14 +110,7 @@ $(document).ready(function() {
         }]
     });
 
-    jQuery('#seplanset_startdate').datetimepicker({
-        lang: 'th',
-        format: 'd-m-Y H:i:s'
-    });
-    jQuery('#seplanset_enddate').datetimepicker({
-        lang: 'th',
-        format: 'd-m-Y H:i:s'
-    });
+    
 
 });
           </script>

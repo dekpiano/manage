@@ -7,34 +7,36 @@ $(document).on('submit', '#form_insert_plan', function(e) {
         data: new FormData(this),
         processData: false,
         contentType: false,
-        cache: false,
-        async: false,
+        dataType:'json',
         beforeSend: function() {
             $('.submitBtn').attr("disabled", "disabled");
         },
         success: function(response) {
-            //console.log(response);
-            if (response == 1) {
-                //$('#form_insert_plan')[0].reset();
+          // console.log(response[0].seplan_namesubject);
+            if (response[0].seplan_coursecode == $('#seplan_coursecode').val()) {
+                var markup = "<tr><td>"+ response[0].seplan_year+"/"+response[0].seplan_term+"</td><td>" + response[0].seplan_coursecode + "</td><td>" + response[0].seplan_namesubject + "</td><td>ม." + response[0].seplan_gradelevel + "</td><td>" + response[0].seplan_typesubject + "</td><td>" + response[0].pers_prefix + response[0].pers_firstname +' '+ response[0].pers_lastname+"</td></tr>";
+                $("#TableShoowPlan tbody").prepend(markup);
                 Swal.fire({
-                    title: 'แจ้งเตือน',
-                    text: "คุณลงทะเบียนวิชาเรียบร้อยแล้ว",
+                    position: 'top-end',
                     icon: 'success',
-                    confirmButtonText: 'ตกลง'
+                    title: 'คุณลงทะเบียนวิชาเรียบร้อยแล้ว',
+                    showConfirmButton: false,
+                    timer: 1500                  
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "../../Teacher/Course";
+                      
                     }
                 })
             } else if (response == 2) {
                 Swal.fire({
-                    title: 'แจ้งเตือน',
-                    text: "คุณได้ลงทะเบียนวิชานี้ไว้แล้ว",
+                    position: 'top-end',
                     icon: 'warning',
-                    confirmButtonText: 'ตกลง'
+                    title: 'คุณได้ลงทะเบียนวิชานี้ในเทมอนี้แล้ว',
+                    showConfirmButton: false,
+                    timer: 1500   
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "../../Teacher/Course";
+                      //  window.location.href = "../../Teacher/Course";
                     }
                 })
             } else {
