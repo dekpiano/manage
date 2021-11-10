@@ -20,7 +20,7 @@
                             <table class="table mb-0" id="example">
                                 <thead>
                                     <tr class="text-center">
-                                        <th rowspan=2>ลำดับ</th>
+                                        <th rowspan=2>ภาคเรียน</th>
                                         <th rowspan=2>ชื่อวิชา</th>
                                         <th rowspan=2>ครูที่ปรึกษา</th>
                                         <th rowspan=2>ระดับชั้นที่ลงทะเบียนได้</th>
@@ -36,7 +36,7 @@
                                 <tbody>
                                     <?php foreach ($ExtraSubject as $key => $v_ExtraSubject) : ?>
                                     <tr>
-                                        <td><?=$key+1?></td>
+                                        <td><?=$v_ExtraSubject->extra_year?>/<?=$v_ExtraSubject->extra_term?></td>
                                         <td><?=$v_ExtraSubject->extra_course_name?></td>
                                         <td><?=$v_ExtraSubject->extra_course_teacher?></td>
                                         <td>

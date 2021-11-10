@@ -77,7 +77,8 @@
                 <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
                 <div class="app-branding">
                     <a class="app-logo" href="index.html"><img class="logo-icon me-2"
-                            src="https://localhost/skj/uploads/logo/LogoSKJ_4.png" alt="logo"><span class="logo-text">ACDM
+                            src="https://localhost/skj/uploads/logo/LogoSKJ_4.png" alt="logo"><span
+                            class="logo-text">ACDM
                             SKJ</span></a>
 
                 </div>
@@ -102,8 +103,8 @@
                             </a>
                             <!--//nav-link-->
                         </li>
-                        <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <!-- <li class="nav-item">
+                           
                             <a class="nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
                                 href="<?=base_url('Student/AcademicResult');?>">
                                 <span class="nav-icon">
@@ -116,9 +117,8 @@
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">ผลการเรียน</span>
-                            </a>
-                            <!--//nav-link-->
-                        </li>
+                            </a>                         
+                        </li> -->
 
                         <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
@@ -159,7 +159,7 @@
                                         <a class="submenu-link <?=$this->uri->segment('3')=="Subject" ? "active" :""?>"
                                             href="<?=base_url('Student/Extra/Subject')?>">รายชื่อวิชาเลือกเพิ่มเติม</a>
                                         <?php else: ?>
-                                            <a class="submenu-link <?=$this->uri->segment('3')=="Subject" ? "active" :""?>"
+                                        <a class="submenu-link <?=$this->uri->segment('3')=="Subject" ? "active" :""?>"
                                             href="#" onclick="AlertOnoff()">รายชื่อวิชาเลือกเพิ่มเติม</a>
                                         <?php endif; ?>
                                     </li>
