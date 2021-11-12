@@ -7,24 +7,24 @@ $(document).on('submit', '#form_insert_plan', function(e) {
         data: new FormData(this),
         processData: false,
         contentType: false,
-        dataType:'json',
+        dataType: 'json',
         beforeSend: function() {
             $('.submitBtn').attr("disabled", "disabled");
         },
         success: function(response) {
-          // console.log(response[0].seplan_namesubject);
+            // console.log(response[0].seplan_namesubject);
             if (response[0].seplan_coursecode == $('#seplan_coursecode').val()) {
-                var markup = "<tr><td>"+ response[0].seplan_year+"/"+response[0].seplan_term+"</td><td>" + response[0].seplan_coursecode + "</td><td>" + response[0].seplan_namesubject + "</td><td>ม." + response[0].seplan_gradelevel + "</td><td>" + response[0].seplan_typesubject + "</td><td>" + response[0].pers_prefix + response[0].pers_firstname +' '+ response[0].pers_lastname+"</td></tr>";
+                var markup = "<tr><td>" + response[0].seplan_year + "/" + response[0].seplan_term + "</td><td>" + response[0].seplan_coursecode + "</td><td>" + response[0].seplan_namesubject + "</td><td>ม." + response[0].seplan_gradelevel + "</td><td>" + response[0].seplan_typesubject + "</td><td>" + response[0].pers_prefix + response[0].pers_firstname + ' ' + response[0].pers_lastname + "</td></tr>";
                 $("#TableShoowPlan tbody").prepend(markup);
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: 'คุณลงทะเบียนวิชาเรียบร้อยแล้ว',
                     showConfirmButton: false,
-                    timer: 1500                  
+                    timer: 1500
                 }).then((result) => {
                     if (result.isConfirmed) {
-                      
+
                     }
                 })
             } else if (response == 2) {
@@ -33,10 +33,10 @@ $(document).on('submit', '#form_insert_plan', function(e) {
                     icon: 'warning',
                     title: 'คุณได้ลงทะเบียนวิชานี้ในเทมอนี้แล้ว',
                     showConfirmButton: false,
-                    timer: 1500   
+                    timer: 1500
                 }).then((result) => {
                     if (result.isConfirmed) {
-                      //  window.location.href = "../../Teacher/Course";
+                        //  window.location.href = "../../Teacher/Course";
                     }
                 })
             } else {
@@ -86,7 +86,40 @@ $(document).on('click', '.Model_update', function() {
     $('#seplan_coursecode').val($(this).attr('seplanCoursecode'));
     $('#seplan_typeplan').val($(this).attr('seplanTypeplan'));
     $('#seplan_sendcomment').html($(this).attr('seplan_sendcomment'));
+});
 
+
+$(document).on('click', '.SetTeachEdit', function() {
+    // console.log($(this).attr('plancode'));
+    $.post("../../teacher/ConTeacherCourse/setting_teacher_edit", { plancode: $(this).attr('plancode') }, function(data, status) {
+        // console.log(data[0][0].seplan_coursecode);
+        $('#up_seplan_coursecode').val(data[0][0].seplan_coursecode);
+        $('#up_seplan_namesubject').val(data[0][0].seplan_namesubject);
+        $('#up_seplan_gradelevel').val(data[0][0].seplan_gradelevel);
+        $('#up_seplan_typesubject').val(data[0][0].seplan_typesubject);
+        $('#up_seplan_usersend').val(data[0][0].seplan_usersend);
+    }, "json");
+});
+
+$(document).on('submit', '#form_update_teacher', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '../../teacher/ConTeacherCourse/setting_teacher_update',
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        beforeSend: function() {
+            $('.submitBtn').attr("disabled", "disabled");
+        },
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
 });
 
 
@@ -122,9 +155,6 @@ $('.ConfrimStatus').change(function(e) {
                         // window.location.reload();
                     }
                 })
-
-
-
             }
         }
     });

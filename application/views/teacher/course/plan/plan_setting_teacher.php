@@ -11,7 +11,7 @@
             <div class="col-lg-8">
 
                 <div class="card">
-                <div class="card-header d-flex align-items-center">
+                    <div class="card-header d-flex align-items-center">
                         <h3 class="h4">เพิ่มข้อมูลทีละรายการ</h3>
                     </div>
                     <div class="card-body">
@@ -91,12 +91,12 @@
                     <div class="card-body">
                         <div class="form-group">
                             <form action="" method="post">
-                            <div class="custom-file">
-                                <input type="file" class="" id="customFileInput" aria-describedby="customFileInput">
-                            </div>
-                            <div class="">
-                                <button class="btn btn-primary" type="submit" id="customFileInput">Upload</button>
-                            </div>
+                                <div class="custom-file">
+                                    <input type="file" class="" id="customFileInput" aria-describedby="customFileInput">
+                                </div>
+                                <div class="">
+                                    <button class="btn btn-primary" type="submit" id="customFileInput">Upload</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -123,7 +123,8 @@
                     </thead>
                     <tbody>
                         <?php foreach ($Plan as $key => $v_Plan): ?>
-                        <tr>
+                        <tr class="SetTeachEdit" plancode="<?=$v_Plan->seplan_coursecode?>" data-toggle="modal"
+                            data-target="#ModalShowPlan">
                             <td><?=$v_Plan->seplan_year?>/<?=$v_Plan->seplan_term?></td>
                             <td><?=$v_Plan->seplan_coursecode?></td>
                             <td><?=$v_Plan->seplan_namesubject?></td>
@@ -142,3 +143,89 @@
 
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalShowPlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate id="form_update_teacher">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="up_seplan_coursecode">รหัสวิชา</label>
+                                <input type="text" class="form-control" placeholder="รหัสวิชา" id="up_seplan_coursecode"
+                                    name="up_seplan_coursecode" required>
+                                <div class="invalid-feedback">กรุณากรอกรหัสวิชา</div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="form-group">
+                                <label for="up_seplan_namesubject">ชื่อวิชา</label>
+                                <input type="text" class="form-control" placeholder="ชื่อวิชา"
+                                    id="up_seplan_namesubject" name="up_seplan_namesubject" required>
+                                <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="up_seplan_gradelevel">ระดับชั้น</label>
+                                <select class="form-control" id="up_seplan_gradelevel" name="up_seplan_gradelevel"
+                                    required>
+                                    <option value="">เลือกระดับชั้น</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                                <div class="invalid-feedback">กรุณาเลือกระดับชั้น</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="form-group">
+                                <label for="up_seplan_typesubject">ประเภท</label>
+                                <select class="form-control" id="up_seplan_typesubject" name="up_seplan_typesubject"
+                                    required>
+                                    <option value="">เลือกประเภท</option>
+                                    <option value="พื้นฐาน">พื้นฐาน</option>
+                                    <option value="เพิ่มเติม">เพิ่มเติม</option>
+                                </select>
+                                <div class="invalid-feedback">กรุณาเลือประเภท</div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-12">
+                            <div class="form-group">
+                                <label for="up_seplan_usersend">ครูผู้สอน</label>
+                                <select class="form-control" id="up_seplan_usersend" name="up_seplan_usersend" required>
+                                    <option value="">เลือกครูผู้สอน</option>
+                                    <?php foreach ($pers as $key => $v_pers): ?>
+                                    <option value="<?=$v_pers->pers_id;?>">
+                                        <?=$v_pers->pers_prefix.$v_pers->pers_firstname.' '.$v_pers->pers_lastname;?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="invalid-feedback">กรุณาครูผู้สอน</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                        <button type="button" class="btn btn-danger">ลบ</button>
+                            <button type="submit" class="btn btn-primary float-right">แก้ไข</button>
+                            
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

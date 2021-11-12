@@ -57,15 +57,15 @@ var  $title = "หน้าแรก";
        
     }
 
-    public function edit_plan($id){
-        $data['title'] = "แก้ไขงาน";
-        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
-        $data['plan'] = $this->db->where('seplan_ID',$id)->get('tb_send_plan')->result();
-        $this->load->view('teacher/layout/header_teacher.php',$data);
-        $this->load->view('teacher/layout/navbar_teaher.php');
-        $this->load->view('teacher/course/plan/plan_edit.php');
-        $this->load->view('teacher/layout/footer_teacher.php');
-    }
+    // public function edit_plan1($id){
+    //     $data['title'] = "แก้ไขงาน";
+    //     $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+    //     $data['plan'] = $this->db->where('seplan_ID',$id)->get('tb_send_plan')->result();
+    //     $this->load->view('teacher/layout/header_teacher.php',$data);
+    //     $this->load->view('teacher/layout/navbar_teaher.php');
+    //     $this->load->view('teacher/course/plan/plan_edit.php');
+    //     $this->load->view('teacher/layout/footer_teacher.php');
+    // }
 
     public function check_plan($idlear = null){
         $data['title'] = "ตรวจสอบงาน";
@@ -205,7 +205,6 @@ var  $title = "หน้าแรก";
                 echo $result;
         }
      }
-    
 
 
      public function delete_plan($id)
@@ -241,6 +240,22 @@ var  $title = "หน้าแรก";
     $this->load->view('teacher/course/plan/plan_setting_teacher.php');
     $this->load->view('teacher/layout/footer_teacher.php');
  }
+
+ public function setting_teacher_edit(){
+    $id = $this->input->post('plancode');
+   $checkdata = $this->db->select('*')->where('seplan_coursecode',$id)->get('tb_send_plan')->result();
+   $this->output->set_content_type('application/json')->set_output(json_encode(array($checkdata)));
+}
+
+public function setting_teacher_update(){
+    $data = array(
+    'seplan_gradelevel' => $this->input->post('up_seplan_gradelevel'),
+    'seplan_namesubject' => $this->input->post('up_seplan_namesubject'),
+    'seplan_typesubject' => $this->input->post('up_seplan_typesubject'),
+    'seplan_usersend' => $this->input->post('up_seplan_usersend'));
+    $result = $this->ModTeacherCourse->plan_update_teacher($data,$this->input->post('up_seplan_coursecode'));
+    echo json_encode($result);
+}
 
      function setting_plan(){         
         $data['title'] = "ตั้งค่า";
