@@ -1,5 +1,5 @@
 //
-
+$('#showAlert').modal('show');
 $(document).on("click", ".ShowAddRoomOnline", function() {
     $('#AddRoomOnline').modal('show');
     $('#FormRoomOnline').addClass('Add_RoomOnline');

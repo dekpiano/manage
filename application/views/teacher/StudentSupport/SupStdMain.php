@@ -10,7 +10,7 @@
 
         <?php  if(isset($CClass[0]->Reg_Class)):
     $IfLen = strlen($CClass[0]->Reg_Class); 
-    $CheckOnOffSystem = "NO"; //ตัวแปรเพิ่มปิดระบบ
+    $CheckOnOffSystem = "YES"; //ตัวแปรเพิ่มปิดระบบ
     ?>
         <div class="statistic align-items-center bg-white has-shadow">
             <div class="text">

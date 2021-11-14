@@ -14,14 +14,19 @@ class ConStudentExtraSubject extends CI_Controller {
 
     public function ExtraSubject(){  
         $data['title'] = "รายชื่อวิชาเลือกเพิ่มเติม";
+        $ExtraSetting = $this->db->get('tb_extra_setting')->result();
         $data['ExtraSetting'] = $this->db->get('tb_extra_setting')->result();
-        $data['Extra'] = $this->db->order_by('extra_key_room','ASC')->get('tb_extra_subject')->result();
+        $data['Extra'] = $this->db->where('extra_year',$ExtraSetting[0]->extra_setting_year)
+                                ->where('extra_term',$ExtraSetting[0]->extra_setting_term)
+                                ->order_by('extra_key_room','ASC')->get('tb_extra_subject')->result();
         $data['ExtraGroupBy'] = $this->db->select('extra_key_room,extra_grade_level')->group_by('extra_key_room')->get('tb_extra_subject')->result();       
         $data['register'] = $this->db->select('tb_extra_register.*,
                                             tb_extra_subject.extra_key_room')
                                     ->from('tb_extra_subject')
                                     ->join('tb_extra_register','tb_extra_register.fk_extra_id = tb_extra_subject.extra_id','LEFT')
                                     ->where('fk_std_id',$this->session->userdata('StudentCode'))
+                                    ->where('extra_year',$ExtraSetting[0]->extra_setting_year)
+                                ->where('extra_term',$ExtraSetting[0]->extra_setting_term)
                                     ->get()->result();
         $data['CountRegister'] = $this->db->select('fk_extra_id')->get('tb_extra_register')->result();                         
         //echo '<pre>';print_r($data['CountRegister']);exit();

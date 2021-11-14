@@ -75,14 +75,16 @@ var  $title = "หน้าแรก";
         $data['lean'] = $DBskj->get('tb_learning')->result();       
         $data['IDlear'] = $idlear;
         $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                 skjacth_personnel.tb_personnel.pers_id,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
                                                 skjacth_personnel.tb_personnel.pers_firstname,
                                                 skjacth_personnel.tb_personnel.pers_lastname")
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                                         ->where('seplan_learning',$idlear)
-                                        ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
+                                        ->group_by(array('seplan_coursecode','pers_id'))->get('tb_send_plan')->result();
         //echo '<pre>'; print_r($data['ID']); exit();
         $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                 skjacth_personnel.tb_personnel.pers_id,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
                                                 skjacth_personnel.tb_personnel.pers_firstname,
                                                 skjacth_personnel.tb_personnel.pers_lastname")
@@ -153,7 +155,7 @@ var  $title = "หน้าแรก";
         $textToStore = $status;
         $seplan_ID = $this->input->post('seplan_ID');
         $year = $this->db->get('tb_send_plan_setup')->row();
-        $plan = $this->db->select('seplan_coursecode,seplan_namesubject,seplan_typeplan,seplan_file,seplan_createdate')->where('seplan_ID',$seplan_ID)->get('tb_send_plan')->row();
+        $plan = $this->db->select('seplan_coursecode,seplan_namesubject,seplan_typeplan,seplan_file,seplan_createdate,seplan_usersend')->where('seplan_ID',$seplan_ID)->get('tb_send_plan')->row();
         $seplan_typeplan = $plan->seplan_typeplan;
         $seplan_coursecode = $plan->seplan_coursecode; 
         $seplan_namesubject = $plan->seplan_namesubject;     
@@ -174,7 +176,7 @@ var  $title = "หน้าแรก";
 
             $filename = $_FILES["seplan_file"]['name'];
             $FileType = strtolower(pathinfo($_FILES['seplan_file']['name'],PATHINFO_EXTENSION));
-            $NewFile = $seplan_coursecode."_".$seplan_namesubject."_".$seplan_typeplan;       
+            $NewFile = $seplan_coursecode."_".$seplan_namesubject."_".$seplan_typeplan."_".$plan->seplan_usersend;       
 
             $config['upload_path']= "uploads/academic/course/plan/".$folder."/".$seplan_namesubject."/";
             $config['allowed_types'] = '*';

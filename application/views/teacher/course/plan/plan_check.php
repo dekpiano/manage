@@ -65,7 +65,7 @@
 
                                 <?php foreach($typeplan as $key => $v_typeplan): ?>
                                 <?php foreach($checkplan as $key => $v_plan): ?>
-                                <?php if($v_plan->seplan_coursecode == $v_planNew->seplan_coursecode && $v_plan->seplan_typeplan == $v_typeplan):  ?>
+                                <?php if($v_plan->seplan_coursecode == $v_planNew->seplan_coursecode && $v_plan->seplan_typeplan == $v_typeplan && $v_planNew->pers_id == $v_plan->pers_id):  ?>
                                 <td>
                                     <?php if($v_plan->seplan_file == null): ?>
                                     <span class="badge badge-danger h6 text-white">ยังไม่ส่ง</span>

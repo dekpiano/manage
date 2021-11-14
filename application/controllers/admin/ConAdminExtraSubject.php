@@ -18,7 +18,10 @@ class ConAdminExtraSubject extends CI_Controller {
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         
 		$data['title'] = "ลงทะเบียนวิชาเพิ่มเติม";
-        $data['ExtraSubject'] = $this->db->get('tb_extra_subject')->result();
+        $ExtraSetting = $this->db->get('tb_extra_setting')->result();
+        $data['ExtraSubject'] = $this->db->where('extra_year',$ExtraSetting[0]->extra_setting_year)
+                                        ->where('extra_term',$ExtraSetting[0]->extra_setting_term)
+                                        ->get('tb_extra_subject')->result();
         $data['CountStudentRegister'] = $this->db->select('tb_extra_register.fk_std_id,
                                                         COUNT(tb_extra_register.fk_std_id) AS CountAll,
                                                         tb_extra_register.fk_extra_id
@@ -31,7 +34,7 @@ class ConAdminExtraSubject extends CI_Controller {
         ->where('pers_position !=','posi_007')
         ->where('pers_position !=','posi_008')
         ->where('pers_position !=','posi_009')
-        ->where('pers_position !=','posi_010')
+        ->where('pers_position !=','posi_010')        
         ->order_by('pers_learning')
         ->get()->result();
 
@@ -141,6 +144,7 @@ class ConAdminExtraSubject extends CI_Controller {
 
      public function ExtraReport() {
         $data['title'] = "รายงาน";
+        $ExtraSetting = $this->db->get('tb_extra_setting')->result();
         $data['OnoffSystem'] = $this->db->get('tb_extra_setting')->result();
         $data['Report'] = $this->db->select('tb_extra_subject.extra_year,
                                                 tb_extra_subject.extra_term,
@@ -159,6 +163,8 @@ class ConAdminExtraSubject extends CI_Controller {
                                         ->from('tb_extra_register') 
                                         ->join('tb_extra_subject','tb_extra_subject.extra_id = tb_extra_register.fk_extra_id')   
                                         ->join('tb_student_express','tb_student_express.StudentCode = tb_extra_register.fk_std_id')   
+                                        ->where('extra_year',$ExtraSetting[0]->extra_setting_year)
+                                        ->where('extra_term',$ExtraSetting[0]->extra_setting_term)
                                         ->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/AdminExtraSubject/AdminExtraReport.php');
