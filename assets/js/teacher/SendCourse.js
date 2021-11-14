@@ -12,9 +12,9 @@ $(document).on('submit', '#form_insert_plan', function(e) {
             $('.submitBtn').attr("disabled", "disabled");
         },
         success: function(response) {
-          // console.log(response[0].seplan_namesubject);
-            if (response[0].seplan_coursecode == $('#seplan_coursecode').val()) {
-                var markup = "<tr><td>"+ response[0].seplan_year+"/"+response[0].seplan_term+"</td><td>" + response[0].seplan_coursecode + "</td><td>" + response[0].seplan_namesubject + "</td><td>ม." + response[0].seplan_gradelevel + "</td><td>" + response[0].seplan_typesubject + "</td><td>" + response[0].pers_prefix + response[0].pers_firstname +' '+ response[0].pers_lastname+"</td></tr>";
+          console.log(response);
+            if (response.msg == "OK") {
+                var markup = "<tr><td>"+ response[0][0].seplan_year+"/"+response[0][0].seplan_term+"</td><td>" + response[0][0].seplan_coursecode + "</td><td>" + response[0][0].seplan_namesubject + "</td><td>ม." + response[0][0].seplan_gradelevel + "</td><td>" + response[0][0].seplan_typesubject + "</td><td>" + response[0][0].pers_prefix + response[0][0].pers_firstname +' '+ response[0][0].pers_lastname+"</td></tr>";
                 $("#TableShoowPlan tbody").prepend(markup);
                 Swal.fire({
                     position: 'top-end',
@@ -27,7 +27,7 @@ $(document).on('submit', '#form_insert_plan', function(e) {
                       
                     }
                 })
-            } else if (response == 2) {
+            } else {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -39,8 +39,6 @@ $(document).on('submit', '#form_insert_plan', function(e) {
                       //  window.location.href = "../../Teacher/Course";
                     }
                 })
-            } else {
-                console.log(response);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

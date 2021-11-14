@@ -42,7 +42,7 @@
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
           <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
-          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=5"></script>
+          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=6"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
           </body>
@@ -84,7 +84,7 @@ $(document).ready(function() {
     });
     $('#TableShoowPlan').DataTable({
         "order": [
-            [1, "desc"]
+            [1, "asc"],[5, "asc"]
         ]
     });
     $('#tb_plan').DataTable({

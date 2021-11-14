@@ -96,12 +96,13 @@ var  $title = "หน้าแรก";
     }
 
     function insert_plan(){
-        $Checkplan = $this->db->where('seplan_coursecode',$this->input->post('seplan_coursecode'))   
-                        ->get('tb_send_plan')->num_rows();
+       
        $pers = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_id,pers_position,pers_learning')
                         ->where('pers_id',$this->input->post('seplan_usersend'))
                         ->get('tb_personnel')->result();
-
+        $Checkplan = $this->db->where('seplan_coursecode',$this->input->post('seplan_coursecode')) 
+                        ->where('seplan_usersend',$this->input->post('seplan_usersend'))   
+                        ->get('tb_send_plan')->num_rows();
         if($Checkplan <= 0){
 
             $insert = array();
@@ -139,7 +140,7 @@ var  $title = "หน้าแรก";
            ->join('skjacth_personnel.tb_personnel','skjacth_academic.tb_send_plan.seplan_usersend = skjacth_personnel.tb_personnel.pers_id')
            ->where('seplan_ID',$result)->get()->result();
            //$this->output->set_content_type('application/json')->set_output($result);
-            echo json_encode($json);
+            echo json_encode(array($json,"msg"=>"OK"));
         
         }else{
             echo 2;
@@ -217,7 +218,7 @@ var  $title = "หน้าแรก";
        echo 'Deleted successfully.';
    }
 
-   // ------------------------------ ตั้งค่า -----------------------------
+   // ------------------------------ ตั้งค่าตั้งค่าครูผู้สอน -----------------------------
 
    function setting_teacher(){         
     $data['title'] = "ตั้งค่าครูผู้สอน";
@@ -234,7 +235,7 @@ var  $title = "หน้าแรก";
                                         skjacth_academic.tb_send_plan.*')
                                         ->from('skjacth_academic.tb_send_plan')
                                         ->join('skjacth_personnel.tb_personnel','skjacth_academic.tb_send_plan.seplan_usersend = skjacth_personnel.tb_personnel.pers_id')
-                                        ->group_by('seplan_coursecode')->get()->result();
+                                        ->group_by('seplan_coursecode,pers_id')->get()->result();
     //print_r($date['SetPlan']); exit();
     $this->load->view('teacher/layout/header_teacher.php',$data);
     $this->load->view('teacher/layout/navbar_teaher.php');
