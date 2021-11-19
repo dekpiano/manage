@@ -74,9 +74,10 @@ $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdm
 
 // Login
 $route['Logout'] = "Control_login/logout";
-$route['LogoutTeacher'] = "Control_login/LogoutTeacher";
+$route['LogoutTeacher'] = "Control_login/logoutGoogle";
 $route['LoginStudent'] = "Control_login/LoginStudent";
 $route['LoginTeacher'] = "Control_login/LoginTeacher";
+//$route['LoginTeacher'] = "Control_login/LoginTeacherMain";
 
 // Teacher
 $route['Teacher/Home'] = "teacher/ConTeacherHome/TeacherHome";

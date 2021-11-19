@@ -21,8 +21,9 @@
                             <!--//auth-form-container-->
                             <?php
                                 if(!isset($login_button))
-                                {                                
-                                    echo '<h3><a href="'.base_url().'Control_login/LoginGoogleTeacher">Logout</h3></div>';
+                                {     
+                                    redirect('LoginTeacher');                           
+                                   // echo '<h3><a href="'.base_url().'Control_login/LoginGoogleTeacher">Logout</h3></div>';
                                 }
                                 else
                                 {

@@ -108,6 +108,19 @@ class Control_login extends CI_Controller {
 				}
 			}
 	}	
+
+	function LoginTeacherMain(){
+		$login_button = '
+			<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
+			';
+		$data['login_button'] = $login_button;
+		$data['title'] = "Login สำหรับครูผู้สอน";
+		$data['description'] = "Login สำหรับครูผู้สอน";  
+	
+		$this->load->view('user/layout/HeaderUser.php',$data);
+		$this->load->view('user/Login/PageLoginTeacher.php');
+		$this->load->view('user/layout/FooterUser.php');
+	}
 	
 	function LoginTeacher(){
 		include_once APPPATH . "libraries/vendor/autoload.php";
@@ -121,19 +134,17 @@ class Control_login extends CI_Controller {
 		
 		if(isset($_GET["code"])){
 			$token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
-			if(!isset($token["error"])){
-				$google_client->setAccessToken($token['access_token']);
+			if(!isset($token["error"])){				
+				$this->session->set_userdata('access_token',$token['access_token']);
 				$google_service = new Google_Service_Oauth2($google_client);
 
 				$data = $google_service->userinfo->get();
-				$current_datetime = date('Y-m-d H:i:s');
+				$current_datetime = date('Y-m-d H:i:s');			
 
 				// echo $this->Model_login->check_login_teacher($data['email']); 
 				if($this->Model_login->check_login_teacher($data['email']) == 1)
    				 {
-						
-				$this->session->set_userdata('access_token',$token['access_token']);
-
+					$google_client->setAccessToken($token['access_token']);
 					$user_data = array(				 
 						'pers_username' => $data['email'],
 						'updated_at' => $current_datetime,
@@ -145,32 +156,37 @@ class Control_login extends CI_Controller {
 				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
 				  
 				}else{
-					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'Email ของคุณไม่สามารถใช้ในระบบนี้ได้ ติดต่อเจ้าหน้าที่คอมเพื่อใช้งานระบบ','alert'=>'error'));
-					redirect('LoginTeacher');
+					$this->session->unset_userdata('access_token');
+
+					$this->session->set_flashdata(array('msg'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียนที่ลงทะเบียนเท่านั้น กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
+				
 				}
 			}
 		}
-		$login_button = '';
+			
+			$login_button = '';
 			if(!$this->session->userdata('access_token'))
 			{
 			$login_button = '
 			<a href="'.$google_client->createAuthUrl().'"><img src="'.base_url('assets/images/btn_google_signin.png').'" alt="Google logo"></a>
 			';
 			$data['login_button'] = $login_button;
-
 			$data['title'] = "Login สำหรับครูผู้สอน";
 			$data['description'] = "Login สำหรับครูผู้สอน";  
-			// $this->load->view('user/layout/HeaderUser.php',$data);
-			// $this->load->view('user/Login/PageLoginTeacher.php');
-			// $this->load->view('user/layout/FooterUser.php');
-		
-			 $this->load->view('login/loginTeacher.php',$data);
+
+			$this->load->view('user/layout/HeaderUser.php',$data);
+			$this->load->view('user/Login/PageLoginTeacher.php');
+			$this->load->view('user/layout/FooterUser.php');
+			
+			// $this->load->view('login/loginTeacher.php',$data);
 			}
 			else
 			{
 			//$this->load->view('login/loginTeacher.php',$data);
 			redirect('Teacher/Home');
-			}	
+			} 	
+		
+		
 	}
 
 
@@ -207,6 +223,7 @@ class Control_login extends CI_Controller {
 
 	public function logout()
 	{
+		
 		delete_cookie('username_cookie'); 
 		delete_cookie('password_cookie'); 
 		$this->session->sess_destroy();

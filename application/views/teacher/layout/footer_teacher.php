@@ -58,12 +58,12 @@
 
           <?php if($this->session->flashdata('msg') == 'YES'):?>
           <script>
-Swal.fire({
-    icon: '<?=$this->session->flashdata('status');?>',
-    title: "แจ้งเตือน",
-    html: '<?=$this->session->flashdata('messge');?>',
-    confirmButtonText: "ตกลง",
-});
+            Swal.fire({
+                icon: '<?=$this->session->flashdata('status');?>',
+                title: "แจ้งเตือน",
+                html: '<?=$this->session->flashdata('messge');?>',
+                confirmButtonText: "ตกลง",
+            });
           </script>
           <?php endif; $this->session->mark_as_temp('msg',20); ?>
 

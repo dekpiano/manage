@@ -20,6 +20,9 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->session->unset_userdata('access_token');
+		$this->session->sess_destroy();
+	
 		$data['title'] = "หน้าแรก";
         $data['description'] = "หน้าหลัก"; 
 		$this->load->view('user/layout/HeaderUser.php',$data);
