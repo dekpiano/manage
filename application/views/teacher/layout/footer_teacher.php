@@ -47,6 +47,15 @@
 
           </body>
 
+        <script>
+        
+        $(window).on('load',function() {
+            $(".se-pre-con").fadeOut(1000);
+        });
+    </script>
+
+        </script>
+
           <?php if($this->session->flashdata('msg') == 'YES'):?>
           <script>
 Swal.fire({

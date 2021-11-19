@@ -57,7 +57,11 @@ header("Expires: 0");
                                 <td><?=$v_checkplan->seplan_coursecode;?></td>
                                 <td>ม.<?=$v_checkplan->seplan_gradelevel;?></td>
 
-                                <td><?=$this->datethai->thai_date_fullmonth(strtotime($v_checkplan->seplan_createdate));?>
+                                <td> <?php if($v_checkplan->seplan_createdate === "0000-00-00 00:00:00"):?>
+                                        ยังไม่ได้ส่ง
+                                    <?php else:?>
+                                    <?=$this->datethai->thai_date_fullmonth(strtotime($v_checkplan->seplan_createdate));?>
+                                    <?php endif; ?>
                                 </td>
 
                                 <td></td>

@@ -81,19 +81,40 @@ var  $title = "หน้าแรก";
                                                 skjacth_personnel.tb_personnel.pers_lastname")
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                                         ->where('seplan_learning',$idlear)
-                                        ->group_by(array('seplan_coursecode','pers_id'))->get('tb_send_plan')->result();
-        //echo '<pre>'; print_r($data['ID']); exit();
-        $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
-                                                 skjacth_personnel.tb_personnel.pers_id,
-                                                skjacth_personnel.tb_personnel.pers_prefix,
-                                                skjacth_personnel.tb_personnel.pers_firstname,
-                                                skjacth_personnel.tb_personnel.pers_lastname")
-                                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                                        ->group_by(array('seplan_coursecode','pers_id'))
+                                        ->get('tb_send_plan')->result();
+        //echo '<pre>'; print_r($data['planNew']); exit();
+        $data['checkplan'] = $this->db->select("*")
                             ->where('seplan_learning',$idlear)
                             ->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_check.php');
+        $this->load->view('teacher/layout/footer_teacher.php');
+    }
+
+    public function check_plan_lear($idlear = null){
+        $data['title'] = "ตรวจสอบงานตามกลุ่มสาระการเรียนรู้";
+        $DBskj = $this->load->database('skj', TRUE); 
+        $data['lean'] = $DBskj->where('lear_id',$idlear)->get('tb_learning')->result();
+        $data['IDlear'] = $idlear;
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                 skjacth_personnel.tb_personnel.pers_id,
+                                                skjacth_personnel.tb_personnel.pers_prefix,
+                                                skjacth_personnel.tb_personnel.pers_firstname,
+                                                skjacth_personnel.tb_personnel.pers_lastname")
+                                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                                        ->where('seplan_learning',$idlear)
+                                        ->group_by(array('seplan_coursecode','pers_id'))
+                                        ->get('tb_send_plan')->result();
+        //echo '<pre>'; print_r($data['planNew']); exit();
+        $data['checkplan'] = $this->db->select("*")
+                            ->where('seplan_learning',$idlear)
+                            ->get('tb_send_plan')->result();
+        $this->load->view('teacher/layout/header_teacher.php',$data);
+        $this->load->view('teacher/layout/navbar_teaher.php');
+        $this->load->view('teacher/course/plan/plan_check_lear.php');
         $this->load->view('teacher/layout/footer_teacher.php');
     }
 
@@ -376,15 +397,16 @@ var  $title = "หน้าแรก";
             $idLearn = $this->session->userdata('pers_learning');
         }
         $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_id,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
                                                 skjacth_personnel.tb_personnel.pers_firstname,
                                                 skjacth_personnel.tb_personnel.pers_lastname")
                                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
                             ->where('seplan_learning',$idLearn)
                             ->where('seplan_typeplan',$data['thai'])
-                            ->where('seplan_file !=','')
                             ->group_by('seplan_namesubject')
                             ->group_by('seplan_coursecode')
+                            ->group_by('pers_id')
                             ->order_by('pers_firstname')
                             ->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
@@ -416,8 +438,9 @@ var  $title = "หน้าแรก";
         }
         $lean = $DBskj->where('lear_id',$idLearn)->get('tb_learning')->result();
 
-        //echo '<pre>'; print_r($lean); exit();
+        
         $checkplan = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_id,
                                                 skjacth_personnel.tb_personnel.pers_prefix,
                                                 skjacth_personnel.tb_personnel.pers_firstname,
                                                 skjacth_personnel.tb_personnel.pers_lastname")
@@ -426,8 +449,10 @@ var  $title = "หน้าแรก";
                             ->where('seplan_typeplan',$data['thai'])
                             ->group_by('seplan_namesubject')
                             ->group_by('seplan_coursecode')
+                            ->group_by('pers_id')
                             ->order_by('pers_firstname')
                             ->get('tb_send_plan')->result();
+            //echo '<pre>'; print_r($checkplan); exit();
     //     $this->load->view('teacher/course/plan/plan_report_print.php',$data);
     
             $spreadsheet = new Spreadsheet();
@@ -489,6 +514,12 @@ var  $title = "หน้าแรก";
 
             $start_row=6; 
             foreach ($checkplan as $key => $v_checkplan) {
+
+                if($v_checkplan->seplan_createdate === "0000-00-00 00:00:00"){
+                    $createdate = "ยังไม่ได้ส่งงาน";
+                }else{
+                   $createdate =  $this->datethai->thai_date_fullmonth(strtotime($v_checkplan->seplan_createdate));
+                }
                 $sheet->getStyle('A4:I'.$start_row)->applyFromArray($styleArray);
 
                 $sheet->setCellValue('A'.$start_row, $key+1);
@@ -498,7 +529,7 @@ var  $title = "หน้าแรก";
                 $sheet->setCellValue('E'.$start_row, $v_checkplan->seplan_namesubject);
                 $sheet->setCellValue('F'.$start_row, $v_checkplan->seplan_coursecode);
                 $sheet->setCellValue('G'.$start_row, 'ม.'.$v_checkplan->seplan_gradelevel);
-                $sheet->setCellValue('H'.$start_row, $this->datethai->thai_date_fullmonth(strtotime($v_checkplan->seplan_createdate)));
+                $sheet->setCellValue('H'.$start_row, $createdate);
                 $sheet->setCellValue('I'.$start_row, '');
 
                 $sheet->getStyle('C6:I'.$start_row)->getAlignment()
