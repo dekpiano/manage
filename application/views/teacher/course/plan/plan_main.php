@@ -103,7 +103,18 @@
                                     </label>
                                     <br>
                                     <small>ผู้ส่ง : <?=$v_plan->seplan_sendcomment?></small> <br>
-                                    <small>ผู้ตรวจ :
+                                    <small>ผู้ตรวจ (หัวหน้ากลุ่ม) :
+                                        <?php if($v_plan->seplan_status1 == ""){
+                                           echo 'รอตรวจ';
+                                       }else{                                       
+                                            if($v_plan->seplan_status1 == 'ผ่าน'){
+                                                echo '<span class="text-success">'.$v_plan->seplan_status1.'</span>';
+                                            }else{
+                                                echo '<span class="text-danger">'.$v_plan->seplan_status1." (".$v_plan->seplan_comment1.")".'</span>';
+                                            }
+                                       } ?>
+                                    </small><br>
+                                    <small>ผู้ตรวจ (หัวหน้างาน) :
                                         <?php if($v_plan->seplan_status2 == ""){
                                            echo 'รอตรวจ';
                                        }else{                                       

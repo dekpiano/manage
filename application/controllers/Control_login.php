@@ -174,11 +174,11 @@ class Control_login extends CI_Controller {
 			$data['title'] = "Login สำหรับครูผู้สอน";
 			$data['description'] = "Login สำหรับครูผู้สอน";  
 
-			$this->load->view('user/layout/HeaderUser.php',$data);
-			$this->load->view('user/Login/PageLoginTeacher.php');
-			$this->load->view('user/layout/FooterUser.php');
+			// $this->load->view('user/layout/HeaderUser.php',$data);
+			// $this->load->view('user/Login/PageLoginTeacher.php');
+			// $this->load->view('user/layout/FooterUser.php');
 			
-			// $this->load->view('login/loginTeacher.php',$data);
+			 $this->load->view('login/loginTeacher.php',$data);
 			}
 			else
 			{

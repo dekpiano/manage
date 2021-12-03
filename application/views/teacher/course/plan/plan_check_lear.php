@@ -97,6 +97,10 @@
                                             <option <?=$v_plan->seplan_status1 == "ไม่ผ่าน" ? 'selected' : ''?>
                                                 value="ไม่ผ่าน">ไม่ผ่าน</option>
                                         </select>
+                                        <div class="IDCom0<?=$v_plan->seplan_ID;?> TbShowComment1">
+                                            <?=$v_plan->seplan_status1 == "ไม่ผ่าน" ? '<a href="#" class="show_comment1" data-toggle="modal" data-planId="'.$v_plan->seplan_ID.'" data-target="#addcomment1">หมายเหตุ</a>' : ''?>
+                                        </div>
+                                       
                                         <?php endif; ?>
                                     </small>
                                     <br>
