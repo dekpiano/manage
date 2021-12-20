@@ -35,9 +35,18 @@ var  $title = "หน้าแรก";
     }
 
     function AddRoomOnline(){ 
-        $insert =  array('roomon_coursecode'=> $this->input->post('roomon_coursecode'),
+
+        $array = array('roomon_coursecode'=> $this->input->post('roomon_coursecode'),           
+            'roomon_classlevel'=> implode("|",$this->input->post('roomon_classlevel')),    
+            'roomon_teachid'=> $this->input->post('roomon_teachid'),
+            'roomon_year' => $this->input->post('roomon_year'),
+            'roomon_term' => $this->input->post('roomon_term')
+        );
+        $count = $this->db->where($array)->count_all_results('tb_room_online');
+        if($count == 0){
+            $insert =  array('roomon_coursecode'=> $this->input->post('roomon_coursecode'),
             'roomon_coursename'=> $this->input->post('roomon_coursename'),
-            'roomon_classlevel'=> $this->input->post('roomon_classlevel'),    
+            'roomon_classlevel'=> implode("|",$this->input->post('roomon_classlevel')),    
             'roomon_teachid'=> $this->input->post('roomon_teachid'),
             'roomon_linkroom' => $this->input->post('roomon_linkroom'),
             'roomon_liveroom' => $this->input->post('roomon_liveroom'),
@@ -47,6 +56,11 @@ var  $title = "หน้าแรก";
             'roomon_datecreate' => date('Y-m-d H:i:s')
         );
         echo $result = $this->ModTeacherTeaching->RoomOnlineInsert($insert); 
+        }else{
+            echo 2;
+        }
+
+        
     }
 
     function EditRoomOnline(){
@@ -58,7 +72,7 @@ var  $title = "หน้าแรก";
         //echo $this->input->post('roomon_teachid'); exit();
       $update =  array('roomon_coursecode'=> $this->input->post('roomon_coursecode'),
             'roomon_coursename'=> $this->input->post('roomon_coursename'),
-            'roomon_classlevel'=> $this->input->post('roomon_classlevel'), 
+            'roomon_classlevel'=> implode("|",$this->input->post('roomon_classlevel')), 
             'roomon_linkroom' => $this->input->post('roomon_linkroom'),
             'roomon_teachid' => $this->input->post('roomon_teachid'),
             'roomon_liveroom' => $this->input->post('roomon_liveroom'),

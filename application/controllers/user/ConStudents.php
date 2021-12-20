@@ -100,10 +100,11 @@ var  $title = "แผงควบคุม";
                                             skjacth_personnel.tb_personnel.pers_prefix,
                                             skjacth_personnel.tb_personnel.pers_firstname,
                                             skjacth_personnel.tb_personnel.pers_lastname')
-                                            ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_room_online.roomon_teachid')
+                                            ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_room_online.roomon_teachid','LEFT')
                                 ->where('roomon_classlevel',$this->input->get('s'))
                                 ->from('tb_room_online')
                                 ->get()->result();
+        $data['keyroom'] = $this->input->get('s');
          $this->load->view('user/layout/HeaderUser.php',$data);
          $this->load->view('user/LearnOnline/PageLearnOnlineDetail.php');
          $this->load->view('user/layout/FooterUser.php');

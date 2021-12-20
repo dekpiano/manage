@@ -445,6 +445,11 @@ $(document).on("click", ".ShowAddRoomOnline", function() {
     $('#FormRoomOnline').removeClass('Update_RoomOnline');
     $('#FormRoomOnline')[0].reset();
 });
+
+var classlevel = new SlimSelect({
+    select: '#roomon_classlevel'
+})
+
 $(document).on("click", ".ShowEditRoomOnline", function() {
     $('#AddRoomOnline').modal('show');
     $('#FormRoomOnline').addClass('Update_RoomOnline');
@@ -462,11 +467,19 @@ $(document).on("click", ".ShowEditRoomOnline", function() {
         $('#roomon_note').val(data[0].roomon_note);
         $('#roomon_year').val(data[0].roomon_year);
         $('#roomon_term').val(data[0].roomon_term);
+
+        var n = data[0].roomon_classlevel.split('|');
+        classlevel.set(n);
+
     }, "json");
 });
 $(document).on("click", ".ShowDeleteRoomOnline", function() {
     $('#DeleteRoomOnline').modal('show');
     $('#del_roomon_id').val($(this).attr('roomid'));
+});
+
+$(document).on("click", ".btn-out", function() {
+    window.location.reload();
 });
 
 $(document).on("submit", ".Add_RoomOnline", function(e) {
@@ -480,8 +493,8 @@ $(document).on("submit", ".Add_RoomOnline", function(e) {
         cache: false,
         async: false,
         success: function(data) {
-            //console.log(data);
-            if (data > 0) {
+            console.log(data);
+            if (data != 2) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -490,7 +503,19 @@ $(document).on("submit", ".Add_RoomOnline", function(e) {
                     timer: 1500
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {
-                        window.location.reload();
+                        //window.location.reload();
+                    }
+                })
+            }else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'ข้อมูลซ้ำ มีในระบบแล้ว',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        //window.location.reload();
                     }
                 })
             }
@@ -528,7 +553,7 @@ $(document).on("submit", ".Update_RoomOnline", function(e) {
 });
 
 $(document).on("submit", ".FormDeleteRoomOnline", function(e) {
-    e.preventDefault(e);
+    e.preventDefault(e);    
     $.post("../../admin/ConAdminRoomOnline/DeleteRoomOnline", { roomid: $("#del_roomon_id").val() }, function(data, status) {
         if (data == 1) {
             Swal.fire({
