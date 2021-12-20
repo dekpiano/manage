@@ -8,6 +8,7 @@ var  $title = "แผงควบคุม";
 		parent::__construct();
 
         $this->DBSKJ = $this->load->database('skj', TRUE);
+        $this->DBPERS = $this->load->database('personnel', TRUE);
     }
 
 
@@ -89,13 +90,22 @@ var  $title = "แผงควบคุม";
         $this->load->view('user/layout/FooterUser.php');
     }
 
+    //-----ห้องเรียนออนไลน์ ------
     public function LearningOnline(){
         $data['lear'] =	$this->DBSKJ->get('tb_learning')->result(); //กลุ่มสาระ
          $data['title'] = "ห้องเรียนออนไลน์";
          $data['description'] = "ห้องเรียนออนไลน์";  
-         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";        
+         $data['room'] = $this->db->select('skjacth_academic.tb_room_online.*,
+                                            skjacth_personnel.tb_personnel.pers_prefix,
+                                            skjacth_personnel.tb_personnel.pers_firstname,
+                                            skjacth_personnel.tb_personnel.pers_lastname')
+                                            ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_room_online.roomon_teachid')
+                                ->where('roomon_classlevel',$this->input->get('s'))
+                                ->from('tb_room_online')
+                                ->get()->result();
          $this->load->view('user/layout/HeaderUser.php',$data);
-         $this->load->view('user/PageLearningOnline.php');
+         $this->load->view('user/LearnOnline/PageLearnOnlineDetail.php');
          $this->load->view('user/layout/FooterUser.php');
      }
 
