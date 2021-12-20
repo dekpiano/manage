@@ -105,7 +105,7 @@ var  $title = "แผงควบคุม";
          $data['description'] = "ห้องเรียนออนไลน์";  
          $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
          $this->load->view('user/layout/HeaderUser.php',$data);
-         $this->load->view('user/PageLearningOnlineDetail.php');
+         $this->load->view('user/LearnOnline/PageLearnOnlineDetail.php');
          $this->load->view('user/layout/FooterUser.php');
      }
 

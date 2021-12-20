@@ -69,6 +69,7 @@ $route['Admin/Acade/RegisterSubject'] = "admin/ConAdminRegisterSubject/AdminRegi
 $route['Admin/Acade/ExtraSubject'] = "admin/ConAdminExtraSubject";
 $route['Admin/Acade/SettingSystem'] = "admin/ConAdminExtraSubject/SystemMainExtraSubject";
 $route['Admin/Acade/Report'] = "admin/ConAdminExtraSubject/ExtraReport";
+$route['Admin/Acade/RoomOnline'] = "admin/ConAdminRoomOnline/RoomOnlineMain";
 
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
 
@@ -119,6 +120,6 @@ $route['StudentsList'] = "user/ConStudents/StudentsList";
 $route['ClassSchedule'] = "user/ConStudents/ClassSchedule";
 
 $route['LearningOnline'] = "user/ConStudents/LearningOnline";
-$route['LearningOnline/(:any)'] = "user/ConStudents/LearningOnline/$1";
+$route['LearningOnline/(:any)'] = "user/ConStudents/LearningOnlineDetail/$1";
 
 $route['ReportLearnOnline'] = "user/ConStudents/PageReportLearnOnline";

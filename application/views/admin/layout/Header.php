@@ -145,7 +145,9 @@
                                 <!--//submenu-arrow-->
                             </a>
                             <!--//nav-link-->
-                            <div id="submenu-2" class="collapse submenu submenu-2 <?=$this->uri->segment('2')=="Acade" ? "show" :""?>" data-bs-parent="#menu-accordion">
+                            <div id="submenu-2"
+                                class="collapse submenu submenu-2 <?=$this->uri->segment('2')=="Acade" ? "show" :""?>"
+                                data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="AcademicResult" ? "active" :""?>"
@@ -161,13 +163,19 @@
                                             href="<?=base_url('Admin/Acade/ExamSchedule');?>">ตารางสอบ</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ClassRoom" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/ClassRoom');?>">ห้องเรียน / ที่ปรึกษา</a></li>
+                                            href="<?=base_url('Admin/Acade/ClassRoom');?>">ห้องเรียน / ที่ปรึกษา</a>
+                                    </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="Students" ? "active" :""?>"
                                             href="<?=base_url('Admin/Acade/Students');?>">นักเรียน</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/ExtraSubject');?>">ลงทะเบียนวิชาเพิ่มเติม</a></li>
+                                            href="<?=base_url('Admin/Acade/ExtraSubject');?>">ลงทะเบียนวิชาเพิ่มเติม</a>
+                                    </li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/RoomOnline');?>">ห้องเรียนออนไลน์</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -206,7 +214,7 @@
                                     <li class="submenu-item ">
                                         <a class="submenu-link <?=$this->uri->segment('5')=="Setting" ? "active" :""?>"
                                             href="<?=base_url('Admin/Affairs/StudentSupport/HomeVisit/Setting')?>">จัดการระบบเยี่ยมบ้าน/SDQ</a>
-                                       
+
                                     </li>
                                 </ul>
                             </div>
