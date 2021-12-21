@@ -2,9 +2,9 @@
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
 
-            <h3>ห้องเรียนออนไลน์</h3>
+            <h3 class="text-center mt-3">ห้องเรียนออนไลน์</h3>
          
-            <form class="row g-3" action="<?=base_url('LearningOnline')?>" method="get">
+            <form class="row g-3 justify-content-center" action="<?=base_url('LearningOnline')?>" method="get">
                 <div class="col-4">
                     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="s">
                         <option value="">เลือกห้องเรียน</option>
@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-body">
                    
-                        <table class="table table-striped" id="example">
+                        <table class="table table-hover display" id="TB-roomonline" style="width:100%">
                             <thead>
                                 <tr>
                                     <th scope="col">รหัสวิชา</th>

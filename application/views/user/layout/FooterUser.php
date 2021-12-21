@@ -1,7 +1,7 @@
 </div>
 <!--//app-wrapper-->
 
-<!-- <script src="<?=base_url();?>assets/plugins/jquery-3.4.1.min.js"></script> -->
+<script src="<?=base_url();?>assets/plugins/jquery-3.4.1.min.js"></script>
 <!-- Javascript -->
 <script src="<?=base_url();?>assets/plugins/popper.min.js"></script>
 <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -13,15 +13,17 @@
 
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Page Specific JS -->
 <script src="<?=base_url();?>assets/js/app.js"></script>
 
 <script>
-$(document).ready(function() {
-    $('#example').DataTable();
-});
+    $('#TB-roomonline').DataTable({
+        "responsive": true,
+    });
 </script>
 <?php if($this->session->flashdata('msg') == 'OK'):?>
 <script>

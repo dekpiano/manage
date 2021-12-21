@@ -6,11 +6,14 @@
 <script src="<?=base_url();?>assets/plugins/popper.min.js"></script>
 <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -25,11 +28,11 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 
 <script>
 $('#example').DataTable({
-    "lengthMenu": [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"]
-    ]
+    "responsive": true,
+      "autoWidth": true,
+      "ordering": false,
 });
+
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {

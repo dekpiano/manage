@@ -98,20 +98,41 @@ var  $title = "หน้าแรก";
         $DBskj = $this->load->database('skj', TRUE); 
         $data['lean'] = $DBskj->where('lear_id',$idlear)->get('tb_learning')->result();
         $data['IDlear'] = $idlear;
+        $check_guide = $this->session->userdata('login_id');
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
-        $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
-                                                 skjacth_personnel.tb_personnel.pers_id,
-                                                skjacth_personnel.tb_personnel.pers_prefix,
-                                                skjacth_personnel.tb_personnel.pers_firstname,
-                                                skjacth_personnel.tb_personnel.pers_lastname")
-                                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
-                                        ->where('seplan_learning',$idlear)
-                                        ->group_by(array('seplan_coursecode','pers_id'))
-                                        ->get('tb_send_plan')->result();
-        //echo '<pre>'; print_r($data['planNew']); exit();
-        $data['checkplan'] = $this->db->select("*")
-                            ->where('seplan_learning',$idlear)
-                            ->get('tb_send_plan')->result();
+        if($check_guide == "pers_052"){
+            $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_id,
+                                            skjacth_personnel.tb_personnel.pers_prefix,
+                                            skjacth_personnel.tb_personnel.pers_firstname,
+                                            skjacth_personnel.tb_personnel.pers_lastname")
+                                            ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                                            ->like('seplan_namesubject',"แนะแนว")
+                                    ->group_by(array('seplan_coursecode','pers_id'))
+                                    ->get('tb_send_plan')->result();
+            $data['checkplan'] = $this->db->select("*")
+                                    ->where('seplan_learning',"lear_009")
+                                    ->or_where('seplan_learning',"lear_001")
+                                    ->or_where('seplan_learning',"lear_003")
+                                    ->get('tb_send_plan')->result();
+        }else{
+            $data['planNew'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_id,
+                                            skjacth_personnel.tb_personnel.pers_prefix,
+                                            skjacth_personnel.tb_personnel.pers_firstname,
+                                            skjacth_personnel.tb_personnel.pers_lastname")
+                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                                ->where('seplan_learning',$idlear)
+                                ->group_by(array('seplan_coursecode','pers_id'))
+                                ->get('tb_send_plan')->result();
+            $data['checkplan'] = $this->db->select("*")
+                                ->where('seplan_learning',$idlear)
+                                ->get('tb_send_plan')->result();
+        }
+       
+      
+        //echo '<pre>'; print_r($this->session->userdata('login_id')); exit();
+      
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_check_lear.php');
