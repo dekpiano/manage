@@ -99,7 +99,8 @@ var  $title = "แผงควบคุม";
          $data['room'] = $this->db->select('skjacth_academic.tb_room_online.*,
                                             skjacth_personnel.tb_personnel.pers_prefix,
                                             skjacth_personnel.tb_personnel.pers_firstname,
-                                            skjacth_personnel.tb_personnel.pers_lastname')
+                                            skjacth_personnel.tb_personnel.pers_lastname,
+                                            skjacth_personnel.tb_personnel.pers_img')
                                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_room_online.roomon_teachid','LEFT')
                                 ->where('roomon_classlevel',$this->input->get('s'))
                                 ->from('tb_room_online')

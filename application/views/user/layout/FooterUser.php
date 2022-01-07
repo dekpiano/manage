@@ -21,8 +21,9 @@
 <script src="<?=base_url();?>assets/js/app.js"></script>
 
 <script>
-    $('#TB-roomonline').DataTable({
+    $('.TB-roomonline').DataTable({
         "responsive": true,
+        "order": [[ 2, "asc" ]]
     });
 </script>
 <?php if($this->session->flashdata('msg') == 'OK'):?>
