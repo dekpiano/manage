@@ -24,7 +24,10 @@ class Welcome extends CI_Controller {
 		$this->session->sess_destroy();
 	
 		$data['title'] = "หน้าแรก";
-        $data['description'] = "หน้าหลัก"; 
+        $data['description'] = "หน้าแรก";  
+        $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
+		
 		$this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/PageWelcomeAcademic.php');
 		$this->load->view('user/layout/FooterUser.php');

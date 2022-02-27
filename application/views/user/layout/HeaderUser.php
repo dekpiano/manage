@@ -9,8 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="ระบบงานวิชาการสำหรับนักเรียน">
+    <meta name="description" content="<?=$description?>">
     <meta name="author" content="Dekpiano">
+
+    <meta property="og:url"
+        content="<?=$full_url?>" />
+    <meta property="og:type" content="Education" />
+    <meta property="og:title" content="<?=$title?> | ระบบงานวิชาการสำหรับนักเรียน" />
+    <meta property="og:description" content="<?=$description?>" />
+    <meta property="og:image"
+        content="<?=$banner?>" />
+
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- FontAwesome JS-->
@@ -23,6 +32,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet">
+
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQZZ1NJJMV"></script>
@@ -147,9 +158,12 @@
                                     <li class="submenu-item "><a
                                             class="submenu-link <?=$this->uri->segment(1) == 'ClassSchedule'?'active':''?> "
                                             href="<?=base_url('ClassSchedule');?>">ตารางเรียน</a></li>
-                                    <li class="submenu-item"><a
+                                    <!-- <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment(1) == 'ExamSchedule'?'active':''?>"
-                                            href="<?=base_url('ExamSchedule');?>">ตารางสอบ</a></li>
+                                            href="<?=base_url('ExamSchedule');?>">ตารางสอบ</a></li> -->
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment(1) == 'ExamScheduleOnline'?'active':''?>"
+                                            href="<?=base_url('ExamScheduleOnline');?>">ตารางสอบออนไลน์</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment(1) == 'StudentsList'?'active':''?>"
                                             href="<?=base_url('StudentsList');?>">รายชื่อนักเรียน</a></li>
@@ -260,9 +274,9 @@
                         <!--//form-group-->
                         <div class="password mb-3">
                             <label class="sr-only" for="password">Password</label>
-                            <input id="password" name="password" type="password"
-                                class="form-control signin-password" placeholder="Password" required="required">
-                          
+                            <input id="password" name="password" type="password" class="form-control signin-password"
+                                placeholder="Password" required="required">
+
                         </div>
                         <!--//form-group-->
                         <div class="text-center">
@@ -271,7 +285,7 @@
                         </div>
                     </form>
                 </div>
-             
+
             </div>
         </div>
     </div>

@@ -16,6 +16,7 @@ var  $title = "แผงควบคุม";
         $data['title'] = "หน้าแรก";
         $data['description'] = "หน้าหลัก";     
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/Students/PageStudentsHome.php');
@@ -28,6 +29,11 @@ var  $title = "แผงควบคุม";
     }
 
     public function Home(){      
+        
+        $data['title'] = "หน้าแรก";
+        $data['description'] = "หน้าแรก";  
+        $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
         
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('user/layout/Header.php',$data);
@@ -44,7 +50,8 @@ var  $title = "แผงควบคุม";
         $data['title'] = "รายชื่อนักเรียนและที่ปรึกษา";
         $data['description'] = "ตรวจสอบรายชื่อนักเรียนและครูที่ปรึกษา";
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        
+        $data['banner'] = "";
+
         $data['selStudent'] = $this->db->select('StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName')->from('tb_students')->where('StudentClass','ม.4/1')->get()->result();
         
         $this->load->view('user/layout/HeaderUser.php',$data);
@@ -61,9 +68,23 @@ var  $title = "แผงควบคุม";
         $data['title'] = "ตารางสอบ";
         $data['description'] = "ตารางสอบ";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
+
         $data['Exam'] = $this->db->order_by('exam_id','DESC')->limit(6)->get('tb_exam_schedule')->result();
         $this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/PageExamSchedule.php');
+        $this->load->view('user/layout/FooterUser.php');
+    }
+
+    public function ExamScheduleOnline(){
+        $data['title'] = "ตารางสอบ Online";
+        $data['description'] = "ตารางสอบ Online";  
+        $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = base_url("uploads/banner/ExamScheduleOnline/banner.png");
+
+        $data['Exam'] = $this->db->order_by('exam_id','DESC')->limit(6)->get('tb_exam_schedule')->result();
+        $this->load->view('user/layout/HeaderUser.php',$data);
+        $this->load->view('user/PageExamScheduleOnline.php');
         $this->load->view('user/layout/FooterUser.php');
     }
 
@@ -71,6 +92,8 @@ var  $title = "แผงควบคุม";
         $data['title'] = "ตารางเรียน";
         $data['description'] = "ตารางเรียน";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
+        
         $data['schedule'] = $this->db->order_by('schestu_id','DESC')->get('tb_class_schedule')->result();
         $this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/PageClassSchedule.php');
@@ -85,6 +108,8 @@ var  $title = "แผงควบคุม";
         $data['title'] = "ตารางเรียน";
         $data['description'] = "ตารางเรียน";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
+
         $this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/PageClassSchedule.php');
         $this->load->view('user/layout/FooterUser.php');
@@ -96,6 +121,8 @@ var  $title = "แผงควบคุม";
          $data['title'] = "ห้องเรียนออนไลน์";
          $data['description'] = "ห้องเรียนออนไลน์";  
          $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";        
+         $data['banner'] = "";
+         
          $data['room'] = $this->db->select('skjacth_academic.tb_room_online.*,
                                             skjacth_personnel.tb_personnel.pers_prefix,
                                             skjacth_personnel.tb_personnel.pers_firstname,
@@ -116,6 +143,8 @@ var  $title = "แผงควบคุม";
          $data['title'] = "ห้องเรียนออนไลน์";
          $data['description'] = "ห้องเรียนออนไลน์";  
          $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+         $data['banner'] = "";
+
          $this->load->view('user/layout/HeaderUser.php',$data);
          $this->load->view('user/LearnOnline/PageLearnOnlineDetail.php');
          $this->load->view('user/layout/FooterUser.php');
@@ -127,6 +156,8 @@ var  $title = "แผงควบคุม";
         $data['title'] = "แบบรายงานการเรียนการสอนออนไลน์";
         $data['description'] = "แบบรายงานการเรียนการสอนออนไลน์";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
+
         $this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/PageReportLearnOnline.php');
         $this->load->view('user/layout/FooterUser.php');

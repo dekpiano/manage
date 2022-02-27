@@ -15,6 +15,11 @@ var  $title = "แผงควบคุม";
 
     public function Home(){      
         
+        $data['title'] = "หน้าแรก";
+        $data['description'] = "หน้าแรก";  
+        $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $data['banner'] = "";
+
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('user/layout/Header.php',$data);
         $this->load->view('user/PageHome.php');

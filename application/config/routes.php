@@ -115,6 +115,7 @@ $route['Student/Extra/CheckRegister'] = "student/ConStudentExtraSubject/CheckReg
 
 // User
 $route['ExamSchedule'] = "user/ConStudents/ExamSchedule";
+$route['ExamScheduleOnline'] = "user/ConStudents/ExamScheduleOnline";
 $route['Students'] = "user/ConStudents";
 $route['StudentsList'] = "user/ConStudents/StudentsList";
 $route['ClassSchedule'] = "user/ConStudents/ClassSchedule";
