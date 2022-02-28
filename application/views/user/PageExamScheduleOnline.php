@@ -11,12 +11,12 @@
 
                 </section>
                 <div class="container text-center">
-                    <?php if (date("Y-m-d") == "2022-02-27"): ?>
+                    <?php if (date("Y-m-d") == "2022-02-28"): ?>
                     <div id="28">
                         <?php $this->load->view('user/ExamSchedule/28.php'); ?>
                     </div>
-                    <?php elseif(date("Y-m-d") == "2022-03-01"):?>
-
+                    <?php elseif(date("Y-m-d") == "2022-03-01" || date("Y-m-d") == "2022-02-29"):?>
+                        <h2><div class="badge bg-danger">ตารางสอบปลายภาคเรียน วันที่ 1 มีนาคม 2564 จะเปิดสอบในวันพรุ่งนี้ กรุณารอ...</div></h2>
                     <div id="1">
                         <?php $this->load->view('user/ExamSchedule/1.php'); ?>
                     </div>
@@ -30,7 +30,7 @@
                     </div>
                     <?php else: ?>
                     <div class="text-center">
-                        <h2><span class="badge bg-danger">ตารางสอบปลายภาคเรียน จะแสดงตามวันที่สอบ กรุณารอ...</span></h2>
+                        <h2><span class="badge bg-danger">ตารางสอบปลายภาคเรียน จะแสดงตามวันที่สอบ กรุณารอในวันพรุ่งนี้...</span></h2>
                     </div>
                     <?php endif;?>
                 </div>

@@ -104,7 +104,7 @@
                                             <th scope="col">ชื่อวิชา</th>
                                             <th scope="col">ระดับชั้น</th>
                                             <th scope="col">ห้องส่งงาน</th>
-                                            <!-- <th scope="col">ห้องเรียนออนไลน์</th> -->
+                                            <th scope="col">ห้องเรียนออนไลน์</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -137,14 +137,14 @@
                                                         href="<?=$v_room->roomon_linkroom;?>"><span
                                                             class="text-white"><?=$subb[0]?></span></a></span>
                                             </td>
-                                            <!-- <td>
+                                            <td>
                                         <?php $sub = explode("//",$v_room->roomon_liveroom);
                             $subb = explode('.',@$sub[1]);
                             ?>
                                         <span class="badge rounded-pill bg-success "> <a target="_blank"
                                                 href="<?=$v_room->roomon_liveroom;?>"><span
                                                     class="text-white"><?=$subb[0]?></span></a></span>
-                                    </td> -->
+                                    </td>
                                         </tr>
                                         <?php endif; ?>
                                         <?php endforeach; ?>

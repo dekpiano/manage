@@ -20,7 +20,7 @@
 <!-- Page Specific JS -->
 <script src="<?=base_url();?>assets/js/app.js"></script>
 
-<script src="<?=base_url();?>assets/js/CountdownTimer.js?v=13"></script>
+<script src="<?=base_url();?>assets/js/CountdownTimer.js?v=16"></script>
 
 <script>
     $('.TB-roomonline').DataTable({

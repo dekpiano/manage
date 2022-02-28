@@ -101,7 +101,7 @@
                         </td>
                         <td>
                             <div class="3t1130"></div><a class="show-3t1130" style="display: none;" target="_blank"
-                                href="http://"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
+                                href="https://docs.google.com/forms/d/e/1FAIpQLSeab7K-LnPtQ8yiAKzM66WAPO5AboETgqUALJIApOADrXtMpw/viewform?usp=sf_link"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
                                     เข้าสอบ</span></a>
                         </td>
                         <td>
@@ -116,7 +116,7 @@
                         </td>
                         <td>
                             <div class="3t1400"></div><a class="show-3t1400" style="display: none;" target="_blank"
-                                href="http://"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
+                                href="https://docs.google.com/forms/d/e/1FAIpQLSe-BfiTxoc7j6LlsnOQAgxfEJLT2YcsygAZn_7RmaIed3FelA/viewform?usp=sf_link"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
                                     เข้าสอบ</span></a>
                         </td>                      
                     </tr>
@@ -196,8 +196,7 @@
                         <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;ประวัติศาสตร์ 4&quot;}">
                             หน้าที่พลเมือง 4
                         </td>
-                        <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;สุขศึกษา 4 &quot;}"> ศิลปะ 4
-                            (นาฏศิลป์)</td>
+                        <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;สุขศึกษา 4 &quot;}">   ศิลปะ 3 (ทัศนศิลป์)</td>
                         <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;สังคมศึกษา 2&quot;}"> สนทนาภาษาจีน 2
                         </td>
                     </tr>
@@ -221,12 +220,12 @@
                         </td>
                         <td>
                             <div class="3t1130"></div><a class="show-3t1130" style="display: none;" target="_blank"
-                                href="http://"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
+                                href="https://docs.google.com/forms/d/e/1FAIpQLScqgCCSpS9cdGVAZqKWq585m_ND1lIvaQp9dDBsHMNfL_kAAg/viewform?usp=sf_link"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
                                     เข้าสอบ</span></a>
                         </td>
                         <td>
                             <div class="3t1300"></div><a class="show-3t1300" style="display: none;" target="_blank"
-                                href="http://"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
+                                href="https://forms.gle/o1H6kbpcT7m3vxE66"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
                                     เข้าสอบ</span></a>
                         </td>
                         <td>
