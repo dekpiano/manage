@@ -116,6 +116,7 @@ class Control_login extends CI_Controller {
 		$data['login_button'] = $login_button;
 		$data['title'] = "Login สำหรับครูผู้สอน";
 		$data['description'] = "Login สำหรับครูผู้สอน";  
+		$data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	
 		$this->load->view('user/layout/HeaderUser.php',$data);
 		$this->load->view('user/Login/PageLoginTeacher.php');
@@ -173,6 +174,8 @@ class Control_login extends CI_Controller {
 			$data['login_button'] = $login_button;
 			$data['title'] = "Login สำหรับครูผู้สอน";
 			$data['description'] = "Login สำหรับครูผู้สอน";  
+			$data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+			$data['banner'] = "";
 
 			// $this->load->view('user/layout/HeaderUser.php',$data);
 			// $this->load->view('user/Login/PageLoginTeacher.php');

@@ -258,7 +258,7 @@
                         </td>
                         <td>
                             <div class="t1130"></div><a class="show-t1130" style="display: none;" target="_blank"
-                                href="http://"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
+                                href="https://forms.gle/ans1JmaokUuhAseh8"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
                                     เข้าสอบ</span></a>
                         </td>
                         <td>

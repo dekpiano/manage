@@ -328,7 +328,7 @@
                        
                         <td>
                             <div class="1t1130"></div><a class="show-1t1130" style="display: none;" target="_blank"
-                                href="http://"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
+                                href="https://forms.gle/QFQaTihPZgseznVd8"><span class="badge rounded-pill bg-primary"><i class="bi bi-pencil"></i>
                                     เข้าสอบ</span></a>
                         </td>
                         <td>
