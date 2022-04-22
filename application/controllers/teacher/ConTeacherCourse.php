@@ -26,9 +26,13 @@ var  $title = "หน้าแรก";
     public function Course(){      
         $data['title'] = "แผนการสอน";
         $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $CheckYear = $this->db->get('tb_send_plan_setup')->result();
         $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
         $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->get('tb_send_plan')->result();
-        $data['planNew'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->group_by('seplan_coursecode')->get('tb_send_plan')->result();
+        $data['planNew'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))
+        ->where('seplan_year',$CheckYear[0]->seplanset_year)
+        ->where('seplan_term',$CheckYear[0]->seplanset_term)
+        ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
      //  echo "<pre>"; print_r($data['plan']); exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
@@ -144,9 +148,13 @@ var  $title = "หน้าแรก";
        $pers = $this->DBPers->select('pers_prefix,pers_firstname,pers_lastname,pers_id,pers_position,pers_learning')
                         ->where('pers_id',$this->input->post('seplan_usersend'))
                         ->get('tb_personnel')->result();
+        $CheckYear = $this->db->get('tb_send_plan_setup')->result();
         $Checkplan = $this->db->where('seplan_coursecode',$this->input->post('seplan_coursecode')) 
-                        ->where('seplan_usersend',$this->input->post('seplan_usersend'))   
+                        ->where('seplan_usersend',$this->input->post('seplan_usersend'))  
+                        ->where('seplan_year',$CheckYear[0]->seplanset_year)
+                        ->where('seplan_term',$CheckYear[0]->seplanset_term)
                         ->get('tb_send_plan')->num_rows();
+        
         if($Checkplan <= 0){
 
             $insert = array();
@@ -182,7 +190,10 @@ var  $title = "หน้าแรก";
            skjacth_academic.tb_send_plan.*')
            ->from('skjacth_academic.tb_send_plan')
            ->join('skjacth_personnel.tb_personnel','skjacth_academic.tb_send_plan.seplan_usersend = skjacth_personnel.tb_personnel.pers_id')
-           ->where('seplan_ID',$result)->get()->result();
+           ->where('seplan_ID',$result)
+           ->where('seplan_year',$CheckYear[0]->seplanset_year)
+           ->where('seplan_term',$CheckYear[0]->seplanset_term)
+           ->get()->result();
            //$this->output->set_content_type('application/json')->set_output($result);
             echo json_encode(array($json,"msg"=>"OK"));
         
@@ -271,6 +282,7 @@ var  $title = "หน้าแรก";
                             ->where($array)
                             ->order_by('pers_learning')
                             ->get('tb_personnel')->result();
+    $CheckYear = $this->db->get('tb_send_plan_setup')->result();
     $data['Plan'] = $this->db->select('skjacth_personnel.tb_personnel.pers_id,
                                         skjacth_personnel.tb_personnel.pers_prefix,
                                         skjacth_personnel.tb_personnel.pers_firstname,
@@ -279,6 +291,8 @@ var  $title = "หน้าแรก";
                                         skjacth_academic.tb_send_plan.*')
                                         ->from('skjacth_academic.tb_send_plan')
                                         ->join('skjacth_personnel.tb_personnel','skjacth_academic.tb_send_plan.seplan_usersend = skjacth_personnel.tb_personnel.pers_id','LEFT')
+                                        ->where('seplan_year',$CheckYear[0]->seplanset_year)
+                                        ->where('seplan_term',$CheckYear[0]->seplanset_term)
                                         ->group_by('seplan_coursecode,pers_id')->get()->result();
     //print_r($date['SetPlan']); exit();
     $this->load->view('teacher/layout/header_teacher.php',$data);

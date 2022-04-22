@@ -12,21 +12,20 @@
 
                 </section>
                 <div class="container text-center">
-                    <?php if (date("Y-m-d") == "2022-02-28"): ?>
+                    <?php if (1): ?>
                     <div id="28">
                         <?php $this->load->view('user/ExamSchedule/28.php'); ?>
                     </div>
-                    <?php elseif(date("Y-m-d") == "2022-02-01"):?>
+                   
 
                     <div id="1">
                         <?php $this->load->view('user/ExamSchedule/1.php'); ?>
                     </div>
-                    <?php elseif(date("Y-m-d") == "2022-03-01"):?>
-
+                   
                     <div id="2">
                         <?php $this->load->view('user/ExamSchedule/2.php'); ?>
                     </div>
-                    <?php elseif(date("Y-m-d") == "2022-03-03"):?>                    
+                                    
                     <div id="3">
                         <?php $this->load->view('user/ExamSchedule/3.php'); ?>
                     </div>
