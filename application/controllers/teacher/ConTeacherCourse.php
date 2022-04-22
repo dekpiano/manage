@@ -33,11 +33,26 @@ var  $title = "หน้าแรก";
         ->where('seplan_year',$CheckYear[0]->seplanset_year)
         ->where('seplan_term',$CheckYear[0]->seplanset_term)
         ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
-     //  echo "<pre>"; print_r($data['plan']); exit();
-        
+     //  echo "<pre>"; print_r($data['plan']); exit();        
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_main.php');
+        $this->load->view('teacher/layout/footer_teacher.php');
+        
+    }
+
+    public function LoadPlan(){      
+        $data['title'] = "ดาวน์โหลดแผนการสอน";
+        $data['CheckHomeVisitManager'] = $this->CheckHomeVisitManager;
+        $CheckYear = $this->db->get('tb_send_plan_setup')->result();
+        $data['OnOff'] = $this->db->select('*')->get('tb_send_plan_setup')->result();
+        $data['plan'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))->get('tb_send_plan')->result();
+        $data['planNew'] = $this->db->where('seplan_usersend',$this->session->userdata('login_id'))
+        ->group_by('seplan_coursecode')->get('tb_send_plan')->result();
+     //  echo "<pre>"; print_r($data['plan']); exit();        
+        $this->load->view('teacher/layout/header_teacher.php',$data);
+        $this->load->view('teacher/layout/navbar_teaher.php');
+        $this->load->view('teacher/course/plan/plan_loadplan.php');
         $this->load->view('teacher/layout/footer_teacher.php');
         
     }

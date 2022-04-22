@@ -20,9 +20,9 @@
             <li><a href="#TeacherLarn" aria-expanded="false" data-toggle="collapse"> <i
                         class="icon-interface-windows"></i>งานครูผู้สอน </a>
                 <ul id="TeacherLarn" class="collapse list-unstyled <?=$this->uri->segment(2) == 'Teaching' ? 'show' : '' ?>">
-                    <li class="<?=$this->uri->segment(3) == 'CheckHomeRoom' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckHomeRoom');?>">เช็ตชื่อโฮมรูม</a></li>
+                    <!-- <li class="<?=$this->uri->segment(3) == 'CheckHomeRoom' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckHomeRoom');?>">เช็ตชื่อโฮมรูม</a></li>
                     <li class="<?=$this->uri->segment(3) == 'CheckTeaching' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/CheckTeaching');?>">เช็ดชื่อการสอน</a></li>
-                    <li class="<?=$this->uri->segment(3) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li>
+                    <li class="<?=$this->uri->segment(3) == 'RoomOnlineMain' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Teaching/RoomOnlineMain');?>">ห้องเรียนออนไลน์</a></li> -->
                 </ul>
             </li>
             <li class=" <?=$this->uri->segment(2) == 'Course' ? 'active' : '' ?>">
@@ -33,7 +33,10 @@
                     <?php if($this->session->userdata('login_id') == 'pers_003' || $this->session->userdata('login_id') == 'pers_002') : ?>
                     <?php else : ?>
                     <li><a href="<?=base_url('Teacher/Course');?>"><i class="fa fa-file" aria-hidden="true"></i>
-                            แผนการสอน</a>
+                            ส่งแผนการสอน</a>
+                    </li>
+                    <li><a href="<?=base_url('Teacher/Course/LoadPlan');?>"><i class="fa fa-file" aria-hidden="true"></i>
+                           ดาวน์โหลดแผน</a>
                     </li>
                     <?php endif; ?>
 
