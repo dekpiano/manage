@@ -35,7 +35,7 @@ class ConAdminClassRoom extends CI_Controller {
         ->get()->result();
 
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/AdminClassRoom/AdminClassRoomMain.php');
+        $this->load->view('admin/Academic/AdminClassRoom/AdminClassRoomMain.php');
         $this->load->view('admin/layout/Footer.php');
             
     }

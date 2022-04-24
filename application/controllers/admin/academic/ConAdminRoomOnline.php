@@ -30,7 +30,7 @@ var  $title = "หน้าแรก";
         ->order_by('pers_learning')
         ->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/AdminRoomOnline/AdminRoomOnlineMain.php');
+        $this->load->view('admin/Academic/AdminRoomOnline/AdminRoomOnlineMain.php');
         $this->load->view('admin/layout/Footer.php');     
     }
 

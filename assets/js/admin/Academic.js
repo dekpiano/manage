@@ -14,6 +14,68 @@ $(document).ready(function() {
         ]
     });
 
+    
+// บทบาทในวิชาการ
+$(document).on("change", "#set_executive", function() {
+    
+    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
+        if (data == 1) {
+            alertify.success('เลือกหัวหน้างานสำเร็จ');
+        } else {
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }
+    });
+});
+
+new SlimSelect({
+    select: '#set_executive'
+  })
+
+$(document).on("change", "#set_deputy", function() {    
+    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
+        if (data == 1) {
+            alertify.success('เลือกหัวหน้างานสำเร็จ');
+        } else {
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }
+    });
+});
+
+new SlimSelect({
+    select: '#set_deputy'
+  })
+
+$(document).on("change", "#set_leader", function() {    
+    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
+        if (data == 1) {
+            alertify.success('เลือกหัวหน้างานสำเร็จ');
+        } else {
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }
+    });
+});
+
+new SlimSelect({
+    select: '#set_leader'
+  })
+
+$(document).on("change", "#set_admin", function() {    
+    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", { TeachID: $(this).val() }, function(data, status) {
+        if (data == 1) {
+            alertify.success('เลือกหัวหน้างานสำเร็จ');
+        } else {
+            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+        }
+    });
+});
+
+new SlimSelect({
+    select: '#set_admin'
+  })
+
+
+
+
     $('#AddClassRoom').on('submit', function(e) {
         e.preventDefault();
         var formadd = $('#AddClassRoom').serialize();
@@ -572,3 +634,6 @@ $(document).on("submit", ".FormDeleteRoomOnline", function(e) {
         }
     });
 });
+
+
+

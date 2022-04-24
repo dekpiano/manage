@@ -55,22 +55,24 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['ClosePage'] = "welcome/ClosePage";
-// admin
+// งานวิชาการ
 $route['LoginAdmin'] = "Control_login/LoginAdmin";
-$route['Admin/Home'] = "admin/ConAdminHome/AdminHome";
-$route['Admin/Acade/AcademicResult'] = "admin/ConAdminAcademinResult/AdminAcademinResultMain";
-$route['Admin/Acade/ClassSchedule'] = "admin/ConAdminClassSchedule/AdminClassScheduleMain";
-$route['Admin/ClassSchedule/add'] = "admin/ConAdminClassSchedule/add";
-$route['Admin/Acade/ExamSchedule'] = "admin/ConAdminExamSchedule/AdminExamScheduleMain";
-$route['Admin/ExamSchedule/add'] = "admin/ConAdminExamSchedule/add";
-$route['Admin/Acade/ClassRoom'] = "admin/ConAdminClassRoom/AdminClassMain";
-$route['Admin/Acade/Students'] = "admin/ConAdminStudents/AdminStudentsMain";
-$route['Admin/Acade/RegisterSubject'] = "admin/ConAdminRegisterSubject/AdminRegisterSubjectMain";
-$route['Admin/Acade/ExtraSubject'] = "admin/ConAdminExtraSubject";
-$route['Admin/Acade/SettingSystem'] = "admin/ConAdminExtraSubject/SystemMainExtraSubject";
-$route['Admin/Acade/Report'] = "admin/ConAdminExtraSubject/ExtraReport";
-$route['Admin/Acade/RoomOnline'] = "admin/ConAdminRoomOnline/RoomOnlineMain";
+$route['Admin/Home'] = "admin/academic/ConAdminHome/AdminHome";
+$route['Admin/Acade/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
+$route['Admin/Acade/ClassSchedule'] = "admin/academic/ConAdminClassSchedule/AdminClassScheduleMain";
+$route['Admin/ClassSchedule/add'] = "admin/academic/ConAdminClassSchedule/add";
+$route['Admin/Acade/ExamSchedule'] = "admin/academic/ConAdminExamSchedule/AdminExamScheduleMain";
+$route['Admin/ExamSchedule/add'] = "admin/academic/ConAdminExamSchedule/add";
+$route['Admin/Acade/ClassRoom'] = "admin/academic/ConAdminClassRoom/AdminClassMain";
+$route['Admin/Acade/Students'] = "admin/academic/ConAdminStudents/AdminStudentsMain";
+$route['Admin/Acade/RegisterSubject'] = "admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectMain";
+$route['Admin/Acade/ExtraSubject'] = "admin/academic/ConAdminExtraSubject";
+$route['Admin/Acade/SettingSystem'] = "admin/academic/ConAdminExtraSubject/SystemMainExtraSubject";
+$route['Admin/Acade/Report'] = "admin/academic/ConAdminExtraSubject/ExtraReport";
+$route['Admin/Acade/RoomOnline'] = "admin/academic/ConAdminRoomOnline/RoomOnlineMain";
+$route['Admin/Acade/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
 
+// งานกิจการนักเรียน
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
 
 // Login

@@ -86,7 +86,7 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="<?=base_url('Logout');?>">Log Out</a></li>
+                                    <li><a class="dropdown-item" href="<?=base_url('LogoutTeacher');?>">Log Out</a></li>
                                 </ul>
                             </div>
                             <!--//app-user-dropdown-->
@@ -179,6 +179,10 @@
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
                                             href="<?=base_url('Admin/Acade/RoomOnline');?>">ห้องเรียนออนไลน์</a>
+                                    </li>
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/AdminRoles');?>">บทบาทในวิชาการ</a>
                                     </li>
                                 </ul>
                             </div>

@@ -39,7 +39,7 @@ class ConAdminExtraSubject extends CI_Controller {
         ->get()->result();
 
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/AdminExtraSubject/AdminExtraSubjectMain.php');
+        $this->load->view('admin/Academic/AdminExtraSubject/AdminExtraSubjectMain.php');
         $this->load->view('admin/layout/Footer.php');
 
         // delete_cookie('username_cookie'); 
@@ -89,7 +89,7 @@ class ConAdminExtraSubject extends CI_Controller {
         $data['title'] = "ตั้งค่าระบบ";
         $data['OnoffSystem'] = $this->db->get('tb_extra_setting')->result();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/AdminExtraSubject/AdminExtraSystemMain.php');
+        $this->load->view('admin/Academic/AdminExtraSubject/AdminExtraSystemMain.php');
         $this->load->view('admin/layout/Footer.php');
 
     }
@@ -167,7 +167,7 @@ class ConAdminExtraSubject extends CI_Controller {
                                         ->where('extra_term',$ExtraSetting[0]->extra_setting_term)
                                         ->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/AdminExtraSubject/AdminExtraReport.php');
+        $this->load->view('admin/Academic/AdminExtraSubject/AdminExtraReport.php');
         $this->load->view('admin/layout/Footer.php');
      }
 

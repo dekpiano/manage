@@ -20,7 +20,7 @@ var  $title = "แผงควบคุม";
         $data['title'] = "ผลการเรียน";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/AdminAcademicResult/AdminAcademicResultMain.php');
+        $this->load->view('admin/Academic/AdminAcademicResult/AdminAcademicResultMain.php');
         $this->load->view('admin/layout/Footer.php');
 
         // delete_cookie('username_cookie'); 
@@ -51,7 +51,7 @@ var  $title = "แผงควบคุม";
         $data['action'] = 'insert_class_schedule';
 
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/AdminClassSchedule/AdminClassScheduleForm.php');
+        $this->load->view('admin/Academic/AdminClassSchedule/AdminClassScheduleForm.php');
         $this->load->view('admin/layout/Footer.php');
 
         // delete_cookie('username_cookie'); 
