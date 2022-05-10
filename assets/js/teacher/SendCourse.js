@@ -244,7 +244,7 @@ $(document).on("change", ".seplan_status1", function() {
 
     $.ajax({
         type: 'POST',
-        url: "../../../teacher/ConTeacherCourse/UpdateStatus1",
+        url: "../../../../teacher/ConTeacherCourse/UpdateStatus1",
         data: { status1: status1, planId: planId },
         dataType: 'json',
         beforeSend: function() {
@@ -288,7 +288,7 @@ $(document).on("change", ".seplan_status2", function() {
 
     $.ajax({
         type: 'POST',
-        url: "../../../teacher/ConTeacherCourse/UpdateStatus2",
+        url: "../../../../teacher/ConTeacherCourse/UpdateStatus2",
         data: { status2: status2, planId: planId },
         dataType: 'json',
         cache: false,
@@ -314,6 +314,117 @@ $(document).on("change", ".seplan_status2", function() {
             alertify.set('notifier', 'position', 'top-right');
             alertify.success('เปลี่ยนสถานะสำเร็จ');
 
+        },
+        error: function(xhr) {
+            alert("Error occured.please try again");
+            console.log(xhr.statusText + xhr.responseText);
+        }
+    });
+});
+
+
+$(document).on("click", ".show_comment1", function() {
+    var planId = $(this).attr('data-planId');
+    //console.log(planId);
+    $.ajax({
+        type: 'POST',
+        url: "../../../../teacher/ConTeacherCourse/CheckComment1",
+        data: { planId: planId },
+        dataType: 'json',
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+
+            $('textarea.seplan_comment1').html(data[0].seplan_comment1);
+            $('#sub_comment1').attr('data-planId', planId);
+
+        },
+        error: function(xhr) {
+            alert("Error occured.please try again");
+            console.log(xhr.statusText + xhr.responseText);
+        }
+    });
+});
+
+$(document).on("click", "#sub_comment1", function() {
+    var planId = $(this).attr('data-planId');
+    var seplan_comment1 = $('#seplan_comment1').val();
+
+    $.ajax({
+        type: 'POST',
+        url: "../../../../teacher/ConTeacherCourse/UpdateComment1",
+        data: { planId: planId, seplan_comment1: seplan_comment1 },
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+
+            if (data == 1) {
+                Swal.fire(
+                    'แจ้งเตือน',
+                    'คุณเพิ่มหมายเหตุเรียบร้อย',
+                    'success'
+                )
+            }
+            $(".form-comment1")[0].reset();
+            $("#addcomment1").modal('hide');
+        },
+        error: function(xhr) {
+            alert("Error occured.please try again");
+            console.log(xhr.statusText + xhr.responseText);
+        }
+    });
+});
+
+
+$(document).on("click", ".show_comment2", function() {
+    var planId = $(this).attr('data-planId');
+
+    $.ajax({
+        type: 'POST',
+        url: "../../../../teacher/ConTeacherCourse/CheckComment2",
+        data: { planId: planId },
+        dataType: 'json',
+        cache: false,
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+
+            $('textarea.seplan_comment2').html(data[0].seplan_comment2);
+            $('#sub_comment2').attr('data-planId', planId);
+
+        },
+        error: function(xhr) {
+            alert("Error occured.please try again");
+            console.log(xhr.statusText + xhr.responseText);
+        }
+    });
+});
+
+$(document).on("click", "#sub_comment2", function() {
+    var planId = $(this).attr('data-planId');
+    var seplan_comment2 = $('#seplan_comment2').val();
+
+    $.ajax({
+        type: 'POST',
+        url: "../../../../teacher/ConTeacherCourse/UpdateComment2",
+        data: { planId: planId, seplan_comment2: seplan_comment2 },
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+
+            if (data == 1) {
+                Swal.fire(
+                    'แจ้งเตือน',
+                    'คุณเพิ่มหมายเหตุเรียบร้อย',
+                    'success'
+                )
+            }
+            $(".form-comment2")[0].reset();
+            $("#addcomment2").modal('hide');
         },
         error: function(xhr) {
             alert("Error occured.please try again");

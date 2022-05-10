@@ -42,7 +42,7 @@
           <script src="<?=base_url()?>assets/js/admin/TeacherProfile.js?v=3"></script>
           <script src="<?=base_url()?>assets/js/admin/passtrength.js?v=1"></script>
           <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
-          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=9"></script>
+          <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=10"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
 
           </body>

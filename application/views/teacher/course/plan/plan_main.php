@@ -29,27 +29,27 @@
         </div>
         <?php endif; ?>
         <div class="recent-updates card">
-                    <div class="card-close">                     
-                      <a target="_blank" href="<?=base_url('uploads/academic/course/คู่มือการส่งแผนการสอนออนไลน์2.0.pdf')?>" class="btn btn-outline-dark">คู่มือการใช้งาน</a>                    
-                    </div>
-                    <div class="card-header">
-                      <h3 class="h4">คำแนะนำ</h3>
-                    </div>
-                    <div class="card-body no-padding">
-                      <!-- Item-->
-                      <div class="item d-flex justify-content-between">
-                        <div class="info d-flex">
-                          <div class="icon"><i class="icon-rss-feed"></i></div>
-                          <div class="title">                          
+            <div class="card-close">
+                <a target="_blank" href="<?=base_url('uploads/academic/course/คู่มือการส่งแผนการสอนออนไลน์2.0.pdf')?>"
+                    class="btn btn-outline-dark">คู่มือการใช้งาน</a>
+            </div>
+            <div class="card-header">
+                <h3 class="h4">คำแนะนำ</h3>
+            </div>
+            <div class="card-body no-padding">
+                <!-- Item-->
+                <div class="item d-flex justify-content-between">
+                    <div class="info d-flex">
+                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                        <div class="title">
                             <h5>- แต่ละรายการที่ส่ง ส่งได้แค่ไฟล์เดียวเท่านั้น ไม่สามารถส่งแยกไฟล์ได้</h5>
-                            <h5>- ให้รวมไฟล์เป็นไฟล์เดียวในแต่ละรายการ ของแต่ละวิชา เช่น แผนการสอนก็รวมตั้งแต่ แผนที่ 1 - แผนที่ 20 เป็นต้น</h5>
-                          </div>
+                            <h5>- ให้รวมไฟล์เป็นไฟล์เดียวในแต่ละรายการ ของแต่ละวิชา เช่น แผนการสอนก็รวมตั้งแต่ แผนที่ 1
+                                - แผนที่ 20 เป็นต้น</h5>
                         </div>
-                       
-                      </div>
-                                                      
                     </div>
-                  </div>
+                </div>
+            </div>
+        </div>
         <?php  $typeplan = array('บันทึกตรวจใช้แผน','แบบตรวจแผนการจัดการเรียนรู้','โครงการสอน','แผนการสอนหน้าเดียว','บันทึกหลังสอน'); ?>
         <div class="card">
             <div cass="card-body">
@@ -98,12 +98,13 @@
                                         <i class="fa fa-upload Model_update" aria-hidden="true" data-toggle="modal"
                                             data-target="#ModalUpdatePlan" seplanID="<?=$v_plan->seplan_ID?>"
                                             seplanCoursecode="<?=$v_plan->seplan_coursecode?>"
-                                            seplanTypeplan="<?=$v_plan->seplan_typeplan?>" seplan_sendcomment="<?=$v_plan->seplan_sendcomment?>"></i>
+                                            seplanTypeplan="<?=$v_plan->seplan_typeplan?>"
+                                            seplan_sendcomment="<?=$v_plan->seplan_sendcomment?>"></i>
 
                                     </label>
                                     <br>
                                     <small>ผู้ส่ง : <?=$v_plan->seplan_sendcomment?></small> <br>
-                                    <small>ผู้ตรวจ (หัวหน้ากลุ่ม) :
+                                    <small>หน.ก :
                                         <?php if($v_plan->seplan_status1 == ""){
                                            echo 'รอตรวจ';
                                        }else{                                       
@@ -114,7 +115,7 @@
                                             }
                                        } ?>
                                     </small><br>
-                                    <small>ผู้ตรวจ (หัวหน้างาน) :
+                                    <small>หน.ง :
                                         <?php if($v_plan->seplan_status2 == ""){
                                            echo 'รอตรวจ';
                                        }else{                                       
@@ -179,7 +180,7 @@
 
             <?php else: ?>
             <div class="modal-body">
-                ระบบปิดอยู่  ยังไม่ถึงกำหนดส่งงาน หรือ เกินกำหนดส่งงาน <br>
+                ระบบปิดอยู่ ยังไม่ถึงกำหนดส่งงาน หรือ เกินกำหนดส่งงาน <br>
                 ไม่สามารถเพิ่มไฟล์หรือแก้ไขไฟล์ได้ <br>
                 ติดต่อหัวงานหลักสูตร
             </div>
