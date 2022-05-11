@@ -133,8 +133,8 @@
                             <td><?=$v_Plan->pers_prefix?><?=$v_Plan->pers_firstname?> <?=$v_Plan->pers_lastname?>
                             </td>
                             <td width="10%"><a class="EditTeach" PlanCode="<?=$v_Plan->seplan_coursecode?>" href="#"
-                                    data-toggle="modal" data-target="#editteacher">แก้ไข</a> | <a
-                                    href="http://">ลบ</a></td>
+                                    data-toggle="modal" data-target="#editteacher">แก้ไข</a> | 
+                                    <a href="#" class="DeleteTeach" DelPlanCode="<?=$v_Plan->seplan_coursecode?>" DelPlanYear="<?=$v_Plan->seplan_year?>" DelPlanTerm="<?=$v_Plan->seplan_term?>">ลบ</a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -161,6 +161,23 @@
             <div class="modal-body">
                 <form class="needs-validation" novalidate id="FromUpdateTeacher">
                     <div class="row">
+                    <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="up_seplan_year">ปีการศึกษา</label>
+                                <input readonly type="text" class="form-control" placeholder="รหัสวิชา"
+                                    id="up_seplan_year" name="up_seplan_year" required>
+                                <div class="invalid-feedback">กรุณากรอปีการศึกษา</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="up_seplan_term">ภาคเรียน</label>
+                                <input readonly type="text" class="form-control" placeholder="รหัสวิชา"
+                                    id="up_seplan_term" name="up_seplan_term" required>
+                                <div class="invalid-feedback">กรุณากรอภาคเรียน</div>
+                            </div>
+                        </div>
+
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="up_seplan_coursecode">รหัสวิชา</label>

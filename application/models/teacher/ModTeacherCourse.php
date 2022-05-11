@@ -23,8 +23,9 @@ class ModTeacherCourse extends CI_Model
         return $result;
     }
 
-    function plan_setting_update_teacher($data,$id){
-        $result = $this->db->update('tb_send_plan',$data,'seplan_coursecode="'.$id.'"');
+    function plan_setting_update_teacher($data,$id,$year,$term){
+        $IF = array('seplan_coursecode'=>$id,'seplan_year' => $year,'seplan_term' => $term);
+        $result = $this->db->update('tb_send_plan',$data,$IF);
         return $result;
     }
 

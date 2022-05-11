@@ -372,6 +372,8 @@ var  $title = "หน้าแรก";
                                 seplan_coursecode,
                                 seplan_gradelevel,
                                 seplan_typesubject,
+                                seplan_year,
+                                seplan_term,
                                 seplan_usersend')
                                 ->where('seplan_coursecode',$PlanCode)
                                 ->limit(1)
@@ -385,12 +387,19 @@ var  $title = "หน้าแรก";
     $data = array('seplan_namesubject' => $this->input->post('up_seplan_namesubject'),
                         'seplan_gradelevel' => $this->input->post('up_seplan_gradelevel'),
                         'seplan_typesubject' => $this->input->post('up_seplan_typesubject'),
-                        'seplan_usersend' => $this->input->post('up_seplan_usersend'),
+                        'seplan_usersend' => $this->input->post('up_seplan_usersend')
     );
-    $result = $this->ModTeacherCourse->plan_setting_update_teacher($data,$this->input->post('up_seplan_coursecode'));
+    $result = $this->ModTeacherCourse->plan_setting_update_teacher($data,$this->input->post('up_seplan_coursecode'),$this->input->post('up_seplan_year'),$this->input->post('up_seplan_term'));
     
     echo ($result);
  }
+
+ function setting_teacher_delete(){   
+     
+    $DatePlanYear = $this->input->post('PlanYear');
+         
+     echo $DatePlanYear;
+  }
 
 
  //---------------------------------------------------------------------------------
