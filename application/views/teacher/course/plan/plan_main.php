@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                             <?php 
-                            foreach ($planNew as $key => $v_planNew):?>
+                            foreach ($planNew as $key => $v_planNew): ?>
                             <tr>
                                 <td scope="row"><?=$v_planNew->seplan_term?>/<?=$v_planNew->seplan_year?></td>
                                 <td><?=$v_planNew->seplan_coursecode.' '.$v_planNew->seplan_namesubject?></td>
@@ -78,7 +78,7 @@
                                 <td><?=$v_planNew->seplan_typesubject?></td>
 
                                 <?php foreach($typeplan as $key => $v_typeplan): ?>
-                                <?php foreach($plan as $key => $v_plan): ?>
+                                <?php foreach($plan as $key => $v_plan):?>
                                 <?php if($v_plan->seplan_coursecode == $v_planNew->seplan_coursecode && $v_plan->seplan_typeplan == $v_typeplan):  ?>
                                 <td>
                                     <?php if($v_plan->seplan_file == null): ?>
