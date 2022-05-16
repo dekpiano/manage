@@ -69,7 +69,7 @@
                             </a>
                         </div>
                         <div class="app-search-box col">
-                            ระบบงานวิชาการ
+                            ระบบงานวิชาการ 
                         </div>
                         <div class="app-utilities col-auto">
                             <div class="app-utility-item app-user-dropdown dropdown">
@@ -166,7 +166,7 @@
                                             href="<?=base_url('ExamScheduleOnline');?>">ตารางสอบออนไลน์</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment(1) == 'StudentsList'?'active':''?>"
-                                            href="<?=base_url('StudentsList');?>">รายชื่อนักเรียน</a></li>
+                                            href="<?=base_url('StudentsList');?>">รายชื่อนักเรียน/ครูที่ปรึกษา</a></li>
 
                                 </ul>
                             </div>

@@ -1,18 +1,17 @@
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
-            
+
             <div class="main-wrapper">
                 <section class="cta-section theme-bg-light py-5">
                     <div class="container text-center">
-                        <h2 class="heading">ตารางเรียนช่วงสถานการณ์โควิด 19</h2>
+                        <h2 class="heading">ตารางเรียนปีการศึกษา 2565</h2>
                         <p>
-                            ตารางเรียนออนไลน์ปรับใหม่ เริ่มใช้จัดการเรียนการสอนเดือนสิงหาคมเป็นต้นไป เริ่มวันที่ 2
-                            สิงหาคม 2564
-                            จนจบภาคเรียนที่ 1/2564
+                          
                         </p>
                     </div>
-                    <div class="container">
+                    <div class="container">                 
+
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="card-box bg-green">
