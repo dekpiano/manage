@@ -6,75 +6,99 @@
         if($keyroom == '1/1'){
             $lineClass = 'https://line.me/R/meeting/40c7a562881a408aab3e24b6870c38b6';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAwOTg3?hl=TH&cjc=3se22x5';
+            $Meet = 'https://meet.google.com/jyt-dfhx-hxf';
         }elseif($keyroom == '1/2'){
             $lineClass = 'https://line.me/R/meeting/48a33102950141f98f7c0847caf05526';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxMDQ5?hl=TH&cjc=3usv2fw';
+            $Meet = 'https://meet.google.com/snp-aija-ekq';
         }elseif($keyroom == '1/3'){
             $lineClass = 'https://line.me/R/meeting/2644ae40a0de4198a6035931d9ce94ef';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxMTIy?hl=TH&cjc=qwhofvs';
+            $Meet = 'https://meet.google.com/txg-wkad-iya';
         }elseif($keyroom == '1/4'){
             $lineClass = 'https://line.me/R/meeting/6cc15501009d4f6ab2e1ef566426400b';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxMTYx?hl=TH&cjc=l75wosn';
+            $Meet = 'https://meet.google.com/szq-eskq-ikb';
         }elseif($keyroom == '2/1'){
             $lineClass = 'https://line.me/R/meeting/eb5cf468255340d1a343ce545d26121a';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxMjQ3?hl=TH&cjc=o7eqym6';
+            $Meet = 'https://meet.google.com/jsh-qtbq-nyx';
         }elseif($keyroom == '2/2'){
             $lineClass = 'https://line.me/R/meeting/9aab91c6f3114edd83868ce16ea7315b';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxMzU2?hl=TH&cjc=cmhm6oo';
+            $Meet = 'https://meet.google.com/qtk-sybd-iop';
         }elseif($keyroom == '2/3'){
             $lineClass = 'https://line.me/R/meeting/2fa8e749659d4beabba16d22cce4787e';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxMzg3?hl=TH&cjc=w6lpue7';
+            $Meet = 'https://meet.google.com/ifp-csqm-rwd';
         }elseif($keyroom == '2/4'){
             $lineClass = 'https://line.me/R/meeting/cef7f431fa2d49f7944bc2d1c33c1281';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxNDEx?hl=TH&cjc=cdpclja';
+            $Meet = 'https://meet.google.com/wry-cxmi-wyo';
         }elseif($keyroom == '3/1'){
             $lineClass = 'https://line.me/R/meeting/236923ef11e04da78aeb64535bb54841';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxNTE0?hl=TH&cjc=3a4p4ur';
+            $Meet = 'https://meet.google.com/vsh-odcc-jam';
         }elseif($keyroom == '3/2'){
             $lineClass = 'https://line.me/R/meeting/338cb8d861fc4607a8d78eb2635fa50e';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxNTYz?hl=TH&cjc=pjqfql6';
+            $Meet = 'https://meet.google.com/rfe-snpq-jtq';
         }elseif($keyroom == '3/3'){
             $lineClass = 'https://line.me/R/meeting/aa145fc0e08747c7aa085b7bc03902b7';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxNjI1?hl=TH&cjc=gkxq3tt';
+            $Meet = 'https://meet.google.com/djr-mzrn-tsn';
         }elseif($keyroom == '3/4'){
             $lineClass = 'https://line.me/R/meeting/93e8aea31a3f4e0ca9328178376b2406';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxNjc2?hl=TH&cjc=ui4csts';
+            $Meet = 'https://meet.google.com/vbo-chnr-ccy';
         }elseif($keyroom == '4/1'){
             $lineClass = 'https://line.me/R/meeting/4092cd73726440e3afb68d8364fe4a09';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxNzI1?hl=TH&cjc=im5q4ff';
+            $Meet = 'https://meet.google.com/ntf-niee-qhe';
         }elseif($keyroom == '4/2'){
             $lineClass = 'https://line.me/R/meeting/52e3630b7c274076b76a1ffb5589ae02';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE2OTAxODI5?hl=TH&cjc=yauuyni';
+            $Meet = 'https://meet.google.com/btf-xbys-waq';
         }elseif($keyroom == '4/3'){
             $lineClass = 'https://line.me/R/meeting/c83a2af09a4f4b65ac3e1ef10155e075';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc1ODcw?hl=TH&cjc=qj5mnv2';
+            $Meet = 'https://meet.google.com/bxq-fchu-umw';
         }elseif($keyroom == '4/4'){
             $lineClass = 'https://line.me/R/meeting/be83db4a537641e18adabeaade007e19';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc1OTEy?hl=TH&cjc=upiyxtt';
+            $Meet = 'https://meet.google.com/jso-bzgy-azu';
         }elseif($keyroom == '5/1'){
             $lineClass = 'https://line.me/R/meeting/a8665100fc4f45e08b342361e129dfb1';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2MTc1?hl=TH&cjc=hb5fao4';
+            $Meet = 'https://meet.google.com/qvo-btwq-ecn';
         }elseif($keyroom == '5/2'){
             $lineClass = 'https://line.me/R/meeting/bf5832214560483b96bfea0e8577e1a1';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2MjI4?hl=TH&cjc=rgsftja';
+            $Meet = 'https://meet.google.com/vva-ykdy-bqt';
         }elseif($keyroom == '5/3'){
             $lineClass = 'https://line.me/R/meeting/ed616656d7764129bd2df835079f6c45';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2MzQ1?hl=TH&cjc=6gcrvvs';
+            $Meet = 'https://meet.google.com/xpz-hmna-obr';
         }elseif($keyroom == '5/4'){
             $lineClass = 'https://line.me/R/meeting/e2a4a80f310246a287138d3a8a932352';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2Mzgy?hl=TH&cjc=ij6mme4';
+            $Meet = 'https://meet.google.com/oex-bfht-vxv';
         }elseif($keyroom == '6/1'){
             $lineClass = 'https://line.me/R/meeting/aed679ff5d9b4c6f908fa072e0b80cc3';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2NDcx?hl=TH&cjc=5xmtrrm';
+            $Meet = 'https://meet.google.com/mnx-bwdt-foo';
         }elseif($keyroom == '6/2'){
             $lineClass = 'https://line.me/R/meeting/60ade7ccea0a46c7a68468178d8a7aef';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2NDk3?hl=TH&cjc=4hyqmty';
+            $Meet = 'https://meet.google.com/dgp-exrt-mce';
         }elseif($keyroom == '6/3'){
             $lineClass = 'https://line.me/R/meeting/1fe392459732466f83fd061304117649';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2NTIw?hl=TH&cjc=2yb3tz7';
+            $Meet = 'https://meet.google.com/csn-ryyz-zrz';
         }elseif($keyroom == '6/4'){
             $lineClass = 'https://line.me/R/meeting/7855a380fe564875b33c0057c36c6f71';
             $Classroom = 'https://classroom.google.com/c/NTE0OTE3Mzc2NTY2?hl=TH&cjc=jyhr3wm';
+            $Meet = 'https://meet.google.com/ugk-ednq-wnf';
         }
         ?>
 
@@ -99,11 +123,39 @@
 
             <?php if(!empty($room)):?>
             <!-- รายวิชาพื้นฐาน -->
-            <div class="row">
-                <div class="text-center">
-                    <h4>ห้องเรียนออนไลน์ มี 2 แอปพลิเคชันให้เลือกใช้ ให้ครูและนักเรียนตกลงกันเพื่อใช้งาน</h4>
-                </div>
+            <center>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header bg-success text-white">
+                            ห้องเรียนออนไลน์ Google Meet ของนักเรียน ม.<?=$keyroom;?>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <img src="https://play-lh.googleusercontent.com/GBYSf20osBl2CRHbjGOyaOG5kQ3G4xbRau-dzScU9ozuXQJtnUZPkR3IqEDOo5OiVgU"
+                                    alt="classroom" class="w-25">
+                            </div>
+                            <p class="text-center">
+                                <a href="<?=$Meet;?>" class="btn btn-secondary btn-lg text-white ">เข้าห้องเรียนออนไลน์ Google Meet
+                                </a>
+                            </p>
 
+                            <!-- <p><b>หรือ</b> scan qr-code:</p>
+                            <p>
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?=$lineClass;?>"
+                                    alt="" srcset="">
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+            </center>
+            <div class="row">
+
+
+                <!-- <div class="text-center">
+                    <h4>ห้องเรียนออนไลน์ มี 2 แอปพลิเคชันให้เลือกใช้ ให้ครูและนักเรียนตกลงกันเพื่อใช้งาน</h4>
+                </div> -->
+
+                <center>
                 <div class="col-md-6">
                     <div class="card mb-3">
                         <div class="card-header bg-success text-white">
@@ -115,16 +167,13 @@
                                     alt="classroom" class="w-25">
                             </div>
                             <p class="text-center">
-                            <a href="<?=$Classroom;?>" class="btn btn-secondary btn-lg text-white ">เข้าห้องเรียน Classroom </a>
-                            </p>
-                            <!-- <p><b>หรือ</b> scan qr-code:</p>
-                            <p>
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?=$Classroom;?>"
-                                    alt="" srcset="">
-                            </p> -->
+                                <a href="<?=$Classroom;?>" class="btn btn-secondary btn-lg text-white ">เข้าห้อง
+                                    Classroom </a>
+                            </p>                          
                         </div>
                     </div>
-                </div>
+
+                <!-- </div>
                 <div class="col-md-6">
                     <div class="card mb-3">
                         <div class="card-header bg-success text-white">
@@ -136,20 +185,16 @@
                                     alt="classroom" class="w-25">
                             </div>
                             <p class="text-center">
-                            <a href="<?=$lineClass;?>" class="btn btn-secondary btn-lg text-white ">เข้าห้องเรียน Line </a>
+                                <a href="<?=$lineClass;?>" class="btn btn-secondary btn-lg text-white ">เข้าห้องเรียน
+                                    Line </a>
                             </p>
-                           
-                            <!-- <p><b>หรือ</b> scan qr-code:</p>
-                            <p>
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?=$lineClass;?>"
-                                    alt="" srcset="">
-                            </p> -->
+
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
-
+            </center>
 
             <!-- 
                     <div class="main-section categories-view1-full">

@@ -29,6 +29,21 @@ class ModTeacherCourse extends CI_Model
         return $result;
     }
 
+    function plan_setting_delete_teacher($id,$year,$term,$name){
+        $IF = array('seplan_coursecode'=>$id,'seplan_year' => $year,'seplan_term' => $term);
+        $result = $this->db->delete('tb_send_plan',$IF);
+
+        $dir_path = 'uploads/academic/course/plan/'.$year.'/'.$term.'/'.$name;
+        $del_path = './uploads/academic/course/plan/'.$year.'/'.$term.'/'.$name;
+        if(is_dir($dir_path))
+        {
+            delete_files($del_path, true);
+            rmdir($del_path);
+        }       
+       return $id;
+    }
+
+
 
     function plan_UpdateStatus1($data,$id){
         $result = $this->db->update('tb_send_plan',$data,'seplan_ID='.$id);

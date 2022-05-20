@@ -63,7 +63,7 @@ $(document).on("click", ".EditTeach", function() {
 });
 
 $(document).on("click", ".DeleteTeach", function() {
-    alert($(this).attr('DlePlanCode'));
+    //alert($(this).attr('delplancode'));
     Swal.fire({
             title: 'ต้องการลบข้อมูลหรือไม่?',
             text: "ข้อมูลจะถูกลบ พร้อมด้วยไฟล์งานทั้งหมด!",
@@ -75,12 +75,14 @@ $(document).on("click", ".DeleteTeach", function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.post("../../teacher/ConTeacherCourse/setting_teacher_delete", {
-                    PlanYear: $(this).attr('DlePlanYear'),
-                    PlanTerm: $(this).attr('DlePlanTerm'),
-                    PlanCode: $(this).attr('DlePlanCode')
+                    PlanCode: $(this).attr('delplancode'),
+                    PlanTerm: $(this).attr('delplanyear'),
+                    PlanYear: $(this).attr('delplanterm'),
+                    PlanName: $(this).attr('delplanname')
                 }, function(data, status) {
-                    alert(data);
-                }, "json");
+                    console.log(data);
+                    $('tr#' + data).remove();
+                });
             }
         })
         // $.post("../../teacher/ConTeacherCourse/setting_teacher_eidt", { PlanCode: $(this).attr('PlanCode') }, function(data, status) {

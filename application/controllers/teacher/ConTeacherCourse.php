@@ -398,9 +398,14 @@ var  $title = "หน้าแรก";
 
  function setting_teacher_delete(){   
      
-    $DatePlanYear = $this->input->post('PlanYear');
+    $DelPlanCode = $this->input->post('PlanCode');
+    $DelPlanTerm = $this->input->post('PlanTerm');
+    $DelPlanYear = $this->input->post('PlanYear');
+    $DelPlanName = $this->input->post('PlanName');
+
+    $result = $this->ModTeacherCourse->plan_setting_delete_teacher($DelPlanCode,$DelPlanTerm,$DelPlanYear,$DelPlanName);
          
-     echo $DatePlanYear;
+    echo $result;
   }
 
 

@@ -124,7 +124,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($Plan as $key => $v_Plan): ?>
-                        <tr>
+                        <tr id="<?=$v_Plan->seplan_coursecode?>">
                             <td><?=$v_Plan->seplan_year?>/<?=$v_Plan->seplan_term?></td>
                             <td><?=$v_Plan->seplan_coursecode?></td>
                             <td><?=$v_Plan->seplan_namesubject?></td>
@@ -134,7 +134,8 @@
                             </td>
                             <td width="10%"><a class="EditTeach" PlanCode="<?=$v_Plan->seplan_coursecode?>" href="#"
                                     data-toggle="modal" data-target="#editteacher">แก้ไข</a> | 
-                                    <a href="#" class="DeleteTeach" DelPlanCode="<?=$v_Plan->seplan_coursecode?>" DelPlanYear="<?=$v_Plan->seplan_year?>" DelPlanTerm="<?=$v_Plan->seplan_term?>">ลบ</a></td>
+                                    <a href="javascript:void(0)" class="DeleteTeach" delplancode="<?=$v_Plan->seplan_coursecode?>" delplanyear="<?=$v_Plan->seplan_year?>" delplanterm="<?=$v_Plan->seplan_term?>"
+                                    delplanname="<?=$v_Plan->seplan_namesubject?>">ลบ</a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
