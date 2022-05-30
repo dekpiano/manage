@@ -15,7 +15,50 @@ class ConAdminStudents extends CI_Controller {
 		}
     }
 
-    public function AdminStudentsMain(){   
+    function getClient()
+{
+    require_once APPPATH. 'libraries/vendor/autoload.php';
+
+     // Our service account access key
+     $googleAccountKeyFilePath = 'service_key.json';
+     putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath);
+ 
+     // Create new client
+     $client = new Google_Client();
+     // Set credentials
+     $client->useApplicationDefaultCredentials();
+ 
+     // Adding an access area for reading, editing, creating and deleting tables
+     $client->addScope('https://www.googleapis.com/auth/spreadsheets');
+ 
+     $service = new Google_Service_Sheets($client);
+ 
+     // you spreadsheet ID
+     
+    return $service;
+}
+
+    public function AdminStudentsMain(){ 
+                
+        $service = $this->getClient();
+        $spreadsheetId = '1mg-PRXzaoTTNU7pDXXPMgqt1WnIC-AQyzmvKLIosz-U';
+        //$response = $service->spreadsheets->get($spreadsheetId);
+        
+        // The A1 notation of the values to retrieve.
+$range = '2.3!B6:E47';  // TODO: Update placeholder value.
+
+$response = $service->spreadsheets_values->get($spreadsheetId, $range);
+$numRows = $response->getValues() != null ? count($response->getValues()) : 0;
+//printf("%d rows retrieved.", $numRows);
+for ($i=0; $i < $numRows; $i++) { 
+    echo $response->values[$i][0].' '.$response->values[$i][1].'<br>';
+}
+
+
+
+    }
+
+    public function AdminStudentsMain1(){   
 
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
