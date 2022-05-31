@@ -7,6 +7,15 @@ $(document).ready(function() {
         ]
     });
 
+    var ta = $('#tb-student').DataTable({
+        "order": [
+            [2, "asc"],
+            [3, "asc"]
+        ],
+        lengthMenu: [45, 100],
+        processing: true,
+    });
+
     var ta = $('#ReportExtraSubject').DataTable({
         "order": [
             [3, "asc"],
@@ -14,64 +23,64 @@ $(document).ready(function() {
         ]
     });
 
-    
-// บทบาทในวิชาการ
-$(document).on("change", "#set_executive", function() {
-    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
+
+    // บทบาทในวิชาการ
+    $(document).on("change", "#set_executive", function() {
+
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+            }
+        });
     });
-});
 
-new SlimSelect({
-    select: '#set_executive'
-  })
+    new SlimSelect({
+        select: '#set_executive'
+    })
 
-$(document).on("change", "#set_deputy", function() {    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
+    $(document).on("change", "#set_deputy", function() {
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+            }
+        });
     });
-});
 
-new SlimSelect({
-    select: '#set_deputy'
-  })
+    new SlimSelect({
+        select: '#set_deputy'
+    })
 
-$(document).on("change", "#set_leader", function() {    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
+    $(document).on("change", "#set_leader", function() {
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+            }
+        });
     });
-});
 
-new SlimSelect({
-    select: '#set_leader'
-  })
+    new SlimSelect({
+        select: '#set_leader'
+    })
 
-$(document).on("change", "#set_admin", function() {    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
+    $(document).on("change", "#set_admin", function() {
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+            }
+        });
     });
-});
 
-new SlimSelect({
-    select: '#set_admin'
-  })
+    new SlimSelect({
+        select: '#set_admin'
+    })
 
 
 
@@ -211,7 +220,7 @@ new SlimSelect({
 
 
 
-  
+
     // ----------------------------วิชาเพิ่มติม-----------------------------------
     $('#ModalAddExtraSubject').on('click', function() {
         $('#myModal').modal('show');
@@ -460,7 +469,7 @@ $(document).on("submit", ".Add_RoomOnline", function(e) {
                         //window.location.reload();
                     }
                 })
-            }else{
+            } else {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
@@ -507,7 +516,7 @@ $(document).on("submit", ".Update_RoomOnline", function(e) {
 });
 
 $(document).on("submit", ".FormDeleteRoomOnline", function(e) {
-    e.preventDefault(e);    
+    e.preventDefault(e);
     $.post("../../admin/ConAdminRoomOnline/DeleteRoomOnline", { roomid: $("#del_roomon_id").val() }, function(data, status) {
         if (data == 1) {
             Swal.fire({
@@ -526,6 +535,3 @@ $(document).on("submit", ".FormDeleteRoomOnline", function(e) {
         }
     });
 });
-
-
-
