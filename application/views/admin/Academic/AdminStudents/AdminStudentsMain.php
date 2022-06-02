@@ -11,9 +11,9 @@
             <div class="container">
                 <div class="card">
                     <div class="card-body">
-                        <button class="btn btn-primary btn-sm float-right mb-3" id="ModalAddClassRoom" data-bs-toggle="modal" data-bs-target="#myModal"> 
+                        <a href="https://docs.google.com/spreadsheets/d/13mTh9NNdzk37s3nMYSfYyI1UZ_Dwz2hi3Rbv2i0OTQ0/edit#gid=0" target="_blank" class="btn btn-primary btn-sm float-right mb-3"> 
                             <i class="far fa-plus-square"></i> เพิ่ม<?=$title;?>
-                        </button>
+                        </a>
                         <a href="<?=base_url('Admin/Acade/StudentsUpdate');?>" class="btn btn-primary btn-sm float-right mb-3"> 
                             <i class="far fa-plus-square"></i> อัพเดพ<?=$title;?>
                         </a>

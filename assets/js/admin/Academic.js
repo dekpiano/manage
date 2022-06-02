@@ -1,3 +1,16 @@
+//  ผลการเรียน
+$(document).on("change", "#checkOnOffRegister", function() {
+
+
+    $.post("../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
+            check: $(this).prop('checked')
+        },
+        function(data, status) {
+
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+})
+
 $(document).ready(function() {
 
     var ta = $('#tb-classroom').DataTable({

@@ -103,7 +103,7 @@
                             </a>
                             <!--//nav-link-->
                         </li>
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                            
                             <a class="nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
                                 href="<?=base_url('Student/AcademicResult');?>">
@@ -118,15 +118,13 @@
                                 </span>
                                 <span class="nav-link-text">ผลการเรียน</span>
                             </a>                         
-                        </li> -->
+                        </li>
 
-                        <li class="nav-item has-submenu">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <!-- <li class="nav-item has-submenu">
                             <a class="nav-link submenu-toggle <?=$this->uri->segment('2')=="Extra" ? "active" :""?>"
                                 href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false"
                                 aria-controls="submenu-1">
                                 <span class="nav-icon">
-                                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -143,9 +141,7 @@
                                             d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                                     </svg>
                                 </span>
-                                <!--//submenu-arrow-->
                             </a>
-                            <!--//nav-link-->
                             <div id="submenu-1"
                                 class="collapse submenu submenu-1 <?=$this->uri->segment('2')=="Extra" ? "show" :""?>"
                                 data-bs-parent="#menu-accordion">
@@ -170,7 +166,7 @@
 
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
                         <!--//nav-item-->
 
                     </ul>

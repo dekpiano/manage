@@ -58,25 +58,9 @@ $('#example').DataTable({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic.js?v=31"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic.js?v=33"></script>
 <script src="<?=base_url();?>assets/js/admin/Affairs.js?v=2"></script>
 
-<script>
-$(function() {
-    $('#extra_setting_onoff').change(function() {
-        $.post("<?=base_url('admin/ConAdminAcademinResult/CheckOnOff');?>", {
-                check: $(this).prop('checked')
-            },
-            function(data, status) {
-
-                //alert("Data: " + data + "\nStatus: " + status);
-            });
-    })
-})
-
-
-
-</script>
 </body>
 
 </html>
