@@ -11,6 +11,42 @@ $(document).on("change", "#checkOnOffRegister", function() {
         });
 })
 
+$(document).on('submit', '#AddClassRoom', function(e) {
+    e.preventDefault();
+    var formadd = $('#AddClassRoom').serialize();
+    $.ajax({
+        type: 'post',
+        url: "../../admin/Academic/ConAdminClassRoom/AddClassRoom",
+        data: formadd,
+        beforeSend: function() {
+            console.log("กำลังโหลด");
+        },
+        complete: function() {
+            //console.log("คือไรว่ะ");
+        },
+        success: function(result) {
+            $('#myModal').modal('hide');
+            console.log(result);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'บันทึกข้อมูลสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.reload();
+                }
+            })
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+
+});
+
 $(document).ready(function() {
 
     var ta = $('#tb-classroom').DataTable({
@@ -94,43 +130,6 @@ $(document).ready(function() {
     new SlimSelect({
         select: '#set_admin'
     })
-
-
-
-
-    $('#AddClassRoom').on('submit', function(e) {
-        e.preventDefault();
-        var formadd = $('#AddClassRoom').serialize();
-        $.ajax({
-            type: 'post',
-            url: "../../admin/ConAdminClassRoom/AddClassRoom",
-            data: formadd,
-            beforeSend: function() {
-                console.log("กำลังโหลด");
-            },
-            complete: function() {
-                //console.log("คือไรว่ะ");
-            },
-            success: function(result) {
-                $('#myModal').modal('hide');
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'บันทึกข้อมูลสำเร็จ',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        window.location.reload();
-                    }
-                })
-
-            }
-        });
-
-    });
-
-
 
     // update plan
     $(document).on('submit', '#form_update_plan', function(e) {

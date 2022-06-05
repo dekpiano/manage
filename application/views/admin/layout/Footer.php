@@ -27,11 +27,19 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 <?php endif; $this->session->mark_as_temp('msg',20); ?>
 
 <script>
+  new SlimSelect({
+        select: '#teacher'
+    })
+    new SlimSelect({
+        select: '#classroom'
+    })
 $('#example').DataTable({
     "responsive": true,
       "autoWidth": true,
       "ordering": false,
 });
+
+
 
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -58,7 +66,7 @@ $('#example').DataTable({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic.js?v=33"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic.js?v=37"></script>
 <script src="<?=base_url();?>assets/js/admin/Affairs.js?v=2"></script>
 
 </body>
