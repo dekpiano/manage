@@ -1,3 +1,52 @@
+//  ผลการเรียน
+$(document).on("change", "#checkOnOffRegister", function() {
+
+
+    $.post("../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
+            check: $(this).prop('checked')
+        },
+        function(data, status) {
+
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+})
+
+$(document).on('submit', '#AddClassRoom', function(e) {
+    e.preventDefault();
+    var formadd = $('#AddClassRoom').serialize();
+    $.ajax({
+        type: 'post',
+        url: "../../admin/Academic/ConAdminClassRoom/AddClassRoom",
+        data: formadd,
+        beforeSend: function() {
+            console.log("กำลังโหลด");
+        },
+        complete: function() {
+            //console.log("คือไรว่ะ");
+        },
+        success: function(result) {
+            $('#myModal').modal('hide');
+            console.log(result);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'บันทึกข้อมูลสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.reload();
+                }
+            })
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+
+});
+
 $(document).ready(function() {
 
     var ta = $('#tb-classroom').DataTable({
@@ -7,6 +56,15 @@ $(document).ready(function() {
         ]
     });
 
+    var ta = $('#tb-student').DataTable({
+        "order": [
+            [2, "asc"],
+            [3, "asc"]
+        ],
+        lengthMenu: [45, 100],
+        processing: true,
+    });
+
     var ta = $('#ReportExtraSubject').DataTable({
         "order": [
             [3, "asc"],
@@ -14,101 +72,64 @@ $(document).ready(function() {
         ]
     });
 
-    
-// บทบาทในวิชาการ
-$(document).on("change", "#set_executive", function() {
-    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
-    });
-});
 
-new SlimSelect({
-    select: '#set_executive'
-  })
+    // บทบาทในวิชาการ
+    $(document).on("change", "#set_executive", function() {
 
-$(document).on("change", "#set_deputy", function() {    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
-    });
-});
-
-new SlimSelect({
-    select: '#set_deputy'
-  })
-
-$(document).on("change", "#set_leader", function() {    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
-    });
-});
-
-new SlimSelect({
-    select: '#set_leader'
-  })
-
-$(document).on("change", "#set_admin", function() {    
-    $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", { TeachID: $(this).val() }, function(data, status) {
-        if (data == 1) {
-            alertify.success('เลือกหัวหน้างานสำเร็จ');
-        } else {
-            alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
-        }
-    });
-});
-
-new SlimSelect({
-    select: '#set_admin'
-  })
-
-
-
-
-    $('#AddClassRoom').on('submit', function(e) {
-        e.preventDefault();
-        var formadd = $('#AddClassRoom').serialize();
-        $.ajax({
-            type: 'post',
-            url: "../../admin/ConAdminClassRoom/AddClassRoom",
-            data: formadd,
-            beforeSend: function() {
-                console.log("กำลังโหลด");
-            },
-            complete: function() {
-                //console.log("คือไรว่ะ");
-            },
-            success: function(result) {
-                $('#myModal').modal('hide');
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'บันทึกข้อมูลสำเร็จ',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        window.location.reload();
-                    }
-                })
-
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
             }
         });
-
     });
 
+    new SlimSelect({
+        select: '#set_executive'
+    })
 
+    $(document).on("change", "#set_deputy", function() {
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+            }
+        });
+    });
+
+    new SlimSelect({
+        select: '#set_deputy'
+    })
+
+    $(document).on("change", "#set_leader", function() {
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+            }
+        });
+    });
+
+    new SlimSelect({
+        select: '#set_leader'
+    })
+
+    $(document).on("change", "#set_admin", function() {
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", { TeachID: $(this).val() }, function(data, status) {
+            if (data == 1) {
+                alertify.success('เลือกหัวหน้างานสำเร็จ');
+            } else {
+                alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
+            }
+        });
+    });
+
+    new SlimSelect({
+        select: '#set_admin'
+    })
 
     // update plan
     $(document).on('submit', '#form_update_plan', function(e) {
@@ -211,7 +232,7 @@ new SlimSelect({
 
 
 
-  
+
     // ----------------------------วิชาเพิ่มติม-----------------------------------
     $('#ModalAddExtraSubject').on('click', function() {
         $('#myModal').modal('show');
@@ -460,7 +481,7 @@ $(document).on("submit", ".Add_RoomOnline", function(e) {
                         //window.location.reload();
                     }
                 })
-            }else{
+            } else {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
@@ -507,7 +528,7 @@ $(document).on("submit", ".Update_RoomOnline", function(e) {
 });
 
 $(document).on("submit", ".FormDeleteRoomOnline", function(e) {
-    e.preventDefault(e);    
+    e.preventDefault(e);
     $.post("../../admin/ConAdminRoomOnline/DeleteRoomOnline", { roomid: $("#del_roomon_id").val() }, function(data, status) {
         if (data == 1) {
             Swal.fire({
@@ -526,6 +547,3 @@ $(document).on("submit", ".FormDeleteRoomOnline", function(e) {
         }
     });
 });
-
-
-

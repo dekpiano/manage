@@ -65,6 +65,7 @@ $route['Admin/Acade/ExamSchedule'] = "admin/academic/ConAdminExamSchedule/AdminE
 $route['Admin/ExamSchedule/add'] = "admin/academic/ConAdminExamSchedule/add";
 $route['Admin/Acade/ClassRoom'] = "admin/academic/ConAdminClassRoom/AdminClassMain";
 $route['Admin/Acade/Students'] = "admin/academic/ConAdminStudents/AdminStudentsMain";
+$route['Admin/Acade/StudentsUpdate'] = "admin/academic/ConAdminStudents/AdminStudentsUpdate";
 $route['Admin/Acade/RegisterSubject'] = "admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectMain";
 $route['Admin/Acade/ExtraSubject'] = "admin/academic/ConAdminExtraSubject";
 $route['Admin/Acade/SettingSystem'] = "admin/academic/ConAdminExtraSubject/SystemMainExtraSubject";

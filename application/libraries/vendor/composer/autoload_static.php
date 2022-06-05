@@ -11,6 +11,7 @@ class ComposerStaticInit327ea5d4f674a5750f8275be9fe7b519
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+        '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -33,6 +34,7 @@ class ComposerStaticInit327ea5d4f674a5750f8275be9fe7b519
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Google\\Service\\' => 15,
             'Google\\Auth\\' => 12,
         ),
         'F' => 
@@ -74,6 +76,10 @@ class ComposerStaticInit327ea5d4f674a5750f8275be9fe7b519
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Google\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/apiclient-services/src',
+        ),
         'Google\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/auth/src',
@@ -87,10 +93,6 @@ class ComposerStaticInit327ea5d4f674a5750f8275be9fe7b519
     public static $prefixesPsr0 = array (
         'G' => 
         array (
-            'Google_Service_' => 
-            array (
-                0 => __DIR__ . '/..' . '/google/apiclient-services/src',
-            ),
             'Google_' => 
             array (
                 0 => __DIR__ . '/..' . '/google/apiclient/src',

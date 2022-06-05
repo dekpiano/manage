@@ -11,11 +11,14 @@
             <div class="container">
                 <div class="card">
                     <div class="card-body">
-                        <button class="btn btn-primary btn-sm float-right mb-3" id="ModalAddClassRoom" data-bs-toggle="modal" data-bs-target="#myModal"> 
+                        <a href="https://docs.google.com/spreadsheets/d/13mTh9NNdzk37s3nMYSfYyI1UZ_Dwz2hi3Rbv2i0OTQ0/edit#gid=0" target="_blank" class="btn btn-primary btn-sm float-right mb-3"> 
                             <i class="far fa-plus-square"></i> เพิ่ม<?=$title;?>
-                        </button>
+                        </a>
+                        <a href="<?=base_url('Admin/Acade/StudentsUpdate');?>" class="btn btn-primary btn-sm float-right mb-3"> 
+                            <i class="far fa-plus-square"></i> อัพเดพ<?=$title;?>
+                        </a>
 
-                        <table class="table table-bordered" id="tb-classroom">
+                        <table class="table table-bordered" id="tb-student">
                             <thead>
                                 <tr>
                                     <th>เลขประจำตัว</th>
@@ -26,14 +29,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
+                              <?php foreach ($stu as $key => $v_stu): ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?=$v_stu->StudentCode?></td>
+                                    <td><?=$v_stu->StudentPrefix?><?=$v_stu->StudentFirstName?> <?=$v_stu->StudentLastName?></td>
+                                    <td><?=$v_stu->StudentClass?></td>
+                                    <td><?=$v_stu->StudentNumber?></td>
                                     <td><a href="http://">เปิดดู</a></td>
                                 </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
 

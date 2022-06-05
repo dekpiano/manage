@@ -49,18 +49,17 @@
                     </div>
                     <!--//col-->
 
-                    <div class="col-6 col-lg-3">
+                    <!-- <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">หน่วยกิตทั้งหมด</h4>
                                 <div class="stats-figure"><?php  echo $AllUnit;?></div>
                                 <div class="stats-meta">หน่วยกิตรวมทุกภาค</div>
                             </div>
-                            <!--//app-card-body-->
+                         
                             <a class="app-card-link-mask" href="#"></a>
                         </div>
-                        <!--//app-card-->
-                    </div>
+                    </div> -->
                     <!--//col-->
                     <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
@@ -101,7 +100,7 @@
                                 <?=$v_scoreYear->RegisterYear?> </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
+                                    <table class="table table-hover table-bordered ShowGrade">
                                         <thead class="bg-light">
                                             <tr class="text-center">
                                                 <th scope="col">รหัสวิชา</th>
@@ -157,7 +156,7 @@
                                         }
                                          endif; 
                                          endforeach;?>
-                                            <tr class="text-center">
+                                            <tr class="text-center tfoot">
                                                 <th colspan=3>รวม</th>
                                                 <th><?php echo  $SumGrade; ?></th>
                                                 <th>                                                    

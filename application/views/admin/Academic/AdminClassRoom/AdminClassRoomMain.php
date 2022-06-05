@@ -1,3 +1,8 @@
+<style>
+    .ss-main .ss-single-selected {
+        height: 40px;
+    }
+</style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
@@ -40,7 +45,7 @@
                                     </td>
                                     <td><?=$v_classRoom->pers_prefix.$v_classRoom->pers_firstname.' '.$v_classRoom->pers_lastname?>
                                     </td>
-                                    <td><a href="<?=base_url('Admin/ConAdminClassRoom/DeleteClassRoom/').$v_classRoom->pers_id;?>">ลบ</a></td>
+                                    <td><a href="<?=base_url('Admin/academic/ConAdminClassRoom/DeleteClassRoom/').$v_classRoom->pers_id;?>">ลบ</a></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -64,7 +69,7 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form id="AddClassRoom" action="#">
+                        <form id="AddClassRoom" action="#" method="post">
                             <div class="mb-3">
                                 <label for="email" class="form-label">ปีการศึกษา <?php $d= (date('Y')+543)-1;?></label>
                                 <select name="year" id="year" class="form-control">
@@ -76,7 +81,7 @@
                             <div class="mb-3">
                                 <label for="classroom">ห้องเรียน / ระดับชั้น</label>
                                
-                                <select name="classroom" id="classroom" class="form-control" required>
+                                <select name="classroom" id="classroom" class="" required>
                                     <option value="1">หัวหน้าระดับชั้น ม.1</option>
                                     <option value="2">หัวหน้าระดับชั้น ม.2</option>
                                     <option value="3">หัวหน้าระดับชั้น ม.3</option>
@@ -91,17 +96,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="teacher">ครูที่ปรึกษา / ครูหัวหน้าระดับ</label>
-                                <select name="teacher" id="teacher" class="form-control" required>
+                                <select name="teacher" id="teacher" class="" required >
 
                                     <option value=''>เลือกครูที่ปรึกษา</option>
                                     <?php foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                                    <?php if(in_array($v_NameTeacher->pers_id,$tea)): ?>
-
-                                    <?php else: ?>
+                               
                                     <option value="<?=$v_NameTeacher->pers_id;?>">
                                         <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname.' '.$v_NameTeacher->pers_lastname?>
                                     </option>
-                                    <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

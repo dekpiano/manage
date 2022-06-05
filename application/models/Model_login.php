@@ -11,14 +11,14 @@ class Model_login extends CI_Model
 	{
 		$this->db->where('StudentCode',$username);
 		$this->db->where('StudentIDNumber',$password);
-		return $this->db->count_all_results('tb_student_express');
+		return $this->db->count_all_results('tb_students');
 	}
 
 	public function fetch_student_login($username,$password)
 	{
 		$this->db->where('StudentCode',$username);
 		$this->db->where('StudentIDNumber',$password);
-		$query = $this->db->get('tb_student_express');
+		$query = $this->db->get('tb_students');
 		return $query->row();
 	}
 

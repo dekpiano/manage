@@ -37,7 +37,8 @@ class Control_login extends CI_Controller {
         $data['title'] = "Login สำหรับนักเรียน";
         $data['description'] = "Login สำหรับนักเรียน";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $this->load->view('user/layout/HeaderUser.php',$data);
+        $data['banner'] = "";
+		$this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/Login/PageLoginStudent.php');
         $this->load->view('user/layout/FooterUser.php');
 		
@@ -50,7 +51,7 @@ class Control_login extends CI_Controller {
 
 	public function check_student()
 	{	
-	
+		    
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			

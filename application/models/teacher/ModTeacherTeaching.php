@@ -20,5 +20,16 @@ class ModTeacherTeaching extends CI_Model
 				$this->db->where('roomon_id', $data);
 		return 	$this->db->delete('tb_room_online');
 	}
+
+    public function CheckHomeRoomInsert($data){
+        $result = $this->db->insert('tb_check_homeroom',$data);
+        return $result;
+    }
+
+    public function CheckHomeRoomUpdate($data,$id){
+        $result = $this->db->update('tb_check_homeroom',$data,'chk_home_id="'.$id.'"');
+        return $result;
+    }
+
  
 }
