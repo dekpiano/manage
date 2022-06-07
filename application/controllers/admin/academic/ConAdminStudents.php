@@ -64,7 +64,7 @@ class ConAdminStudents extends CI_Controller {
     public function AdminStudentsUpdate(){
         $this->load->helper('array');
         $service = $this->getClient();
-        $spreadsheetId = '13mTh9NNdzk37s3nMYSfYyI1UZ_Dwz2hi3Rbv2i0OTQ0';
+        $spreadsheetId = '1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec';
         
         $range = 'stu1!A2:I1000';  // TODO: Update placeholder value.
 
@@ -100,8 +100,8 @@ class ConAdminStudents extends CI_Controller {
                 'StudentPrefix' => $response->values[$i][3], 
                 'StudentFirstName' => $response->values[$i][4], 
                 'StudentLastName' => $response->values[$i][5],
-                'StudentIDNumber' => $response->values[$i][6],
-                'StudentDateBirth' => $response->values[$i][7],
+                'StudentIDNumber' => $response->values[$i][7],
+                'StudentDateBirth' => $response->values[$i][6],
                 'StudentStatus' => $response->values[$i][8]);
                 $this->ModAdminStudents->Students_Inaert($arrayName);
             }

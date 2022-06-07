@@ -43,21 +43,28 @@ var  $title = "หน้าแรก";
                         'chk_home_yaer'=>'2565',
                         'chk_home_room'=> $data['teacher'][0]->Reg_Class
                        );                                        
-        $data['ChkHomeRoom'] = $this->db->select('*')
-                                ->where($checif)                                
-                                ->where('chk_home_date <',date('Y-m-d H:i',strtotime('+8 hour +20 minutes',strtotime(date('Y-m-d H:i:s')))))
-                                ->get('tb_check_homeroom')->result();
-        if(empty($data['ChkHomeRoom'])){
+        $data['ChkHomeRoom1'] = $this->db->select('*')
+                                ->where($checif)
+                                ->order_by('chk_home_date','DESC')
+                                ->get('tb_check_homeroom')->row();
+ //echo '<pre>'; print_r($data['ChkHomeRoom1']); exit();
+        if(date("Y-m-d",strtotime($data['ChkHomeRoom1']->chk_home_date)) != date("Y-m-d")){
             $data['Action'] = base_url('teacher/ConTeacherTeaching/Insert_CheckHomeRoom');
             $data['ButtonName'] = "บันทึกข้อมูล";
             $data['ButtonClass'] = "primary";
+
         }else{
             $data['Action'] = base_url('teacher/ConTeacherTeaching/Update_CheckHomeRoom');
             $data['ButtonName'] = "อัพเดตข้อมูล";
             $data['ButtonClass'] = "warning";
+
+            $data['ChkHomeRoom'] = $this->db->select('*')
+                                ->where($checif)
+                                ->order_by('chk_home_date','DESC')
+                                ->get('tb_check_homeroom')->result();
         }                     
             
-        // echo '<pre>'; print_r($data['ChkHomeRoom']); exit();
+        
 
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -184,7 +191,6 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');
         
     }
-
 
     // ห้องเรียนออนไลน์
 

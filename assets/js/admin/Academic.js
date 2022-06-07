@@ -16,7 +16,7 @@ $(document).on('submit', '#AddClassRoom', function(e) {
     var formadd = $('#AddClassRoom').serialize();
     $.ajax({
         type: 'post',
-        url: "../../admin/Academic/ConAdminClassRoom/AddClassRoom",
+        url: "../../admin/academic/ConAdminClassRoom/AddClassRoom",
         data: formadd,
         beforeSend: function() {
             console.log("กำลังโหลด");
