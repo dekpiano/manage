@@ -42,6 +42,8 @@ $('#example').DataTable({
 
 
 
+
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
     'use strict'
@@ -65,8 +67,8 @@ $('#example').DataTable({
 </script>
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
-
-<script src="<?=base_url();?>assets/js/admin/Academic.js?v=37"></script>
+<script src="<?=base_url();?>assets/js/admin/AcadeStudent.js?v=4"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
 <script src="<?=base_url();?>assets/js/admin/Affairs.js?v=2"></script>
 
 </body>

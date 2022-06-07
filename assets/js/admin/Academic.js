@@ -56,14 +56,7 @@ $(document).ready(function() {
         ]
     });
 
-    var ta = $('#tb-student').DataTable({
-        "order": [
-            [2, "asc"],
-            [3, "asc"]
-        ],
-        lengthMenu: [45, 100],
-        processing: true,
-    });
+
 
     var ta = $('#ReportExtraSubject').DataTable({
         "order": [

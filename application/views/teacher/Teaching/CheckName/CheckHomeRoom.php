@@ -94,57 +94,38 @@
 <!-- Dashboard Counts Section-->
 <section class="">
     <div class="container">
-
-
-        <div class="card">
-            <div class="card-close">
-                <div class="dropdown">
-                    <button type="button" id="closeCard2" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                    <div aria-labelledby="closeCard2" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#"
-                            class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#"
-                            class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                </div>
-            </div>
+        <div class="articles card">          
             <div class="card-header d-flex align-items-center">
-                <h3 class="h4">แบบฟอร์มเช็คชื่อโฮมรูมนักเรียนกิจกรรมหน้าเสาธง ชั้น ม.<?=$teacher[0]->Reg_Class;?></h3>
+                <h2 class="h3">แบบฟอร์มเช็คชื่อโฮมรูมนักเรียนกิจกรรมหน้าเสาธง ชั้น ม.<?=$teacher[0]->Reg_Class;?></h2>
+                <div class="badge badge-rounded bg-green">
+                    <h3>
+                    <?=$this->datethai->thai_date_and_time(strtotime(date('d-m-Y H:i:s')));?></div>
+                    </h3>
+                    
             </div>
-            <div class="card-body">
+            <div class="card-body no-padding">
 
-                <form class="form-horizontal" action="<?=$Action;?>" method="post">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">รหัสนักเรียน</th>
-                                    <th scope="col">ชื่อ-นามสกุล</th>
-                                    <th scope="col">สถานะ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $CountStu = 0;
-                                    foreach ($student as $key => $v_stu) : 
-                                        $CountStu += 1;
-                                    ?>
+            <form class="form-horizontal" action="<?=$Action;?>" method="post">
 
-                                <tr>
-                                    <th scope="row"><?=$v_stu->StudentNumber?></th>
-                                    <td>
-                                        <?=$v_stu->StudentCode?>
+                <div class="row justify-content-md-center mt-3">
+                    <?php foreach ($student as $key => $v_stu) : ?>
 
-                                        <input type="hidden" name="chk_home_teacher" id="chk_home_teacher"
+                        <input type="hidden" name="chk_home_teacher" id="chk_home_teacher"
                                             value="<?=$this->session->userdata('login_id')?>">
-                                        <input type="hidden" name="chk_home_room" id="chk_home_room"
-                                            value="<?=$teacher[0]->Reg_Class;?>">
-                                        <input type="hidden" name="chk_home_term" id="chk_home_term" value="1">
-                                        <input type="hidden" name="chk_home_yaer" id="chk_home_yaer" value="2565">
-                                    </td>
-                                    <td><?=$v_stu->StudentPrefix?><?=$v_stu->StudentFirstName?>
-                                        <?=$v_stu->StudentLastName?></td>
-                                    <td>
-                                        <?php                                             
+                        <input type="hidden" name="chk_home_room" id="chk_home_room"
+                            value="<?=$teacher[0]->Reg_Class;?>">
+                        <input type="hidden" name="chk_home_term" id="chk_home_term" value="1">
+                        <input type="hidden" name="chk_home_yaer" id="chk_home_yaer" value="2565">
+
+                    <div class="item align-items-center col-lg-4 d-flex offset-lg-2 p-1">
+                        <div class="image"><img src="https://cdn-icons.flaticon.com/png/512/3899/premium/3899618.png?token=exp=1654576917~hmac=54dd8c2e5b87d32c473a1a9baa23ed7b"  alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="text"><a href="#">
+                                <h3 class="h5"><?=$v_stu->StudentNumber?>. <?=$v_stu->StudentPrefix?><?=$v_stu->StudentFirstName?>
+                                        <?=$v_stu->StudentLastName?></h3>
+                            </a><small>เลขประจำตัว <?=$v_stu->StudentCode?></small></div>
+                    </div>
+                    <div class="col-lg-6 align-self-center">
+                        <?php                                             
                                             $chkMa = explode("|",@$ChkHomeRoom[0]->chk_home_ma);
                                             $chkLa = explode("|",@$ChkHomeRoom[0]->chk_home_la);
                                             $chkSahy = explode("|",@$ChkHomeRoom[0]->chk_home_sahy);
@@ -152,80 +133,71 @@
                                             $chkHnee = explode("|",@$ChkHomeRoom[0]->chk_home_hnee);
                                             $chkKhad = explode("|",@$ChkHomeRoom[0]->chk_home_khad);
                                             ?>
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-outline-primary active">
-                                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]"
-                                                    id="status[<?=$key?>]" value="มา" autocomplete="off" <?php 
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary active">
+                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
+                                    value="มา" autocomplete="off" <?php 
                                                     if($chkMa[0] == ""){
                                                         echo "checked";
                                                     }else{
                                                         if(in_array($v_stu->StudentCode, $chkMa)){echo "checked";}  
                                                     }
                                                     ?>> มา
-                                            </label>
-                                            <label class="btn btn-outline-primary">
-                                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]"
-                                                    id="status[<?=$key?>]" value="ขาด" autocomplete="off"
-                                                    <?php if(in_array($v_stu->StudentCode, $chkKhad)){echo "checked";}?>>
-                                                ขาด
-                                            </label>
-                                            <label class="btn btn-outline-primary">
-                                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]"
-                                                    id="status[<?=$key?>]" value="สาย" autocomplete="off"
-                                                    <?php if(in_array($v_stu->StudentCode, $chkSahy)){echo "checked";}?>>
-                                                สาย
-                                            </label>
-                                            <label class="btn btn-outline-primary">
-                                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]"
-                                                    id="status[<?=$key?>]" value="ลา" autocomplete="off"
-                                                    <?php if(in_array($v_stu->StudentCode, $chkLa)){echo "checked";}?>>
-                                                ลา
-                                            </label>
-                                            <label class="btn btn-outline-primary">
-                                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]"
-                                                    id="status[<?=$key?>]" value="กิจกรรม" autocomplete="off"
-                                                    <?php if(in_array($v_stu->StudentCode, $chkKid)){echo "checked";}?>>
-                                                กิจกรรม
-                                            </label>
-                                            <label class="btn btn-outline-primary">
-                                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]"
-                                                    id="status[<?=$key?>]" value="หนี" autocomplete="off"
-                                                    <?php if(in_array($v_stu->StudentCode, $chkHnee)){echo "checked";}?>>
-                                                ไม่เข้าร่วม
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
+                                    value="ขาด" autocomplete="off"
+                                    <?php if(in_array($v_stu->StudentCode, $chkKhad)){echo "checked";}?>>
+                                ขาด
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
+                                    value="สาย" autocomplete="off"
+                                    <?php if(in_array($v_stu->StudentCode, $chkSahy)){echo "checked";}?>>
+                                สาย
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
+                                    value="ลา" autocomplete="off"
+                                    <?php if(in_array($v_stu->StudentCode, $chkLa)){echo "checked";}?>>
+                                ลา
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
+                                    value="กิจกรรม" autocomplete="off"
+                                    <?php if(in_array($v_stu->StudentCode, $chkKid)){echo "checked";}?>>
+                                กิจกรรม
+                            </label>
+                            <label class="btn btn-outline-primary w-auto">
+                                <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
+                                    value="หนี" autocomplete="off"
+                                    <?php if(in_array($v_stu->StudentCode, $chkHnee)){echo "checked";}?>>
+                                ไม่เข้า
+                            </label>
+                        </div>
+                    </div>
 
-
-                                <input type="hidden" name="CountStu" id="CountStu" value="<?=$CountStu;?>">
+                    <?php endforeach; ?>
                                 <input type="hidden" name="chk_home_id" id="chk_home_id"
                                     value="<?=@$ChkHomeRoom[0]->chk_home_id?>">
-
-                                <?php
-                                        
-                                        // echo date('Y-m-d H:i',strtotime('+8 hour +20 minutes',strtotime($ChkHomeRoom[0]->chk_home_date)))
-                                        
-                                        ?>
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <?php 
-                        if(date("H:i",strtotime('09:30')) > date("H:i")):
+                </div>
+                <?php 
+                        if(date("H:i",strtotime('12:30')) > date("H:i")):
                     ?>
-                    <center>
+                    <div class="text-center m-3">
                         <button type="submit" class="btn btn-<?=$ButtonClass;?>"><?=$ButtonName;?></button>
-                    </center>
+                    </div>
                     <?php else: ?>
                     <div class="alert alert-danger text-center">
-                        <strong>แจ้งเตือน!</strong> ขณะนี้เลยเวลาเช็คชื่อโฮมรูมแล้ว กรุณารอในวันถัดไป... (ติดต่องานกิจกรรมนักเรียน)
+                        <strong>แจ้งเตือน!</strong> ขณะนี้เลยเวลาเช็คชื่อโฮมรูมแล้ว กรุณารอในวันถัดไป ถึงเวลา 09.00 น.
+                        ของทุกวัน... (ติดต่องานกิจกรรมนักเรียน)
                     </div>
                     <?php endif; ?>
-                </form>
+            </form>
             </div>
 
         </div>
+
+     
     </div>
 </section>

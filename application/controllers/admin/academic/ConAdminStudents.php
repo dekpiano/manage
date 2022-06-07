@@ -77,10 +77,10 @@ class ConAdminStudents extends CI_Controller {
             $checkStu[] = $v_re->StudentIDNumber;
         }
 
-        //print_r($checkStu);exit();
+        //echo '<pre>';print_r($response->values[0][7]);exit();
         for ($i=0; $i < $numRows; $i++) { 
 
-            if (in_array($response->values[$i][6], $checkStu))
+            if (in_array($response->values[$i][7], $checkStu))
             {
              $arrayName = array('StudentNumber' => $response->values[$i][0], 
                                 'StudentClass' => $response->values[$i][1],
@@ -88,9 +88,9 @@ class ConAdminStudents extends CI_Controller {
                                 'StudentPrefix' => $response->values[$i][3], 
                                 'StudentFirstName' => $response->values[$i][4], 
                                 'StudentLastName' => $response->values[$i][5],
-                                'StudentDateBirth' => $response->values[$i][7],
+                                'StudentDateBirth' => $response->values[$i][6],
                                 'StudentStatus' => $response->values[$i][8]);
-            $this->ModAdminStudents->Students_Update($arrayName,$response->values[$i][6]);
+            $this->ModAdminStudents->Students_Update($arrayName,$response->values[$i][7]);
             }
           else
             {
@@ -159,11 +159,9 @@ class ConAdminStudents extends CI_Controller {
         
     }
     
-    public function AddStudents(){   
-        $dataStudents = array('Reg_Year'=>$this->input->post('year'),
-                                'Reg_Class'=>$this->input->post('Students'),
-                                'class_teacher'=>$this->input->post('teacher'));
-        print_r($this->ModAdminStudents->Students_Add($dataStudents));
+    public function AdminStudentsDelete($id){   
+      
+        print_r($this->ModAdminStudents->Students_Delete($id));
     }
 
 }
