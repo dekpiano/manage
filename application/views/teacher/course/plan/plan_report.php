@@ -130,6 +130,11 @@
                                 if($v_checkplan->seplan_status1 == "ผ่าน" && $v_checkplan->seplan_status2 == "ผ่าน"){
                                     $bg_alert = "table-success";
                                 }
+                                if(date('Y',strtotime($v_checkplan->seplan_createdate)) == "2021"){
+
+                                }else{
+
+                                
                             ?>
 
                             <tr id="bgC<?=$v_checkplan->seplan_ID;?>">
@@ -153,7 +158,7 @@
 
                                 <td></td>
                             </tr>
-                            <?php endforeach; ?>
+                            <?php } endforeach; ?>
                         </tbody>
 
                     </table>

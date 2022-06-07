@@ -541,45 +541,21 @@ var  $title = "หน้าแรก";
         }else{
             $idLearn = $this->session->userdata('pers_learning');
         }
-        if($idLearn == 'lear_009'){
-            $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
-                                                    skjacth_personnel.tb_personnel.pers_id,
-                                                    skjacth_personnel.tb_personnel.pers_prefix,
-                                                    skjacth_personnel.tb_personnel.pers_firstname,
-                                                    skjacth_personnel.tb_personnel.pers_lastname")
-                                                    ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
-                                        ->where('seplan_learning',$idLearn)  
-                                        ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$data['setupplan'][0]->seplanset_year)
-                                        ->where('seplan_term',$data['setupplan'][0]->seplanset_term)     
-                                        ->or_where('seplan_coursecode','ก23100')                       
-                                        ->or_where('seplan_coursecode','ก23101')    
-                                        ->or_where('seplan_coursecode','ก23102')
-                                        ->group_by('seplan_namesubject')
-                                        ->group_by('seplan_coursecode')
-                                        ->group_by('pers_id')
-                                        ->order_by('pers_firstname')
-                                        ->get('tb_send_plan')->result();
-        }else{
-            $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
-                                                    skjacth_personnel.tb_personnel.pers_id,
-                                                    skjacth_personnel.tb_personnel.pers_prefix,
-                                                    skjacth_personnel.tb_personnel.pers_firstname,
-                                                    skjacth_personnel.tb_personnel.pers_lastname")
-                                                    ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
-                                        ->where('seplan_learning',$idLearn)  
-                                        ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$data['setupplan'][0]->seplanset_year)
-                                        ->where('seplan_term',$data['setupplan'][0]->seplanset_term)   
-                                        ->group_by('seplan_namesubject')
-                                        ->group_by('seplan_coursecode')
-                                        ->group_by('pers_id')
-                                        ->order_by('pers_firstname')
-                                        ->get('tb_send_plan')->result();
-        }
-        
-
-//echo '<pre>'; print_r($data['checkplan']); exit();
+        $data['checkplan'] = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_id,
+                                                skjacth_personnel.tb_personnel.pers_prefix,
+                                                skjacth_personnel.tb_personnel.pers_firstname,
+                                                skjacth_personnel.tb_personnel.pers_lastname")
+                                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                            ->where('seplan_learning',$idLearn)
+                            ->where('seplan_typeplan',$data['thai'])
+                            ->where('seplan_year',$data['setupplan'][0]->seplanset_year)
+                            ->where('seplan_term',$data['setupplan'][0]->seplanset_term)
+                            ->group_by('seplan_namesubject')
+                            ->group_by('seplan_coursecode')
+                            ->group_by('pers_id')
+                            ->order_by('pers_firstname')
+                            ->get('tb_send_plan')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/course/plan/plan_report.php');
@@ -609,43 +585,23 @@ var  $title = "หน้าแรก";
         }
         $lean = $DBskj->where('lear_id',$idLearn)->get('tb_learning')->result();
 
-        if($idLearn == 'lear_009'){
-            $checkplan = $this->db->select("skjacth_academic.tb_send_plan.*,
-                                                    skjacth_personnel.tb_personnel.pers_id,
-                                                    skjacth_personnel.tb_personnel.pers_prefix,
-                                                    skjacth_personnel.tb_personnel.pers_firstname,
-                                                    skjacth_personnel.tb_personnel.pers_lastname")
-                                                    ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
-                                        ->where('seplan_learning',$idLearn)  
-                                        ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$setupplan[0]->seplanset_year)
-                                        ->where('seplan_term',$setupplan[0]->seplanset_term)     
-                                        ->or_where('seplan_coursecode','ก23100')                       
-                                        ->or_where('seplan_coursecode','ก23101')    
-                                        ->or_where('seplan_coursecode','ก23102')
-                                        ->group_by('seplan_namesubject')
-                                        ->group_by('seplan_coursecode')
-                                        ->group_by('pers_id')
-                                        ->order_by('pers_firstname')
-                                        ->get('tb_send_plan')->result();
-        }else{
-            $checkplan = $this->db->select("skjacth_academic.tb_send_plan.*,
-                                                    skjacth_personnel.tb_personnel.pers_id,
-                                                    skjacth_personnel.tb_personnel.pers_prefix,
-                                                    skjacth_personnel.tb_personnel.pers_firstname,
-                                                    skjacth_personnel.tb_personnel.pers_lastname")
-                                                    ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
-                                        ->where('seplan_learning',$idLearn)  
-                                        ->where('seplan_typeplan',$data['thai'])
-                                        ->where('seplan_year',$setupplan[0]->seplanset_year)
-                                        ->where('seplan_term',$setupplan[0]->seplanset_term)   
-                                        ->group_by('seplan_namesubject')
-                                        ->group_by('seplan_coursecode')
-                                        ->group_by('pers_id')
-                                        ->order_by('pers_firstname')
-                                        ->get('tb_send_plan')->result();
-        }
-           // echo '<pre>'; print_r($checkplan); exit();
+        
+        $checkplan = $this->db->select("skjacth_academic.tb_send_plan.*,
+                                                skjacth_personnel.tb_personnel.pers_id,
+                                                skjacth_personnel.tb_personnel.pers_prefix,
+                                                skjacth_personnel.tb_personnel.pers_firstname,
+                                                skjacth_personnel.tb_personnel.pers_lastname")
+                                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_send_plan.seplan_usersend')
+                            ->where('seplan_learning',$idLearn)
+                            ->where('seplan_typeplan',$data['thai'])
+                            ->where('seplan_year',$setupplan[0]->seplanset_year)
+                            ->where('seplan_term',$setupplan[0]->seplanset_term)
+                            ->group_by('seplan_namesubject')
+                            ->group_by('seplan_coursecode')
+                            ->group_by('pers_id')
+                            ->order_by('pers_firstname')
+                            ->get('tb_send_plan')->result();
+            //echo '<pre>'; print_r($checkplan); exit();
     //     $this->load->view('teacher/course/plan/plan_report_print.php',$data);
     
             $spreadsheet = new Spreadsheet();
@@ -707,11 +663,7 @@ var  $title = "หน้าแรก";
 
             $start_row=6; 
             foreach ($checkplan as $key => $v_checkplan) {
-                if(date('Y',strtotime($v_checkplan->seplan_createdate)) == "2021"){
 
-                }else{
-
-                
                 if($v_checkplan->seplan_createdate === "0000-00-00 00:00:00"){
                     $createdate = "ยังไม่ได้ส่งงาน";
                 }else{
@@ -736,7 +688,6 @@ var  $title = "หน้าแรก";
 
                 $start_row++; 
             }
-        }
             $sheet->getStyle('A6:A'.($start_row))->getAlignment()
             ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER) //Set vertical center
             ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER) //Set horizontal center
