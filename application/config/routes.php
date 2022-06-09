@@ -100,7 +100,8 @@ $route['Teacher/Course/ReportPlan/(:any)'] = "teacher/ConTeacherCourse/report_pl
 $route['Teacher/Course/DownloadPlan'] = "teacher/ConTeacherCourse/DownloadPlan";
 $route['Teacher/Course/DownloadPlanZip/(:any)'] = "teacher/ConTeacherCourse/DownloadPlanZip/$1";
 $route['Teacher/Profile'] = "teacher/ConTeacherProfile/ProfileMain";
-$route['Teacher/Teaching/CheckHomeRoom'] = "teacher/ConTeacherTeaching/CheckHomeRoom";
+$route['Teacher/Teaching/CheckHomeRoomMain'] = "teacher/ConTeacherTeaching/CheckHomeRoomMain";
+$route['Teacher/Teaching/CheckHomeRoomAdd'] = "teacher/ConTeacherTeaching/CheckHomeRoomAdd";
 $route['Teacher/Teaching/CheckTeaching'] = "teacher/ConTeacherTeaching/CheckTeaching";
 $route['Teacher/Teaching/RoomOnlineMain'] = "teacher/ConTeacherTeaching/RoomOnlineMain";
 

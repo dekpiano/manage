@@ -12,8 +12,36 @@ var  $title = "หน้าแรก";
         $this->load->model('teacher/ModTeacherTeaching');
     }
 
-    public function CheckHomeRoom(){      
-        $data['title']  = "โฮมรูม";
+    public function CheckHomeRoomMain(){
+        $data['title']  = "หน้าแรกโฮมรูม";
+        $DBpersonnel = $this->load->database('personnel', TRUE);
+        $data['teacher'] = $this->db->select('skjacth_personnel.tb_personnel.pers_prefix,
+                                            skjacth_personnel.tb_personnel.pers_firstname,
+                                            skjacth_personnel.tb_personnel.pers_lastname,
+                                            skjacth_personnel.tb_personnel.pers_id,
+                                            skjacth_academic.tb_regclass.Reg_Year,
+                                            skjacth_academic.tb_regclass.Reg_Class')
+                                            ->join($DBpersonnel->database.'.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
+                                            ->where('pers_id',$this->session->userdata('login_id'))
+                                            ->where('Reg_Year','2565')
+                                            ->get('tb_regclass')->result();
+
+        $checif = array('chk_home_term'=>'1',
+                            'chk_home_yaer'=>'2565',
+                            'chk_home_room'=> $data['teacher'][0]->Reg_Class
+                        );                                        
+        $data['ChkHomeRoom'] = $this->db->select('*')
+                ->where($checif)
+                ->get('tb_check_homeroom')->result();
+
+        $this->load->view('teacher/layout/header_teacher.php',$data);
+        $this->load->view('teacher/layout/navbar_teaher.php');
+        $this->load->view('teacher/Teaching/CheckHomeRoom/CheckHomeRoomMain.php');
+        $this->load->view('teacher/layout/footer_teacher.php'); 
+    }
+
+    public function CheckHomeRoomAdd(){      
+        $data['title']  = "เช็คชื่อโฮมรูม";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['teacher'] = $this->db->select('skjacth_personnel.tb_personnel.pers_prefix,
                                         skjacth_personnel.tb_personnel.pers_firstname,
@@ -48,7 +76,7 @@ var  $title = "หน้าแรก";
                                 ->order_by('chk_home_date','DESC')
                                 ->get('tb_check_homeroom')->row();
  //echo '<pre>'; print_r($data['ChkHomeRoom1']); exit();
-        if(date("Y-m-d",strtotime($data['ChkHomeRoom1']->chk_home_date)) != date("Y-m-d")){
+        if(date("Y-m-d",strtotime(@$data['ChkHomeRoom1']->chk_home_date)) != date("Y-m-d")){
             $data['Action'] = base_url('teacher/ConTeacherTeaching/Insert_CheckHomeRoom');
             $data['ButtonName'] = "บันทึกข้อมูล";
             $data['ButtonClass'] = "primary";
@@ -62,13 +90,11 @@ var  $title = "หน้าแรก";
                                 ->where($checif)
                                 ->order_by('chk_home_date','DESC')
                                 ->get('tb_check_homeroom')->result();
-        }                     
-            
-        
+        }   
 
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
-        $this->load->view('teacher/Teaching/CheckName/CheckHomeRoom.php');
+        $this->load->view('teacher/Teaching/CheckHomeRoom/CheckHomeRoomAdd.php');
         $this->load->view('teacher/layout/footer_teacher.php');       
     }
 
@@ -123,7 +149,7 @@ var  $title = "หน้าแรก";
       }else{
         $this->session->set_flashdata(array('msg'=> 'YES','messge' => 'บันทึกข้อมูลไม่สำเร็จ','status'=>'error'));
       }
-      redirect('Teacher/Teaching/CheckHomeRoom');
+      redirect('Teacher/Teaching/CheckHomeRoomAdd');
     }
 
     public function Update_CheckHomeRoom(){  
@@ -187,7 +213,7 @@ var  $title = "หน้าแรก";
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
-        $this->load->view('teacher/Teaching/CheckName/CheckHomeRoom.php');
+        $this->load->view('teacher/Teaching/CheckHomeRoom/CheckHomeRoom.php');
         $this->load->view('teacher/layout/footer_teacher.php');
         
     }

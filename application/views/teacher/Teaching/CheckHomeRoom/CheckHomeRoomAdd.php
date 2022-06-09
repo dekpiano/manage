@@ -94,15 +94,25 @@
 <!-- Dashboard Counts Section-->
 <section class="">
     <div class="container">
+        <?php if(empty(@$ChkHomeRoom[0]->chk_home_ma)): ?>
+        <div class="alert alert-danger" role="alert">
+            <strong>แจ้งเตือน!</strong> ห้องเรียนชั้น ม.<?=$teacher[0]->Reg_Class;?> ยังไม่ได้เช็คโฮมรูม มีเวลาถึง เวลา 09.00
+            น.
+        </div>
+        <?php else: ?>
+        <div class="alert alert-success" role="alert">
+            <strong>แจ้งเตือน!</strong> บันทึกข้อมูลโฮมรูมเรียบร้อยแล้ว สามารถอัพเดตข้อมูลได้ถึง เวลา 09.00 น.
+        </div>
+        <?php endif; ?>
         <div class="articles card">
-            <div class="card-header d-flex align-items-center">
+            <div class="card-header align-items-center">
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="col-lg-8">
                         <h2 class="h3">แบบฟอร์มเช็คชื่อโฮมรูมนักเรียนกิจกรรมหน้าเสาธง ชั้น
                             ม.<?=$teacher[0]->Reg_Class;?></h2>
                     </div>
 
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <h3>
                             <?=$this->datethai->thai_date_and_time(strtotime(date('d-m-Y H:i:s')));?>
                         </h3>
@@ -113,7 +123,7 @@
 
                 <form class="form-horizontal" action="<?=$Action;?>" method="post">
 
-                    <div class="row justify-content-md-center mt-3 text-center">
+                    <div class="row justify-content-md-center mt-3">
                         <?php foreach ($student as $key => $v_stu) : ?>
 
                         <input type="hidden" name="chk_home_teacher" id="chk_home_teacher"
@@ -124,16 +134,18 @@
                         <input type="hidden" name="chk_home_yaer" id="chk_home_yaer" value="2565">
 
                         <div class="item align-items-center col-lg-4 d-flex offset-lg-2" style="padding: 5px 20px;">
-                            <div class="image"><img
-                                    src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
+                            <div class="image"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
                                     alt="..." class="img-fluid rounded-circle"></div>
-                            <div class="text"><a href="#">
+                            <div class="text">
+                                <a href="#">
                                     <h3 class="h5"><?=$v_stu->StudentNumber?>.
                                         <?=$v_stu->StudentPrefix?><?=$v_stu->StudentFirstName?>
                                         <?=$v_stu->StudentLastName?></h3>
-                                </a><small>เลขประจำตัว <?=$v_stu->StudentCode?></small></div>
+                                </a>
+                                <small>เลขประจำตัว <?=$v_stu->StudentCode?></small>
+                            </div>
                         </div>
-                        <div class="col-lg-6 align-self-center mb-4">
+                        <div class="col-lg-6 align-self-center mb-4 text-center">
                             <?php                                             
                                             $chkMa = explode("|",@$ChkHomeRoom[0]->chk_home_ma);
                                             $chkLa = explode("|",@$ChkHomeRoom[0]->chk_home_la);
@@ -145,18 +157,18 @@
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-primary active">
                                     <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
-                                        value="มา" autocomplete="off" <?php 
-                                                    if($chkMa[0] == ""){
-                                                        echo "checked";
-                                                    }else{
-                                                        if(in_array($v_stu->StudentCode, $chkMa)){echo "checked";}  
-                                                    }
-                                                    ?>> มา
+                                        value="มา" autocomplete="off"
+                                        <?php if(in_array($v_stu->StudentCode, $chkMa)){echo "checked";}?>> มา
                                 </label>
                                 <label class="btn btn-outline-primary">
                                     <input type="radio" name="status[<?=$v_stu->StudentCode?>]" id="status[<?=$key?>]"
-                                        value="ขาด" autocomplete="off"
-                                        <?php if(in_array($v_stu->StudentCode, $chkKhad)){echo "checked";}?>>
+                                        value="ขาด" autocomplete="off" <?php 
+                                                    if($chkKhad[0] == ""){
+                                                        echo "checked";
+                                                    }else{
+                                                        if(in_array($v_stu->StudentCode, $chkKhad)){echo "checked";}  
+                                                    }
+                                                    ?>>
                                     ขาด
                                 </label>
                                 <label class="btn btn-outline-primary">
@@ -191,15 +203,19 @@
                             value="<?=@$ChkHomeRoom[0]->chk_home_id?>">
                     </div>
                     <?php 
-                        if(date("H:i",strtotime('12:30')) > date("H:i")):
+                        if(date("H:i",strtotime('12:00')) > date("H:i")):
                     ?>
                     <div class="text-center m-3">
                         <button type="submit" class="btn btn-<?=$ButtonClass;?>"><?=$ButtonName;?></button>
                     </div>
                     <?php else: ?>
-                    <div class="alert alert-danger text-center">
-                        <strong>แจ้งเตือน!</strong> ขณะนี้เลยเวลาเช็คชื่อโฮมรูมแล้ว กรุณารอในวันถัดไป ถึงเวลา 09.00 น.
-                        ของทุกวัน... (ติดต่องานกิจกรรมนักเรียน)
+                    <div class="container">
+                        <div class="alert alert-danger text-center">
+                            <strong>แจ้งเตือน!</strong> ขณะนี้เลยเวลาเช็คชื่อโฮมรูมแล้ว ไม่สามารถกดปุ่มยืนยันได้
+                            กรุณารอในวันถัดไป ถึงเวลา 09.00
+                            น.
+                            ของทุกวัน... (ติดต่องานกิจกรรมนักเรียน)
+                        </div>
                     </div>
                     <?php endif; ?>
                 </form>

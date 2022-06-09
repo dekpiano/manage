@@ -44,7 +44,7 @@
                     <div class="g-1 row" style="padding-top:5px">
                         <div class="col-md-2 col-6">
                             <div class="card1 text-center">
-                                <a href="<?=base_url('Teacher/Teaching/CheckHomeRoom');?>">
+                                <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomMain');?>">
                                     <div class="image">
                                         <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" width="36" />
                                     </div>
