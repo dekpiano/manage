@@ -216,12 +216,17 @@
                             </a>
                             <!--//nav-link-->
                             <div id="submenu-1"
-                                class="collapse submenu submenu-1 <?=$this->uri->segment('4')=="HomeVisit" ? "show" :""?>"
+                                class="collapse submenu submenu-1 <?=$this->uri->segment('2')=="Affairs" ? "show" :""?>"
                                 data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
                                     <li class="submenu-item ">
                                         <a class="submenu-link <?=$this->uri->segment('5')=="Setting" ? "active" :""?>"
                                             href="<?=base_url('Admin/Affairs/StudentSupport/HomeVisit/Setting')?>">จัดการระบบเยี่ยมบ้าน/SDQ</a>
+
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a class="submenu-link <?=$this->uri->segment('4')=="SettingSystem" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Affairs/StudentHomeRoom/SettingSystem')?>">จัดการระบบโฮมรูม</a>
 
                                     </li>
                                 </ul>

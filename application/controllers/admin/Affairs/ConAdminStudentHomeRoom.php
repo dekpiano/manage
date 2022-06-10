@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ConAdminStudentSupport extends CI_Controller {
+class ConAdminStudentHomeRoom extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -17,12 +17,13 @@ class ConAdminStudentSupport extends CI_Controller {
     } 
 
     // ------------------ ตั้งค่าระบบ ---------------------------
-    public function PageMainSetting(){ 
+    public function PageSettingHomeRoom(){ 
 
-        $data['title'] = "ตั้งค่าระบบเยี่ยมบ้านนักเรียน/SDQ";
+        $data['title'] = "ตั้งค่าระบบโฮมรูม";
         $DBpersonnel = $this->load->database('personnel', TRUE); //ฐานข้อมูลบุคลากร
         $DBaffairs = $this->load->database('affairs', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
-        $data['Manager'] = $DBaffairs->select('homevisit_set_manager')->get('tb_homevisit_setting')->result();
+        $data['Time'] = $DBaffairs->select('set_homeroom_time')->where('set_homeroom_id',1)->get('tb_checkhomeroom_setting')->result();
+       // print_r($data['Time']);exit();
         $data['NameTeacher'] = $DBpersonnel->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_position,pers_learning')
          ->from('tb_personnel')
          ->where('pers_position !=','posi_001')
@@ -34,16 +35,16 @@ class ConAdminStudentSupport extends CI_Controller {
          ->order_by('pers_learning')
          ->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Affairs/AdminAffairs/AdminStudentSupport/AdminHomeVisit/AdminPageMainSetting.php');
+        $this->load->view('admin/Affairs/AdminAffairs/AdminStudentHomeRoom/AdminPageSettingHomeRoom.php');
         $this->load->view('admin/layout/Footer.php');
 
     }
 
-    public function HomeVisitSettingManager() {  
+    public function UpdateTimeHomeRoom() {  
         $DBaffairs = $this->load->database('affairs', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
 
-        $data = array('homevisit_set_manager' => $this->input->post('TeachID'));
-        $result = $DBaffairs->update('tb_homevisit_setting',$data,'homevisit_set_id=1');
+        $data = array('set_homeroom_time' => $this->input->post('set_homeroom_time'));
+        $result = $DBaffairs->update('tb_checkhomeroom_setting',$data,'set_homeroom_id=1');
         echo $result;
     }
 

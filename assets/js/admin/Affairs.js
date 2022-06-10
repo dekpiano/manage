@@ -7,3 +7,14 @@ $(document).on("change", "#homevisit_set_manager", function() {
         }
     });
 });
+
+$(document).on("change", "#set_homeroom_time", function() {
+    console.log($(this).val());
+    $.post("../../../admin/Affairs/ConAdminStudentHomeRoom/UpdateTimeHomeRoom", { set_homeroom_time: $(this).val() }, function(data, status) {
+        if (data == 1) {
+            alertify.success('เปลี่ยนเวลาสำเร็จ');
+        } else {
+            alertify.error('เปลี่ยนเวลาไม่สำเร็จ');
+        }
+    });
+});

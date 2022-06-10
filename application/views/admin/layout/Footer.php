@@ -69,7 +69,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 <script src="<?=base_url();?>assets/js/admin/AcadeStudent.js?v=4"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
-<script src="<?=base_url();?>assets/js/admin/Affairs.js?v=2"></script>
+<script src="<?=base_url();?>assets/js/admin/Affairs.js?v=3"></script>
 
 </body>
 

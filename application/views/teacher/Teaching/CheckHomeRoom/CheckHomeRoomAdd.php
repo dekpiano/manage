@@ -222,8 +222,8 @@
                         <input type="hidden" name="chk_home_id" id="chk_home_id"
                             value="<?=@$ChkHomeRoom[0]->chk_home_id?>">
                     </div>
-                    <?php 
-                        if(date("H:i",strtotime('09:00')) > date("H:i")):
+                    <?php                     
+                        if(date("H:i",strtotime($ChkHomeRoomSet[0]->set_homeroom_time)) > date("H:i:s")):
                     ?>
                     <div class="text-center m-3">
                         <button type="submit" class="btn btn-<?=$ButtonClass;?>"><?=$ButtonName;?></button>

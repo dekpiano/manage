@@ -4,7 +4,7 @@ class ModTeacherTeaching extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->DBAffairs= $this->load->database('affairs', TRUE);
     }
 
     function RoomOnlineInsert($data){        
@@ -22,12 +22,12 @@ class ModTeacherTeaching extends CI_Model
 	}
 
     public function CheckHomeRoomInsert($data){
-        $result = $this->db->insert('tb_check_homeroom',$data);
+        $result = $this->DBAffairs->insert('tb_checkhomeroom',$data);
         return $result;
     }
 
     public function CheckHomeRoomUpdate($data,$id){
-        $result = $this->db->update('tb_check_homeroom',$data,'chk_home_id="'.$id.'"');
+        $result = $this->DBAffairs->update('tb_checkhomeroom',$data,'chk_home_id="'.$id.'"');
         return $result;
     }
 

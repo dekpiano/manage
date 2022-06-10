@@ -10,6 +10,7 @@ var  $title = "หน้าแรก";
 			redirect('welcome','refresh');
 		}
         $this->load->model('teacher/ModTeacherTeaching');
+        $this->DBAffairs= $this->load->database('affairs', TRUE);
     }
 
     public function CheckHomeRoomMain(){
@@ -30,9 +31,9 @@ var  $title = "หน้าแรก";
                             'chk_home_yaer'=>'2565',
                             'chk_home_room'=> $data['teacher'][0]->Reg_Class
                         );                                        
-        $data['ChkHomeRoom'] = $this->db->select('*')
+        $data['ChkHomeRoom'] = $this->DBAffairs->select('*')
                 ->where($checif)
-                ->get('tb_check_homeroom')->result();
+                ->get('tb_checkhomeroom')->result();
 
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
@@ -71,10 +72,10 @@ var  $title = "หน้าแรก";
                         'chk_home_yaer'=>'2565',
                         'chk_home_room'=> $data['teacher'][0]->Reg_Class
                        );                                        
-        $data['ChkHomeRoom1'] = $this->db->select('*')
+        $data['ChkHomeRoom1'] = $this->DBAffairs->select('*')
                                 ->where($checif)
                                 ->order_by('chk_home_date','DESC')
-                                ->get('tb_check_homeroom')->row();
+                                ->get('tb_checkhomeroom')->row();
  //echo '<pre>'; print_r($data['ChkHomeRoom1']); exit();
         if(date("Y-m-d",strtotime(@$data['ChkHomeRoom1']->chk_home_date)) != date("Y-m-d")){
             $data['Action'] = base_url('teacher/ConTeacherTeaching/Insert_CheckHomeRoom');
@@ -86,11 +87,12 @@ var  $title = "หน้าแรก";
             $data['ButtonName'] = "อัพเดตข้อมูล";
             $data['ButtonClass'] = "warning";
 
-            $data['ChkHomeRoom'] = $this->db->select('*')
+            $data['ChkHomeRoom'] = $this->DBAffairs->select('*')
                                 ->where($checif)
                                 ->order_by('chk_home_date','DESC')
-                                ->get('tb_check_homeroom')->result();
+                                ->get('tb_checkhomeroom')->result();
         }   
+        $data['ChkHomeRoomSet'] = $this->DBAffairs->where('set_homeroom_id',1)->get('tb_checkhomeroom_setting')->result();
 
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
