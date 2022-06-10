@@ -204,7 +204,7 @@ var  $title = "หน้าแรก";
       }else{
         $this->session->set_flashdata(array('msg'=> 'YES','messge' => 'อัพเดตข้อมูลไม่สำเร็จ','status'=>'error'));
       }
-      redirect('Teacher/Teaching/CheckHomeRoom');
+      redirect('Teacher/Teaching/CheckHomeRoomAdd');
     }
 
     public function CheckTeaching(){      

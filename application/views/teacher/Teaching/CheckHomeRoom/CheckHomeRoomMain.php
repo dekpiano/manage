@@ -94,31 +94,50 @@
 
 
 <!-- Dashboard Counts Section-->
-<section class="dashboard-counts no-padding-bottom">
+<div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomAdd');?>">
+                <div class="statistic d-flex align-items-center bg-white has-shadow">
+                    <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
+                    <div class="text"><strong>บันทึกข้อมูลโฮมรูม</strong></div>
+                </div>
+                </a>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+<section class="dashboard-counts no-padding-bottom">   
     <div class="container-fluid">
-        <h2>สถิติการมาเข้าแถวตอนเช้า วันที่ 
+        <h2>สถิติการมาเข้าแถวตอนเช้า วันที่
             <?=$this->datethai->thai_date_fullmonth(strtotime(date('Y-m-d')))?>
         </h2>
         <?php 
-        if(empty($ChkHomeRoom)){
+        
+            
             foreach ($ChkHomeRoom as $key => $v_ChkHomeRoom) {
                 if(date('Y-m-d',strtotime($v_ChkHomeRoom->chk_home_date)) === date('Y-m-d')){
-                 $stu_ma =  count(explode('|', $v_ChkHomeRoom->chk_home_ma));
-                 $stu_khad =  count(explode('|', $v_ChkHomeRoom->chk_home_khad));
-                 $stu_la =  count(explode('|', $v_ChkHomeRoom->chk_home_la));
-                 $stu_sahy =  count(explode('|', $v_ChkHomeRoom->chk_home_sahy));
-                 $stu_kid =  count(explode('|', $v_ChkHomeRoom->chk_home_kid));
-                 $stu_hnee =  count(explode('|', $v_ChkHomeRoom->chk_home_hnee));
+                    $v_ChkHomeRoom->chk_home_ma !== "" ? $stu_ma =  count(explode('|', $v_ChkHomeRoom->chk_home_ma)) : $stu_ma = 0;
+                    $v_ChkHomeRoom->chk_home_khad !== "" ? $stu_khad =  count(explode('|', $v_ChkHomeRoom->chk_home_khad)) : $stu_khad = 0;
+                    $v_ChkHomeRoom->chk_home_la !== "" ? $stu_la =  count(explode('|', $v_ChkHomeRoom->chk_home_la)) : $stu_la = 0;
+                    $v_ChkHomeRoom->chk_home_sahy !== "" ? $stu_sahy =  count(explode('|', $v_ChkHomeRoom->chk_home_sahy)) : $stu_sahy = 0;
+                    $v_ChkHomeRoom->chk_home_kid !== "" ? $stu_kid =  count(explode('|', $v_ChkHomeRoom->chk_home_kid)) : $stu_kid = 0;
+                    $v_ChkHomeRoom->chk_home_hnee !== "" ? $stu_hnee =  count(explode('|', $v_ChkHomeRoom->chk_home_hnee)) : $stu_hnee = 0;
+                        
+                }
+                else{
+                    $stu_ma =  0;
+                    $stu_khad =  0;
+                    $stu_la =  0;
+                    $stu_sahy =  0;
+                    $stu_kid =  0;
+                    $stu_hnee =  0;
                 }
              }
-        }else{
-            $stu_ma =  0;
-            $stu_khad =  0;
-            $stu_la =  0;
-            $stu_sahy =  0;
-            $stu_kid =  0;
-            $stu_hnee =  0;
-        }
+        
         
         // if($ChkHomeRoom){
 

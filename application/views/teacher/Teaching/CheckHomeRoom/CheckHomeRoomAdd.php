@@ -96,12 +96,32 @@
     <div class="container">
         <?php if(empty(@$ChkHomeRoom[0]->chk_home_ma)): ?>
         <div class="alert alert-danger" role="alert">
-            <strong>แจ้งเตือน!</strong> ห้องเรียนชั้น ม.<?=$teacher[0]->Reg_Class;?> ยังไม่ได้เช็คโฮมรูม มีเวลาถึง เวลา 09.00
-            น.
+            <div class="row">
+                <div class="col-auto mr-auto">
+                    <strong>แจ้งเตือน!</strong> ห้องเรียนชั้น ม.<?=$teacher[0]->Reg_Class;?> ยังไม่ได้เช็คโฮมรูม
+                    มีเวลาถึง เวลา 09.00 น.
+                </div>
+
+                <div class="col-auto">
+                    <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomMain')?>" class="btn btn-outline-primary">
+                        ไปดูสถิติ
+                    </a>
+                </div>
+            </div>
         </div>
         <?php else: ?>
         <div class="alert alert-success" role="alert">
-            <strong>แจ้งเตือน!</strong> บันทึกข้อมูลโฮมรูมเรียบร้อยแล้ว สามารถอัพเดตข้อมูลได้ถึง เวลา 09.00 น.
+            <div class="row">
+                <div class="col-auto mr-auto">
+                    <strong>แจ้งเตือน!</strong> บันทึกข้อมูลโฮมรูมเรียบร้อยแล้ว สามารถอัพเดตข้อมูลได้ถึง เวลา 09.00 น.
+                </div>
+
+                <div class="col-auto">
+                    <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomMain')?>" class="btn btn-outline-primary">
+                        ไปดูสถิติ
+                    </a>
+                </div>
+            </div>
         </div>
         <?php endif; ?>
         <div class="articles card">
@@ -203,7 +223,7 @@
                             value="<?=@$ChkHomeRoom[0]->chk_home_id?>">
                     </div>
                     <?php 
-                        if(date("H:i",strtotime('12:00')) > date("H:i")):
+                        if(date("H:i",strtotime('09:00')) > date("H:i")):
                     ?>
                     <div class="text-center m-3">
                         <button type="submit" class="btn btn-<?=$ButtonClass;?>"><?=$ButtonName;?></button>
