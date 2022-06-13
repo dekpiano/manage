@@ -38,12 +38,23 @@ var  $title = "หน้าแรก";
                         );                                        
         $data['ChkHomeRoom'] = $this->DBAffairs->select('*')
                 ->where($checif)
-                ->get('tb_checkhomeroom')->result();
+                ->order_by('chk_home_date','DESC')
+                ->get('tb_checkhomeroom')->row();
 
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/Teaching/CheckHomeRoom/CheckHomeRoomMain.php');
         $this->load->view('teacher/layout/footer_teacher.php'); 
+    }
+
+    public function CHR_CheckStudent(){
+        $data['title']  = "หน้าแรกโฮมรูม";       
+        $data['teacher'] = $this->TeacRoom();
+
+        $re = $this->ModTeacherTeaching->Mo_CHR_CheckStudent($this->input->post('keyword'),$this->input->post('id'));
+
+        echo json_encode($re);
+
     }
 
     function ChartHomeRoom(){
@@ -255,6 +266,8 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php');
         
     }
+
+        
 
     // ห้องเรียนออนไลน์
 

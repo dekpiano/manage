@@ -22,7 +22,7 @@ $(document).ready(function() {
     // ------------------------------------------------------ //
 
     $.post('../../teacher/ConTeacherTeaching/ChartHomeRoom', function(show) {
-        console.log(show);
+        //console.log(show);
         var BARCHARTEXMPLE = $('#barChartExample');
         var barChartExample = new Chart(BARCHARTEXMPLE, {
             type: 'bar',

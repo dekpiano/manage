@@ -44,6 +44,7 @@
           <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=14"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
+          <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=7"></script>
 
           </body>
 

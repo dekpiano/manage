@@ -86,11 +86,16 @@
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center ">
             <h2 class="no-margin-bottom"><?=$title;?></h2>
             <p class="mb-0">
-
             </p>
         </div>
     </div>
 </header>
+<div class="breadcrumb-holder container-fluid">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=base_url('Teacher/Teaching/CheckHomeRoomMain');?>">หน้าแรก</a></li>
+        <li class="breadcrumb-item active">บันทึกข้อมูลโฮมรูม</li>
+    </ul>
+</div>
 <!-- Dashboard Counts Section-->
 <section class="">
     <div class="container">

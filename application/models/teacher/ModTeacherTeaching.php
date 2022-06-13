@@ -31,5 +31,25 @@ class ModTeacherTeaching extends CI_Model
         return $result;
     }
 
+    public function Mo_CHR_CheckStudent($data,$id){
+        $chk_home = $this->DBAffairs->select("$data,chk_home_id")
+                                    ->where('chk_home_id',$id)
+                                    ->get('tb_checkhomeroom')->result();
+        $ho = count(explode("|",$chk_home[0]->$data));
+        $ho1 = explode("|",$chk_home[0]->$data);
+
+        $data = array();
+        for ($i=0; $i < $ho; $i++) {            
+
+            $result = $this->db->select('StudentNumber,StudentClass,StudentCode,StudentPrefix,StudentFirstName,StudentLastName')
+                            ->where('StudentCode',$ho1[$i])
+                            ->get('tb_students')->result();
+                      
+            array_push($data,$result);      
+
+        }        
+        return $data;
+    }
+
  
 }

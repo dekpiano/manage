@@ -110,7 +110,7 @@
             <div class="statistic d-flex align-items-center bg-white has-shadow">
                 <div class="icon bg-red"><i class="fa fa-line-chart"></i></div>
                 <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomStatistics');?>">
-                    <div class="text"><strong>สถิติข้อมูลโฮมรูม</strong></div>
+                    <div class="text"><strong>สถิติข้อมูลทั้งหมดโฮมรูม</strong></div>
                 </a>
             </div>
 
@@ -127,16 +127,13 @@
         </h2>
         <?php 
         
-            
-            foreach ($ChkHomeRoom as $key => $v_ChkHomeRoom) {
-                if(date('Y-m-d',strtotime($v_ChkHomeRoom->chk_home_date)) === date('Y-m-d')){
-                    $v_ChkHomeRoom->chk_home_ma !== "" ? $stu_ma =  count(explode('|', $v_ChkHomeRoom->chk_home_ma)) : $stu_ma = 0;
-                    $v_ChkHomeRoom->chk_home_khad !== "" ? $stu_khad =  count(explode('|', $v_ChkHomeRoom->chk_home_khad)) : $stu_khad = 0;
-                    $v_ChkHomeRoom->chk_home_la !== "" ? $stu_la =  count(explode('|', $v_ChkHomeRoom->chk_home_la)) : $stu_la = 0;
-                    $v_ChkHomeRoom->chk_home_sahy !== "" ? $stu_sahy =  count(explode('|', $v_ChkHomeRoom->chk_home_sahy)) : $stu_sahy = 0;
-                    $v_ChkHomeRoom->chk_home_kid !== "" ? $stu_kid =  count(explode('|', $v_ChkHomeRoom->chk_home_kid)) : $stu_kid = 0;
-                    $v_ChkHomeRoom->chk_home_hnee !== "" ? $stu_hnee =  count(explode('|', $v_ChkHomeRoom->chk_home_hnee)) : $stu_hnee = 0;
-                        
+                if(date('Y-m-d',strtotime(@$ChkHomeRoom->chk_home_date)) === date('Y-m-d')){
+                    $ChkHomeRoom->chk_home_ma !== "" ? $stu_ma =  count(explode('|', $ChkHomeRoom->chk_home_ma)) : $stu_ma = 0;
+                    $ChkHomeRoom->chk_home_khad !== "" ? $stu_khad =  count(explode('|', $ChkHomeRoom->chk_home_khad)) : $stu_khad = 0;
+                    $ChkHomeRoom->chk_home_la !== "" ? $stu_la =  count(explode('|', $ChkHomeRoom->chk_home_la)) : $stu_la = 0;
+                    $ChkHomeRoom->chk_home_sahy !== "" ? $stu_sahy =  count(explode('|', $ChkHomeRoom->chk_home_sahy)) : $stu_sahy = 0;
+                    $ChkHomeRoom->chk_home_kid !== "" ? $stu_kid =  count(explode('|', $ChkHomeRoom->chk_home_kid)) : $stu_kid = 0;
+                    $ChkHomeRoom->chk_home_hnee !== "" ? $stu_hnee =  count(explode('|', $ChkHomeRoom->chk_home_hnee)) : $stu_hnee = 0;
                 }
                 else{
                     $stu_ma =  0;
@@ -146,7 +143,7 @@
                     $stu_kid =  0;
                     $stu_hnee =  0;
                 }
-             }
+             
         
         
         // if($ChkHomeRoom){
@@ -156,7 +153,8 @@
         <div class="row bg-white has-shadow">
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
-                <div class="item d-flex align-items-center">
+                <div class="item d-flex align-items-center ShowStudent" homeroom-id="<?=@$ChkHomeRoom->chk_home_id;?>"
+                    homeroom-keyword="chk_home_ma">
                     <div class="icon bg-violet"><i class="icon-user"></i></div>
                     <div class="title"><b>มา</b>
                         <div class="progress">
@@ -169,7 +167,8 @@
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
-                <div class="item d-flex align-items-center">
+                <div class="item d-flex align-items-center ShowStudent" homeroom-id="<?=@$ChkHomeRoom->chk_home_id;?>"
+                    homeroom-keyword="chk_home_khad">
                     <div class="icon bg-red"><i class="icon-user"></i></div>
                     <div class="title"><span>ขาด</span>
                         <div class="progress">
@@ -182,7 +181,8 @@
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
-                <div class="item d-flex align-items-center">
+                <div class="item d-flex align-items-center ShowStudent" homeroom-id="<?=@$ChkHomeRoom->chk_home_id;?>"
+                    homeroom-keyword="chk_home_sahy">
                     <div class="icon bg-green"><i class="icon-user"></i></div>
                     <div class="title"><span>สาย<br></span>
                         <div class="progress">
@@ -195,7 +195,8 @@
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
-                <div class="item d-flex align-items-center">
+                <div class="item d-flex align-items-center ShowStudent" homeroom-id="<?=@$ChkHomeRoom->chk_home_id;?>"
+                    homeroom-keyword="chk_home_la">
                     <div class="icon bg-orange"><i class="icon-user"></i></div>
                     <div class="title"><span>ลา<br></span>
                         <div class="progress">
@@ -208,7 +209,8 @@
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
-                <div class="item d-flex align-items-center">
+                <div class="item d-flex align-items-center ShowStudent" homeroom-id="<?=@$ChkHomeRoom->chk_home_id;?>"
+                    homeroom-keyword="chk_home_kid">
                     <div class="icon" style="background: #6df2ff !important;
     color: #fff;"><i class="icon-user"></i></div>
                     <div class="title"><span>กิจกรรม<br></span>
@@ -222,7 +224,8 @@
             </div>
             <!-- Item -->
             <div class="col-xl-2 col-sm-6">
-                <div class="item d-flex align-items-center">
+                <div class="item d-flex align-items-center ShowStudent" homeroom-id="<?=@$ChkHomeRoom->chk_home_id;?>"
+                    homeroom-keyword="chk_home_hnee">
                     <div class="icon bg-orange" style="background: #ff6df4 !important;
     color: #fff;"><i class="icon-user"></i></div>
                     <div class="title"><span>ไม่เข้าแถว<br></span>
@@ -263,3 +266,32 @@
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="ShowStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">รายชื่อนักเรียน</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover" id="TB_showstudent">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">เลขประจำตัว</th>
+                            <th scope="col">ชื่อ - นามสกุล</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
