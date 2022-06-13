@@ -13,19 +13,24 @@ var  $title = "หน้าแรก";
         $this->DBAffairs= $this->load->database('affairs', TRUE);
     }
 
-    public function CheckHomeRoomMain(){
-        $data['title']  = "หน้าแรกโฮมรูม";
+    public function TeacRoom(){
         $DBpersonnel = $this->load->database('personnel', TRUE);
-        $data['teacher'] = $this->db->select('skjacth_personnel.tb_personnel.pers_prefix,
-                                            skjacth_personnel.tb_personnel.pers_firstname,
-                                            skjacth_personnel.tb_personnel.pers_lastname,
-                                            skjacth_personnel.tb_personnel.pers_id,
-                                            skjacth_academic.tb_regclass.Reg_Year,
-                                            skjacth_academic.tb_regclass.Reg_Class')
-                                            ->join($DBpersonnel->database.'.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
-                                            ->where('pers_id',$this->session->userdata('login_id'))
-                                            ->where('Reg_Year','2565')
-                                            ->get('tb_regclass')->result();
+        $teacher = $this->db->select('skjacth_personnel.tb_personnel.pers_prefix,
+        skjacth_personnel.tb_personnel.pers_firstname,
+        skjacth_personnel.tb_personnel.pers_lastname,
+        skjacth_personnel.tb_personnel.pers_id,
+        skjacth_academic.tb_regclass.Reg_Year,
+        skjacth_academic.tb_regclass.Reg_Class')
+        ->join($DBpersonnel->database.'.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
+        ->where('pers_id',$this->session->userdata('login_id'))
+        ->where('Reg_Year','2565')
+        ->get('tb_regclass')->result();
+
+        return $teacher;
+    }
+    public function CheckHomeRoomMain(){
+        $data['title']  = "หน้าแรกโฮมรูม";       
+        $data['teacher'] = $this->TeacRoom();
 
         $checif = array('chk_home_term'=>'1',
                             'chk_home_yaer'=>'2565',
@@ -41,19 +46,31 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/footer_teacher.php'); 
     }
 
+    function ChartHomeRoom(){
+        $data['teacher'] = $this->TeacRoom();
+        $checif = array('chk_home_term'=>'1',
+                            'chk_home_yaer'=>'2565',
+                            'chk_home_room'=> $data['teacher'][0]->Reg_Class
+                        );                                        
+        $ChkHomeRoom = $this->DBAffairs->select('*')
+                ->where($checif)
+                ->order_by('chk_home_date','DESC')
+                ->get('tb_checkhomeroom')->row();
+        
+        $data = [];
+            $ChkHomeRoom->chk_home_ma !== "" ? $data[] =  count(explode('|', $ChkHomeRoom->chk_home_ma)) : $data[] = 0;
+            $ChkHomeRoom->chk_home_khad !== "" ? $data[] =  count(explode('|', $ChkHomeRoom->chk_home_khad)) : $data[] = 0;
+            $ChkHomeRoom->chk_home_sahy !== "" ? $data[] =  count(explode('|', $ChkHomeRoom->chk_home_sahy)) : $data[] = 0;
+            $ChkHomeRoom->chk_home_la !== "" ? $data[] =  count(explode('|', $ChkHomeRoom->chk_home_la)) : $data[] = 0;            
+            $ChkHomeRoom->chk_home_kid !== "" ? $data[] =  count(explode('|', $ChkHomeRoom->chk_home_kid)) : $data[] = 0;
+            $ChkHomeRoom->chk_home_hnee !== "" ? $data[] =  count(explode('|', $ChkHomeRoom->chk_home_hnee)) : $data[] = 0;
+            
+        echo json_encode($data);
+    }
+
     public function CheckHomeRoomAdd(){      
         $data['title']  = "เช็คชื่อโฮมรูม";
-        $DBpersonnel = $this->load->database('personnel', TRUE); 
-        $data['teacher'] = $this->db->select('skjacth_personnel.tb_personnel.pers_prefix,
-                                        skjacth_personnel.tb_personnel.pers_firstname,
-                                        skjacth_personnel.tb_personnel.pers_lastname,
-                                        skjacth_personnel.tb_personnel.pers_id,
-                                        skjacth_academic.tb_regclass.Reg_Year,
-                                        skjacth_academic.tb_regclass.Reg_Class')
-                                        ->join($DBpersonnel->database.'.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
-                                        ->where('pers_id',$this->session->userdata('login_id'))
-                                        ->where('Reg_Year','2565')
-                                        ->get('tb_regclass')->result();
+        $data['teacher'] = $this->TeacRoom();
         //print_r($data['teacher'][0]->Reg_Class); exit();
         $data['student'] = $this->db->select('StudentID,
                                                 StudentNumber,
@@ -207,6 +224,25 @@ var  $title = "หน้าแรก";
         $this->session->set_flashdata(array('msg'=> 'YES','messge' => 'อัพเดตข้อมูลไม่สำเร็จ','status'=>'error'));
       }
       redirect('Teacher/Teaching/CheckHomeRoomAdd');
+    }
+
+    public function CheckHomeRoomStatistics(){
+        $data['title']  = "สถิติโฮมรูม";
+        $data['teacher'] = $this->TeacRoom();
+
+        $checif = array('chk_home_term'=>'1',
+                        'chk_home_yaer'=>'2565',
+                        'chk_home_room'=> $data['teacher'][0]->Reg_Class
+                       );                                        
+        $data['ChkHomeRoom'] = $this->DBAffairs->select('*')
+                                ->where($checif)
+                                ->order_by('chk_home_date','ASC')
+                                ->get('tb_checkhomeroom')->result();
+
+        $this->load->view('teacher/layout/header_teacher.php',$data);
+        $this->load->view('teacher/layout/navbar_teaher.php');
+        $this->load->view('teacher/Teaching/CheckHomeRoom/CheckHomeRoomStatistics.php');
+        $this->load->view('teacher/layout/footer_teacher.php'); 
     }
 
     public function CheckTeaching(){      

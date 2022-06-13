@@ -20,9 +20,9 @@
           <script src="<?=base_url()?>assets/vendor/popper.js/umd/popper.min.js"> </script>
           <script src="<?=base_url()?>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
           <script src="<?=base_url()?>assets/vendor/jquery.cookie/jquery.cookie.js"> </script>
-          <script src="<?=base_url()?>assets/vendor/chart.js/Chart.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
           <script src="<?=base_url()?>assets/vendor/jquery-validation/jquery.validate.min.js"></script>
-          <script src="<?=base_url()?>assets/js/charts-home.js"></script>
+          <script src="<?=base_url()?>assets/js/charts-custom.js?v=5"></script>
           <!-- Main File -->
           <script src="<?=base_url()?>assets/js/front.js"></script>
           <script src="<?=base_url()?>assets/js/jquery.datetimepicker.js"></script>
@@ -48,7 +48,9 @@
           </body>
 
         <script>
+   
         
+
         $(window).on('load',function() {
             $(".se-pre-con").fadeOut(1000);
         });

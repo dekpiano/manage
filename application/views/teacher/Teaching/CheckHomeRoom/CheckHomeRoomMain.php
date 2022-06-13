@@ -95,22 +95,32 @@
 
 <!-- Dashboard Counts Section-->
 <div class="container-fluid mt-5">
-        <div class="row">
-            <div class="col-lg-4">
-                <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomAdd');?>">
-                <div class="statistic d-flex align-items-center bg-white has-shadow">
-                    <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
-                    <div class="text"><strong>บันทึกข้อมูลโฮมรูม</strong></div>
-                </div>
-                </a>
-                
-            </div>
-        </div>
 
+    <div class="row">
+        <div class="col-lg-4 col-12">
+            <div class="statistic d-flex align-items-center bg-white has-shadow">
+                <div class="icon bg-red"><i class="fa fa-plus"></i></div>
+                <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomAdd');?>">
+                    <div class="text"><strong>บันทึกข้อมูลโฮมรูม</strong></div>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-12">
+            <div class="statistic d-flex align-items-center bg-white has-shadow">
+                <div class="icon bg-red"><i class="fa fa-line-chart"></i></div>
+                <a href="<?=base_url('Teacher/Teaching/CheckHomeRoomStatistics');?>">
+                    <div class="text"><strong>สถิติข้อมูลโฮมรูม</strong></div>
+                </a>
+            </div>
+
+        </div>
     </div>
 
+</div>
 
-<section class="dashboard-counts no-padding-bottom">   
+
+<section class="dashboard-counts no-padding-bottom">
     <div class="container-fluid">
         <h2>สถิติการมาเข้าแถวตอนเช้า วันที่
             <?=$this->datethai->thai_date_fullmonth(strtotime(date('Y-m-d')))?>
@@ -222,6 +232,32 @@
                         </div>
                     </div>
                     <div class="number"><strong><?=$stu_hnee;?></strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard-counts no-padding-bottom">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="bar-chart-example card">
+                <div class="card-header d-flex align-items-center">
+                    <h3 class="h4">สถิติการมาเข้าแถวตอนเช้า</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                            <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                            <div class=""></div>
+                        </div>
+                    </div>
+                    <canvas id="barChartExample" width="565" height="250"
+                        style="display: block; width: 565px; height: 282px;" class="chartjs-render-monitor">
+
+                    </canvas>
                 </div>
             </div>
         </div>
