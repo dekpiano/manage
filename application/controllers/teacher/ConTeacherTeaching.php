@@ -162,7 +162,8 @@ var  $title = "หน้าแรก";
     //    echo $this->input->post('chk_home_teacher');
     //    echo $this->input->post('chk_home_room');
 
-       $data = array('chk_home_date' => date('Y-m-d H:i:s'),
+       $data = array('chk_home_date' => date('Y-m-d'),
+                    'chk_home_time' => date('H:i:s'),
                     'chk_home_teacher' => $this->input->post('chk_home_teacher'),
                     'chk_home_room' => $this->input->post('chk_home_room'),
                     'chk_home_ma' => $chk_home_ma,
@@ -216,7 +217,8 @@ var  $title = "หน้าแรก";
     //    echo $this->input->post('chk_home_teacher');
     //    echo $this->input->post('chk_home_room');
 
-       $data = array('chk_home_date' => date('Y-m-d H:i:s'),
+       $data = array('chk_home_date' => date('Y-m-d'),
+                    'chk_home_time' => date('H:i:s'),
                     'chk_home_teacher' => $this->input->post('chk_home_teacher'),
                     'chk_home_room' => $this->input->post('chk_home_room'),
                     'chk_home_ma' => $chk_home_ma,

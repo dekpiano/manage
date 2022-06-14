@@ -76,6 +76,7 @@ $route['Admin/Acade/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/Aca
 // งานกิจการนักเรียน
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
 $route['Admin/Affairs/StudentHomeRoom/SettingSystem'] = "admin/Affairs/ConAdminStudentHomeRoom/PageSettingHomeRoom";
+$route['Admin/Affairs/StudentHomeRoom/Dashboard/(:any)'] = "admin/Affairs/ConAdminStudentHomeRoom/PageHomeRoomDashboard/$1";
 
 // Login
 $route['Logout'] = "Control_login/logout";

@@ -20,20 +20,20 @@
     <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/portal.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-        rel="stylesheet">
-        
+        rel="stylesheet">        
 
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
   
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet">
     </link>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <style>
     .btn-group-xs>.btn,
     .btn-xs {
@@ -226,7 +226,7 @@
                                     </li>
                                     <li class="submenu-item ">
                                         <a class="submenu-link <?=$this->uri->segment('4')=="SettingSystem" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Affairs/StudentHomeRoom/SettingSystem')?>">จัดการระบบโฮมรูม</a>
+                                            href="<?=base_url('Admin/Affairs/StudentHomeRoom/Dashboard/'.date("Y-m-d"))?>">จัดการระบบโฮมรูม</a>
 
                                     </li>
                                 </ul>

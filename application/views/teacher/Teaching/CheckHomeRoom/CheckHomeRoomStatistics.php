@@ -42,7 +42,7 @@
                                 <?php foreach ($ChkHomeRoom as $key => $v_ChkHomeRoom) : ?>
                                 <tr>
                                     <th scope="row">
-                                        <?=$this->datethai->thai_date_and_time(strtotime($v_ChkHomeRoom->chk_home_date))?>
+                                        <?=$this->datethai->thai_date_fullmonth(strtotime($v_ChkHomeRoom->chk_home_date))?> <?=$v_ChkHomeRoom->chk_home_time?>
                                     </th>
                                     <td>
                                         <?=$v_ChkHomeRoom->chk_home_ma !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_ma)) : $data[] = 0;?>
