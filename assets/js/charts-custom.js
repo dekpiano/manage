@@ -21,37 +21,6 @@ $(document).ready(function() {
     // Bar Chart
     // ------------------------------------------------------ //
 
-    $.post('../../teacher/ConTeacherTeaching/ChartHomeRoom', function(show) {
-        //console.log(show);
-        var BARCHARTEXMPLE = $('#barChartExample');
-        var barChartExample = new Chart(BARCHARTEXMPLE, {
-            type: 'bar',
-            data: {
-                labels: ["มา", "ขาด", "สาย", "ลา", "กิจกรรม", "ไม่เข้าแถว"],
-                datasets: [{
-                    label: 'จำนวน',
-                    data: show,
-                    backgroundColor: [
-                        'rgba(121, 106, 238, 1)',
-                        'rgba(255, 118, 118, 1)',
-                        'rgba(84, 230, 157, 1)',
-                        'rgba(255, 195, 109, 1)',
-                        'rgba(109, 242, 255, 1)',
-                        'rgba(255, 109, 244, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            },
-        });
-
-    }, "json")
 
 
 

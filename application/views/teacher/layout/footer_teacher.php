@@ -15,6 +15,36 @@
           </div>
           </div>
           </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="ShowStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">รายชื่อนักเรียน</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <table class="table table-hover" id="TB_showstudent">
+                              <thead>
+                                  <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">เลขประจำตัว</th>
+                                      <th scope="col">ชื่อ - นามสกุล</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
           <!-- JavaScript files-->
           <script src="<?=base_url()?>assets/vendor/jquery/jquery.min.js"></script>
           <script src="<?=base_url()?>assets/vendor/popper.js/umd/popper.min.js"> </script>
@@ -27,6 +57,8 @@
           <script src="<?=base_url()?>assets/js/front.js"></script>
           <script src="<?=base_url()?>assets/js/jquery.datetimepicker.js"></script>
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+          <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
           <!-- DataTable -->
           <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
           <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
@@ -44,29 +76,37 @@
           <script src="<?=base_url()?>assets/js/teacher/HelpStudents.js?v=10"></script>
           <script src="<?=base_url()?>assets/js/teacher/SendCourse.js?v=14"></script>
           <script src="<?=base_url()?>assets/js/teacher/Teaching.js?v=1"></script>
-          <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=7"></script>
+          <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=9"></script>
 
           </body>
 
-        <script>
-   
-        
+          <script>
+$(window).on('load', function() {
+    $(".se-pre-con").fadeOut(1000);
+});
+$(function() {
+    $("#show_date").datepicker({
+        dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
+        changeMonth: true, // กำหนดให้เปลี่ยนเดือนได้
+        changeYear: true, //กำหนดให้เปลี่ยนปีได้
+        dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], //กำหนดชื่อย่อของวัน เป็น ภาษาไทย
+        monthNamesShort: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม",
+            "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+        ],
+    });
+});
+          </script>
 
-        $(window).on('load',function() {
-            $(".se-pre-con").fadeOut(1000);
-        });
-    </script>
-
-        </script>
+          </script>
 
           <?php if($this->session->flashdata('msg') == 'YES'):?>
           <script>
-            Swal.fire({
-                icon: '<?=$this->session->flashdata('status');?>',
-                title: "แจ้งเตือน",
-                html: '<?=$this->session->flashdata('messge');?>',
-                confirmButtonText: "ตกลง",
-            });
+Swal.fire({
+    icon: '<?=$this->session->flashdata('status');?>',
+    title: "แจ้งเตือน",
+    html: '<?=$this->session->flashdata('messge');?>',
+    confirmButtonText: "ตกลง",
+});
           </script>
           <?php endif; $this->session->mark_as_temp('msg',20); ?>
 
@@ -81,7 +121,7 @@ $(document).ready(function() {
         lang: 'th',
         format: 'd-m-Y H:i:s'
     });
-    
+
     $('[data-toggle="popover"]').popover();
 
     $('#example').DataTable({
@@ -122,7 +162,7 @@ $(document).ready(function() {
         }]
     });
 
-    
+
 
 });
           </script>

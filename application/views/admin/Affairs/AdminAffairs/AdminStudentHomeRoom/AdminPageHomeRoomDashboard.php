@@ -76,12 +76,18 @@
                                     ?>
                                     <tr>
                                         <td class="cell">มัธยมศึกษาปีที่ <?=$v_showHR->chk_home_room?></td>
-                                        <td class="cell"><?=$data_ma;?></span></td>
-                                        <td class="cell"><?=$data_khad;?></td>
-                                        <td class="cell"><?=$data_sahy;?></td>
-                                        <td class="cell"><?=$data_la;?></td>
-                                        <td class="cell"><?=$data_kid;?></td>
-                                        <td class="cell"><?=$data_hnee;?></td>
+                                        <td class="cell ShowStudentOfficer" homeroom-id="<?=$v_showHR->chk_home_id?>"
+                                    homeroom-keyword="chk_home_ma"><?=$data_ma;?></span></td>
+                                        <td class="cell ShowStudentOfficer" homeroom-id="<?=$v_showHR->chk_home_id?>"
+                                    homeroom-keyword="chk_home_khad"><?=$data_khad;?></td>
+                                        <td class="cell ShowStudentOfficer" homeroom-id="<?=$v_showHR->chk_home_id?>"
+                                    homeroom-keyword="chk_home_sahy"><?=$data_sahy;?></td>
+                                        <td class="cell ShowStudentOfficer" homeroom-id="<?=$v_showHR->chk_home_id?>"
+                                    homeroom-keyword="chk_home_la"><?=$data_la;?></td>
+                                        <td class="cell ShowStudentOfficer" homeroom-id="<?=$v_showHR->chk_home_id?>"
+                                    homeroom-keyword="chk_home_kid"><?=$data_kid;?></td>
+                                        <td class="cell ShowStudentOfficer" homeroom-id="<?=$v_showHR->chk_home_id?>"
+                                    homeroom-keyword="chk_home_hnee"><?=$data_hnee;?></td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

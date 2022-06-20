@@ -106,6 +106,7 @@ $route['Teacher/Profile'] = "teacher/ConTeacherProfile/ProfileMain";
 $route['Teacher/Teaching/CheckHomeRoomMain'] = "teacher/ConTeacherTeaching/CheckHomeRoomMain";
 $route['Teacher/Teaching/CheckHomeRoomAdd'] = "teacher/ConTeacherTeaching/CheckHomeRoomAdd";
 $route['Teacher/Teaching/CheckHomeRoomStatistics'] = "teacher/ConTeacherTeaching/CheckHomeRoomStatistics";
+$route['Teacher/Teaching/CheckHomeRoomDashboard/(:any)'] = "teacher/ConTeacherTeaching/CheckHomeRoomDashboard/$1";
 
 $route['Teacher/Teaching/CheckTeaching'] = "teacher/ConTeacherTeaching/CheckTeaching";
 $route['Teacher/Teaching/RoomOnlineMain'] = "teacher/ConTeacherTeaching/RoomOnlineMain";

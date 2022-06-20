@@ -37,18 +37,7 @@ class ConAdminStudentHomeRoom extends CI_Controller {
         $data['title'] = "แดชบอร์ดโฮมรูม";
        
         $data['Time'] = $this->DBaffairs->select('set_homeroom_time')->where('set_homeroom_id',1)->get('tb_checkhomeroom_setting')->result();
-       // print_r($data['Time']);exit();
-        $data['NameTeacher'] = $this->DBpersonnel->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_position,pers_learning')
-         ->from('tb_personnel')
-         ->where('pers_position !=','posi_001')
-         ->where('pers_position !=','posi_002')
-         ->where('pers_position !=','posi_007')
-         ->where('pers_position !=','posi_008')
-         ->where('pers_position !=','posi_009')
-         ->where('pers_position !=','posi_010')
-         ->order_by('pers_learning')
-         ->get()->result();
-
+        
          //print_r($date); exit();
         $data['showHR'] = $this->DBaffairs->where('chk_home_date',date('Y-m-d', strtotime($key)))                               
                                 ->order_by('chk_home_room','ASC')

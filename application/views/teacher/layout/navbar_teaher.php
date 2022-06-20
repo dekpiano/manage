@@ -70,7 +70,7 @@
                     <li class="<?=$this->uri->segment(3) == 'Main' ? 'active' : '' ?>">
                         <a href="<?=base_url('Teacher/SupStd/Main');?>">เยี่ยมบ้าน / SDQ</a>
                     </li>
-                    <?php if($CheckHomeVisitManager->homevisit_set_manager == $this->session->userdata('login_id')): ?>
+                    <?php if(@$CheckHomeVisitManager->homevisit_set_manager == $this->session->userdata('login_id')): ?>
                     <span class="heading">ตรวจงาน</span>
                     <li class="<?=$this->uri->segment(3) == 'CheckWorkManager' ? 'active' : '' ?>">
                         <a href="<?=base_url('Teacher/SupStd/CheckWorkManager');?>">หัวหน้างาน</a>

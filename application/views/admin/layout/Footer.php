@@ -1,6 +1,36 @@
 </div>
 <!--//app-wrapper-->
 
+ <!-- Modal -->
+ <div class="modal fade" id="ShowStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">รายชื่อนักเรียน</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <table class="table table-hover" id="TB_showstudent">
+                              <thead>
+                                  <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">เลขประจำตัว</th>
+                                      <th scope="col">ชื่อ - นามสกุล</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
 <script src="<?=base_url();?>assets/plugins/jquery-3.4.1.min.js"></script>
 <!-- Javascript -->
 <script src="<?=base_url();?>assets/plugins/popper.min.js"></script>
@@ -30,7 +60,7 @@
 <script src="<?=base_url();?>assets/js/app.js?v=1"></script>
 
 
-<script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=7.5"></script>
+<script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>
 
 <?php if($this->session->flashdata('msg') == 'YES'):?>
 <script>
@@ -40,16 +70,16 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 
 <script>
     $(function() {
-    $("#show_date").datepicker({
-        dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
-        changeMonth: true, // กำหนดให้เปลี่ยนเดือนได้
-        changeYear: true, //กำหนดให้เปลี่ยนปีได้
-        dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], //กำหนดชื่อย่อของวัน เป็น ภาษาไทย
-        monthNamesShort: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม",
-            "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-        ],
+        $("#show_date").datepicker({
+            dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
+            changeMonth: true, // กำหนดให้เปลี่ยนเดือนได้
+            changeYear: true, //กำหนดให้เปลี่ยนปีได้
+            dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], //กำหนดชื่อย่อของวัน เป็น ภาษาไทย
+            monthNamesShort: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม",
+                "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+            ],
+        });
     });
-});
 new SlimSelect({
     select: '#teacher'
 })

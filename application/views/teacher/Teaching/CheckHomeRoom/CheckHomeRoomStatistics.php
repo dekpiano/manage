@@ -44,18 +44,23 @@
                                     <th scope="row">
                                         <?=$this->datethai->thai_date_fullmonth(strtotime($v_ChkHomeRoom->chk_home_date))?> <?=$v_ChkHomeRoom->chk_home_time?>
                                     </th>
-                                    <td>
+                                    <td class="ShowStudent" homeroom-id="<?=$v_ChkHomeRoom->chk_home_id?>" homeroom-keyword="chk_home_ma">
                                         <?=$v_ChkHomeRoom->chk_home_ma !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_ma)) : $data[] = 0;?>
                                     </td>
-                                    <td><?=$v_ChkHomeRoom->chk_home_khad !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_khad)) : $data[] = 0;?>
+                                    <td class="ShowStudent" homeroom-id="<?=$v_ChkHomeRoom->chk_home_id?>" homeroom-keyword="chk_home_khad">
+                                        <?=$v_ChkHomeRoom->chk_home_khad !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_khad)) : $data[] = 0;?>
                                     </td>
-                                    <td><?=$v_ChkHomeRoom->chk_home_sahy !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_sahy)) : $data[] = 0;?>
+                                    <td class="ShowStudent" homeroom-id="<?=$v_ChkHomeRoom->chk_home_id?>" homeroom-keyword="chk_home_sahy">
+                                        <?=$v_ChkHomeRoom->chk_home_sahy !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_sahy)) : $data[] = 0;?>
                                     </td>
-                                    <td><?=$v_ChkHomeRoom->chk_home_la !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_la)) : $data[] = 0;?>
+                                    <td class="ShowStudent" homeroom-id="<?=$v_ChkHomeRoom->chk_home_id?>" homeroom-keyword="chk_home_la">
+                                        <?=$v_ChkHomeRoom->chk_home_la !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_la)) : $data[] = 0;?>
                                     </td>
-                                    <td><?=$v_ChkHomeRoom->chk_home_kid !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_kid)) : $data[] = 0;?>
+                                    <td class="ShowStudent" homeroom-id="<?=$v_ChkHomeRoom->chk_home_id?>" homeroom-keyword="chk_home_kid">
+                                        <?=$v_ChkHomeRoom->chk_home_kid !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_kid)) : $data[] = 0;?>
                                     </td>
-                                    <td><?=$v_ChkHomeRoom->chk_home_hnee !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_hnee)) : $data[] = 0;?>
+                                    <td class="ShowStudent" homeroom-id="<?=$v_ChkHomeRoom->chk_home_id?>" homeroom-keyword="chk_home_hnee">
+                                        <?=$v_ChkHomeRoom->chk_home_hnee !== "" ? $data[] =  count(explode('|', $v_ChkHomeRoom->chk_home_hnee)) : $data[] = 0;?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
