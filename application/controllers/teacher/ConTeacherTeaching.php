@@ -32,7 +32,7 @@ var  $title = "หน้าแรก";
         $data['title']  = "หน้าแรกโฮมรูม";       
         $data['teacher'] = $this->TeacRoom();
 
-        if($data['teacher'][0]->Reg_Class == 1 || $data['teacher'][0]->Reg_Class == 2 || $data['teacher'][0]->Reg_Class == 3 || $data['teacher'][0]->Reg_Class == 4 || $data['teacher'][0]->Reg_Class == 5 || $data['teacher'][0]->Reg_Class == 6){
+        if($data['teacher'][0]->Reg_Class == "1" || $data['teacher'][0]->Reg_Class == "2"|| $data['teacher'][0]->Reg_Class == "3" || $data['teacher'][0]->Reg_Class == "4" || $data['teacher'][0]->Reg_Class == "5" || $data['teacher'][0]->Reg_Class == "6"){
             redirect('Teacher/Teaching/CheckHomeRoomDashboard/'.date('d-m-Y'));
         }else{
             $checif = array('chk_home_term'=>'1',
