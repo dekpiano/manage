@@ -10,7 +10,7 @@
                         <div class="col-lg-4">
                             <p>ประจำวันที่</p>
                             <input type="text" class="form-control show_date" id="show_date"
-                                value="<?=$this->uri->segment(5)?>" style="text-align: center">
+                                value="<?=date('d-m-Y')?>" style="text-align: center">
                         </div>
 
                     </div>
@@ -36,9 +36,12 @@
                                             <div class=""></div>
                                         </div>
                                     </div>
+                                    <div id="graph-container">
                                     <canvas id="chart-doughnut" width="314" height="157"
                                         style="display: block; width: 314px; height: 157px;"
                                         class="chartjs-render-monitor"></canvas>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <!--//app-card-body-->

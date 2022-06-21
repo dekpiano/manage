@@ -44,15 +44,21 @@ $(document).on("change", "#set_homeroom_time", function() {
     });
 });
 
+var d = new Date();
+var strDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+ChartHomeRoomAll(strDate)
 $(document).on("change", "#show_date", function() {
-    window.location.href = $(this).val();
+    //window.location.href = $(this).val();
+    // alert();
+    $('#chart-doughnut').remove();
+    $('#graph-container').append('<canvas id="chart-doughnut" width="314" height="157" style="display: block; width: 314px; height: 157px;" class="chartjs-render-monitor"></canvas>');
 
+    ChartHomeRoomAll($(this).val())
 });
 
-var pathArray = window.location.pathname.split('/');
-if (pathArray[5]) {
-    $.post('../../../../admin/Affairs/ConAdminStudentHomeRoom/ChartHomeRoomAll', { key: pathArray[5] }, function(show) {
-            console.log(show);
+function ChartHomeRoomAll(TDate) {
+    $.post('../../../../admin/Affairs/ConAdminStudentHomeRoom/ChartHomeRoomAll', { key: TDate }, function(show) {
+            //console.log(show);
             var BARCHARTEXMPLE = $('#chart-doughnut');
             var barChartExample = new Chart(BARCHARTEXMPLE, {
                 type: 'bar',
@@ -86,6 +92,9 @@ if (pathArray[5]) {
             alert(xhr.responseText);
         });
 }
+
+
+
 
 $(document).on("click", ".ShowStudentOfficer", function() {
     $('#ShowStudent').modal('show');
