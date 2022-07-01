@@ -155,34 +155,34 @@
                                 <ul class="submenu-list list-unstyled">
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="AcademicResult" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/AcademicResult');?>">ผลการเรียน</a></li>
+                                            href="<?=base_url('Admin/Acade/AcademicResult');?>">จัดการผลการเรียน</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="RegisterSubject" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/RegisterSubject');?>">วิชาเรียน</a></li>
+                                            href="<?=base_url('Admin/Acade/RegisterSubject');?>">จัดการวิชาเรียน</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ClassSchedule" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/ClassSchedule');?>">ตารางเรียน</a></li>
+                                            href="<?=base_url('Admin/Acade/ClassSchedule');?>">จัดการตารางเรียน</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ExamSchedule" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/ExamSchedule');?>">ตารางสอบ</a></li>
+                                            href="<?=base_url('Admin/Acade/ExamSchedule');?>">จัดการตารางสอบ</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ClassRoom" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/ClassRoom');?>">ห้องเรียน / ที่ปรึกษา</a>
+                                            href="<?=base_url('Admin/Acade/ClassRoom');?>">จัดการห้องเรียน / ที่ปรึกษา</a>
                                     </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="Students" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/Students');?>">นักเรียน</a></li>
-                                    <li class="submenu-item"><a
+                                            href="<?=base_url('Admin/Acade/Students');?>">จัดการนักเรียน</a></li>
+                                    <!-- <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
                                             href="<?=base_url('Admin/Acade/ExtraSubject');?>">ลงทะเบียนวิชาเพิ่มเติม</a>
+                                    </li> -->
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/RoomOnline');?>">จัดการห้องเรียนออนไลน์</a>
                                     </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/RoomOnline');?>">ห้องเรียนออนไลน์</a>
-                                    </li>
-                                    <li class="submenu-item"><a
-                                            class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/AdminRoles');?>">บทบาทในวิชาการ</a>
+                                            href="<?=base_url('Admin/Acade/AdminRoles');?>">จัดการบทบาทในวิชาการ</a>
                                     </li>
                                 </ul>
                             </div>

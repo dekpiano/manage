@@ -17,9 +17,9 @@ var  $title = "แผงควบคุม";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['GroupYear'] = $this->db->select('SubjectYear')->group_by('SubjectYear')->get('tb_subjects')->result();
-        $data['subject'] = $this->db->where('SubjectYear','1/2562')->get('tb_subjects')->result();
+        
         //echo '<pre>';print_r($data['GroupYear']); exit();
-        $data['title'] = "ลงทะเบียนวิชา";	
+        $data['title'] = "วิชาเรียน";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminRegisterSubject/AdminRegisterSubjectMain.php');
@@ -31,35 +31,46 @@ var  $title = "แผงควบคุม";
         
     }
 
+    public function AdminRegisterSubjectSelect(){ 
+        $data = [];
+        $subject = $this->db->where('SubjectYear','1/2565')->get('tb_subjects')->result();
+        foreach($subject as $record){
+            $data[] = array( 
+                "SubjectYear" => $record->SubjectYear,
+                "SubjectCode" => $record->SubjectCode,
+                "SubjectName" => $record->SubjectName,
+                "FirstGroup" => $record->FirstGroup,
+                "SubjectClass" => $record->SubjectClass,
+                "SubjectYear" => $record->SubjectYear,
+                "SubjectID" => $record->SubjectID
+            );
 
-  
-
-    public function add(){   
-
-		$data['title'] = "ตารางเรียน";
-		$data['icon'] = '<i class="far fa-plus-square"></i>';
-		$data['color'] = 'primary';
-		
-		$this->db->select('*');
-		$this->db->from('tb_class_schedule');
-		$this->db->order_by('schestu_id','DESC');
-		$data['class_schedule'] = $this->db->get()->result();
-		
-		$num = @explode("_", $data['class_schedule'][0]->schestu_id);
-        $num1 = @sprintf("%03d",$num[1]+1);
-        $data['class_schedule'] = 'schestu_'.$num1;
-        $data['action'] = 'insert_class_schedule';
-
-        $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminClassSchedule/AdminClassScheduleForm.php');
-        $this->load->view('admin/layout/Footer.php');
-
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
-        
+        }
+        $output = array(
+            "data" =>  $data
+        );
+        echo json_encode($output);
     }
-    
+
+
+    public function AdminRegisterSubjectInsert(){ 
+        $data = array('SubjectCode' => $this->input->post('SubjectCode'),
+        'SubjectName' => $this->input->post('SubjectName'),
+        'SubjectUnit' => $this->input->post('SubjectUnit'),
+        'SubjectHour' => $this->input->post('SubjectHour'),
+        'SubjectType' => $this->input->post('SubjectType'),
+        'FirstGroup' => $this->input->post('FirstGroup'),
+        'SecondGroup' => $this->input->post('SecondGroup'), 
+        'SubjectClass' => $this->input->post('SubjectClass'),
+        'SubjectYear' => $this->input->post('SubjectYear'));  
+
+        echo $this->ModAdminRegisterSubject->ModSubjectInsert($data);
+    }
+
+    public function AdminRegisterSubjectDelete($id){ 
+        echo $this->ModAdminRegisterSubject->ModSubjectDelete($id); 
+    }
+
 
 }
 

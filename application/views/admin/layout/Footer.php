@@ -1,6 +1,5 @@
 </div>
 <!--//app-wrapper-->
-
  <!-- Modal -->
  <div class="modal fade" id="ShowStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
@@ -58,9 +57,6 @@
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <!-- Page Specific JS -->
 <script src="<?=base_url();?>assets/js/app.js?v=1"></script>
-
-
-<script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>
 
 <?php if($this->session->flashdata('msg') == 'YES'):?>
 <script>
@@ -121,6 +117,17 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 <script src="<?=base_url();?>assets/js/admin/AcadeStudent.js?v=4"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
+
+<?php if($this->uri->segment(2) ==="Acade"): ?>
+    <script src="<?=base_url();?>assets/js/admin/AcadeRegisterSubject.js?v=1"></script>
+<?php endif; ?>
+
+
+<?php if($this->uri->segment(2) ==="Affairs"): ?>
+<script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>
+<?php endif; ?>
+
+
 </body>
 
 </html>

@@ -18,18 +18,18 @@
                         <div class="col-auto">
                             <div class="page-utilities">
                                 <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-                                <div class="col-auto">
-                             
-                                <?php foreach ($GroupYear as $key => $v_GroupYear): 
+                                    <div class="col-auto">
+
+                                        <?php foreach ($GroupYear as $key => $v_GroupYear): 
                                  $GG = substr($v_GroupYear->SubjectYear, 2, 6);
                                 // print_r(array($GG));
                                     //$GG = explode('/',$v_GroupYear->SubjectYear); 
-                                    $G = array_unique(array($GG));
-                                    echo '<pre>';print_r($G);
-                                ?>	
-                                <?php endforeach; ?>		  
-								
-							    </div>                
+                                    // $G = array_unique(array($GG));
+                                    // echo '<pre>';print_r($G);
+                                ?>
+                                        <?php endforeach; ?>
+
+                                    </div>
                                     <div class="col-auto">
                                         <a class="btn app-btn-secondary" href="#">
                                             <svg width="1em" height="1em" viewBox="0 0 16 16"
@@ -55,7 +55,7 @@
                     <!--//row-->
 
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                             <div class="app-card app-card-settings shadow-sm p-3">
                                 <div class="app-card-header mb-3">
                                     <div class="row justify-content-between align-items-center">
@@ -74,10 +74,10 @@
                                     <!--//row-->
                                 </div>
                                 <div class="app-card-body">
-                                    <form class="settings-form row">
-                                        <div class="mb-3 col-6">
+                                    <form class="settings-form row" id="form-subject">
+                                        <div class="mb-3 col-6 col-lg-6">
                                             <label for="setting-input-1" class="form-label">ปีการศึกษา</label>
-                                            <select class="form-select w-auto" required="">
+                                            <select class="form-select" required="" name="SubjectYear" id="SubjectYear">
                                                 <option value="">เลือกปีการศึกษา</option>
                                                 <?php $d = date('Y')+543; for ($i=$d; $i <= $d+1 ; $i++) :?>
                                                 <option value="1/<?=$i;?>">1/<?=$i;?></option>
@@ -86,10 +86,10 @@
                                                 <?php endfor; ?>
                                             </select>
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-6">
                                             <label for="setting-input-1" class="form-label">ระดับชั้นที่เปิดสอน
                                             </label>
-                                            <select class="form-select w-auto" required="">
+                                            <select class="form-select" required="" name="SubjectClass" id="SubjectClass">
                                                 <option value="">เลือกระดับชั้น</option>
                                                 <?php $sara = $this->classroom->LevelClass();
                                                 foreach ($sara as $key => $v_sara):?>
@@ -97,41 +97,41 @@
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">รหัสวิชา
                                             </label>
                                             <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="">
+                                                required="" name="SubjectCode" id="SubjectCode">
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">ชื่อวิชา
                                             </label>
                                             <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="">
+                                                required=""  name="SubjectName" id="SubjectName">
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">หน่วยกิต
                                             </label>
                                             <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="">
+                                                required="" name="SubjectUnit" id="SubjectUnit">
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">จำนวนชั่วโมง
                                             </label>
                                             <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="">
+                                                required="" name="SubjectHour" id="SubjectHour">
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-4">
                                             <label for="setting-input-1" class="form-label">ประเภทวิชา</label>
-                                            <select class="form-select w-auto" required="">
+                                            <select class="form-select " required="" name="SubjectType" id="SubjectType">
                                                 <option value="">เลือกประเภทวิชา</option>
                                                 <option value="1/พื้นฐาน">1/พื้นฐาน</option>
                                                 <option value="2/เพิ่มเติม">2/เพิ่มเติม</option>
                                             </select>
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-4">
                                             <label for="setting-input-1" class="form-label">สาระหลัก</label>
-                                            <select class="form-select " required="">
+                                            <select class="form-select " required="" name="FirstGroup" id="FirstGroup">
                                                 <option value="">เลือกสาระหลัก</option>
                                                 <?php $sara = $this->classroom->GroupSaraMain();
                                                 foreach ($sara as $key => $v_sara):?>
@@ -139,10 +139,10 @@
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <div class="mb-3 col-6">
+                                        <div class="mb-3 col-6 col-lg-4">
                                             <label for="setting-input-1" class="form-label">สาระย่อย</label>
-                                            <select class="form-select w-auto" required="">
-                                                <option value="">เลือกสาระหลัก</option>
+                                            <select class="form-select" required="" name="SecondGroup" id="SecondGroup">
+                                                <option value="">เลือกสาระย่อย</option>
                                                 <?php $sara = $this->classroom->GroupSaraSecond();
                                                 foreach ($sara as $key => $v_sara):?>
                                                 <option value="<?=$v_sara?>"><?=$v_sara?></option>
@@ -156,11 +156,13 @@
 
                             </div>
                         </div>
-                        <div class="col-md-7">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
                             <div class="app-card app-card-orders-table shadow-sm mb-5">
                                 <div class="app-card-body">
                                     <div class="table-responsive p-3">
-                                        <table class="table app-table-hover mb-0 text-left" id="example">
+                                        <table class="table app-table-hover mb-0 text-left" id="tbSubject">
                                             <thead>
                                                 <tr>
                                                     <th class="cell">ปีการศึกษา</th>
@@ -168,32 +170,19 @@
                                                     <th class="cell">ชื่อวิชา</th>
                                                     <th class="cell">สาระ</th>
                                                     <th class="cell">ชั้น</th>
-                                                    <th class="cell"></th>
+                                                    <th class="cell">ปีที่เรียน</th>
+                                                    <th class="cell">คำสั่ง</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                            <?php foreach ($subject as $key => $v_subject):?>
-                                                <tr>
-                                                    <td class="cell"><?=$v_subject->SubjectYear?></td>
-                                                    <td class="cell"><span class="truncate"><?=$v_subject->SubjectCode?></span></td>
-                                                    <td class="cell"><?=$v_subject->SubjectName?></td>
-                                                    <td class="cell"><?=$v_subject->FirstGroup?></td>
-                                                    <td class="cell"><?=$v_subject->SubjectClass?></td>
-
-                                                    <td class="cell"><a class="btn-sm app-btn-secondary"
-                                                            href="#">View</a></td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
+                                            
                                         </table>
-                                    </div>
-                                    <!--//table-responsive-->
+                                    </div>                                
 
                                 </div>
                                 <!--//app-card-body-->
                             </div>
                             <!--//app-card-->
-                            
+
                         </div>
                     </div>
 
