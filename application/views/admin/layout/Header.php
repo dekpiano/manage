@@ -20,10 +20,10 @@
     <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/portal.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-        rel="stylesheet">        
+        rel="stylesheet">
 
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
-  
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
@@ -154,11 +154,17 @@
                                 data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
                                     <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="Enroll" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/Enroll');?>">ลงทะเบียนเรียน</a>
+                                    </li>
+                                    <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="AcademicResult" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/AcademicResult');?>">จัดการผลการเรียน</a></li>
+                                            href="<?=base_url('Admin/Acade/AcademicResult');?>">จัดการผลการเรียน</a>
+                                    </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="RegisterSubject" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/RegisterSubject');?>">จัดการวิชาเรียน</a></li>
+                                            href="<?=base_url('Admin/Acade/RegisterSubject');?>">จัดการวิชาเรียน</a>
+                                    </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ClassSchedule" ? "active" :""?>"
                                             href="<?=base_url('Admin/Acade/ClassSchedule');?>">จัดการตารางเรียน</a></li>
@@ -167,7 +173,8 @@
                                             href="<?=base_url('Admin/Acade/ExamSchedule');?>">จัดการตารางสอบ</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ClassRoom" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Acade/ClassRoom');?>">จัดการห้องเรียน / ที่ปรึกษา</a>
+                                            href="<?=base_url('Admin/Acade/ClassRoom');?>">จัดการห้องเรียน /
+                                            ที่ปรึกษา</a>
                                     </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="Students" ? "active" :""?>"

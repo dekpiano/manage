@@ -58,6 +58,8 @@ $route['ClosePage'] = "welcome/ClosePage";
 // งานวิชาการ
 $route['LoginAdmin'] = "Control_login/LoginAdmin";
 $route['Admin/Home'] = "admin/academic/ConAdminHome/AdminHome";
+$route['Admin/Acade/Enroll'] = "admin/academic/ConAdminEnroll/AdminEnrollMain";
+$route['Admin/Acade/Enroll/Add'] = "admin/academic/ConAdminEnroll/AdminEnrollAdd";
 $route['Admin/Acade/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
 $route['Admin/Acade/ClassSchedule'] = "admin/academic/ConAdminClassSchedule/AdminClassScheduleMain";
 $route['Admin/ClassSchedule/add'] = "admin/academic/ConAdminClassSchedule/add";

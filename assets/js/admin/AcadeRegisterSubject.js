@@ -23,7 +23,7 @@ tablel_Subject = $('#tbSubject').DataTable({
         }
     ]
 });
-// จัดการนักเรียน
+// จัดการนักเรียน  
 
 $(document).on('submit', '#form-subject', function(e) {
     e.preventDefault();

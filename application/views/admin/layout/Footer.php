@@ -51,10 +51,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<script src="https://cdn.rawgit.com/crlcu/multiselect/v2.5.1/dist/js/multiselect.min.js"></script>
 <!-- Page Specific JS -->
 <script src="<?=base_url();?>assets/js/app.js?v=1"></script>
 
@@ -76,12 +78,17 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
             ],
         });
     });
+    
+    $('#multiselect').multiselect();
+
 new SlimSelect({
     select: '#teacher'
 })
 new SlimSelect({
     select: '#classroom'
 })
+
+
 $('#example').DataTable({
     "responsive": true,
     "autoWidth": true,
@@ -119,6 +126,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
 
 <?php if($this->uri->segment(2) ==="Acade"): ?>
+    <script src="<?=base_url();?>assets/js/admin/AcadeEnroll.js?v=2"></script>
     <script src="<?=base_url();?>assets/js/admin/AcadeRegisterSubject.js?v=1"></script>
 <?php endif; ?>
 
