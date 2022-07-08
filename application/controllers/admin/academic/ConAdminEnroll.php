@@ -51,6 +51,30 @@ var  $title = "แผงควบคุม";
         echo json_encode($subject);
 
     }
+
+    public function AdminEnrollInsert(){
+
+       $chk_Subject = $this->db->where('SubjectID',$this->input->post('subjectregis'))->get('tb_subjects')->result();
+       print_r($chk_Subject[0]->SubjectCode);
+       print_r($chk_Subject[0]->SubjectYear);
+       print_r($chk_Subject[0]->SubjectClass);
+       print_r($this->input->post('teacherregis'));
+       print_r($this->input->post('to'));
+
+        
+       foreach ($this->input->post('to') as $key => $value) {
+        $a =  array('StudentID' => $value,
+        'SubjectCode' => $chk_Subject[0]->SubjectCode,
+        'RegisterYear' => $chk_Subject[0]->SubjectYear,
+        'RegisterClass' => $chk_Subject[0]->SubjectClass,
+        'TeacherID' => $this->input->post('teacherregis')
+        );   
+        echo $data = $this->db->insert('tb_register',$a);
+
+       }
+     
+    }
+
     
 
 }

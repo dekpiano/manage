@@ -52,6 +52,8 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.1.0/dist/js/tom-select.complete.min.js"></script>
+
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -95,11 +97,6 @@ $('#example').DataTable({
     "ordering": false,
 });
 
-
-
-
-
-
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
     'use strict'
@@ -126,7 +123,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
 
 <?php if($this->uri->segment(2) ==="Acade"): ?>
-    <script src="<?=base_url();?>assets/js/admin/AcadeEnroll.js?v=2"></script>
+    <script src="<?=base_url();?>assets/js/admin/AcadeEnroll.js?v=7"></script>
     <script src="<?=base_url();?>assets/js/admin/AcadeRegisterSubject.js?v=1"></script>
 <?php endif; ?>
 
