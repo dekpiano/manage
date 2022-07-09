@@ -59,7 +59,7 @@ $(document).on("change", "#Room", function() {
         $.each(data, function(index, value) {
             //console.log(value);
             // trHTML = '<tr><td></td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix+value.StudentFirstName+' '+value.StudentLastName + '</td></tr>';
-            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
+            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber.padStart(2, '0') + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
             $('#multiselect').append(trHTML);
         });
     }, 'json');
@@ -75,7 +75,7 @@ $(document).on("change", "#RoomEdit", function() {
         $.each(data, function(index, value) {
             //console.log(value);
             // trHTML = '<tr><td></td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix+value.StudentFirstName+' '+value.StudentLastName + '</td></tr>';
-            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
+            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber.padStart(2, '0') + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
             $('#multiselect').append(trHTML);
         });
 
@@ -101,7 +101,6 @@ $(document).on("submit", "#FormEnroll", function(e) {
             })
         },
         success: function(data) {
-
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -109,7 +108,6 @@ $(document).on("submit", "#FormEnroll", function(e) {
                 showConfirmButton: false,
                 timer: 5000
             })
-
         }
     });
 });

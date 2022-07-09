@@ -54,11 +54,11 @@ var  $title = "แผงควบคุม";
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
                                     tb_students.StudentCode,
+                                    tb_students.StudentClass,
                                     tb_students.StudentNumber,
                                     tb_students.StudentPrefix,
                                     tb_students.StudentFirstName,
-                                    tb_students.StudentLastName,
-                                    tb_students.StudentClass                                    
+                                    tb_students.StudentLastName                                                                       
                                     ")
                                     ->from('tb_register')
                                     ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -66,7 +66,6 @@ var  $title = "แผงควบคุม";
                                     ->where('RegisterYear','1/2565') 
                                     ->where('TeacherID',$TeachID)
                                     ->where('SubjectID',$codeSub)
-                                    ->order_by('StudentNumber')
                                     ->get()->result();
 
         //echo '<pre>'; print_r($Register);
@@ -96,7 +95,6 @@ var  $title = "แผงควบคุม";
        print_r($chk_Subject[0]->SubjectClass);
        print_r($this->input->post('teacherregis'));
        print_r($this->input->post('to'));
-
         
        foreach ($this->input->post('to') as $key => $value) {
         $a =  array('StudentID' => $value,
@@ -106,10 +104,28 @@ var  $title = "แผงควบคุม";
         'TeacherID' => $this->input->post('teacherregis')
         );   
         echo $data = $this->db->insert('tb_register',$a);
-
-       }
-     
+       }     
     }
+
+    public function AdminEnrollUpdate(){
+
+        $chk_Subject = $this->db->where('SubjectID',$this->input->post('subjectregis'))->get('tb_subjects')->result();
+        print_r($chk_Subject[0]->SubjectCode);
+        print_r($chk_Subject[0]->SubjectYear);
+        print_r($chk_Subject[0]->SubjectClass);
+        print_r($this->input->post('teacherregis'));
+        print_r($this->input->post('to'));
+         
+        foreach ($this->input->post('to') as $key => $value) {
+         $a =  array('StudentID' => $value,
+         'SubjectCode' => $chk_Subject[0]->SubjectCode,
+         'RegisterYear' => $chk_Subject[0]->SubjectYear,
+         'RegisterClass' => $chk_Subject[0]->SubjectClass,
+         'TeacherID' => $this->input->post('teacherregis')
+         );   
+         echo $data = $this->db->insert('tb_register',$a);
+        }     
+     }
 
     public function AdminEnrollSubject(){ 
         $data = [];

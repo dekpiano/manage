@@ -151,7 +151,7 @@
                                             <select name="to[]" id="multiselect_to" class="form-control" size="8"
                                                 required multiple="multiple" style="height:20rem">
                                                 <?php foreach ($Register as $key => $v_Register) : ?>
-                                                <option value="<?=$v_Register->StudentID?>"><?=$v_Register->StudentClass?> <?=$v_Register->StudentNumber?> <?=$v_Register->StudentPrefix.$v_Register->StudentFirstName.' '.$v_Register->StudentLastName?></option>
+                                                <option value="<?=$v_Register->StudentID?>"> <?=$v_Register->StudentClass?> <?=sprintf("%02d",$v_Register->StudentNumber)?>  <?=$v_Register->StudentPrefix.$v_Register->StudentFirstName.' '.$v_Register->StudentLastName?></option>
                                                 <?php endforeach; ?>
                                             </select>
 
