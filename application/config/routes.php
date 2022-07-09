@@ -60,6 +60,7 @@ $route['LoginAdmin'] = "Control_login/LoginAdmin";
 $route['Admin/Home'] = "admin/academic/ConAdminHome/AdminHome";
 $route['Admin/Acade/Enroll'] = "admin/academic/ConAdminEnroll/AdminEnrollMain";
 $route['Admin/Acade/Enroll/Add'] = "admin/academic/ConAdminEnroll/AdminEnrollAdd";
+$route['Admin/Acade/Enroll/Edit/(:any)/(:any)'] = "admin/academic/ConAdminEnroll/AdminEnrollEdit/$1/$2";
 $route['Admin/Acade/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
 $route['Admin/Acade/ClassSchedule'] = "admin/academic/ConAdminClassSchedule/AdminClassScheduleMain";
 $route['Admin/ClassSchedule/add'] = "admin/academic/ConAdminClassSchedule/add";

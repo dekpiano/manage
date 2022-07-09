@@ -1,4 +1,36 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+var tbErollSubject;
+tbErollSubject = $('#tbErollSubject').DataTable({
+    "order": [
+        [1, "asc"]
+    ],
+    'processing': true,
+    "ajax": {
+        url: "../../admin/academic/ConAdminEnroll/AdminEnrollSubject",
+        "type": "POST"
+    },
+    'columns': [
+        { data: 'SubjectYear' },
+        { data: 'SubjectCode' },
+        { data: 'SubjectName' },
+        { data: 'FirstGroup' },
+        { data: 'SubjectClass' },
+        {
+            data: 'TeacherName',
+            render: function(data, type, row) {
+                return data;
+            }
+        },
+        {
+            data: 'SubjectID',
+            render: function(data, type, row) {
+                return '<a href="../../Admin/Acade/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '"  class="btn btn-primary btn-sm text-white">ลงทะเบียนแล้ว</a> ';
+            }
+        }
+    ]
+});
+
 var form = document.getElementById('FormEnroll')
 form.addEventListener('submit', function(event) {
 
@@ -12,21 +44,11 @@ form.addEventListener('submit', function(event) {
 
 }, false)
 
-new TomSelect("#teacherregis", {
-    create: true,
-    sortField: {
-        field: "text"
-    }
-});
+$('#teacherregis').select2();
+$('#subjectregis').select2();
+$('#Room').select2();
+$('#RoomEdit').select2();
 
-new TomSelect("#Room", {
-    create: true,
-    sortField: {
-        field: "text"
-    }
-});
-
-new TomSelect("#subjectregis");
 
 $(document).on("change", "#Room", function() {
 
@@ -37,7 +59,23 @@ $(document).on("change", "#Room", function() {
         $.each(data, function(index, value) {
             //console.log(value);
             // trHTML = '<tr><td></td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix+value.StudentFirstName+' '+value.StudentLastName + '</td></tr>';
-            trHTML = '<option value="' + value.StudentID + '">' + value.StudentCode + ' ' + value.StudentNumber + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
+            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
+            $('#multiselect').append(trHTML);
+        });
+    }, 'json');
+
+});
+
+$(document).on("change", "#RoomEdit", function() {
+
+    $('#multiselect option').remove();
+
+    $.post("../../../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
+
+        $.each(data, function(index, value) {
+            //console.log(value);
+            // trHTML = '<tr><td></td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix+value.StudentFirstName+' '+value.StudentLastName + '</td></tr>';
+            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
             $('#multiselect').append(trHTML);
         });
 
@@ -74,6 +112,4 @@ $(document).on("submit", "#FormEnroll", function(e) {
 
         }
     });
-
-
 });

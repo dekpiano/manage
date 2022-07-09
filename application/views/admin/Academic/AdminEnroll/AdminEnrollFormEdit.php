@@ -45,14 +45,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select class="" name="subjectregis" id="subjectregis" class="subjectregis" required autocomplete="off">
-                                        <option value="">เลือกวิชาเรียน</option>
-                                        <?php foreach ($subject as $key => $v_subject): ?>
-                                        <option value="<?=$v_subject->SubjectID?>">
-                                            <?=$v_subject->SubjectName?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                   <?=$Register[0]->SubjectName?>
                                     <div class="invalid-feedback">
                                         กรุณาเลือกวิชาเรียน
                                     </div>
@@ -72,10 +65,10 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="teacherregis" id="teacherregis" calss="teacherregis" required>
+                                    <select name="teacherregis" id="teacherregis" class="teacherregis" required>
                                         <option value="">เลือกครูผู้สอน</option>
                                         <?php foreach ($teacher as $key => $v_teacher): ?>
-                                        <option value="<?=$v_teacher->pers_id?>">
+                                        <option <?=$v_teacher->pers_id == $Register[0]->TeacherID?"selected":""?> value="<?=$v_teacher->pers_id?>">
                                             <?=$v_teacher->pers_prefix.$v_teacher->pers_firstname.' '.$v_teacher->pers_lastname?>
                                         </option>
                                         <?php endforeach; ?>
@@ -108,7 +101,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="Room" id="Room" class="mb-3 Room" required>
+                                    <select name="RoomEdit" id="RoomEdit" class="mb-3 w-auto" required>
                                         <option value="">เลือกห้องเรียน</option>
                                         <?php $ListRoom = $this->classroom->ListRoom();
                                     foreach ($ListRoom as $key => $v_ListRoom): ?>
@@ -136,7 +129,7 @@
                                     </table>
                                 </div> -->
 
-                                    <div class="row">
+                                    <div class="row mt-3">
                                         <div class="col-lg-5">
                                             <select name="from[]" id="multiselect" class="form-control" size="20"
                                                 multiple="multiple" style="height:20rem">
@@ -156,7 +149,11 @@
 
                                         <div class="col-lg-5">
                                             <select name="to[]" id="multiselect_to" class="form-control" size="8"
-                                                required multiple="multiple" style="height:20rem"></select>
+                                                required multiple="multiple" style="height:20rem">
+                                                <?php foreach ($Register as $key => $v_Register) : ?>
+                                                <option value="<?=$v_Register->StudentID?>"><?=$v_Register->StudentClass?> <?=$v_Register->StudentNumber?> <?=$v_Register->StudentPrefix.$v_Register->StudentFirstName.' '.$v_Register->StudentLastName?></option>
+                                                <?php endforeach; ?>
+                                            </select>
 
                                             <div class="row">
                                                 <div class="col-lg-6">
