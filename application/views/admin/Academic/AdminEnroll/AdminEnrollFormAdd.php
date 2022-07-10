@@ -34,7 +34,7 @@
             </section>
             <hr class="mb-4">
             <section class="we-offer-area">
-                <form id="FormEnroll" method="post" novalidate>
+                <form id="FormEnroll" method="post" class="needs-validation" novalidate>
 
 
                     <div class="row g-4 settings-section">
@@ -49,7 +49,7 @@
                                         <option value="">เลือกวิชาเรียน</option>
                                         <?php foreach ($subject as $key => $v_subject): ?>
                                         <option value="<?=$v_subject->SubjectID?>">
-                                            <?=$v_subject->SubjectName?>
+                                        <?=$v_subject->SubjectCode?> <?=$v_subject->SubjectName?>
                                         </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -136,7 +136,7 @@
                                     </table>
                                 </div> -->
 
-                                    <div class="row">
+                                    <div class="row mt-3">
                                         <div class="col-lg-5">
                                             <select name="from[]" id="multiselect" class="form-control" size="20"
                                                 multiple="multiple" style="height:20rem">

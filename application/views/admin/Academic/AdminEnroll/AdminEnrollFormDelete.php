@@ -35,7 +35,7 @@
             </section>
             <hr class="mb-4">
             <section class="we-offer-area">
-                <form id="FormEnrollUpdate" class="needs-validation" method="post" novalidate>
+                <form id="FormEnrollDelete" class="needs-validation" method="post" novalidate>
 
 
                     <div class="row g-4 settings-section">
@@ -105,7 +105,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="RoomEdit" id="RoomEdit" class="mb-3 w-auto" required>
+                                    <!-- <select name="RoomEdit" id="RoomEdit" class="mb-3 w-auto" required>
                                         <option value="">เลือกห้องเรียน</option>
                                         <?php $ListRoom = $this->classroom->ListRoom();
                                     foreach ($ListRoom as $key => $v_ListRoom): ?>
@@ -113,25 +113,11 @@
                                             ม.<?=$v_ListRoom?>
                                         </option>
                                         <?php endforeach; ?>
-                                    </select>
+                                    </select> -->
                                     <div class="invalid-feedback">
                                         กรุณาเลือห้องเรียน
                                     </div>
-                                    <!-- <div class="table-responsive">
-                                    <table class="table mb-0 text-left" id="TB_showStudent">
-                                        <thead>
-                                            <tr>
-                                                <th class="cell">เลือก</th>
-                                                <th class="cell">เลขนักเรียน</th>
-                                                <th class="cell">ชื่อ - สกุล</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-
-                                        </tbody>
-                                    </table>
-                                </div> -->
+                                 
 
                                     <div class="row mt-3">
                                         
@@ -139,6 +125,9 @@
                                         <p>รายชื่อนักเรียน</p>
                                             <select name="from[]" id="multiselect" class="form-control" size="20"
                                                 multiple="multiple" style="height:20rem">
+                                                <?php foreach ($Register as $key => $v_Register) : ?>
+                                                <option value="<?=$v_Register->StudentID?>"> <?=$v_Register->StudentClass?> <?=sprintf("%02d",$v_Register->StudentNumber)?>  <?=$v_Register->StudentPrefix.$v_Register->StudentFirstName.' '.$v_Register->StudentLastName?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
 
@@ -155,12 +144,10 @@
                                         </div>
 
                                         <div class="col-lg-5">
-                                        <p>รายชื่อนักเรียนที่เพิ่งเข้ามาใหม่</p>
+                                        <p>รายชื่อนักเรียนที่จะถอนออกรายวิชานี้</p>
                                             <select name="to[]" id="multiselect_to" class="form-control" size="8"
                                                 required multiple="multiple" style="height:20rem">
-                                                <!-- <?php foreach ($Register as $key => $v_Register) : ?>
-                                                <option value="<?=$v_Register->StudentID?>"> <?=$v_Register->StudentClass?> <?=sprintf("%02d",$v_Register->StudentNumber)?>  <?=$v_Register->StudentPrefix.$v_Register->StudentFirstName.' '.$v_Register->StudentLastName?></option>
-                                                <?php endforeach; ?> -->
+                                                
                                             </select>
 
                                             <div class="row">

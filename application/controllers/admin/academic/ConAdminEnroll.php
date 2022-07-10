@@ -29,7 +29,7 @@ var  $title = "แผงควบคุม";
     }
 
     public function AdminEnrollAdd(){
-        $data['title'] = "เพิ่มการลงทะเบียนเรียน";
+        $data['title'] = "เพิ่มรายชื่อการลงทะเบียนเรียน";
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
                                         ->where('pers_learning !=',"")
@@ -42,14 +42,14 @@ var  $title = "แผงควบคุม";
     }
 
     public function AdminEnrollEdit($codeSub,$TeachID){
-        $data['title'] = "แก้ไขการลงทะเบียนเรียน";
+        $data['title'] = "แก้ไขรายชื่อการลงทะเบียนเรียน";
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
                                         ->where('pers_learning !=',"")
                                         ->get('tb_personnel')->result();
-
         $data['Register'] = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
+                                    tb_subjects.SubjectID,
                                     tb_register.SubjectCode,
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
@@ -58,7 +58,7 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentNumber,
                                     tb_students.StudentPrefix,
                                     tb_students.StudentFirstName,
-                                    tb_students.StudentLastName                                                                       
+                                    tb_students.StudentLastName   
                                     ")
                                     ->from('tb_register')
                                     ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -67,11 +67,41 @@ var  $title = "แผงควบคุม";
                                     ->where('TeacherID',$TeachID)
                                     ->where('SubjectID',$codeSub)
                                     ->get()->result();
-
-        //echo '<pre>'; print_r($Register);
-
+      
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminEnroll/AdminEnrollFormEdit.php');
+        $this->load->view('admin/layout/Footer.php');
+    }
+
+    public function AdminEnrollDelete($codeSub,$TeachID){
+        $data['title'] = "ถอนรายชื่อการลงทะเบียนเรียน";
+        $DBpersonnel = $this->load->database('personnel', TRUE);
+        $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
+                                        ->where('pers_learning !=',"")
+                                        ->get('tb_personnel')->result();
+
+        $data['Register'] = $this->db->select("tb_register.RegisterYear,
+                                    tb_subjects.SubjectName,
+                                    tb_subjects.SubjectID,
+                                    tb_register.SubjectCode,
+                                    tb_register.StudentID,
+                                    tb_register.TeacherID,
+                                    tb_students.StudentCode,
+                                    tb_students.StudentClass,
+                                    tb_students.StudentNumber,
+                                    tb_students.StudentPrefix,
+                                    tb_students.StudentFirstName,
+                                    tb_students.StudentLastName   
+                                    ")
+                                    ->from('tb_register')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
+                                    ->where('RegisterYear','1/2565') 
+                                    ->where('TeacherID',$TeachID)
+                                    ->where('SubjectID',$codeSub)
+                                    ->get()->result();
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminEnroll/AdminEnrollFormDelete.php');
         $this->load->view('admin/layout/Footer.php');
     }
 
@@ -84,6 +114,40 @@ var  $title = "แผงควบคุม";
                             ->get('tb_students')->result();
        
         echo json_encode($subject);
+        
+    }
+
+    public function AdminEnrollShow(){
+       
+        $Register = $this->db->select("tb_register.RegisterYear,
+                                    tb_subjects.SubjectName,
+                                    tb_subjects.SubjectID,
+                                    tb_register.SubjectCode,
+                                    tb_register.StudentID,
+                                    tb_register.TeacherID,
+                                    tb_students.StudentCode,
+                                    tb_students.StudentClass,
+                                    tb_students.StudentNumber,
+                                    tb_students.StudentPrefix,
+                                    tb_students.StudentFirstName,
+                                    tb_students.StudentLastName,                                    
+                                    skjacth_personnel.tb_personnel.pers_firstname,
+                                    skjacth_personnel.tb_personnel.pers_prefix,
+                                    skjacth_personnel.tb_personnel.pers_lastname   
+                                    ")
+                                    ->from('tb_register')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
+                                    ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
+                                    ->where('RegisterYear','1/2565') 
+                                    ->where('TeacherID',$this->input->post('teachid'))
+                                    ->where('SubjectID',$this->input->post('subid'))
+                                    ->order_by('StudentClass')
+                                    ->order_by('StudentNumber')                                    
+                                    ->get()->result();
+        //print_r($Register) ; //subid
+
+        echo json_encode($Register);
 
     }
 
@@ -109,13 +173,8 @@ var  $title = "แผงควบคุม";
 
     public function AdminEnrollUpdate(){
 
-        $chk_Subject = $this->db->where('SubjectID',$this->input->post('subjectregis'))->get('tb_subjects')->result();
-        print_r($chk_Subject[0]->SubjectCode);
-        print_r($chk_Subject[0]->SubjectYear);
-        print_r($chk_Subject[0]->SubjectClass);
-        print_r($this->input->post('teacherregis'));
-        print_r($this->input->post('to'));
-         
+        $chk_Subject = $this->db->where('SubjectID',$this->input->post('subjectregisupdate'))->get('tb_subjects')->result();
+
         foreach ($this->input->post('to') as $key => $value) {
          $a =  array('StudentID' => $value,
          'SubjectCode' => $chk_Subject[0]->SubjectCode,
@@ -124,6 +183,22 @@ var  $title = "แผงควบคุม";
          'TeacherID' => $this->input->post('teacherregis')
          );   
          echo $data = $this->db->insert('tb_register',$a);
+        }     
+     }
+
+     public function AdminEnrollDel(){
+
+        $chk_Subject = $this->db->where('SubjectID',$this->input->post('subjectregisupdate'))->get('tb_subjects')->result();
+
+        foreach ($this->input->post('to') as $key => $value) {
+         $a =  array('StudentID' => $value,
+         'SubjectCode' => $chk_Subject[0]->SubjectCode,
+         'RegisterYear' => $chk_Subject[0]->SubjectYear,
+         'RegisterClass' => $chk_Subject[0]->SubjectClass,
+         'TeacherID' => $this->input->post('teacherregis')
+         );   
+             $this->db->where($a);
+        echo $this->db->delete('tb_register');
         }     
      }
 

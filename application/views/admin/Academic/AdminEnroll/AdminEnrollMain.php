@@ -55,6 +55,7 @@
                                         <th class="cell">ชั้น</th>
                                         <th class="cell">ครูผู้สอน</th>
                                         <th class="cell">สถานะ</th>
+                                        <th class="cell">คำสั่ง</th>
                                     </tr>
                                 </thead>
 
@@ -76,3 +77,36 @@
 
     </div>
     <!--//main-wrapper-->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ShowSubjectName" id="staticBackdropLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover" id="tb_ShowEnroll">
+                        <thead>
+                            <tr>
+                                <th scope="col">ห้อง</th>
+                                <th scope="col">เลขที่</th>
+                                <th scope="col">เลขประจำตัว</th>
+                                <th scope="col">ชื่อ - นามสกุล</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+          
+                </div>
+            </div>
+        </div>
+    </div>

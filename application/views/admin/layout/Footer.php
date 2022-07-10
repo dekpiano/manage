@@ -90,15 +90,30 @@ new SlimSelect({
     select: '#classroom'
 })
 
-
 $('#example').DataTable({
     "responsive": true,
     "autoWidth": true,
     "ordering": false,
 });
 
+</script>
 
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+<script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
+<script src="<?=base_url();?>assets/js/admin/AcadeStudent.js?v=4"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
+
+<?php if($this->uri->segment(2) ==="Acade"): ?>
+    <script src="<?=base_url();?>assets/js/admin/AcadeRegisterSubject.js?v=1"></script>    
+    <script src="<?=base_url();?>assets/js/admin/AcadeEnroll.js?v=10"></script>
+<?php endif; ?>
+
+
+<?php if($this->uri->segment(2) ==="Affairs"): ?>
+<script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>
+<?php endif; ?>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
     'use strict'
 
@@ -117,25 +132,7 @@ $('#example').DataTable({
             }, false)
         })
 })()
-
-
 </script>
-
-<script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
-<script src="<?=base_url();?>assets/js/admin/AcadeStudent.js?v=4"></script>
-<script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
-
-<?php if($this->uri->segment(2) ==="Acade"): ?>
-    <script src="<?=base_url();?>assets/js/admin/AcadeRegisterSubject.js?v=1"></script>    
-    <script src="<?=base_url();?>assets/js/admin/AcadeEnroll.js?v=5"></script>
-<?php endif; ?>
-
-
-<?php if($this->uri->segment(2) ==="Affairs"): ?>
-<script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>
-<?php endif; ?>
-
-
 
 </body>
 

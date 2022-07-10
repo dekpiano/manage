@@ -1,5 +1,6 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 
+
 var tbErollSubject;
 tbErollSubject = $('#tbErollSubject').DataTable({
     "order": [
@@ -25,29 +26,33 @@ tbErollSubject = $('#tbErollSubject').DataTable({
         {
             data: 'SubjectID',
             render: function(data, type, row) {
-                return '<a href="../../Admin/Acade/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '"  class="btn btn-primary btn-sm text-white">ลงทะเบียนแล้ว</a> ';
+                return '<span class="badge bg-success rounded-pill ShowEnroll" data-bs-toggle="modal" data-bs-target="#staticBackdrop" sub-id="' + row.SubjectID + '" teach-id="' + row.TeacherID + '">ลงทะเบียนแล้ว</span>';
+            }
+        },
+        {
+            data: 'SubjectID',
+            render: function(data, type, row) {
+                return '<a href="../../Admin/Acade/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
+                    ' <a href="../../Admin/Acade/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
+                    ' <a href="../../Admin/Acade/Enroll/Cancel/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-danger btn-sm text-white">ลบลงทะเบียน</a>';
             }
         }
     ]
 });
 
-var form = document.getElementById('FormEnroll')
-form.addEventListener('submit', function(event) {
 
-    // add was-validated to display custom colors
-    form.classList.add('was-validated')
-
-    if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-    }
-
-}, false)
-
-$('#teacherregis').select2();
-$('#subjectregis').select2();
-$('#Room').select2();
-$('#RoomEdit').select2();
+$('#teacherregis').select2({
+    width: 300
+});
+$('#subjectregis').select2({
+    width: 300
+});
+$('#Room').select2({
+    width: 300
+});
+$('#RoomEdit').select2({
+    width: 300
+});
 
 
 $(document).on("change", "#Room", function() {
@@ -97,7 +102,7 @@ $(document).on("submit", "#FormEnroll", function(e) {
                 icon: 'error',
                 title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
                 showConfirmButton: false,
-                timer: 5000
+                timer: 3000
             })
         },
         success: function(data) {
@@ -106,8 +111,83 @@ $(document).on("submit", "#FormEnroll", function(e) {
                 icon: 'success',
                 title: 'บันทึกข้อมูลสำเร็จ',
                 showConfirmButton: false,
-                timer: 5000
+                timer: 3000
             })
         }
     });
+});
+
+$(document).on("submit", "#FormEnrollUpdate", function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '../../../../../admin/academic/ConAdminEnroll/AdminEnrollUpdate',
+        type: 'post',
+        data: $(this).serialize(),
+        error: function() {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        },
+        success: function(data) {
+            // console.log(data);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'เพิ่งรายชื่อนักเรียนสำเร็จ',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }
+    });
+});
+
+$(document).on("submit", "#FormEnrollDelete", function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '../../../../../admin/academic/ConAdminEnroll/AdminEnrollDel',
+        type: 'post',
+        data: $(this).serialize(),
+        error: function() {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        },
+        success: function(data) {
+            // console.log(data);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'ถอนการลงทะเบียนรายวิชาสำเร็จ',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }
+    });
+});
+
+
+$(document).on("click", ".ShowEnroll", function() {
+
+    $('#tb_ShowEnroll tbody tr').remove();
+
+    $.post("../../admin/academic/ConAdminEnroll/AdminEnrollShow", {
+        subid: $(this).attr('sub-id'),
+        teachid: $(this).attr('teach-id')
+    }, function(data, status) {
+        //console.log(data);
+        $('.ShowSubjectName').html("วิชา " + data[0].SubjectName + "<br>ครูผู้สอน " + data[0].pers_prefix + data[0].pers_firstname + ' ' + data[0].pers_lastname);
+        $.each(data, function(index, value) {
+            $('#tb_ShowEnroll tbody').append('<tr class="DelTableRow"><td>' + value.StudentClass + '</td><td>' + value.StudentNumber + '</td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</td></tr>');
+        });
+    }, 'json');
+
+
 });
