@@ -42,68 +42,80 @@
 
                     <?php if(!empty($set_score)):?>
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover table-bordered">
-                            <thead class="text-center">
-                                <tr>
-                                    <th colspan="4">ข้อมูลนักเรียน</th>
-                                    <th colspan="8">การประเมินผลการเรียน</th>
-                                </tr>
-                                <tr>
-                                    <th>ชั้น</th>
-                                    <th>เลขที่</th>
-                                    <th>เลขประจำตัว</th>
-                                    <th width="200">ชื่อ - นามสกุล</th>
-                                    <?php 
+                        <form class="form_score">
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th colspan="4">ข้อมูลนักเรียน</th>
+                                        <th colspan="8">การประเมินผลการเรียน</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ชั้น</th>
+                                        <th>เลขที่</th>
+                                        <th>เลขประจำตัว</th>
+                                        <th width="200">ชื่อ - นามสกุล</th>
+                                        <?php 
                                     $sum_scoer = 0;
                                     foreach ($set_score as $key => $v_set_score): 
                                         $sum_scoer += $v_set_score->regscore_score;
                                     ?>
-                                    <th class="h6">
-                                        <?=$v_set_score->regscore_namework?>
-                                        (<?=$v_set_score->regscore_score?>)
-                                    </th>
+                                        <th class="h6">
+                                            <?=$v_set_score->regscore_namework?>
+                                            (<?=$v_set_score->regscore_score?>)                                          
+                                        </th>
+                                        <?php endforeach; ?>
+                                        <th class="h6">คะแนนรวม (<?=$sum_scoer?>)</th>
+                                        <th class="h6">ร้อยละคะแนนรวม</th>
+                                        <th class="h6">เกรด</th>
+                                        <th class="h6">สถานะนักเรียน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($check_student as $key => $v_check_student) : ?>
+                                    <tr>
+                                        <th><?=$v_check_student->StudentClass?></th>
+                                        <td><?=$v_check_student->StudentNumber?></td>
+                                        <td><?=$v_check_student->StudentCode?></td>
+                                        <td><?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
+                                            <?=$v_check_student->StudentLastName?>
+                                            <input type="text" class="form-control sr-only" id="StudentID"
+                                                name="StudentID[]" value="<?=$v_check_student->StudentID?>">
+                                            <input type="text" class="form-control sr-only" id="SubjectCode"
+                                                name="SubjectCode" value="<?=$check_student[0]->SubjectCode?>">
+                                            <input type="text" class="form-control sr-only" id="RegisterYear"
+                                                name="RegisterYear" value="<?=$check_student[0]->RegisterYear?>">
+                                        </td>
+                                        <?php 
+                                        foreach ($set_score as $key => $v_set_score): 
+                                        $s = explode("|",$v_check_student->Score100);
+                                        ?>
+                                        <td>
+                                            <input type="text" class="form-control check_score" check-score-key="<?=$v_set_score->regscore_score?>"
+                                                id="<?=$v_check_student->StudentID?>"
+                                                name="<?=$v_check_student->StudentID?>[]"
+                                                value="<?=$v_check_student->Score100 == "" ?"0":$s[$key]?>">
+                                        </td>
+                                        <?php endforeach; ?>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                     <?php endforeach; ?>
-                                    <th class="h6">คะแนนรวม (<?=$sum_scoer?>)</th>
-                                    <th class="h6">ร้อยละคะแนนรวม</th>
-                                    <th class="h6">เกรด</th>
-                                    <th class="h6">สถานะนักเรียน</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($check_student as $key => $v_check_student) : ?>
-                                <tr>
-                                    <th><?=$v_check_student->StudentClass?></th>
-                                    <td><?=$v_check_student->StudentNumber?></td>
-                                    <td><?=$v_check_student->StudentCode?></td>
-                                    <td><?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
-                                        <?=$v_check_student->StudentLastName?></td>
-                                    <td>
-                                        <input type="text" class="form-control" id="exampleInputEmail1">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="exampleInputEmail1">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="exampleInputEmail1">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="exampleInputEmail1">
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                            <div class="text-center">
+                            <button type="submit" class="btn btn-primary">บันทึกคะแนน</button>
+                            </div>
+                            
+                        </form>
                     </div>
                     <?php else: ?>
 
-                        <div class="text-center">
+                    <div class="text-center">
                         <h1>กรุณาตั้งค่าคะแนนเก็บก่อน</h1>
-                        </div>
-                        
+                    </div>
+
                     <?php endif; ?>
 
 

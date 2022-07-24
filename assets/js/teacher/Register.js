@@ -29,6 +29,30 @@ function calculateSum() {
 }
 
 
+
+$(document).on('keyup', '.check_score', function() {
+    var num = parseInt($(this).val());
+    var key = parseInt($(this).attr('check-score-key'));
+    // console.log($(this).val());
+    //   console.log($(this).attr('check-score-key'));
+
+      if(num > key){
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'คุณกรอกคะแนนเกินคะแนนเก็บ<br>กรุณากรอกคะแนนใหม่',
+            showConfirmButton: false,
+            timer: 3000
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                //window.location.reload();
+                $(this).val("0");
+            }
+        })
+      }
+});
+
+
 $(document).on('submit', '.form_set_score', function(e) {
     e.preventDefault();
     $.ajax({
@@ -80,7 +104,36 @@ $(document).on('click', '#chcek_score', function() {
             $('#final_exam_score').val(data[3].regscore_score);
             $('#sum').val(Number(data[0].regscore_score) + Number(data[1].regscore_score) + Number(data[2].regscore_score) + Number(data[3].regscore_score));
         }
-
-
     }, 'json');
+});
+
+$(document).on('submit', '.form_score', function(e) {
+    e.preventDefault();
+   
+    $.ajax({
+        url: '../../../../../teacher/ConTeacherRegister/insert_score',
+        type: "post",
+        data: $(this).serialize(), //this is formData
+        success: function(data) {
+            console.log(data);
+            if (data > 0) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'บันทึกคะแนนสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        //window.location.reload();
+                    }
+                })
+            } else {
+                window.location.reload();
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
 });

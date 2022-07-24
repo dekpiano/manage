@@ -50,11 +50,13 @@ var  $title = "หน้าแรก";
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
+                                    tb_register.Score100,
                                     tb_register.TeacherID,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
+                                    tb_students.StudentID,
                                     tb_students.StudentPrefix,
                                     tb_students.StudentFirstName,
                                     tb_students.StudentLastName,
@@ -80,6 +82,21 @@ var  $title = "หน้าแรก";
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/register/SaveScore/SaveScoreAdd.php');
         $this->load->view('teacher/layout/footer_teacher.php');        
+    }
+
+    public function insert_score(){ 
+
+        foreach ($this->input->post('StudentID') as $key => $value) {
+            // print_r($value);
+            // print_r($this->input->post('SubjectCode'));
+            // print_r($this->input->post('RegisterYear'));
+            // print_r(implode("|",$this->input->post($value)));
+            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
+            $data = array('Score100' => implode("|",$this->input->post($value)));
+            echo $this->db->update('tb_register',$data,$key);
+        }
+        
+        
     }
 
     public function setting_score($key){      
