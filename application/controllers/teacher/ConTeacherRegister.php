@@ -71,13 +71,54 @@ var  $title = "หน้าแรก";
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
+        $check_idSubject = $this->db->where('SubjectCode',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
+        $data['set_score'] = $this->db->where('regscore_subjectID',$check_idSubject->SubjectID)->get('tb_register_score')->result();
         
-       // echo '<pre>'; print_r($data['check_subject']);exit();
+      // echo '<pre>'; print_r($data['set_score']);exit();
         
         $this->load->view('teacher/layout/header_teacher.php',$data);
         $this->load->view('teacher/layout/navbar_teaher.php');
         $this->load->view('teacher/register/SaveScore/SaveScoreAdd.php');
         $this->load->view('teacher/layout/footer_teacher.php');        
+    }
+
+    public function setting_score($key){      
+       
+
+        if($key == "form_insert_score"){
+            $list = array('before_middle','test_midterm','after_midterm','final_exam');
+            $score = array('before_middle_score','test_midterm_score','after_midterm_score','final_exam_score');
+            for ($i=0; $i <= 3 ; $i++) { 
+                $data = array('regscore_subjectID' => $this->input->post("regscore_subjectID"),
+                'regscore_namework' => $this->input->post($list[$i]),
+                'regscore_score' => $this->input->post($score[$i]) ); 
+                $this->db->insert('tb_register_score',$data);           
+            }
+            echo 1;
+        }elseif($key == "form_update_score"){
+            $list = array('before_middle','test_midterm','after_midterm','final_exam');
+            $score = array('before_middle_score','test_midterm_score','after_midterm_score','final_exam_score');
+            for ($i=0; $i <= 3 ; $i++) { 
+                $data = array(
+                    'regscore_score' => $this->input->post($score[$i]) 
+                ); 
+                $uplist = array('regscore_namework' => $this->input->post($list[$i]),
+                              'regscore_subjectID' =>$this->input->post("regscore_subjectID"));
+                $this->db->update('tb_register_score',$data,$uplist);           
+            }
+            echo 1;
+        }
+       
+    }
+    
+    public function edit_score(){  
+        $edit_score = $this->db->where('regscore_subjectID',$this->input->post('subid'))->get('tb_register_score')->result();
+        if($edit_score){
+            echo json_encode($edit_score);
+        }else{
+            echo 0;
+        }
+        
     }
 
 }

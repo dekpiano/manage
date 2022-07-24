@@ -82,6 +82,10 @@
           <script src="<?=base_url()?>assets/js/teacher/TeachHomeroom.js?v=9"></script>
           <?php endif; ?>
 
+          <?php if($this->uri->segment(2) === "Register"): ?>
+          <script src="<?=base_url()?>assets/js/teacher/Register.js?v=4"></script>
+          <?php endif; ?>
+
           </body>
 
           <script>
