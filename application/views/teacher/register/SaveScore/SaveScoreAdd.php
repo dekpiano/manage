@@ -19,12 +19,28 @@
     padding: 10px 15px;
     margin: 0;
 }
+
+table thead,
+table tfoot {
+    position: sticky;
+}
+
+table thead {
+    inset-block-start: 0;
+    /* "top" */
+}
 </style>
 <header class="page-header">
     <div class="container-fluid">
         <h2 class="no-margin-bottom"><?=$title?></h2>
     </div>
 </header>
+<div class="breadcrumb-holder container-fluid">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=base_url('Teacher/Register/SaveScoreMain');?>">หน้าแรก</a></li>
+        <li class="breadcrumb-item active"><?=$title?></li>
+    </ul>
+</div>
 <!-- Dashboard Counts Section-->
 <section class="dashboard-counts no-padding-bottom">
     <div class="container-fluid">
@@ -43,7 +59,7 @@
                     <?php if(!empty($set_score)):?>
                     <div class="table-responsive">
                         <form class="form_score">
-                            <table class="table table-striped table-hover table-bordered">
+                            <table id="tb_score" class="table table-striped table-hover table-bordered">
                                 <thead class="text-center">
                                     <tr>
                                         <th colspan="4">ข้อมูลนักเรียน</th>
@@ -60,8 +76,8 @@
                                         $sum_scoer += $v_set_score->regscore_score;
                                     ?>
                                         <th class="h6">
-                                            <?=$v_set_score->regscore_namework?>
-                                            (<?=$v_set_score->regscore_score?>)                                          
+                                            <?=$v_set_score->regscore_namework?><br>
+                                            (<?=$v_set_score->regscore_score?>)
                                         </th>
                                         <?php endforeach; ?>
                                         <th class="h6">คะแนนรวม (<?=$sum_scoer?>)</th>
@@ -73,10 +89,11 @@
                                 <tbody>
                                     <?php foreach ($check_student as $key => $v_check_student) : ?>
                                     <tr>
-                                        <th><?=$v_check_student->StudentClass?></th>
-                                        <td><?=$v_check_student->StudentNumber?></td>
-                                        <td><?=$v_check_student->StudentCode?></td>
-                                        <td><?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
+                                        <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
+                                        <td class="align-middle text-center"><?=$v_check_student->StudentNumber?></td>
+                                        <td class="align-middle text-center"><?=$v_check_student->StudentCode?></td>
+                                        <td class="align-middle">
+                                            <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
                                             <?=$v_check_student->StudentLastName?>
                                             <input type="text" class="form-control sr-only" id="StudentID"
                                                 name="StudentID[]" value="<?=$v_check_student->StudentID?>">
@@ -90,24 +107,31 @@
                                         $s = explode("|",$v_check_student->Score100);
                                         ?>
                                         <td>
-                                            <input type="text" class="form-control check_score" check-score-key="<?=$v_set_score->regscore_score?>"
+                                            <input type="text" class="form-control check_score"
+                                                check-score-key="<?=$v_set_score->regscore_score?>"
                                                 id="<?=$v_check_student->StudentID?>"
                                                 name="<?=$v_check_student->StudentID?>[]"
                                                 value="<?=$v_check_student->Score100 == "" ?"0":$s[$key]?>">
                                         </td>
                                         <?php endforeach; ?>
+                                        <td class="align-middle">
+                                            <div class="subtot text-center font-weight-bold"></div>
+                                        </td>
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td class="align-middle">
+                                            <div class="grade text-center font-weight-bold"></div>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <?php $Status =  explode("/",$v_check_student->StudentStatus); echo $Status[1]?>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                             <div class="text-center">
-                            <button type="submit" class="btn btn-primary">บันทึกคะแนน</button>
+                                <button type="submit" class="btn btn-primary">บันทึกคะแนน</button>
                             </div>
-                            
+
                         </form>
                     </div>
                     <?php else: ?>

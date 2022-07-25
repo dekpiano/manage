@@ -62,7 +62,8 @@ var  $title = "หน้าแรก";
                                     tb_students.StudentLastName,
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
-                                    tb_students.StudentCode
+                                    tb_students.StudentCode,
+                                    tb_students.StudentStatus
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')

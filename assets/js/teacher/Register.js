@@ -36,7 +36,7 @@ $(document).on('keyup', '.check_score', function() {
     // console.log($(this).val());
     //   console.log($(this).attr('check-score-key'));
 
-      if(num > key){
+    if (num > key) {
         Swal.fire({
             position: 'top-end',
             icon: 'error',
@@ -49,7 +49,7 @@ $(document).on('keyup', '.check_score', function() {
                 $(this).val("0");
             }
         })
-      }
+    }
 });
 
 
@@ -85,6 +85,61 @@ $(document).on('submit', '.form_set_score', function(e) {
 });
 
 
+$(".check_score").each(function() {
+    $(this).keyup(function() {
+        calculateTotal($(this).parent().index());
+        // console.log($(this).parent().index());
+    });
+});
+
+function calculateTotal(index) {
+    var total = 0;
+    $('#tb_score tbody tr td').filter(function() {
+        if ($(this).index() == index) {
+            total += parseInt($(this).find('.check_score').val()) || 0;
+        }
+    });
+    $('#tb_score tbody tr td.totalCol:eq(' + index + ')').html(total);
+    // calculateSum();
+    calculateRowSum();
+}
+
+function calculateRowSum() {
+    $('table tbody tr').each(function() {
+        var sum = 0;
+        $(this).find('td').each(function() {
+            sum += parseInt($(this).find('.check_score').val()) || 0;
+        });
+
+        $(this).find('.subtot').html(sum);
+        $(this).find('.grade').html(check_grade(sum));
+    });
+}
+
+function check_grade(sum) {
+    if ((sum > 100) || (sum < 0)) {
+        var grade = "ไม่สามารถคิดเกรดได้ คะแนนเกิน";
+    } else if ((sum >= 79.5) && (sum <= 100)) {
+        var grade = 4;
+    } else if ((sum >= 74.5) && (sum <= 79.4)) {
+        var grade = 3.5;
+    } else if ((sum >= 69.5) && (sum <= 74.4)) {
+        var grade = 3;
+    } else if ((sum >= 64.5) && (sum <= 69.4)) {
+        var grade = 2.5;
+    } else if ((sum >= 59.5) && (sum <= 64.4)) {
+        var grade = 2;
+    } else if ((sum >= 54.5) && (sum = 59.4)) {
+        var grade = 1.5;
+    } else if ((sum >= 49.5) && (sum <= 54.4)) {
+        var grade = 1
+    } else if (sum <= 49.4) {
+        var grade = 0;
+    }
+    return grade;
+}
+calculateRowSum();
+
 $(document).on('click', '#chcek_score', function() {
 
     //console.log($(this).attr('subject-id'));
@@ -109,7 +164,7 @@ $(document).on('click', '#chcek_score', function() {
 
 $(document).on('submit', '.form_score', function(e) {
     e.preventDefault();
-   
+
     $.ajax({
         url: '../../../../../teacher/ConTeacherRegister/insert_score',
         type: "post",
