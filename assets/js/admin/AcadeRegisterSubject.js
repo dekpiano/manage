@@ -37,7 +37,7 @@ $(document).on('submit', '#form-subject', function(e) {
             alert('Something is wrong');
         },
         success: function(data) {
-            //console.log(data);
+            console.log(data);
             if (data > 0) {
                 $('#form-subject')[0].reset();
                 Swal.fire({
@@ -45,11 +45,17 @@ $(document).on('submit', '#form-subject', function(e) {
                     icon: 'success',
                     title: 'บันทึกข้อมูลสำเร็จ',
                     showConfirmButton: false,
-                    timer: 1000
+                    timer: 3000
                 })
                 tablel_Subject.ajax.reload();
             } else {
-                alert("บันทึกไม่สำเร็จ");
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'ข้อมูลรายวิชานี้ ได้ลงทะเบียนในภาคเรียนนี้แล้ว',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
             }
 
         }

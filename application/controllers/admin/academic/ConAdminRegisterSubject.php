@@ -54,17 +54,28 @@ var  $title = "แผงควบคุม";
 
 
     public function AdminRegisterSubjectInsert(){ 
-        $data = array('SubjectCode' => $this->input->post('SubjectCode'),
-        'SubjectName' => $this->input->post('SubjectName'),
-        'SubjectUnit' => $this->input->post('SubjectUnit'),
-        'SubjectHour' => $this->input->post('SubjectHour'),
-        'SubjectType' => $this->input->post('SubjectType'),
-        'FirstGroup' => $this->input->post('FirstGroup'),
-        'SecondGroup' => $this->input->post('SecondGroup'), 
-        'SubjectClass' => $this->input->post('SubjectClass'),
-        'SubjectYear' => $this->input->post('SubjectYear'));  
 
-        echo $this->ModAdminRegisterSubject->ModSubjectInsert($data);
+        $check_subject = $this->db->where('SubjectCode',$this->input->post('SubjectCode'))
+                ->where('SubjectYear',$this->input->post('SubjectYear'))
+                ->get('tb_subjects')->num_rows();
+
+        if($check_subject > 0){
+            echo 0;
+        }else{
+            $data = array('SubjectCode' => $this->input->post('SubjectCode'),
+            'SubjectName' => $this->input->post('SubjectName'),
+            'SubjectUnit' => $this->input->post('SubjectUnit'),
+            'SubjectHour' => $this->input->post('SubjectHour'),
+            'SubjectType' => $this->input->post('SubjectType'),
+            'FirstGroup' => $this->input->post('FirstGroup'),
+            'SecondGroup' => $this->input->post('SecondGroup'), 
+            'SubjectClass' => $this->input->post('SubjectClass'),
+            'SubjectYear' => $this->input->post('SubjectYear'));  
+             echo $this->ModAdminRegisterSubject->ModSubjectInsert($data);
+    
+        }
+        
+       
     }
 
     public function AdminRegisterSubjectDelete($id){ 
