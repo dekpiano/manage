@@ -28,6 +28,10 @@ function calculateSum() {
     }
 }
 
+$(document).on('change', '#check_room', function() {
+
+    window.location.href = $(this).val();
+});
 
 
 $(document).on('keyup', '.check_score', function() {
@@ -56,7 +60,7 @@ $(document).on('keyup', '.check_score', function() {
 $(document).on('submit', '.form_set_score', function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../../../../teacher/ConTeacherRegister/setting_score/' + $(this).attr('id'),
+        url: '../../../../../../teacher/ConTeacherRegister/setting_score/' + $(this).attr('id'),
         type: "post",
         data: $(this).serialize(), //this is formData
         success: function(data) {
@@ -144,7 +148,7 @@ $(document).on('click', '#chcek_score', function() {
 
     //console.log($(this).attr('subject-id'));
 
-    $.post("../../../../../teacher/ConTeacherRegister/edit_score", {
+    $.post("../../../../../../teacher/ConTeacherRegister/edit_score", {
         subid: $(this).attr('subject-id')
     }, function(data, status) {
         if (data == 0) {
@@ -166,7 +170,7 @@ $(document).on('submit', '.form_score', function(e) {
     e.preventDefault();
 
     $.ajax({
-        url: '../../../../../teacher/ConTeacherRegister/insert_score',
+        url: '../../../../../../teacher/ConTeacherRegister/insert_score',
         type: "post",
         data: $(this).serialize(), //this is formData
         success: function(data) {

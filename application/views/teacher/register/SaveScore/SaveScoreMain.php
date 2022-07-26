@@ -54,6 +54,7 @@
                                     <th>หน่วยกิจ</th>
                                     <th>ชั่วโมง</th>
                                     <th>บันทึกผลการเรียน</th>
+                                    <th>รายงาน</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,7 +65,12 @@
                                     <td><?=$v_check_subject->SubjectCode?> <?=$v_check_subject->SubjectName?></td>
                                     <td><?=$v_check_subject->SubjectUnit?></td>
                                     <td><?=$v_check_subject->SubjectHour?></td>
-                                    <td><a href="<?=base_url('Teacher/Register/SaveScoreAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectCode)?>" class="btn btn-primary btn-sm">บันทึกผลการเรียน</a></td>
+                                    <td>
+                                        <a href="<?=base_url('Teacher/Register/SaveScoreAdd/'.$v_check_subject->RegisterYear.'/'.$v_check_subject->SubjectCode.'/all')?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> บันทึกผลการเรียน</a>
+                                    </td>
+                                    <td>
+                                    <a href="<?=base_url('Teacher/Register/RopoetPT');?>" class="btn btn-primary btn-sm"><i class="fa fa-print" aria-hidden="true"></i> พิมพ์รายงาน</a>
+                                    </td>
                                 </tr>
                               <?php endforeach; ?>
                             </tbody>

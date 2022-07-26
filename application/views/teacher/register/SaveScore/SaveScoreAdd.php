@@ -42,7 +42,7 @@ table thead {
     </ul>
 </div>
 <!-- Dashboard Counts Section-->
-<section class="dashboard-counts no-padding-bottom">
+<section class="no-padding-bottom">
     <div class="container-fluid">
         <div class="col-lg-12">
             <div class="card">
@@ -57,19 +57,38 @@ table thead {
                 <div class="card-body">
 
                     <?php if(!empty($set_score)):?>
+                    <div>
+                        <div class="form-group row justify-content-center">
+                            <label class="col-sm-3 form-control-label align-self-center text-right">เลือกห้อง</label>
+                            <div class="col-sm-4">
+                                <select name="check_room" id="check_room" class="form-control mb-3 w-auto">
+                                    <option value="all">ทั้งหมด</option>
+                                    <?php 
+                                    foreach ($check_room as $key => $v_check_room) : 
+                                        $sub_doc = explode('.',$v_check_room->StudentClass);
+                                        $sub_room = explode('/',$sub_doc[1]);
+                                        $all_room = $sub_room[0].'-'.$sub_room[1];
+                                        ?>
+                                        <option <?=$this->uri->segment(7) == $all_room ?"selected":"" ?> value="<?=$all_room;?>"><?=$v_check_room->StudentClass;?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <form class="form_score">
                             <table id="tb_score" class="table table-striped table-hover table-bordered">
                                 <thead class="text-center">
                                     <tr>
-                                        <th colspan="4">ข้อมูลนักเรียน</th>
-                                        <th colspan="8">การประเมินผลการเรียน</th>
+                                        <th colspan="5">ข้อมูลนักเรียน</th>
+                                        <th colspan="7">การประเมินผลการเรียน</th>
                                     </tr>
                                     <tr>
                                         <th>ชั้น</th>
                                         <th>เลขที่</th>
                                         <th>เลขประจำตัว</th>
                                         <th width="200">ชื่อ - นามสกุล</th>
+                                        <th width="">เวลาเรียน<br>(40)</th>
                                         <?php 
                                     $sum_scoer = 0;
                                     foreach ($set_score as $key => $v_set_score): 
@@ -81,7 +100,6 @@ table thead {
                                         </th>
                                         <?php endforeach; ?>
                                         <th class="h6">คะแนนรวม (<?=$sum_scoer?>)</th>
-                                        <th class="h6">ร้อยละคะแนนรวม</th>
                                         <th class="h6">เกรด</th>
                                         <th class="h6">สถานะนักเรียน</th>
                                     </tr>
@@ -102,6 +120,10 @@ table thead {
                                             <input type="text" class="form-control sr-only" id="RegisterYear"
                                                 name="RegisterYear" value="<?=$check_student[0]->RegisterYear?>">
                                         </td>
+                                        <td>
+                                        <input type="text" class="form-control" id=""
+                                                name="" value="">
+                                        </td>
                                         <?php 
                                         foreach ($set_score as $key => $v_set_score): 
                                         $s = explode("|",$v_check_student->Score100);
@@ -117,7 +139,6 @@ table thead {
                                         <td class="align-middle">
                                             <div class="subtot text-center font-weight-bold"></div>
                                         </td>
-                                        <td></td>
                                         <td class="align-middle">
                                             <div class="grade text-center font-weight-bold"></div>
                                         </td>

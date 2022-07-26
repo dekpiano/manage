@@ -115,7 +115,9 @@ $route['Teacher/Teaching/CheckTeaching'] = "teacher/ConTeacherTeaching/CheckTeac
 $route['Teacher/Teaching/RoomOnlineMain'] = "teacher/ConTeacherTeaching/RoomOnlineMain";
 
 $route['Teacher/Register/SaveScoreMain'] = "teacher/ConTeacherRegister/SaveScoreMain";
-$route['Teacher/Register/SaveScoreAdd/(:any)/(:any)/(:any)'] = "teacher/ConTeacherRegister/SaveScoreAdd/$1/$2/$3";
+$route['Teacher/Register/SaveScoreAdd/(:any)/(:any)/(:any)/(:any)'] = "teacher/ConTeacherRegister/SaveScoreAdd/$1/$2/$3/$4";
+$route['Teacher/Register/RopoetPT'] = "teacher/ConTeacherRegister/report_pt";
+
 
 $route['Teacher/SupStd/Main'] = "teacher/ConTeacherStudentSupport/SupStdMain";
 $route['Teacher/SupStd/CheckWorkManager'] = "teacher/ConTeacherStudentSupport/SupStdCheckWorkManager";

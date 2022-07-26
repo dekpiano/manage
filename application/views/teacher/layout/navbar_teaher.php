@@ -27,7 +27,7 @@
             </li>
 
             <li><a href="#TeacherSaveScore" aria-expanded="false" data-toggle="collapse"> <i
-                        class="icon-interface-windows"></i>งานทะเบียน </a>
+                        class="icon-interface-windows"></i>งานวัดผล </a>
                 <ul id="TeacherSaveScore" class="collapse list-unstyled <?=$this->uri->segment(2) == 'Register' ? 'show' : '' ?>">
                     <li class="<?=$this->uri->segment(3) == 'SaveScoreMain' ? 'active' : '' ?>"><a href="<?=base_url('Teacher/Register/SaveScoreMain');?>">บันทึกผลการเรียน</a></li>                  
                 </ul>

@@ -83,7 +83,7 @@
           <?php endif; ?>
 
           <?php if($this->uri->segment(2) === "Register"): ?>
-          <script src="<?=base_url()?>assets/js/teacher/Register.js?v=7.2"></script>
+          <script src="<?=base_url()?>assets/js/teacher/Register.js?v=8"></script>
           <?php endif; ?>
 
           </body>
