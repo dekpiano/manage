@@ -193,6 +193,25 @@ var  $title = "หน้าแรก";
         
     }
 
+    public function checkroom_report(){
+        $check_room = $this->db->select('
+                                    tb_students.StudentClass,
+                                ')
+                                ->from('tb_register')
+                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('RegisterYear',$this->input->post('report_yaer'))
+                                ->where('tb_register.SubjectCode',$this->input->post('report_subject'))
+                                // ->where('tb_students.StudentClass','ม.6/3')
+                                ->order_by('tb_students.StudentClass','ASC')
+                                ->group_by('tb_students.StudentClass')
+                                ->get()->result();
+
+        echo json_encode($check_room);                    
+
+    }
+
     public function report_pt(){ 
         require_once (APPPATH. '../vendor/vendor/autoload.php');
 
@@ -204,14 +223,45 @@ var  $title = "หน้าแรก";
                 'default_font_size' => 16
             )
         );
-        $stylesheet = file_get_contents('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css');
-        $live_mpdf->WriteHTML($stylesheet,1);
 
-        $data['test'] = "วชิรวิทย์  แกล้วการไถ";
+        if($this->input->post('select_print') == "all"){
+            
+            $data['re_subjuct'] = $this->db
+                            ->where('SubjectYear',$this->input->post('report_RegisterYear'))
+                            ->where('SubjectCode',$this->input->post('report_SubjectCode'))
+                            ->get('tb_subjects')->result();
+            $data['re_room'] = $data['re_subjuct'][0]->SubjectClass; 
+            $data['re_teacher'] = "";
+            //print_r($data['re_room']); exit();
+
+        }else{
+             $data['re_subjuct'] = $this->db
+                            ->where('SubjectYear',$this->input->post('report_RegisterYear'))
+                            ->where('SubjectCode',$this->input->post('report_SubjectCode'))
+                            ->get('tb_subjects')->result();
+            $data['re_room'] = $this->input->post('select_print');
+            $sub_room = explode(".",$this->input->post('select_print'));
+            $sub_Year =  explode("/",$this->input->post('report_RegisterYear'));
+
+            $data['re_teacher'] = $this->db->select('skjacth_personnel.tb_personnel.pers_id,
+                                                    skjacth_academic.tb_regclass.Reg_Class,
+                                                    skjacth_academic.tb_regclass.Reg_Year,
+                                                    skjacth_personnel.tb_personnel.pers_prefix,
+                                                    skjacth_personnel.tb_personnel.pers_firstname,
+                                                    skjacth_personnel.tb_personnel.pers_lastname')
+                                ->from('tb_regclass')
+                                ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher','left')
+                                ->where('Reg_Year',$sub_Year[1])
+                                ->where('Reg_Class',$sub_room[1])->get()->result(); 
+           //print_r($data['re_teacher']); exit();
+        }
+
+
+        $data['test'] = $this->input->post('report_RegisterYear'); //true
         $all_html = $this->load->view('teacher/register/report/ReportPT',$data,true);
         
         $live_mpdf->WriteHTML($all_html);
-        $live_mpdf->Output(); 
+        $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE); 
     }
 
 

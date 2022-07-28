@@ -196,3 +196,21 @@ $(document).on('submit', '.form_score', function(e) {
         }
     });
 });
+
+
+$(document).on('click', '#chcek_report', function() {
+
+    $("#report_RegisterYear").val($(this).attr('report-yaer'));
+    $("#report_SubjectCode").val($(this).attr('report-subject'));
+
+    $.post("../../teacher/ConTeacherRegister/checkroom_report", {
+        report_yaer: $(this).attr('report-yaer'),
+        report_subject: $(this).attr('report-subject')
+    }, function(data, status) {
+
+        $.each(data, function(key, val) {
+            console.log(val.StudentClass);
+            $('#select_print').append('<option value="' + val.StudentClass + '">' + val.StudentClass + '</option>');
+        });
+    }, 'json');
+});
