@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ConTeacherRegister extends CI_Controller {
-var  $title = "หน้าแรก";
 	public function __construct() {
 		parent::__construct();
 		
@@ -12,6 +11,29 @@ var  $title = "หน้าแรก";
         $this->DBpersonnel = $this->load->database('personnel', TRUE); 
         $this->DBaffairs = $this->load->database('affairs', TRUE);
         $this->CheckHomeVisitManager = $this->DBaffairs->select('homevisit_set_id,homevisit_set_manager')->where('homevisit_set_id',1)->get('tb_homevisit_setting')->first_row();
+    }
+
+    function check_grade($sum) {
+        if (($sum > 100) || ($sum < 0)) {
+             $grade = "ไม่สามารถคิดเกรดได้ คะแนนเกิน";
+        } else if (($sum >= 79.5) && ($sum <= 100)) {
+             $grade = 4;
+        } else if (($sum >= 74.5) && ($sum <= 79.4)) {
+             $grade = 3.5;
+        } else if (($sum >= 69.5) && ($sum <= 74.4)) {
+             $grade = 3;
+        } else if (($sum >= 64.5) && ($sum <= 69.4)) {
+             $grade = 2.5;
+        } else if (($sum >= 59.5) && ($sum <= 64.4)) {
+             $grade = 2;
+        } else if (($sum >= 54.5) && ($sum <= 59.4)) {
+             $grade = 1.5;
+        } else if (($sum >= 49.5) && ($sum <= 54.4)) {
+             $grade = 1;
+        } else if ($sum <= 49.4) {
+             $grade = 0;
+        }
+        return $grade;
     }
 
     public function SaveScoreMain(){      
@@ -71,6 +93,7 @@ var  $title = "หน้าแรก";
                                     tb_register.Score100,
                                     tb_register.TeacherID,
                                     tb_subjects.SubjectName,
+                                    tb_register.StudyTime,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
                                     tb_subjects.SubjectHour,
@@ -102,6 +125,7 @@ var  $title = "หน้าแรก";
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
                                     tb_register.TeacherID,
+                                    tb_register.StudyTime,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
                                     tb_subjects.SubjectUnit,
@@ -141,14 +165,16 @@ var  $title = "หน้าแรก";
 
     public function insert_score(){ 
 
-        foreach ($this->input->post('StudentID') as $key => $value) {
+        foreach ($this->input->post('StudentID') as $num => $value) {
             // print_r($value);
             // print_r($this->input->post('SubjectCode'));
-            // print_r($this->input->post('RegisterYear'));
-            // print_r(implode("|",$this->input->post($value)));
+            $study_time = $this->input->post('study_time');
+            // print_r(); exit();
+            $Grade = $this->check_grade(array_sum($this->input->post($value)));
+
             $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
-            $data = array('Score100' => implode("|",$this->input->post($value)));
-            echo $this->db->update('tb_register',$data,$key);
+            $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num]);
+           echo $this->db->update('tb_register',$data,$key);
         }
         
         
@@ -232,7 +258,40 @@ var  $title = "หน้าแรก";
                             ->get('tb_subjects')->result();
             $data['re_room'] = $data['re_subjuct'][0]->SubjectClass; 
             $data['re_teacher'] = "";
-            //print_r($data['re_room']); exit();
+            $data['set_score'] = $this->db->where('regscore_subjectID',$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
+
+            $data['check_student'] = $this->db->select('
+                                    tb_register.SubjectCode,
+                                    tb_register.RegisterYear,
+                                    tb_register.RegisterClass,
+                                    tb_register.Score100,
+                                    tb_register.Grade,
+                                    tb_register.TeacherID,
+                                    tb_register.StudyTime,
+                                    tb_subjects.SubjectName,
+                                    tb_subjects.SubjectID,
+                                    tb_subjects.SubjectUnit,
+                                    tb_subjects.SubjectHour,
+                                    tb_students.StudentID,
+                                    tb_students.StudentPrefix,
+                                    tb_students.StudentFirstName,
+                                    tb_students.StudentLastName,
+                                    tb_students.StudentNumber,
+                                    tb_students.StudentClass,
+                                    tb_students.StudentCode,
+                                    tb_students.StudentStatus
+                                ')
+                                ->from('tb_register')
+                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('RegisterYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->order_by('tb_students.StudentClass','ASC')
+                                ->order_by('tb_students.StudentNumber','ASC')
+                                ->get()->result();
+
+            //echo "<pre>";print_r($data['check_student']); exit();
 
         }else{
              $data['re_subjuct'] = $this->db
@@ -252,15 +311,55 @@ var  $title = "หน้าแรก";
                                 ->from('tb_regclass')
                                 ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher','left')
                                 ->where('Reg_Year',$sub_Year[1])
-                                ->where('Reg_Class',$sub_room[1])->get()->result(); 
-           //print_r($data['re_teacher']); exit();
+                                ->where('Reg_Class',$sub_room[1])
+                                ->get()->result(); 
+          
+
+        $data['set_score'] = $this->db->where('regscore_subjectID',$data['re_subjuct'][0]->SubjectID)->get('tb_register_score')->result();
+        
+        $data['check_student'] = $this->db->select('
+                                    tb_register.SubjectCode,
+                                    tb_register.RegisterYear,
+                                    tb_register.RegisterClass,
+                                    tb_register.Score100,
+                                    tb_register.Grade,
+                                    tb_register.TeacherID,
+                                    tb_register.StudyTime,
+                                    tb_subjects.SubjectName,
+                                    tb_subjects.SubjectID,
+                                    tb_subjects.SubjectUnit,
+                                    tb_subjects.SubjectHour,
+                                    tb_students.StudentID,
+                                    tb_students.StudentPrefix,
+                                    tb_students.StudentFirstName,
+                                    tb_students.StudentLastName,
+                                    tb_students.StudentNumber,
+                                    tb_students.StudentClass,
+                                    tb_students.StudentCode,
+                                    tb_students.StudentStatus
+                                ')
+                                ->from('tb_register')
+                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                                ->where('TeacherID',$this->session->userdata('login_id'))
+                                ->where('RegisterYear',$this->input->post('report_RegisterYear'))
+                                ->where('tb_register.SubjectCode',$this->input->post('report_SubjectCode'))
+                                ->where('tb_students.StudentClass',$this->input->post('select_print'))
+                                ->order_by('tb_students.StudentClass','ASC')
+                                ->order_by('tb_students.StudentNumber','ASC')
+                                ->get()->result();
+           
+        //echo '<pre>';print_r($data['check_student']); exit();
         }
 
 
         $data['test'] = $this->input->post('report_RegisterYear'); //true
-        $all_html = $this->load->view('teacher/register/report/ReportPT',$data,true);
-        
-        $live_mpdf->WriteHTML($all_html);
+        $ReportFront = $this->load->view('teacher/register/report/ReportFront',$data,true);        
+        $live_mpdf->WriteHTML($ReportFront);
+
+        $live_mpdf->AddPage(); 
+        $ReportSummary = $this->load->view('teacher/register/report/ReportSummary',$data,true); 
+        $live_mpdf->WriteHTML($ReportSummary);
         $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE); 
     }
 

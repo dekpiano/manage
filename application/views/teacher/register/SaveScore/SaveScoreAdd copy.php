@@ -88,7 +88,7 @@ table thead {
                                         <th>เลขที่</th>
                                         <th>เลขประจำตัว</th>
                                         <th width="200">ชื่อ - นามสกุล</th>
-                                        <th width="">เวลาเรียน<br> <small>(40 สัปดาห์)</small> </th>
+                                        <th width="">เวลาเรียน<br>(40)</th>
                                         <?php 
                                     $sum_scoer = 0;
                                     foreach ($set_score as $key => $v_set_score): 
@@ -105,7 +105,7 @@ table thead {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($check_student as $key => $v_check_student) :  ?>
+                                    <?php foreach ($check_student as $key => $v_check_student) : ?>
                                     <tr>
                                         <th class="align-middle text-center"><?=$v_check_student->StudentClass?></th>
                                         <td class="align-middle text-center"><?=$v_check_student->StudentNumber?></td>
@@ -121,8 +121,8 @@ table thead {
                                                 name="RegisterYear" value="<?=$check_student[0]->RegisterYear?>">
                                         </td>
                                         <td>
-                                        <input type="text" class="form-control study_time" id="study_time"
-                                                name="study_time[]" value="<?=$v_check_student->StudyTime == 0 || $v_check_student->StudyTime == "" ?"0":$v_check_student->StudyTime?>">
+                                        <input type="text" class="form-control" id=""
+                                                name="" value="">
                                         </td>
                                         <?php 
                                         foreach ($set_score as $key => $v_set_score): 

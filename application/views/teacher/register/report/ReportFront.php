@@ -86,12 +86,61 @@
                 <?php if($re_teacher != ""):
                 foreach ($re_teacher as $key => $v_re_teacher): 
                     echo $v_re_teacher->pers_prefix.$v_re_teacher->pers_firstname.' '.$v_re_teacher->pers_lastname?>
-                  &nbsp;&nbsp;  
+                &nbsp;&nbsp;
                 <?php endforeach; endif; ?>
             </td>
         </tr>
     </tbody>
 </table>
+
+<?php 
+$count_all = 0;
+$grade4 = 0;$grade35 = 0;$grade3 = 0;$grade25 = 0;$grade2 = 0;$grade15 = 0;$grade1 = 0;$grade0 = 0;$gradeR=0;$gradeMS=0;
+
+foreach ($check_student as $key => $v_check_student) {
+   $count_all += 1;
+   $sum = intval($v_check_student->Grade);
+
+   if($v_check_student->StudyTime < 32){
+        $gradeMS += 1;
+   }else{
+    if (($sum > 100) || ($sum < 0)) {
+        $grade_error = "ไม่สามารถคิดเกรดได้ คะแนนเกิน";
+        } else if (($sum == 4)) {
+            $grade4 += 1;
+        } else if (($sum == 3.5)) {
+            $grade35 += 1;
+        } else if (($sum == 3)) {
+            $grade3 += 1;
+        } else if (($sum == 2.5)) {
+            $grade25 += 1;
+        } else if (($sum == 2)) {
+            $grade2 += 1;
+        } else if (($sum == 1.5)) {
+            $grade15 += 1;
+        } else if (($sum == 1)) {
+            $grade1 += 1;
+        } else if ($sum == 0) {
+            $grade0 += 1;
+        }else if($sum == "ร"){
+            $gradeR += 1;
+        }
+   }
+
+} 
+$avg4 = round(($grade4*100)/$count_all,2);
+$avg35 = round(($grade35*100)/$count_all,2);
+$avg3 = round(($grade3*100)/$count_all,2);
+$avg25 = round(($grade25*100)/$count_all,2);
+$avg2 = round(($grade2*100)/$count_all,2);
+$avg15 = round(($grade15*100)/$count_all,2);
+$avg1 = round(($grade1*100)/$count_all,2);
+$avg0 = round(($grade0*100)/$count_all,2);
+$avgR = round(($gradeR*100)/$count_all,2);;
+$avgMS=round(($gradeMS*100)/$count_all,2);
+
+$avg3_up = $avg3 + $avg35 + $avg4;
+?>
 
 
 <table class="table" style="width: 100%;margin-top: 10px; border-collapse: collapse;border: 2px solid;">
@@ -125,43 +174,44 @@
             <td style="width: 6.1639%; text-align: center; vertical-align: middle;"><strong>มส</strong></td>
         </tr>
         <tr>
-            <td style="width: 16.7401%; text-align: center; vertical-align: middle;"><strong>45</strong></td>
-            <td style="width: 7.1585%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.1587%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.0037%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.0382%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 8.6299%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.439%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 6.2672%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 6.7525%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 6.1639%; text-align: center; vertical-align: middle;"><strong>45</strong></td>
+            <td style="width: 16.7401%; text-align: center; vertical-align: middle;"><strong><?=$count_all;?></strong>
+            </td>
+            <td style="width: 7.1585%; text-align: center; vertical-align: middle;"><strong><?=$grade4;?></strong></td>
+            <td style="width: 7.1587%; text-align: center; vertical-align: middle;"><strong><?=$grade35;?></strong></td>
+            <td style="width: 7.0037%; text-align: center; vertical-align: middle;"><strong><?=$grade3;?></strong></td>
+            <td style="width: 7.0382%; text-align: center; vertical-align: middle;"><strong><?=$grade25;?></strong></td>
+            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong><?=$grade2;?></strong></td>
+            <td style="width: 8.6299%; text-align: center; vertical-align: middle;"><strong><?=$grade15;?></strong></td>
+            <td style="width: 7.439%; text-align: center; vertical-align: middle;"><strong><?=$grade1;?></strong></td>
+            <td style="width: 6.2672%; text-align: center; vertical-align: middle;"><strong><?=$grade0;?></strong></td>
+            <td style="width: 6.7525%; text-align: center; vertical-align: middle;"><strong><?=$gradeR;?></strong></td>
+            <td style="width: 6.1639%; text-align: center; vertical-align: middle;"><strong><?=$gradeMS;?></strong></td>
             <td style="width: 8.1773%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
         </tr>
         <tr>
             <td style="width: 16.7401%; text-align: center; vertical-align: middle;"><strong>คิดเป็นร้อยละ</strong></td>
-            <td style="width: 7.1585%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.1587%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.0037%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.0382%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 8.6299%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 7.439%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 6.2672%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 6.7525%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
-            <td style="width: 6.1639%; text-align: center; vertical-align: middle;"><strong>100.00</strong></td>
-            <td style="width: 8.1773%; text-align: center; vertical-align: middle;"><strong><br></strong></td>
+            <td style="width: 7.1585%; text-align: center; vertical-align: middle;"><strong><?=$avg4;?></strong></td>
+            <td style="width: 7.1587%; text-align: center; vertical-align: middle;"><strong><?=$avg35;?></strong></td>
+            <td style="width: 7.0037%; text-align: center; vertical-align: middle;"><strong><?=$avg3;?></strong></td>
+            <td style="width: 7.0382%; text-align: center; vertical-align: middle;"><strong><?=$avg25;?></strong></td>
+            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong><?=$avg2;?></strong></td>
+            <td style="width: 8.6299%; text-align: center; vertical-align: middle;"><strong><?=$avg15;?></strong></td>
+            <td style="width: 7.439%; text-align: center; vertical-align: middle;"><strong><?=$avg1;?></strong></td>
+            <td style="width: 6.2672%; text-align: center; vertical-align: middle;"><strong><?=$avg0;?></strong></td>
+            <td style="width: 6.7525%; text-align: center; vertical-align: middle;"><strong><?=$avgR;?></strong></td>
+            <td style="width: 6.1639%; text-align: center; vertical-align: middle;"><strong><?=$avgMS;?></strong></td>
+            <td style="width: 8.1773%; text-align: center; vertical-align: middle;"><strong></strong></td>
         </tr>
         <tr>
             <td colspan="5" style="width: 45.2832%;"><strong>ร้อยละของนักเรียนที่ได้ผลการเรียนระดับดี(3)
                     ขึ้นไป&nbsp;</strong></td>
-            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong>0.00</strong></td>
+            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong><?=$avg3_up;?></strong></td>
             <td colspan="5" style="width: 37.1541%;"><strong>ผลการเรียนเฉลี่ยของรายวิชา</strong></td>
             <td style="width: 8.1773%; text-align: center; vertical-align: middle;"><strong>0.00</strong></td>
         </tr>
         <tr>
             <td colspan="5" style="width: 45.2832%;"><strong>ร้อยละของนักเรียนที่ไม่ผ่านการประเมิน</strong></td>
-            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong>100.00</strong></td>
+            <td style="width: 8.0208%; text-align: center; vertical-align: middle;"><strong>0.00</strong></td>
             <td colspan="6" style="width: 46.6255%;"><strong>ส่วนเบี่ยงเบนมาตรฐาน</strong></td>
         </tr>
     </tbody>
