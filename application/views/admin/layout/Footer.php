@@ -102,11 +102,13 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/AcadeStudent.js?v=4"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
 
-<?php if($this->uri->segment(2) ==="Acade"): ?>
+<?php if($this->uri->segment(2) ==="Registration"): ?>
     <script src="<?=base_url();?>assets/js/admin/AcadeRegisterSubject.js?v=3"></script>    
-    <script src="<?=base_url();?>assets/js/admin/AcadeEnroll.js?v=10"></script>
+    <script src="<?=base_url();?>assets/js/admin/AcadeEnroll.js?v=11"></script>
 <?php endif; ?>
-
+<?php if($this->uri->segment(2) ==="Evaluate"): ?>
+<script src="<?=base_url();?>assets/js/admin/AcadeSaveScore.js?v=2"></script>
+<?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>
 <script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>

@@ -106,8 +106,8 @@ class ConAdminStudents extends CI_Controller {
                 $this->ModAdminStudents->Students_Inaert($arrayName);
             }
         }
-        $this->session->set_flashdata(array('status'=> 'success','messge' => 'บันทึกข้อมูลสำเร็จ','msg'=>'YES'));
-        redirect('Admin/Acade/Students', 'location');
+        $this->session->set_flashdata(array('status'=> 'success','messge' => 'อัพเดพข้อมูลสำเร็จ','msg'=>'YES'));
+        redirect('Admin/Registration/Students', 'location');
     }
 
     public function AdminStudentsMain1(){   

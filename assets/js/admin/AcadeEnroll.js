@@ -32,9 +32,9 @@ tbErollSubject = $('#tbErollSubject').DataTable({
         {
             data: 'SubjectID',
             render: function(data, type, row) {
-                return '<a href="../../Admin/Acade/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
-                    ' <a href="../../Admin/Acade/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
-                    ' <a href="../../Admin/Acade/Enroll/Cancel/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-danger btn-sm text-white">ลบลงทะเบียน</a>';
+                return '<a href="../../Admin/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
+                    ' <a href="../../Admin/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
+                    ' <a href="../../Admin/Registration/Enroll/Cancel/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-danger btn-sm text-white">ลบลงทะเบียน</a>';
             }
         }
     ]

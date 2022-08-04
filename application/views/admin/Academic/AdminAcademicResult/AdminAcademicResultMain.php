@@ -24,7 +24,7 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             เปิด - ปิดใช้งาน </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            ผลการเรียน
+                                            แสดงผลการเรียนของนักเรียน
                                         </div>
                                     </div>
                                     <div class="col-auto">

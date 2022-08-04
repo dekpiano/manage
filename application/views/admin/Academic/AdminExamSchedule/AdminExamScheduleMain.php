@@ -14,7 +14,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <a href="<?=base_url('Admin/ExamSchedule/add');?>"
+                                <a href="<?=base_url('Admin/Registration/ExamSchedule/add');?>"
                                     class="btn btn-primary btn-sm float-right mb-3"> <i class="far fa-plus-square"></i>
                                     เพิ่ม<?=$title;?>
                                 </a>

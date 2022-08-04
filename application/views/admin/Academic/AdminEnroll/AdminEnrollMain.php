@@ -18,7 +18,7 @@
 
                             </div>
                             <div class="col-auto">
-                                <a class="btn app-btn-secondary" href="<?=base_url('Admin/Acade/Enroll/Add')?>">
+                                <a class="btn app-btn-secondary" href="<?=base_url('Admin/Registration/Enroll/Add')?>">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download mr-1"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"

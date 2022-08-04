@@ -14,7 +14,7 @@
                         <a href="https://docs.google.com/spreadsheets/d/1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec/edit#gid=0" target="_blank" class="btn btn-primary btn-sm float-right mb-3"> 
                             <i class="far fa-plus-square"></i> เพิ่ม<?=$title;?>
                         </a>
-                        <a href="<?=base_url('Admin/Acade/StudentsUpdate');?>" class="btn btn-primary btn-sm float-right mb-3"> 
+                        <a href="<?=base_url('Admin/Registration/StudentsUpdate');?>" class="btn btn-primary btn-sm float-right mb-3"> 
                             <i class="far fa-plus-square"></i> อัพเดพ<?=$title;?>
                         </a>
 
