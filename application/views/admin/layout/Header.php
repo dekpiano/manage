@@ -184,11 +184,7 @@
                                             class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
                                             href="<?=base_url('Admin/Registration/RoomOnline');?>">จัดการห้องเรียนออนไลน์</a>
                                     </li>
-                                    <li class="submenu-item"><a
-                                            class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Registration/AdminRoles');?>">จัดการบทบาทในวิชาการ</a>
-                                    </li>
-
+                                  
                                 </ul>
                             </div>
                         </li>
@@ -279,7 +275,17 @@
                             </div>
                         </li>
                         <!--//nav-item-->
-
+                        <li class="nav-item ">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link <?=$this->uri->segment('3')=="AdminRoles" ? "active" :""?>"
+                                href="<?=base_url('Admin/Setting/AdminRoles');?>">
+                                <span class="nav-icon">
+                                    <i class="bi bi-gear-fill" style="font-size: 1.2rem;"></i>
+                                </span>
+                                <span class="nav-link-text">จัดการบทบาทในวิชาการ</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
                     </ul>
                     <!--//app-menu-->
                 </nav>

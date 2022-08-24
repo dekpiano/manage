@@ -54,7 +54,7 @@
                                         <th class="cell">กลุ่มสาระ</th>
                                         <th class="cell">ชั้น</th>
                                         <th class="cell">ครูผู้สอน</th>
-                                        <th class="cell">สถานะ</th>
+                                        <th class="cell">นักเรียน</th>
                                         <th class="cell">คำสั่ง</th>
                                     </tr>
                                 </thead>

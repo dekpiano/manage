@@ -34,7 +34,7 @@ tbErollSubject = $('#tbErollSubject').DataTable({
             render: function(data, type, row) {
                 return '<a href="../../Admin/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
                     ' <a href="../../Admin/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
-                    ' <a href="../../Admin/Registration/Enroll/Cancel/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-danger btn-sm text-white">ลบลงทะเบียน</a>';
+                    ' <a href="#" class="btn btn-danger btn-sm text-white CancelEnroll" key-subject="' + row.SubjectCode + '" key-teacher="' + row.TeacherID + '">ลบลงทะเบียน</a>';
             }
         }
     ]
@@ -189,5 +189,35 @@ $(document).on("click", ".ShowEnroll", function() {
         });
     }, 'json');
 
+});
 
+$(document).on("click", ".CancelEnroll", function() {
+    console.log($(this).attr('key-teacher'));
+    Swal.fire({
+        title: 'ต้องการลบการลงทะเบียนหรือไม่?',
+        text: 'เมื่อลงการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $(this).parents('tr').remove();
+
+            $.post("../../admin/academic/ConAdminEnroll/AdminEnrollCancel", {
+                KeyTeacher: $(this).attr('key-teacher'),
+                KeySubject: $(this).attr('key-subject')
+            }, function(data, status) {
+                console.log(data);
+
+            });
+
+            Swal.fire(
+                'ลบข้อมูลเรียบร้อย!',
+                'Your data has been deleted.',
+                'success'
+            )
+        }
+    })
 });

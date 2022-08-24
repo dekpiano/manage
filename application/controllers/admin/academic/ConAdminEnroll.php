@@ -249,7 +249,17 @@ var  $title = "แผงควบคุม";
        echo json_encode($output);
     }
 
-    
+    public function AdminEnrollCancel(){
+
+      
+         $a =  array(
+         'SubjectCode' => $this->input->post('KeySubject'),
+         'TeacherID' => $this->input->post('KeyTeacher')
+         );   
+             $this->db->where($a);
+        echo $this->db->delete('tb_register');
+            
+     }
 
 }
 

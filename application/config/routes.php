@@ -74,7 +74,8 @@ $route['Admin/Registration/ExtraSubject'] = "admin/academic/ConAdminExtraSubject
 $route['Admin/Registration/SettingSystem'] = "admin/academic/ConAdminExtraSubject/SystemMainExtraSubject";
 $route['Admin/Acade/Report'] = "admin/academic/ConAdminExtraSubject/ExtraReport";
 $route['Admin/Registration/RoomOnline'] = "admin/academic/ConAdminRoomOnline/RoomOnlineMain";
-$route['Admin/Registration/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
+
+$route['Admin/Setting/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
 
 $route['Admin/Evaluate/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
 $route['Admin/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreMain";
