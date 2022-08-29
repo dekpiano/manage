@@ -230,6 +230,16 @@
                                             href="<?=base_url('Admin/Evaluate/SaveScore');?>">จัดการบันทึกผลการเรียน</a>
                                     </li>
 
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ReportPerson" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Evaluate/ReportPerson');?>"> รายงานผลการเรียนรายบุคคล</a>
+                                    </li>
+                                    
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('3')=="ReportRoom" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Evaluate/ReportRoom');?>"> รายงานผลการเรียนรายห้องเรียน</a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </li>

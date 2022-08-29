@@ -108,6 +108,7 @@ $('#example').DataTable({
 <?php endif; ?>
 <?php if($this->uri->segment(2) ==="Evaluate"): ?>
 <script src="<?=base_url();?>assets/js/admin/AcadeSaveScore.js?v=2"></script>
+<script src="<?=base_url();?>assets/js/admin/AcadeReport.js?v=4"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>

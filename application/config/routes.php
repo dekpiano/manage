@@ -79,6 +79,8 @@ $route['Admin/Setting/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/A
 
 $route['Admin/Evaluate/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
 $route['Admin/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreMain";
+$route['Admin/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
+$route['Admin/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
 
 // งานกิจการนักเรียน
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
