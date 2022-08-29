@@ -43,8 +43,16 @@ var  $title = "แผงควบคุม";
     public function AdminReportRoomMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-
-        $data['stu'] = $this->db->select("tb_students.StudentID,
+        $keyroom = $this->input->post("keyroom");
+        if(!isset($keyroom)){
+            $data["Nodata"] = 0;
+            $data['totip'] = "";
+            $data['keyroom'] = '';
+        }else{
+            $data["Nodata"] = 1;
+            $data['keyroom'] = $keyroom;
+            $data['totip'] = "ระดับชั้น ".$keyroom;
+            $data['stu'] = $this->db->select("tb_students.StudentID,
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
@@ -53,7 +61,7 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentLastName,
                                     tb_students.StudentStatus")
                             ->where('StudentStatus','1/ปกติ')
-                            ->where('StudentClass','ม.1/1')                            
+                            ->where('StudentClass',$keyroom)                            
                             ->order_by('tb_students.StudentNumber','ASC')
                             ->get('tb_students')->result();
        
@@ -72,7 +80,7 @@ var  $title = "แผงควบคุม";
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('RegisterYear','1/2565')
                                 ->where('StudentStatus','1/ปกติ')
-                                ->where('StudentClass','ม.1/1')
+                                ->where('StudentClass',$keyroom)
                                 ->group_by('tb_register.SubjectCode')                                
                                 ->get()->result();
 
@@ -90,9 +98,12 @@ var  $title = "แผงควบคุม";
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('RegisterYear','1/2565')
                                 ->where('StudentStatus','1/ปกติ')
-                                ->where('StudentClass','ม.1/1')
+                                ->where('StudentClass',$keyroom)
                                 //->group_by('tb_register.SubjectCode')                                
                                 ->get()->result();
+
+        }
+        
 
         //echo '<pre>'; print_r($data['check']); exit();
         $data['title'] = "รายงานผลการเรียนรายห้องเรียน";

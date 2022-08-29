@@ -27,15 +27,47 @@ th.rotated-text>div>span {
 </style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
-        <div class="container-xl">
-            <h1 class="app-page-title">จัดการข้อมูล<?=$title;?></h1>
-            <hr class="mb-4">
+        <div class="row g-3 mb-4 align-items-center justify-content-between">
+            <div class="col-auto">
+                <h1 class="app-page-title mb-0"><?=$title?> <?=$totip;?></h1>
+            </div>
+            <div class="col-auto">
+                <div class="page-utilities">
+                    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+
+
+                        <div class="col-auto">
+                            <form action="<?=base_url('Admin/Evaluate/ReportRoom');?>" method="post">
+                                <select class="form-select w-auto" name="keyroom">
+                                    <option selected="" value="1">เลือกห้อง...</option>
+                                    <?php foreach ($this->classroom->ListRoom() as $key => $v_ListRoom) : ?>
+                                    <option <?=$keyroom == "ม.".$v_ListRoom ?"selected":""?> value="ม.<?=$v_ListRoom;?>"><?=$v_ListRoom;?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn app-btn-primary" type="submit">ค้นหา</button>
+                        </div>
+                        </form>
+                    </div>
+                    <!--//row-->
+                </div>
+                <!--//table-utilities-->
+            </div>
+            <!--//col-auto-->
         </div>
         <!--//container-->
         </section>
         <section class="we-offer-area">
             <div class="container-fluid">
 
+                <?php if($Nodata == 0): ?>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center">กรุณาเลือกห้องเรียนก่อน...</h2>
+                    </div>
+                </div>
+                <?php else: ?>
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -117,6 +149,8 @@ th.rotated-text>div>span {
                         </table>
                     </div>
                 </div>
+                <?php endif; ?>
+
             </div>
 
     </div>
