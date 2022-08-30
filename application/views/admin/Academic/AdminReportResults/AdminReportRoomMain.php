@@ -41,7 +41,8 @@ th.rotated-text>div>span {
                                 <select class="form-select w-auto" name="keyroom">
                                     <option selected="" value="1">เลือกห้อง...</option>
                                     <?php foreach ($this->classroom->ListRoom() as $key => $v_ListRoom) : ?>
-                                    <option <?=$keyroom == "ม.".$v_ListRoom ?"selected":""?> value="ม.<?=$v_ListRoom;?>"><?=$v_ListRoom;?></option>
+                                    <option <?=$keyroom == "ม.".$v_ListRoom ?"selected":""?>
+                                        value="ม.<?=$v_ListRoom;?>"><?=$v_ListRoom;?></option>
                                     <?php endforeach; ?>
                                 </select>
                         </div>
@@ -70,11 +71,11 @@ th.rotated-text>div>span {
                 <?php else: ?>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="tblGrand">
                             <thead>
-                                <tr>
-                                    <th class="cell">ลำดับที่</th>
-                                    <th class="cell">ชื่อ - นามสกุล</th>
+                                <tr class="text-center">
+                                    <th class="cell align-middle" width="20">ลำดับที่</th>
+                                    <th class="cell align-middle" width="250">ชื่อ - นามสกุล</th>
                                     <?php foreach ($subject as $key => $v_subject): ?>
                                     <th class="rotated-text">
                                         <div>
@@ -84,22 +85,29 @@ th.rotated-text>div>span {
                                         </div>
                                     </th>
                                     <?php endforeach; ?>
-                                    <th class="cell">GPA เกรดเฉลี่ย</th>
+                                    <th class="cell align-middle">GPA เกรดเฉลี่ย</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <?php foreach ($stu as $key => $v_stu) : ?>
+                                <?php 
+                                
+                                foreach ($stu as $key => $v_stu) : 
+                                ?>
                                 <tr>
-                                    <td class="cell"><?=$v_stu->StudentNumber?></td>
+                                    <td class="cell align-middle text-center"><?=$v_stu->StudentNumber?></td>
                                     <td class="cell">
                                         <?=$v_stu->StudentPrefix.$v_stu->StudentFirstName?> <?=$v_stu->StudentLastName?>
                                     </td>
-                                    <?php foreach ($subject as $key => $v_subject): ?>
-                                    <td class="text-center">
+                                    <?php   
+                                         $SumAll=0;  $SumUnit=0;     
+                                    foreach ($subject as $key => $v_subject): 
+                                    ?>
+                                    <td class="text-center check_score" width="45">
                                         <div>
                                             <span>
-                                                <?php foreach ($check as $key => $v_check):?>
+
+                                                <?php  $GPA = 0; $Unit=0;  foreach ($check as $key => $v_check):?>
                                                 <?php if($v_subject->SubjectCode == $v_check->SubjectCode && $v_stu->StudentID == $v_check->StudentID): ?>
 
                                                 <?php 
@@ -121,7 +129,17 @@ th.rotated-text>div>span {
                                                                 if($sub[0] == "" && $sub[1] == "" && $sub[2] == "" && $sub[3] == ""){
                                                                    
                                                                    }else{
-                                                                    echo $this->grade->check_grade($sum);
+
+                                                                    echo floatval($this->grade->check_grade($sum));
+
+                                                                    if($this->grade->check_grade($sum) == "ร" || $this->grade->check_grade($sum) == "มส"){
+
+                                                                    }else{
+                                                                      $GPA = floatval($this->grade->check_grade($sum));
+                                                                      $Unit = floatval($v_subject->SubjectUnit); 
+                                                                     
+                                                                    }
+                                                                    
                                                                    }
                                                             }
                                                         }
@@ -130,18 +148,24 @@ th.rotated-text>div>span {
                                                     
                                                 }
                                                 
+                                                $SumUnit += $Unit; 
                                                 ?>
 
-                                                <?php endif; ?>
-                                                <?php endforeach;?>
+                                                <?php endif; ?>                                                
+                                                <?php endforeach;?>                                                
                                             </span>
-                                        </div>
-
+                                        </div>                                       
+                                        <?php 
+                                      
+                                        $SumAll += (($GPA*$Unit));
+                                        
+                                        ?>
 
                                     </td>
                                     <?php endforeach; ?>
-                                    <td class="cell">
-
+                                    
+                                    <td class="cell totalCol text-center">
+                                        <?=intval(($SumAll/($SumUnit?$SumUnit:1))*100)/100;?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
