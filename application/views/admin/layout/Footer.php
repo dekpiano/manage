@@ -80,7 +80,7 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
             ],
         });
     });
-    
+   
     $('#multiselect').multiselect();
 
 new SlimSelect({
@@ -100,7 +100,7 @@ $('#example').DataTable({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 <script src="<?=base_url();?>assets/js/admin/AcadeStudent.js?v=4"></script>
-<script src="<?=base_url();?>assets/js/admin/Academic.js?v=40"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic.js?v=47"></script>
 
 <?php if($this->uri->segment(2) ==="Registration"): ?>
     <script src="<?=base_url();?>assets/js/admin/AcadeRegisterSubject.js?v=3"></script>    
@@ -108,7 +108,7 @@ $('#example').DataTable({
 <?php endif; ?>
 <?php if($this->uri->segment(2) ==="Evaluate"): ?>
 <script src="<?=base_url();?>assets/js/admin/AcadeSaveScore.js?v=2"></script>
-<script src="<?=base_url();?>assets/js/admin/AcadeReport.js?v=7"></script>
+<script src="<?=base_url();?>assets/js/admin/AcadeReport.js?v=8"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>

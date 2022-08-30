@@ -1,7 +1,6 @@
 //  ผลการเรียน
+
 $(document).on("change", "#checkOnOffRegister", function() {
-
-
     $.post("../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
             check: $(this).prop('checked')
         },
@@ -71,7 +70,7 @@ $(document).ready(function() {
 
         $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
             if (data == 1) {
-                alertify.success('เลือกหัวหน้างานสำเร็จ');
+                alertify.success('เลือก ผอ.โรงเรียน สำเร็จ');
             } else {
                 alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
             }
@@ -85,7 +84,7 @@ $(document).ready(function() {
     $(document).on("change", "#set_deputy", function() {
         $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
             if (data == 1) {
-                alertify.success('เลือกหัวหน้างานสำเร็จ');
+                alertify.success('เลือก รองฯ วิชการ สำเร็จ');
             } else {
                 alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
             }
@@ -110,10 +109,14 @@ $(document).ready(function() {
         select: '#set_leader'
     })
 
-    $(document).on("change", "#set_admin", function() {
-        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", { TeachID: $(this).val() }, function(data, status) {
+    $(document).on("change", ".set_admin", function() {
+        //alert($(this).attr('admin-id'));
+        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", {
+            TeachID: $(this).val(),
+            AdminID: $(this).attr('admin-id')
+        }, function(data, status) {
             if (data == 1) {
-                alertify.success('เลือกหัวหน้างานสำเร็จ');
+                alertify.success('เลือก เจ้าหน้าที่วิชาการ สำเร็จ');
             } else {
                 alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
             }
@@ -121,8 +124,19 @@ $(document).ready(function() {
     });
 
     new SlimSelect({
-        select: '#set_admin'
+        select: '#set_adminone'
     })
+    new SlimSelect({
+        select: '#set_admintwo'
+    })
+    new SlimSelect({
+        select: '#set_admintheer'
+    })
+    new SlimSelect({
+        select: '#set_adminfour'
+    })
+
+
 
     // update plan
     $(document).on('submit', '#form_update_plan', function(e) {

@@ -5,6 +5,13 @@ $('.ShowStudent').DataTable({
     ]
 });
 
+$('.tblGrand').DataTable({
+    "order": [
+        [0, "asc"]
+    ]
+});
+
+
 
 // $('#tblGrand tbody tr').each(function() {
 //     var totmarks = 0;

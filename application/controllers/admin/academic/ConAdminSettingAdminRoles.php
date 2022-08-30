@@ -17,7 +17,8 @@ var  $title = "แผงควบคุม";
         $data['title'] = "บทบาทในวิชาการ";	
         $DBpersonnel = $this->load->database('personnel', TRUE); //ฐานข้อมูลบุคลากร
         $DBaffairs = $this->load->database('affairs', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
-        $data['Manager'] = $this->db->select('admin_rloes_userid')->get('tb_admin_rloes')->result();
+        $data['Manager'] = $this->db->select('admin_rloes_userid,admin_rloes_id,admin_rloes_nanetype')->get('tb_admin_rloes')->result();
+        //echo '<pre>'; print_r($data['Manager']); exit();
         $data['NameTeacher'] = $DBpersonnel->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_position,pers_learning')
          ->from('tb_personnel')
          ->order_by('pers_learning')
@@ -54,7 +55,7 @@ var  $title = "แผงควบคุม";
     public function AcademicSettingAdmin() {      
  
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
-        $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id=4');
+        $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id="'.$this->input->post('AdminID').'"');
         echo $result;
     }
 

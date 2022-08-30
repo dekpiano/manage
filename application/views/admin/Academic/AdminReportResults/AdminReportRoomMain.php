@@ -71,7 +71,7 @@ th.rotated-text>div>span {
                 <?php else: ?>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered" id="tblGrand">
+                        <table class="table table-bordered tblGrand" id="tblGrand">
                             <thead>
                                 <tr class="text-center">
                                     <th class="cell align-middle" width="20">ลำดับที่</th>
