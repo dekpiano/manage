@@ -95,6 +95,9 @@ $route['LoginStudent'] = "Control_login/LoginStudent";
 $route['LoginTeacher'] = "Control_login/LoginTeacher";
 //$route['LoginTeacher'] = "Control_login/LoginTeacherMain";
 
+$route['LoginMenager'] = "Welcome/LoginMenager";
+$route['LoginMenager_callback'] = "Control_login/LoginMenager_callback";
+
 // Teacher
 $route['Teacher/Home'] = "teacher/ConTeacherHome/TeacherHome";
 $route['Teacher/Course'] = "teacher/ConTeacherCourse/Course";

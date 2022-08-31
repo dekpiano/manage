@@ -253,4 +253,61 @@ class Control_login extends CI_Controller {
 	redirect('welcome', 'refresh');
 	}
 
+
+
+	public function LoginMenager_callback(){
+		include_once APPPATH . "libraries/vendor/autoload.php";
+		$google_client = new Google_Client();
+		$redirect_uri = base_url('LoginMenager_callback');
+
+		$google_client->setClientId('29638025169-aeobhq04v0lvimcjd27osmhlpua380gl.apps.googleusercontent.com');
+		$google_client->setClientSecret('RSANANTRl84lnYm54Hi0icGa');
+		$google_client->setRedirectUri($redirect_uri);
+		$google_client->addScope('email');
+		$google_client->addScope('profile');
+		
+		if(isset($_GET["code"])){
+			$token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+			if(!isset($token["error"])){				
+				$this->session->set_userdata('access_token',$token['access_token']);
+				$google_service = new Google_Service_Oauth2($google_client);
+
+				$data = $google_service->userinfo->get();
+				$current_datetime = date('Y-m-d H:i:s');			
+
+				// echo $this->Model_login->check_login_teacher($data['email']); 
+				if($this->Model_login->check_login_teacher($data['email']) == 1)
+   				 {
+					$google_client->setAccessToken($token['access_token']);
+					$user_data = array(				 
+						'pers_username' => $data['email'],
+						'updated_at' => $current_datetime,
+						'login_oauth_uid' => $data['id']
+					);			
+				   $this->Model_login->Update_user_data($user_data, $data['email']);
+
+				   $result = $this->Model_login->fetch_teacher_login($data['email']);
+				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
+				  
+				}else{
+					$this->session->unset_userdata('access_token');
+
+					$this->session->set_flashdata(array('msg'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียนที่ลงทะเบียนเท่านั้น กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
+				
+				}
+			}
+		}
+			
+			$login_button = '';
+			if(!$this->session->userdata('access_token'))
+			{
+			// header('Location: '.$google_client->createAuthUrl());
+			redirect('welcome');
+			}
+			else
+			{			
+			redirect('Admin/Home');
+			} 	
+	}
+
 }

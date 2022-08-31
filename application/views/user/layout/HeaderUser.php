@@ -12,13 +12,11 @@
     <meta name="description" content="<?=$description?>">
     <meta name="author" content="Dekpiano">
 
-    <meta property="og:url"
-        content="<?=$full_url?>" />
+    <meta property="og:url" content="<?=$full_url?>" />
     <meta property="og:type" content="Education" />
     <meta property="og:title" content="<?=$title?> | ระบบงานวิชาการสำหรับนักเรียน" />
     <meta property="og:description" content="<?=$description?>" />
-    <meta property="og:image"
-        content="<?=$banner?>" />
+    <meta property="og:image" content="<?=$banner?>" />
 
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -69,7 +67,7 @@
                             </a>
                         </div>
                         <div class="app-search-box col">
-                            ระบบงานวิชาการ 
+                            ระบบงานวิชาการ
                         </div>
                         <div class="app-utilities col-auto">
                             <div class="app-utility-item app-user-dropdown dropdown">
@@ -81,7 +79,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
 
                                     <li><a class="dropdown-item" href="<?=base_url('LoginStudent');?>">นักเรียน</a></li>
-                                    <li><a class="dropdown-item" href="<?=base_url('LoginTeacher');?>">ครูผู้สอน</a>
+                                    <li><a class="dropdown-item" href="http://teacher.skj.ac.th/">ครูผู้สอน</a>
                                     </li>
                                 </ul>
                             </div>
@@ -284,6 +282,14 @@
                                 In</button>
                         </div>
                     </form>
+                    <hr>
+                    <div class="text-center">
+                        <a href="<?=base_url('LoginMenager')?>">
+                            <img src="<?=base_url('assets/images/btn_google_signin.png')?>" alt="" srcset="">
+                        </a>
+                    </div>
+
+
                 </div>
 
             </div>
