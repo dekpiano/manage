@@ -253,8 +253,6 @@ class Control_login extends CI_Controller {
 	redirect('welcome', 'refresh');
 	}
 
-
-
 	public function LoginMenager_callback(){
 		include_once APPPATH . "libraries/vendor/autoload.php";
 		$google_client = new Google_Client();

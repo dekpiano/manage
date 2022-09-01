@@ -12,6 +12,14 @@ class ConAdminClassRoom extends CI_Controller {
 
         $this->load->library('Classroom');
 
+        $data['check_status'] = $this->db->where('admin_rloes_userid',$this->session->userdata('login_id'))->get('tb_admin_rloes')->row();
+        if(@$data['check_status']->admin_rloes_status == "admin" || @$data['check_status']->admin_rloes_status == "manager"){
+            
+        }else{
+            $this->session->set_flashdata(array('msg'=>'OK','messge'=> 'คุณไม่มีสิทธ์ในระบบจัดข้อมูลนี้ ติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
+            redirect('welcome','refresh');
+        }
+
     }
 
     public function AdminClassMain(){   
