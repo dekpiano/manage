@@ -8,6 +8,10 @@ $('.ShowStudent').DataTable({
 $('.tblGrand').DataTable({
     "order": [
         [0, "asc"]
+    ],
+    dom: 'Bfrtip',
+    buttons: [
+        'copy', 'excel', 'pdf', 'print'
     ]
 });
 
