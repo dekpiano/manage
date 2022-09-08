@@ -25,6 +25,7 @@
                                     <th>ชื่อ - นามสกุล</th>
                                     <th>ชั้น</th>
                                     <th>เลขที่</th>
+                                    <th>สถานะพฤติกรรม</th>
                                     <th>รายละเอียด</th>
                                     <th>คำสั่ง</th>
                                 </tr>
@@ -36,6 +37,7 @@
                                     <td><?=$v_stu->StudentPrefix?><?=$v_stu->StudentFirstName?> <?=$v_stu->StudentLastName?></td>
                                     <td><?=$v_stu->StudentClass?></td>
                                     <td><?=$v_stu->StudentNumber?></td>
+                                    <td><?=$v_stu->StudentBehavior?></td>
                                     <td><a href="http://">เปิดดู</a></td>
                                     <td><a class="delete_student btn btn-danger" href="#" idStu="<?=$v_stu->StudentCode?>">ลบ</a></td>
                                 </tr>

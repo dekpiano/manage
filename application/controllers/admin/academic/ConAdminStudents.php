@@ -59,7 +59,8 @@ class ConAdminStudents extends CI_Controller {
                                         StudentFirstName,
                                         StudentLastName,
                                         StudentIDNumber,
-                                        StudentStatus')
+                                        StudentStatus,
+                                        StudentBehavior')
                                         ->where('StudentStatus','1/ปกติ')
                                         ->get('tb_students')->result();        
 		$data['title'] = "นักเรียน";
@@ -74,7 +75,7 @@ class ConAdminStudents extends CI_Controller {
         $service = $this->getClient();
         $spreadsheetId = '1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec';
         
-        $range = 'stu1!A2:I1000';  // TODO: Update placeholder value.
+        $range = 'stu1!A2:J1000';  // TODO: Update placeholder value.
 
         $response = $service->spreadsheets_values->get($spreadsheetId, $range);
         $numRows = $response->getValues() != null ? count($response->getValues()) : 0;
@@ -85,7 +86,7 @@ class ConAdminStudents extends CI_Controller {
             $checkStu[] = $v_re->StudentIDNumber;
         }
 
-        //echo '<pre>';print_r($response->values[0][7]);exit();
+        //echo '<pre>';print_r($response->values[0][9]);exit();
         for ($i=0; $i < $numRows; $i++) { 
 
             if (in_array($response->values[$i][7], $checkStu))
@@ -97,7 +98,8 @@ class ConAdminStudents extends CI_Controller {
                                 'StudentFirstName' => $response->values[$i][4], 
                                 'StudentLastName' => $response->values[$i][5],
                                 'StudentDateBirth' => $response->values[$i][6],
-                                'StudentStatus' => $response->values[$i][8]);
+                                'StudentStatus' => $response->values[$i][8],
+                                'StudentBehavior' => $response->values[$i][9]);
             $this->ModAdminStudents->Students_Update($arrayName,$response->values[$i][7]);
             }
           else
@@ -110,7 +112,8 @@ class ConAdminStudents extends CI_Controller {
                 'StudentLastName' => $response->values[$i][5],
                 'StudentIDNumber' => $response->values[$i][7],
                 'StudentDateBirth' => $response->values[$i][6],
-                'StudentStatus' => $response->values[$i][8]);
+                'StudentStatus' => $response->values[$i][8],
+                'StudentBehavior' => $response->values[$i][9]);
                 $this->ModAdminStudents->Students_Inaert($arrayName);
             }
         }
