@@ -45,7 +45,7 @@
                                     </td>
                                     <td><?=$v_classRoom->pers_prefix.$v_classRoom->pers_firstname.' '.$v_classRoom->pers_lastname?>
                                     </td>
-                                    <td><a href="<?=base_url('Admin/academic/ConAdminClassRoom/DeleteClassRoom/').$v_classRoom->pers_id;?>">ลบ</a></td>
+                                    <td><a href="<?=base_url('admin/academic/ConAdminClassRoom/DeleteClassRoom/').$v_classRoom->pers_id;?>">ลบ</a></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

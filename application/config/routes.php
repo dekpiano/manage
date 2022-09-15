@@ -98,40 +98,6 @@ $route['LoginTeacher'] = "Control_login/LoginTeacher";
 $route['LoginMenager'] = "Welcome/LoginMenager";
 $route['LoginMenager_callback'] = "Control_login/LoginMenager_callback";
 
-// Teacher
-$route['Teacher/Home'] = "teacher/ConTeacherHome/TeacherHome";
-$route['Teacher/Course'] = "teacher/ConTeacherCourse/Course";
-$route['Teacher/Course/LoadPlan'] = "teacher/ConTeacherCourse/LoadPlan";
-$route['Teacher/Course/SendPlan'] = "teacher/ConTeacherCourse/send_plan";
-$route['Teacher/Course/EditPlan/(:num)'] = "teacher/ConTeacherCourse/edit_plan/$1";
-$route['Teacher/Course/CheckPlan'] = "teacher/ConTeacherCourse/check_plan";
-$route['Teacher/Course/Setting'] = "teacher/ConTeacherCourse/setting_plan";
-$route['Teacher/Course/SettingTeacher'] = "teacher/ConTeacherCourse/setting_teacher";
-$route['Teacher/Course/CheckPlan/(:any)'] = "teacher/ConTeacherCourse/check_plan_lear/$1";
-$route['Teacher/Course/CheckPlan/(:any)/(:any)'] = "teacher/ConTeacherCourse/check_plan_lear_techer/$1/$2";
-$route['Teacher/Course/Delete/(:any)']['delete'] = "teacher/ConTeacherCourse/delete_plan/$1";
-$route['Teacher/Course/ReportPlan'] = "teacher/ConTeacherCourse/report_plan";
-$route['Teacher/Course/ReportPlan/(:any)'] = "teacher/ConTeacherCourse/report_plan/$1";
-$route['Teacher/Course/DownloadPlan'] = "teacher/ConTeacherCourse/DownloadPlan";
-$route['Teacher/Course/DownloadPlanZip/(:any)'] = "teacher/ConTeacherCourse/DownloadPlanZip/$1";
-$route['Teacher/Profile'] = "teacher/ConTeacherProfile/ProfileMain";
-$route['Teacher/Teaching/CheckHomeRoomMain'] = "teacher/ConTeacherTeaching/CheckHomeRoomMain";
-$route['Teacher/Teaching/CheckHomeRoomAdd'] = "teacher/ConTeacherTeaching/CheckHomeRoomAdd";
-$route['Teacher/Teaching/CheckHomeRoomStatistics'] = "teacher/ConTeacherTeaching/CheckHomeRoomStatistics";
-$route['Teacher/Teaching/CheckHomeRoomDashboard/(:any)'] = "teacher/ConTeacherTeaching/CheckHomeRoomDashboard/$1";
-$route['Teacher/Teaching/CheckTeaching'] = "teacher/ConTeacherTeaching/CheckTeaching";
-$route['Teacher/Teaching/RoomOnlineMain'] = "teacher/ConTeacherTeaching/RoomOnlineMain";
-
-$route['Teacher/Register/SaveScoreMain'] = "teacher/ConTeacherRegister/SaveScoreMain";
-$route['Teacher/Register/SaveScoreAdd/(:any)/(:any)/(:any)/(:any)'] = "teacher/ConTeacherRegister/SaveScoreAdd/$1/$2/$3/$4";
-$route['Teacher/Register/RopoetPT'] = "teacher/ConTeacherRegister/report_pt";
-
-
-$route['Teacher/SupStd/Main'] = "teacher/ConTeacherStudentSupport/SupStdMain";
-$route['Teacher/SupStd/CheckWorkManager'] = "teacher/ConTeacherStudentSupport/SupStdCheckWorkManager";
-$route['Teacher/SupStd/CheckWorkExecutive'] = "teacher/ConTeacherStudentSupport/SupStdCheckWorkExecutive";
-$route['Teacher/SupStdMain/Add'] = "teacher/ConTeacherStudentSupport/SupStdAdd";
-
 
 //Student
 $route['Student/AcademicResult'] = "student/ConStudentHome/score";

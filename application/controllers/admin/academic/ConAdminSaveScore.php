@@ -27,6 +27,7 @@ var  $title = "แผงควบคุม";
         
         $data['title'] = "บันทึกผลการเรียน";	
         $data['OnOffSaveScore'] = $this->db->where('onoff_id >= 2')->where('onoff_id <= 5')->get('tb_register_onoff')->result();
+        $data['OnOffSaveScoreSystem'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminSaveScore/AdminSaveScoreMain.php');
         $this->load->view('admin/layout/Footer.php');
