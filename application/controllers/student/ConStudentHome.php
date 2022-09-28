@@ -49,6 +49,7 @@ var  $title = "ผลการเรียน";
                                     ->from('tb_register')
                                     ->join('tb_subjects', 'tb_register.SubjectCode = tb_subjects.SubjectCode')
                                     ->where('StudentID',$this->session->userdata('login_id'))
+                                    ->order_by('tb_subjects.SubjectType asc')
                                     ->order_by('tb_subjects.FirstGroup asc','tb_subjects.SubjectCode asc')
                                     ->get()->result();
       

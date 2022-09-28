@@ -7,15 +7,15 @@
                 $SubGrade = 0;
                 foreach ($scoreStudent as $key => $score ){
                     if($v_scoreYear->RegisterYear == $score->RegisterYear && $v_scoreYear->RegisterYear == $score->SubjectYear){
-                        $AllUnit += $score->SubjectUnit;
+                        $AllUnit += floatval(floatval($score->SubjectUnit));
 
                         if($score->Grade == 'ร' || $score->Grade == 'มส' || $score->Grade == ''){                           
-                            $SubGrade += ($score->SubjectUnit*0);
+                            $SubGrade += (floatval($score->SubjectUnit)*0);
                         }else{
-                            if($score->Score100 == ''){
-                                $SubGrade += (($score->SubjectUnit)*($score->Grade));
+                            if(floatval($score->Score100) == ''){
+                                $SubGrade += ((floatval($score->SubjectUnit))*($score->Grade));
                             }else{
-                                $SubGrade += (($score->SubjectUnit)*($score->Grade));
+                                $SubGrade += ((floatval($score->SubjectUnit))*($score->Grade));
                             }
                         }
                     }
@@ -29,24 +29,24 @@
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
 
-            <h1 class="app-page-title"><?=$title?></h1>
+            <h1 class="app-page-title text-center ">
+                <?=$title?>
+            </h1>
 
-            <div class="app-card app-card-orders-table shadow-sm mb-5">
+            <div class="mb-5">
                 <?php if($CheckOnOff[0]->onoff_status == "true") : ?>
 
                 <div class="row g-4 mb-4">
-                    <div class="col-6 col-lg-3">
+                    <!-- <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">จำนวนเทอม</h4>
                                 <div class="stats-figure"><?php  print_r(count($scoreYear)); ?></div>
                                 <div class="stats-meta">คือ จำนวนที่ภาคเรียน</div>
-                            </div>
-                            <!--//app-card-body-->
+                            </div>                         
                             <a class="app-card-link-mask" href="#"></a>
                         </div>
-                        <!--//app-card-->
-                    </div>
+                    </div> -->
                     <!--//col-->
 
                     <!-- <div class="col-6 col-lg-3">
@@ -61,7 +61,7 @@
                         </div>
                     </div> -->
                     <!--//col-->
-                    <div class="col-6 col-lg-3">
+                    <!-- <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">ค่าเฉลี่ย CGPA</h4>
@@ -71,18 +71,15 @@
                                     if($AllGrade && $AllUnit){
                                         $All = $AllGrade/$AllUnit; 
                                         echo substr($All,0,strpos($All,'.')+3);
-                                    }
-                                    
+                                    }                                    
                             ?>
 
                                 </div>
                                 <div class="stats-meta">เกรดเฉลี่ยรวมทุกภาค</div>
                             </div>
-                            <!--//app-card-body-->
                             <a class="app-card-link-mask" href="#"></a>
                         </div>
-                        <!--//app-card-->
-                    </div>
+                    </div> -->
 
                 </div>
                 <!--//row-->
@@ -114,7 +111,7 @@
                                             <?php  $SumUnit = 0; $SumGrade = 0; $scoreLevel=0;
                                         foreach ($scoreStudent as $key => $score ):                                         
                                             if($v_scoreYear->RegisterYear == $score->RegisterYear && $v_scoreYear->RegisterYear == $score->SubjectYear):
-                                            $c = $score->Score100;
+                                            $c = floatval($score->Score100);
                                             $type = explode("/",$score->SubjectType);
                                            //echo '<pre>';print_r($score);
                                                 // if(($c>100)||($c<0)||($c== ''))
@@ -132,7 +129,7 @@
                                                 <th scope="row"><?=$score->SubjectCode;?></th>
                                                 <td><?=$score->SubjectName;?></td>
                                                 <td class="text-center"><?=$type[1]?></td>
-                                                <td class="text-center"><?=$score->SubjectUnit;?></td>
+                                                <td class="text-center"><?=number_format(floatval($score->SubjectUnit),1);?></td>
 
                                                 <?php if($score->Grade == 'ร' || $score->Grade == 'มส' || $score->Grade == ''){ ?>
                                                 <td class="text-center"><?=$score->Grade?></td>
@@ -142,29 +139,29 @@
 
 
                                             </tr>
-                                            <?php $SumUnit += $score->SubjectUnit;
+                                            <?php $SumUnit += floatval($score->SubjectUnit);
                                         if($score->Grade == 'ร' || $score->Grade == 'มส' || $score->Grade == ''){
-                                            $scoreLevel += ($score->SubjectUnit*0);
-                                            $SumGrade += ($score->SubjectUnit*0);
+                                            $scoreLevel += (floatval($score->SubjectUnit)*0);
+                                            $SumGrade += (floatval($score->SubjectUnit)*0);
                                         }else{
-                                            if($score->Score100 == ''){
-                                                $SumGrade += (($score->SubjectUnit)*($score->Grade));
+                                            if(floatval($score->Score100) == ''){
+                                                $SumGrade += ((floatval($score->SubjectUnit))*($score->Grade));
                                             }else{
-                                                $scoreLevel += $score->Score100;
-                                                $SumGrade += (($score->SubjectUnit)*($score->Grade));
+                                                $scoreLevel += floatval($score->Score100);
+                                                $SumGrade += ((floatval($score->SubjectUnit))*($score->Grade));
                                             }
                                         }
                                          endif; 
                                          endforeach;?>
                                             <tr class="text-center tfoot">
                                                 <th colspan=3>รวม</th>
-                                                <th><?php echo  $SumGrade; ?></th>
+                                                <th></th>
                                                 <th>                                                    
                                                     <?php 
-                                                    if($SumGrade && $SumUnit){
-                                                        $a = ($SumGrade/$SumUnit);
-                                                        echo substr($a,0,strpos($a,'.')+3);
-                                                    }
+                                                    // if($SumGrade && $SumUnit){
+                                                    //     $a = ($SumGrade/$SumUnit);
+                                                    //     echo substr($a,0,strpos($a,'.')+3);
+                                                    // }
                                                    
                                                         ?>
 
