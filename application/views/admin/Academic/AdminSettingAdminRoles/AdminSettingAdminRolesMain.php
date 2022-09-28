@@ -232,6 +232,42 @@
                         </select>
                     </div>
                 </div>
+                <div class="row g-4 settings-section">
+                    <div class="col-12 col-md-4">
+                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
+                            id="set_adminfive" name="set_admin" admin-id="<?=$Manager[7]->admin_rloes_id;?>">
+                            <option value="">กรุณาเลือกหัวหน้างาน</option>
+                            <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
+                            <option
+                                <?=$Manager[7]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
+                                value="<?=$v_NameTeacher->pers_id?>">
+                                <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-4 settings-section">
+                    <div class="col-12 col-md-4">
+                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
+                            id="set_adminsix" name="set_admin" admin-id="<?=$Manager[8]->admin_rloes_id;?>">
+                            <option value="">กรุณาเลือกหัวหน้างาน</option>
+                            <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
+                            <option
+                                <?=$Manager[8]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
+                                value="<?=$v_NameTeacher->pers_id?>">
+                                <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
                 <hr>
 
             </div>

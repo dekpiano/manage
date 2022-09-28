@@ -135,6 +135,12 @@ $(document).ready(function() {
     new SlimSelect({
         select: '#set_adminfour'
     })
+    new SlimSelect({
+        select: '#set_adminfive'
+    })
+    new SlimSelect({
+        select: '#set_adminsix'
+    })
 
 
 
