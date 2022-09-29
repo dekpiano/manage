@@ -116,6 +116,19 @@ $('#example').DataTable({
 <?php endif; ?>
 
 <script>
+// window.addEventListener("load", function() {
+//     const loader = document.querySelector(".loader");
+//     loader.className += " hidden"; // class "loader hidden"
+// });
+
+$("button").click(function(){
+  $('.loader').show();
+});
+
+
+</script>
+
+<script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
     'use strict'

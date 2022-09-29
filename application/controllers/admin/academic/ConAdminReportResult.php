@@ -66,8 +66,7 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentCode,
                                     tb_students.StudentPrefix,
                                     tb_students.StudentFirstName,
-                                    tb_students.StudentLastName,
-                                    tb_students.StudentStatus")
+                                    tb_students.StudentLastName")
                             ->where('StudentStatus','1/ปกติ')
                             ->where('StudentClass',$keyroom)                            
                             ->order_by('tb_students.StudentNumber','ASC')
@@ -75,12 +74,7 @@ var  $title = "แผงควบคุม";
        
         $data['subject'] = $this->db->select("
                                         tb_students.StudentID,
-                                        tb_students.StudentClass,
-                                        tb_students.StudentNumber,
-                                        tb_register.Score100,
-                                        tb_register.Grade,
                                         tb_register.SubjectCode,
-                                        tb_register.StudyTime,
                                         tb_subjects.SubjectName,
                                         tb_subjects.SubjectUnit")
                                 ->from('tb_register')
@@ -94,26 +88,22 @@ var  $title = "แผงควบคุม";
 
             $data['check'] = $this->db->select("
                                         tb_students.StudentID,
-                                        tb_students.StudentClass,
-                                        tb_students.StudentStatus,
-                                        tb_register.Score100,
-                                        tb_register.Grade,
-                                        tb_register.StudyTime,                                       
-                                        tb_register.SubjectCode,
-                                        tb_subjects.SubjectName")
+                                        tb_register.Grade,                                      
+                                        tb_register.SubjectCode")
                                 ->from('tb_register')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('RegisterYear','1/2565')
                                 ->where('StudentStatus','1/ปกติ')
                                 ->where('StudentClass',$keyroom)
                                 //->group_by('tb_register.SubjectCode')                                
                                 ->get()->result();
+                               // echo '<pre>'; print_r($data['stu']); exit();
 
         }
         
 
-        //echo '<pre>'; print_r($data['check']); exit();
+       
+
         $data['title'] = "รายงานผลการเรียนรายห้องเรียน";
 
         $this->load->view('admin/layout/Header.php',$data);

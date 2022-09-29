@@ -49,8 +49,41 @@
     .toggle.ios .toggle-handle {
         border-radius: 20rem;
     }
+
+    .loader {
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loader>img {
+        width: 100px;
+    }
+
+    .loader.hidden {
+        animation: fadeOut 0.1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeOut {
+        100% {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
     </style>
 </head>
+
+  <div class="loader" style="display:none;">
+      <img src="https://boychawin.com/irms/images/VAyR.gif" alt="Loading..." />
+  </div>
 
 <body class="app" style="font-family: 'Sarabun', sans-serif;">
     <header class="app-header fixed-top">
@@ -176,15 +209,17 @@
 
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ExamSchedule" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Registration/ExamSchedule');?>">จัดการตารางสอบ</a></li>
+                                            href="<?=base_url('Admin/Registration/ExamSchedule');?>">จัดการตารางสอบ</a>
+                                    </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ClassSchedule" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Registration/ClassSchedule');?>">จัดการตารางเรียน</a></li>
+                                            href="<?=base_url('Admin/Registration/ClassSchedule');?>">จัดการตารางเรียน</a>
+                                    </li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ExtraSubject" ? "active" :""?>"
                                             href="<?=base_url('Admin/Registration/RoomOnline');?>">จัดการห้องเรียนออนไลน์</a>
                                     </li>
-                                  
+
                                 </ul>
                             </div>
                         </li>
@@ -232,12 +267,14 @@
 
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ReportPerson" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Evaluate/ReportPerson');?>"> รายงานผลการเรียนรายบุคคล</a>
+                                            href="<?=base_url('Admin/Evaluate/ReportPerson');?>">
+                                            รายงานผลการเรียนรายบุคคล</a>
                                     </li>
-                                    
+
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('3')=="ReportRoom" ? "active" :""?>"
-                                            href="<?=base_url('Admin/Evaluate/ReportRoom');?>"> รายงานผลการเรียนรายห้องเรียน</a>
+                                            href="<?=base_url('Admin/Evaluate/ReportRoom');?>">
+                                            รายงานผลการเรียนรายห้องเรียน</a>
                                     </li>
 
                                 </ul>
