@@ -86,7 +86,7 @@ class ConAdminStudents extends CI_Controller {
             $checkStu[] = $v_re->StudentIDNumber;
         }
 
-        //echo '<pre>';print_r($response->values[0][9]);exit();
+        //echo '<pre>';print_r($response->values);exit();
         for ($i=0; $i < $numRows; $i++) { 
 
             if (in_array($response->values[$i][7], $checkStu))
