@@ -184,8 +184,11 @@ th.rotated-text>div>span {
 <!--//main-wrapper-->
 
 
-<?php  $GPA = 0; $Unit=0;  foreach ($check as $key => $v_check):?>
+<?php foreach ($check as $key => $v_check):?>
                                         <?php if($v_subject->SubjectCode == $v_check->SubjectCode && $v_stu->StudentID == $v_check->StudentID): ?>
-                                            <?php echo $v_check->Grade; ?>
+                                           <div class="showGrade" data_unit="<?=$v_subject->SubjectUnit?>">
+                                           <?php echo $v_check->Grade; ?>
+                                           </div>
+                                            
                                         <?php endif; ?>
                                         <?php endforeach; ?>

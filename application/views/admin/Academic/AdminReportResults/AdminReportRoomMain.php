@@ -71,7 +71,7 @@ th.rotated-text>div>span {
                 <?php else: ?>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered tblGrand" id="tblGrand">
+                        <table class="table table-bordered" id="tblGrade">
                             <thead>
                                 <tr class="text-center">
                                     <th class="cell align-middle" style="width:20px">ลำดับที่</th>
@@ -110,7 +110,7 @@ th.rotated-text>div>span {
                                     </td>
                                     <?php endforeach; ?>
 
-                                    <td class="cell totalCol text-center">
+                                    <td class="cell totalGrade text-center">
 
                                     </td>
                                 </tr>

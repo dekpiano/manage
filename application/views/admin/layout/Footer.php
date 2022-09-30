@@ -108,7 +108,7 @@ $('#example').DataTable({
 <?php endif; ?>
 <?php if($this->uri->segment(2) ==="Evaluate"): ?>
 <script src="<?=base_url();?>assets/js/admin/AcadeSaveScore.js?v=2"></script>
-<script src="<?=base_url();?>assets/js/admin/AcadeReport.js?v=9"></script>
+<script src="<?=base_url();?>assets/js/admin/AcadeReport.js?v=10"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>
@@ -121,7 +121,7 @@ $('#example').DataTable({
 //     loader.className += " hidden"; // class "loader hidden"
 // });
 
-$("button").click(function(){
+$(".clickLoder").click(function(){
   $('.loader').show();
 });
 

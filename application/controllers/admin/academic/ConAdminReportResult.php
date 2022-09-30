@@ -60,6 +60,7 @@ var  $title = "แผงควบคุม";
             $data["Nodata"] = 1;
             $data['keyroom'] = $keyroom;
             $data['totip'] = "ระดับชั้น ".$keyroom;
+            
             $data['stu'] = $this->db->select("tb_students.StudentID,
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
@@ -68,12 +69,11 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentFirstName,
                                     tb_students.StudentLastName")
                             ->where('StudentStatus','1/ปกติ')
-                            ->where('StudentClass',$keyroom)                            
+                            ->where('StudentClass',$keyroom)   
                             ->order_by('tb_students.StudentNumber','ASC')
                             ->get('tb_students')->result();
        
         $data['subject'] = $this->db->select("
-                                        tb_students.StudentID,
                                         tb_register.SubjectCode,
                                         tb_subjects.SubjectName,
                                         tb_subjects.SubjectUnit")
@@ -94,10 +94,17 @@ var  $title = "แผงควบคุม";
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('RegisterYear','1/2565')
                                 ->where('StudentStatus','1/ปกติ')
-                                ->where('StudentClass',$keyroom)
-                                //->group_by('tb_register.SubjectCode')                                
+                                ->where('StudentClass',$keyroom)                              
+                                //->group_by('tb_register.SubjectCode')               
                                 ->get()->result();
-                               // echo '<pre>'; print_r($data['stu']); exit();
+
+                                // $result=array_diff_key($data['stu'],$data['check']);
+                                 //echo '<pre>';print_r($data['subject']);
+
+                                // $firstNames = array_column($data['check'], 'Grade','StudentID');
+                                // echo '<pre>';print_r($firstNames);
+
+                                  //exit();
 
         }
         
