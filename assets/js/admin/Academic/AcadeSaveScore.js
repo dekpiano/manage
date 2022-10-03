@@ -4,7 +4,7 @@ $(document).on("change", ".onoff_savescore", function() {
     //console.log($(this).val());
     // console.log($(this).attr('onoff-id'));
 
-    $.post("../../admin/academic/ConAdminSaveScore/CheckOnOffSaveScore", {
+    $.post("../../../admin/academic/ConAdminSaveScore/CheckOnOffSaveScore", {
             check: $(this).prop('checked'),
             key: $(this).attr('onoff-id'),
             value: $(this).val()

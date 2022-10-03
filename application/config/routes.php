@@ -58,35 +58,40 @@ $route['ClosePage'] = "welcome/ClosePage";
 // งานวิชาการ
 $route['LoginAdmin'] = "Control_login/LoginAdmin";
 $route['Admin/Home'] = "admin/academic/ConAdminHome/AdminHome";
-$route['Admin/Registration/Enroll'] = "admin/academic/ConAdminEnroll/AdminEnrollMain";
-$route['Admin/Registration/Enroll/Add'] = "admin/academic/ConAdminEnroll/AdminEnrollAdd";
-$route['Admin/Registration/Enroll/Edit/(:any)/(:any)'] = "admin/academic/ConAdminEnroll/AdminEnrollEdit/$1/$2";
-$route['Admin/Registration/Enroll/Delete/(:any)/(:any)'] = "admin/academic/ConAdminEnroll/AdminEnrollDelete/$1/$2";
-$route['Admin/Registration/ClassSchedule'] = "admin/academic/ConAdminClassSchedule/AdminClassScheduleMain";
-$route['Admin/Registration/ClassSchedule/add'] = "admin/academic/ConAdminClassSchedule/add";
-$route['Admin/Registration/ExamSchedule'] = "admin/academic/ConAdminExamSchedule/AdminExamScheduleMain";
-$route['Admin/Registration/ExamSchedule/add'] = "admin/academic/ConAdminExamSchedule/add";
-$route['Admin/Registration/ClassRoom'] = "admin/academic/ConAdminClassRoom/AdminClassMain";
-$route['Admin/Registration/Students'] = "admin/academic/ConAdminStudents/AdminStudentsMain";
-$route['Admin/Registration/StudentsUpdate'] = "admin/academic/ConAdminStudents/AdminStudentsUpdate";
-$route['Admin/Registration/RegisterSubject'] = "admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectMain";
-$route['Admin/Registration/ExtraSubject'] = "admin/academic/ConAdminExtraSubject";
-$route['Admin/Registration/SettingSystem'] = "admin/academic/ConAdminExtraSubject/SystemMainExtraSubject";
+$route['Admin/Acade/Registration/Enroll'] = "admin/academic/ConAdminEnroll/AdminEnrollMain";
+$route['Admin/Acade/Registration/Enroll/Add'] = "admin/academic/ConAdminEnroll/AdminEnrollAdd";
+$route['Admin/Acade/Registration/Enroll/Edit/(:any)/(:any)'] = "admin/academic/ConAdminEnroll/AdminEnrollEdit/$1/$2";
+$route['Admin/Acade/Registration/Enroll/Delete/(:any)/(:any)'] = "admin/academic/ConAdminEnroll/AdminEnrollDelete/$1/$2";
+$route['Admin/Acade/Registration/ClassSchedule'] = "admin/academic/ConAdminClassSchedule/AdminClassScheduleMain";
+$route['Admin/Acade/Registration/ClassSchedule/add'] = "admin/academic/ConAdminClassSchedule/add";
+$route['Admin/Acade/Registration/ExamSchedule'] = "admin/academic/ConAdminExamSchedule/AdminExamScheduleMain";
+$route['Admin/Acade/Registration/ExamSchedule/add'] = "admin/academic/ConAdminExamSchedule/add";
+$route['Admin/Acade/Registration/ClassRoom'] = "admin/academic/ConAdminClassRoom/AdminClassMain";
+$route['Admin/Acade/Registration/Students'] = "admin/academic/ConAdminStudents/AdminStudentsMain";
+$route['Admin/Acade/Registration/StudentsUpdate'] = "admin/academic/ConAdminStudents/AdminStudentsUpdate";
+$route['Admin/Acade/Registration/RegisterSubject'] = "admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectMain";
+$route['Admin/Acade/Registration/ExtraSubject'] = "admin/academic/ConAdminExtraSubject";
+$route['Admin/Acade/Registration/SettingSystem'] = "admin/academic/ConAdminExtraSubject/SystemMainExtraSubject";
 $route['Admin/Acade/Report'] = "admin/academic/ConAdminExtraSubject/ExtraReport";
-$route['Admin/Registration/RoomOnline'] = "admin/academic/ConAdminRoomOnline/RoomOnlineMain";
+$route['Admin/Acade/Registration/RoomOnline'] = "admin/academic/ConAdminRoomOnline/RoomOnlineMain";
 
-$route['Admin/Setting/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
+$route['Admin/Acade/Setting/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
 
-$route['Admin/Evaluate/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
-$route['Admin/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreMain";
-$route['Admin/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
-$route['Admin/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
+$route['Admin/Acade/Evaluate/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
+$route['Admin/Acade/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreMain";
+$route['Admin/Acade/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
+$route['Admin/Acade/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
 
 // งานกิจการนักเรียน
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
 $route['Admin/Affairs/StudentHomeRoom/SettingSystem'] = "admin/Affairs/ConAdminStudentHomeRoom/PageSettingHomeRoom";
 $route['Admin/Affairs/StudentHomeRoom/Dashboard/(:any)'] = "admin/Affairs/ConAdminStudentHomeRoom/PageHomeRoomDashboard/$1";
 $route['Admin/Affairs/StudentHomeRoom/ChartHomeRoomAll'] = "admin/Affairs/ConAdminStudentHomeRoom/ChartHomeRoomAll";
+
+
+// งานบริหารทั่วไป
+$route['Admin/General/Personnel/Main'] = "admin/General/ConAdminGeneralPersonnel/PageAdminGeneralMain";
+
 
 // Login
 $route['Logout'] = "Control_login/logout";

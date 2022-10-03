@@ -5,7 +5,7 @@ tablel_Subject = $('#tbSubject').DataTable({
     ],
     'processing': true,
     "ajax": {
-        url: "../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectSelect",
+        url: "../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectSelect",
         "type": "POST"
     },
     'columns': [
@@ -27,7 +27,7 @@ tablel_Subject = $('#tbSubject').DataTable({
 
 $(document).on('click', '.EditSubject', function() {
     $.ajax({
-        url: '../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectEdit',
+        url: '../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectEdit',
         type: 'post',
         data: { KeySubj: $(this).attr('idSbuj') },
         dataType: 'json',
@@ -57,7 +57,7 @@ $(document).on('submit', '#form-subject', function(e) {
     //console.log($(this).serialize());
 
     $.ajax({
-        url: '../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectInsert',
+        url: '../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectInsert',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
@@ -94,7 +94,7 @@ $(document).on('submit', '#form-update-subject', function(e) {
     //console.log($(this).serialize());
 
     $.ajax({
-        url: '../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectUpdate',
+        url: '../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectUpdate',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
@@ -141,7 +141,7 @@ $(document).on('click', '.delete_subject', function() {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectDelete/' + id,
+                url: '../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectDelete/' + id,
                 type: 'DELETE',
                 error: function() {
                     alert('Something is wrong');

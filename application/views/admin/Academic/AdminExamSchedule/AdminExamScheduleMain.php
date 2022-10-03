@@ -14,7 +14,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <a href="<?=base_url('Admin/Registration/ExamSchedule/add');?>"
+                                <a href="<?=base_url('Admin/Acade/Registration/ExamSchedule/add');?>"
                                     class="btn btn-primary btn-sm float-right mb-3"> <i class="far fa-plus-square"></i>
                                     เพิ่ม<?=$title;?>
                                 </a>
@@ -40,7 +40,7 @@
                                                 <?=$v_exam_schedule->exam_filename;?></a></td>
                                         <td><?=$v_exam_schedule->exam_create;?></td>
                                         <td>
-                                            <a href="<?=base_url('admin/ConAdminExamSchedule/delete_exam_schedule/').$v_exam_schedule->exam_id.'/'.$v_exam_schedule->exam_filename;?>"
+                                            <a href="<?=base_url('Admin/Acade/ConAdminExamSchedule/delete_exam_schedule/').$v_exam_schedule->exam_id.'/'.$v_exam_schedule->exam_filename;?>"
                                                 class="btn btn-danger btn-sm"
                                                 onClick="return confirm('ต้องการลบข้อมูลหรือไม่?')"><i
                                                     class="fas fa-trash-alt"></i> ลบ</a>

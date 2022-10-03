@@ -20,7 +20,7 @@
                     <div class="page-utilities">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?=base_url('Admin/Registration/Enroll')?>">หน้าหลัก</a>
+                                <li class="breadcrumb-item"><a href="<?=base_url('Admin/Acade/Registration/Enroll')?>">หน้าหลัก</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page"><?=$title;?></li>
                             </ol>

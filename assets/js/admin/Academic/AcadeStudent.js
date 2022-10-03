@@ -21,7 +21,7 @@ $(document).on('click', '.delete_student', function() {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '../../admin/academic/ConAdminStudents/AdminStudentsDelete/' + id,
+                url: '../../../admin/academic/ConAdminStudents/AdminStudentsDelete/' + id,
                 type: 'DELETE',
                 error: function() {
                     alert('Something is wrong');

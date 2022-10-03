@@ -8,7 +8,7 @@ tbErollSubject = $('#tbErollSubject').DataTable({
     ],
     'processing': true,
     "ajax": {
-        url: "../../admin/academic/ConAdminEnroll/AdminEnrollSubject",
+        url: "../../../admin/academic/ConAdminEnroll/AdminEnrollSubject",
         "type": "POST"
     },
     'columns': [
@@ -32,8 +32,8 @@ tbErollSubject = $('#tbErollSubject').DataTable({
         {
             data: 'SubjectID',
             render: function(data, type, row) {
-                return '<a href="../../Admin/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
-                    ' <a href="../../Admin/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
+                return '<a href="../../../Admin/Acade/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
+                    ' <a href="../../../Admin/Acade/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
                     ' <a href="#" class="btn btn-danger btn-sm text-white CancelEnroll" key-subject="' + row.SubjectCode + '" key-teacher="' + row.TeacherID + '">ลบลงทะเบียน</a>';
             }
         }
@@ -59,7 +59,7 @@ $(document).on("change", "#Room", function() {
 
     $('#multiselect option').remove();
 
-    $.post("../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
+    $.post("../../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
 
         $.each(data, function(index, value) {
             //console.log(value);
@@ -75,7 +75,7 @@ $(document).on("change", "#RoomEdit", function() {
 
     $('#multiselect option').remove();
 
-    $.post("../../../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
+    $.post("../../../../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
 
         $.each(data, function(index, value) {
             //console.log(value);
@@ -93,7 +93,7 @@ $(document).on("change", "#RoomEdit", function() {
 $(document).on("submit", "#FormEnroll", function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../../admin/academic/ConAdminEnroll/AdminEnrollInsert',
+        url: '../../../../admin/academic/ConAdminEnroll/AdminEnrollInsert',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
@@ -120,7 +120,7 @@ $(document).on("submit", "#FormEnroll", function(e) {
 $(document).on("submit", "#FormEnrollUpdate", function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../../../../admin/academic/ConAdminEnroll/AdminEnrollUpdate',
+        url: '../../../../../../admin/academic/ConAdminEnroll/AdminEnrollUpdate',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
@@ -148,7 +148,7 @@ $(document).on("submit", "#FormEnrollUpdate", function(e) {
 $(document).on("submit", "#FormEnrollDelete", function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../../../../admin/academic/ConAdminEnroll/AdminEnrollDel',
+        url: '../../../../../../admin/academic/ConAdminEnroll/AdminEnrollDel',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
@@ -178,7 +178,7 @@ $(document).on("click", ".ShowEnroll", function() {
 
     $('#tb_ShowEnroll tbody tr').remove();
 
-    $.post("../../admin/academic/ConAdminEnroll/AdminEnrollShow", {
+    $.post("../../../admin/academic/ConAdminEnroll/AdminEnrollShow", {
         subid: $(this).attr('sub-id'),
         teachid: $(this).attr('teach-id')
     }, function(data, status) {
@@ -205,7 +205,7 @@ $(document).on("click", ".CancelEnroll", function() {
         if (result.isConfirmed) {
             $(this).parents('tr').remove();
 
-            $.post("../../admin/academic/ConAdminEnroll/AdminEnrollCancel", {
+            $.post("../../../admin/academic/ConAdminEnroll/AdminEnrollCancel", {
                 KeyTeacher: $(this).attr('key-teacher'),
                 KeySubject: $(this).attr('key-subject')
             }, function(data, status) {

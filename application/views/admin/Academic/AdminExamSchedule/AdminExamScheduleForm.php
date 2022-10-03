@@ -18,7 +18,7 @@
                         <div class="card shadow mb-4 ">
 
                             <div class="card-body">
-                                <form action="<?=base_url('admin/ConAdminExamSchedule/').$action;?>" method="post"
+                                <form action="<?=base_url('Admin/Acade/ConAdminExamSchedule/').$action;?>" method="post"
                                     enctype="multipart/form-data" class="needs-validation" novalidate>
                                     <div class="form-group row">
                                         <label for="exam_id" class="col-sm-2 col-form-label">รหัส<?=$title;?></label>

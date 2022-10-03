@@ -1,7 +1,7 @@
 //  ผลการเรียน
 
 $(document).on("change", "#checkOnOffRegister", function() {
-    $.post("../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
+    $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
             check: $(this).prop('checked')
         },
         function(data, status) {
@@ -15,7 +15,7 @@ $(document).on('submit', '#AddClassRoom', function(e) {
     var formadd = $('#AddClassRoom').serialize();
     $.ajax({
         type: 'post',
-        url: "../../admin/academic/ConAdminClassRoom/AddClassRoom",
+        url: "../../../admin/academic/ConAdminClassRoom/AddClassRoom",
         data: formadd,
         beforeSend: function() {
             console.log("กำลังโหลด");
@@ -68,7 +68,7 @@ $(document).ready(function() {
     // บทบาทในวิชาการ
     $(document).on("change", "#set_executive", function() {
 
-        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
+        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
             if (data == 1) {
                 alertify.success('เลือก ผอ.โรงเรียน สำเร็จ');
             } else {
@@ -82,7 +82,7 @@ $(document).ready(function() {
     })
 
     $(document).on("change", "#set_deputy", function() {
-        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
+        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
             if (data == 1) {
                 alertify.success('เลือก รองฯ วิชการ สำเร็จ');
             } else {
@@ -96,7 +96,7 @@ $(document).ready(function() {
     })
 
     $(document).on("change", "#set_leader", function() {
-        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
+        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
             if (data == 1) {
                 alertify.success('เลือกหัวหน้างานสำเร็จ');
             } else {
@@ -111,7 +111,7 @@ $(document).ready(function() {
 
     $(document).on("change", ".set_admin", function() {
         //alert($(this).attr('admin-id'));
-        $.post("../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", {
+        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", {
             TeachID: $(this).val(),
             AdminID: $(this).attr('admin-id')
         }, function(data, status) {
@@ -141,88 +141,6 @@ $(document).ready(function() {
     new SlimSelect({
         select: '#set_adminsix'
     })
-
-
-
-    // update plan
-    $(document).on('submit', '#form_update_plan', function(e) {
-        var $this = $('button[type="submit"]');
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '../../../teacher/ConTeacherCourse/update_plan',
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            cache: false,
-            async: false,
-            beforeSend: function() {
-
-                var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> กำลังส่ง...';
-                $this.html(loadingText);
-
-            },
-            success: function(response) { //console.log(response);
-                if (response == 1) {
-                    //$('#form_insert_plan')[0].reset();
-                    Swal.fire({
-                        title: 'แจ้งเตือน',
-                        text: "คุณส่งงานเรียบร้อยแล้ว",
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "../../../Teacher/Course";
-                        }
-                    })
-
-                } else {
-                    console.log(response);
-                    var loadingText = 'ส่งงาน';
-                    $this.html(loadingText);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
-                var loadingText = 'ส่งงาน';
-                $this.html(loadingText);
-            }
-        });
-    });
-
-
-    $(document).on('click', '.delete_plan', function() {
-        var id = $(this).parents("tr").attr("id");
-        //alert(id);
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "คุณต้องการลลข้อมูลหรือไม่!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'ใช่'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '../Teacher/Course/Delete/' + id,
-                    type: 'DELETE',
-                    error: function() {
-                        alert('Something is wrong');
-                    },
-                    success: function(data) {
-                        $("#" + id).remove();
-                        Swal.fire(
-                            'Deleted!',
-                            'คุณลบไฟล์สำเร็จ',
-                            'success'
-                        )
-                    }
-                });
-            }
-        })
-    });
-
 
 
 
