@@ -30,7 +30,7 @@
                                         <?php endforeach; ?>
 
                                     </div>
-                                    <div class="col-auto">
+                                    <!-- <div class="col-auto">
                                         <a class="btn app-btn-secondary" href="#">
                                             <svg width="1em" height="1em" viewBox="0 0 16 16"
                                                 class="bi bi-download mr-1" fill="currentColor"
@@ -44,7 +44,7 @@
                                             </svg>
                                             Download CSV
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!--//row-->
                             </div>
@@ -89,7 +89,8 @@
                                         <div class="mb-3 col-6 col-lg-6">
                                             <label for="setting-input-1" class="form-label">ระดับชั้นที่เปิดสอน
                                             </label>
-                                            <select class="form-select" required="" name="SubjectClass" id="SubjectClass">
+                                            <select class="form-select" required="" name="SubjectClass"
+                                                id="SubjectClass">
                                                 <option value="">เลือกระดับชั้น</option>
                                                 <?php $sara = $this->classroom->LevelClass();
                                                 foreach ($sara as $key => $v_sara):?>
@@ -107,7 +108,7 @@
                                             <label for="setting-input-1" class="form-label">ชื่อวิชา
                                             </label>
                                             <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required=""  name="SubjectName" id="SubjectName">
+                                                required="" name="SubjectName" id="SubjectName">
                                         </div>
                                         <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">หน่วยกิต
@@ -123,7 +124,8 @@
                                         </div>
                                         <div class="mb-3 col-6 col-lg-4">
                                             <label for="setting-input-1" class="form-label">ประเภทวิชา</label>
-                                            <select class="form-select " required="" name="SubjectType" id="SubjectType">
+                                            <select class="form-select " required="" name="SubjectType"
+                                                id="SubjectType">
                                                 <option value="">เลือกประเภทวิชา</option>
                                                 <option value="1/พื้นฐาน">1/พื้นฐาน</option>
                                                 <option value="2/เพิ่มเติม">2/เพิ่มเติม</option>
@@ -174,9 +176,9 @@
                                                     <th class="cell">คำสั่ง</th>
                                                 </tr>
                                             </thead>
-                                            
+
                                         </table>
-                                    </div>                                
+                                    </div>
 
                                 </div>
                                 <!--//app-card-body-->
@@ -195,3 +197,104 @@
 
     </div>
     <!--//main-wrapper-->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">แก้ไขวิชาเรียน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="settings-form row" id="form-update-subject">
+                    <input type="text" class="form-control"  value="" required=""
+                                name="Up_SubjectID" id="Up_SubjectID" style="display:none;">
+
+                        <div class="mb-3 col-6 col-lg-6">
+                            <label for="setting-input-1" class="form-label">ปีการศึกษา</label>
+                            <select class="form-select" required="" name="Up_SubjectYear" id="Up_SubjectYear">
+                                <option value="">เลือกปีการศึกษา</option>
+                                <?php $d = date('Y')+543; for ($i=$d; $i <= $d+1 ; $i++) :?>
+                                <option value="1/<?=$i;?>">1/<?=$i;?></option>
+                                <option value="2/<?=$i;?>">2/<?=$i;?></option>
+                                <option value="3/<?=$i;?>">3/<?=$i;?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-6 col-lg-6">
+                            <label for="setting-input-1" class="form-label">ระดับชั้นที่เปิดสอน
+                            </label>
+                            <select class="form-select" required="" name="Up_SubjectClass" id="Up_SubjectClass">
+                                <option value="">เลือกระดับชั้น</option>
+                                <?php $sara = $this->classroom->LevelClass();
+                                                foreach ($sara as $key => $v_sara):?>
+                                <option value="<?=$v_sara?>"><?=$v_sara?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-6 col-lg-3">
+                            <label for="setting-input-1" class="form-label">รหัสวิชา
+                            </label>
+
+                            <input type="text" class="form-control"  value="" required=""
+                                name="Up_SubjectCode" id="Up_SubjectCode">
+                        </div>
+                        <div class="mb-3 col-6 col-lg-5">
+                            <label for="setting-input-1" class="form-label">ชื่อวิชา
+                            </label>
+                            <input type="text" class="form-control"  value="" required=""
+                                name="Up_SubjectName" id="Up_SubjectName">
+                        </div>
+                        <div class="mb-3 col-6 col-lg-2">
+                            <label for="setting-input-1" class="form-label">หน่วยกิต
+                            </label>
+                            <input type="text" class="form-control"  value="" required=""
+                                name="Up_SubjectUnit" id="Up_SubjectUnit">
+                        </div>
+                        <div class="mb-3 col-6 col-lg-2">
+                            <label for="setting-input-1" class="form-label">จำนวนชั่วโมง
+                            </label>
+                            <input type="text" class="form-control" value="" required=""
+                                name="Up_SubjectHour" id="Up_SubjectHour">
+                        </div>
+                        <div class="mb-3 col-6 col-lg-4">
+                            <label for="setting-input-1" class="form-label">ประเภทวิชา</label>
+                            <select class="form-select " required="" name="Up_SubjectType" id="Up_SubjectType">
+                                <option value="">เลือกประเภทวิชา</option>
+                                <option value="1/พื้นฐาน">1/พื้นฐาน</option>
+                                <option value="2/เพิ่มเติม">2/เพิ่มเติม</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-6 col-lg-4">
+                            <label for="setting-input-1" class="form-label">สาระหลัก</label>
+                            <select class="form-select " required="" name="Up_FirstGroup" id="Up_FirstGroup">
+                                <option value="">เลือกสาระหลัก</option>
+                                <?php $sara = $this->classroom->GroupSaraMain();
+                                                foreach ($sara as $key => $v_sara):?>
+                                <option value="<?=$v_sara?>"><?=$v_sara?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-6 col-lg-4">
+                            <label for="setting-input-1" class="form-label">สาระย่อย</label>
+                            <select class="form-select" required="" name="Up_SecondGroup" id="Up_SecondGroup">
+                                <option value="">เลือกสาระย่อย</option>
+                                <?php $sara = $this->classroom->GroupSaraSecond();
+                                                foreach ($sara as $key => $v_sara):?>
+                                <option value="<?=$v_sara?>"><?=$v_sara?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary">แก้ไข</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>

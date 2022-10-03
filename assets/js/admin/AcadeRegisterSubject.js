@@ -18,12 +18,39 @@ tablel_Subject = $('#tbSubject').DataTable({
         {
             data: 'SubjectID',
             render: function(data, type, row) {
-                return '<a href="#" idSbuj="' + data + '" class="btn btn-danger btn-sm delete_subject">ลบ</a> ';
+                return '<a href="#" idSbuj="' + data + '" class="btn btn-warning btn-sm EditSubject"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">แก้ไข</a> | <a href="#" idSbuj="' + data + '" class="btn btn-danger btn-sm delete_subject text-white">ลบ</a>';
+
             }
         }
     ]
 });
-// จัดการนักเรียน  
+
+$(document).on('click', '.EditSubject', function() {
+    $.ajax({
+        url: '../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectEdit',
+        type: 'post',
+        data: { KeySubj: $(this).attr('idSbuj') },
+        dataType: 'json',
+        error: function() {
+            alert('Something is wrong');
+        },
+        success: function(data) {
+            console.log(data[0]);
+            $('#Up_SubjectYear').val(data[0].SubjectYear);
+            $('#Up_SubjectClass').val(data[0].SubjectClass);
+            $('#Up_SubjectCode').val(data[0].SubjectCode);
+            $('#Up_SubjectName').val(data[0].SubjectName);
+            $('#Up_SubjectUnit').val(data[0].SubjectUnit);
+            $('#Up_SubjectHour').val(data[0].SubjectHour);
+            $('#Up_SubjectType').val(data[0].SubjectType);
+            $('#Up_FirstGroup').val(data[0].FirstGroup);
+            $('#Up_SecondGroup').val(data[0].SecondGroup);
+            $('#Up_SubjectID').val(data[0].SubjectID);
+
+        }
+    });
+});
+
 
 $(document).on('submit', '#form-subject', function(e) {
     e.preventDefault();
@@ -44,6 +71,43 @@ $(document).on('submit', '#form-subject', function(e) {
                     position: 'top-end',
                     icon: 'success',
                     title: 'บันทึกข้อมูลสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                tablel_Subject.ajax.reload();
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'ข้อมูลรายวิชานี้ ได้ลงทะเบียนในภาคเรียนนี้แล้ว',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            }
+
+        }
+    });
+});
+
+$(document).on('submit', '#form-update-subject', function(e) {
+    e.preventDefault();
+    //console.log($(this).serialize());
+
+    $.ajax({
+        url: '../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectUpdate',
+        type: 'post',
+        data: $(this).serialize(),
+        error: function() {
+            alert('Something is wrong');
+        },
+        success: function(data) {
+            $('#staticBackdrop').hide();
+            if (data > 0) {
+                $('#form-update-subject')[0].reset();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'แก้ไขข้อมูลสำเร็จ',
                     showConfirmButton: false,
                     timer: 3000
                 })

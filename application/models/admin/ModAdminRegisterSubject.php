@@ -18,6 +18,18 @@ class ModAdminRegisterSubject extends CI_Model
 		return  $this->db->insert('tb_subjects',$data);
 	}
 
+	public function ModSubjectUpdate($data,$Key)
+	{
+		$this->db->where('SubjectID',$Key);
+		return $this->db->update('tb_subjects',$data);
+	}
+
+	public function ModSubjectEdit($data)
+	{				
+				$this->db->where('SubjectID', $data);
+		return  $this->db->get('tb_subjects')->result();
+	}
+
 	public function ModSubjectDelete($id)
 	{	
 		$this->db->where('SubjectID', $id);

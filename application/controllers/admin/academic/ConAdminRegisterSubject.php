@@ -68,7 +68,8 @@ var  $title = "แผงควบคุม";
                 ->get('tb_subjects')->num_rows();
 
         if($check_subject > 0){
-            echo 0;
+            echo 0 ;
+
         }else{
             $data = array('SubjectCode' => $this->input->post('SubjectCode'),
             'SubjectName' => $this->input->post('SubjectName'),
@@ -84,6 +85,23 @@ var  $title = "แผงควบคุม";
         }
         
        
+    }
+
+    public function AdminRegisterSubjectUpdate(){      
+        $data = array('SubjectCode' => $this->input->post('Up_SubjectCode'),
+        'SubjectName' => $this->input->post('Up_SubjectName'),
+        'SubjectUnit' => $this->input->post('Up_SubjectUnit'),
+        'SubjectHour' => $this->input->post('Up_SubjectHour'),
+        'SubjectType' => $this->input->post('Up_SubjectType'),
+        'FirstGroup' => $this->input->post('Up_FirstGroup'),
+        'SecondGroup' => $this->input->post('Up_SecondGroup'), 
+        'SubjectClass' => $this->input->post('Up_SubjectClass'),
+        'SubjectYear' => $this->input->post('Up_SubjectYear'));  
+        $key = $this->input->post('Up_SubjectID');
+        echo $this->ModAdminRegisterSubject->ModSubjectUpdate($data,$key);
+    }
+    public function AdminRegisterSubjectEdit(){ 
+       echo json_encode($this->ModAdminRegisterSubject->ModSubjectEdit($this->input->post('KeySubj'))); 
     }
 
     public function AdminRegisterSubjectDelete($id){ 
