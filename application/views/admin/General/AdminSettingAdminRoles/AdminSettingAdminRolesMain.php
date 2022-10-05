@@ -91,7 +91,7 @@
             <section class="cta-section theme-bg-light py-5">
                 <div class="container text-center">
 
-                    <h2 class="heading">จัดการข้อมูล<?=$title;?></h2>
+                    <h2 class="heading">จัดการข้อมูลบทบาทใน<?=$title;?></h2>
                 </div>
                 <!--//container-->
             </section>
@@ -118,7 +118,7 @@
 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">รองฯ วิชาการ</h3>                      
+                        <h3 class="section-title">รองผู้อำนวยการ<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3" aria-label=".form-select-lg example"
@@ -139,7 +139,7 @@
                 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">หัวหน้างานวิชาการ</h3>                      
+                        <h3 class="section-title">หัวหน้างาน<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3" aria-label=".form-select-lg example"
@@ -159,7 +159,7 @@
 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                        <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3 set_admin" aria-label=".form-select-lg example"
@@ -178,7 +178,7 @@
 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                        <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3 set_admin" aria-label=".form-select-lg example"
@@ -197,7 +197,7 @@
 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                        <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3 set_admin" aria-label=".form-select-lg example"
@@ -216,7 +216,7 @@
 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                        <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3 set_admin" aria-label=".form-select-lg example"
@@ -234,7 +234,7 @@
                 </div>
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                        <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3 set_admin" aria-label=".form-select-lg example"
@@ -252,7 +252,7 @@
                 </div>
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                        <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3 set_admin" aria-label=".form-select-lg example"

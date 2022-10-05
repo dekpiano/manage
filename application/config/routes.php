@@ -91,7 +91,7 @@ $route['Admin/Affairs/StudentHomeRoom/ChartHomeRoomAll'] = "admin/Affairs/ConAdm
 
 // งานบริหารทั่วไป
 $route['Admin/General/Personnel/Main'] = "admin/General/ConAdminGeneralPersonnel/PageAdminGeneralMain";
-$route['Admin/General/Setting/AdminRoles'] = "admin/General/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
+$route['Admin/General/Setting/AdminRoles'] = "admin/General/ConAdminSettingAdminRoles/GeneralSettingAdminRoles";
 
 // Login
 $route['Logout'] = "Control_login/logout";

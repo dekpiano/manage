@@ -32,11 +32,41 @@ class Model_login extends CI_Model
 
 	public function fetch_teacher_login1($username,$password)
 	{
+		$DBacademic = $this->load->database('default', TRUE); 
 		$DBpersonnel = $this->load->database('personnel', TRUE); 
-		$DBpersonnel->where('pers_username',$username);
-		$DBpersonnel->where('pers_password',$password);
-		$query = $DBpersonnel->get('tb_personnel');
-		return $query->row();
+		$DBgeneral = $this->load->database('general', TRUE);
+
+		$query = $DBpersonnel->select('
+			skjacth_personnel.tb_personnel.pers_id,
+			skjacth_personnel.tb_personnel.pers_prefix,
+			skjacth_personnel.tb_personnel.pers_firstname,
+			skjacth_personnel.tb_personnel.pers_lastname,
+			skjacth_personnel.tb_personnel.pers_img,
+			skjacth_personnel.tb_personnel.pers_groupleade,
+			skjacth_personnel.tb_personnel.pers_learning,
+			skjacth_general.tb_admin_rloes.admin_rloes_id AS general_rloes_id,
+			skjacth_academic.tb_admin_rloes.admin_rloes_id AS academic_rloes_id,
+			skjacth_general.tb_admin_rloes.admin_rloes_nanetype AS general_nanetype,
+			skjacth_academic.tb_admin_rloes.admin_rloes_nanetype AS academic_nanetype,
+			skjacth_academic.tb_admin_rloes.admin_rloes_status AS academic_status,
+			skjacth_general.tb_admin_rloes.admin_rloes_status AS general_status
+		')
+		->from('skjacth_personnel.tb_personnel')
+		->join('skjacth_general.tb_admin_rloes','skjacth_general.tb_admin_rloes.admin_rloes_userid = skjacth_personnel.tb_personnel.pers_id','left')
+		->join('skjacth_academic.tb_admin_rloes','skjacth_academic.tb_admin_rloes.admin_rloes_userid = skjacth_personnel.tb_personnel.pers_id','left')
+		->where('pers_username',$username)
+		->where('pers_password',$password)
+		->get();
+
+		if($query->num_rows() > 0)
+		{
+			return $query->row();
+		}
+		else
+		{
+			return false;
+		}
+
 	}
 
 	public function record_count_admin($username,$password)
@@ -66,9 +96,31 @@ class Model_login extends CI_Model
 
 	function fetch_teacher_login($id)
 	{
+		$DBacademic = $this->load->database('default', TRUE); 
 		$DBpersonnel = $this->load->database('personnel', TRUE); 
-		$DBpersonnel->where('pers_username', $id);
-		$query = $DBpersonnel->get('tb_personnel');
+		$DBgeneral = $this->load->database('general', TRUE);
+
+		$query = $DBpersonnel->select('
+			skjacth_personnel.tb_personnel.pers_id,
+			skjacth_personnel.tb_personnel.pers_prefix,
+			skjacth_personnel.tb_personnel.pers_firstname,
+			skjacth_personnel.tb_personnel.pers_lastname,
+			skjacth_personnel.tb_personnel.pers_img,
+			skjacth_personnel.tb_personnel.pers_groupleade,
+			skjacth_personnel.tb_personnel.pers_learning,
+			skjacth_general.tb_admin_rloes.admin_rloes_id AS general_rloes_id,
+			skjacth_academic.tb_admin_rloes.admin_rloes_id AS academic_rloes_id,
+			skjacth_general.tb_admin_rloes.admin_rloes_nanetype AS general_nanetype,
+			skjacth_academic.tb_admin_rloes.admin_rloes_nanetype AS academic_nanetype,
+			skjacth_academic.tb_admin_rloes.admin_rloes_status AS academic_status,
+			skjacth_general.tb_admin_rloes.admin_rloes_status AS general_status
+		')
+		->from('skjacth_personnel.tb_personnel')
+		->join('skjacth_general.tb_admin_rloes','skjacth_general.tb_admin_rloes.admin_rloes_userid = skjacth_personnel.tb_personnel.pers_id','left')
+		->join('skjacth_academic.tb_admin_rloes','skjacth_academic.tb_admin_rloes.admin_rloes_userid = skjacth_personnel.tb_personnel.pers_id','left')
+		->where('pers_username', $id)
+		->get();
+
 		if($query->num_rows() > 0)
 		{
 			return $query->row();

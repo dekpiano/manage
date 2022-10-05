@@ -1,5 +1,5 @@
 
-
+<div class="mx-3">บริหารงานวิชาการ</div> 
                         <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle <?=$this->uri->segment('3')=="Registration" ? "active" :""?>"

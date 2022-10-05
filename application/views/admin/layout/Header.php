@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
-    <link  rel="stylesheet" href="<?=base_url();?>assets/css/datepicker.css?v=1">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/datepicker.css?v=1">
 
     <style>
     .btn-group-xs>.btn,
@@ -84,10 +84,10 @@
     </style>
 </head>
 
-  <div class="loader" style="display:none;">
-      <img src="https://boychawin.com/irms/images/VAyR.gif" alt="Loading..." />
-      อาจใช้เวลาในการโหลดข้อมูล 1 - 2 นาที กรุณรอ...
-  </div>
+<div class="loader" style="display:none;">
+    <img src="https://boychawin.com/irms/images/VAyR.gif" alt="Loading..." />
+    อาจใช้เวลาในการโหลดข้อมูล 1 - 2 นาที กรุณรอ...
+</div>
 
 <body class="app" style="font-family: 'Sarabun', sans-serif;">
     <header class="app-header fixed-top">
@@ -161,10 +161,14 @@
                             </a>
                             <!--//nav-link-->
                         </li>
-
+                        <hr>
+                        <?php if($this->session->userdata('CheckrloesAcademic') === 'เจ้าหน้าที่วิชาการ'): ?>
                         <?php $this->load->view('admin/layout/Header_Academic.php'); ?>
-<hr>
+                        <?php endif; ?>
+                        <hr>
+                        <?php if($this->session->userdata('CheckrloesGeneral') === 'เจ้าหน้าที่ทั่วไป'): ?>
                         <?php $this->load->view('admin/layout/Header_General.php'); ?>
+                        <?php endif; ?>
 
                     </ul>
                     <!--//app-menu-->

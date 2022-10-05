@@ -1,5 +1,6 @@
 
 
+                       <div class="mx-3">บริหารงานทั่วไป</div> 
                         <li class="nav-item has-submenu">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle <?=$this->uri->segment('2')=="General" ? "active" :""?>"

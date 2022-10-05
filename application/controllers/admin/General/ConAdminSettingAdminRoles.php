@@ -21,11 +21,11 @@ var  $title = "แผงควบคุม";
 
     }
 
-    public function AcademicSettingAdminRoles(){      
-        $data['title'] = "บทบาทในงานทั่วไป";	
+    public function GeneralSettingAdminRoles(){      
+        $data['title'] = "บริหารทั่วไป";	
         $DBpersonnel = $this->load->database('personnel', TRUE); //ฐานข้อมูลบุคลากร
-        $DBaffairs = $this->load->database('affairs', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
-        $data['Manager'] = $this->db->select('admin_rloes_userid,admin_rloes_id,admin_rloes_nanetype')->get('tb_admin_rloes')->result();
+        $DBgeneral = $this->load->database('general', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
+        $data['Manager'] = $DBgeneral->select('admin_rloes_userid,admin_rloes_id,admin_rloes_nanetype')->get('tb_admin_rloes')->result();
         //echo '<pre>'; print_r($data['Manager']); exit();
         $data['NameTeacher'] = $DBpersonnel->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_position,pers_learning')
          ->from('tb_personnel')
@@ -39,28 +39,28 @@ var  $title = "แผงควบคุม";
     }
 
   
-    public function AcademicSettingManager() {      
+    public function GeneralSettingManager() {      
  
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
         $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id=1');
         echo $result;
     }
 
-    public function AcademicSettingDeputy() {      
+    public function GeneralSettingDeputy() {      
  
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
         $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id=2');
         echo $result;
     }
 
-    public function AcademicSettingLeader() {      
+    public function GeneralSettingLeader() {      
  
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
         $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id=3');
         echo $result;
     }
 
-    public function AcademicSettingAdmin() {      
+    public function GeneralSettingAdmin() {      
  
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
         $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id="'.$this->input->post('AdminID').'"');

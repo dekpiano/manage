@@ -205,7 +205,7 @@ class Control_login extends CI_Controller {
 				{
 
 					$result = $this->Model_login->fetch_teacher_login1($username, $password);
-					$this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','class' => $result->StudentClass,'img' => $result->pers_img,'groupleade'=>$result->pers_groupleade,'CheckStatusPassword'=>$result->pers_changepassword));
+					$this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','class' => $result->StudentClass,'img' => $result->pers_img,'groupleade'=>$result->pers_groupleade,'CheckStatusPassword'=>$result->pers_changepassword,'CheckrloesAcademic' => $result->academic_nanetype,'CheckrloesGeneral' => $result->general_nanetype));
 
 					set_cookie('username_cookie',$username,'3600'); 
 					set_cookie('password_cookie',$password,'3600');
@@ -285,7 +285,7 @@ class Control_login extends CI_Controller {
 				   $this->Model_login->Update_user_data($user_data, $data['email']);
 
 				   $result = $this->Model_login->fetch_teacher_login($data['email']);
-				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade));
+				   $this->session->set_userdata(array('login_id' => $result->pers_id,'pers_learning' => $result->pers_learning,'fullname'=> $result->pers_prefix.$result->pers_firstname.' '.$result->pers_lastname,'status'=> 'admin','img' => $result->pers_img,'groupleade'=>$result->pers_groupleade,'CheckrloesAcademic' => $result->academic_nanetype,'CheckrloesGeneral' => $result->general_nanetype));
 				  
 				}else{
 					$this->session->unset_userdata('access_token');
