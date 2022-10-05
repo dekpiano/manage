@@ -34,6 +34,9 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+    <link  rel="stylesheet" href="<?=base_url();?>assets/css/datepicker.css?v=1">
+
     <style>
     .btn-group-xs>.btn,
     .btn-xs {
@@ -83,6 +86,7 @@
 
   <div class="loader" style="display:none;">
       <img src="https://boychawin.com/irms/images/VAyR.gif" alt="Loading..." />
+      อาจใช้เวลาในการโหลดข้อมูล 1 - 2 นาที กรุณรอ...
   </div>
 
 <body class="app" style="font-family: 'Sarabun', sans-serif;">

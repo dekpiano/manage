@@ -71,52 +71,62 @@ th.rotated-text>div>span {
                 <?php else: ?>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered" id="tblGrade">
-                            <thead>
-                                <tr class="text-center">
-                                    <th class="cell align-middle" style="width:20px">ลำดับที่</th>
-                                    <th class="cell align-middle" style="width:500px">ชื่อ - นามสกุล</th>
-                                    <?php foreach ($subject as $key => $v_subject):?>
-                                    <th class="rotated-text">
-                                        <div>
-                                            <span>
-                                                <?=$v_subject->SubjectUnit.' '.$v_subject->SubjectCode.' '.$v_subject->SubjectName ?>
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <?php endforeach; ?>
-                                    <th class="cell align-middle">GPA เกรดเฉลี่ย</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="tblGrade">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="cell align-middle" style="width:20px">ลำดับที่</th>
+                                        <th class="cell align-middle" style="width:500px">ชื่อ - นามสกุล</th>
+                                        <?php foreach ($subject as $key => $v_subject):?>
+                                        <th class="rotated-text">
+                                            <div>
+                                                <span>
+                                                    <?=$v_subject->SubjectUnit.' '.$v_subject->SubjectCode.' '.$v_subject->SubjectName ?>
+                                                </span>
+                                            </div>
+                                        </th>
+                                        <?php endforeach; ?>
+                                        <th class="cell align-middle">GPA เกรดเฉลี่ย</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <?php 
+                                    <?php 
                                 
                                 foreach ($stu as $key => $v_stu) : 
                                 ?>
-                                <tr>
-                                    <td class="cell align-middle text-center"><?=$v_stu->StudentNumber?></td>
-                                    <td class="cell">
-                                        <?=$v_stu->StudentPrefix.$v_stu->StudentFirstName?> <?=$v_stu->StudentLastName?>
-                                    </td>
-                                    <?php   
+                                    <tr>
+                                        <td class="cell align-middle text-center"><?=$v_stu->StudentNumber?></td>
+                                        <td class="cell">
+                                            <?=$v_stu->StudentPrefix.$v_stu->StudentFirstName?>
+                                            <?=$v_stu->StudentLastName?>
+                                        </td>
+                                        <?php   
                                          $SumAll=0;  $SumUnit=0;     
                                     foreach ($subject as $key => $v_subject): 
                                      
                                     ?>
-                                    <td class="text-center check_score" width="45">
-                                
-                                     
-                                    </td>
+                                        <td class="text-center check_score" width="45">
+                                            <?php foreach ($check as $key => $v_check):?>
+                                            <?php if($v_subject->SubjectCode == $v_check->SubjectCode && $v_stu->StudentID == $v_check->StudentID): ?>
+                                            <div class="showGrade" data_unit="<?=$v_subject->SubjectUnit?>">
+                                                <?php echo $v_check->Grade; ?>
+                                            </div>
+
+                                            <?php endif; ?>
+                                            <?php endforeach; ?>
+
+                                        </td>
+                                        <?php endforeach; ?>
+
+                                        <td class="cell totalGrade text-center">
+
+                                        </td>
+                                    </tr>
                                     <?php endforeach; ?>
-
-                                    <td class="cell totalGrade text-center">
-
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <?php endif; ?>

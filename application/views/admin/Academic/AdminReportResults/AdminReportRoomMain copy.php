@@ -192,3 +192,22 @@ th.rotated-text>div>span {
                                             
                                         <?php endif; ?>
                                         <?php endforeach; ?>
+
+
+                                        <?php   
+                                         $SumAll=0;  $SumUnit=0;     
+                                    foreach ($subject as $key => $v_subject): 
+                                     
+                                    ?>
+                                    <td class="text-center check_score" width="45">
+                                    <?php foreach ($check as $key => $v_check):?>
+                                        <?php if($v_subject->SubjectCode == $v_check->SubjectCode && $v_stu->StudentID == $v_check->StudentID): ?>
+                                           <div class="showGrade" data_unit="<?=$v_subject->SubjectUnit?>">
+                                           <?php echo $v_check->Grade; ?>
+                                           </div>
+                                            
+                                        <?php endif; ?>
+                                        <?php endforeach; ?>
+                                     
+                                    </td>
+                                    <?php endforeach; ?>

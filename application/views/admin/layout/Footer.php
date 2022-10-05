@@ -35,7 +35,6 @@
 <script src="<?=base_url();?>assets/plugins/popper.min.js"></script>
 <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
@@ -62,16 +61,51 @@
 <!-- Page Specific JS -->
 <script src="<?=base_url();?>assets/js/app.js?v=1"></script>
 
+<script src="<?=base_url();?>assets/plugins/bootstrap-datepicker.js?v=2"></script>
+
 <?php if($this->session->flashdata('msg') == 'YES'):?>
 <script>
 Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge');?>", "<?=$this->session->flashdata('status');?>");
 </script>
 <?php endif; $this->session->mark_as_temp('msg',20); ?>
 
-<script>
+<script> 
+ $.datetimepicker.setLocale('th');
+    $("#pers_britday").datetimepicker({
+        timepicker:false,
+        format:'d-m-Y',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000            
+        lang:'th',  // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+        onSelectDate:function(dp,$input){
+            var yearT=new Date(dp).getFullYear()-0;  
+            var yearTH=yearT+543;
+            var fulldate=$input.val();
+            var fulldateTH=fulldate.replace(yearT,yearTH);
+            $input.val(fulldateTH);
+        },
+    });
+     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+     $("#pers_britday").on("mouseenter mouseleave",function(e){
+        var dateValue=$(this).val();
+        if(dateValue!=""){
+                var arr_date=dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+                // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+                //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0 
+                if(e.type=="mouseenter"){
+                    var yearT=arr_date[2]-543;
+                }       
+                if(e.type=="mouseleave"){
+                    var yearT=parseInt(arr_date[2])+543;
+                }   
+                dateValue=dateValue.replace(arr_date[2],yearT);
+                $(this).val(dateValue);                                                 
+        }       
+    });
+
+
     $(function() {
         $("#show_date").datepicker({
             dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
+            yearOffset:543,
             changeMonth: true, // กำหนดให้เปลี่ยนเดือนได้
             changeYear: true, //กำหนดให้เปลี่ยนปีได้
             dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], //กำหนดชื่อย่อของวัน เป็น ภาษาไทย
@@ -80,8 +114,10 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
             ],
         });
     });
-   
-    $('#multiselect').multiselect();
+
+ 
+
+$('#multiselect').multiselect();
 
 new SlimSelect({
     select: '#teacher'
@@ -111,7 +147,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=10"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Personnel"): ?>
-<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=3"></script>
+<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=7"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>
