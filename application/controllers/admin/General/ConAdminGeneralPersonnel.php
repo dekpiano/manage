@@ -5,7 +5,10 @@ class ConAdminGeneralPersonnel extends CI_Controller {
 var  $title = "แผงควบคุม";
 	public function __construct() {
 		parent::__construct();
+
 		$this->load->library('settingpresonnal');
+        $this->load->model('admin/General/ModAdminPresonnal');
+
 		if (empty($this->session->userdata('fullname'))) {		
 			redirect('welcome','refresh');
 		}
@@ -28,7 +31,7 @@ var  $title = "แผงควบคุม";
         $data['admin'] = $this->DBPers->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
     
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/General/PageAdminGeneralMain.php');
+        $this->load->view('admin/General/AdminPresonnal/PagePresonnalMain.php');
         $this->load->view('admin/layout/Footer.php');
 
         // delete_cookie('username_cookie'); 
@@ -63,8 +66,8 @@ var  $title = "แผงควบคุม";
             $data[] = array( 
                 "TeacherName" =>  $record->pers_prefix.$record->pers_firstname.' '.$record->pers_lastname,
                 "TeacherID" => $record->pers_id,
-                "pers_position" => $record->posi_name,
-                "pers_learning" => $record->lear_namethai,
+                "pers_position" => $record->pers_position,
+                "pers_learning" => $record->pers_learning,
                 "pers_status" => $record->pers_status,
             );
            
@@ -148,7 +151,25 @@ var  $title = "แผงควบคุม";
                     
                 }
         }else{
-            echo "ไม่ได้เลือกรูปภาพ";
+         
+            $data_update = array(
+                'pers_status' => $this->input->post('pers_status'),
+                'pers_prefix' => $this->input->post('pers_prefix'),
+                'pers_firstname' => $this->input->post('pers_firstname'),
+                'pers_lastname' => $this->input->post('pers_lastname'),
+                'pers_britday' => $this->input->post('pers_britday'),
+                'pers_phone' => $this->input->post('pers_phone'),
+                'pers_address' => $this->input->post('pers_address'),
+                'pers_username' => $this->input->post('pers_username'),
+                'pers_position' => $this->input->post('pers_position'),
+                'pers_learning' => $this->input->post('pers_learning'),
+                'pers_academic' => $this->input->post('pers_academic'),
+                'pers_groupleade' => $this->input->post('pers_groupleade'),
+                'pers_dataUpdate' => date('Y-m-d H:i:s'),
+                'pers_userEdit' => $this->session->userdata('login_id')
+            );
+
+            echo $this->ModAdminPresonnal->Presonnal_Update($data_update,$this->input->post('pers_id'));
         }
 		
 		

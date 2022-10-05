@@ -70,7 +70,7 @@
             <div class="modal-body">
                 <form class="needs-validation" novalidate="" id="form-personnal">
                     <div class="row g-3">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <label for="pers_status" class="form-label">สถานะผู้ใช้งาน</label>
                             <select class="select2_pres" id="pers_status" name="pers_status" required="">
                                 <option value="กำลังใช้งาน">กำลังใช้งาน</option>
@@ -82,8 +82,18 @@
                                 กรุณากรอกเลือกสถานะผู้ใช้งาน
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <label for="pers_id" class="form-label">รหัสประจำตัว</label>
+                            <input type="text" class="form-control" id="pers_id" name="pers_id"
+                                placeholder="" value="" required="" readonly>
+                            <div class="invalid-feedback">
+                                กรุณากรอกชื่อจริง...
+                            </div>
+                        </div>
                         <hr>
                     </div>
+                  
+
                     <div class="row g-3 mb-3 justify-content-center">
                         <div class="col-md-4">
                             <label for="pers_img" class="form-label">รูปภาพ</label>

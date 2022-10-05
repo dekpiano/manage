@@ -147,7 +147,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=10"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Personnel"): ?>
-<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=7"></script>
+<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=9"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>

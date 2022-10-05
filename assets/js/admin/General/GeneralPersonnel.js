@@ -64,12 +64,14 @@ $(document).on("click", ".BtnEditPersonnel", function() {
         pers_academic.set(data[0].pers_academic);
         pers_learning.set(data[0].pers_learning);
         pers_position.set(data[0].pers_position);
+        pers_groupleade.set(data[0].pers_groupleade);
         $('#pers_firstname').val(data[0].pers_firstname);
         $('#pers_lastname').val(data[0].pers_lastname);
         $('#pers_britday').val(data[0].pers_britday);
         $('#pers_phone').val(data[0].pers_phone);
         $('#pers_address').val(data[0].pers_address);
         $('#pers_username').val(data[0].pers_username);
+        $('#pers_id').val(data[0].pers_id);
     }, 'json');
 });
 
@@ -86,6 +88,17 @@ $(document).on("submit", "#form-personnal", function(e) {
         async: false,
         success: function(data) {
             console.log(data);
+            if (data == 1) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'บันทึกข้อมูลสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                $('#ModalEditTech').attr('data-bs-backdrop', 'false');
+                $('#ModalEditTech').hide();
+            }
         }
     });
 });
