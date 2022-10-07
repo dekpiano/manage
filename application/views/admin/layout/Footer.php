@@ -139,7 +139,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=48"></script>
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=5"></script>    
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=8"></script>    
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=12"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Evaluate"): ?>
@@ -147,7 +147,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=10"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Personnel"): ?>
-<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=9"></script>
+<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=11"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>

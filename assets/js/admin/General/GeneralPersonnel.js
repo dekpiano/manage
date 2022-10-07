@@ -37,7 +37,7 @@ tbErollSubject = $('#TbPersonnelMain').DataTable({
         {
             data: 'TeacherID',
             render: function(data, type, row) {
-                return '<a href="#" class="badge bg-warning BtnEditPersonnel" data-bs-toggle="modal" data-bs-target="#ModalEditTech" pres-id="' + data + '">แก้ไข</a>|<a href="" class="badge bg-danger">ลบ</a>';
+                return '<a href="#" class="badge bg-warning BtnEditPersonnel"  pres-id="' + data + '">แก้ไข</a>|<a href="#" class="badge bg-danger DeletePersonnal" key-teacher="' + data + '" key-img="' + row.pers_img + '">ลบ</a>';
             }
         }
 
@@ -46,8 +46,10 @@ tbErollSubject = $('#TbPersonnelMain').DataTable({
 
 
 $(document).on("click", "#BtnAddPersonnel", function() {
-    $('#form-personnal').attr('action', 'Insert');
+    $('#ModalEditTech').modal('show');
+    $('#form-personnal').attr('action', '../../../admin/General/ConAdminGeneralPersonnel/InsertDataPersonnel');
     $('#form-personnal')[0].reset();
+    $('#ShowImgPresol').attr('src', '../../../uploads/usericon.png');
     pers_status.set('กำลังใช้งาน');
     pers_prefix.set('');
     pers_academic.set('');
@@ -55,7 +57,8 @@ $(document).on("click", "#BtnAddPersonnel", function() {
     pers_position.set('');
 });
 $(document).on("click", ".BtnEditPersonnel", function() {
-    $('#form-personnal').attr('action', '../../../admin/General/ConAdminGeneralPersonnel/UpdateDataPersonnel');
+    $('#ModalEditTech').modal('show');
+    $('#pers_img').val('');
 
     $.post("../../../admin/General/ConAdminGeneralPersonnel/EditDataPersonnel", { KeyPresID: $(this).attr('pres-id') }, function(data, status) {
         console.log(data);
@@ -72,6 +75,12 @@ $(document).on("click", ".BtnEditPersonnel", function() {
         $('#pers_address').val(data[0].pers_address);
         $('#pers_username').val(data[0].pers_username);
         $('#pers_id').val(data[0].pers_id);
+        if (data[0].pers_img != "") {
+            $('#ShowImgPresol').attr("src", "../../../uploads/General/Personnel/" + data[0].pers_img);
+        }
+
+        $('#form-personnal').attr('action', '../../../admin/General/ConAdminGeneralPersonnel/UpdateDataPersonnel/' + data[0].pers_img);
+
     }, 'json');
 });
 
@@ -96,9 +105,39 @@ $(document).on("submit", "#form-personnal", function(e) {
                     showConfirmButton: false,
                     timer: 3000
                 })
-                $('#ModalEditTech').attr('data-bs-backdrop', 'false');
-                $('#ModalEditTech').hide();
+                $('#ModalEditTech').modal('hide');
             }
         }
     });
+});
+
+$(document).on("click", ".DeletePersonnal", function() {
+    //console.log($(this).attr('key-teacher'));
+    Swal.fire({
+        title: 'ต้องการลบบุคลากรออกจากฐานข้อมูลหรือไม่?',
+        text: 'ข้อมูลจะถูกลบออกจากฐานข้อมูล',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $(this).parents('tr').remove();
+
+            $.post("../../../admin/General/ConAdminGeneralPersonnel/DeletePersonnel", {
+                KeyTeacher: $(this).attr('key-teacher'),
+                KeyImg: $(this).attr('key-img')
+            }, function(data, status) {
+                console.log(data);
+
+            });
+
+            Swal.fire(
+                'ลบข้อมูลเรียบร้อย!',
+                'Your data has been deleted.',
+                'success'
+            )
+        }
+    })
 });

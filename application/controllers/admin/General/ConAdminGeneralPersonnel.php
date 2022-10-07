@@ -7,7 +7,7 @@ var  $title = "แผงควบคุม";
 		parent::__construct();
 
 		$this->load->library('settingpresonnal');
-        $this->load->model('admin/General/ModAdminPresonnal');
+        $this->load->model('admin/General/ModAdminPresonnel');
 
 		if (empty($this->session->userdata('fullname'))) {		
 			redirect('welcome','refresh');
@@ -29,9 +29,17 @@ var  $title = "แผงควบคุม";
     public function PageAdminGeneralMain(){      
         $data['title'] = "หน้าแรกบุคคลกร";
         $data['admin'] = $this->DBPers->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
+
+        $this->DBPers->select('*');
+		$this->DBPers->from('tb_personnel');
+		$this->DBPers->order_by('pers_id','DESC');
+		$data['pers'] =	$this->DBPers->get()->result();		
+		$num = @explode("_", $data['pers'][0]->pers_id);
+        $num1 = @sprintf("%03d",$num[1]+1);
+        $data['pers_id'] = 'pers_'.$num1;
     
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/General/AdminPresonnal/PagePresonnalMain.php');
+        $this->load->view('admin/General/AdminPresonnel/PagePresonnelMain.php');
         $this->load->view('admin/layout/Footer.php');
 
         // delete_cookie('username_cookie'); 
@@ -69,6 +77,7 @@ var  $title = "แผงควบคุม";
                 "pers_position" => $record->pers_position,
                 "pers_learning" => $record->pers_learning,
                 "pers_status" => $record->pers_status,
+                "pers_img" => $record->pers_img
             );
            
         }   
@@ -112,12 +121,12 @@ var  $title = "แผงควบคุม";
 		}
 	}
 
-	public function UpdateDataPersonnel()
+    public function InsertDataPersonnel()
 	{
         if($_FILES['pers_img']['error'] == 0){
             // print_r($_FILES['pers_img']['error']);
             // exit();
-            $config['upload_path']   = 'uploads/General/Personnal/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
+            $config['upload_path']   = 'uploads/General/Personnel/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
              $config['allowed_types'] = 'gif|jpg|jpeg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
              $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
              $config['max_width']     = 0; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
@@ -129,18 +138,100 @@ var  $title = "แผงควบคุม";
                 {
                     $data = array('upload_data' => $this->upload->data());				
     
-                    // $data_insert = array(
-                    //         'banner_name' => $this->input->post('banner_name'),
-                    //         'banner_img' => $data['upload_data']['file_name'],
-                    //         'banner_date' => date('Y-m-d H:i:s'),
-                    //         'banner_linkweb' => $this->input->post('banner_linkweb'),
-                    //         'banner_status' => "on",
-                    //         'banner_personnel_id' => $this->session->userdata('login_id')
-                    //     );
-    
                         $cover_image = $this->resizeImage($this->upload->data(),600,800,70);
-                        echo "บักทึกสำเร็จ";
-                   
+                    
+                        $data_update = array(
+                            'pers_id' => $this->input->post('pers_id'),
+                            'pers_status' => $this->input->post('pers_status'),
+                            'pers_prefix' => $this->input->post('pers_prefix'),
+                            'pers_firstname' => $this->input->post('pers_firstname'),
+                            'pers_lastname' => $this->input->post('pers_lastname'),
+                            'pers_britday' => $this->input->post('pers_britday'),
+                            'pers_phone' => $this->input->post('pers_phone'),
+                            'pers_address' => $this->input->post('pers_address'),
+                            'pers_username' => $this->input->post('pers_username'),
+                            'pers_position' => $this->input->post('pers_position'),
+                            'pers_learning' => $this->input->post('pers_learning'),
+                            'pers_academic' => $this->input->post('pers_academic'),
+                            'pers_groupleade' => $this->input->post('pers_groupleade'),
+                            'pers_dataUpdate' => date('Y-m-d H:i:s'),
+                            'pers_userEdit' => $this->session->userdata('login_id'),
+                            'pers_img' => $data['upload_data']['file_name']
+                        );
+            
+                        echo $this->ModAdminPresonnel->Personnel_Insert($data_update);
+                }
+                else
+                {
+                    $error = array('error' => $this->upload->display_errors());
+                    print_r($error['error']);
+                  
+                    
+                    
+                }
+        }else{
+         
+            $data_update = array(
+                'pers_id' => $this->input->post('pers_id'),
+                'pers_status' => $this->input->post('pers_status'),
+                'pers_prefix' => $this->input->post('pers_prefix'),
+                'pers_firstname' => $this->input->post('pers_firstname'),
+                'pers_lastname' => $this->input->post('pers_lastname'),
+                'pers_britday' => $this->input->post('pers_britday'),
+                'pers_phone' => $this->input->post('pers_phone'),
+                'pers_address' => $this->input->post('pers_address'),
+                'pers_username' => $this->input->post('pers_username'),
+                'pers_position' => $this->input->post('pers_position'),
+                'pers_learning' => $this->input->post('pers_learning'),
+                'pers_academic' => $this->input->post('pers_academic'),
+                'pers_groupleade' => $this->input->post('pers_groupleade'),
+                'pers_dataUpdate' => date('Y-m-d H:i:s'),
+                'pers_userEdit' => $this->session->userdata('login_id')
+            );
+
+            echo $this->ModAdminPresonnel->Personnel_Insert($data_update);
+        }
+	}
+
+
+	public function UpdateDataPersonnel($img)
+	{
+        if($_FILES['pers_img']['error'] == 0){
+            
+           // exit();
+            $config['upload_path']   = 'uploads/General/Personnel/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
+             $config['allowed_types'] = 'gif|jpg|jpeg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+             $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+             $config['max_width']     = 0; //ขนาดความกว้างสูงสุด (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+             $config['max_height']    = 0;  //ขนาดความสูงสูงสดุ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+             $config['encrypt_name']  = true; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if($this->upload->do_upload('pers_img'))
+                {
+                    @unlink("./uploads/General/Personnel/".$img);
+                        $data = array('upload_data' => $this->upload->data());	
+                        $cover_image = $this->resizeImage($this->upload->data(),600,800,70);
+                    
+                        $data_update = array(
+                            'pers_status' => $this->input->post('pers_status'),
+                            'pers_prefix' => $this->input->post('pers_prefix'),
+                            'pers_firstname' => $this->input->post('pers_firstname'),
+                            'pers_lastname' => $this->input->post('pers_lastname'),
+                            'pers_britday' => $this->input->post('pers_britday'),
+                            'pers_phone' => $this->input->post('pers_phone'),
+                            'pers_address' => $this->input->post('pers_address'),
+                            'pers_username' => $this->input->post('pers_username'),
+                            'pers_position' => $this->input->post('pers_position'),
+                            'pers_learning' => $this->input->post('pers_learning'),
+                            'pers_academic' => $this->input->post('pers_academic'),
+                            'pers_groupleade' => $this->input->post('pers_groupleade'),
+                            'pers_dataUpdate' => date('Y-m-d H:i:s'),
+                            'pers_userEdit' => $this->session->userdata('login_id'),
+                            'pers_img' => $data['upload_data']['file_name']
+                        );
+            
+                        echo $this->ModAdminPresonnel->Presonnel_Update($data_update,$this->input->post('pers_id'));
                 }
                 else
                 {
@@ -169,10 +260,14 @@ var  $title = "แผงควบคุม";
                 'pers_userEdit' => $this->session->userdata('login_id')
             );
 
-            echo $this->ModAdminPresonnal->Presonnal_Update($data_update,$this->input->post('pers_id'));
+            echo $this->ModAdminPresonnel->Presonnel_Update($data_update,$this->input->post('pers_id'));
         }
-		
-		
+	}
+
+    public function DeletePersonnel()
+	{
+        @unlink("./uploads/General/Personnel/".$this->input->post('KeyImg'));
+		$this->ModAdminPresonnel->Personnel_Delete($this->input->post('KeyTeacher'));
 	}
 
 

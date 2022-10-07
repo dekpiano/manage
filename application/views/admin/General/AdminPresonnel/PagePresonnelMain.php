@@ -12,8 +12,7 @@
                 <h1 class="app-page-title mb-0"><?=$title;?></h1>
             </div>
             <div class="col-auto">
-                <a class="btn app-btn-primary" id="BtnAddPersonnel" href="#" data-bs-toggle="modal"
-                    data-bs-target="#ModalEditTech">
+                <a class="btn app-btn-primary" id="BtnAddPersonnel" href="#">
                     + เพิ่มบุคลากร
                 </a>
             </div>
@@ -84,24 +83,22 @@
                         </div>
                         <div class="col-md-3">
                             <label for="pers_id" class="form-label">รหัสประจำตัว</label>
-                            <input type="text" class="form-control" id="pers_id" name="pers_id"
-                                placeholder="" value="" required="" readonly>
+                            <input type="text" class="form-control" id="pers_id" name="pers_id" placeholder="" value="<?=$pers_id;?>"
+                                required="" readonly>
                             <div class="invalid-feedback">
                                 กรุณากรอกชื่อจริง...
                             </div>
                         </div>
                         <hr>
                     </div>
-                  
+
 
                     <div class="row g-3 mb-3 justify-content-center">
                         <div class="col-md-4">
                             <label for="pers_img" class="form-label">รูปภาพ</label>
-                            <img src="<?=base_url('uploads/usericon.png');?>" alt="" class="img-fluid">
-                            <input type="file" class="form-control" id="pers_img" name="pers_img" placeholder="">
-                            <div class="invalid-feedback">
-                                กรุณากรอกเลือกสถานะผู้ใช้งาน
-                            </div>
+                            <img src="<?=base_url('uploads/usericon.png');?>" alt="" class="img-fluid" id="ShowImgPresol">
+                            <input type="file" class="form-control" id="pers_img" name="pers_img" placeholder="" onchange="document.getElementById('ShowImgPresol').src = window.URL.createObjectURL(this.files[0])">
+
                         </div>
                     </div>
                     <div class="row g-3">
@@ -139,7 +136,7 @@
                         <div class="col-md-4">
                             <label for="pers_britday" class="form-label">วันเกิด</label>
                             <input type="text" class="form-control" id="pers_britday" name="pers_britday" placeholder=""
-                                value="">
+                                value="" autocomplete="off">
                             <div class="invalid-feedback">
                                 กรุณาเลือกวันเกิด
                             </div>
@@ -187,8 +184,8 @@
 
                         <div class="col-md-4">
                             <label for="pers_learning" class="form-label">กลุ่มสาระการเรียนรู้</label>
-                            <select class="select2_pres" id="pers_learning" name="pers_learning" required="">
-                                <option value="">เลือก...</option>
+                            <select class="select2_pres" id="pers_learning" name="pers_learning">
+                                <option value="">ไม่มีไม่ต้องเลือก...</option>
                                 <?php foreach ($this->settingpresonnal->GroupSaraMain() as $key => $value) : ?>
                                 <option value="<?=$value;?>"><?=$value;?></option>
                                 <?php endforeach; ?>

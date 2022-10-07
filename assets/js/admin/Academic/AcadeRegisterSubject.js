@@ -18,7 +18,7 @@ tablel_Subject = $('#tbSubject').DataTable({
         {
             data: 'SubjectID',
             render: function(data, type, row) {
-                return '<a href="#" idSbuj="' + data + '" class="btn btn-warning btn-sm EditSubject"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">แก้ไข</a> | <a href="#" idSbuj="' + data + '" class="btn btn-danger btn-sm delete_subject text-white">ลบ</a>';
+                return '<a href="#" idSbuj="' + data + '" class="btn btn-warning btn-sm EditSubject">แก้ไข</a> | <a href="#" idSbuj="' + data + '" class="btn btn-danger btn-sm delete_subject text-white">ลบ</a>';
 
             }
         }
@@ -26,6 +26,7 @@ tablel_Subject = $('#tbSubject').DataTable({
 });
 
 $(document).on('click', '.EditSubject', function() {
+    $('#ModalUpdateSubject').modal('show');
     $.ajax({
         url: '../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectEdit',
         type: 'post',
@@ -35,7 +36,7 @@ $(document).on('click', '.EditSubject', function() {
             alert('Something is wrong');
         },
         success: function(data) {
-            console.log(data[0]);
+            //console.log(data[0]);
             $('#Up_SubjectYear').val(data[0].SubjectYear);
             $('#Up_SubjectClass').val(data[0].SubjectClass);
             $('#Up_SubjectCode').val(data[0].SubjectCode);
@@ -101,7 +102,7 @@ $(document).on('submit', '#form-update-subject', function(e) {
             alert('Something is wrong');
         },
         success: function(data) {
-            $('#staticBackdrop').hide();
+            $('#ModalUpdateSubject').modal('hide');
             if (data > 0) {
                 $('#form-update-subject')[0].reset();
                 Swal.fire({
