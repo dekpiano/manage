@@ -21,6 +21,29 @@ var  $title = "แผงควบคุม";
 
     }
 
+    function getClient()
+    {
+        require_once APPPATH. '../vendor/google_sheet/vendor/autoload.php';
+    
+         // Our service account access key
+         $googleAccountKeyFilePath = 'service_key.json';
+         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath);
+     
+         // Create new client
+         $client = new Google_Client();
+         // Set credentials
+         $client->useApplicationDefaultCredentials();
+     
+         // Adding an access area for reading, editing, creating and deleting tables
+         $client->addScope('https://www.googleapis.com/auth/spreadsheets');
+     
+         $service = new Google_Service_Sheets($client);
+     
+         // you spreadsheet ID
+         
+        return $service;
+    }
+
     public function AdminReportPersonMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
@@ -157,7 +180,30 @@ var  $title = "แผงควบคุม";
                             ')
                             ->where('StudentID',$IdStudent)->get('tb_students')->row();
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
-        //echo '<pre>'; print_r($this->session->userdata('login_id')); exit();
+        
+        $this->load->helper('array');
+        $service = $this->getClient();
+        $spreadsheetId = '1eMgeASo3Vqxh8O0pERAJ0WO_9MLVx4wkuiJEFjquAfQ';
+        
+        $range_checkChunum = 'ชุมนุม!A3:F1000';  // TODO: Update placeholder value.
+        $response_checkChunum = $service->spreadsheets_values->get($spreadsheetId, $range_checkChunum);
+        $numRows_checkChunum = $response_checkChunum->getValues() != null ? count($response_checkChunum->getValues()) : 0;
+       
+        $range_ruksun = 'ลูกเสือ!A3:F1000';  // TODO: Update placeholder value.
+        $response_ruksun = $service->spreadsheets_values->get($spreadsheetId, $range_ruksun);
+        $numRows_ruksun = $response_ruksun->getValues() != null ? count($response_ruksun->getValues()) : 0;
+      
+       $checkChunum = [];
+       foreach ($response_checkChunum->values as $key => $value) {
+        $checkChunum[] = $value[1];
+       }   
+       $data['checkChunum']  = $checkChunum;
+     
+       $checkRuksun = [];
+       foreach ($response_ruksun->values as $key => $value) {
+        $checkRuksun[] = $value[1];
+       }   
+       $data['checkRuksun']  = $checkRuksun;
        
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminReportResults/AdminReportStudentsResult.php');

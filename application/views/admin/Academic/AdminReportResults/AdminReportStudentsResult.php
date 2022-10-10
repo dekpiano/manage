@@ -163,9 +163,9 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card mb-5">
-                                            
+
                                             <table class="table">
-                                                <thead class="text-center table-success" >
+                                                <thead class="text-center table-success">
                                                     <tr>
                                                         <th colspan="3">กิจกรรมพัฒนาผู้เรียน</th>
                                                     </tr>
@@ -176,18 +176,38 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                
                                                     <tr>
                                                         <th scope="row">กิจรรมชุมชน</th>
                                                         <td class="text-center">40</td>
-                                                        <td class="text-center">ผ่าน</td>
-                                                    </tr> 
+                                                        <td class="text-center">
+                                                        <?php 
+                                                                if(in_array($stu->StudentCode,$checkRuksun)){
+                                                                    echo '<p class="text-danger">ไม่ผ่าน</p>';
+                                                                }else{
+                                                                    echo '<p class="text-success">ผ่าน</p>';
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php if($stu->StudentClass <= 'ม.4/1') : ?>
                                                     <tr>
                                                         <th scope="row">ลูกเสือและเนตรนารี</th>
                                                         <td class="text-center">40</td>
-                                                        <td class="text-center">ผ่าน</td>
-                                                    </tr>                                                
+                                                        <td class="text-center">
+                                                        <?php 
+                                                                if(in_array($stu->StudentCode,$checkChunum)){
+                                                                    echo '<p class="text-danger">ไม่ผ่าน</p>';
+                                                                }else{
+                                                                    echo '<p class="text-success">ผ่าน</p>';
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php endif; ?>
                                                 </tbody>
                                             </table>
+
                                         </div>
                                     </div>
                                 </div>
