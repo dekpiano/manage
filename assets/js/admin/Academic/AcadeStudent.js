@@ -38,3 +38,41 @@ $(document).on('click', '.delete_student', function() {
         }
     })
 });
+
+function calculateColumnUnit(index) {
+    var total = 0;
+    $('.ShowGrade tbody tr').each(function() {
+        var value = parseFloat($('td', this).eq(2).text());
+        if (!isNaN(value)) {
+            total += value;
+        }
+    });
+    $('.ShowGrade .tfoot th').eq(index).text(total);
+}
+
+function calculateColumnGrade(index) {
+    var totalGrade = 0;
+    var totalUnit = 0;
+    var averageGrade = 0;
+
+    $('.ShowGrade tbody tr').each(function() {
+        var valueUnit = parseFloat($('td', this).eq(2).text());
+        var valueGrade = parseFloat($('td', this).eq(3).text());
+        value = valueUnit * valueGrade
+
+        if (!isNaN(valueUnit)) {
+            totalUnit += valueUnit;
+        }
+
+        if (!isNaN(value)) {
+            totalGrade += value;
+        }
+
+    });
+    averageGrade = totalGrade / totalUnit;
+    console.log(String(averageGrade).substring(0, 4));
+    $('.ShowGrade .tfoot th').eq(index).text(String(averageGrade).substring(0, 4));
+}
+
+calculateColumnUnit(1); //ผลรวมตำแหน่งที่ 1 หน่วยกิต
+calculateColumnGrade(2); //ผลรวมตำแหน่งที่ 2

@@ -16,11 +16,9 @@
     <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=3"></script> 
 
     <script>
-        $(document).ready(function() {
-           
+        $(document).ready(function() {           
             calculateColumnUnit(1); //ผลรวมตำแหน่งที่ 1 หน่วยกิต
-            calculateColumnGrade(2); //ผลรวมตำแหน่งที่ 2
-               
+            calculateColumnGrade(2); //ผลรวมตำแหน่งที่ 2               
         });
         function calculateColumnUnit(index) {
             var total = 0;
@@ -49,8 +47,6 @@
                 if (!isNaN(value)) {
                     totalGrade += value;
                 }
-
-               
                 
             });
             averageGrade = totalGrade/totalUnit;

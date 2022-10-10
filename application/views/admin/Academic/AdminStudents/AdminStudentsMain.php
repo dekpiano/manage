@@ -38,7 +38,7 @@
                                     <td><?=$v_stu->StudentClass?></td>
                                     <td><?=$v_stu->StudentNumber?></td>
                                     <td><?=$v_stu->StudentBehavior?></td>
-                                    <td><a href="http://">เปิดดู</a></td>
+                                    <td><a href="#">เปิดดู</a></td>
                                     <td><a class="delete_student btn btn-danger" href="#" idStu="<?=$v_stu->StudentCode?>">ลบ</a></td>
                                 </tr>
                                 <?php endforeach; ?>

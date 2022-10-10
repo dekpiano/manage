@@ -37,7 +37,7 @@
                                     <td class="cell"><?=$v_stu->StudentLastName?></td>
                                     <td class="cell"><?=$v_stu->StudentClass?></td>
 
-                                    <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+                                    <td class="cell"><a class="btn-sm app-btn-secondary" href="<?=base_url('Admin/Acade/Evaluate/ReportPerson/'.$v_stu->StudentID);?>">View</a></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

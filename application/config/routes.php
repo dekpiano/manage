@@ -72,14 +72,16 @@ $route['Admin/Acade/Registration/StudentsUpdate'] = "admin/academic/ConAdminStud
 $route['Admin/Acade/Registration/RegisterSubject'] = "admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectMain";
 $route['Admin/Acade/Registration/ExtraSubject'] = "admin/academic/ConAdminExtraSubject";
 $route['Admin/Acade/Registration/SettingSystem'] = "admin/academic/ConAdminExtraSubject/SystemMainExtraSubject";
-$route['Admin/Acade/Report'] = "admin/academic/ConAdminExtraSubject/ExtraReport";
 $route['Admin/Acade/Registration/RoomOnline'] = "admin/academic/ConAdminRoomOnline/RoomOnlineMain";
+
+$route['Admin/Acade/Report'] = "admin/academic/ConAdminExtraSubject/ExtraReport";
 
 $route['Admin/Acade/Setting/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
 
 $route['Admin/Acade/Evaluate/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
 $route['Admin/Acade/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreMain";
 $route['Admin/Acade/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
+$route['Admin/Acade/Evaluate/ReportPerson/(:any)'] = "admin/academic/ConAdminReportResult/AdminStudentsScore/$1";
 $route['Admin/Acade/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
 
 // งานกิจการนักเรียน

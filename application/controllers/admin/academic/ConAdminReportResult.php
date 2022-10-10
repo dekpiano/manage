@@ -109,8 +109,6 @@ var  $title = "แผงควบคุม";
         }
         
 
-       
-
         $data['title'] = "รายงานผลการเรียนรายห้องเรียน";
 
         $this->load->view('admin/layout/Header.php',$data);
@@ -118,6 +116,59 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/layout/Footer.php');
         
     }
+
+    public function AdminStudentsScore($IdStudent){      
+        $data['title'] = "ผลการเรียนนักเรียนรายบุคคล";
+        $data['ExtraSetting'] = $this->db->get('tb_extra_setting')->result();
+        $data['scoreYear'] = $this->db->select('
+                                    tb_register.RegisterClass,
+                                    tb_register.RegisterYear,
+                                    tb_register.StudentID
+                                    ')
+                                    ->from('tb_register')
+                                    ->where('StudentID',$IdStudent)
+                                    ->group_by('tb_register.RegisterYear')
+                                    ->order_by('tb_register.RegisterClass asc','tb_register.RegisterYear asc')
+                                    ->get()->result();
+         //echo '<pre>';print_r($data['scoreYear']); exit();
+        $data['scoreStudent'] = $this->db->select('tb_register.StudentID,
+                                        tb_register.SubjectCode,
+                                        tb_register.Score100,
+                                        tb_register.Grade,
+                                        tb_register.RegisterYear,
+                                        tb_register.RegisterClass,
+                                        tb_subjects.SubjectName,
+                                        tb_subjects.SubjectUnit,
+                                        tb_subjects.SubjectYear,
+                                        tb_subjects.SubjectType,
+                                        tb_subjects.FirstGroup')
+                                    ->from('tb_register')
+                                    ->join('tb_subjects', 'tb_register.SubjectCode = tb_subjects.SubjectCode')
+                                    ->where('StudentID',$IdStudent)
+                                    ->order_by('tb_subjects.SubjectType asc')
+                                    ->order_by('tb_subjects.FirstGroup asc','tb_subjects.SubjectCode asc')
+                                    ->get()->result();
+        $data['stu'] =  $this->db->select('
+                            StudentClass,
+                            StudentCode,
+                            StudentPrefix,
+                            StudentFirstName,
+                            StudentLastName 
+                            ')
+                            ->where('StudentID',$IdStudent)->get('tb_students')->row();
+        $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        //echo '<pre>'; print_r($this->session->userdata('login_id')); exit();
+       
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportStudentsResult.php');
+        $this->load->view('admin/layout/Footer.php');
+        
+        // delete_cookie('username_cookie'); 
+		// delete_cookie('password_cookie'); 
+        // $this->session->sess_destroy();
+        
+    }
+
     
     
 
