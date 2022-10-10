@@ -25,7 +25,7 @@ class ConAdminStudents extends CI_Controller {
 
     function getClient()
 {
-    require_once APPPATH. 'libraries/vendor/autoload.php';
+    require_once APPPATH. '../vendor/google_sheet/vendor/autoload.php';
 
      // Our service account access key
      $googleAccountKeyFilePath = 'service_key.json';
@@ -118,7 +118,7 @@ class ConAdminStudents extends CI_Controller {
             }
         }
         $this->session->set_flashdata(array('status'=> 'success','messge' => 'อัพเดพข้อมูลสำเร็จ','msg'=>'YES'));
-        redirect('Admin/Registration/Students', 'location');
+        redirect('Admin/Acade/Registration/Students', 'location');
     }
 
     public function AdminStudentsMain1(){   
