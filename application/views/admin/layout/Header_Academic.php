@@ -119,6 +119,12 @@
                                             รายงานผลการเรียนรายห้องเรียน</a>
                                     </li>
 
+                                    <li class="submenu-item"><a
+                                            class="submenu-link <?=$this->uri->segment('4')=="ReportSummaryTeacher" ? "active" :""?>"
+                                            href="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher');?>">
+                                            รายงานสรุปผลสัมฤทธิ์ทางการเรียน</a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </li>

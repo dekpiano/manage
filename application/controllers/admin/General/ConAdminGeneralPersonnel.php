@@ -29,7 +29,9 @@ var  $title = "แผงควบคุม";
     public function PageAdminGeneralMain(){      
         $data['title'] = "หน้าแรกบุคคลกร";
         $data['admin'] = $this->DBPers->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-
+        $data['position'] = $this->DBSKJ->get('tb_position')->result();
+        $data['learning'] = $this->DBSKJ->get('tb_learning')->result();
+        //echo '<pre>'; print_r($data['position']); exit();
         $this->DBPers->select('*');
 		$this->DBPers->from('tb_personnel');
 		$this->DBPers->order_by('pers_id','DESC');
@@ -40,11 +42,7 @@ var  $title = "แผงควบคุม";
     
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/General/AdminPresonnel/PagePresonnelMain.php');
-        $this->load->view('admin/layout/Footer.php');
-
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();        
+        $this->load->view('admin/layout/Footer.php');      
     }
 
     public function ShowDataPersonnel(){
@@ -74,8 +72,8 @@ var  $title = "แผงควบคุม";
             $data[] = array( 
                 "TeacherName" =>  $record->pers_prefix.$record->pers_firstname.' '.$record->pers_lastname,
                 "TeacherID" => $record->pers_id,
-                "pers_position" => $record->pers_position,
-                "pers_learning" => $record->pers_learning,
+                "pers_position" => $record->posi_name,
+                "pers_learning" => $record->lear_namethai,
                 "pers_status" => $record->pers_status,
                 "pers_img" => $record->pers_img
             );
@@ -194,11 +192,12 @@ var  $title = "แผงควบคุม";
 	}
 
 
-	public function UpdateDataPersonnel($img)
+	public function UpdateDataPersonnel($IDPres = null)
 	{
         if($_FILES['pers_img']['error'] == 0){
             
-           // exit();
+            $img = $this->DBPers->select('pers_img')->where('pers_id',$IDPres)->get('tb_personnel')->row();
+            //exit();
             $config['upload_path']   = 'uploads/General/Personnel/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
              $config['allowed_types'] = 'gif|jpg|jpeg|png'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
              $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
@@ -209,7 +208,7 @@ var  $title = "แผงควบคุม";
                 $this->upload->initialize($config);
                 if($this->upload->do_upload('pers_img'))
                 {
-                    @unlink("./uploads/General/Personnel/".$img);
+                    @unlink("./uploads/General/Personnel/".$img->pers_img);
                         $data = array('upload_data' => $this->upload->data());	
                         $cover_image = $this->resizeImage($this->upload->data(),600,800,70);
                     

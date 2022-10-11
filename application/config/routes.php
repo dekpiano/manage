@@ -83,7 +83,7 @@ $route['Admin/Acade/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/Adm
 $route['Admin/Acade/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
 $route['Admin/Acade/Evaluate/ReportPerson/(:any)'] = "admin/academic/ConAdminReportResult/AdminStudentsScore/$1";
 $route['Admin/Acade/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
-
+$route['Admin/Acade/Evaluate/ReportSummaryTeacher'] = "admin/academic/ConAdminReportResult/AdminReportSummaryTeacher";
 // งานกิจการนักเรียน
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
 $route['Admin/Affairs/StudentHomeRoom/SettingSystem'] = "admin/Affairs/ConAdminStudentHomeRoom/PageSettingHomeRoom";

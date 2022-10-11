@@ -145,11 +145,11 @@ $('#example').DataTable({
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Evaluate"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=2"></script>
-<script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=10"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=12"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=5"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Personnel"): ?>
-<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=11"></script>
+<script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=13"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="Affairs"): ?>

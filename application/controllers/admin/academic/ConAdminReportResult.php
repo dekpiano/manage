@@ -25,21 +25,17 @@ var  $title = "แผงควบคุม";
     {
         require_once APPPATH. '../vendor/google_sheet/vendor/autoload.php';
     
-         // Our service account access key
-         $googleAccountKeyFilePath = 'service_key.json';
-         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath);
-     
-         // Create new client
-         $client = new Google_Client();
-         // Set credentials
-         $client->useApplicationDefaultCredentials();
-     
-         // Adding an access area for reading, editing, creating and deleting tables
-         $client->addScope('https://www.googleapis.com/auth/spreadsheets');
-     
-         $service = new Google_Service_Sheets($client);
-     
-         // you spreadsheet ID
+        // configure the Google Client
+        $client = new \Google_Client();
+        $client->setApplicationName('Google Sheets API');
+        $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+        $client->setAccessType('offline');
+        // credentials.json is the key file we downloaded while setting up our Google Sheets API
+        $path = 'service_key.json';
+        $client->setAuthConfig($path);
+
+        // configure the Sheets Service
+        $service = new \Google_Service_Sheets($client);
          
         return $service;
     }
@@ -208,11 +204,51 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminReportResults/AdminReportStudentsResult.php');
         $this->load->view('admin/layout/Footer.php');
-        
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
-        
+              
+    }
+
+    public function AdminReportSummaryTeacher(){
+        $data['title'] = "รายงานสรุปผลสัมฤทธิ์ทางการเรียน";
+
+        $data['Showdata'] = $this->db->select('
+                            COUNT(CASE WHEN tb_register.Grade = 4 then 1 else null end) AS G4_0,
+                            COUNT(CASE WHEN tb_register.Grade = 3.5 then 1 else null end) AS G3_5,
+                            COUNT(CASE WHEN tb_register.Grade = 3 then 1 else null end) AS G3_0,
+                            COUNT(CASE WHEN tb_register.Grade = 2.5 then 1 else null end) AS G2_5,
+                            COUNT(CASE WHEN tb_register.Grade = 2 then 1 else null end) AS G2_0,
+                            COUNT(CASE WHEN tb_register.Grade = 1.5 then 1 else null end) AS G1_5,
+                            COUNT(CASE WHEN tb_register.Grade = 1 then 1 else null end) AS G1_0,
+                            COUNT(CASE WHEN tb_register.Grade = "0" then 1 else null end) AS G0,
+                            COUNT(CASE WHEN tb_register.Grade = "ร" then 1 else null end) AS G_W,
+                            COUNT(CASE WHEN tb_register.Grade = "มส" then 1 else null end) AS G_MS,
+                            COUNT(skjacth_academic.tb_students.StudentClass) AS SumStu,
+                            skjacth_academic.tb_students.StudentClass,
+                            skjacth_academic.tb_register.RegisterYear,
+                            skjacth_academic.tb_register.TeacherID,
+                            skjacth_academic.tb_register.Grade,
+                            skjacth_academic.tb_register.SubjectCode,
+                            skjacth_personnel.tb_personnel.pers_prefix,
+                            skjacth_personnel.tb_personnel.pers_firstname,
+                            skjacth_personnel.tb_personnel.pers_lastname,
+                            skjacth_personnel.tb_personnel.pers_learning,
+                            skjacth_academic.tb_subjects.SubjectName,
+                            skjacth_academic.tb_subjects.SubjectType,
+                            skjacth_academic.tb_subjects.SubjectUnit                                                   
+                            ')
+                            ->from('skjacth_academic.tb_register')
+                            ->join('skjacth_academic.tb_students','skjacth_academic.tb_students.StudentID = skjacth_academic.tb_register.StudentID')
+                            ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
+                            ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
+                            ->where('RegisterYear','1/2565')
+                            ->where('pers_learning','lear_001')
+                            ->group_by('tb_students.StudentClass,tb_register.SubjectCode')
+                            ->order_by('TeacherID,StudentClass')
+                            ->get()->result();
+
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportAcademicSummary.php');
+        $this->load->view('admin/layout/Footer.php');
+
     }
 
     

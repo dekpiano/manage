@@ -51,3 +51,23 @@
 
 </div>
 <!--//main-wrapper-->
+
+
+SELECT
+COUNT(CASE WHEN tb_register.Grade = 4 then 1 else null end) AS G4_0,
+COUNT(CASE WHEN tb_register.Grade = 3.5 then 1 else null end) AS G3_5,
+COUNT(CASE WHEN tb_register.Grade = 3 then 1 else null end) AS G3_0,
+COUNT(CASE WHEN tb_register.Grade = 2.5 then 1 else null end) AS G2_5,
+COUNT(CASE WHEN tb_register.Grade = 2 then 1 else null end) AS G2_0,
+COUNT(CASE WHEN tb_register.Grade = 1.5 then 1 else null end) AS G1_5,
+COUNT(CASE WHEN tb_register.Grade = 1 then 1 else null end) AS G1_0,
+COUNT(CASE WHEN tb_register.Grade = '0' then 1 else null end) AS G0,
+COUNT(CASE WHEN tb_register.Grade = 'ร' then 1 else null end) AS G_W,
+COUNT(CASE WHEN tb_register.Grade = 'มส' then 1 else null end) AS G_MS,
+COUNT(tb_register.Grade) AS allsum,
+tb_register.SubjectCode
+FROM
+tb_register
+WHERE tb_register.RegisterYear = '1/2565' AND 
+GROUP BY
+tb_register.SubjectCode
