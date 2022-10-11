@@ -173,8 +173,8 @@
                             <label for="pers_position" class="form-label">ตำแหน่งทางการศึกษา</label>
                             <select class="select2_pres" id="pers_position" name="pers_position" required="">
                                 <option value="">เลือก...</option>
-                                <?php foreach ($this->settingpresonnal->GroupPosition() as $key => $value) : ?>
-                                <option value="<?=$value;?>"><?=$value;?></option>
+                                <?php foreach ($position as $key => $value) : ?>
+                                <option value="<?=$value->posi_id;?>"><?=$value->posi_name;?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback">
@@ -186,8 +186,8 @@
                             <label for="pers_learning" class="form-label">กลุ่มสาระการเรียนรู้</label>
                             <select class="select2_pres" id="pers_learning" name="pers_learning">
                                 <option value="">ไม่มีไม่ต้องเลือก...</option>
-                                <?php foreach ($this->settingpresonnal->GroupSaraMain() as $key => $value) : ?>
-                                <option value="<?=$value;?>"><?=$value;?></option>
+                                <?php foreach ($learning as $key => $value) : ?>
+                                <option value="<?=$value->lear_id;?>"><?=$value->lear_namethai;?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback">

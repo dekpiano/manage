@@ -61,7 +61,7 @@ $(document).on("click", ".BtnEditPersonnel", function() {
     $('#pers_img').val('');
 
     $.post("../../../admin/General/ConAdminGeneralPersonnel/EditDataPersonnel", { KeyPresID: $(this).attr('pres-id') }, function(data, status) {
-        console.log(data);
+        //console.log(data);
         pers_status.set(data[0].pers_status);
         pers_prefix.set(data[0].pers_prefix);
         pers_academic.set(data[0].pers_academic);
@@ -79,7 +79,7 @@ $(document).on("click", ".BtnEditPersonnel", function() {
             $('#ShowImgPresol').attr("src", "../../../uploads/General/Personnel/" + data[0].pers_img);
         }
 
-        $('#form-personnal').attr('action', '../../../admin/General/ConAdminGeneralPersonnel/UpdateDataPersonnel/' + data[0].pers_img);
+        $('#form-personnal').attr('action', '../../../admin/General/ConAdminGeneralPersonnel/UpdateDataPersonnel/' + data[0].pers_id);
 
     }, 'json');
 });
