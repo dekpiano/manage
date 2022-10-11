@@ -25,21 +25,17 @@ var  $title = "แผงควบคุม";
     {
         require_once APPPATH. '../vendor/google_sheet/vendor/autoload.php';
     
-         // Our service account access key
-         $googleAccountKeyFilePath = 'service_key.json';
-         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath);
-     
-         // Create new client
-         $client = new Google_Client();
-         // Set credentials
-         $client->useApplicationDefaultCredentials();
-     
-         // Adding an access area for reading, editing, creating and deleting tables
-         $client->addScope('https://www.googleapis.com/auth/spreadsheets');
-     
-         $service = new Google_Service_Sheets($client);
-     
-         // you spreadsheet ID
+        // configure the Google Client
+        $client = new \Google_Client();
+        $client->setApplicationName('Google Sheets API');
+        $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+        $client->setAccessType('offline');
+        // credentials.json is the key file we downloaded while setting up our Google Sheets API
+        $path = 'service_key.json';
+        $client->setAuthConfig($path);
+
+        // configure the Sheets Service
+        $service = new \Google_Service_Sheets($client);
          
         return $service;
     }
