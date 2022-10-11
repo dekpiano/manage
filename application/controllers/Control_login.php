@@ -125,7 +125,7 @@ class Control_login extends CI_Controller {
 	}
 	
 	function LoginTeacher(){
-		include_once APPPATH . "libraries/vendor/autoload.php";
+		include_once APPPATH . "../vendor/google_sheet/vendor/autoload.php";
 		$google_client = new Google_Client();
 
 		$google_client->setClientId('29638025169-aeobhq04v0lvimcjd27osmhlpua380gl.apps.googleusercontent.com');
@@ -254,7 +254,7 @@ class Control_login extends CI_Controller {
 	}
 
 	public function LoginMenager_callback(){
-		include_once APPPATH . "libraries/vendor/autoload.php";
+		include_once APPPATH . "../vendor/google_sheet/vendor/autoload.php";
 		$google_client = new Google_Client();
 		$redirect_uri = base_url('LoginMenager_callback');
 
