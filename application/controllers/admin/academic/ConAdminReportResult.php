@@ -208,8 +208,13 @@ var  $title = "แผงควบคุม";
     }
 
     public function AdminReportSummaryTeacher(){
+        $DBSkj = $this->load->database('skj', TRUE);
         $data['title'] = "รายงานสรุปผลสัมฤทธิ์ทางการเรียน";
+        $data['lern'] = $DBSkj->get('tb_learning')->result();
 
+        $data['Keylern'] = $this->input->get('SelLern');
+        //echo $date['Keylern']; exit();      
+       
         $data['Showdata'] = $this->db->select('
                             COUNT(CASE WHEN tb_register.Grade = 4 then 1 else null end) AS G4_0,
                             COUNT(CASE WHEN tb_register.Grade = 3.5 then 1 else null end) AS G3_5,
@@ -223,6 +228,7 @@ var  $title = "แผงควบคุม";
                             COUNT(CASE WHEN tb_register.Grade = "มส" then 1 else null end) AS G_MS,
                             COUNT(skjacth_academic.tb_students.StudentClass) AS SumStu,
                             skjacth_academic.tb_students.StudentClass,
+                            skjacth_academic.tb_students.StudentBehavior,
                             skjacth_academic.tb_register.RegisterYear,
                             skjacth_academic.tb_register.TeacherID,
                             skjacth_academic.tb_register.Grade,
@@ -240,10 +246,11 @@ var  $title = "แผงควบคุม";
                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                             ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
                             ->where('RegisterYear','1/2565')
-                            ->where('pers_learning','lear_001')
+                            ->where('pers_learning',$data['Keylern'])
+                            ->where('StudentBehavior','ปกติ')
                             ->group_by('tb_students.StudentClass,tb_register.SubjectCode')
                             ->order_by('TeacherID,StudentClass')
-                            ->get()->result();
+                            ->get()->result();        
 
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminReportResults/AdminReportAcademicSummary.php');
