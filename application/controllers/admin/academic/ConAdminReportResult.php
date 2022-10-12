@@ -88,8 +88,7 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentFirstName,
                                     tb_students.StudentLastName")
                             ->where('StudentStatus','1/ปกติ')
-                            ->where('StudentClass',$keyroom)  
-                            ->limit(3)                            
+                            ->where('StudentClass',$keyroom)     
                             ->order_by('tb_students.StudentNumber','ASC')
                             ->get('tb_students')->result();
        
@@ -102,7 +101,9 @@ var  $title = "แผงควบคุม";
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->where('RegisterYear','1/2565')
                                 ->where('StudentStatus','1/ปกติ')
-                                ->where('StudentClass',$keyroom)
+                                ->where('StudentClass',$keyroom)                                
+                                ->where('tb_register.SubjectCode !=','I30301')
+                                ->where('tb_register.SubjectCode !=','I20201')
                                 ->group_by('tb_register.SubjectCode')                                
                                 ->get()->result();
 
@@ -113,7 +114,9 @@ var  $title = "แผงควบคุม";
                                 ->from('tb_register')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 ->where('RegisterYear','1/2565')
-                                ->where('StudentStatus','1/ปกติ')
+                                ->where('StudentStatus','1/ปกติ')                                
+                                ->where('tb_register.SubjectCode !=','I30301')
+                                ->where('tb_register.SubjectCode !=','I20201')
                                 ->where('StudentClass',$keyroom)                              
                                 //->group_by('tb_register.SubjectCode')               
                                 ->get()->result();
