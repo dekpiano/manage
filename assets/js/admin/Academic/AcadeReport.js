@@ -34,11 +34,12 @@ $('#tblGrade tbody tr').each(function() {
     var totalGrade = 0;
     var totalUnit = 0;
     var averageGrade = 0;
+    var value = 0;
 
     $(this).find('.showGrade').each(function() {
         var valueUnit = parseFloat($(this).attr('data_unit'));
         var valueGrade = parseFloat($(this).text());
-        value = valueUnit * valueGrade;
+        value += valueUnit * valueGrade;
 
         if (!isNaN(valueUnit)) {
             totalUnit += valueUnit;
@@ -47,10 +48,10 @@ $('#tblGrade tbody tr').each(function() {
         if (!isNaN(valueGrade)) {
             totalGrade += valueGrade;
         }
-        averageGrade = totalGrade / totalUnit;
-        console.log(String(averageGrade).substring(0, 4));
-    });
+        averageGrade = value / totalUnit;
 
+    });
+    // console.log(averageGrade);
     $(this).find('.totalGrade').html(String(averageGrade).substring(0, 4));
 });
 

@@ -39,12 +39,12 @@
 
                                     <td class="cell">
                                         <?php if($this->uri->segment(3) === "Executive") :?>
-                                        <a class="btn-sm app-btn-secondary"
+                                        <a class="btn-sm app-btn-secondary clickLoad-spin"
                                             href="<?=base_url('Admin/Acade/Executive/ReportPerson/'.$v_stu->StudentID);?>">
                                             <i class="bi bi-eye-fill"></i> ดูผลการเรียน
                                         </a>
                                         <?php else: ?>
-                                            <a class="btn-sm btn-primary"
+                                            <a class="btn-sm btn-primary clickLoad-spin"
                                             href="<?=base_url('Admin/Acade/Evaluate/ReportPerson/'.$v_stu->StudentID);?>">
                                             <i class="bi bi-eye-fill"></i> ดูผลการเรียน
                                         </a>

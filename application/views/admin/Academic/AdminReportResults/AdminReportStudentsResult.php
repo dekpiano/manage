@@ -36,54 +36,6 @@
             </div>
 
             <div class="mb-5">
-
-                <div class="row g-4 mb-4">
-                    <!-- <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">จำนวนเทอม</h4>
-                                <div class="stats-figure"><?php  print_r(count($scoreYear)); ?></div>
-                                <div class="stats-meta">คือ จำนวนที่ภาคเรียน</div>
-                            </div>                         
-                            <a class="app-card-link-mask" href="#"></a>
-                        </div>
-                    </div> -->
-                    <!--//col-->
-
-                    <!-- <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">หน่วยกิตทั้งหมด</h4>
-                                <div class="stats-figure"><?php  echo $AllUnit;?></div>
-                                <div class="stats-meta">หน่วยกิตรวมทุกภาค</div>
-                            </div>
-                         
-                            <a class="app-card-link-mask" href="#"></a>
-                        </div>
-                    </div> -->
-                    <!--//col-->
-                    <!-- <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">ค่าเฉลี่ย CGPA</h4>
-                                <div class="stats-figure">
-
-                                    <?php
-                                    if($AllGrade && $AllUnit){
-                                        $All = $AllGrade/$AllUnit; 
-                                        echo substr($All,0,strpos($All,'.')+3);
-                                    }                                    
-                            ?>
-
-                                </div>
-                                <div class="stats-meta">เกรดเฉลี่ยรวมทุกภาค</div>
-                            </div>
-                            <a class="app-card-link-mask" href="#"></a>
-                        </div>
-                    </div> -->
-
-                </div>
-                <!--//row-->
                 <div class="row">
                     <?php asort($scoreYear);
                 
@@ -171,40 +123,60 @@
                                                     </tr>
                                                     <tr>
                                                         <th scope="col">กิจกรรม</th>
-                                                        <th scope="col">เวลา (ชม.)</th>
                                                         <th scope="col">ผลการประเมิน</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                
                                                     <tr>
-                                                        <th scope="row">กิจรรมชุมชน</th>
-                                                        <td class="text-center">40</td>
-                                                        <td class="text-center">
-                                                        <?php 
-                                                                if(in_array($stu->StudentCode,$checkRuksun)){
-                                                                    echo '<p class="text-danger">ไม่ผ่าน</p>';
-                                                                }else{
-                                                                    echo '<p class="text-success">ผ่าน</p>';
-                                                                }
-                                                            ?>
+                                                        <th>กิจกรรมแนะแนว</th>
+                                                        <td class="text-center"><span class="text-success">ผ่าน</span>
                                                         </td>
                                                     </tr>
                                                     <?php if($stu->StudentClass <= 'ม.4/1') : ?>
                                                     <tr>
-                                                        <th scope="row">ลูกเสือและเนตรนารี</th>
-                                                        <td class="text-center">40</td>
+                                                        <th scope="row">ลูกเสือ/เนตรนารี/ยุวฯ/บพ.</th>
                                                         <td class="text-center">
-                                                        <?php 
+                                                            <?php 
                                                                 if(in_array($stu->StudentCode,$checkChunum)){
-                                                                    echo '<p class="text-danger">ไม่ผ่าน</p>';
+                                                                    echo '<span class="text-danger">ไม่ผ่าน</span>';
                                                                 }else{
-                                                                    echo '<p class="text-success">ผ่าน</p>';
+                                                                    echo '<span class="text-success">ผ่าน</span>';
                                                                 }
                                                             ?>
                                                         </td>
                                                     </tr>
                                                     <?php endif; ?>
+                                                    <tr>
+                                                        <th scope="row">กิจรรมชุมชน</th>
+                                                        <td class="text-center">
+                                                            <?php 
+                                                                if(in_array($stu->StudentCode,$checkRuksun)){
+                                                                    echo '<span class="text-danger">ไม่ผ่าน</span>';
+                                                                }else{
+                                                                    echo '<span class="text-success">ผ่าน</span>';
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>กิจกรรมเพื่อสังคม</th>
+                                                        <td class="text-center"><span class="text-success">ผ่าน</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table">
+                                                <thead class="text-center table-success">
+                                                    <tr>
+                                                        <th colspan="3">ผลการประเมิน</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col">คุณลักษณะอันพึงประสงค์</th>
+                                                        <th scope="col">อ่าน คิดวิเคราะห์ เขียน</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
                                                 </tbody>
                                             </table>
 

@@ -117,7 +117,6 @@ th.rotated-text>div>span {
                                             <div class="showGrade" data_unit="<?=$v_subject->SubjectUnit?>">
                                                 <?php echo $v_check->Grade; ?>
                                             </div>
-
                                             <?php endif; ?>
                                             <?php endforeach; ?>
 
