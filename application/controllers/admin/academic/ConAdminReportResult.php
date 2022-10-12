@@ -88,7 +88,8 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentFirstName,
                                     tb_students.StudentLastName")
                             ->where('StudentStatus','1/ปกติ')
-                            ->where('StudentClass',$keyroom)                              
+                            ->where('StudentClass',$keyroom)  
+                            ->limit(3)                            
                             ->order_by('tb_students.StudentNumber','ASC')
                             ->get('tb_students')->result();
        

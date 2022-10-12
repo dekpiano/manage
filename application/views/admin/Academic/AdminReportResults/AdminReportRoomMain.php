@@ -25,7 +25,33 @@ th.rotated-text>div>span {
     padding-left: 5px;
 }
 </style>
-<div class="app-wrapper">
+<style>
+            .fixTableHead {
+                overflow-y: auto;
+                height: 600px;
+            }
+
+            .fixTableHead thead th {
+                position: sticky;
+                top: 0;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                padding: 8px 15px;
+                border: 2px solid #529432;
+            }
+
+            th {
+                background: #ABDD93;
+            }
+            </style>
+<div class="app-wrapper" style="overflow-x: overlay;">
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="row g-3 mb-4 align-items-center justify-content-between">
             <div class="col-auto">
@@ -74,14 +100,14 @@ th.rotated-text>div>span {
                     </div>
                 </div>
                 <?php else: ?>
-                <div class="card">
+                <div class="card"  style="width: 1600px;">
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="tblGrade">
+                        <div class="table-responsive fixTableHead">
+                            <table class="table table-bordered" id="tblGradeSumRoom">
                                 <thead>
-                                    <tr class="text-center">
+                                    <tr class="text-center table-success">
                                         <th class="cell align-middle" style="width:20px">ลำดับที่</th>
-                                        <th class="cell align-middle" style="width:500px">ชื่อ - นามสกุล</th>
+                                        <th class="cell align-middle" style="width:230px">ชื่อ - นามสกุล</th>
                                         <?php foreach ($subject as $key => $v_subject):?>
                                         <th class="rotated-text">
                                             <div>

@@ -29,7 +29,7 @@ $('.tblGrade').DataTable({
 // });
 
 //admin เกรด นักเรียน
-$('#tblGrade tbody tr').each(function() {
+$('#tblGradeSumRoom tbody tr').each(function() {
 
     var totalGrade = 0;
     var totalUnit = 0;
@@ -39,19 +39,19 @@ $('#tblGrade tbody tr').each(function() {
     $(this).find('.showGrade').each(function() {
         var valueUnit = parseFloat($(this).attr('data_unit'));
         var valueGrade = parseFloat($(this).text());
-        value += valueUnit * valueGrade;
 
         if (!isNaN(valueUnit)) {
             totalUnit += valueUnit;
         }
 
         if (!isNaN(valueGrade)) {
-            totalGrade += valueGrade;
+            value += valueUnit * valueGrade;
+
         }
         averageGrade = value / totalUnit;
 
     });
-    // console.log(averageGrade);
+    console.log(averageGrade);
     $(this).find('.totalGrade').html(String(averageGrade).substring(0, 4));
 });
 
