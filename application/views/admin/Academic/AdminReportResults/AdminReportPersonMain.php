@@ -37,7 +37,19 @@
                                     <td class="cell"><?=$v_stu->StudentLastName?></td>
                                     <td class="cell"><?=$v_stu->StudentClass?></td>
 
-                                    <td class="cell"><a class="btn-sm app-btn-secondary" href="<?=base_url('Admin/Acade/Evaluate/ReportPerson/'.$v_stu->StudentID);?>">View</a></td>
+                                    <td class="cell">
+                                        <?php if($this->uri->segment(3) === "Executive") :?>
+                                        <a class="btn-sm app-btn-secondary"
+                                            href="<?=base_url('Admin/Acade/Executive/ReportPerson/'.$v_stu->StudentID);?>">
+                                            <i class="bi bi-eye-fill"></i> ดูผลการเรียน
+                                        </a>
+                                        <?php else: ?>
+                                            <a class="btn-sm btn-primary"
+                                            href="<?=base_url('Admin/Acade/Evaluate/ReportPerson/'.$v_stu->StudentID);?>">
+                                            <i class="bi bi-eye-fill"></i> ดูผลการเรียน
+                                        </a>
+                                        <?php endif; ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -51,23 +63,3 @@
 
 </div>
 <!--//main-wrapper-->
-
-
-SELECT
-COUNT(CASE WHEN tb_register.Grade = 4 then 1 else null end) AS G4_0,
-COUNT(CASE WHEN tb_register.Grade = 3.5 then 1 else null end) AS G3_5,
-COUNT(CASE WHEN tb_register.Grade = 3 then 1 else null end) AS G3_0,
-COUNT(CASE WHEN tb_register.Grade = 2.5 then 1 else null end) AS G2_5,
-COUNT(CASE WHEN tb_register.Grade = 2 then 1 else null end) AS G2_0,
-COUNT(CASE WHEN tb_register.Grade = 1.5 then 1 else null end) AS G1_5,
-COUNT(CASE WHEN tb_register.Grade = 1 then 1 else null end) AS G1_0,
-COUNT(CASE WHEN tb_register.Grade = '0' then 1 else null end) AS G0,
-COUNT(CASE WHEN tb_register.Grade = 'ร' then 1 else null end) AS G_W,
-COUNT(CASE WHEN tb_register.Grade = 'มส' then 1 else null end) AS G_MS,
-COUNT(tb_register.Grade) AS allsum,
-tb_register.SubjectCode
-FROM
-tb_register
-WHERE tb_register.RegisterYear = '1/2565' AND 
-GROUP BY
-tb_register.SubjectCode

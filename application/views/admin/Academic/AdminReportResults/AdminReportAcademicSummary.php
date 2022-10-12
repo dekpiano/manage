@@ -10,8 +10,13 @@
                     <div class="page-utilities">
                         <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                             <div class="col-auto">
+                            <?php if($this->uri->segment(3) === "Executive") :?>
                                 <form class="docs-search-form row gx-1 align-items-center" method="get"
+                                    action="<?=base_url('Admin/Acade/Executive/ReportSummaryTeacher');?>">
+                                    <?php else: ?>
+                                        <form class="docs-search-form row gx-1 align-items-center" method="get"
                                     action="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher');?>">
+                                    <?php endif; ?>
                                     <div class="col-auto">
                                         <select class="form-select w-auto" name="SelLern" id="SelLern">
                                             <option value="0">เลือก...</option>

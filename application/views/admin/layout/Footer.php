@@ -143,7 +143,7 @@ $('#example').DataTable({
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=12"></script>    
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=5"></script>
 <?php endif; ?>
-<?php if($this->uri->segment(3) ==="Evaluate"): ?>
+<?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=2"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=13"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=5"></script>

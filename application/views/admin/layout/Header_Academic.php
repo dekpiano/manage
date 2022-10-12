@@ -98,10 +98,12 @@
                     href="<?=base_url('Admin/Acade/Evaluate/SaveScore');?>">จัดการบันทึกผลการเรียน</a>
             </li>
 
-            <li class="submenu-item"><a
-                    class="submenu-link <?=$this->uri->segment('4')=="ReportPerson" ? "active" :""?>"
+            <li class="submenu-item">
+                <a
+                    class="submenu-link <?=$this->uri->segment('4')=="ReportPerson" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/ReportPerson');?>">
-                    รายงานผลการเรียนรายบุคคล</a>
+                    รายงานผลการเรียนรายบุคคล
+                </a>
             </li>
 
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="ReportRoom" ? "active" :""?>"
@@ -110,7 +112,7 @@
             </li>
 
             <li class="submenu-item"><a
-                    class="submenu-link <?=$this->uri->segment('4')=="ReportSummaryTeacher" ? "active" :""?>"
+                    class="submenu-link <?=$this->uri->segment('4')=="ReportSummaryTeacher" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher?SelLern=0');?>">
                     รายงานสรุปผลสัมฤทธิ์ทางการเรียน</a>
             </li>
@@ -160,7 +162,7 @@
 <li class="nav-item ">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
     <a class="nav-link <?=$this->uri->segment('4')=="AdminRoles" ? "active" :""?>"
-        href="<?=base_url('Admin/Setting/AdminRoles');?>">
+        href="<?=base_url('Admin/Acade/Setting/AdminRoles');?>">
         <span class="nav-icon">
             <i class="bi bi-gear-fill" style="font-size: 1.2rem;"></i>
         </span>

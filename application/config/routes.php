@@ -84,16 +84,23 @@ $route['Admin/Acade/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResu
 $route['Admin/Acade/Evaluate/ReportPerson/(:any)'] = "admin/academic/ConAdminReportResult/AdminStudentsScore/$1";
 $route['Admin/Acade/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
 $route['Admin/Acade/Evaluate/ReportSummaryTeacher'] = "admin/academic/ConAdminReportResult/AdminReportSummaryTeacher";
+
 // งานกิจการนักเรียน
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";
 $route['Admin/Affairs/StudentHomeRoom/SettingSystem'] = "admin/Affairs/ConAdminStudentHomeRoom/PageSettingHomeRoom";
 $route['Admin/Affairs/StudentHomeRoom/Dashboard/(:any)'] = "admin/Affairs/ConAdminStudentHomeRoom/PageHomeRoomDashboard/$1";
 $route['Admin/Affairs/StudentHomeRoom/ChartHomeRoomAll'] = "admin/Affairs/ConAdminStudentHomeRoom/ChartHomeRoomAll";
 
-
 // งานบริหารทั่วไป
 $route['Admin/General/Personnel/Main'] = "admin/General/ConAdminGeneralPersonnel/PageAdminGeneralMain";
 $route['Admin/General/Setting/AdminRoles'] = "admin/General/ConAdminSettingAdminRoles/GeneralSettingAdminRoles";
+
+
+// ผู้บริหารสถานศึกษา
+$route['Admin/Acade/Executive/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
+$route['Admin/Acade/Executive/ReportPerson/(:any)'] = "admin/academic/ConAdminReportResult/AdminStudentsScore/$1";
+$route['Admin/Acade/Executive/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
+$route['Admin/Acade/Executive/ReportSummaryTeacher'] = "admin/academic/ConAdminReportResult/AdminReportSummaryTeacher";
 
 // Login
 $route['Logout'] = "Control_login/logout";

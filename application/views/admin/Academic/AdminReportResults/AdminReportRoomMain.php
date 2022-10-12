@@ -37,7 +37,12 @@ th.rotated-text>div>span {
 
 
                         <div class="col-auto">
-                            <form action="<?=base_url('Admin/Acade/Evaluate/ReportRoom');?>" method="post">
+                            <?php if($this->uri->segment(3) === "Executive") :?>
+                            <form action="<?=base_url('Admin/Acade/Executive/ReportRoom');?>" method="post">
+                            <?php else:?>
+                                <form action="<?=base_url('Admin/Acade/Evaluate/ReportRoom');?>" method="post">
+                            <?php endif; ?>
+
                                 <select class="form-select w-auto" name="keyroom">
                                     <option selected="" value="1">เลือกห้อง...</option>
                                     <?php foreach ($this->classroom->ListRoom() as $key => $v_ListRoom) : ?>

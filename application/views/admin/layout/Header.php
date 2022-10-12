@@ -169,6 +169,10 @@
                         <?php if($this->session->userdata('CheckrloesGeneral') === 'เจ้าหน้าที่ทั่วไป'): ?>
                         <?php $this->load->view('admin/layout/Header_General.php'); ?>
                         <?php endif; ?>
+                        <hr>
+                        <?php if($this->session->userdata('status') === 'manager'): ?>
+                        <?php $this->load->view('admin/layout/Header_executive.php'); ?>
+                        <?php endif; ?>
 
                     </ul>
                     <!--//app-menu-->
