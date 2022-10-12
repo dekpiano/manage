@@ -55,7 +55,7 @@ $('#tblGrade tbody tr').each(function() {
 });
 
 //สรุปผลสัมฤทธื์ คะแนนรวมดี ครู
-//หาจำนวนเกรดรวม
+//หาจำนวนคนของเกรดรวม
 $('#ReportSummaryTeacher tbody tr').each(function() {
     var SumGradeGood = 0;
     $(this).find('.showGradeGood').each(function() {
@@ -68,7 +68,7 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
     //console.log(SumGradeGood);
 });
 
-// หาผล ร กับ มส
+// หาผลรวม ร กับ มส
 $('#ReportSummaryTeacher tbody tr').each(function() {
     var SumGradeNoGood = 0;
     $(this).find('.showGradeNoGood').each(function() {
@@ -105,10 +105,29 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
         if (!isNaN(ValueGradeGood)) {
             AvgGrade += G[key] * ValueGradeGood;
         }
-        console.log(ValueGradeGood);
-        console.log(G[key]);
     });
     var value = parseFloat($('td', this).eq(14).text());
     $(this).find('.AvgGrade').html('<b>' + parseFloat(AvgGrade / value).toFixed(2) + '</b>');
+
+});
+
+// หา SD
+$('#ReportSummaryTeacher tbody tr').each(function() {
+    var AvgSD = 0;
+    var G = [4, 3.5, 3, 2.5, 2, 1.5, 1, 0];
+    var v_19 = parseFloat($('td', this).eq(19).text()); //ค่าเฉลี่ย
+    var v_17 = parseFloat($('td', this).eq(17).text()); //รวม ร มส
+    var v_16 = parseFloat($('td', this).eq(16).text()); //มส
+    var v_15 = parseFloat($('td', this).eq(15).text()); //ร
+
+    $(this).find('.showGradeGood').each(function(key, val) {
+        var ValueGradeGood = parseInt($(this).text())
+        if (!isNaN(ValueGradeGood)) {
+            AvgSD += ValueGradeGood * (G[key] - v_19) ** 2;
+        }
+    });
+    var SumAvgSD = Math.sqrt(AvgSD / (v_17 - v_16 - v_15));
+
+    $(this).find('.SumAvgSD').html('<b>' + parseFloat(SumAvgSD).toFixed(2) + '</b>');
 
 });

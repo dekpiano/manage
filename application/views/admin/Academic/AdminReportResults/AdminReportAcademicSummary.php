@@ -1,4 +1,4 @@
-<div class="app-wrapper">
+<div class="app-wrapper" style="overflow-x: overlay;">
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
@@ -10,17 +10,19 @@
                     <div class="page-utilities">
                         <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                             <div class="col-auto">
-                                <form class="docs-search-form row gx-1 align-items-center" method="get" action="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher');?>">
+                                <form class="docs-search-form row gx-1 align-items-center" method="get"
+                                    action="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher');?>">
                                     <div class="col-auto">
-                                    <select class="form-select w-auto" name="SelLern" id="SelLern">
-										  <option value="0">เลือก...</option>
-                                          <?php foreach ($lern as $key => $v_lern) : ?>
-										  <option <?=$this->input->get('SelLern') == $v_lern->lear_id ?"selected":""?> value="<?=$v_lern->lear_id?>"><?=$v_lern->lear_namethai?></option>
-                                          <?php endforeach; ?>
-									</select>
+                                        <select class="form-select w-auto" name="SelLern" id="SelLern">
+                                            <option value="0">เลือก...</option>
+                                            <?php foreach ($lern as $key => $v_lern) : ?>
+                                            <option <?=$this->input->get('SelLern') == $v_lern->lear_id ?"selected":""?>
+                                                value="<?=$v_lern->lear_id?>"><?=$v_lern->lear_namethai?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                     <div class="col-auto">
-                                    <button class="btn app-btn-primary clickLoder" type="submit">ค้นหา</button>
+                                        <button class="btn app-btn-primary clickLoder" type="submit">ค้นหา</button>
                                     </div>
                                 </form>
 
@@ -37,30 +39,53 @@
             <!--//row-->
 
             <style>
-            .scrollit {
-                overflow: scroll;
+            .fixTableHead {
+                overflow-y: auto;
+                height: 550px;
+            }
 
+            .fixTableHead thead th {
+                position: sticky;
+                top: 0;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                padding: 8px 15px;
+                border: 2px solid #529432;
+            }
+
+            th {
+                background: #ABDD93;
             }
             </style>
             <?php if($this->input->get('SelLern') === '0'):?>
-                <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
-				    <div class="inner">
-					    <div class="app-card-body p-3 p-lg-4">
-						    <h3 class="text-center"><i class="bi bi-arrow-right-circle-fill"></i> กรุณาเลือกรายการ ทางปุ่มขวาบน</h3>					
+            <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+                <div class="inner">
+                    <div class="app-card-body p-3 p-lg-4">
+                        <h3 class="text-center"><i class="bi bi-arrow-right-circle-fill"></i> กรุณาเลือกรายการ
+                            ทางปุ่มขวาบน</h3>
 
-					    </div><!--//app-card-body-->
-					    
-				    </div><!--//inner-->
-			    </div>
+                    </div>
+                    <!--//app-card-body-->
+
+                </div>
+                <!--//inner-->
+            </div>
             <?php else: ?>
-            <div class="app-card  shadow-sm mb-5 p-2 ">
+            <div class="app-card  shadow-sm mb-5 p-2 " style="width: 1600px;">
                 <div class="app-card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive fixTableHead">
                         <table class="table app-table-hover mb-0 text-left table-bordered scrollit"
                             id="ReportSummaryTeacher" style="">
                             <!-ReportSummaryTeacher-->
                                 <thead>
-                                    <tr class="text-center">
+                                    <tr class="text-center table-success">
                                         <th class="cell text-center" style="width:230px">ครูผู้สอน</th>
                                         <th class="cell text-center" style="width:280px">วิชา</th>
                                         <th class="cell text-center">ชั้น</th>
@@ -115,7 +140,7 @@
                                         <td class="cell text-center SumGradeNoGood"></td>
                                         <td class="cell text-center SumPcGood"></td>
                                         <td class="cell text-center AvgGrade"></td>
-                                        <td class="cell text-center text-danger"></td>
+                                        <td class="cell text-center SumAvgSD"></td>
                                     </tr>
                                     <?php endforeach; ?>
 
