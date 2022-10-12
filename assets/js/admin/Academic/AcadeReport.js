@@ -51,8 +51,8 @@ $('#tblGradeSumRoom tbody tr').each(function() {
         averageGrade = value / totalUnit;
 
     });
-    console.log(averageGrade);
-    $(this).find('.totalGrade').html(String(averageGrade).substring(0, 4));
+    //console.log(averageGrade);
+    $(this).find('.totalGrade').html(parseFloat(String(averageGrade).substring(0, 4)).toFixed(2));
 });
 
 //สรุปผลสัมฤทธื์ คะแนนรวมดี ครู

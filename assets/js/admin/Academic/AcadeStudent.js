@@ -70,8 +70,8 @@ function calculateColumnGrade(index) {
 
     });
     averageGrade = totalGrade / totalUnit;
-    console.log(String(averageGrade).substring(0, 4));
-    $('.ShowGrade .tfoot th').eq(index).text(String(averageGrade).substring(0, 4));
+    console.log(parseFloat(String(averageGrade).substring(0, 4)).toFixed(2));
+    $('.ShowGrade .tfoot th').eq(index).text(parseFloat(String(averageGrade).substring(0, 4)).toFixed(2));
 }
 
 calculateColumnUnit(1); //ผลรวมตำแหน่งที่ 1 หน่วยกิต

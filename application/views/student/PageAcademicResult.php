@@ -69,17 +69,7 @@
                                             if($v_scoreYear->RegisterYear == $score->RegisterYear && $v_scoreYear->RegisterYear == $score->SubjectYear):
                                             $c = floatval($score->Score100);
                                             $type = explode("/",$score->SubjectType);
-                                           //echo '<pre>';print_r($score);
-                                                // if(($c>100)||($c<0)||($c== ''))
-                                                // { $cc= "(W)" ; }
-                                                // else if (($c>=80)&&($c<=100)) { $cc= "A" ; }
-                                                // else if (($c>=75)&&($c<=79)) { $cc= "B+" ; }
-                                                // else if (($c>=70)&&($c<=74)) { $cc= "B" ; }
-                                                // else if (($c>=65)&&($c<=69)) { $cc= "C+" ; }
-                                                // else if (($c>=60)&&($c<=64)) { $cc= "C" ; }
-                                                // else if (($c>=55)&&($c<=59)) { $cc= "D+" ; }
-                                                // else if (($c>=50)&&($c<=54)) { $cc= "D" ; }
-                                                // else if ($c<=49) { $cc= "F" ; }
+                                           
                                          ?>
                                                     <tr>
                                                         <th scope="row" class="text-center"><?=$score->SubjectCode;?></th>
@@ -114,14 +104,7 @@
                                                         <th colspan=3>รวม</th>
                                                         <th></th>
                                                         <th>
-                                                            <?php 
-                                                    // if($SumGrade && $SumUnit){
-                                                    //     $a = ($SumGrade/$SumUnit);
-                                                    //     echo substr($a,0,strpos($a,'.')+3);
-                                                    // }
-                                                   
-                                                        ?>
-
+                                                          
                                                         </th>
                                                     </tr>
                                                 </tbody>

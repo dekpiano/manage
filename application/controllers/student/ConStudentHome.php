@@ -69,12 +69,14 @@ var  $title = "ผลการเรียน";
                                     ->from('tb_register')
                                     ->join('tb_subjects', 'tb_register.SubjectCode = tb_subjects.SubjectCode')
                                     ->where('StudentID',$this->session->userdata('login_id'))
+                                    ->where('tb_register.SubjectCode !=','I30301')
+                                    ->where('tb_register.SubjectCode !=','I20201')
                                     ->order_by('tb_subjects.SubjectType asc')
                                     ->order_by('tb_subjects.FirstGroup asc','tb_subjects.SubjectCode asc')
                                     ->get()->result();
       
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
-        //echo '<pre>'; print_r($this->session->userdata('login_id')); exit();
+       // echo '<pre>'; print_r($data['scoreStudent']); exit();
         $data['stu'] =  $this->db->select('
                                     StudentClass,
                                     StudentCode,
