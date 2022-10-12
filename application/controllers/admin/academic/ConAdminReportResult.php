@@ -165,6 +165,8 @@ var  $title = "แผงควบคุม";
                                     ->from('tb_register')
                                     ->join('tb_subjects', 'tb_register.SubjectCode = tb_subjects.SubjectCode')
                                     ->where('StudentID',$IdStudent)
+                                    ->where('tb_register.SubjectCode !=','I30301')
+                                    ->where('tb_register.SubjectCode !=','I20201')
                                     ->order_by('tb_subjects.SubjectType asc')
                                     ->order_by('tb_subjects.FirstGroup asc','tb_subjects.SubjectCode asc')
                                     ->get()->result();

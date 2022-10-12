@@ -58,14 +58,12 @@ function calculateColumnGrade(index) {
     $('.ShowGrade tbody tr').each(function() {
         var valueUnit = parseFloat($('td', this).eq(2).text());
         var valueGrade = parseFloat($('td', this).eq(3).text());
-        value = valueUnit * valueGrade
 
-        if (!isNaN(valueUnit)) {
-            totalUnit += valueUnit;
-        }
-
-        if (!isNaN(value)) {
-            totalGrade += value;
+        if (!isNaN(valueGrade)) {
+            if (!isNaN(valueUnit)) {
+                totalUnit += valueUnit;
+            }
+            totalGrade += valueUnit * valueGrade;
         }
 
     });

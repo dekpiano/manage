@@ -40,11 +40,12 @@ $('#tblGradeSumRoom tbody tr').each(function() {
         var valueUnit = parseFloat($(this).attr('data_unit'));
         var valueGrade = parseFloat($(this).text());
 
-        if (!isNaN(valueUnit)) {
-            totalUnit += valueUnit;
-        }
-
         if (!isNaN(valueGrade)) {
+            if (!isNaN(valueUnit)) {
+                totalUnit += valueUnit;
+            }
+
+
             value += valueUnit * valueGrade;
 
         }
