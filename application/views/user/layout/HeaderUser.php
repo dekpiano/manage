@@ -18,7 +18,7 @@
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$banner?>" />
 
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="https://skj.ac.th/uploads/logo/LogoSKJ_4.png">
 
     <!-- FontAwesome JS-->
     <script defer src="<?=base_url();?>assets/plugins/fontawesome/js/all.min.js"></script>
@@ -100,7 +100,7 @@
                 <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
                 <div class="app-branding">
                     <a class="app-logo" href="index.html"><img class="logo-icon me-2"
-                            src="https://localhost/skj/uploads/logo/LogoSKJ_4.png" alt="logo"><span
+                            src="https://skj.ac.th/uploads/logo/LogoSKJ_4.png" alt="logo"><span
                             class="logo-text">ACDM
                             SKJ</span></a>
 

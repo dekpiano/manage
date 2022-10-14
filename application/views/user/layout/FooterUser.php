@@ -28,16 +28,16 @@
         "order": [[ 2, "asc" ]]
     });
 </script>
-<?php if($this->session->flashdata('msg') == 'OK'):?>
+<?php if($this->session->flashdata('status') == 'OK'):?>
 <script>
 Swal.fire({
     icon: '<?=$this->session->flashdata('alert');?>',
     title: "แจ้งเตือน",
-    html: '<?=$this->session->flashdata('messge');?>',
+    html: '<?=$this->session->flashdata('messge');?><br/>ติดต่องานวิชาการ',
     confirmButtonText: "ตกลง",
 });
 </script>
-<?php endif; $this->session->mark_as_temp('msg',20); ?>
+<?php endif; $this->session->mark_as_temp('status',20); ?>
 </body>
 
 </html>

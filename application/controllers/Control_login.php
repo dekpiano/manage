@@ -34,10 +34,10 @@ class Control_login extends CI_Controller {
 
 	public function LoginStudent(){
 		
-        $data['title'] = "Login สำหรับนักเรียน";
-        $data['description'] = "Login สำหรับนักเรียน";  
+        $data['title'] = "ระบบสารสนเทศสำหรับนักเรียน สกจ";
+        $data['description'] = "สำหรับดูผลการเรียนออนไลน์ ลงทะเบียนต่าง ๆ ของโรงเรียน และ อื่น ๆ";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['banner'] = "";
+        $data['banner'] = base_url("uploads/academic/LoginStudent/login.PNG");
 		$this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/Login/PageLoginStudent.php');
         $this->load->view('user/layout/FooterUser.php');
@@ -73,9 +73,8 @@ class Control_login extends CI_Controller {
 				}
 				else
 				{
-					$this->session->set_flashdata(array('status'=>'OK','msgerr'=> 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง','alert'=>'error'));
+					$this->session->set_flashdata(array('status'=>'OK','messge'=> 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง','alert'=>'error'));
 					// redirect('login');
-
 					redirect('LoginStudent');
 				}
 			}

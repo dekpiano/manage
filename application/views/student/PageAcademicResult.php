@@ -30,7 +30,7 @@
         <div class="container-xl">
 
             <h1 class="app-page-title text-center ">
-                <?=$title?>
+                <!-- <?=$title?> -->
             </h1>
 
             <div class="mb-5">
@@ -72,7 +72,8 @@
                                            
                                          ?>
                                                     <tr>
-                                                        <th scope="row" class="text-center"><?=$score->SubjectCode;?></th>
+                                                        <th scope="row" class="text-center"><?=$score->SubjectCode;?>
+                                                        </th>
                                                         <td><?=$score->SubjectName;?></td>
                                                         <td class="text-center"><?=$type[1]?></td>
                                                         <td class="text-center">
@@ -104,7 +105,7 @@
                                                         <th colspan=3>รวม</th>
                                                         <th></th>
                                                         <th>
-                                                          
+
                                                         </th>
                                                     </tr>
                                                 </tbody>
@@ -112,69 +113,119 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                    <table class="table">
-                                                <thead class="text-center table-success">
-                                                    <tr>
-                                                        <th colspan="3">กิจกรรมพัฒนาผู้เรียน</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col">กิจกรรม</th>
-                                                        <th scope="col">ผลการประเมิน</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>กิจกรรมแนะแนว</th>
-                                                        <td class="text-center"><span class="text-success">ผ่าน</span>
-                                                        </td>
-                                                    </tr>
-                                                    <?php if($stu->StudentClass <= 'ม.4/1') : ?>
-                                                    <tr>
-                                                        <th scope="row">ลูกเสือ/เนตรนารี/ยุวฯ/บพ.</th>
-                                                        <td class="text-center">
-                                                            <?php 
+                                        <table class="table">
+                                            <thead class="text-center table-success">
+                                                <tr>
+                                                    <th colspan="3">กิจกรรมพัฒนาผู้เรียน</th>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col">กิจกรรม</th>
+                                                    <th scope="col">ผลการประเมิน</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>กิจกรรมแนะแนว</th>
+                                                    <td class="text-center"><span class="text-success">ผ่าน</span>
+                                                    </td>
+                                                </tr>
+                                                <?php if($stu->StudentClass <= 'ม.4/1') : ?>
+                                                <tr>
+                                                    <th scope="row">ลูกเสือ/เนตรนารี/ยุวฯ/บพ.</th>
+                                                    <td class="text-center">
+                                                        <?php 
                                                                 if(in_array($stu->StudentCode,$checkChunum)){
                                                                     echo '<span class="text-danger">ไม่ผ่าน</span>';
                                                                 }else{
                                                                     echo '<span class="text-success">ผ่าน</span>';
                                                                 }
                                                             ?>
-                                                        </td>
-                                                    </tr>
-                                                    <?php endif; ?>
-                                                    <tr>
-                                                        <th scope="row">กิจรรมชุมชน</th>
-                                                        <td class="text-center">
-                                                            <?php 
+                                                    </td>
+                                                </tr>
+                                                <?php endif; ?>
+                                                <tr>
+                                                    <th scope="row">กิจรรมชุมชน</th>
+                                                    <td class="text-center">
+                                                        <?php 
                                                                 if(in_array($stu->StudentCode,$checkRuksun)){
                                                                     echo '<span class="text-danger">ไม่ผ่าน</span>';
                                                                 }else{
                                                                     echo '<span class="text-success">ผ่าน</span>';
                                                                 }
                                                             ?>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>กิจกรรมเพื่อสังคม</th>
-                                                        <td class="text-center"><span class="text-success">ผ่าน</span>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>กิจกรรมเพื่อสังคม</th>
+                                                    <td class="text-center"><span class="text-success">ผ่าน</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
 
-                                            <table class="table">
-                                                <thead class="text-center table-success">
-                                                    <tr>
-                                                        <th colspan="3">ผลการประเมิน</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col">คุณลักษณะอันพึงประสงค์</th>
-                                                        <th scope="col">อ่าน คิดวิเคราะห์ เขียน</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                        <table class="table">
+                                            <thead class="text-center table-success">
+                                                <tr>
+                                                    <th colspan="3">ผลการประเมิน</th>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col">คุณลักษณะอันพึงประสงค์</th>
+                                                    <th scope="col">อ่าน คิดวิเคราะห์ เขียน</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+
+
+                                        <div class="app-card alert shadow-sm mb-4 border-left-decoration"
+                                            role="alert">
+                                            <div class="inner">
+                                                <div class="app-card-body p-3 p-lg-4">
+                                                    <h3 class="mb-3">แจ้งเตือน!</h3>
+                                                    <div class="row gx-5 gy-3">
+                                                        <div class="col-12 col-lg-12">
+
+                                                            <div>
+                                                                ในวันที่ 15 - 17 ตุลาคม 2565 หากนักเรียนคนใดมีผลการเรียน
+                                                                0 ร มส มผ ให้นักเรียนลงทะเบียนเพื่อขอแก้ผลการเรียน 0 ร
+                                                                มส. และ มผ.
+
+
+                                                            </div>
+                                                        </div>
+                                                        <!--//col-->
+                                                        <div class="col-12 col-lg-12">
+                                                            <style>
+                                                            .app-card.border-left-decoration {
+                                                                border-left: 3px solid #dc3545;
+                                                            }
+                                                            </style>
+
+                                                            <a class="btn btn-danger" target="_blank"
+                                                                href="https://forms.gle/mwKALnD9WhAf61Mx8"><svg
+                                                                    width="1em" height="1em" viewBox="0 0 16 16"
+                                                                    class="bi bi-file-earmark-arrow-down me-2"
+                                                                    fill="currentColor"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z">
+                                                                    </path>
+                                                                    <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z">
+                                                                    </path>
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M8 6a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 10.293V6.5A.5.5 0 0 1 8 6z">
+                                                                    </path>
+                                                                </svg>ลิงก์สำหรับลงทะเบียนขอแก้ผลการเรียน 0 ร มส มผ</a>
+                                                        </div>
+                                                        <!--//col-->
+                                                    </div>
+                                                </div>
+                                                <!--//app-card-body-->
+
+                                            </div>
+                                            <!--//inner-->
+                                        </div>
 
                                     </div>
                                 </div>
@@ -186,6 +237,29 @@
                     <?php  endforeach;?>
                 </div>
                 <?php else: ?>
+                <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+                    <div class="inner">
+                        <div class="app-card-body p-3 p-lg-4">
+                            <h3 class="mb-3">ระบบแสดงผลการเรียน</h3>
+                            <div class="row gx-5 gy-3">
+                                <div class="col-12 col-lg-9">
+
+                                    <div>
+                                        ผลการเรียน ระบบจะเปิดให้ดูในวันที่ 15 ตุลาคม 2565 เป็นต้นไป
+                                    </div>
+                                </div>
+                                <!--//col-->
+
+                            </div>
+                            <!--//row-->
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <!--//app-card-body-->
+
+                    </div>
+                    <!--//inner-->
+                </div>
+
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="text-center">
