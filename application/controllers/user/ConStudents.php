@@ -92,7 +92,7 @@ var  $title = "แผงควบคุม";
         $data['title'] = "ตารางเรียน";
         $data['description'] = "ตารางเรียน";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['banner'] = "";
+        $data['banner'] = base_url("uploads/banner/class_schedule/banner.png");;
         
         $data['schedule'] = $this->db->order_by('schestu_id','DESC')->get('tb_class_schedule')->result();
         $this->load->view('user/layout/HeaderUser.php',$data);
