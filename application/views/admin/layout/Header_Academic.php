@@ -117,6 +117,10 @@
                     รายงานสรุปผลสัมฤทธิ์ทางการเรียน</a>
             </li>
 
+            <li class="submenu-item"><a
+                    class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat');?>">จัดการผลการเรียน (เรียนซ้ำ)</a>
+            </li>
         </ul>
     </div>
 </li>

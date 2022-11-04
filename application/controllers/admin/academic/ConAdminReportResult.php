@@ -43,7 +43,7 @@ var  $title = "แผงควบคุม";
     public function AdminReportPersonMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['stu'] = $this->db->select("tb_students.StudentID,
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
@@ -131,7 +131,7 @@ var  $title = "แผงควบคุม";
 
         }
         
-
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['title'] = "รายงานผลการเรียนรายห้องเรียน";
 
         $this->load->view('admin/layout/Header.php',$data);
@@ -206,7 +206,7 @@ var  $title = "แผงควบคุม";
         $checkRuksun[] = $value[1];
        }   
        $data['checkRuksun']  = $checkRuksun;
-       
+       $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminReportResults/AdminReportStudentsResult.php');
         $this->load->view('admin/layout/Footer.php');
@@ -215,6 +215,7 @@ var  $title = "แผงควบคุม";
 
     public function AdminReportSummaryTeacher(){
         $DBSkj = $this->load->database('skj', TRUE);
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['title'] = "รายงานสรุปผลสัมฤทธิ์ทางการเรียน";
         $data['lern'] = $DBSkj->get('tb_learning')->result();
 

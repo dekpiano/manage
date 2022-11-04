@@ -27,6 +27,7 @@ var  $title = "แผงควบคุม";
         $data['GroupYear'] = $this->db->select('SubjectYear')->group_by('SubjectYear')->get('tb_subjects')->result();
         
         //echo '<pre>';print_r($data['GroupYear']); exit();
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['title'] = "วิชาเรียน";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('admin/layout/Header.php',$data);

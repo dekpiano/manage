@@ -24,7 +24,7 @@ class ConAdminExtraSubject extends CI_Controller {
 
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
 		$data['title'] = "ลงทะเบียนวิชาเพิ่มเติม";
         $ExtraSetting = $this->db->get('tb_extra_setting')->result();
         $data['ExtraSubject'] = $this->db->where('extra_year',$ExtraSetting[0]->extra_setting_year)
@@ -152,6 +152,7 @@ class ConAdminExtraSubject extends CI_Controller {
 
      public function ExtraReport() {
         $data['title'] = "รายงาน";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $ExtraSetting = $this->db->get('tb_extra_setting')->result();
         $data['OnoffSystem'] = $this->db->get('tb_extra_setting')->result();
         $data['Report'] = $this->db->select('tb_extra_subject.extra_year,

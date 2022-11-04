@@ -64,6 +64,7 @@ class ConAdminStudents extends CI_Controller {
                                         ->where('StudentStatus','1/ปกติ')
                                         ->get('tb_students')->result();        
 		$data['title'] = "นักเรียน";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminStudents/AdminStudentsMain.php');
         $this->load->view('admin/layout/Footer.php');

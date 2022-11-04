@@ -35,7 +35,7 @@ class ConAdminStudentHomeRoom extends CI_Controller {
 
     public function PageHomeRoomDashboard($key){ 
         $data['title'] = "แดชบอร์ดโฮมรูม";
-       
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['Time'] = $this->DBaffairs->select('set_homeroom_time')->where('set_homeroom_id',1)->get('tb_checkhomeroom_setting')->result();
         
          //print_r($date); exit();
@@ -78,7 +78,7 @@ class ConAdminStudentHomeRoom extends CI_Controller {
 
     // ------------------ ตั้งค่าระบบ ---------------------------
     public function PageSettingHomeRoom(){ 
-
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['title'] = "ตั้งค่าระบบโฮมรูม";        
         $data['Time'] = $this->DBaffairs->select('set_homeroom_time')->where('set_homeroom_id',1)->get('tb_checkhomeroom_setting')->result();
        // print_r($data['Time']);exit();

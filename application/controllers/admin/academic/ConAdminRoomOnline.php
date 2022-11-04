@@ -24,6 +24,7 @@ var  $title = "หน้าแรก";
 
     public function RoomOnlineMain(){      
         $data['title']  = "หน้าหลักห้องเรียนออนไลน์";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['RoomOnline'] =$this->db->get('tb_room_online')->result();

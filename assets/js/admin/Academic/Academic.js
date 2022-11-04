@@ -1,5 +1,9 @@
 //  ผลการเรียน
-
+Tb_Repeat = $('#Tb_Repeat').DataTable({
+    "order": [
+        [1, "asc"]
+    ],
+});
 $(document).on("change", "#checkOnOffRegister", function() {
     $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
             check: $(this).prop('checked')

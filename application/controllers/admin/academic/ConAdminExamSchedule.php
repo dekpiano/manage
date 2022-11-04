@@ -24,7 +24,7 @@ var  $title = "แผงควบคุม";
     public function AdminExamScheduleMain(){   
 		$DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-		
+		$data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
 		$data['title'] = "ตารางสอบ";		
 		$this->db->select('*');
 		$this->db->from('tb_exam_schedule');

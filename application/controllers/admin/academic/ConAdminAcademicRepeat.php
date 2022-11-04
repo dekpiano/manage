@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ConAdminAcademinResult extends CI_Controller {
+class ConAdminAcademicRepeat extends CI_Controller {
 var  $title = "แผงควบคุม";
 	public function __construct() {
         parent::__construct();
@@ -21,20 +21,33 @@ var  $title = "แผงควบคุม";
 
     }
 
-    public function AdminAcademinResultMain(){   
+    public function AdminAcademicRepeatMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
-        $data['title'] = "ผลการเรียน";	
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['title'] = "ผลการเรียน (เรียนซ้ำ)";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
-        $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminAcademicResult/AdminAcademicResultMain.php');
-        $this->load->view('admin/layout/Footer.php');
 
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
-        
+        $data['result'] = $this->db->select('
+                            skjacth_academic.tb_register.SubjectCode,
+                            skjacth_academic.tb_register.RegisterYear,
+                            skjacth_academic.tb_register.TeacherID,
+                            skjacth_personnel.tb_personnel.pers_prefix,
+                            skjacth_personnel.tb_personnel.pers_firstname,
+                            skjacth_personnel.tb_personnel.pers_lastname,
+                            skjacth_academic.tb_subjects.SubjectName,
+                            skjacth_academic.tb_register.RegisterClass
+                            ')
+                            ->from('skjacth_academic.tb_register')
+                            ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
+                            ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
+                            ->where('RegisterYear','1/2565')
+                            ->group_by('SubjectCode')
+                            ->get()->result();
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminAcademicRepeat/AdminAcademicRepeatMain.php');
+        $this->load->view('admin/layout/Footer.php');
+           
     }
     
     public function CheckOnOff(){   

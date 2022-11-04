@@ -24,7 +24,7 @@ var  $title = "แผงควบคุม";
     public function AdminSaveScoreMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['title'] = "บันทึกผลการเรียน";	
         $data['OnOffSaveScore'] = $this->db->where('onoff_id >= 2')->where('onoff_id <= 5')->get('tb_register_onoff')->result();
         $data['OnOffSaveScoreSystem'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();

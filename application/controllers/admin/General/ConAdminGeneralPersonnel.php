@@ -28,6 +28,7 @@ var  $title = "แผงควบคุม";
 
     public function PageAdminGeneralMain(){      
         $data['title'] = "หน้าแรกบุคคลกร";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['admin'] = $this->DBPers->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['position'] = $this->DBSKJ->get('tb_position')->result();
         $data['learning'] = $this->DBSKJ->get('tb_learning')->result();

@@ -136,7 +136,7 @@ $('#example').DataTable({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=48"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=50"></script>
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=8"></script>    
@@ -157,10 +157,27 @@ $('#example').DataTable({
 <?php endif; ?>
 
 <script>
-// window.addEventListener("load", function() {
-//     const loader = document.querySelector(".loader");
-//     loader.className += " hidden"; // class "loader hidden"
-// });
+// ตั้งค่าปีการศึกษาที่ใช้ปัจจุบัน
+$(document).on("change", "#schyear_year", function() {
+    let y = $(this).val();
+    $.post("<?=base_url();?>/admin/academic/ConAdminSchoolYear/SchoolYear", {
+            schyear_year: $(this).val()
+        },
+        function(data, status) {
+            //console.log(data);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'เปลี่ยนแปลงปีการศึกษาเป็น ' + y + ' สำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.reload();
+                }
+            })
+        });
+})
 
 $(".clickLoder").click(function(){
   $('.loader').show();

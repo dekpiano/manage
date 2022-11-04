@@ -24,7 +24,7 @@ var  $title = "แผงควบคุม";
     public function AdminEnrollMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['title'] = "หน้าหลัก | ลงทะเบียนเรียน";	
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminEnroll/AdminEnrollMain.php');
@@ -38,6 +38,7 @@ var  $title = "แผงควบคุม";
 
     public function AdminEnrollAdd(){
         $data['title'] = "เพิ่มรายชื่อการลงทะเบียนเรียน";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
                                         ->where('pers_learning !=',"")
@@ -51,6 +52,7 @@ var  $title = "แผงควบคุม";
 
     public function AdminEnrollEdit($codeSub,$TeachID){
         $data['title'] = "แก้ไขรายชื่อการลงทะเบียนเรียน";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
                                         ->where('pers_learning !=',"")
@@ -83,6 +85,7 @@ var  $title = "แผงควบคุม";
 
     public function AdminEnrollDelete($codeSub,$TeachID){
         $data['title'] = "ถอนรายชื่อการลงทะเบียนเรียน";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
                                         ->where('pers_learning !=',"")

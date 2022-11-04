@@ -23,6 +23,7 @@ var  $title = "แผงควบคุม";
 
     public function AcademicSettingAdminRoles(){      
         $data['title'] = "บทบาทในวิชาการ";	
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $DBpersonnel = $this->load->database('personnel', TRUE); //ฐานข้อมูลบุคลากร
         $DBaffairs = $this->load->database('affairs', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
         $data['Manager'] = $this->db->select('admin_rloes_userid,admin_rloes_id,admin_rloes_nanetype')->get('tb_admin_rloes')->result();
