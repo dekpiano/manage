@@ -136,7 +136,7 @@ $('#example').DataTable({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=50"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=51"></script>
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=8"></script>    
@@ -144,8 +144,8 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=8"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
-<script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=2"></script>
-<script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=15"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=10"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=16"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=8"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Personnel"): ?>

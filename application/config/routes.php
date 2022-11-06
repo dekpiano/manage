@@ -79,6 +79,7 @@ $route['Admin/Acade/Report'] = "admin/academic/ConAdminExtraSubject/ExtraReport"
 $route['Admin/Acade/Setting/AdminRoles'] = "admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdminRoles";
 
 $route['Admin/Acade/Evaluate/AcademicRepeat'] = "admin/academic/ConAdminAcademicRepeat/AdminAcademicRepeatMain";
+$route['Admin/Acade/Evaluate/AcademicRepeat/(:any)/(:any)/(:any)'] = "admin/academic/ConAdminAcademicRepeat/AdminAcademicRepeatGrade/$1/$2/$3";
 $route['Admin/Acade/Evaluate/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
 $route['Admin/Acade/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreMain";
 $route['Admin/Acade/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
