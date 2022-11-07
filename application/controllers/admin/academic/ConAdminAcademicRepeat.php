@@ -108,14 +108,14 @@ var  $title = "แผงควบคุม";
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 //->where('TeacherID',$this->session->userdata('login_id'))
                                 ->where('tb_register.Grade <= 0')
-                                //->where('tb_register.Grade_Type','เรียนซ้ำครั้งที่ 1')
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
+                                ->where('tb_register.SubjectCode',urldecode($subject))                                
+                                ->or_where('tb_register.Grade_Type','เรียนซ้ำครั้งที่ 1')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
-            //echo '<pre>'; print_r($data['check_student']);exit();          
+           // echo '<pre>'; print_r($data['check_student']);exit();          
         $data['Teacher'] = $DBpersonnel->select('pers_prefix,pers_firstname,pers_lastname')->where('pers_id',@$data['check_student'][0]->TeacherID)->get('tb_personnel')->row();            
         
         }else{
