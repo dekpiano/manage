@@ -82,6 +82,7 @@ $route['Admin/Acade/Evaluate/AcademicRepeat'] = "admin/academic/ConAdminAcademic
 $route['Admin/Acade/Evaluate/AcademicRepeat/(:any)/(:any)/(:any)'] = "admin/academic/ConAdminAcademicRepeat/AdminAcademicRepeatGrade/$1/$2/$3";
 $route['Admin/Acade/Evaluate/AcademicResult'] = "admin/academic/ConAdminAcademinResult/AdminAcademinResultMain";
 $route['Admin/Acade/Evaluate/SaveScore'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreMain";
+$route['Admin/Acade/Evaluate/SaveScoreGrade/(:any)/(:any)/(:any)'] = "admin/academic/ConAdminSaveScore/AdminSaveScoreGrade/$1/$2/$3";
 $route['Admin/Acade/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResult/AdminReportPersonMain";
 $route['Admin/Acade/Evaluate/ReportPerson/(:any)'] = "admin/academic/ConAdminReportResult/AdminStudentsScore/$1";
 $route['Admin/Acade/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";

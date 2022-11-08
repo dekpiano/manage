@@ -66,5 +66,43 @@
             </div>
         </section>
 
+		<div class="app-card  mt-5">
+                    <div class="app-card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table mb-0 text-left" id="Tb_Repeat">
+                                <thead>
+                                    <tr>
+                                        <th class="cell">ปีการศึกษา</th>
+                                        <th class="cell">รายวิชา</th>
+                                        <th class="cell">ครูผู้สอน</th>
+                                        <th class="cell">แก้ไขคะแนน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($result as $key => $v_result) : ?>
+                                    <tr>
+                                        <td class="cell"><?=$v_result->RegisterYear?></td>
+                                        <td class="cell"><span
+                                                class="truncate"><?=$v_result->SubjectCode.' '.$v_result->SubjectName?></span>
+                                        </td>
+                                        <td class="cell">
+                                            <?=$v_result->pers_prefix.$v_result->pers_firstname.' '.$v_result->pers_lastname?>
+                                        </td>
+                                        <td class="cell">
+                                            <a href="<?=base_url('Admin/Acade/Evaluate/SaveScoreGrade/'.$v_result->RegisterYear.'/'.$v_result->SubjectCode)?>"
+                                                class="badge bg-warning">แก้ไข</a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--//table-responsive-->
+                    </div>
+                    <!--//app-card-body-->
+                </div>
+
     </div>
     <!--//main-wrapper-->
+
+	
