@@ -91,13 +91,16 @@
         <ul class="submenu-list list-unstyled">
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="AcademicResult" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/AcademicResult');?>">จัดการผลการเรียน</a>
+                    href="<?=base_url('Admin/Acade/Evaluate/AcademicResult');?>">จัดการดูผลการเรียนนักเรียน</a>
             </li>
 
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="SaveScore" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/SaveScore');?>">จัดการบันทึกผลการเรียน</a>
+                    href="<?=base_url('Admin/Acade/Evaluate/SaveScore');?>">จัดการผลการเรียน (ปกติ)</a>
             </li>
-
+            <li class="submenu-item"><a
+                    class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat');?>">จัดการผลการเรียน (เรียนซ้ำ)</a>
+            </li>
             <li class="submenu-item">
                 <a
                     class="submenu-link <?=$this->uri->segment('4')=="ReportPerson" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
@@ -117,10 +120,7 @@
                     รายงานสรุปผลสัมฤทธิ์ทางการเรียน</a>
             </li>
 
-            <li class="submenu-item"><a
-                    class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat');?>">จัดการผลการเรียน (เรียนซ้ำ)</a>
-            </li>
+          
         </ul>
     </div>
 </li>

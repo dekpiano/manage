@@ -48,8 +48,9 @@ var  $title = "แผงควบคุม";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-        $data['title'] = "ผลการเรียน (เรียนซ้ำ)";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['title'] = "ผลการเรียน (".$data['checkOnOff'][6]->onoff_detail.')';	
+       
 
         $data['result'] = $this->db->select('
                             skjacth_academic.tb_register.SubjectCode,
@@ -73,15 +74,12 @@ var  $title = "แผงควบคุม";
            
     }
 
-    function AdminAcademicRepeatGrade($term,$yaer,$subject,$room = 'all'){
+    function AdminAcademicRepeatGrade($term,$yaer,$subject){
         $DBpersonnel = $this->load->database('personnel', TRUE); 
-        
-        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-        $data['title'] = "กรอกคะแนนผลการเรียน (เรียนซ้ำ)";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['title'] = "กรอกคะแนนผลการเรียน (".$data['checkOnOff'][6]->onoff_detail.')';	
        
-      
-        if($room == "all"){  
         $data['check_student'] = $this->db->select('
                                     tb_register.SubjectCode,
                                     tb_register.RegisterYear,
@@ -101,59 +99,25 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentClass,
                                     tb_students.StudentCode,
                                     tb_students.StudentStatus,
-                                    tb_students.StudentBehavior
+                                    tb_students.StudentBehavior,
+                                    tb_register.Grade,
+                                    tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
                                 ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 //->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('tb_register.Grade <= 0')
+                                ->where('tb_register.Grade','มส')
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))                                
-                                ->or_where('tb_register.Grade_Type','เรียนซ้ำครั้งที่ 1')
+                                //->or_where('tb_register.Grade_Type','เรียนซ้ำครั้งที่ 1')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
                                 ->get()->result();
            // echo '<pre>'; print_r($data['check_student']);exit();          
         $data['Teacher'] = $DBpersonnel->select('pers_prefix,pers_firstname,pers_lastname')->where('pers_id',@$data['check_student'][0]->TeacherID)->get('tb_personnel')->row();            
         
-        }else{
-            $sub_checkroom = explode('-',$room);
-            $sub_room = $sub_checkroom[0].'/'.$sub_checkroom[1];
-            $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
-                                    tb_register.RegisterYear,
-                                    tb_register.RegisterClass,
-                                    tb_register.Score100,
-                                    tb_register.TeacherID,
-                                    tb_register.StudyTime,
-                                    tb_subjects.SubjectName,
-                                    tb_subjects.SubjectID,
-                                    tb_subjects.SubjectUnit,
-                                    tb_subjects.SubjectHour,
-                                    tb_students.StudentID,
-                                    tb_students.StudentPrefix,
-                                    tb_students.StudentFirstName,
-                                    tb_students.StudentLastName,
-                                    tb_students.StudentNumber,
-                                    tb_students.StudentClass,
-                                    tb_students.StudentCode,
-                                    tb_students.StudentStatus,
-                                    tb_students.StudentBehavior
-                                ')
-                                ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
-                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
-                                //->where('TeacherID',$this->session->userdata('login_id'))
-                                ->where('RegisterYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))
-                                ->where('tb_students.StudentClass','ม.'.$sub_room)
-                                ->order_by('tb_students.StudentClass','ASC')
-                                ->order_by('tb_students.StudentNumber','ASC')
-                                ->get()->result();
-
-        }
 
         $check_idSubject = $this->db->where('SubjectCode',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
         

@@ -24,17 +24,13 @@ var  $title = "แผงควบคุม";
     public function AdminAcademinResultMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        
-        $data['title'] = "ผลการเรียน";	
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['title'] = "ดูผลการเรียนของนักเรียน";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminAcademicResult/AdminAcademicResultMain.php');
         $this->load->view('admin/layout/Footer.php');
 
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
-        
     }
     
     public function CheckOnOff(){   

@@ -32,9 +32,7 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/Academic/AdminSaveScore/AdminSaveScoreMain.php');
         $this->load->view('admin/layout/Footer.php');
 
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
+       
         
     }
     

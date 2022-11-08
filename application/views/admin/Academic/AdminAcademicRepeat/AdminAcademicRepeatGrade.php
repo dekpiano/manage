@@ -14,7 +14,7 @@
         <section class="we-offer-area mt-5">
             <div class="container-fluid">
 
-<?php if($check_student): ?>
+                <?php if($check_student): ?>
                 <div class="card">
                     <div class="card-body">
 
@@ -23,7 +23,7 @@
                                 <div class="col-md-6 d-flex justify-content-center">
                                     <div>
                                         ครูผู้สอน :<br>
-                                        รายวิชา : 
+                                        รายวิชา :
                                     </div>
                                     <div class="ms-3">
                                         <?=$Teacher->pers_prefix.$Teacher->pers_firstname.' '.$Teacher->pers_lastname;?><br>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="table-responsive">
                             <form class="form_score">
-                          
+
                                 <table id="tb_score" class="table table-hover table-bordered">
                                     <thead class="text-center">
                                         <tr>
@@ -69,16 +69,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($check_student as $key => $v_check_student) :  ?>
+                                        <?php 
+                                        foreach ($check_student as $key => $v_check_student) :
+                                          
+                                            if($v_check_student->Grade == "มส" || $v_check_student->Grade_Type == 'เรียนซ้ำครั้งที่ 1'):  
+                                            
+                                        ?>
                                         <tr>
                                             <th class="align-middle text-center"><?=$v_check_student->StudentClass?>
                                             </th>
-                                            <td class="align-middle text-center"><?=$v_check_student->StudentNumber?>
+                                            <td class="align-middle text-center fw-bold"><?=$v_check_student->StudentNumber?>
                                             </td>
-                                            <td class="align-middle text-center"><?=$v_check_student->StudentCode?></td>
-                                            <td class="align-middle">
+                                            <td class="align-middle text-center fw-bold"><?=$v_check_student->StudentCode?></td>
+                                            <td class="align-middle fw-bold">
                                                 <?=$v_check_student->StudentPrefix?><?=$v_check_student->StudentFirstName?>
-                                                <?=$v_check_student->StudentLastName?>
+                                                <?=$v_check_student->StudentLastName?> <br>
+                                                <small class="fw-normal"><?=($v_check_student->Grade_Type);?></small> 
                                                 <input type="text" class="form-control sr-only" id="StudentID"
                                                     name="StudentID[]" value="<?=$v_check_student->StudentID?>">
                                                 <input type="text" class="form-control sr-only" id="SubjectCode"
@@ -114,7 +120,8 @@
                                                     id="<?=$v_check_student->StudentID?>"
                                                     name="<?=$v_check_student->StudentID?>[]"
                                                     value="<?=$v_check_student->Score100 == "" ?"":$s[$key]?>"
-                                                    <?=$checkOnOff[6]->onoff_status == "off"?"readonly":""?> autocomplete="off">
+                                                    <?=$checkOnOff[6]->onoff_status == "off"?"readonly":""?>
+                                                    autocomplete="off">
                                             </td>
                                             <?php endforeach; ?>
                                             <td class="align-middle">
@@ -133,13 +140,17 @@
                                             ?>
                                             </td>
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php 
+                                        endif;
+                                    endforeach; 
+                                    ?>
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary "><i class="fa fa-floppy-o"
-                                            aria-hidden="true"></i> บันทึกคะแนน</button>
-
+                                    <button type="submit" class="btn btn-primary "><i class="bi bi-pencil-square"></i>
+                                        บันทึกคะแนน</button>
+                                    <a href="" class="btn btn-warning float-end"><i class="bi bi-printer"></i>
+                                        พิมพ์รายงาน</a>
                                 </div>
                             </form>
 
@@ -149,16 +160,16 @@
                     </div>
                 </div>
                 <?php else: ?>
-                    <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
-				    <div class="inner">
-					    <div class="app-card-body text-center ">
-						    <h3 class=""> ไม่มีนักเรียน เรียนซ้ำ ในรายวิชานี้!</h3>
-                            <a class="btn app-btn-primary" href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat');?>">กลับหน้าหลัก</a>
-						  </div><!--//app-card-body-->
-					    
-				    </div><!--//inner-->
-			    </div>
-                   
+                <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+                    <div class="inner">
+                        <div class="app-card-body text-center">
+                            <h3 class=""> ไม่มีนักเรียน เรียนซ้ำ ในรายวิชานี้!</h3>
+                            <a class="btn app-btn-primary"
+                                href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat');?>">กลับหน้าหลัก</a>
+                        </div>
+                    </div>
+                </div>
+
                 <?php endif; ?>
 
 
