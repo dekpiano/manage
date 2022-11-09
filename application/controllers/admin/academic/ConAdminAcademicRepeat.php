@@ -69,7 +69,7 @@ var  $title = "แผงควบคุม";
                             ->group_by('SubjectCode')
                             ->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminAcademicRepeat/AdminAcademicRepeatMain.php');
+        $this->load->view('admin/Academic/AdminEvaluateLearnRepeat/AdminEvaluateLearnRepeatMain.php');
         $this->load->view('admin/layout/Footer.php');
            
     }
@@ -126,7 +126,7 @@ var  $title = "แผงควบคุม";
 
         //echo '<pre>';print_r($data['set_score']); exit();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminAcademicRepeat/AdminAcademicRepeatGrade.php');
+        $this->load->view('admin/Academic/AdminEvaluateLearnRepeat/AdminEvaluateLearnRepeatGrade.php');
         $this->load->view('admin/layout/Footer.php');
     }
 

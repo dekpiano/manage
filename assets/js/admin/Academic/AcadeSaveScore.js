@@ -91,10 +91,10 @@ function calculateRowSum() {
             $(this).find('.grade').html(check_grade(sum));
         }
 
-        if(sum >= 50 ){
-        //    $(this).find('.check_score').attr('readonly','0');
-        //    $(this).find('.study_time').attr('readonly','0');
-           
+        if (sum >= 50) {
+            //    $(this).find('.check_score').attr('readonly','0');
+            //    $(this).find('.study_time').attr('readonly','0');
+
         }
         //console.log(sum);
     });
@@ -152,6 +152,38 @@ function calculateTotal(index) {
     calculateRowSum();
 }
 
+$(document).on('submit', '.form_score_0W', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: '../../../../../../admin/academic/ConAdminSaveScore/insert_score_0W',
+        type: "post",
+        data: $(this).serialize(), //this is formData
+        success: function(data) {
+            console.log(data);
+            if (data > 0) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'บันทึกคะแนนสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            } else {
+                // window.location.reload();
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+});
+
+//ตั้งค่าเรียนซ้ำครั้งที่
 $(document).on('submit', '.form_score', function(e) {
     e.preventDefault();
 
@@ -170,7 +202,7 @@ $(document).on('submit', '.form_score', function(e) {
                     timer: 2000
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {
-                       
+
                     }
                 })
             } else {
@@ -183,15 +215,14 @@ $(document).on('submit', '.form_score', function(e) {
     });
 });
 
-//ตั้งค่าเรียนซ้ำครั้งที่
 $(document).on("change", "#CheckTimeRepeat", function() {
     let CheckTimeRepeat = $(this).val();
-    $.post("../../../admin/academic/ConAdminAcademicRepeat/CheckTimeRepeat", {            
+    $.post("../../../admin/academic/ConAdminAcademicRepeat/CheckTimeRepeat", {
             value: CheckTimeRepeat
         },
         function(data, status) {
             //console.log(data);
-            if(data == 1){
+            if (data == 1) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -200,33 +231,33 @@ $(document).on("change", "#CheckTimeRepeat", function() {
                     timer: 3000
                 })
             }
-           
-        
+
+
         });
 });
 
 $(document).on("change", "#CheckOnoffRepeat", function() {
     let CheckOnoffRepeat = $(this).val();
-    $.post("../../../admin/academic/ConAdminAcademicRepeat/CheckOnoffRepeat", {            
+    $.post("../../../admin/academic/ConAdminAcademicRepeat/CheckOnoffRepeat", {
             value: CheckOnoffRepeat
         },
         function(data, status) {
-            
-            if(CheckOnoffRepeat === 'on'){
-               // console.log(CheckOnoffRepeat);
-               $('#CheckOnoffRepeat').removeClass('border-danger');
-               $('#CheckOnoffRepeat').removeClass('text-danger');
-               $('#CheckOnoffRepeat').addClass('border-success');
+
+            if (CheckOnoffRepeat === 'on') {
+                // console.log(CheckOnoffRepeat);
+                $('#CheckOnoffRepeat').removeClass('border-danger');
+                $('#CheckOnoffRepeat').removeClass('text-danger');
+                $('#CheckOnoffRepeat').addClass('border-success');
                 $('#CheckOnoffRepeat').addClass('text-success');
-            }else{
+            } else {
                 $('#CheckOnoffRepeat').removeClass('border-success');
                 $('#CheckOnoffRepeat').removeClass('text-success');
                 $('#CheckOnoffRepeat').addClass('border-danger');
-               $('#CheckOnoffRepeat').addClass('text-danger');
-              
+                $('#CheckOnoffRepeat').addClass('text-danger');
+
             }
-          
-            if(data == 1){
+
+            if (data == 1) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -235,7 +266,7 @@ $(document).on("change", "#CheckOnoffRepeat", function() {
                     timer: 3000
                 })
             }
-           
-        
+
+
         });
 });

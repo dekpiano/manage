@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <form class="form_score">
+                            <form class="form_score_0W">
 
                                 <table id="tb_score" class="table table-hover table-bordered">
                                     <thead class="text-center">
@@ -71,8 +71,8 @@
                                     <tbody>
                                         <?php 
                                         foreach ($check_student as $key => $v_check_student) :
-                                          
-                                            if($v_check_student->Grade == "มส" || $v_check_student->Grade_Type == 'เรียนซ้ำครั้งที่ 1'):  
+                                         // echo $v_check_student->Grade;
+                                            if($v_check_student->Grade <= 0 && $v_check_student->Grade != 'มส' || $v_check_student->Grade_Type == 'แก้ 0 ร'):  
                                             
                                         ?>
                                         <tr>

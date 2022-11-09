@@ -88,18 +88,14 @@
     <!--//nav-link-->
     <div id="submenu-1" class="collapse submenu submenu-1 <?=$this->uri->segment('3')=="Evaluate" ? "show" :""?>"
         data-bs-parent="#menu-accordion">
-        <ul class="submenu-list list-unstyled">
-            <li class="submenu-item"><a
-                    class="submenu-link <?=$this->uri->segment('4')=="AcademicResult" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/AcademicResult');?>">จัดการดูผลการเรียนนักเรียน</a>
-            </li>
+        <ul class="submenu-list list-unstyled">            
 
-            <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="SaveScore" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/SaveScore');?>">จัดการผลการเรียน (ปกติ)</a>
+            <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="EditGrade" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Evaluate/EditGrade');?>">จัดการผลการเรียน (0 ร)</a>
             </li>
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat');?>">จัดการผลการเรียน (เรียนซ้ำ)</a>
+                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat');?>">จัดการผลการเรียนซ้ำ (มส)</a>
             </li>
             <li class="submenu-item">
                 <a
@@ -119,7 +115,13 @@
                     href="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher?SelLern=0');?>">
                     รายงานสรุปผลสัมฤทธิ์ทางการเรียน</a>
             </li>
-
+            <li class="submenu-item"><a
+                    class="submenu-link <?=$this->uri->segment('4')=="AcademicResult" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Evaluate/AcademicResult');?>">ตั้งค่าแสดงผลการเรียนนักเรียน</a>
+            </li>
+            <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="SaveScore" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Evaluate/SaveScore');?>">ตั้งค่าบันทึกผลการเรียน</a>
+            </li>
           
         </ul>
     </div>

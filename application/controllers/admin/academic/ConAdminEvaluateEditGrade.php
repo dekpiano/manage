@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ConAdminSaveScore extends CI_Controller {
+class ConAdminEvaluateEditGrade extends CI_Controller {
 var  $title = "แผงควบคุม";
 	public function __construct() {
         parent::__construct();
@@ -44,11 +44,11 @@ var  $title = "แผงควบคุม";
         return $grade;
     }
     
-    public function AdminSaveScoreMain(){   
+    public function AdminEvaluateEditGradeMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-        $data['title'] = "บันทึกผลการเรียน";	
+        $data['title'] = "แสดงผลการเรียน 0 ร";	
         $data['OnOffSaveScore'] = $this->db->where('onoff_id >= 2')->where('onoff_id <= 5')->get('tb_register_onoff')->result();
         $data['OnOffSaveScoreSystem'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();
         
@@ -70,18 +70,18 @@ var  $title = "แผงควบคุม";
                             ->get()->result();
         
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminSaveScore/AdminSaveScoreMain.php');
+        $this->load->view('admin/Academic/AdminEvaluateEditGrade/AdminEvaluateEditGradeMain.php');
         $this->load->view('admin/layout/Footer.php');
 
        
         
     }
 
-    public function AdminSaveScoreGrade($term,$yaer,$subject){
+    public function AdminEvaluateEditGradeUpdate($term,$yaer,$subject){
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-        $data['title'] = "กรอกคะแนนผลการเรียน";	
+        $data['title'] = "บันทึกคะแนนผลการเรียน 0 ร";	
        
         $data['check_student'] = $this->db->select('
                                     tb_register.SubjectCode,
@@ -128,7 +128,7 @@ var  $title = "แผงควบคุม";
         $data['onoff_savescore'] = $this->db->where('onoff_id >=',2)->where('onoff_id <=',5)->get('tb_register_onoff')->result();
 
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminSaveScore/AdminSaveScoreGrade.php');
+        $this->load->view('admin/Academic/AdminEvaluateEditGrade/AdminEvaluateEditGrade.php');
         $this->load->view('admin/layout/Footer.php');
         
 
@@ -166,21 +166,7 @@ var  $title = "แผงควบคุม";
         }
 
     }
-    
-    public function CheckOnOffSaveScore(){   
-
-        if($this->input->post('check') == "true"){
-			$value = "on";
-		}elseif($this->input->post('check') == "false"){
-			$value = "off";
-		}
-
-        echo  $this->ModAdminSaveScore->UpdateOnOffSaveScore($this->input->post('key'),$value);
-        
-
-    }
-
-    
+     
 
 }
 

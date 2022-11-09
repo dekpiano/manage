@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <form class="form_score_0W">
+                            <form class="form_score">
 
                                 <table id="tb_score" class="table table-hover table-bordered">
                                     <thead class="text-center">
@@ -71,8 +71,8 @@
                                     <tbody>
                                         <?php 
                                         foreach ($check_student as $key => $v_check_student) :
-                                         // echo $v_check_student->Grade;
-                                            if($v_check_student->Grade <= 0 || $v_check_student->Grade_Type == 'แก้ 0 ร'):  
+                                          
+                                            if($v_check_student->Grade == "มส" || $v_check_student->Grade_Type == 'เรียนซ้ำครั้งที่ 1'):  
                                             
                                         ?>
                                         <tr>
@@ -119,7 +119,7 @@
                                                     check-score-key="<?=$v_set_score->regscore_score?>"
                                                     id="<?=$v_check_student->StudentID?>"
                                                     name="<?=$v_check_student->StudentID?>[]"
-                                                    value="<?=$v_check_student->Score100 == "" ?"":$s[$key]?>"
+                                                    value="<?=$v_check_student->Score100 == "" ?"0":$s[$key]?>"
                                                     <?=$checkOnOff[6]->onoff_status == "off"?"readonly":""?>
                                                     autocomplete="off">
                                             </td>
