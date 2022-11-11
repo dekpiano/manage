@@ -41,8 +41,9 @@ var  $title = "แผงควบคุม";
     }
 
     public function AdminRegisterSubjectSelect(){ 
+        $CheckYear = $this->db->get('tb_schoolyear')->result();
         $data = [];
-        $subject = $this->db->where('SubjectYear','1/2565')->get('tb_subjects')->result();
+        $subject = $this->db->where('SubjectYear',$CheckYear[0]->schyear_year)->get('tb_subjects')->result();
         foreach($subject as $record){
             $data[] = array( 
                 "SubjectYear" => $record->SubjectYear,
