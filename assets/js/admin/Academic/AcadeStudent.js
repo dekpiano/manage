@@ -39,6 +39,33 @@ $(document).on('click', '.delete_student', function() {
     })
 });
 
+
+$(document).on('change', '.StudentBehavior', function() {
+    let StatusBehavior = $(this).val();
+    let KeyStuId = $(this).attr('data-stuid');
+    $.post("../../../../admin/academic/ConAdminStudents/AdminUpdateStudentBehavior", {
+            KeyStuId: KeyStuId,
+            ValueBehavior: StatusBehavior
+        },
+        function(data, status) {
+            console.log(data);
+            if (data == 1) {
+                $('#tbStudent tr.' + KeyStuId).remove();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'เปลี่ยนแปลงสถานะเป็น' + StatusBehavior,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+
+            }
+
+
+        });
+
+});
+
 function calculateColumnUnit(index) {
     var total = 0;
     $('.ShowGrade tbody tr').each(function() {

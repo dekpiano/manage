@@ -46,7 +46,7 @@ class ConAdminStudents extends CI_Controller {
     return $service;
 }
 
-    public function AdminStudentsMain(){ 
+    public function AdminStudentsMain($Key = null){ 
                 
      
         $DBpersonnel = $this->load->database('personnel', TRUE); 
@@ -61,9 +61,10 @@ class ConAdminStudents extends CI_Controller {
                                         StudentIDNumber,
                                         StudentStatus,
                                         StudentBehavior')
-                                        ->where('StudentStatus','1/ปกติ')
-                                        ->get('tb_students')->result();        
-		$data['title'] = "นักเรียน";
+                                        ->where('StudentBehavior',urldecode($Key))
+                                        ->get('tb_students')->result();     
+                                        //echo '<pre>'; print_r($data['stu']);  exit(); 
+		$data['title'] = "จัดการข้อมูลนักเรียน";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminStudents/AdminStudentsMain.php');
@@ -169,6 +170,11 @@ class ConAdminStudents extends CI_Controller {
 		// delete_cookie('password_cookie'); 
         // $this->session->sess_destroy();
         
+    }
+
+    public function AdminUpdateStudentBehavior(){
+        $data = array('StudentBehavior' => $this->input->post('ValueBehavior'));
+        echo $this->db->update('tb_students',$data,'StudentID="'.$this->input->post('KeyStuId').'"');
     }
     
     public function AdminStudentsDelete($id){   

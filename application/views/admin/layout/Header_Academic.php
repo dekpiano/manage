@@ -37,7 +37,7 @@
                     ที่ปรึกษา</a>
             </li>
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="Students" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Registration/Students');?>">จัดการนักเรียน</a></li>
+                    href="<?=base_url('Admin/Acade/Registration/Students/All');?>">จัดการนักเรียน</a></li>
             <!-- <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment('4')=="ExtraSubject" ? "active" :""?>"
                                             href="<?=base_url('Admin/Acade/Registration/ExtraSubject');?>">ลงทะเบียนวิชาเพิ่มเติม</a>
