@@ -120,6 +120,7 @@ class Model_login extends CI_Model
 		->join('skjacth_academic.tb_admin_rloes','skjacth_academic.tb_admin_rloes.admin_rloes_userid = skjacth_personnel.tb_personnel.pers_id','left')
 		->where('pers_username', $id)
 		->get();
+		
 
 		if($query->num_rows() > 0)
 		{
