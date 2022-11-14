@@ -153,11 +153,11 @@
         <!--//submenu-arrow-->
     </a>
     <!--//nav-link-->
-    <div id="submenu-3" class="collapse submenu submenu-3 <?=$this->uri->segment('2')=="Affairs" ? "show" :""?>"
+    <div id="submenu-3" class="collapse submenu submenu-3 <?=$this->uri->segment('3')=="Course" ? "show" :""?>"
         data-bs-parent="#menu-accordion">
         <ul class="submenu-list list-unstyled">
             <li class="submenu-item ">
-                <a class="submenu-link <?=$this->uri->segment('5')=="Setting" ? "active" :""?>" href="#">กำลังพัฒนา</a>
+                <a class="submenu-link <?=$this->uri->segment('3')=="Course" ? "active" :""?>" href="<?=base_url('Admin/Acade/Course/SendPlan');?>">จัดการส่งแผน</a>
 
             </li>
 

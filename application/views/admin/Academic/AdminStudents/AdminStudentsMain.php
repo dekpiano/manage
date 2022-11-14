@@ -11,51 +11,52 @@
             <div class="container">
 
                 <div class="row g-4 mb-4">
-                    <div class="col-6 col-lg-4">
+                    <div class="col-6 col-lg-6">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
                                 <div class="stats-figure">นักเรียน ปกติ</div>
-                              
+
                             </div>
                             <!--//app-card-body-->
-                            <a class="app-card-link-mask" href="<?=base_url('Admin/Acade/Registration/Students/ปกติ')?>"></a>
+                            <a class="app-card-link-mask"
+                                href="<?=base_url('Admin/Acade/Registration/Students/ปกติ')?>"></a>
                         </div>
                         <!--//app-card-->
                     </div>
-                    <!--//col-->
-                    <div class="col-6 col-lg-4">
+
+                    <!-- <div class="col-6 col-lg-4">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
                                 <div class="stats-figure">นักเรียน ขาดเรียนนาน</div>
                               
                             </div>
-                            <!--//app-card-body-->
                             <a class="app-card-link-mask" href="<?=base_url('Admin/Acade/Registration/Students/ขาดเรียนนาน')?>"></a>
                         </div>
-                        <!--//app-card-->
-                    </div>
-                    <!--//col-->
-                    <div class="col-6 col-lg-4">
+                        
+                    </div> -->
+
+                    <div class="col-6 col-lg-6">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
                                 <div class="stats-figure">นักเรียน จำหน่าย</div>
-                              
+
                             </div>
                             <!--//app-card-body-->
-                            <a class="app-card-link-mask" href="<?=base_url('Admin/Acade/Registration/Students/จำหน่าย')?>"></a>
+                            <a class="app-card-link-mask"
+                                href="<?=base_url('Admin/Acade/Registration/Students/จำหน่าย')?>"></a>
                         </div>
                         <!--//app-card-->
                     </div>
                     <!--//col-->
 
-                   
-                 
+
+
                 </div>
 
-                <?php if($stu) :?>
+                <?php if(@$stu) :?>
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         สถานะนักเรียน<?=$stu[0]->StudentBehavior?>
@@ -78,20 +79,25 @@
                                     <th>ชั้น</th>
                                     <th>เลขที่</th>
                                     <th>สถานะพฤติกรรม</th>
-                                    <th>รายละเอียด</th>
+                                    <th>สถานะนักเรียน</th>
                                     <th>คำสั่ง</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($stu as $key => $v_stu): ?>
                                 <tr class="<?=$v_stu->StudentCode?> <?=$v_stu->StudentID?>">
-                                    <td><?=$v_stu->StudentCode?></td>
+                                    <td class="text-center"><?=$v_stu->StudentCode?></td>
                                     <td><?=$v_stu->StudentPrefix?><?=$v_stu->StudentFirstName?>
                                         <?=$v_stu->StudentLastName?></td>
-                                    <td><?=$v_stu->StudentClass?></td>
-                                    <td><?=$v_stu->StudentNumber?></td>
-                                    <td>
-                                        <div>
+                                    <td class="text-center"><?=$v_stu->StudentClass?></td>
+                                    <td class="text-center"><?=$v_stu->StudentNumber?></td>
+                                    <td class="text-center">
+                                        <?php if($v_stu->StudentBehavior == 'ปกติ'): ?>
+                                        <span class="badge rounded-pill bg-success"><?=$v_stu->StudentBehavior?></span>
+                                        <?php else: ?>
+                                        <span class="badge rounded-pill bg-warning "><?=$v_stu->StudentBehavior?></span>
+                                        <?php endif;?>
+                                        <!-- <div>
                                             <?php $StatusBehavior = array('ปกติ','ขาดเรียนนาน','จำหน่าย') ?>
                                             <select name="StudentBehavior" id="StudentBehavior"
                                                 class="form-select form-select-sm StudentBehavior"
@@ -101,10 +107,14 @@
                                                     value="<?=$v_Status?>"><?=$v_Status;?></option>
                                                 <?php endforeach; ?>
                                             </select>
-                                        </div>
+                                        </div> -->
                                     </td>
-                                    <td><a href="#">เปิดดู</a></td>
-                                    <td><a class="delete_student btn btn-danger" href="#"
+                                    <td class="text-center">
+                                        <span class="badge rounded-pill bg-success">
+                                            <?php $sub = explode('/', $v_stu->StudentStatus); echo $sub[1];?>
+                                        </span>
+                                    </td>
+                                    <td class="text-center"><a class="delete_student btn btn-danger" href="#"
                                             idStu="<?=$v_stu->StudentCode?>">ลบ</a></td>
                                 </tr>
                                 <?php endforeach; ?>

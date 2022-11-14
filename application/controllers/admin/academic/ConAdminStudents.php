@@ -47,23 +47,32 @@ class ConAdminStudents extends CI_Controller {
 }
 
     public function AdminStudentsMain($Key = null){ 
-                
-     
-        $DBpersonnel = $this->load->database('personnel', TRUE); 
-        $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        $data['stu'] = $this->db->select('StudentID,
-                                        StudentNumber,
-                                        StudentClass,
-                                        StudentCode,
-                                        StudentPrefix,
-                                        StudentFirstName,
-                                        StudentLastName,
-                                        StudentIDNumber,
-                                        StudentStatus,
-                                        StudentBehavior')
-                                        ->where('StudentBehavior',urldecode($Key))
-                                        ->get('tb_students')->result();     
-                                        //echo '<pre>'; print_r($data['stu']);  exit(); 
+        if(urldecode($Key) == "ปกติ"){
+           $ta = "StudentStatus='1/ปกติ' OR StudentBehavior='ขาดเรียนนาน'";
+        } elseif(urldecode($Key) == 'จำหน่าย'){
+            $ta = "StudentStatus!='1/ปกติ' OR StudentBehavior='ขาดเรียนนาน'";
+        }else{
+            $ta = null;
+        }       
+        if($Key != 'All'){
+            $DBpersonnel = $this->load->database('personnel', TRUE); 
+            $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
+            $data['stu'] = $this->db->select('StudentID,
+                                            StudentNumber,
+                                            StudentClass,
+                                            StudentCode,
+                                            StudentPrefix,
+                                            StudentFirstName,
+                                            StudentLastName,
+                                            StudentIDNumber,
+                                            StudentStatus,
+                                            StudentBehavior')
+                                            ->where($ta)
+                                            ->where('StudentBehavior',urldecode($Key))                                        
+                                            ->get('tb_students')->result();     
+                                            //echo '<pre>'; print_r($data['stu']);  exit(); 
+        }
+       
 		$data['title'] = "จัดการข้อมูลนักเรียน";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $this->load->view('admin/layout/Header.php',$data);
