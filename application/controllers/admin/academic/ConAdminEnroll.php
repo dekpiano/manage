@@ -221,29 +221,32 @@ var  $title = "แผงควบคุม";
         $data = [];
         //$subject = $this->db->where('SubjectYear','1/2565')->get('tb_subjects')->result();
        
-        $Register = $this->db->select("skjacth_academic.tb_register.RegisterYear,
+        $Register = $this->db->select("
                                     skjacth_academic.tb_register.SubjectCode,
                                     skjacth_academic.tb_subjects.SubjectName,
                                     skjacth_academic.tb_subjects.FirstGroup,
                                     skjacth_academic.tb_register.RegisterClass,
                                     skjacth_academic.tb_register.TeacherID,
                                     skjacth_academic.tb_subjects.SubjectID,
+                                    skjacth_academic.tb_subjects.SubjectYear,
                                     skjacth_personnel.tb_personnel.pers_firstname,
                                     skjacth_personnel.tb_personnel.pers_prefix,
                                     skjacth_personnel.tb_personnel.pers_lastname")
                                 ->from('tb_register')
                                 ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
-                                ->where('RegisterYear',$CheckYear[0]->schyear_year)
+                                ->where('tb_subjects.SubjectYear',$CheckYear[0]->schyear_year)
                                 ->group_by('SubjectCode')
                                 ->group_by('TeacherID')
                                 ->group_by('RegisterClass')
                                 ->get()->result();
 
+        //echo '<pre>'; print_r($Register);   exit();    
+
         foreach($Register as $record){
             
             $data[] = array( 
-                "SubjectYear" => $record->RegisterYear,
+                "SubjectYear" => $record->SubjectYear,
                 "SubjectCode" => $record->SubjectCode,
                 "SubjectName" => $record->SubjectName,
                 "FirstGroup" => $record->FirstGroup,
@@ -259,7 +262,7 @@ var  $title = "แผงควบคุม";
             "data" =>  $data
         );
 
-       // echo '<pre>'; print_r($Register);              
+      
       
        echo json_encode($output);
     }
