@@ -47,10 +47,11 @@ class ConAdminStudents extends CI_Controller {
 }
 
     public function AdminStudentsMain($Key = null){ 
+       // echo urldecode($Key); exit();
         if(urldecode($Key) == "ปกติ"){
-           $ta = "StudentStatus='1/ปกติ' OR StudentBehavior='ขาดเรียนนาน'";
+           $ta = "StudentBehavior='ปกติ' OR StudentBehavior='ขาดเรียนนาน'";           
         } elseif(urldecode($Key) == 'จำหน่าย'){
-            $ta = "StudentStatus!='1/ปกติ' OR StudentBehavior='ขาดเรียนนาน'";
+            $ta = "StudentBehavior!='ปกติ'  AND StudentBehavior = ''";            
         }else{
             $ta = null;
         }       
@@ -66,9 +67,9 @@ class ConAdminStudents extends CI_Controller {
                                             StudentLastName,
                                             StudentIDNumber,
                                             StudentStatus,
-                                            StudentBehavior')
-                                            ->where($ta)
-                                            ->where('StudentBehavior',urldecode($Key))                                        
+                                            StudentBehavior,
+                                            StudentStudyLine')
+                                            ->where($ta) 
                                             ->get('tb_students')->result();     
                                             //echo '<pre>'; print_r($data['stu']);  exit(); 
         }
@@ -83,23 +84,34 @@ class ConAdminStudents extends CI_Controller {
 
     public function AdminStudentsUpdate(){
         $this->load->helper('array');
+        
+            
+        
         $service = $this->getClient();
         $spreadsheetId = '1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec';
         
-        $range = 'stu1!A2:J1000';  // TODO: Update placeholder value.
+        $range = 'stu1!A2:K1000';  // TODO: Update placeholder value.
 
         $response = $service->spreadsheets_values->get($spreadsheetId, $range);
         $numRows = $response->getValues() != null ? count($response->getValues()) : 0;
        
         $checkStu = [];
-        $re = $this->db->select('StudentIDNumber,StudentStatus')->where('StudentStatus','1/ปกติ')->get('tb_students')->result();
+        $re = $this->db->select('StudentIDNumber,StudentStatus')
+        ->where('StudentBehavior','ปกติ')
+        ->where('StudentStatus','1/ปกติ')
+        ->or_where('StudentBehavior','ขาดเรียนนาน')
+        ->get('tb_students')->result();
         foreach ($re as $key => $v_re) {
             $checkStu[] = $v_re->StudentIDNumber;
         }
-
-        //echo '<pre>';print_r($response->values);exit();
+        //sset($response->values[775][10])
+       // echo '<pre>';print_r($re);exit();
         for ($i=0; $i < $numRows; $i++) { 
-
+            if(isset($response->values[$i][10]) == 1){
+               $StudyLine = $response->values[$i][10];
+            }else{
+                $StudyLine = '';
+            }
             if (in_array($response->values[$i][7], $checkStu))
             {
              $arrayName = array('StudentNumber' => $response->values[$i][0], 
@@ -110,7 +122,8 @@ class ConAdminStudents extends CI_Controller {
                                 'StudentLastName' => $response->values[$i][5],
                                 'StudentDateBirth' => $response->values[$i][6],
                                 'StudentStatus' => $response->values[$i][8],
-                                'StudentBehavior' => $response->values[$i][9]);
+                                'StudentBehavior' => $response->values[$i][9],
+                                'StudentStudyLine' => $StudyLine);
             $this->ModAdminStudents->Students_Update($arrayName,$response->values[$i][7]);
             }
           else
@@ -124,12 +137,13 @@ class ConAdminStudents extends CI_Controller {
                 'StudentIDNumber' => $response->values[$i][7],
                 'StudentDateBirth' => $response->values[$i][6],
                 'StudentStatus' => $response->values[$i][8],
-                'StudentBehavior' => $response->values[$i][9]);
+                'StudentBehavior' => $response->values[$i][9],
+                'StudentStudyLine' => $StudyLine);
                 $this->ModAdminStudents->Students_Inaert($arrayName);
             }
         }
         $this->session->set_flashdata(array('status'=> 'success','messge' => 'อัพเดพข้อมูลสำเร็จ','msg'=>'YES'));
-        redirect('Admin/Acade/Registration/Students', 'location');
+        redirect('Admin/Acade/Registration/Students/ปกติ', 'location');
     }
 
     public function AdminStudentsMain1(){   
@@ -182,8 +196,15 @@ class ConAdminStudents extends CI_Controller {
     }
 
     public function AdminUpdateStudentBehavior(){
-        $data = array('StudentBehavior' => $this->input->post('ValueBehavior'));
-        echo $this->db->update('tb_students',$data,'StudentID="'.$this->input->post('KeyStuId').'"');
+        if($this->input->post('ValueBehavior') == 'ขาดเรียนนาน' || $this->input->post('ValueBehavior') == 'ปกติ'){
+            $data = array('StudentBehavior' => $this->input->post('ValueBehavior'));
+            $this->db->update('tb_students',$data,'StudentID="'.$this->input->post('KeyStuId').'"');
+            echo $this->input->post('ValueBehavior');
+        }else{
+            $data = array('StudentBehavior' => $this->input->post('ValueBehavior'));
+            echo $this->db->update('tb_students',$data,'StudentID="'.$this->input->post('KeyStuId').'"');
+        }
+        
     }
     
     public function AdminStudentsDelete($id){   

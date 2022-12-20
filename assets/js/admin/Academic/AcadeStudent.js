@@ -59,8 +59,16 @@ $(document).on('change', '.StudentBehavior', function() {
                     timer: 3000
                 })
 
-            }
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'เปลี่ยนแปลงสถานะเป็น' + StatusBehavior,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
 
+            }
 
         });
 

@@ -3,8 +3,18 @@
         <div class="container-xl">
             <section class="cta-section theme-bg-light py-5">
                 <div class="container text-center">
-
                     <h2 class="heading">จัดการข้อมูล<?=$title;?></h2>
+                    <div class="mt-4">
+                        <a href="https://docs.google.com/spreadsheets/d/1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec/edit#gid=0"
+                            target="_blank" class="btn btn-primary btn-sm float-right mb-3">
+                            <i class="far fa-plus-square"></i> เพิ่มข้อมูลนักเรียน
+                        </a>
+                        <a href="<?=base_url('Admin/Acade/Registration/StudentsUpdate');?>"
+                            class="btn btn-primary btn-sm float-right mb-3 clickLoad-spin">
+                            <i class="far fa-plus-square"></i> อัพเดพข้อมูลนักเรียน
+                        </a>
+                    </div>
+
                 </div>
                 <!--//container-->
             </section>
@@ -19,7 +29,7 @@
 
                             </div>
                             <!--//app-card-body-->
-                            <a class="app-card-link-mask"
+                            <a class="app-card-link-mask clickLoder"
                                 href="<?=base_url('Admin/Acade/Registration/Students/ปกติ')?>"></a>
                         </div>
                         <!--//app-card-->
@@ -45,7 +55,7 @@
 
                             </div>
                             <!--//app-card-body-->
-                            <a class="app-card-link-mask"
+                            <a class="app-card-link-mask clickLoder"
                                 href="<?=base_url('Admin/Acade/Registration/Students/จำหน่าย')?>"></a>
                         </div>
                         <!--//app-card-->
@@ -62,14 +72,7 @@
                         สถานะนักเรียน<?=$stu[0]->StudentBehavior?>
                     </div>
                     <div class="card-body">
-                        <a href="https://docs.google.com/spreadsheets/d/1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec/edit#gid=0"
-                            target="_blank" class="btn btn-primary btn-sm float-right mb-3">
-                            <i class="far fa-plus-square"></i> เพิ่มข้อมูลนักเรียน
-                        </a>
-                        <a href="<?=base_url('Admin/Acade/Registration/StudentsUpdate');?>"
-                            class="btn btn-primary btn-sm float-right mb-3 clickLoad-spin">
-                            <i class="far fa-plus-square"></i> อัพเดพข้อมูลนักเรียน
-                        </a>
+
 
                         <table class="table table-bordered" id="tbStudent">
                             <thead>
@@ -77,10 +80,11 @@
                                     <th>เลขประจำตัว</th>
                                     <th>ชื่อ - นามสกุล</th>
                                     <th>ชั้น</th>
-                                    <th>เลขที่</th>
-                                    <th>สถานะพฤติกรรม</th>
+                                    <th>เลขที่</th>                                   
+                                    <th>สายการเรียน</th>                                    
                                     <th>สถานะนักเรียน</th>
-                                    <th>คำสั่ง</th>
+                                    <th>สถานะพฤติกรรม</th>
+                                    <!-- <th>คำสั่ง</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,6 +95,12 @@
                                         <?=$v_stu->StudentLastName?></td>
                                     <td class="text-center"><?=$v_stu->StudentClass?></td>
                                     <td class="text-center"><?=$v_stu->StudentNumber?></td>
+                                    <td class="text-center"><?=$v_stu->StudentStudyLine?></td>
+                                    <td class="text-center">
+                                        <span class="badge rounded-pill bg-success">
+                                            <?php $sub = explode('/', $v_stu->StudentStatus); echo $sub[1];?>
+                                        </span>
+                                    </td>
                                     <td class="text-center">
                                         <?php if($v_stu->StudentBehavior == 'ปกติ'): ?>
                                         <span class="badge rounded-pill bg-success"><?=$v_stu->StudentBehavior?></span>
@@ -109,13 +119,23 @@
                                             </select>
                                         </div> -->
                                     </td>
-                                    <td class="text-center">
-                                        <span class="badge rounded-pill bg-success">
-                                            <?php $sub = explode('/', $v_stu->StudentStatus); echo $sub[1];?>
-                                        </span>
-                                    </td>
-                                    <td class="text-center"><a class="delete_student btn btn-danger" href="#"
-                                            idStu="<?=$v_stu->StudentCode?>">ลบ</a></td>
+                                    
+                                    <!-- <td class="text-center">
+                                        <a class="delete_student btn btn-danger" href="#"
+                                            idStu="<?=$v_stu->StudentCode?>">ลบ</a>
+                                        <div>
+                                            <?php $StatusBehavior = array('ปกติ','ขาดเรียนนาน','จำหน่าย') ?>
+                                            <select name="StudentBehavior" id="StudentBehavior"
+                                                class="form-select form-select-sm StudentBehavior"
+                                                data-stuid="<?=$v_stu->StudentID?>">
+                                                <?php foreach ($StatusBehavior as $key => $v_Status) : ?>
+                                                <option <?=$v_stu->StudentBehavior == $v_Status ?"selected":""?>
+                                                    value="<?=$v_Status?>"><?=$v_Status;?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </td> -->
+                                  
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
