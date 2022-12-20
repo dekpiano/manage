@@ -44,13 +44,15 @@ var  $title = "แผงควบคุม";
         return $grade;
     }
 
-    public function AdminAcademicRepeatMain(){   
+    public function AdminAcademicRepeatMain($term,$year){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "ผลการเรียน (".$data['checkOnOff'][6]->onoff_detail.')';	
-       
+        $data['CountYear'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->order_by('RegisterYear','ASC')->get('tb_register')->result();
+        
+        //print_r($data['CountYear']); exit();
 
         $data['result'] = $this->db->select('
                             skjacth_academic.tb_register.SubjectCode,
@@ -65,7 +67,7 @@ var  $title = "แผงควบคุม";
                             ->from('skjacth_academic.tb_register')
                             ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
-                            ->where('RegisterYear','1/2565')
+                            ->where('RegisterYear',$term.'/'.$year)
                             ->group_by('SubjectCode')
                             ->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
@@ -176,6 +178,12 @@ var  $title = "แผงควบคุม";
         //print($this->input->post('value'));
         $this->db->where('onoff_id',7);
         echo $this->db->update('tb_register_onoff',array('onoff_status'=>$this->input->post('value')));
+    }
+
+    public function CheckOnoffYear(){
+        //print($this->input->post('value'));
+        $this->db->where('onoff_id',7);
+        echo $this->db->update('tb_register_onoff',array('onoff_year'=>$this->input->post('value')));
     }
 
     

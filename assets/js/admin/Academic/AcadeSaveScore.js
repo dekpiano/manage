@@ -270,3 +270,14 @@ $(document).on("change", "#CheckOnoffRepeat", function() {
 
         });
 });
+
+$(document).on("change", "#onoff_year", function() {
+    let onoff_year = $(this).val();
+    console.log(onoff_year);
+    $.post("../../../../../admin/academic/ConAdminAcademicRepeat/CheckOnoffYear", {
+            value: onoff_year
+        },
+        function(data, status) {
+            window.location.href = '../' + onoff_year;
+        });
+});

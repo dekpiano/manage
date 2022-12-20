@@ -17,8 +17,22 @@
                     </div>
                     <div class="ms-3">
                         <select name="CheckOnoffRepeat" id="CheckOnoffRepeat" class="form-select form-select-sm border <?=$checkOnOff[6]->onoff_status =="on" ?"border-success text-success":"border-danger text-danger" ?>">
-                            <option <?=$checkOnOff[6]->onoff_status =="on" ?"selected":""?> value="on"> กำลังใช้งาน</option>
-                            <option <?=$checkOnOff[6]->onoff_status =="off" ?"selected":""?> value="off">ปิดการใช้งาน</option>
+                            <option <?=$checkOnOff[6]->onoff_status =="on" ?"selected":""?> value="on"> เปิดบันทึกคะแนนเรียนซ้ำ</option>
+                            <option <?=$checkOnOff[6]->onoff_status =="off" ?"selected":""?> value="off">ปิดบันทึกคะแนนเรียนซ้ำ</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex  align-items-center mt-2">
+                    <div>
+                        ของปีการศึกษา
+                    </div>
+                    <div class="ms-3">
+                        <select name="onoff_year" id="onoff_year" class="form-select form-select-sm">
+                            <?php foreach ($CountYear as $key => $value) : ?>
+                            <option <?=$checkOnOff[6]->onoff_year ==$value->RegisterYear ?"selected":"" ?>
+                                value="<?=$value->RegisterYear?>"><?=$value->RegisterYear?></option>  
+                                <?php endforeach; ?>                          
                         </select>
                     </div>
                 </div>
