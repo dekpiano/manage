@@ -50,10 +50,34 @@ var  $title = "แผงควบคุม";
         $data['title'] = "รายชื่อนักเรียนและครูที่ปรึกษา";
         $data['description'] = "ตรวจสอบรายชื่อนักเรียนและครูที่ปรึกษา";
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['banner'] = base_url('uploads/banner/StudentList/bannerStu.png');;
+        $data['banner'] = base_url('uploads/banner/StudentList/bannerStu.png');
 
-        $data['selStudent'] = $this->db->select('StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName')->from('tb_students')->where('StudentClass','ม.4/1')->get()->result();
-        
+        $data['schoolyear'] = $this->db->get('tb_schoolyear')->row();
+        $subYear = explode('/',$data['schoolyear']->schyear_year);
+        $data['TeacRoom'] = $this->db->select('
+        skjacth_personnel.tb_personnel.pers_prefix,
+        skjacth_personnel.tb_personnel.pers_firstname,
+        skjacth_personnel.tb_personnel.pers_lastname,
+        skjacth_academic.tb_regclass.Reg_Class
+        ')
+        ->from('skjacth_academic.tb_regclass')
+        ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
+        ->where('Reg_Year',$subYear[1])
+        ->where('Reg_Class',@$_GET['studentList'])
+        ->get()->result();
+
+        $data['checkLine'] = $this->db->select('StudentStudyLine')
+        ->where('StudentClass','ม.'.@$_GET['studentList'])
+        ->group_by('StudentStudyLine')
+        ->get('tb_students')->result();
+        $data['selStudent'] = $this->db->select('StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentStudyLine,StudentBehavior')
+        ->from('tb_students')
+        ->where('StudentStatus','1/ปกติ')  
+        ->where('StudentBehavior !=','จำหน่่าย')      
+        ->where('StudentClass','ม.'.@$_GET['studentList'])
+        ->order_by('StudentNumber','ASC')
+        ->get()->result();
+                
         $this->load->view('user/layout/HeaderUser.php',$data);
         $this->load->view('user/PageStudentsList.php');
         $this->load->view('user/layout/FooterUser.php');
@@ -62,6 +86,41 @@ var  $title = "แผงควบคุม";
 		// delete_cookie('password_cookie'); 
         // $this->session->sess_destroy();
         
+    }
+
+    public function StudentsPrintRoom(){
+        require_once (APPPATH. '../vendor/vendor/autoload.php');
+
+        $live_mpdf = new \Mpdf\Mpdf(
+            array(
+                'format' => 'A4',
+                'mode' => 'utf-8',
+                'default_font' => 'thsarabun',
+                'default_font_size' => 12,
+                'margin_top' => 5,
+	            'margin_left' => 5,
+	            'margin_right' => 5,
+	            'mirrorMargins' => 0
+            )
+        );
+
+        $data['schoolyear'] = $this->db->get('tb_schoolyear')->row();
+        $subYear = explode('/',$data['schoolyear']->schyear_year);
+        $data['checkLine'] = $this->db->select('StudentStudyLine')
+        ->where('StudentClass','ม.4/1')
+        ->group_by('StudentStudyLine')
+        ->get('tb_students')->result();
+        $data['selStudent'] = $this->db->select('StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentStudyLine,StudentBehavior')
+        ->from('tb_students')
+        ->where('StudentStatus','1/ปกติ')  
+        ->where('StudentBehavior !=','จำหน่่าย')      
+        ->where('StudentClass','ม.4/1')
+        ->order_by('StudentNumber','ASC')
+        ->get()->result();
+        // true
+        $ReportFront = $this->load->view('user/PageStudentsListPrint',$data,true);        
+        $live_mpdf->WriteHTML($ReportFront);
+        $live_mpdf->Output('filename.pdf', \Mpdf\Output\Destination::INLINE); 
     }
     
     public function ExamSchedule(){

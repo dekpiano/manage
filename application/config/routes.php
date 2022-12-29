@@ -133,7 +133,9 @@ $route['ExamSchedule'] = "user/ConStudents/ExamSchedule";
 $route['ExamScheduleOnline'] = "user/ConStudents/ExamScheduleOnline";
 $route['Students'] = "user/ConStudents";
 $route['StudentsList'] = "user/ConStudents/StudentsList";
+$route['StudentsList/Print'] = "user/ConStudents/StudentsPrintRoom";
 $route['ClassSchedule'] = "user/ConStudents/ClassSchedule";
+
 
 $route['LearningOnline'] = "user/ConStudents/LearningOnline";
 $route['LearningOnline/(:any)'] = "user/ConStudents/LearningOnlineDetail/$1";

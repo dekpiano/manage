@@ -23,7 +23,8 @@
                         <div class="col-auto">
                             <button type="submit" class="btn-primary mb-3 btn-lg text-white"><i class="fa fa-search"
                                     aria-hidden="true"></i> ค้นหานักเรียน</button>
-                           
+                            <button type="submit" class="btn-info mb-3 btn-lg text-white"><i class="fa fa-print"
+                                    aria-hidden="true"></i> พิมพ์ใบรายชื่อ</button>
 
                         </div>
 
@@ -49,16 +50,13 @@
                         <?=$schoolyear->schyear_year?>
                     </h4>
                 </div>
-                <div class="text-center mb-3 ">
+                <div class="text-center">
                     <h5>
                         ครูที่ปรึกษา
                         <?php foreach ($TeacRoom as $key => $v_TeacRoom) {
                             echo $v_TeacRoom->pers_prefix.$v_TeacRoom->pers_firstname.' '.$v_TeacRoom->pers_lastname.' ';
                         } ?>
                     </h5>
-                    <a href="#" class="btn-info  btn-lg text-white mt-2">
-                        <i class="fa fa-print"  aria-hidden="true"></i> พิมพ์ใบรายชื่อ
-                    </a>
                 </div>
                 <?php endif; ?>
 
