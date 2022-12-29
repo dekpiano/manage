@@ -47,13 +47,25 @@ class ConAdminStudents extends CI_Controller {
 }
 
     public function AdminStudentsMain($Key = null){ 
-       // echo urldecode($Key); exit();
+        $data['CountAllStu'] = $this->db->select('COUNT(StudentBehavior) AS stuall')
+        ->where('StudentBehavior','ปกติ')
+        ->or_where('StudentBehavior','ขาดเรียนนาน')
+        ->get('tb_students')->result();
+        $data['CountNormalStu'] = $this->db->select('COUNT(StudentBehavior) AS stunormal')
+        ->where('StudentBehavior','ปกติ')
+        ->get('tb_students')->result();
+        $data['CountAbsentStu'] = $this->db->select('COUNT(StudentBehavior) AS stuabsent')
+        ->where('StudentBehavior','ขาดเรียนนาน')
+        ->get('tb_students')->result();
+
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+
         if(urldecode($Key) == "ปกติ"){
            $ta = "StudentBehavior='ปกติ' OR StudentBehavior='ขาดเรียนนาน'";           
         } elseif(urldecode($Key) == 'จำหน่าย'){
             $ta = "StudentBehavior!='ปกติ'  AND StudentBehavior = ''";            
         }else{
-            $ta = null;
+            $ta = 1;
         }       
         if($Key != 'All'){
             $DBpersonnel = $this->load->database('personnel', TRUE); 
@@ -71,8 +83,10 @@ class ConAdminStudents extends CI_Controller {
                                             StudentStudyLine')
                                             ->where($ta) 
                                             ->get('tb_students')->result();     
-                                            //echo '<pre>'; print_r($data['stu']);  exit(); 
+                                           
         }
+
+ //echo '<pre>'; print_r($data['stu']);  exit(); 
        
 		$data['title'] = "จัดการข้อมูลนักเรียน";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();

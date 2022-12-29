@@ -21,6 +21,110 @@
             <div class="container">
 
                 <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0 w-100">
+                                <div class="align-items-center gx-3 d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <div class="app-icon-holder">
+                                            <i class="bi bi-people-fill"></i>
+                                            </div>
+                                            <!--//icon-holder-->
+
+                                        </div>
+                                        <!--//col-->
+                                        <div class="col-auto">
+                                            <h4 class="app-card-title">นักเรียนทั้งหมด</h4>
+                                            <p style="margin-bottom: auto">ปีการศึกษา <?=$SchoolYear->schyear_year?></p>
+                                        </div>
+                                        <!--//col-->
+                                    </div>
+                                    <div>
+                                        <div class="col-auto">
+                                            <h2 class="app-card-title"><?=$CountAllStu[0]->stuall?></h2>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--//row-->
+                            </div>
+                            <!--//app-card-header-->
+
+                        </div>
+                        <!--//app-card-->
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0 w-100">
+                                <div class="align-items-center gx-3 d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <div class="app-icon-holder">
+                                            <i class="bi bi-people-fill"></i>
+                                            </div>
+                                            <!--//icon-holder-->
+
+                                        </div>
+                                        <!--//col-->
+                                        <div class="col-auto">
+                                            <h4 class="app-card-title">นักเรียน ปกติ</h4>
+                                            <p style="margin-bottom: auto">ปีการศึกษา <?=$SchoolYear->schyear_year?></p>
+                                        </div>
+                                        <!--//col-->
+                                    </div>
+                                    <div>
+                                        <div class="col-auto">
+                                            <h2 class="app-card-title"><?=$CountNormalStu[0]->stunormal?></h2>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--//row-->
+                            </div>
+                            <!--//app-card-header-->
+
+                        </div>
+                        <!--//app-card-->
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0 w-100">
+                                <div class="align-items-center gx-3 d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <div class="app-icon-holder">
+                                            <i class="bi bi-people-fill"></i>
+                                            </div>
+                                            <!--//icon-holder-->
+
+                                        </div>
+                                        <!--//col-->
+                                        <div class="col-auto">
+                                            <h4 class="app-card-title">นักเรียน ขาดเรียนนาน</h4>
+                                            <p style="margin-bottom: auto">ปีการศึกษา <?=$SchoolYear->schyear_year?></p>
+                                        </div>
+                                        <!--//col-->
+                                    </div>
+                                    <div>
+                                        <div class="col-auto">
+                                            <h2 class="app-card-title"><?=$CountAbsentStu[0]->stuabsent?></h2>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--//row-->
+                            </div>
+                            <!--//app-card-header-->
+
+                        </div>
+                        <!--//app-card-->
+                    </div>
+
+                </div>
+
+                <div class="row g-4 mb-4">
                     <div class="col-6 col-lg-6">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
@@ -80,8 +184,8 @@
                                     <th>เลขประจำตัว</th>
                                     <th>ชื่อ - นามสกุล</th>
                                     <th>ชั้น</th>
-                                    <th>เลขที่</th>                                   
-                                    <th>สายการเรียน</th>                                    
+                                    <th>เลขที่</th>
+                                    <th>สายการเรียน</th>
                                     <th>สถานะนักเรียน</th>
                                     <th>สถานะพฤติกรรม</th>
                                     <!-- <th>คำสั่ง</th> -->
@@ -98,7 +202,7 @@
                                     <td class="text-center"><?=$v_stu->StudentStudyLine?></td>
                                     <td class="text-center">
                                         <span class="badge rounded-pill bg-success">
-                                            <?php $sub = explode('/', $v_stu->StudentStatus); echo $sub[1];?>
+                                            <?=$v_stu->StudentStatus?>
                                         </span>
                                     </td>
                                     <td class="text-center">
@@ -106,36 +210,9 @@
                                         <span class="badge rounded-pill bg-success"><?=$v_stu->StudentBehavior?></span>
                                         <?php else: ?>
                                         <span class="badge rounded-pill bg-warning "><?=$v_stu->StudentBehavior?></span>
-                                        <?php endif;?>
-                                        <!-- <div>
-                                            <?php $StatusBehavior = array('ปกติ','ขาดเรียนนาน','จำหน่าย') ?>
-                                            <select name="StudentBehavior" id="StudentBehavior"
-                                                class="form-select form-select-sm StudentBehavior"
-                                                data-stuid="<?=$v_stu->StudentID?>">
-                                                <?php foreach ($StatusBehavior as $key => $v_Status) : ?>
-                                                <option <?=$v_stu->StudentBehavior == $v_Status ?"selected":""?>
-                                                    value="<?=$v_Status?>"><?=$v_Status;?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div> -->
+                                        <?php endif;?>                                       
                                     </td>
-                                    
-                                    <!-- <td class="text-center">
-                                        <a class="delete_student btn btn-danger" href="#"
-                                            idStu="<?=$v_stu->StudentCode?>">ลบ</a>
-                                        <div>
-                                            <?php $StatusBehavior = array('ปกติ','ขาดเรียนนาน','จำหน่าย') ?>
-                                            <select name="StudentBehavior" id="StudentBehavior"
-                                                class="form-select form-select-sm StudentBehavior"
-                                                data-stuid="<?=$v_stu->StudentID?>">
-                                                <?php foreach ($StatusBehavior as $key => $v_Status) : ?>
-                                                <option <?=$v_stu->StudentBehavior == $v_Status ?"selected":""?>
-                                                    value="<?=$v_Status?>"><?=$v_Status;?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </td> -->
-                                  
+
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
