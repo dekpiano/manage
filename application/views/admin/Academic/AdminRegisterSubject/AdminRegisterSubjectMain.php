@@ -79,7 +79,7 @@
                                             <label for="setting-input-1" class="form-label">ปีการศึกษา</label>
                                             <select class="form-select" required="" name="SubjectYear" id="SubjectYear">
                                                 <option value="">เลือกปีการศึกษา</option>
-                                                <?php $d = date('Y')+543; for ($i=$d; $i <= $d+1 ; $i++) :?>
+                                                <?php $d = date('Y')+542; for ($i=$d; $i <= $d+1 ; $i++) :?>
                                                 <option value="1/<?=$i;?>">1/<?=$i;?></option>
                                                 <option value="2/<?=$i;?>">2/<?=$i;?></option>
                                                 <option value="3/<?=$i;?>">3/<?=$i;?></option>
@@ -233,7 +233,7 @@
                             <label for="setting-input-1" class="form-label">ปีการศึกษา</label>
                             <select class="form-select" required="" name="Up_SubjectYear" id="Up_SubjectYear">
                                 <option value="">เลือกปีการศึกษา</option>
-                                <?php $d = date('Y')+543; for ($i=$d; $i <= $d+1 ; $i++) :?>
+                                <?php $d = date('Y')+542; for ($i=$d; $i <= $d+1 ; $i++) :?>
                                 <option value="1/<?=$i;?>">1/<?=$i;?></option>
                                 <option value="2/<?=$i;?>">2/<?=$i;?></option>
                                 <option value="3/<?=$i;?>">3/<?=$i;?></option>

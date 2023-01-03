@@ -139,7 +139,7 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=51"></script>
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=8"></script>    
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=9"></script>    
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=12"></script>    
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=15"></script>
 <?php endif; ?>
