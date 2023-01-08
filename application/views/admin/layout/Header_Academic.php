@@ -99,6 +99,14 @@
             </li>
             <li class="submenu-item">
                 <a
+                    class="submenu-link <?=$this->uri->segment('4')=="ReportTeacherSaveScore" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Evaluate/ReportTeacherSaveScore/').$SchoolYear->schyear_year;?>">
+                    รายงานผลการบันทึกคนแนนครูผู้สอน
+                </a>
+            </li>
+
+            <li class="submenu-item">
+                <a
                     class="submenu-link <?=$this->uri->segment('4')=="ReportPerson" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/ReportPerson');?>">
                     รายงานผลการเรียนรายบุคคล

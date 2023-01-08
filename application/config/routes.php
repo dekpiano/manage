@@ -91,6 +91,8 @@ $route['Admin/Acade/Evaluate/ReportPerson'] = "admin/academic/ConAdminReportResu
 $route['Admin/Acade/Evaluate/ReportPerson/(:any)'] = "admin/academic/ConAdminReportResult/AdminStudentsScore/$1";
 $route['Admin/Acade/Evaluate/ReportRoom'] = "admin/academic/ConAdminReportResult/AdminReportRoomMain";
 $route['Admin/Acade/Evaluate/ReportSummaryTeacher'] = "admin/academic/ConAdminReportResult/AdminReportSummaryTeacher";
+$route['Admin/Acade/Evaluate/ReportTeacherSaveScore/(:any)/(:any)'] = "admin/academic/ConAdminReportResult/AdminReportTeacherSaveScoreMain/$1/$2";
+$route['Admin/Acade/Evaluate/ReportTeacherSaveScoreCheck/(:any)/(:any)/(:any)'] = "admin/academic/ConAdminReportResult/AdminReportTeacherSaveScoreCheck/$1/$2/$3";
 
 // งานกิจการนักเรียน
 $route['Admin/Affairs/StudentSupport/HomeVisit/Setting'] = "admin/Affairs/ConAdminStudentSupport/PageMainSetting";

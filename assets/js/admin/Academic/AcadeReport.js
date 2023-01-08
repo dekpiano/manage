@@ -133,3 +133,9 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
     $(this).find('.SumAvgSD').html('<b>' + parseFloat(SumAvgSD).toFixed(2) + '</b>');
 
 });
+
+$(document).on("change", "#CheckYearSaveScore", function() {
+    let Select_year = $(this).val();
+    window.location.href = '../' + Select_year;
+       
+});

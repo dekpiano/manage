@@ -60,11 +60,50 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminReportResults/AdminReportPersonMain.php');
         $this->load->view('admin/layout/Footer.php');
-
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
         
+    }
+
+    public function AdminReportTeacherSaveScoreMain($Term,$year){   
+        $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['Teacher'] = $DBpersonnel->select('
+        skjacth_personnel.tb_personnel.pers_prefix,
+        skjacth_personnel.tb_personnel.pers_firstname,
+        skjacth_personnel.tb_personnel.pers_lastname,
+        skjacth_personnel.tb_personnel.pers_id,
+        skjacth_personnel.tb_personnel.pers_learning,
+        skjacth_personnel.tb_personnel.pers_position,
+        skjacth_skj.tb_position.posi_name,
+        skjacth_skj.tb_learning.lear_namethai,
+        skjacth_personnel.tb_personnel.pers_status')
+        ->from('skjacth_personnel.tb_personnel')
+        ->join('skjacth_skj.tb_position','skjacth_skj.tb_position.posi_id = skjacth_personnel.tb_personnel.pers_position')
+        ->join('skjacth_skj.tb_learning','skjacth_skj.tb_learning.lear_id = skjacth_personnel.tb_personnel.pers_learning')
+        ->where('pers_id',$this->session->userdata('login_id'))
+        ->get()->result();
+        $data['CheckYearSaveScore'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['Term'] = $Term;
+        $data['Year'] = $year;
+       
+        //echo '<pre>'; print_r($data['CheckYearSaveScore']); exit();
+        $data['title'] = "รายงานผลการบันทึกคะแนนครูผู้สอน";
+
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportTeacherSaveScoreMain.php');
+        $this->load->view('admin/layout/Footer.php');
+        
+    }
+
+    public function AdminReportTeacherSaveScoreCheck($Term,$year,$TeacID){  
+        $data['title'] = "รายงานผลการบันทึกคะแนนของ";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['Term'] = $Term;
+        $data['Year'] = $year;
+        
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportTeacherSaveScoreCheck.php');
+        $this->load->view('admin/layout/Footer.php');
+
     }
 
     public function AdminReportRoomMain(){   
