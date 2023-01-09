@@ -80,6 +80,7 @@
 
                                     <li><a class="dropdown-item" href="<?=base_url('LoginStudent');?>">นักเรียน</a></li>
                                     <li><a class="dropdown-item" href="http://teacher.skj.ac.th/">ครูผู้สอน</a>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">ผู้บริหาร</a>
                                     </li>
                                 </ul>
                             </div>

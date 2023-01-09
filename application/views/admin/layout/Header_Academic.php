@@ -1,3 +1,24 @@
+<li class="nav-item">
+    <div class="nav-link">
+        <div class="d-flex align-items-center">
+            <div style="width: -webkit-fill-available;">
+                ระบบกำลังเปิดในปีการศึกษา
+            </div>
+            <select name="schyear_year" id="schyear_year" class="form-select form-select-sm">
+                <?php $Y = date('Y')+543;
+                                        for ($i=2565; $i <= $Y+2; $i++):
+                                        for ($j=1; $j <= 2; $j++) : ?>
+                <option <?=$SchoolYear->schyear_year == $j.'/'.$i ?"selected":""?> value="<?=$j.'/'.$i;?>">
+                    <?=$j.'/'.$i;?></option>
+                <?php endfor; ?>
+                <?php endfor; ?>
+
+            </select>
+        </div>
+
+    </div>
+
+</li>
 <div class="mx-3">บริหารงานวิชาการ</div>
 <li class="nav-item has-submenu">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
@@ -88,26 +109,25 @@
     <!--//nav-link-->
     <div id="submenu-1" class="collapse submenu submenu-1 <?=$this->uri->segment('3')=="Evaluate" ? "show" :""?>"
         data-bs-parent="#menu-accordion">
-        <ul class="submenu-list list-unstyled">            
+        <ul class="submenu-list list-unstyled">
 
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="EditGrade" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/EditGrade');?>">จัดการผลการเรียน (0 ร)</a>
             </li>
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat/').$SchoolYear->schyear_year;?>">จัดการผลการเรียนซ้ำ (มส)</a>
+                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat/').$SchoolYear->schyear_year;?>">จัดการผลการเรียนซ้ำ
+                    (มส)</a>
             </li>
             <li class="submenu-item">
-                <a
-                    class="submenu-link <?=$this->uri->segment('4')=="ReportTeacherSaveScore" && $this->uri->segment('3')=="Evaluate" || $this->uri->segment('4')=="ReportTeacherSaveScoreCheck" ? "active" :""?>"
+                <a class="submenu-link <?=$this->uri->segment('4')=="ReportTeacherSaveScore" && $this->uri->segment('3')=="Evaluate" || $this->uri->segment('4')=="ReportTeacherSaveScoreCheck" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/ReportTeacherSaveScore/').$SchoolYear->schyear_year;?>">
                     รายงานผลการบันทึกคนแนนครูผู้สอน
                 </a>
             </li>
 
             <li class="submenu-item">
-                <a
-                    class="submenu-link <?=$this->uri->segment('4')=="ReportPerson" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
+                <a class="submenu-link <?=$this->uri->segment('4')=="ReportPerson" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/ReportPerson');?>">
                     รายงานผลการเรียนรายบุคคล
                 </a>
@@ -130,7 +150,7 @@
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="SaveScore" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/SaveScore');?>">ตั้งค่าบันทึกผลการเรียน</a>
             </li>
-          
+
         </ul>
     </div>
 </li>
@@ -165,7 +185,8 @@
         data-bs-parent="#menu-accordion">
         <ul class="submenu-list list-unstyled">
             <li class="submenu-item ">
-                <a class="submenu-link <?=$this->uri->segment('3')=="Course" ? "active" :""?>" href="<?=base_url('Admin/Acade/Course/SendPlan');?>">จัดการส่งแผน</a>
+                <a class="submenu-link <?=$this->uri->segment('3')=="Course" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Course/SendPlan');?>">จัดการส่งแผน</a>
 
             </li>
 

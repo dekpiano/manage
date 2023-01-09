@@ -160,27 +160,7 @@
                                 <span class="nav-link-text">หน้าแรก</span>
                             </a>
                             <!--//nav-link-->
-                        </li>
-                        <li class="nav-item">
-                            <div class="nav-link">
-                                <div class="d-flex align-items-center">
-                                    <div style="width: -webkit-fill-available;">
-                                        ระบบกำลังเปิดในปีการศึกษา
-                                    </div>
-                                    <select name="schyear_year" id="schyear_year" class="form-select form-select-sm">
-                                        <?php $Y = date('Y')+543;
-                                        for ($i=2565; $i <= $Y+2; $i++):
-                                        for ($j=1; $j <= 2; $j++) : ?>
-                                        <option <?=$SchoolYear->schyear_year == $j.'/'.$i ?"selected":""?> value="<?=$j.'/'.$i;?>"><?=$j.'/'.$i;?></option>
-                                        <?php endfor; ?>
-                                        <?php endfor; ?>
-
-                                    </select>
-                                </div>
-
-                            </div>
-
-                        </li>
+                        </li>                      
 
                         <hr>
                         <?php if($this->session->userdata('CheckrloesAcademic') === 'เจ้าหน้าที่วิชาการ' || $this->session->userdata('CheckrloesAcademic') === 'หัวหน้าวิชาการ' || $this->session->userdata('CheckrloesAcademic') === 'รองวิชาการ'): ?>
