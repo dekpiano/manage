@@ -16,18 +16,22 @@
         <section class="we-offer-area">
             <div class="container-fluid">
 
-                <div class="card">
+                <?php foreach ($checkSubject as $key => $v_checkSubject) : ?>
+
+                <div class="card mb-3">
                     <div class="card-body">
                         <table class="table app-table-hover mb-0 text-left" id="">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="cell" colspan="3"></th>
-                                    <th class="cell"  colspan="4">วิชา</th>
+                                    <th class="cell" colspan="5"><h5>วิชา <?=$v_checkSubject->SubjectName?></h5> </th>
+                                    <th class="cell" colspan="4"> <h5>คะแนน</h5>  </th>
                                 </tr>
                                 <tr>
+                                    <th class="cell">ห้อง</th>
                                     <th class="cell">เลขที่</th>
                                     <th class="cell">เลขประจำตัว</th>
                                     <th class="cell">ชื่อ - นามสกุล</th>
+                                    <th class="cell">สถานะ</th>
                                     <th class="cell">ก่อนกลางภาค</th>
                                     <th class="cell">สอบกลางภาค</th>
                                     <th class="cell">หลังกลางภาค</th>
@@ -35,19 +39,29 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($CheckScore as $key => $v_CheckScore) : 
+                                if($v_checkSubject->SubjectCode == $v_CheckScore->SubjectCode) :
+                                   $subScore = explode('|',$v_CheckScore->Score100);?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?=$v_CheckScore->StudentClass?></td>
+                                    <td><?=$v_CheckScore->StudentNumber?></td>
+                                    <td><?=$v_CheckScore->StudentCode?></td>
+                                    <td><?=$v_CheckScore->StudentPrefix?><?=$v_CheckScore->StudentFirstName?>
+                                        <?=$v_CheckScore->StudentLastName?></td>
+                                    <td><?=$v_CheckScore->StudentBehavior?></td>
+                                    <td><?=$subScore[0]?></td>
+                                    <td><?=$subScore[1]?></td>
+                                    <td><?=$subScore[2]?></td>
+                                    <td><?=$subScore[3]?></td>
                                 </tr>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <?php endforeach; ?>
+
             </div>
 
     </div>

@@ -57,8 +57,9 @@
                                     <td class="cell"><?=$v_Teacher->posi_name?></td>
 
                                     <td class="cell">
+                                        <?php $level =  $this->uri->segment('3'); ?>
                                         <a class="btn-sm btn-primary clickLoad-spin"
-                                            href="<?=base_url('Admin/Acade/Evaluate/ReportTeacherSaveScoreCheck/'.$Term.'/'.$Year.'/'.$v_Teacher->pers_id);?>">
+                                            href="<?=base_url('Admin/Acade/'.$level.'/ReportTeacherSaveScoreCheck/'.$Term.'/'.$Year.'/'.$v_Teacher->pers_id);?>">
                                             <i class="bi bi-eye-fill"></i> ดูผลการบันทึกคนแนน
                                         </a>
 

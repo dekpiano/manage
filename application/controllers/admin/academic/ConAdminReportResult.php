@@ -78,13 +78,12 @@ var  $title = "แผงควบคุม";
         ->from('skjacth_personnel.tb_personnel')
         ->join('skjacth_skj.tb_position','skjacth_skj.tb_position.posi_id = skjacth_personnel.tb_personnel.pers_position')
         ->join('skjacth_skj.tb_learning','skjacth_skj.tb_learning.lear_id = skjacth_personnel.tb_personnel.pers_learning')
-        ->where('pers_id',$this->session->userdata('login_id'))
+        //->where('pers_id',$this->session->userdata('login_id'))
         ->get()->result();
         $data['CheckYearSaveScore'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['Term'] = $Term;
-        $data['Year'] = $year;
-       
+        $data['Year'] = $year;       
         //echo '<pre>'; print_r($data['CheckYearSaveScore']); exit();
         $data['title'] = "รายงานผลการบันทึกคะแนนครูผู้สอน";
 
@@ -95,7 +94,47 @@ var  $title = "แผงควบคุม";
     }
 
     public function AdminReportTeacherSaveScoreCheck($Term,$year,$TeacID){  
-        $data['title'] = "รายงานผลการบันทึกคะแนนของ";
+        $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['Teacher'] = $DBpersonnel->select('pers_prefix,pers_firstname,pers_lastname')
+        ->where('pers_id',$TeacID)
+        ->get('tb_personnel')->row();
+
+        $data['title'] = "รายงานผลการบันทึกคะแนนของ".$data['Teacher']->pers_prefix.$data['Teacher']->pers_firstname.' '.$data['Teacher']->pers_lastname.' ปีการศึกษา '.$Term.'/'.$year; 
+
+        $data['checkSubject'] = $this->db->select('
+        tb_register.SubjectCode,
+        tb_subjects.SubjectName')
+        ->from('tb_register')
+        ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+        ->where('TeacherID',$TeacID)
+        ->where('RegisterYear',$Term.'/'.$year)
+        ->group_by('SubjectCode')
+        ->get()->result();
+        
+        //echo '<pre>'; print_r($data['checkSubject']); exit();
+
+        $data['CheckScore'] = $this->db->select('
+        tb_register.SubjectCode,
+        tb_register.Score100,
+        tb_register.RegisterYear,
+        tb_register.RegisterClass,
+        tb_register.TeacherID,
+        tb_register.StudentID,
+        tb_students.StudentClass,
+        tb_students.StudentPrefix,
+        tb_students.StudentFirstName,
+        tb_students.StudentLastName,
+        tb_students.StudentCode,
+        tb_students.StudentNumber,
+        tb_students.StudentBehavior
+        ')->from('tb_register')
+        ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+        ->where('tb_register.RegisterYear',$Term.'/'.$year)
+        ->where('tb_register.TeacherID',$TeacID)
+        ->order_by('StudentClass','ASC')
+        ->order_by('StudentNumber','ASC')
+        ->get()->result();
+        
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['Term'] = $Term;
         $data['Year'] = $year;
