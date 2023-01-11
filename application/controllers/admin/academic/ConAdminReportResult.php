@@ -355,27 +355,30 @@ var  $title = "แผงควบคุม";
         ->where('StudentStatus','1/ปกติ')
         ->where('StudentClass','ม.5/4')
         ->order_by('StudentNumber','ASC')
+        ->group_by('StudentCode')
+        ->get()->result();
+       
+        $stu1 = $this->db->select('StudentNumber,StudentClass,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,Score100,SubjectCode')
+        ->from('tb_students')
+        ->join('tb_register','tb_students.StudentID = tb_register.StudentID')
+        ->where('StudentStatus','1/ปกติ')
+        ->where('StudentClass','ม.5/4')
+        ->order_by('StudentNumber','ASC')
         ->get()->result();
 
-        
+        $data = [];   
+        $data1 = [];
 
-        $data = [];       
-        foreach ($stu as $key => $v_stu) {            
-            if(!in_array($v_stu->StudentCode,$data)){
-                $data += [ $v_stu->StudentCode => $v_stu->StudentFirstName ];              
-            }           
-        }
-        for ($i=0; $i < count($data); $i++) { 
+        for ($i=0; $i < count($stu); $i++) { 
             $data1[$i] = array();
         }
 
-        foreach ($stu as $key => $v_stu) { 
-            $data1[$key] = 00; 
-                //array_push($data1[$key],$ss[0]); 
+        foreach ($stu as $key => $value) {
+            array_push($data1[$key],$value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName); 
+             
         }
-       
         
-
+       
         echo '<pre>'; print_r($data1); exit();
 
         $data['RegisSubject'] = $this->db
