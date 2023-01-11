@@ -343,7 +343,63 @@ var  $title = "แผงควบคุม";
 
     }
 
-    
+    public function ReportScoreRoomMain($Term,$year){
+        $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['title'] = "รายงานผลการบันทึกคะแนน (รายห้องเรียน)"; 
+
+        $data['Room'] = $this->classroom->ListRoom();
+
+        $stu = $this->db->select('StudentNumber,StudentClass,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,Score100,SubjectCode')
+        ->from('tb_students')
+        ->join('tb_register','tb_students.StudentID = tb_register.StudentID')
+        ->where('StudentStatus','1/ปกติ')
+        ->where('StudentClass','ม.5/4')
+        ->order_by('StudentNumber','ASC')
+        ->get()->result();
+
+        
+
+        $data = [];       
+        foreach ($stu as $key => $v_stu) {            
+            if(!in_array($v_stu->StudentCode,$data)){
+                $data += [ $v_stu->StudentCode => $v_stu->StudentFirstName ];              
+            }           
+        }
+        for ($i=0; $i < count($data); $i++) { 
+            $data1[$i] = array();
+        }
+
+        foreach ($stu as $key => $v_stu) { 
+            $data1[$key] = 00; 
+                //array_push($data1[$key],$ss[0]); 
+        }
+       
+        
+
+        echo '<pre>'; print_r($data1); exit();
+
+        $data['RegisSubject'] = $this->db
+        ->select('tb_register.SubjectCode,
+        tb_subjects.SubjectName')
+        ->from('tb_register')
+        ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+        ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+        ->where('tb_register.RegisterYear',$Term.'/'.$year)  
+        ->where('tb_students.StudentClass','ม.5/4')  
+        ->order_by('SubjectCode','ASC')
+        ->group_by('SubjectCode') 
+        ->get()->result();
+        
+
+        
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['Term'] = $Term;
+        $data['Year'] = $year;
+        
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportScoreRoomMain.php');
+        $this->load->view('admin/layout/Footer.php');
+    }
     
 
 }
