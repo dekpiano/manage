@@ -349,37 +349,50 @@ var  $title = "แผงควบคุม";
 
         $data['Room'] = $this->classroom->ListRoom();
 
-        $stu = $this->db->select('StudentNumber,StudentClass,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,Score100,SubjectCode')
+        $data['stu'] = $this->db->select('tb_students.StudentID,tb_students.StudentNumber,tb_students.StudentClass,tb_students.StudentCode,tb_students.StudentPrefix,tb_students.StudentFirstName,tb_students.StudentLastName,tb_register.Score100,tb_register.SubjectCode')
         ->from('tb_students')
         ->join('tb_register','tb_students.StudentID = tb_register.StudentID')
-        ->where('StudentStatus','1/ปกติ')
-        ->where('StudentClass','ม.5/4')
-        ->order_by('StudentNumber','ASC')
-        ->group_by('StudentCode')
+        ->where('tb_register.RegisterYear',$Term.'/'.$year) 
+        ->where('tb_students.StudentStatus','1/ปกติ')
+        ->where('tb_students.StudentClass','ม.5/4')        
+        ->group_by('StudentCode') 
+        ->order_by('tb_students.StudentNumber','ASC')
         ->get()->result();
        
-        $stu1 = $this->db->select('StudentNumber,StudentClass,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,Score100,SubjectCode')
-        ->from('tb_students')
-        ->join('tb_register','tb_students.StudentID = tb_register.StudentID')
-        ->where('StudentStatus','1/ปกติ')
+        $data['Check'] = $this->db->select('
+        tb_register.Score100,
+        tb_register.SubjectCode,
+        tb_students.StudentClass,
+        tb_students.StudentID,
+        tb_students.StudentPrefix,
+        tb_students.StudentFirstName,
+        tb_students.StudentLastName
+        ')
+        ->from('tb_register')
+        ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+        ->where('tb_register.RegisterYear',$Term.'/'.$year) 
         ->where('StudentClass','ม.5/4')
-        ->order_by('StudentNumber','ASC')
+        ->order_by('SubjectCode','ASC')
         ->get()->result();
-
-        $data = [];   
-        $data1 = [];
-
-        for ($i=0; $i < count($stu); $i++) { 
-            $data1[$i] = array();
-        }
-
-        foreach ($stu as $key => $value) {
-            array_push($data1[$key],$value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName); 
-             
-        }
         
-       
-        echo '<pre>'; print_r($data1); exit();
+        $CheckSub = [];
+        foreach ($data['stu'] as $key => $value) {
+            
+            $CheckSub[$key][] = $value->StudentID;
+            $CheckSub[$key][] = $value->StudentNumber;
+            $CheckSub[$key][] = $value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName;
+            $CheckSub[$key][] = $value->StudentCode;
+            foreach ($data['Check'] as $key1 => $v_Check) {
+                if($value->StudentID == $v_Check->StudentID){
+                    $CheckSub[$key][] = $v_Check->SubjectCode.'/'.$v_Check->Score100;
+                }
+            }
+        }
+
+        $data['CheckSub'] = $CheckSub;
+
+        echo '<pre>'; print_r($data['CheckSub']); 
+        exit();
 
         $data['RegisSubject'] = $this->db
         ->select('tb_register.SubjectCode,

@@ -75,31 +75,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
-                                    $CheckID = array();
-                                    $CheckSubject = array();
-                                    foreach ($stu as $key => $v_stu) : 
-                                        if(!in_array($v_stu->SubjectCode,$CheckSubject)){
-                                            array_push($CheckSubject,$v_stu->SubjectCode);
-                                        }
-                                        if(!in_array($v_stu->StudentCode,$CheckID)){ 
-                                            array_push($CheckID,$v_stu->StudentCode);  
-                                        }
-                                        ?>
-                                    <?php endforeach; ?>
+                                    <?php                                    
+                                    foreach ($CheckSub as $key => $v_stu) :
+                                        //echo '<pre>'; print_r($v_stu);
+                                    ?>
+                                    
                                     <tr>
-                                        <td><?=$v_stu->StudentNumber?></td>
-                                        <td><?=$v_stu->StudentCode?></td>
-                                        <td><?=$v_stu->StudentPrefix.$v_stu->StudentFirstName.' '.$v_stu->StudentLastName?>
-                                        </td>
+                                        <td><?=$v_stu[1]?></td>
+                                        <td><?=$v_stu[3]?></td>
+                                        <td><?=$v_stu[2]?></td>
+                                        <?php $i = 4;
+                                        foreach ($RegisSubject as $key1 => $v_RegisSubject): ?>
+                                        <td><?=$v_stu[$i]?></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <?php $i++; endforeach; ?>
                                     </tr>
-                                    <?php print_r($CheckID); ?>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
