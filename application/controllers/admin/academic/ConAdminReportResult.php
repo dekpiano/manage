@@ -358,41 +358,6 @@ var  $title = "แผงควบคุม";
         ->group_by('StudentCode') 
         ->order_by('tb_students.StudentNumber','ASC')
         ->get()->result();
-       
-        $data['Check'] = $this->db->select('
-        tb_register.Score100,
-        tb_register.SubjectCode,
-        tb_students.StudentClass,
-        tb_students.StudentID,
-        tb_students.StudentPrefix,
-        tb_students.StudentFirstName,
-        tb_students.StudentLastName
-        ')
-        ->from('tb_register')
-        ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
-        ->where('tb_register.RegisterYear',$Term.'/'.$year) 
-        ->where('StudentClass','ม.5/4')
-        ->order_by('SubjectCode','ASC')
-        ->get()->result();
-        
-        $CheckSub = [];
-        foreach ($data['stu'] as $key => $value) {
-            
-            $CheckSub[$key][] = $value->StudentID;
-            $CheckSub[$key][] = $value->StudentNumber;
-            $CheckSub[$key][] = $value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName;
-            $CheckSub[$key][] = $value->StudentCode;
-            foreach ($data['Check'] as $key1 => $v_Check) {
-                if($value->StudentID == $v_Check->StudentID){
-                    $CheckSub[$key][] = $v_Check->SubjectCode.'/'.$v_Check->Score100;
-                }
-            }
-        }
-
-        $data['CheckSub'] = $CheckSub;
-
-        echo '<pre>'; print_r($data['CheckSub']); 
-        exit();
 
         $data['RegisSubject'] = $this->db
         ->select('tb_register.SubjectCode,
@@ -406,6 +371,29 @@ var  $title = "แผงควบคุม";
         ->group_by('SubjectCode') 
         ->get()->result();
         
+                  
+        $CheckSub = [];
+        foreach ($data['stu'] as $key => $value) {
+            
+            $CheckSub[$key][] = $value->StudentID;
+            $CheckSub[$key][] = $value->StudentNumber;
+            $CheckSub[$key][] = $value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName;
+            $CheckSub[$key][] = $value->StudentCode;
+           
+            //foreach ($data['RegisSubject'] as $key1 => $v_Check) {
+                $da = $this->CheckData($Term,$year,$value->StudentID);
+                foreach ($da as $key22 => $v_da) {
+                    $CheckSub[$key][] = $v_da->SubjectCode.'/'.$v_da->Score100.'-'.count($da);
+                }
+               // $CheckSub[$key][] = $v_Check->SubjectCode;
+            //}
+           
+        }
+
+        $data['CheckSub'] = $CheckSub;
+        // echo '<pre>'; print_r($data['CheckSub']); 
+        
+        // exit();
 
         
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
@@ -415,6 +403,23 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminReportResults/AdminReportScoreRoomMain.php');
         $this->load->view('admin/layout/Footer.php');
+    }
+
+    public function CheckData($Term,$year,$IDstu){
+        $Check = $this->db->select('
+        tb_register.Score100,
+        tb_register.SubjectCode,
+        tb_students.StudentID
+        ')
+        ->from('tb_register')
+        ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+        ->where('tb_register.RegisterYear',$Term.'/'.$year) 
+        ->where('tb_students.StudentClass','ม.5/4')
+        ->where('tb_students.StudentID',$IDstu)
+        ->order_by('SubjectCode','ASC')
+        ->get()->result();
+
+        return $Check;
     }
     
 

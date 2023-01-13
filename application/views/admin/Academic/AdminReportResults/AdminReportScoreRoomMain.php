@@ -85,11 +85,22 @@
                                         <td><?=$v_stu[3]?></td>
                                         <td><?=$v_stu[2]?></td>
                                         <?php $i = 4;
-                                        foreach ($RegisSubject as $key1 => $v_RegisSubject): ?>
-                                        <td><?=$v_stu[$i]?></td>
+                                        
+                                        foreach ($RegisSubject as $key1 => $v_RegisSubject): 
+                                            $sub = explode("/",@$v_stu[$i]);
+                                            echo $sub[0];
+                                            if($v_RegisSubject->SubjectCode == $sub[0]):
+                                        ?>
+                                        <td><?=$v_RegisSubject->SubjectCode;?></td>
+                                        <td><?=$i;?></td>
                                         <td></td>
                                         <td></td>
+                                        <?php else : ?>
+                                        <td><?=$i;?></td>
                                         <td></td>
+                                        <td></td>
+                                        <td></td> 
+                                        <?php endif; ?>
                                         <?php $i++; endforeach; ?>
                                     </tr>
                                     <?php endforeach; ?>
