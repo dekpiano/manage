@@ -121,7 +121,7 @@
             </li>
             <li class="submenu-item">
                 <a class="submenu-link <?=$this->uri->segment('4')=="ReportScoreRoomMain" && $this->uri->segment('3')=="Evaluate" || $this->uri->segment('4')=="ReportTeacherSaveScoreCheck" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/ReportScoreRoomMain/').$SchoolYear->schyear_year;?>">
+                    href="<?=base_url('Admin/Acade/Evaluate/ReportScoreRoomMain/').$SchoolYear->schyear_year.'/All/All';?>">
                     รายงานผลการบันทึกคะแนน (รายห้องเรียน)
                 </a>
             </li>

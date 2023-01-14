@@ -22,17 +22,20 @@
             </div>
             <div class="col-auto justify-content-md-end">
                 <div class="page-utilities">
+                    <input type="text" id="term" value="<?=$this->uri->segment('5')?>" style="display:none;">
+                    <input type="text" id="year" value="<?=$this->uri->segment('6')?>" style="display:none;">
                     <div class="row g-2  ">
                         <div class="col-auto">
-                            <form action="#" method="post" class="d-flex align-items-center">
-                                <select class="form-select w-auto ms-2" name="CheckYearSaveScore"
-                                    id="CheckYearSaveScore">
+                            <form action="<?=base_url('Admin/Acade/Evaluate/ReportScoreRoomMain/2/2565')?>" method="post" class="d-flex align-items-center">
+                                <label for="">ระดับชั้น</label>
+                            <select class="form-select w-auto ms-2" name="SelectRoomReportScore"
+                                    id="SelectRoomReportScore" >
                                     <option value="">เลือกห้องเรียน</option>
                                     <?php foreach ($Room as $key => $v_Room) : ?>
-                                    <option value="<?=$v_Room?>"><?=$v_Room?></option>
+                                    <option <?=$this->uri->segment('7').'/'.$this->uri->segment('8') == $v_Room ?"selected":""?> value="<?=$v_Room?>">ม.<?=$v_Room?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <button class="btn app-btn-primary clickLoder ms-3" type="submit">ค้นหา</button>
+                                <!-- <button class="btn app-btn-primary clickLoder ms-3" type="submit">ค้นหา</button> -->
                             </form>
                         </div>
                     </div>
@@ -44,6 +47,7 @@
         <!--//container-->
         </section>
         <section class="we-offer-area">
+            <?php if($CheckSub): ?>
             <div class="container-fluid">
 
                 <div class="card">
@@ -81,22 +85,23 @@
                                     ?>
                                     
                                     <tr>
-                                        <td><?=$v_stu[1]?></td>
-                                        <td><?=$v_stu[3]?></td>
-                                        <td><?=$v_stu[2]?></td>
+                                        <td class="text-center"> <?=$v_stu[1]?></td>
+                                        <td class="text-center"><?=$v_stu[3]?></td>
+                                        <td class="text-nowrap"><?=$v_stu[2]?></td>
                                         <?php $i = 4;
                                         
                                         foreach ($RegisSubject as $key1 => $v_RegisSubject): 
                                             $sub = explode("/",@$v_stu[$i]);
-                                            echo $sub[0];
-                                            if($v_RegisSubject->SubjectCode == $sub[0]):
-                                        ?>
-                                        <td><?=$v_RegisSubject->SubjectCode;?></td>
-                                        <td><?=$i;?></td>
-                                        <td></td>
-                                        <td></td>
+                                            //echo '<pre>'; print_r($sub);
+                                            if($v_RegisSubject->SubjectCode == $sub[0] || $sub[1] != ""):
+                                                $score = explode("|",@$sub[1]);
+                                        ?>                                        
+                                        <td class="text-center"><?php echo @$score[0];  ?></td>
+                                        <td class="text-center"><?php echo @$score[1];  ?></td>
+                                        <td class="text-center"><?php echo @$score[2];  ?></td>
+                                        <td class="text-center"><?php echo @$score[3];  ?></td>
                                         <?php else : ?>
-                                        <td><?=$i;?></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td> 
@@ -111,6 +116,21 @@
                     </div>
                 </div>
             </div>
+            <?php else: ?>
+                <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+                <div class="inner">
+                    <div class="app-card-body p-3 p-lg-4">
+                        <div class="row">                           
+                            <div class="col-md-12 text-center align-self-center">
+                                <h2 class="heading">กรุณาเลือกห้องเรียนก่อน !</h2>
+                                <div class="intro">ระบบรายงานผลการบันทึกคะแนน (รายห้องเรียน)</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <?php endif;?>
 
     </div>
     </section>

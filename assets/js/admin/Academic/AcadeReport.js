@@ -139,3 +139,14 @@ $(document).on("change", "#CheckYearSaveScore", function() {
     window.location.href = '../' + Select_year;
        
 });
+
+$(document).on("change", "#SelectRoomReportScore", function() {
+    
+    $('.loader').show();
+    let Select_year = $(this).val();
+    let term = $('#term').val();
+    let year = $('#year').val();
+    window.location.href = '../' + Select_year;
+
+       
+});

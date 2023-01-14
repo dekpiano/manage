@@ -343,7 +343,7 @@ var  $title = "แผงควบคุม";
 
     }
 
-    public function ReportScoreRoomMain($Term,$year){
+    public function ReportScoreRoomMain($Term,$year,$Class,$Room){
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['title'] = "รายงานผลการบันทึกคะแนน (รายห้องเรียน)"; 
 
@@ -354,7 +354,7 @@ var  $title = "แผงควบคุม";
         ->join('tb_register','tb_students.StudentID = tb_register.StudentID')
         ->where('tb_register.RegisterYear',$Term.'/'.$year) 
         ->where('tb_students.StudentStatus','1/ปกติ')
-        ->where('tb_students.StudentClass','ม.5/4')        
+        ->where('tb_students.StudentClass','ม.'.$Class.'/'.$Room)        
         ->group_by('StudentCode') 
         ->order_by('tb_students.StudentNumber','ASC')
         ->get()->result();
@@ -366,7 +366,7 @@ var  $title = "แผงควบคุม";
         ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
         ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
         ->where('tb_register.RegisterYear',$Term.'/'.$year)  
-        ->where('tb_students.StudentClass','ม.5/4')  
+        ->where('tb_students.StudentClass','ม.'.$Class.'/'.$Room)  
         ->order_by('SubjectCode','ASC')
         ->group_by('SubjectCode') 
         ->get()->result();
@@ -379,21 +379,35 @@ var  $title = "แผงควบคุม";
             $CheckSub[$key][] = $value->StudentNumber;
             $CheckSub[$key][] = $value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName;
             $CheckSub[$key][] = $value->StudentCode;
-           
-            //foreach ($data['RegisSubject'] as $key1 => $v_Check) {
-                $da = $this->CheckData($Term,$year,$value->StudentID);
+
+
+            $check_sub = array();
+            $da = $this->CheckData($Term,$year,$Class,$Room,$value->StudentID);
                 foreach ($da as $key22 => $v_da) {
-                    $CheckSub[$key][] = $v_da->SubjectCode.'/'.$v_da->Score100.'-'.count($da);
+                    $check_sub[] = $v_da->SubjectCode;
                 }
-               // $CheckSub[$key][] = $v_Check->SubjectCode;
-            //}
+               
+
+             foreach ($data['RegisSubject'] as $key1 => $v_Check) {
+               
+
+                if(array_search($v_Check->SubjectCode, $check_sub)){
+                    $dat = $this->CheckValue($Term,$year,$Class,$Room,$value->StudentID,$v_Check->SubjectCode);
+                  
+                    $CheckSub[$key][] = $v_Check->SubjectCode.'/'.$dat[0]->Score100;
+                }else{
+                    $CheckSub[$key][] = $v_Check->SubjectCode.'/';
+                }
+               
+            }
            
         }
 
         $data['CheckSub'] = $CheckSub;
-        // echo '<pre>'; print_r($data['CheckSub']); 
-        
-        // exit();
+    //    echo '<pre>'; print_r($data['CheckSub']);        
+ 
+
+    //     exit();
 
         
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
@@ -405,7 +419,7 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/layout/Footer.php');
     }
 
-    public function CheckData($Term,$year,$IDstu){
+    public function CheckData($Term,$year,$Class,$Room,$IDstu){
         $Check = $this->db->select('
         tb_register.Score100,
         tb_register.SubjectCode,
@@ -414,8 +428,26 @@ var  $title = "แผงควบคุม";
         ->from('tb_register')
         ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
         ->where('tb_register.RegisterYear',$Term.'/'.$year) 
-        ->where('tb_students.StudentClass','ม.5/4')
+        ->where('tb_students.StudentClass','ม.'.$Class.'/'.$Room)
         ->where('tb_students.StudentID',$IDstu)
+        ->order_by('SubjectCode','ASC')
+        ->get()->result();
+
+        return $Check;
+    }
+
+    public function CheckValue($Term,$year,$Class,$Room,$IDstu,$IDSubjuct){
+        $Check = $this->db->select('
+        tb_register.Score100,
+        tb_register.SubjectCode,
+        tb_students.StudentID
+        ')
+        ->from('tb_register')
+        ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+        ->where('tb_register.RegisterYear',$Term.'/'.$year) 
+        ->where('tb_students.StudentClass','ม.'.$Class.'/'.$Room)
+        ->where('tb_students.StudentID',$IDstu)
+        ->where('tb_register.SubjectCode',$IDSubjuct)
         ->order_by('SubjectCode','ASC')
         ->get()->result();
 
