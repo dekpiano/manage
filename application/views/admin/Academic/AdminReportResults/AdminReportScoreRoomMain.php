@@ -13,6 +13,21 @@
     width: 20px;
     white-space: nowrap;
 }
+
+
+thead{
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
+
+.NameFix{
+    position: sticky;
+    left: 0;
+    background: #fff;
+}
+
+
 </style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -52,7 +67,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-y: scroll;height: 750px;">
                             <table class="table table-hover table-bordered mb-0 text-left" id="">
                                 <thead>
                                     <tr class="text-center">
@@ -84,10 +99,11 @@
                                         //echo '<pre>'; print_r($v_stu);
                                     ?>
                                     
-                                    <tr>
-                                        <td class="text-center"> <?=$v_stu[1]?></td>
-                                        <td class="text-center"><?=$v_stu[3]?></td>
-                                        <td class="text-nowrap"><?=$v_stu[2]?></td>
+                                    <tr>                                       
+                                        <td class="text-center "> <?=$v_stu[1]?></td>
+                                        <td class="text-center "><?=$v_stu[3]?></td>
+                                        <td class="text-nowrap "><?=$v_stu[2]?></td>
+                                       
                                         <?php $i = 4;
                                         
                                         foreach ($RegisSubject as $key1 => $v_RegisSubject): 
