@@ -30,7 +30,7 @@
                     <div class="ms-3">
                         <select name="onoff_year" id="onoff_year" class="form-select form-select-sm">
                             <?php foreach ($CountYear as $key => $value) : ?>
-                            <option <?=$checkOnOff[6]->onoff_year ==$value->RegisterYear ?"selected":"" ?>
+                            <option <?=$this->uri->segment(5).'/'.$this->uri->segment(6) ==$value->RegisterYear ?"selected":"" ?>
                                 value="<?=$value->RegisterYear?>"><?=$value->RegisterYear?></option>  
                                 <?php endforeach; ?>                          
                         </select>

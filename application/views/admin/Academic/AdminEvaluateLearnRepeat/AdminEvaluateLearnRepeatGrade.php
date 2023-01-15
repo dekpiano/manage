@@ -165,7 +165,7 @@
                         <div class="app-card-body text-center">
                             <h3 class=""> ไม่มีนักเรียน เรียนซ้ำ ในรายวิชานี้!</h3>
                             <a class="btn app-btn-primary"
-                                href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat/'.$SchoolYear->schyear_year);?>">กลับหน้าหลัก</a>
+                                href="#" onclick="javascript:history.go(-1)">กลับหน้าหลัก</a>
                         </div>
                     </div>
                 </div>
