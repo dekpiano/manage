@@ -44,6 +44,7 @@ var  $title = "แผงควบคุม";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['stu'] = $this->db->select("tb_students.StudentID,
                                     tb_students.StudentNumber,
                                     tb_students.StudentClass,
@@ -65,6 +66,7 @@ var  $title = "แผงควบคุม";
 
     public function AdminReportTeacherSaveScoreMain($Term,$year){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['Teacher'] = $DBpersonnel->select('
         skjacth_personnel.tb_personnel.pers_prefix,
         skjacth_personnel.tb_personnel.pers_firstname,
@@ -95,6 +97,7 @@ var  $title = "แผงควบคุม";
 
     public function AdminReportTeacherSaveScoreCheck($Term,$year,$TeacID){  
         $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['Teacher'] = $DBpersonnel->select('pers_prefix,pers_firstname,pers_lastname')
         ->where('pers_id',$TeacID)
         ->get('tb_personnel')->row();
@@ -147,6 +150,7 @@ var  $title = "แผงควบคุม";
 
     public function AdminReportRoomMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $keyroom = $this->input->post("keyroom");
         if(!isset($keyroom)){
@@ -294,6 +298,7 @@ var  $title = "แผงควบคุม";
     public function AdminReportSummaryTeacher(){
         $DBSkj = $this->load->database('skj', TRUE);
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "รายงานสรุปผลสัมฤทธิ์ทางการเรียน";
         $data['lern'] = $DBSkj->get('tb_learning')->result();
 
@@ -346,7 +351,7 @@ var  $title = "แผงควบคุม";
     public function ReportScoreRoomMain($Term,$year,$Class,$Room){
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['title'] = "รายงานผลการบันทึกคะแนน (รายห้องเรียน)"; 
-
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['Room'] = $this->classroom->ListRoom();
 
         $data['stu'] = $this->db->select('tb_students.StudentID,tb_students.StudentNumber,tb_students.StudentClass,tb_students.StudentCode,tb_students.StudentPrefix,tb_students.StudentFirstName,tb_students.StudentLastName,tb_register.Score100,tb_register.SubjectCode')

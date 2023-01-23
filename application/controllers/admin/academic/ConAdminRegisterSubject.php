@@ -28,6 +28,7 @@ var  $title = "แผงควบคุม";
         
         //echo '<pre>';print_r($data['GroupYear']); exit();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+$data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "วิชาเรียน";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('admin/layout/Header.php',$data);

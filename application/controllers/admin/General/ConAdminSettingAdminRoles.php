@@ -24,6 +24,7 @@ var  $title = "แผงควบคุม";
     public function GeneralSettingAdminRoles(){      
         $data['title'] = "บริหารทั่วไป";	
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $DBpersonnel = $this->load->database('personnel', TRUE); //ฐานข้อมูลบุคลากร
         $DBgeneral = $this->load->database('general', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
         $data['Manager'] = $DBgeneral->select('admin_rloes_userid,admin_rloes_id,admin_rloes_nanetype')->get('tb_admin_rloes')->result();

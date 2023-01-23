@@ -19,6 +19,7 @@ class ConAdminStudentSupport extends CI_Controller {
     // ------------------ ตั้งค่าระบบ ---------------------------
     public function PageMainSetting(){ 
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "ตั้งค่าระบบเยี่ยมบ้านนักเรียน/SDQ";
         $DBpersonnel = $this->load->database('personnel', TRUE); //ฐานข้อมูลบุคลากร
         $DBaffairs = $this->load->database('affairs', TRUE); //ฐานข้อมูลงานกิจการนักเรียน

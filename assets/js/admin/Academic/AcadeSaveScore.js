@@ -238,7 +238,7 @@ $(document).on("change", "#CheckTimeRepeat", function() {
 
 $(document).on("change", "#CheckOnoffRepeat", function() {
     let CheckOnoffRepeat = $(this).val();
-    $.post("../../../admin/academic/ConAdminAcademicRepeat/CheckOnoffRepeat", {
+    $.post("../../../../../admin/academic/ConAdminAcademicRepeat/CheckOnoffRepeat", {
             value: CheckOnoffRepeat
         },
         function(data, status) {

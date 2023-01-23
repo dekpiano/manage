@@ -135,6 +135,7 @@ var  $title = "แผงควบคุม";
 
     public function insert_score(){ 
         $checkOnOff = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $TimeNum = $this->input->post('TimeNum');
         foreach ($this->input->post('StudentID') as $num => $value) {
            //print_r($this->input->post('TimeNum'));
@@ -156,7 +157,7 @@ var  $title = "แผงควบคุม";
 
             $checkScore100 = $this->db->select('Score100')->where($key)->get('tb_register')->result();
             if($checkScore100[0]->Score100 === implode("|",$this->input->post($value))){
-                $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num]);
+                $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_UpdateTime'=>date('Y-m-d H:i:s'));
             }else{
                 $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_Type'=>$checkOnOff[6]->onoff_detail,'Grade_UpdateTime'=>date('Y-m-d H:i:s'));
             }

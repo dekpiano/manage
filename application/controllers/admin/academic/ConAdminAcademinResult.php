@@ -25,6 +25,7 @@ var  $title = "แผงควบคุม";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "ดูผลการเรียนของนักเรียน";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
@@ -40,6 +41,7 @@ var  $title = "แผงควบคุม";
 
     public function add(){   
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
 		$data['title'] = "ตารางเรียน";
 		$data['icon'] = '<i class="far fa-plus-square"></i>';
 		$data['color'] = 'primary';

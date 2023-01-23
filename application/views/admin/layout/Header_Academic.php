@@ -116,7 +116,7 @@
             </li>
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat/').$SchoolYear->schyear_year;?>">จัดการผลการเรียนซ้ำ
+                    href="<?=base_url('Admin/Acade/Evaluate/AcademicRepeat/').$checkOnOff[6]->onoff_year;?>">จัดการผลการเรียนซ้ำ
                     (มส)</a>
             </li>
             <li class="submenu-item">

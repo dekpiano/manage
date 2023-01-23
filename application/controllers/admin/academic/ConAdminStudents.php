@@ -47,6 +47,7 @@ class ConAdminStudents extends CI_Controller {
 }
 
     public function AdminStudentsMain($Key = null){ 
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['CountAllStu'] = $this->db->select('COUNT(StudentBehavior) AS stuall')
         ->where('StudentBehavior','ปกติ')
         ->or_where('StudentBehavior','ขาดเรียนนาน')
