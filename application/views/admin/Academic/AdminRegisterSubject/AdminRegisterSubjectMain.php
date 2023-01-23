@@ -63,12 +63,12 @@
                                             <h4 class="app-card-title">เพิ่มข้อมูลรายวิชา</h4>
                                         </div>
                                         <!--//col-->
-                                        <div class="col-auto">
+                                        <!-- <div class="col-auto">
                                             <div class="card-header-action">
                                                 <a href="#">View report</a>
                                             </div>
-                                            <!--//card-header-actions-->
-                                        </div>
+                                            
+                                        </div> -->
                                         <!--//col-->
                                     </div>
                                     <!--//row-->
@@ -79,7 +79,7 @@
                                             <label for="setting-input-1" class="form-label">ปีการศึกษา</label>
                                             <select class="form-select" required="" name="SubjectYear" id="SubjectYear">
                                                 <option value="">เลือกปีการศึกษา</option>
-                                                <?php $d = date('Y')+542; for ($i=$d; $i <= $d+1 ; $i++) :?>
+                                                <?php $d = date('Y')+541; for ($i=$d; $i <= $d+2 ; $i++) :?>
                                                 <option value="1/<?=$i;?>">1/<?=$i;?></option>
                                                 <option value="2/<?=$i;?>">2/<?=$i;?></option>
                                                 <option value="3/<?=$i;?>">3/<?=$i;?></option>
@@ -233,7 +233,7 @@
                             <label for="setting-input-1" class="form-label">ปีการศึกษา</label>
                             <select class="form-select" required="" name="Up_SubjectYear" id="Up_SubjectYear">
                                 <option value="">เลือกปีการศึกษา</option>
-                                <?php $d = date('Y')+542; for ($i=$d; $i <= $d+1 ; $i++) :?>
+                                <?php $d = date('Y')+541; for ($i=$d; $i <= $d+2 ; $i++) :?>
                                 <option value="1/<?=$i;?>">1/<?=$i;?></option>
                                 <option value="2/<?=$i;?>">2/<?=$i;?></option>
                                 <option value="3/<?=$i;?>">3/<?=$i;?></option>
