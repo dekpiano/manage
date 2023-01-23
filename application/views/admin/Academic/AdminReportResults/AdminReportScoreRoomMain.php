@@ -27,7 +27,6 @@ thead{
     background: #fff;
 }
 
-
 </style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -99,11 +98,11 @@ thead{
                                         //echo '<pre>'; print_r($v_stu);
                                     ?>
                                     
-                                    <tr>                                       
+                                    <tr>
+                                       
                                         <td class="text-center "> <?=$v_stu[1]?></td>
                                         <td class="text-center "><?=$v_stu[3]?></td>
                                         <td class="text-nowrap "><?=$v_stu[2]?></td>
-                                       
                                         <?php $i = 4;
                                         
                                         foreach ($RegisSubject as $key1 => $v_RegisSubject): 

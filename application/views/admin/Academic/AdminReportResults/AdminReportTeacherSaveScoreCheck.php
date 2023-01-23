@@ -23,7 +23,7 @@
                         <table class="table app-table-hover table-bordered mb-0 text-left" id="">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="cell" colspan="5"><h5>วิชา <?=$v_checkSubject->SubjectName?></h5> </th>
+                                    <th class="cell" colspan="5"><h5><?=$v_checkSubject->SubjectCode?> วิชา <?=$v_checkSubject->SubjectName?></h5> </th>
                                     <th class="cell" colspan="4"> <h5>คะแนน</h5>  </th>
                                 </tr>
                                 <tr class="text-center">

@@ -386,15 +386,14 @@ var  $title = "แผงควบคุม";
                 foreach ($da as $key22 => $v_da) {
                     $check_sub[] = $v_da->SubjectCode;
                 }
-               
+               // echo '<pre>'; print_r($check_sub);
 
              foreach ($data['RegisSubject'] as $key1 => $v_Check) {
-               
-
-                if(array_search($v_Check->SubjectCode, $check_sub)){
+               // echo array_search($v_Check->SubjectCode, $check_sub);
+                if(array_search($v_Check->SubjectCode, $check_sub) >= 0){
                     $dat = $this->CheckValue($Term,$year,$Class,$Room,$value->StudentID,$v_Check->SubjectCode);
-                  
-                    $CheckSub[$key][] = $v_Check->SubjectCode.'/'.$dat[0]->Score100;
+                   
+                    $CheckSub[$key][] = $v_Check->SubjectCode.'/'.@$dat[0]->Score100;
                 }else{
                     $CheckSub[$key][] = $v_Check->SubjectCode.'/';
                 }
@@ -404,10 +403,8 @@ var  $title = "แผงควบคุม";
         }
 
         $data['CheckSub'] = $CheckSub;
-    //    echo '<pre>'; print_r($data['CheckSub']);        
- 
-
-    //     exit();
+       //echo '<pre>'; print_r($data['CheckSub']);  
+        //exit();
 
         
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
