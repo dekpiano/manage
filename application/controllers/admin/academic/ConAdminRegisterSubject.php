@@ -24,11 +24,11 @@ var  $title = "แผงควบคุม";
     public function AdminRegisterSubjectMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-        $data['GroupYear'] = $this->db->select('SubjectYear')->group_by('SubjectYear')->get('tb_subjects')->result();
+        $data['GroupYear'] = $this->db->select('SubjectYear')->group_by('SubjectYear')->order_by('SubjectYear','ASC')->get('tb_subjects')->result();
         
         //echo '<pre>';print_r($data['GroupYear']); exit();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-$data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "วิชาเรียน";	
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
@@ -42,9 +42,15 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
     }
 
     public function AdminRegisterSubjectSelect(){ 
+      
         $CheckYear = $this->db->get('tb_schoolyear')->result();
         $data = [];
-        $subject = $this->db->where('SubjectYear',$CheckYear[0]->schyear_year)->get('tb_subjects')->result();
+        if($this->input->post('keyYear')){
+            $subject = $this->db->where('SubjectYear',$this->input->post('keyYear'))->get('tb_subjects')->result();
+        }else{
+            $subject = $this->db->where('SubjectYear',$CheckYear->schyear_year)->get('tb_subjects')->result();
+        }
+       
         foreach($subject as $record){
             $data[] = array( 
                 "SubjectYear" => $record->SubjectYear,
@@ -53,12 +59,13 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
                 "FirstGroup" => $record->FirstGroup,
                 "SubjectClass" => $record->SubjectClass,
                 "SubjectYear" => $record->SubjectYear,
-                "SubjectID" => $record->SubjectID
+                "SubjectID" => $record->SubjectID,
+                "keyYear" => $this->input->post('keyYear')
             );
 
         }
         $output = array(
-            "data" =>  $data
+            "data" =>  $data,           
         );
         echo json_encode($output);
     }

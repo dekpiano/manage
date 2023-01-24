@@ -1,29 +1,41 @@
-var tablel_Subject;
-tablel_Subject = $('#tbSubject').DataTable({
-    "order": [
-        [1, "asc"]
-    ],
-    'processing': true,
-    "ajax": {
-        url: "../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectSelect",
-        "type": "POST"
-    },
-    'columns': [
-        { data: 'SubjectYear' },
-        { data: 'SubjectCode' },
-        { data: 'SubjectName' },
-        { data: 'FirstGroup' },
-        { data: 'SubjectClass' },
-        { data: 'SubjectYear' },
-        {
-            data: 'SubjectID',
-            render: function(data, type, row) {
-                return '<a href="#" idSbuj="' + data + '" class="btn btn-warning btn-sm EditSubject">แก้ไข</a> | <a href="#" idSbuj="' + data + '" class="btn btn-danger btn-sm delete_subject text-white">ลบ</a>';
-
-            }
-        }
-    ]
+let tablel_Subject;
+TB_Subject($('#CheckYearNow').val());
+$(document).on('change', '.SelectSubject', function() {
+    //alert($(this).val());
+    TB_Subject($(this).val());
 });
+
+
+function TB_Subject(Year) {
+    tablel_Subject = $('#tbSubject').DataTable({
+        destroy: true,
+        "order": [
+            [1, "asc"]
+        ],
+        'processing': true,
+        "ajax": {
+            url: "../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectSelect",
+            "type": "POST",
+            data: { "keyYear": Year }
+        },
+        'columns': [
+            { data: 'SubjectYear' },
+            { data: 'SubjectCode' },
+            { data: 'SubjectName' },
+            { data: 'FirstGroup' },
+            { data: 'SubjectClass' },
+            { data: 'SubjectYear' },
+            {
+                data: 'SubjectID',
+                render: function(data, type, row) {
+                    return '<a href="#" idSbuj="' + data + '" class="btn btn-warning btn-sm EditSubject">แก้ไข</a> | <a href="#" idSbuj="' + data + '" class="btn btn-danger btn-sm delete_subject text-white">ลบ</a>';
+
+                }
+            }
+        ]
+    });
+}
+
 
 $(document).on('click', '.EditSubject', function() {
     $('#ModalUpdateSubject').modal('show');
