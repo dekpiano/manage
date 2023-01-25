@@ -2,6 +2,14 @@
 .border-left-primary {
     border-left: .25rem solid #5BC3D5 !important;
 }
+
+.toolbar {
+    float: left;
+}
+
+.dataTables_length {
+    float: left;
+}
 </style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -18,7 +26,8 @@
 
                             </div>
                             <div class="col-auto">
-                                <a class="btn app-btn-secondary" href="<?=base_url('Admin/Acade/Registration/Enroll/Add')?>">
+                                <a class="btn app-btn-primary"
+                                    href="<?=base_url('Admin/Acade/Registration/Enroll/Add/').$SchoolYear->schyear_year?>">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download mr-1"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -38,12 +47,21 @@
                 </div>
                 <!--//col-auto-->
             </div>
+            <hr>
 
             <section class="we-offer-area">
-
-
-                <div class="app-card app-card-orders-table mt-5">
+                <div class="app-card app-card-orders-table pt-2">
                     <div class="app-card-body">
+                        <input type="text" name="schyear_year" id="schyear_year" value="<?=$SchoolYear->schyear_year?>" style="display:none;">
+                        <div class="mt-2 d-flex align-items-center justify-content-center">
+                            <label for="">เลือกดูปี</label>
+                            <select class="form-select w-auto ms-2" id="CheckYearEnroll" name="CheckYearEnroll">
+                                <?php foreach ($GroupYear as $key => $v_GroupYear) : ?>
+                                <option <?=$SchoolYear->schyear_year == $v_GroupYear->SubjectYear ?"selected":""?> value="<?=$v_GroupYear->SubjectYear?>"><?=$v_GroupYear->SubjectYear?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
                         <div class="table-responsive  p-3">
                             <table class="table app-table-hover mb-0 text-left" id="tbErollSubject">
                                 <thead>
@@ -105,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-          
+
                 </div>
             </div>
         </div>

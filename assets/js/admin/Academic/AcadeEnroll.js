@@ -1,45 +1,58 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 
-
-var tbErollSubject;
-tbErollSubject = $('#tbErollSubject').DataTable({
-    "order": [
-        [1, "asc"]
-    ],
-    'processing': true,
-    "ajax": {
-        url: "../../../admin/academic/ConAdminEnroll/AdminEnrollSubject",
-        "type": "POST"
-    },
-    'columns': [
-        { data: 'SubjectYear' },
-        { data: 'SubjectCode' },
-        { data: 'SubjectName' },
-        { data: 'FirstGroup' },
-        { data: 'SubjectClass' },
-        {
-            data: 'TeacherName',
-            render: function(data, type, row) {
-                return data;
-            }
-        },
-        {
-            data: 'SubjectID',
-            render: function(data, type, row) {
-                return '<span class="badge bg-success rounded-pill ShowEnroll" data-bs-toggle="modal" data-bs-target="#staticBackdrop" sub-id="' + row.SubjectID + '" teach-id="' + row.TeacherID + '">ลงทะเบียนแล้ว</span>';
-            }
-        },
-        {
-            data: 'SubjectID',
-            render: function(data, type, row) {
-                return '<a href="../../../Admin/Acade/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
-                    ' <a href="../../../Admin/Acade/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
-                    ' <a href="#" class="btn btn-danger btn-sm text-white CancelEnroll" key-subject="' + row.SubjectCode + '" key-teacher="' + row.TeacherID + '">ลบลงทะเบียน</a>';
-            }
-        }
-    ]
+let tbErollSubject;
+TB_ErollSubject($('#schyear_year').val());
+$(document).on('change', '#CheckYearEnroll', function() {
+    //alert($(this).val());
+    TB_ErollSubject($(this).val());
 });
 
+function TB_ErollSubject(Year) {
+    tbErollSubject = $('#tbErollSubject').DataTable({
+        destroy: true,
+        "order": [
+            [1, "asc"]
+        ],
+        'processing': true,
+        "ajax": {
+            url: "../../../admin/academic/ConAdminEnroll/AdminEnrollSubject",
+            "type": "POST",
+            data: { "keyYear": Year }
+        },
+        'columns': [
+            { data: 'SubjectYear' },
+            { data: 'SubjectCode' },
+            { data: 'SubjectName' },
+            { data: 'FirstGroup' },
+            { data: 'SubjectClass' },
+            {
+                data: 'TeacherName',
+                render: function(data, type, row) {
+                    return data;
+                }
+            },
+            {
+                data: 'SubjectID',
+                render: function(data, type, row) {
+                    return '<span class="badge bg-success rounded-pill ShowEnroll" data-bs-toggle="modal" data-bs-target="#staticBackdrop" sub-id="' + row.SubjectID + '" teach-id="' + row.TeacherID + '">ลงทะเบียนแล้ว</span>';
+                }
+            },
+            {
+                data: 'SubjectID',
+                render: function(data, type, row) {
+                    return '<a href="../../../Admin/Acade/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
+                        ' <a href="../../../Admin/Acade/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
+                        ' <a href="#" class="btn btn-danger btn-sm text-white CancelEnroll" key-subject="' + row.SubjectCode + '" key-teacher="' + row.TeacherID + '">ลบลงทะเบียน</a>';
+                }
+            }
+        ]
+    });
+}
+
+
+$('#SelectYearRegister').select2({
+    width: 300
+});
 
 $('#teacherregis').select2({
     width: 300
@@ -54,12 +67,16 @@ $('#RoomEdit').select2({
     width: 300
 });
 
+$(document).on("change", "#SelectYearRegister", function() {
+    window.location.href = '../' + $(this).val();
+});
+
 
 $(document).on("change", "#Room", function() {
 
     $('#multiselect option').remove();
 
-    $.post("../../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
+    $.post("../../../../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
 
         $.each(data, function(index, value) {
             //console.log(value);
@@ -93,7 +110,7 @@ $(document).on("change", "#RoomEdit", function() {
 $(document).on("submit", "#FormEnroll", function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../../../admin/academic/ConAdminEnroll/AdminEnrollInsert',
+        url: '../../../../../../admin/academic/ConAdminEnroll/AdminEnrollInsert',
         type: 'post',
         data: $(this).serialize(),
         error: function() {

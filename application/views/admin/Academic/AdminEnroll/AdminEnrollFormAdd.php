@@ -36,6 +36,36 @@
             <section class="we-offer-area">
                 <form id="FormEnroll" method="post" class="needs-validation" novalidate>
 
+                <div class="row g-4 settings-section">
+                        <div class="col-12 col-md-4">
+                            <h3 class="section-title">ปีการศึกษา</h3>
+                            <div class="section-intro">ให้เลือกปีการศึกษาที่จะลงทะเบียน </div>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <div class="app-card app-card-settings shadow-sm p-4">
+                                <div class="app-card-body">
+                                   
+                                    <select  name="SelectYearRegister" id="SelectYearRegister" class="" required autocomplete="off">
+                                        <option value="">เลือกปีการศึกษา</option>
+                                        <?php $d = date('Y')+543; 
+                                        for ($i=$d-2; $i<=$d; $i++): 
+                                            for($j=1; $j<=3; $j++):
+                                        ?>
+                                        <option <?=$this->uri->segment(6).'/'.$this->uri->segment(7) == $j.'/'.$i ?"selected":""?> value="<?=$j.'/'.$i;?>"><?=$j.'/'.$i;?></option>
+                                        <?php endfor; endfor; ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        กรุณาเลือกปีการศึกษา
+                                    </div>
+                                </div>
+                                <!--//app-card-body-->
+
+                            </div>
+                            <!--//app-card-->
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+
 
                     <div class="row g-4 settings-section">
                         <div class="col-12 col-md-4">
