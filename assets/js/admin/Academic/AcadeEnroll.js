@@ -164,30 +164,42 @@ $(document).on("submit", "#FormEnrollUpdate", function(e) {
 
 $(document).on("submit", "#FormEnrollDelete", function(e) {
     e.preventDefault();
-    $.ajax({
-        url: '../../../../../../admin/academic/ConAdminEnroll/AdminEnrollDel',
-        type: 'post',
-        data: $(this).serialize(),
-        error: function() {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
-                showConfirmButton: false,
-                timer: 3000
-            })
-        },
-        success: function(data) {
-            // console.log(data);
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'ถอนการลงทะเบียนรายวิชาสำเร็จ',
-                showConfirmButton: false,
-                timer: 3000
-            })
+    Swal.fire({
+        title: 'ต้องการถอนรายชื่อในการลงทะเบียนหรือไม่?',
+        text: 'เมื่อถอนรายชื่อการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '../../../../../../admin/academic/ConAdminEnroll/AdminEnrollDel',
+                type: 'post',
+                data: $(this).serialize(),
+                error: function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                },
+                success: function(data) {
+                    // console.log(data);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'ถอนการลงทะเบียนรายวิชาสำเร็จ',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
+            });
         }
-    });
+    })
 });
 
 
@@ -212,7 +224,7 @@ $(document).on("click", ".CancelEnroll", function() {
     console.log($(this).attr('key-teacher'));
     Swal.fire({
         title: 'ต้องการลบการลงทะเบียนหรือไม่?',
-        text: 'เมื่อลงการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
+        text: 'เมื่อลบการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
