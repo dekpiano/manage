@@ -47,7 +47,10 @@
         data-bs-parent="#menu-accordion">
         <ul class="submenu-list list-unstyled">
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="Enroll" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Registration/Enroll');?>">ลงทะเบียนเรียน</a>
+                    href="<?=base_url('Admin/Acade/Registration/Enroll');?>">ลงทะเบียนเรียน (ปกติ)</a>
+            </li>
+            <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="Repeat" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Registration/Repeat');?>">ลงทะเบียนเรียน (ซ้ำ)</a>
             </li>
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="RegisterSubject" ? "active" :""?>"
