@@ -50,6 +50,7 @@ var  $title = "แผงควบคุม";
         $data['title'] = "ลงทะเบียนเรียนซ้ำนักเรียนรายวิชา";
 
         $data['DataRepeat'] = $this->db->select("
+        tb_students.StudentID,
         tb_students.StudentPrefix,
         tb_students.StudentFirstName,
         tb_students.StudentLastName,
@@ -59,7 +60,8 @@ var  $title = "แผงควบคุม";
         tb_subjects.SubjectName,
         tb_register.SubjectCode,
         tb_register.RegisterYear,
-        tb_register.Grade")
+        tb_register.Grade,
+        tb_register.Grade_Type")
         ->from('tb_register')
         ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
         ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
@@ -76,19 +78,28 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/layout/Footer.php');
     }
 
-    public function AdminRegisRepeatAdd($Term,$Year){
+    public function AdminRegisRepeatAdd(){
         $data['title'] = "เพิ่มรายชื่อการลงทะเบียนเรียน";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $CheckYear = $this->db->get('tb_schoolyear')->result();
-        $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
-        ->where('pers_learning !=',"")
-        ->get('tb_personnel')->result();
-        $data['subject'] = $this->db->where('SubjectYear',$Term.'/'.$Year)->get('tb_subjects')->result();
+
+        print_r($this->input->post('SelRepeat'));
+        print_r($this->input->post('YearRepeat'));
+        print_r($this->input->post('SubjectRepeat'));
+
+        foreach ($this->input->post('SelRepeat') as $key => $value) {
+            echo $value;
+            // $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+            // $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
+            // $this->db->update('tb_register');
+        }
         
+        
+        exit();
         $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminRegisRepeat/AdminRegisRepeatFormAdd.php');
+        $this->load->view('admin/Academic/AdminRegisRepeat/AdminRegisRepeatAdd.php');
         $this->load->view('admin/layout/Footer.php');
     }
 

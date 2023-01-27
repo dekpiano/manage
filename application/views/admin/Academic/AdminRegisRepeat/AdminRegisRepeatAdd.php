@@ -17,8 +17,9 @@
 
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
-                    <h1 class="app-page-title mb-0">จัดการข้อมูล<?=$title;?></h1>
-                </div>      
+                    <h1 class="app-page-title mb-0">จัดการข้อมูล<?=$title;?>
+                        <?=$DataRepeat[0]->SubjectCode.' '.$DataRepeat[0]->SubjectName?></h1>
+                </div>
             </div>
             <hr>
 
@@ -26,32 +27,46 @@
                 <div class="app-card app-card-orders-table pt-2">
                     <div class="app-card-body">
                         <div class="table-responsive  p-3">
-                            <table class="table app-table-hover mb-0 text-left" id="">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th class="cell">เลือกที่เรียนซ้ำ</th>
-                                        <th class="cell">ห้อง</th>
-                                        <th class="cell">เลขที่</th>
-                                        <th class="cell">รหัสประจำตัว</th>
-                                        <th class="cell">ชื่อนักเรียน</th>
-                                        <th class="cell">คะแนน</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($DataRepeat as $key => $v_DataRepeat) : ?>
-                                    <tr class="<?=$v_DataRepeat->Grade == "มส" ?"table-danger":""?>">
-                                        <td class="text-center"><input type="checkbox" name="" id="" class="form-check-input"></td>
-                                        <td class="text-center"><?=$v_DataRepeat->StudentClass?></td>
-                                        <td class="text-center"><?=$v_DataRepeat->StudentNumber?></td>
-                                        <td class="text-center"><?=$v_DataRepeat->StudentCode?></td>
-                                        <td class="text-left"><?=$v_DataRepeat->StudentPrefix.$v_DataRepeat->StudentFirstName.' '.$v_DataRepeat->StudentLastName?></td>
-                                        <td class="text-center"><?=$v_DataRepeat->Grade?></td>
+                            <form action="<?=base_url('Admin/Acade/Registration/Repeat/Add')?>" method="post">
+                            <input type="text" name="YearRepeat" value="<?=$DataRepeat[0]->RegisterYear?>" style="display:none;">
+                            <input type="text" name="SubjectRepeat" value="<?=$DataRepeat[0]->SubjectCode?>" style="display:none;">
+                                <table class="table app-table-hover mb-0 text-left" id="">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>เลือกที่เรียนซ้ำ</th>
+                                            <th>ปีการศึกษา</th>
+                                            <th >ห้อง</th>
+                                            <th>เลขที่</th>
+                                            <th>รหัสประจำตัว</th>
+                                            <th>ชื่อนักเรียน</th>
+                                            <th>คะแนน</th>
+                                            <th>สถานะ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($DataRepeat as $key => $v_DataRepeat) : ?>
+                                        <tr class="<?=$v_DataRepeat->Grade == "มส" ?"table-danger":""?>">
+                                            <td class="text-center"><input type="checkbox" name="SelRepeat[]" id="SelRepeat" value="<?=$v_DataRepeat->StudentID?>"
+                                                    class="form-check-input"></td>
+                                            <td class="text-center"><?=$v_DataRepeat->RegisterYear?></td>
+                                            <td class="text-center"><?=$v_DataRepeat->StudentClass?></td>
+                                            <td class="text-center"><?=$v_DataRepeat->StudentNumber?></td>
+                                            <td class="text-center"><?=$v_DataRepeat->StudentCode?></td>
+                                            <td class="text-left">
+                                                <?=$v_DataRepeat->StudentPrefix.$v_DataRepeat->StudentFirstName.' '.$v_DataRepeat->StudentLastName?>
+                                            </td>
+                                            <td class="text-center"><?=$v_DataRepeat->Grade?></td>
+                                            <td class="text-center"><?=$v_DataRepeat->Grade_Type?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
 
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
+                                </table>
+                                <div class="mt-3 text-center">
+                                    <button class="btn app-btn-primary">บันทึก</button>
+                                </div>
+                            </form>
 
-                            </table>
                         </div>
                         <!--//table-responsive-->
                     </div>
