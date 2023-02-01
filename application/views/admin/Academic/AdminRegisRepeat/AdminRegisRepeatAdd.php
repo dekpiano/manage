@@ -27,7 +27,7 @@
                 <div class="app-card app-card-orders-table pt-2">
                     <div class="app-card-body">
                         <div class="table-responsive  p-3">
-                            <form action="<?=base_url('Admin/Acade/Registration/Repeat/Add')?>" method="post">
+                            <form id="FormRegisRepeatUpdate" method="post">
                             <input type="text" name="YearRepeat" value="<?=$DataRepeat[0]->RegisterYear?>" style="display:none;">
                             <input type="text" name="SubjectRepeat" value="<?=$DataRepeat[0]->SubjectCode?>" style="display:none;">
                                 <table class="table app-table-hover mb-0 text-left" id="">
@@ -46,8 +46,11 @@
                                     <tbody>
                                         <?php foreach ($DataRepeat as $key => $v_DataRepeat) : ?>
                                         <tr class="<?=$v_DataRepeat->Grade == "มส" ?"table-danger":""?>">
-                                            <td class="text-center"><input type="checkbox" name="SelRepeat[]" id="SelRepeat" value="<?=$v_DataRepeat->StudentID?>"
-                                                    class="form-check-input"></td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="SelRepeat[]" id="SelRepeat" value="<?=$v_DataRepeat->StudentID?>"
+                                                    class="form-check-input"
+                                                <?=($v_DataRepeat->Grade_Type != "" ?"checked":"")?> >
+                                                </td>
                                             <td class="text-center"><?=$v_DataRepeat->RegisterYear?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentClass?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentNumber?></td>

@@ -99,146 +99,163 @@ $(document).on("change", "#RoomEdit", function() {
 });
 
 
-$(document).on("submit", "#FormRegisRepeat", function(e) {
-    e.preventDefault();
-    $.ajax({
-        url: '../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatInsert',
-        type: 'post',
-        data: $(this).serialize(),
-        error: function() {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
-                showConfirmButton: false,
-                timer: 3000
-            })
-        },
-        success: function(data) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'บันทึกข้อมูลสำเร็จ',
-                showConfirmButton: false,
-                timer: 3000
-            })
-        }
-    });
-});
+// $(document).on("submit", "#FormRegisRepeat", function(e) {
+//     e.preventDefault();
+//     $.ajax({
+//         url: '../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatInsert',
+//         type: 'post',
+//         data: $(this).serialize(),
+//         error: function() {
+//             Swal.fire({
+//                 position: 'top-end',
+//                 icon: 'error',
+//                 title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
+//                 showConfirmButton: false,
+//                 timer: 3000
+//             })
+//         },
+//         success: function(data) {
+//             Swal.fire({
+//                 position: 'top-end',
+//                 icon: 'success',
+//                 title: 'บันทึกข้อมูลสำเร็จ',
+//                 showConfirmButton: false,
+//                 timer: 3000
+//             })
+//         }
+//     });
+// });
 
 $(document).on("submit", "#FormRegisRepeatUpdate", function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatUpdate',
+        url: '../../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatAdd',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
+            //console.log(data);
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
+                title: 'ระบบผิดพลาด ลองใหม่อีกครั้ง!',
                 showConfirmButton: false,
                 timer: 3000
             })
         },
         success: function(data) {
-            // console.log(data);
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'เพิ่งรายชื่อนักเรียนสำเร็จ',
-                showConfirmButton: false,
-                timer: 3000
-            })
+            console.log(data);
+            if (data === "สำเร็จ") {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'ลงทะเบียนเรียนซ้ำ สำเร็จ!',
+                    showConfirmButton: false,
+                    timer: 3000
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        location.reload(true);
+                    }
+                });
+
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'คุณไม่ได้เลือกนักเรียนในการลงทะเบียนเรียนซ้ำ!',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
+
         }
     });
 });
 
-$(document).on("submit", "#FormRegisRepeatDelete", function(e) {
-    e.preventDefault();
-    Swal.fire({
-        title: 'ต้องการถอนรายชื่อในการลงทะเบียนหรือไม่?',
-        text: 'เมื่อถอนรายชื่อการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: '../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatDel',
-                type: 'post',
-                data: $(this).serialize(),
-                error: function() {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                },
-                success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'ถอนการลงทะเบียนรายวิชาสำเร็จ',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                }
-            });
-        }
-    })
-});
+// $(document).on("submit", "#FormRegisRepeatDelete", function(e) {
+//     e.preventDefault();
+//     Swal.fire({
+//         title: 'ต้องการถอนรายชื่อในการลงทะเบียนหรือไม่?',
+//         text: 'เมื่อถอนรายชื่อการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             $.ajax({
+//                 url: '../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatDel',
+//                 type: 'post',
+//                 data: $(this).serialize(),
+//                 error: function() {
+//                     Swal.fire({
+//                         position: 'top-end',
+//                         icon: 'error',
+//                         title: 'นักเรียนในรายชื่อนี้ได้ลงทะเบียนวิชานี้ และปีนี้ไปแล้ว กรุณาเลือกและตรวจสอบใหม่',
+//                         showConfirmButton: false,
+//                         timer: 3000
+//                     })
+//                 },
+//                 success: function(data) {
+//                     // console.log(data);
+//                     Swal.fire({
+//                         position: 'top-end',
+//                         icon: 'success',
+//                         title: 'ถอนการลงทะเบียนรายวิชาสำเร็จ',
+//                         showConfirmButton: false,
+//                         timer: 3000
+//                     })
+//                 }
+//             });
+//         }
+//     })
+// });
 
 
-$(document).on("click", ".ShowRegisRepeat", function() {
+// $(document).on("click", ".ShowRegisRepeat", function() {
 
-    $('#tb_ShowRegisRepeat tbody tr').remove();
+//     $('#tb_ShowRegisRepeat tbody tr').remove();
 
-    $.post("../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatShow", {
-        subid: $(this).attr('sub-id'),
-        teachid: $(this).attr('teach-id')
-    }, function(data, status) {
-        //console.log(data);
-        $('.ShowSubjectName').html("วิชา " + data[0].SubjectName + "<br>ครูผู้สอน " + data[0].pers_prefix + data[0].pers_firstname + ' ' + data[0].pers_lastname);
-        $.each(data, function(index, value) {
-            $('#tb_ShowRegisRepeat tbody').append('<tr class="DelTableRow"><td>' + value.StudentClass + '</td><td>' + value.StudentNumber + '</td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</td></tr>');
-        });
-    }, 'json');
+//     $.post("../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatShow", {
+//         subid: $(this).attr('sub-id'),
+//         teachid: $(this).attr('teach-id')
+//     }, function(data, status) {
+//         //console.log(data);
+//         $('.ShowSubjectName').html("วิชา " + data[0].SubjectName + "<br>ครูผู้สอน " + data[0].pers_prefix + data[0].pers_firstname + ' ' + data[0].pers_lastname);
+//         $.each(data, function(index, value) {
+//             $('#tb_ShowRegisRepeat tbody').append('<tr class="DelTableRow"><td>' + value.StudentClass + '</td><td>' + value.StudentNumber + '</td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</td></tr>');
+//         });
+//     }, 'json');
 
-});
+// });
 
-$(document).on("click", ".CancelRegisRepeat", function() {
-    console.log($(this).attr('key-teacher'));
-    Swal.fire({
-        title: 'ต้องการลบการลงทะเบียนหรือไม่?',
-        text: 'เมื่อลบการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $(this).parents('tr').remove();
+// $(document).on("click", ".CancelRegisRepeat", function() {
+//     console.log($(this).attr('key-teacher'));
+//     Swal.fire({
+//         title: 'ต้องการลบการลงทะเบียนหรือไม่?',
+//         text: 'เมื่อลบการลงทะเบียนวิชานี้แล้ว คะแนนและรายชื่อนักเรียนในวิชานี้ จะถูกลบทั้งหมด',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             $(this).parents('tr').remove();
 
-            $.post("../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatCancel", {
-                KeyTeacher: $(this).attr('key-teacher'),
-                KeySubject: $(this).attr('key-subject')
-            }, function(data, status) {
-                console.log(data);
+//             $.post("../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatCancel", {
+//                 KeyTeacher: $(this).attr('key-teacher'),
+//                 KeySubject: $(this).attr('key-subject')
+//             }, function(data, status) {
+//                 console.log(data);
 
-            });
+//             });
 
-            Swal.fire(
-                'ลบข้อมูลเรียบร้อย!',
-                'Your data has been deleted.',
-                'success'
-            )
-        }
-    })
-});
+//             Swal.fire(
+//                 'ลบข้อมูลเรียบร้อย!',
+//                 'Your data has been deleted.',
+//                 'success'
+//             )
+//         }
+//     })
+// });

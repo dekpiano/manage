@@ -85,22 +85,55 @@ var  $title = "แผงควบคุม";
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $CheckYear = $this->db->get('tb_schoolyear')->result();
 
-        print_r($this->input->post('SelRepeat'));
-        print_r($this->input->post('YearRepeat'));
-        print_r($this->input->post('SubjectRepeat'));
+        $CheckRepeat = $this->db->select('onoff_detail')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
+        
+        $CheckStudent = $this->db->select('StudentID')
+        ->where('RegisterYear',$this->input->post('YearRepeat'))
+        ->where('SubjectCode',$this->input->post('SubjectRepeat'))
+        ->get('tb_register')->result();   
 
-        foreach ($this->input->post('SelRepeat') as $key => $value) {
-            echo $value;
-            // $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
-            // $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
-            // $this->db->update('tb_register');
+        $IdStuRepeat = array();
+        $CountUpSucceed =0;
+
+        if($this->input->post('SelRepeat')){        
+            foreach ($this->input->post('SelRepeat') as $key => $value) {
+                array_push($IdStuRepeat,$value);
+            }
+            foreach ($CheckStudent as $key => $v_CheckStudent) {
+                if(in_array($v_CheckStudent->StudentID,$IdStuRepeat)){
+                     $DataUpdateRepeat = array('Grade_Type' => $CheckRepeat[0]->onoff_detail);
+                     $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+                     $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
+                     $this->db->where('StudentID',$v_CheckStudent->StudentID);
+                    $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
+                }else{
+                    $DataUpdateRepeat = array('Grade_Type' => "");
+                    $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+                    $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
+                    $this->db->where('StudentID',$v_CheckStudent->StudentID);
+                   $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
+                }
+            }
+        }else{
+                 $DataUpdateRepeat = array('Grade_Type' => "");
+                 $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+                 $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
+                $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
+           
+             
         }
-        
-        
-        exit();
-        $this->load->view('admin/layout/Header.php',$data);
-        $this->load->view('admin/Academic/AdminRegisRepeat/AdminRegisRepeatAdd.php');
-        $this->load->view('admin/layout/Footer.php');
+       
+        if($CountUpSucceed > 0){
+            echo "สำเร็จ";
+        }else{
+            echo 0;
+        }
+
+      
+      
+        // $this->load->view('admin/layout/Header.php',$data);
+        // $this->load->view('admin/Academic/AdminRegisRepeat/AdminRegisRepeatAdd.php');
+        // $this->load->view('admin/layout/Footer.php');
     }
 
     public function AdminRegisRepeatEdit($codeSub,$TeachID){
