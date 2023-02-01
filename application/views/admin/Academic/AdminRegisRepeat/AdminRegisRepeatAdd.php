@@ -59,7 +59,9 @@
                                                 <?=$v_DataRepeat->StudentPrefix.$v_DataRepeat->StudentFirstName.' '.$v_DataRepeat->StudentLastName?>
                                             </td>
                                             <td class="text-center"><?=$v_DataRepeat->Grade?></td>
-                                            <td class="text-center"><?=$v_DataRepeat->Grade_Type?></td>
+                                            <td class="text-center">
+                                                <?=$v_DataRepeat->Grade_Type == "" ?"เรียนปกติ":"$v_DataRepeat->Grade_Type"?>
+                                            </td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
