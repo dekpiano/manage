@@ -136,16 +136,16 @@ $('#example').DataTable({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=51"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=52"></script>
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=13"></script>    
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=16"></script>  
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=18"></script>  
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisRepeat.js?v=6"></script>  
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=15"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
-<script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=15"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=17"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=19"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=8"></script>
 <?php endif; ?>

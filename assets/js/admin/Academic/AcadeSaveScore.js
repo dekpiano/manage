@@ -217,7 +217,7 @@ $(document).on('submit', '.form_score', function(e) {
 
 $(document).on("change", "#CheckTimeRepeat", function() {
     let CheckTimeRepeat = $(this).val();
-    $.post("../../../admin/academic/ConAdminAcademicRepeat/CheckTimeRepeat", {
+    $.post("../../../../../admin/academic/ConAdminAcademicRepeat/CheckTimeRepeat", {
             value: CheckTimeRepeat
         },
         function(data, status) {

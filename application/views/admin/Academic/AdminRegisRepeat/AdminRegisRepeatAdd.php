@@ -18,11 +18,11 @@
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
                     <h1 class="app-page-title mb-0">จัดการข้อมูล<?=$title;?>
-                        <?=$DataRepeat[0]->SubjectCode.' '.$DataRepeat[0]->SubjectName?></h1>
+                        <?=@$DataRepeat[0]->SubjectCode.' '.@$DataRepeat[0]->SubjectName?></h1>
                 </div>
             </div>
             <hr>
-
+<?php if($DataRepeat) :?>
             <section class="we-offer-area">
                 <div class="app-card app-card-orders-table pt-2">
                     <div class="app-card-body">
@@ -80,7 +80,26 @@
 
 
             </section>
-
+            <?php else :  ?>
+                <div class="app-card shadow-sm mb-4 border-left-decoration">
+				    <div class="inner">
+					    <div class="app-card-body p-4">
+						    <div class="row gx-5 gy-3">
+						        <div class="col-12 col-lg-9">
+							        
+							        <div> <h3>ยังไม่มีข้อมูลการลงทะเบียนเรียน</h3> </div>
+							    </div><!--//col-->
+							    <div class="col-12 col-lg-3">
+								    <a class="btn app-btn-primary" href="<?=base_url('Admin/Acade/Registration/Repeat')?>">ย้อนกลับ</a>
+							    </div><!--//col-->
+						    </div><!--//row-->
+	
+					    </div><!--//app-card-body-->
+					    
+				    </div><!--//inner-->
+			    </div>
+                
+<?php endif; ?>
 
             <!--//row-->
         </div>

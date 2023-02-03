@@ -65,13 +65,13 @@ var  $title = "แผงควบคุม";
         ->from('tb_register')
         ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
         ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
-        ->where('tb_subjects.SubjectYear',$Term.'/'.$Year)
+        ->where('tb_register.RegisterYear',$Term.'/'.$Year)
         ->where('tb_register.SubjectCode',urldecode($IDSubject))
         ->order_by('StudentClass','ASC')
         ->order_by('StudentNumber','ASC')
         ->get()->result();
 
-        //echo '<pre>'; print_r($data['DataRepeat']); exit();
+       // echo '<pre>'; print_r($data['DataRepeat']); exit();
 
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminRegisRepeat/AdminRegisRepeatAdd.php');

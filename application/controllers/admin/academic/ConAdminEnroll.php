@@ -164,7 +164,7 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
                                     ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
                                     ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
-                                    //->where('RegisterYear',$CheckYear[0]->schyear_year) 
+                                    ->where('RegisterYear',$this->input->post('yearid')) 
                                     ->where('TeacherID',$this->input->post('teachid'))
                                     ->where('SubjectID',$this->input->post('subid'))
                                     ->order_by('StudentClass')

@@ -34,7 +34,7 @@ function TB_ErollSubject(Year) {
             {
                 data: 'SubjectID',
                 render: function(data, type, row) {
-                    return '<span class="badge bg-success rounded-pill ShowEnroll" data-bs-toggle="modal" data-bs-target="#staticBackdrop" sub-id="' + row.SubjectID + '" teach-id="' + row.TeacherID + '">ลงทะเบียนแล้ว</span>';
+                    return '<span class="badge bg-success rounded-pill ShowEnroll" data-bs-toggle="modal" data-bs-target="#staticBackdrop" sub-id="' + row.SubjectID + '" teach-id="' + row.TeacherID + '" year-id="' + row.SubjectYear + '">ลงทะเบียนแล้ว</span>';
                 }
             },
             {
@@ -209,7 +209,8 @@ $(document).on("click", ".ShowEnroll", function() {
 
     $.post("../../../admin/academic/ConAdminEnroll/AdminEnrollShow", {
         subid: $(this).attr('sub-id'),
-        teachid: $(this).attr('teach-id')
+        teachid: $(this).attr('teach-id'),
+        yearid: $(this).attr('year-id')
     }, function(data, status) {
         //console.log(data);
         $('.ShowSubjectName').html("วิชา " + data[0].SubjectName + "<br>ครูผู้สอน " + data[0].pers_prefix + data[0].pers_firstname + ' ' + data[0].pers_lastname);
