@@ -249,7 +249,6 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
                                 ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                                 ->where('tb_subjects.SubjectYear',$keyYear)
                                 ->group_by('SubjectCode')
-                                ->group_by('TeacherID')
                                 ->group_by('RegisterClass')
                                 ->get()->result();
 
