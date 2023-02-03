@@ -58,6 +58,7 @@ var  $title = "แผงควบคุม";
         tb_students.StudentCode,
         tb_students.StudentNumber,
         tb_subjects.SubjectName,
+        tb_subjects.SubjectYear,
         tb_register.SubjectCode,
         tb_register.RegisterYear,
         tb_register.Grade,
@@ -66,12 +67,15 @@ var  $title = "แผงควบคุม";
         ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
         ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
         ->where('tb_register.RegisterYear',$Term.'/'.$Year)
+        ->where('tb_subjects.SubjectYear',$Term.'/'.$Year)
         ->where('tb_register.SubjectCode',urldecode($IDSubject))
         ->order_by('StudentClass','ASC')
         ->order_by('StudentNumber','ASC')
         ->get()->result();
 
-       // echo '<pre>'; print_r($data['DataRepeat']); exit();
+        
+
+        //echo '<pre>'; print_r($data['DataRepeat']); exit();
 
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminRegisRepeat/AdminRegisRepeatAdd.php');
