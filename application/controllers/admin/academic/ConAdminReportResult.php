@@ -225,6 +225,7 @@ var  $title = "แผงควบคุม";
     public function AdminStudentsScore($IdStudent){      
         $data['title'] = "ผลการเรียนนักเรียนรายบุคคล";
         $data['ExtraSetting'] = $this->db->get('tb_extra_setting')->result();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['scoreYear'] = $this->db->select('
                                     tb_register.RegisterClass,
                                     tb_register.RegisterYear,

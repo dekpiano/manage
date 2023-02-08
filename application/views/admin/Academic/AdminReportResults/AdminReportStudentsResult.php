@@ -53,7 +53,7 @@
                                     <div class="col-md-8">
                                         <div class="card mb-5">
                                             <div class="table-responsive">
-                                                <table class="table table-hover table-bordered ShowGrade">
+                                                <table class="table table-hover table-bordered">
                                                     <thead class="bg-light">
                                                         <tr class="text-center table-success">
                                                             <th scope="col">รหัสวิชา</th>
@@ -64,12 +64,12 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php  $SumUnit = 0; $SumGrade = 0; $scoreLevel=0;
+                                                        <?php  $SumUnit = 0; $SumGrade = 0; $scoreLevel=0; $CountSubjectAll = 0;
                                         foreach ($scoreStudent as $key => $score ):                                         
                                         if($v_scoreYear->RegisterYear == $score->RegisterYear && $v_scoreYear->RegisterYear == $score->SubjectYear):
                                             $c = floatval($score->Score100);
                                             $type = explode("/",$score->SubjectType);
-                                        
+                                            $CountSubjectAll += 1;
                                          ?>
                                                         <tr>
                                                             <th scope="row"><?=$score->SubjectCode;?></th>
@@ -101,13 +101,14 @@
                                         }
                                          endif; 
                                          endforeach;?>
-                                                        <tr class="text-center tfoot">
-                                                            <th colspan=3>รวม</th>
-                                                            <th></th>
-                                                            <th>
-
-                                                            </th>
-                                                        </tr>
+                                                       <tr class="text-center tfoot">
+                                                        <th ></th>
+                                                        <th >วิชาทั้งหมด <?=$CountSubjectAll;?> วิชา</th>
+                                                        <th colspan=2>หน่วยกิตทั้งหมด <?=$SumUnit;?></th>
+                                                        <th>
+                                                            <?=substr($SumGrade/$SumUnit,0,4);?>
+                                                        </th>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
