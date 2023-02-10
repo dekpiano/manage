@@ -51,8 +51,15 @@ var  $title = "แผงควบคุม";
         $data['description'] = "ตรวจสอบรายชื่อนักเรียนและครูที่ปรึกษา";
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['banner'] = base_url('uploads/banner/StudentList/bannerStu.png');
-
         $data['schoolyear'] = $this->db->get('tb_schoolyear')->row();
+
+        $data['SelectSubject'] = $this->db->select('SubjectCode,SubjectName')
+        ->where('SubjectYear',$data['schoolyear']->schyear_year)
+        ->order_by('FirstGroup','ASC')
+        ->get('tb_subjects')->result();
+
+        
+       
         $subYear = explode('/',$data['schoolyear']->schyear_year);
         $data['TeacRoom'] = $this->db->select('
         skjacth_personnel.tb_personnel.pers_prefix,
@@ -66,7 +73,7 @@ var  $title = "แผงควบคุม";
         ->where('Reg_Class',@$_GET['studentList'])
         ->get()->result();
 
-        $data['checkLine'] = $this->db->select('StudentStudyLine')
+        $data['checkLine'] = $this->db->select('StudentClass,StudentStudyLine')
         ->where('StudentClass','ม.'.@$_GET['studentList'])
         ->group_by('StudentStudyLine')
         ->get('tb_students')->result();
@@ -88,7 +95,7 @@ var  $title = "แผงควบคุม";
         
     }
 
-    public function StudentsPrintRoom(){
+    public function StudentsPrintRoom($Class,$Room,$StudyLine = 0){
         require_once (APPPATH. '../vendor/vendor/autoload.php');
 
         $live_mpdf = new \Mpdf\Mpdf(
@@ -106,17 +113,49 @@ var  $title = "แผงควบคุม";
 
         $data['schoolyear'] = $this->db->get('tb_schoolyear')->row();
         $subYear = explode('/',$data['schoolyear']->schyear_year);
+
+        
+
+        $NameRoom = 'ม.'.$Class.'/'.$Room;
+        $data['SubRoom'] = explode('.',$NameRoom);
+        $data['TeacRoom'] = $this->db->select('
+        skjacth_personnel.tb_personnel.pers_prefix,
+        skjacth_personnel.tb_personnel.pers_firstname,
+        skjacth_personnel.tb_personnel.pers_lastname,
+        skjacth_academic.tb_regclass.Reg_Class
+        ')
+        ->from('skjacth_academic.tb_regclass')
+        ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_regclass.class_teacher')
+        ->where('Reg_Year',$subYear[1])
+        ->where('Reg_Class',$data['SubRoom'][1])
+        ->get()->result();
+
+        //echo '<pre>'; print_r($data['TeacRoom']); exit();
+
         $data['checkLine'] = $this->db->select('StudentStudyLine')
-        ->where('StudentClass','ม.4/1')
+        ->where('StudentClass',$NameRoom)
         ->group_by('StudentStudyLine')
         ->get('tb_students')->result();
-        $data['selStudent'] = $this->db->select('StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentStudyLine,StudentBehavior')
-        ->from('tb_students')
-        ->where('StudentStatus','1/ปกติ')  
-        ->where('StudentBehavior !=','จำหน่่าย')      
-        ->where('StudentClass','ม.4/1')
-        ->order_by('StudentNumber','ASC')
-        ->get()->result();
+
+        if($StudyLine == "All"){
+            $data['selStudent'] = $this->db->select('StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentStudyLine,StudentBehavior')
+            ->from('tb_students')
+            ->where('StudentStatus','1/ปกติ')  
+            ->where('StudentBehavior !=','จำหน่่าย')      
+            ->where('StudentClass',$NameRoom)
+            ->order_by('StudentNumber','ASC')
+            ->get()->result();
+        }else{
+            $data['selStudent'] = $this->db->select('StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentStudyLine,StudentBehavior')
+            ->from('tb_students')
+            ->where('StudentStatus','1/ปกติ')  
+            ->where('StudentBehavior !=','จำหน่่าย')      
+            ->where('StudentClass',$NameRoom)
+            ->where('StudentStudyLine',$StudyLine)
+            ->order_by('StudentNumber','ASC')
+            ->get()->result();
+        }
+
         // true
         $ReportFront = $this->load->view('user/PageStudentsListPrint',$data,true);        
         $live_mpdf->WriteHTML($ReportFront);

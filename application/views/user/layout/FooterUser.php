@@ -20,6 +20,8 @@
 <!-- Page Specific JS -->
 <script src="<?=base_url();?>assets/js/app.js"></script>
 
+<script src="<?=base_url();?>assets/js/User/StudentsList.js?v=2"></script>
+
 <script src="<?=base_url();?>assets/js/CountdownTimer.js?v=16"></script>
 
 <script>
