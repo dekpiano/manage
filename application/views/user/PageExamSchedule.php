@@ -13,7 +13,7 @@
                 <div id="accordion">
                     <?php  foreach ($Exam as $key => $v_Exam) : ?>
                     <div class="card">
-                        <div class="card-header" id="heading<?=$key?>">
+                        <!-- <div class="card-header" id="heading<?=$key?>">
                             <h5 class="mb-0">
                                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?=$key?>"
                                     aria-expanded="true" aria-controls="collapse<?=$key?>">
@@ -21,15 +21,18 @@
                                     <?=$v_Exam->exam_term?>
                                 </button>
                             </h5>
-                        </div>
-
+                        </div> -->
+<!-- 
                         <div id="collapse<?=$key?>" class="collapse <?=$key == 0 ? 'show' : ''?>"
                             aria-labelledby="heading<?=$key?>" data-parent="#accordion">
                             <div class="card-body">
                                 <iframe src="<?=base_url('uploads/academic/exam_schedule/').$v_Exam->exam_filename;?>"
                                     width="100%" height="500px"></iframe>
                             </div>
-                        </div>
+                        </div> -->
+
+                        <img class="img-fluid" src="<?=base_url('uploads/academic/exam_schedule/Tb2566-2-2.jpg')?>" alt="">
+                        <img class="img-fluid" src="<?=base_url('uploads/academic/exam_schedule/Tb2566-2-1.jpg')?>" alt="">
                     </div>
                     <?php endforeach; ?>
                 </div>

@@ -166,7 +166,7 @@ var  $title = "แผงควบคุม";
         $data['title'] = "ตารางสอบ";
         $data['description'] = "ตารางสอบ";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $data['banner'] = "";
+        $data['banner'] = base_url('assets/images/ExamSchedule/banner.jpg');
 
         $data['Exam'] = $this->db->order_by('exam_id','DESC')->limit(6)->get('tb_exam_schedule')->result();
         $this->load->view('user/layout/HeaderUser.php',$data);

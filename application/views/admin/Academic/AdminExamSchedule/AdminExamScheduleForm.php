@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <form action="<?=base_url('Admin/Acade/ConAdminExamSchedule/').$action;?>" method="post"
                                     enctype="multipart/form-data" class="needs-validation" novalidate>
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-3">
                                         <label for="exam_id" class="col-sm-2 col-form-label">รหัส<?=$title;?></label>
                                         <div class="col-md-2">
                                             <input type="text" readonly class="form-control" id="exam_id" name="exam_id"
@@ -28,7 +28,7 @@
                                                 required>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-3">
                                         <label for="exam_term" class="col-sm-2 col-form-label">ประเภทสอบ</label>
                                         <div class="col-md-4">
                                             <div class="custom-control custom-radio custom-control-inline">
@@ -45,7 +45,7 @@
                                             <div class="invalid-feedback">เลือกสอบกลางภาคหรือปลายภาค</div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-3">
                                         <label for="exam_term" class="col-sm-2 col-form-label">ภาคเรียน</label>
                                         <div class="col-md-4">
                                             <select name="exam_term" id="exam_term" class="form-control" required>
@@ -61,7 +61,7 @@
                                             <div class="invalid-feedback">เลือกภาคเรียน</div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-3">
                                         <label for="exam_year" class="col-sm-2 col-form-label">ปีการศึกษา</label>
                                         <div class="col-md-4">
                                             <select name="exam_year" id="exam_year" class="form-control" required>
@@ -76,15 +76,13 @@
                                             <div class="invalid-feedback">เลือกปีการศึกษา</div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-3">
                                         <label for="exam_filename"
                                             class="col-sm-2 col-form-label">ไฟล์<?=$title;?></label>
                                         <div class="col-sm-4">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="exam_filename"
-                                                    id="exam_filename" required>
-                                                <label class="custom-file-label" for="validatedCustomFile">Choose
-                                                    file...</label>
+                                                    id="exam_filename" required>                                              
                                                 <div class="invalid-feedback">เลือกไฟล์ PDF</div>
                                             </div>
 
@@ -92,7 +90,7 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-3">
                                         <label for="exam_filename" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
                                             <button type="submit"

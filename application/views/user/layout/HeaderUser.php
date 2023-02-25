@@ -161,8 +161,8 @@
                                             class="submenu-link <?=$this->uri->segment(1) == 'ExamSchedule'?'active':''?>"
                                             href="<?=base_url('ExamSchedule');?>">ตารางสอบ</a></li> -->
                                     <li class="submenu-item"><a
-                                            class="submenu-link <?=$this->uri->segment(1) == 'ExamScheduleOnline'?'active':''?>"
-                                            href="<?=base_url('ExamScheduleOnline');?>">ตารางสอบออนไลน์</a></li>
+                                            class="submenu-link <?=$this->uri->segment(1) == 'ExamSchedule'?'active':''?>"
+                                            href="<?=base_url('ExamSchedule');?>">ตารางสอบ</a></li>
                                     <li class="submenu-item"><a
                                             class="submenu-link <?=$this->uri->segment(1) == 'StudentsList'?'active':''?>"
                                             href="<?=base_url('StudentsList');?>">รายชื่อนักเรียน/ครูที่ปรึกษา</a></li>
