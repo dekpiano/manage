@@ -100,8 +100,6 @@ class ConAdminStudents extends CI_Controller {
     public function AdminStudentsUpdate(){
         $this->load->helper('array');
         
-            
-        
         $service = $this->getClient();
         $spreadsheetId = '1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec';
         
@@ -111,16 +109,14 @@ class ConAdminStudents extends CI_Controller {
         $numRows = $response->getValues() != null ? count($response->getValues()) : 0;
        
         $checkStu = [];
-        $re = $this->db->select('StudentIDNumber,StudentStatus')
-        ->where('StudentBehavior','ปกติ')
+        $re = $this->db->select('StudentIDNumber,StudentStatus')        
         ->where('StudentStatus','1/ปกติ')
-        ->or_where('StudentBehavior','ขาดเรียนนาน')
         ->get('tb_students')->result();
         foreach ($re as $key => $v_re) {
             $checkStu[] = $v_re->StudentIDNumber;
         }
-        //sset($response->values[775][10])
-       // echo '<pre>';print_r($re);exit();
+        
+       //echo '<pre>';print_r($checkStu);exit();
         for ($i=0; $i < $numRows; $i++) { 
             if(isset($response->values[$i][10]) == 1){
                $StudyLine = $response->values[$i][10];
