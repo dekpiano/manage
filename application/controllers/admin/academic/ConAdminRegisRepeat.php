@@ -180,7 +180,7 @@ var  $title = "แผงควบคุม";
     public function AdminRegisRepeatDelete($codeSub,$TeachID){
         $data['title'] = "ถอนรายชื่อการลงทะเบียนเรียน";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-$data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $CheckYear = $this->db->get('tb_schoolyear')->result();
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')

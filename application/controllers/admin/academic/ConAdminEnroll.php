@@ -26,7 +26,7 @@ var  $title = "แผงควบคุม";
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
-        $data['title'] = "หน้าหลัก | ลงทะเบียนเรียน";	
+        $data['title'] = "ลงทะเบียนเรียน";	
 
         $data['GroupYear'] = $this->db->select('SubjectYear')->group_by('SubjectYear')->order_by('SubjectYear','ASC')->get('tb_subjects')->result();
 
@@ -67,6 +67,8 @@ var  $title = "แผงควบคุม";
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
                                         ->where('pers_learning !=',"")
                                         ->get('tb_personnel')->result();
+        $data['CheckYearSubject'] = $this->db->select('SubjectYear')->where('SubjectID',$codeSub)->get('tb_subjects')->result();
+
         $data['Register'] = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
@@ -98,12 +100,14 @@ var  $title = "แผงควบคุม";
     public function AdminEnrollDelete($codeSub,$TeachID){
         $data['title'] = "ถอนรายชื่อการลงทะเบียนเรียน";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-$data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $CheckYear = $this->db->get('tb_schoolyear')->result();
         $data['teacher'] = $DBpersonnel->select('pers_id,pers_img,pers_prefix,pers_firstname,pers_lastname')
                                         ->where('pers_learning !=',"")
                                         ->get('tb_personnel')->result();
+
+        $data['CheckYearSubject'] = $this->db->select('SubjectYear')->where('SubjectID',$codeSub)->get('tb_subjects')->result();
 
         $data['Register'] = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
@@ -121,7 +125,8 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
                                     ->from('tb_register')
                                     ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
-                                    //->where('RegisterYear',$CheckYear[0]->schyear_year) 
+                                    ->where('tb_register.RegisterYear',$data['CheckYearSubject'][0]->SubjectYear) 
+                                    ->where('tb_subjects.SubjectYear',$data['CheckYearSubject'][0]->SubjectYear)
                                     ->where('TeacherID',$TeachID)
                                     ->where('SubjectID',$codeSub)
                                     ->get()->result();
@@ -248,8 +253,9 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
                                 ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                                 ->where('tb_subjects.SubjectYear',$keyYear)
-                                ->group_by('SubjectCode')
-                                ->group_by('RegisterClass')
+                                ->where('tb_register.RegisterYear',$keyYear)
+                                ->group_by('tb_register.SubjectCode')
+                                ->group_by('tb_register.RegisterClass')
                                 ->get()->result();
 
         //echo '<pre>'; print_r($Register);   exit();    
@@ -288,6 +294,14 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
              $this->db->where($a);
         echo $this->db->delete('tb_register');
             
+     }
+
+     public function AdminEnrollChangeTeacher(){
+       
+        $data = array('TeacherID' => $this->input->post('KeyTeacher'));
+        $this->db->where('SubjectCode',$this->input->post('KeySubjectCode'));
+        $this->db->where('RegisterYear',$this->input->post('KeySubjectYear'));
+        echo $UpdateChangeTeacher = $this->db->update('tb_register',$data);
      }
 
 }

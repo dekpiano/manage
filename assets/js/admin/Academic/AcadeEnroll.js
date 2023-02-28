@@ -72,6 +72,22 @@ $(document).on("change", "#SelectYearRegister", function() {
 });
 
 
+$(document).on("change", ".teacherregis", function() {
+    //alert($(this).val());
+    let teacherregis = $(this).val();
+    let subjectregisupdate = $('#subjectregisupdate').val();
+    let SubjectYear = $('#SubjectYearregisupdate').val();
+    let SubjectCode = $('#SubjectCode').val();
+
+    $.post("../../../../../../admin/academic/ConAdminEnroll/AdminEnrollChangeTeacher", {
+        KeyTeacher: teacherregis,
+        KeySubjectYear: SubjectYear,
+        KeySubjectCode: SubjectCode
+    }, function(data, status) {
+        window.location.href = '../' + subjectregisupdate + '/' + teacherregis;
+    });
+});
+
 $(document).on("change", "#Room", function() {
 
     $('#multiselect option').remove();

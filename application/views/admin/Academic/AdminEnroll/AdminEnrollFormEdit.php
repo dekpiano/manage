@@ -20,7 +20,8 @@
                     <div class="page-utilities">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?=base_url('Admin/Acade/Registration/Enroll')?>">หน้าหลัก</a>
+                                <li class="breadcrumb-item"><a
+                                        href="<?=base_url('Admin/Acade/Registration/Enroll')?>">หน้าหลัก</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page"><?=$title;?></li>
                             </ol>
@@ -37,7 +38,25 @@
             <section class="we-offer-area">
                 <form id="FormEnrollUpdate" class="needs-validation" method="post" novalidate>
 
+                    <div class="row g-4 settings-section">
+                        <div class="col-12 col-md-4">
+                            <h3 class="section-title">ปีการศึกษา</h3>
+                            <div class="section-intro">ปีการศึกษาที่วิชานี้ลงทะเบียน </div>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <div class="app-card app-card-settings shadow-sm p-4">
+                                <div class="app-card-body">
+                                    <?=$CheckYearSubject[0]->SubjectYear?>
+                                </div>
+                                <input type="hidden" name="SubjectYearregisupdate" id="SubjectYearregisupdate"
+                                    value="<?=$CheckYearSubject[0]->SubjectYear?>">
+                                <!--//app-card-body-->
 
+                            </div>
+                            <!--//app-card-->
+                        </div>
+                    </div>
+                    <hr class="mb-4">
                     <div class="row g-4 settings-section">
                         <div class="col-12 col-md-4">
                             <h3 class="section-title">วิชาเรียน</h3>
@@ -46,7 +65,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                <?=$Register[0]->SubjectCode?> <?=$Register[0]->SubjectName?>
+                                    <?=$Register[0]->SubjectCode?> <?=$Register[0]->SubjectName?>
                                     <input type="hidden" name="subjectregisupdate" id="subjectregisupdate"
                                         value="<?=$Register[0]->SubjectID?>">
                                     <div class="invalid-feedback">
@@ -134,16 +153,16 @@
                                 </div> -->
 
                                     <div class="row mt-3">
-                                        
+
                                         <div class="col-lg-5">
-                                        <p>รายชื่อนักเรียน</p>
+                                            <p>รายชื่อนักเรียน</p>
                                             <select name="from[]" id="multiselect" class="form-control" size="20"
                                                 multiple="multiple" style="height:20rem">
                                             </select>
                                         </div>
 
                                         <div class="col-lg-2 align-self-center">
-                                       
+
                                             <button type="button" id="multiselect_rightAll"
                                                 class="btn btn-primary w-100 mb-1">เลือกทั้งหมด</button>
                                             <button type="button" id="multiselect_rightSelected"
@@ -155,7 +174,7 @@
                                         </div>
 
                                         <div class="col-lg-5">
-                                        <p>รายชื่อนักเรียนที่เพิ่งเข้ามาใหม่</p>
+                                            <p>รายชื่อนักเรียนที่เพิ่งเข้ามาใหม่</p>
                                             <select name="to[]" id="multiselect_to" class="form-control" size="8"
                                                 required multiple="multiple" style="height:20rem">
                                                 <!-- <?php foreach ($Register as $key => $v_Register) : ?>
