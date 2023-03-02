@@ -136,7 +136,7 @@ $('#example').DataTable({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=52"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=54"></script>
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=13"></script>    

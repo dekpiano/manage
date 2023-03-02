@@ -4,7 +4,8 @@ Tb_Repeat = $('#Tb_Repeat').DataTable({
         [1, "asc"]
     ],
 });
-$(document).on("change", "#checkOnOffRegister", function() {
+$(document).on("change", "#checkOnOffDoGrade", function() {
+    //alert($(this).prop('checked'));
     $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
             check: $(this).prop('checked')
         },
