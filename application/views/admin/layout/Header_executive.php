@@ -1,5 +1,5 @@
-<div class="mx-3">ผู้บริหารโรงเรียน</div>
 
+<div class="mx-3">งานวิชาการ</div>
 <li class="nav-item">
     <a class="nav-link <?=$this->uri->segment('3')=="Executive" && $this->uri->segment('4')=="ReportScoreRoomMain" || $this->uri->segment('4')=="ReportScoreRoomMain" ? "active" :""?>"
         href="<?=base_url('Admin/Acade/Executive/ReportScoreRoomMain/').$SchoolYear->schyear_year.'/All/All';?>">
@@ -47,5 +47,16 @@
             <i class="bi bi-stack" style="font-size: 1.2rem;"></i>
         </span>
         <span class="nav-link-text">รายงานสรุปผลสัมฤทธิ์ทางการเรียน</span>
+    </a>
+</li>
+
+<div class="mx-3">งานรับสมัครนักเรียน</div>
+<li class="nav-item">
+    <a class="nav-link <?=$this->uri->segment('3')=="Executive" && $this->uri->segment('4')=="ReportEnroll" ? "active" :""?>"
+        href="<?=base_url('Admin/Acade/Executive/ReportEnroll/Main');?>">
+        <span class="nav-icon">
+            <i class="bi bi-stack" style="font-size: 1.2rem;"></i>
+        </span>
+        <span class="nav-link-text">รายงานการสมัครเรียน</span>
     </a>
 </li>

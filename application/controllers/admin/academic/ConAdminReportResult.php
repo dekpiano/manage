@@ -456,6 +456,84 @@ var  $title = "แผงควบคุม";
 
         return $Check;
     }
+
+
+    public function AdminReportEnrollMain(){
+        $DBadmission = $this->load->database('admission', TRUE);      
+        $data['title'] = "รายงานการรับสมัครนักเรียน"; 
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['SelYear'] = $DBadmission->select('recruit_year')->group_by('recruit_year')->get('tb_recruitstudent')->result();
+        $data['CheckYearadmission'] = $DBadmission->select('openyear_year')->get('tb_openyear')->row();
+
+        //echo '<pre>'; print_r($SelDataStudent);exit();
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportEnrollMain.php');
+        $this->load->view('admin/layout/Footer.php');
+    }
+
+    public function AdminReportEnrollData(){
+        $DBadmission = $this->load->database('admission', TRUE);
+        $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data = [];
+        $keyYear = $this->input->post('keyYear');
+
+        $SelDataStudent = $DBadmission->select('
+        skjacth_admission.tb_recruitstudent.recruit_id,
+        skjacth_admission.tb_recruitstudent.recruit_regLevel,
+        skjacth_admission.tb_recruitstudent.recruit_prefix,
+        skjacth_admission.tb_recruitstudent.recruit_firstName,
+        skjacth_admission.tb_recruitstudent.recruit_lastName,
+        skjacth_admission.tb_recruitstudent.recruit_tpyeRoom,
+        skjacth_admission.tb_recruitstudent.recruit_category,
+        skjacth_admission.tb_recruitstudent.recruit_status,
+        skjacth_admission.tb_recruitstudent.recruit_statusSurrender,
+        skjacth_admission.tb_recruitstudent.recruit_idCard,
+        skjacth_personnel.tb_students.stu_UpdateConfirm
+        ')
+        ->from('skjacth_admission.tb_recruitstudent')
+        ->join('skjacth_personnel.tb_students','skjacth_admission.tb_recruitstudent.recruit_idCard = skjacth_personnel.tb_students.stu_iden','LEFT')
+        ->where('tb_recruitstudent.recruit_year',$keyYear)        
+        ->get()->result();
+
+        foreach($SelDataStudent as $record){
+            
+            $data[] = array( 
+                "recruit_id" => $record->recruit_id,
+                "recruit_regLevel" => $record->recruit_regLevel,
+                "recruit_Fullname" => $record->recruit_prefix.$record->recruit_firstName.' '.$record->recruit_lastName,
+                "recruit_tpyeRoom" => $record->recruit_tpyeRoom,
+                "recruit_category" => $record->recruit_category,
+                "recruit_status" => $record->recruit_status,
+                "stu_UpdateConfirm" => $record->stu_UpdateConfirm,
+                "recruit_statusSurrender" => $record->recruit_statusSurrender,
+                "recruit_idCard" => $record->recruit_idCard
+            );
+           
+        }   
+        $output = array(
+            "data" =>  $data
+        );
+       echo json_encode($output);
+    }
+
+    public function AdminReportEnrollDetailStudent($IDStu){
+        $DBadmission = $this->load->database('admission', TRUE);
+        $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $data['title'] = "ข้อมูลนักเรียนรายบุคคล"; 
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+
+        $CkeckIDEN = $DBadmission->select('recruit_idCard,recruit_regLevel,recruit_img')->where('recruit_id',$IDStu)->get('tb_recruitstudent')->row();
+        $data['recruit_regLevel'] =  $CkeckIDEN->recruit_regLevel;
+        $data['recruit_img'] =  $CkeckIDEN->recruit_img;
+        $data['DataStudent'] = $DBpersonnel->where('stu_iden',$CkeckIDEN->recruit_idCard)->get('tb_students')->row();
+
+        //echo '<pre>'; print_r($data['DataStudent']); exit();
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportEnrollDetailStudent.php');
+        $this->load->view('admin/layout/Footer.php');
+    }
     
 
 }

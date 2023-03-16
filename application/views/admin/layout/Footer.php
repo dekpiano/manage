@@ -69,6 +69,13 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 </script>
 <?php endif; $this->session->mark_as_temp('msg',20); ?>
 
+<script>
+    $('#example').DataTable({
+    "responsive": true,
+    "ordering": false,
+});
+</script>
+
 <script> 
  $.datetimepicker.setLocale('th');
     $("#pers_britday").datetimepicker({
@@ -126,11 +133,7 @@ new SlimSelect({
     select: '#classroom'
 })
 
-$('#example').DataTable({
-    "responsive": true,
-    "autoWidth": true,
-    "ordering": false,
-});
+
 
 </script>
 
@@ -149,6 +152,9 @@ $('#example').DataTable({
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=19"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=8"></script>
 <?php endif; ?>
+<?php if($this->uri->segment(3) ==="Executive"): ?>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdmission.js?v=1"></script>
+<?php endif; ?>   
 <?php if($this->uri->segment(3) ==="Personnel"): ?>
 <script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=13"></script>
 <?php endif; ?>

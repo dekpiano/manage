@@ -162,15 +162,16 @@
                             <!--//nav-link-->
                         </li>                      
 
-                        <hr>
                         <?php if($this->session->userdata('CheckrloesAcademic') === 'เจ้าหน้าที่วิชาการ' || $this->session->userdata('CheckrloesAcademic') === 'หัวหน้าวิชาการ' || $this->session->userdata('CheckrloesAcademic') === 'รองวิชาการ'): ?>
                         <?php $this->load->view('admin/layout/Header_Academic.php'); ?>
-                        <?php endif; ?>
                         <hr>
+                        <?php endif; ?>
+                        
                         <?php if($this->session->userdata('CheckrloesGeneral') === 'เจ้าหน้าที่ทั่วไป'): ?>
                         <?php $this->load->view('admin/layout/Header_General.php'); ?>
-                        <?php endif; ?>
                         <hr>
+                        <?php endif; ?>
+                        
                         <?php if($this->session->userdata('CheckrloesAcademic') == 'ผู้บริหาร' && $this->session->userdata('status') === 'manager' || $this->session->userdata('login_id') === 'pers_021' || $this->session->userdata('CheckrloesAcademic') == 'รองวิชาการ'): ?>
                         <?php $this->load->view('admin/layout/Header_executive.php'); ?>
                         <?php endif; ?>

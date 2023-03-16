@@ -117,6 +117,9 @@ $route['Admin/Acade/Executive/ReportSummaryTeacher'] = "admin/academic/ConAdminR
 $route['Admin/Acade/Executive/ReportTeacherSaveScore/(:any)/(:any)'] = "admin/academic/ConAdminReportResult/AdminReportTeacherSaveScoreMain/$1/$2";
 $route['Admin/Acade/Executive/ReportTeacherSaveScoreCheck/(:any)/(:any)/(:any)'] = "admin/academic/ConAdminReportResult/AdminReportTeacherSaveScoreCheck/$1/$2/$3";
 $route['Admin/Acade/Executive/ReportScoreRoomMain/(:any)/(:any)/(:any)/(:any)'] = "admin/academic/ConAdminReportResult/ReportScoreRoomMain/$1/$2/$3/$4";
+$route['Admin/Acade/Executive/ReportEnroll/Main'] = "admin/academic/ConAdminReportResult/AdminReportEnrollMain";
+$route['Admin/Acade/Executive/ReportEnroll/ID/(:any)'] = "admin/academic/ConAdminReportResult/AdminReportEnrollDetailStudent/$1";
+
 
 // Login
 $route['Logout'] = "Control_login/logout";
