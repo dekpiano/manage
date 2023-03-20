@@ -152,14 +152,25 @@ var  $title = "แผงควบคุม";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
+        $data['CheckYear'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
         $keyroom = $this->input->post("keyroom");
+        $SubRoom1 = explode('.',$keyroom);
+        $SubRoom2 = explode('/',@$SubRoom1[1]);        
+        $KeyCheckYear = $this->input->post("KeyCheckYear");
+        $SubKeyCheckYear = explode('/',$KeyCheckYear);
+        $Term = @$SubKeyCheckYear[0];
+        $year = @$SubKeyCheckYear[1];
+        $Class = @$SubRoom2[0];
+        $Room = @$SubRoom2[1];
         if(!isset($keyroom)){
             $data["Nodata"] = 0;
             $data['totip'] = "";
             $data['keyroom'] = '';
+            $data['KeyCheckYear'] = $KeyCheckYear;
         }else{
             $data["Nodata"] = 1;
             $data['keyroom'] = $keyroom;
+            $data['KeyCheckYear'] = $KeyCheckYear;
             $data['totip'] = "ระดับชั้น ".$keyroom;
             
             $data['stu'] = $this->db->select("tb_students.StudentID,
@@ -173,43 +184,57 @@ var  $title = "แผงควบคุม";
                             ->where('StudentClass',$keyroom)     
                             ->order_by('tb_students.StudentNumber','ASC')
                             ->get('tb_students')->result();
-       
-        $data['subject'] = $this->db->select("
-                                        tb_register.SubjectCode,
-                                        tb_subjects.SubjectName,
-                                        tb_subjects.SubjectUnit")
-                                ->from('tb_register')
-                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
-                                ->where('RegisterYear','1/2565')
-                                ->where('StudentStatus','1/ปกติ')
-                                ->where('StudentClass',$keyroom)                                
-                                ->where('tb_register.SubjectCode !=','I30301')
-                                ->where('tb_register.SubjectCode !=','I20201')
-                                ->group_by('tb_register.SubjectCode')                                
-                                ->get()->result();
 
-            $data['check'] = $this->db->select("
-                                        tb_students.StudentID,
-                                        tb_register.Grade,                                      
-                                        tb_register.SubjectCode")
-                                ->from('tb_register')
-                                ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
-                                ->where('RegisterYear','1/2565')
-                                ->where('StudentStatus','1/ปกติ')                                
-                                ->where('tb_register.SubjectCode !=','I30301')
-                                ->where('tb_register.SubjectCode !=','I20201')
-                                ->where('StudentClass',$keyroom)                              
-                                //->group_by('tb_register.SubjectCode')               
-                                ->get()->result();
+            $data['subject'] = $this->db->select("
+                            tb_register.SubjectCode,
+                            tb_subjects.SubjectName,
+                            tb_subjects.SubjectUnit")
+                    ->from('tb_register')
+                    ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                    ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                    ->where('RegisterYear',$KeyCheckYear)
+                    ->where('StudentStatus','1/ปกติ')
+                    ->where('StudentClass',$keyroom)                                
+                    ->where('tb_register.SubjectCode !=','I30301')
+                    ->where('tb_register.SubjectCode !=','I20201')
+                    ->group_by('tb_register.SubjectCode')                                
+                    ->get()->result();
 
-                                // $result=array_diff_key($data['stu'],$data['check']);
-                                 //echo '<pre>';print_r($data['subject']);
+                            $CheckSub = [];
+                            foreach ($data['stu'] as $key => $value) {
+                                
+                                $CheckSub[$key][] = $value->StudentID;
+                                $CheckSub[$key][] = $value->StudentNumber;
+                                $CheckSub[$key][] = $value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName;
+                                $CheckSub[$key][] = $value->StudentCode;
+                    
+                    
+                                $check_sub = array();
+                                $da = $this->CheckData($Term,$year,$Class,$Room,$value->StudentID);
+                                    foreach ($da as $key22 => $v_da) {
+                                        $check_sub[] = $v_da->SubjectCode;
+                                    }
+                                   // echo '<pre>'; print_r($check_sub);
+                    
+                                 foreach ($data['subject'] as $key1 => $v_Check) {
+                                   // echo array_search($v_Check->SubjectCode, $check_sub);
+                                    if(array_search($v_Check->SubjectCode, $check_sub) >= 0){
+                                        $dat = $this->CheckValue($Term,$year,$Class,$Room,$value->StudentID,$v_Check->SubjectCode);
+                                       
+                                        $CheckSub[$key][] = $v_Check->SubjectCode.'/'.@$dat[0]->Grade;
+                                    }else{
+                                        $CheckSub[$key][] = $v_Check->SubjectCode.'/';
+                                    }
+                                   
+                                }
+                               
+                            }
+                    
+                            $data['CheckSub'] = $CheckSub;
 
-                                // $firstNames = array_column($data['check'], 'Grade','StudentID');
-                                // echo '<pre>';print_r($data['check']);
+                           // echo '<pre>';print_r($CheckSub); exit();   
+                                
 
-                               // exit();
 
         }
         
@@ -409,9 +434,7 @@ var  $title = "แผงควบคุม";
         }
 
         $data['CheckSub'] = $CheckSub;
-       //echo '<pre>'; print_r($data['CheckSub']);  
-        //exit();
-
+       //echo '<pre>'; print_r($data['CheckSub']);  exit();
         
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['Term'] = $Term;
@@ -442,7 +465,8 @@ var  $title = "แผงควบคุม";
     public function CheckValue($Term,$year,$Class,$Room,$IDstu,$IDSubjuct){
         $Check = $this->db->select('
         tb_register.Score100,
-        tb_register.SubjectCode,
+        tb_register.SubjectCode,        
+        tb_register.Grade,
         tb_students.StudentID
         ')
         ->from('tb_register')
