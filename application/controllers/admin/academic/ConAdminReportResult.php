@@ -326,10 +326,12 @@ var  $title = "แผงควบคุม";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "รายงานสรุปผลสัมฤทธิ์ทางการเรียน";
+        $data['CheckYear'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
         $data['lern'] = $DBSkj->get('tb_learning')->result();
 
         $data['Keylern'] = $this->input->get('SelLern');
-        //echo $date['Keylern']; exit();      
+        $data['KeyYear'] = urldecode($this->input->get('KeyYear'));
+       // echo  $data['KeyYear']; exit();      
        
         $data['Showdata'] = $this->db->select('
                             COUNT(CASE WHEN tb_register.Grade = 4 then 1 else null end) AS G4_0,
@@ -361,11 +363,11 @@ var  $title = "แผงควบคุม";
                             ->join('skjacth_academic.tb_students','skjacth_academic.tb_students.StudentID = skjacth_academic.tb_register.StudentID')
                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                             ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
-                            ->where('RegisterYear','1/2565')
+                            ->where('RegisterYear',$data['KeyYear'])
                             ->where('pers_learning',$data['Keylern'])
                             ->where('StudentBehavior','ปกติ')
                             ->group_by('tb_students.StudentClass,tb_register.SubjectCode')
-                            ->order_by('TeacherID,StudentClass')
+                            ->order_by('TeacherID,SubjectCode,StudentClass')
                             ->get()->result();        
 
         $this->load->view('admin/layout/Header.php',$data);

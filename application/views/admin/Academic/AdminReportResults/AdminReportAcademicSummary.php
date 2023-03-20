@@ -18,8 +18,17 @@
                                     action="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher');?>">
                                     <?php endif; ?>
                                     <div class="col-auto">
+                                        <select class="form-select w-auto" name="KeyYear" id="KeyYear">
+                                            <option value="0">เลือกปีการศึกษา...</option>
+                                            <?php foreach ($CheckYear as $key => $v_CheckYear) : ?>
+                                            <option <?=$KeyYear == $v_CheckYear->RegisterYear ?'selected':''?>
+                                                value="<?=$v_CheckYear->RegisterYear?>"><?=$v_CheckYear->RegisterYear?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
                                         <select class="form-select w-auto" name="SelLern" id="SelLern">
-                                            <option value="0">เลือก...</option>
+                                            <option value="0">เลือกกลุ่มสาระ...</option>
                                             <?php foreach ($lern as $key => $v_lern) : ?>
                                             <option <?=$this->input->get('SelLern') == $v_lern->lear_id ?"selected":""?>
                                                 value="<?=$v_lern->lear_id?>"><?=$v_lern->lear_namethai?></option>
