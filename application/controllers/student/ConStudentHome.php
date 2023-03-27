@@ -51,6 +51,7 @@ var  $title = "ผลการเรียน";
                                     ')
                                     ->from('tb_register')
                                     ->where('StudentID',$this->session->userdata('login_id'))
+                                    ->where('tb_register.RegisterYear','2/2565')
                                     ->group_by('tb_register.RegisterYear')
                                     ->order_by('tb_register.RegisterClass asc','tb_register.RegisterYear asc')
                                     ->get()->result();

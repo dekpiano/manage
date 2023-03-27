@@ -127,13 +127,20 @@
                                             <tbody>
                                                 <tr>
                                                     <th>กิจกรรมแนะแนว</th>
-                                                    <td class="text-center"><span class="text-success">ผ่าน</span>
+                                                    <td class="text-center">
+                                                        <span class="text-success">
+                                                        
+                                                        
+                                                    </span>
+                                                    <?=$v_scoreYear->RegisterYear == '1/2565' ?"ผ่าน":"รอประมวลผล..."?>
                                                     </td>
                                                 </tr>
                                                 <?php if($stu->StudentClass <= 'ม.4/1') : ?>
                                                 <tr>
                                                     <th scope="row">ลูกเสือ/เนตรนารี/ยุวฯ/บพ.</th>
                                                     <td class="text-center">
+                                                    <?php 
+                                                    if($v_scoreYear->RegisterYear == '1/2565' ) : ?>
                                                         <?php 
                                                                 if(in_array($stu->StudentCode,$checkChunum)){
                                                                     echo '<span class="text-danger">ไม่ผ่าน</span>';
@@ -141,12 +148,17 @@
                                                                     echo '<span class="text-success">ผ่าน</span>';
                                                                 }
                                                             ?>
+                                                            <?php else : ?>
+                                                            รอประมวลผล...
+                                                            <?php endif; ?>
                                                     </td>
                                                 </tr>
                                                 <?php endif; ?>
                                                 <tr>
                                                     <th scope="row">กิจรรมชุมชน</th>
                                                     <td class="text-center">
+                                                    <?php 
+                                                    if($v_scoreYear->RegisterYear == '1/2565' ) : ?>
                                                         <?php 
                                                                 if(in_array($stu->StudentCode,$checkRuksun)){
                                                                     echo '<span class="text-danger">ไม่ผ่าน</span>';
@@ -154,11 +166,15 @@
                                                                     echo '<span class="text-success">ผ่าน</span>';
                                                                 }
                                                             ?>
+                                                            <?php else : ?>
+                                                            รอประมวลผล...
+                                                            <?php endif; ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>กิจกรรมเพื่อสังคม</th>
-                                                    <td class="text-center"><span class="text-success">ผ่าน</span>
+                                                    <td class="text-center"><span class="text-success"></span>
+                                                    <?=$v_scoreYear->RegisterYear == '1/2565' ?"ผ่าน":"รอประมวลผล..."?>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -179,7 +195,7 @@
                                         </table>
 
 
-                                        <div class="app-card alert shadow-sm mb-4 border-left-decoration"
+                                        <!-- <div class="app-card alert shadow-sm mb-4 border-left-decoration"
                                             role="alert">
                                             <div class="inner">
                                                 <div class="app-card-body p-3 p-lg-4">
@@ -195,7 +211,6 @@
 
                                                             </div>
                                                         </div>
-                                                        <!--//col-->
                                                         <div class="col-12 col-lg-12">
                                                             <style>
                                                             .app-card.border-left-decoration {
@@ -219,14 +234,14 @@
                                                                     </path>
                                                                 </svg>ลิงก์สำหรับลงทะเบียนขอแก้ผลการเรียน 0 ร มส มผ</a>
                                                         </div>
-                                                        <!--//col-->
+                                                      
                                                     </div>
                                                 </div>
-                                                <!--//app-card-body-->
+                                              
 
                                             </div>
-                                            <!--//inner-->
-                                        </div>
+                                          
+                                        </div> -->
 
                                     </div>
                                 </div>
