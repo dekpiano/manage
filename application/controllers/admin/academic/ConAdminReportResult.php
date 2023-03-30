@@ -357,14 +357,16 @@ var  $title = "แผงควบคุม";
                             skjacth_personnel.tb_personnel.pers_learning,
                             skjacth_academic.tb_subjects.SubjectName,
                             skjacth_academic.tb_subjects.SubjectType,
-                            skjacth_academic.tb_subjects.SubjectUnit                                                   
+                            skjacth_academic.tb_subjects.SubjectUnit,
+                            skjacth_academic.tb_subjects.SubjectYear                                                   
                             ')
                             ->from('skjacth_academic.tb_register')
                             ->join('skjacth_academic.tb_students','skjacth_academic.tb_students.StudentID = skjacth_academic.tb_register.StudentID')
                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                             ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
-                            ->where('RegisterYear',$data['KeyYear'])
-                            ->where('pers_learning',$data['Keylern'])
+                            ->where('tb_register.RegisterYear',$data['KeyYear'])
+                            ->where('tb_subjects.SubjectYear',$data['KeyYear'])
+                            ->where('tb_personnel.pers_learning',$data['Keylern'])
                             ->where('StudentBehavior','ปกติ')
                             ->group_by('tb_students.StudentClass,tb_register.SubjectCode')
                             ->order_by('TeacherID,SubjectCode,StudentClass')
