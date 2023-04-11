@@ -75,7 +75,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($result as $key => $v_result) : ?>
+                                    <?php foreach ($DataRepeat as $key => $v_result) : ?>
                                     <tr>
                                         <td class="cell"><?=$v_result->RegisterYear?></td>
                                         <td class="cell"><span

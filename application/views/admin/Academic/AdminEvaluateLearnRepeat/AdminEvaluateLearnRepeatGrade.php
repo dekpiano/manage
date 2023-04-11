@@ -72,7 +72,7 @@
                                         <?php 
                                         foreach ($check_student as $key => $v_check_student) :
                                           
-                                            if($v_check_student->Grade == "มส" || $v_check_student->Grade_Type == 'เรียนซ้ำครั้งที่ 1'):  
+                                            if(1==1):  
                                             
                                         ?>
                                         <tr>
