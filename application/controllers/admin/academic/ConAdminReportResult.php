@@ -383,6 +383,7 @@ var  $title = "แผงควบคุม";
         $data['title'] = "รายงานผลการบันทึกคะแนน (รายห้องเรียน)"; 
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['Room'] = $this->classroom->ListRoom();
+        $data['CheckYear'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
 
         $data['stu'] = $this->db->select('tb_students.StudentID,tb_students.StudentNumber,tb_students.StudentClass,tb_students.StudentCode,tb_students.StudentPrefix,tb_students.StudentFirstName,tb_students.StudentLastName,tb_register.Score100,tb_register.SubjectCode')
         ->from('tb_students')

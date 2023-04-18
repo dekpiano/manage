@@ -115,6 +115,7 @@ var  $title = "แผงควบคุม";
                                 //>where('tb_register.Grade <=',0)
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
+                                ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
                                 ->where('tb_register.SubjectCode',urldecode($subject))                                
                                 //->or_where('tb_register.Grade_Type','เรียนซ้ำครั้งที่ 1')
                                 ->order_by('tb_students.StudentClass','ASC')

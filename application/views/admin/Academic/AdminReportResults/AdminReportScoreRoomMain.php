@@ -15,18 +15,17 @@
 }
 
 
-thead{
+thead {
     position: sticky;
     top: 0;
     background-color: #fff;
 }
 
-.NameFix{
+.NameFix {
     position: sticky;
     left: 0;
     background: #fff;
 }
-
 </style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -38,15 +37,31 @@ thead{
                 <div class="page-utilities">
                     <input type="text" id="term" value="<?=$this->uri->segment('5')?>" style="display:none;">
                     <input type="text" id="year" value="<?=$this->uri->segment('6')?>" style="display:none;">
-                    <div class="row g-2  ">
+
+                    <div class="row g-2 ">
+                        <div class="col-auto me-2">
+                            <select class="form-select w-auto" name="KeyCheckYear" id="KeyCheckYear">
+                                <option selected="" value="">ปีการศึกษา...</option>
+                                <?php foreach ($CheckYear as $key => $v_CheckYear) : ?>
+                                <option
+                                    <?=$this->uri->segment('5').'/'.$this->uri->segment('6') == $v_CheckYear->RegisterYear ?'selected':''?>
+                                    value="<?=$v_CheckYear->RegisterYear?>">
+                                    <?=$v_CheckYear->RegisterYear?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
                         <div class="col-auto">
-                            <form action="<?=base_url('Admin/Acade/Evaluate/ReportScoreRoomMain/2/2565')?>" method="post" class="d-flex align-items-center">
-                                <label for="">ระดับชั้น</label>
-                            <select class="form-select w-auto ms-2" name="SelectRoomReportScore"
-                                    id="SelectRoomReportScore" >
+                            <form action="<?=base_url('Admin/Acade/Evaluate/ReportScoreRoomMain/1/2565')?>"
+                                method="post" class="d-flex align-items-center">
+                                <!-- <label for="">ระดับชั้น</label> -->
+                                <select class="form-select w-auto ms-2" name="SelectRoomReportScore"
+                                    id="SelectRoomReportScore">
                                     <option value="">เลือกห้องเรียน</option>
                                     <?php foreach ($Room as $key => $v_Room) : ?>
-                                    <option <?=$this->uri->segment('7').'/'.$this->uri->segment('8') == $v_Room ?"selected":""?> value="<?=$v_Room?>">ม.<?=$v_Room?></option>
+                                    <option
+                                        <?=$this->uri->segment('7').'/'.$this->uri->segment('8') == $v_Room ?"selected":""?>
+                                        value="<?=$v_Room?>">ม.<?=$v_Room?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <!-- <button class="btn app-btn-primary clickLoder ms-3" type="submit">ค้นหา</button> -->
@@ -97,9 +112,9 @@ thead{
                                     foreach ($CheckSub as $key => $v_stu) :
                                         //echo '<pre>'; print_r($v_stu);
                                     ?>
-                                    
+
                                     <tr>
-                                       
+
                                         <td class="text-center "> <?=$v_stu[1]?></td>
                                         <td class="text-center "><?=$v_stu[3]?></td>
                                         <td class="text-nowrap "><?=$v_stu[2]?></td>
@@ -110,7 +125,7 @@ thead{
                                             //echo '<pre>'; print_r($sub);
                                             if($v_RegisSubject->SubjectCode == $sub[0] || $sub[1] != ""):
                                                 $score = explode("|",@$sub[1]);
-                                        ?>                                        
+                                        ?>
                                         <td class="text-center"><?php echo @$score[0];  ?></td>
                                         <td class="text-center"><?php echo @$score[1];  ?></td>
                                         <td class="text-center"><?php echo @$score[2];  ?></td>
@@ -119,7 +134,7 @@ thead{
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td> 
+                                        <td></td>
                                         <?php endif; ?>
                                         <?php $i++; endforeach; ?>
                                     </tr>
@@ -132,12 +147,12 @@ thead{
                 </div>
             </div>
             <?php else: ?>
-                <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+            <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
                 <div class="inner">
                     <div class="app-card-body p-3 p-lg-4">
-                        <div class="row">                           
+                        <div class="row">
                             <div class="col-md-12 text-center align-self-center">
-                                <h2 class="heading">กรุณาเลือกห้องเรียนก่อน !</h2>
+                                <h2 class="heading">กรุณาเลือกปีการศึกษาและห้องเรียนก่อน !</h2>
                                 <div class="intro">ระบบรายงานผลการบันทึกคะแนน (รายห้องเรียน)</div>
                             </div>
                         </div>

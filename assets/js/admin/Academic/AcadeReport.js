@@ -137,16 +137,18 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
 $(document).on("change", "#CheckYearSaveScore", function() {
     let Select_year = $(this).val();
     window.location.href = '../' + Select_year;
-       
+
 });
 
 $(document).on("change", "#SelectRoomReportScore", function() {
-    
+
     $('.loader').show();
-    let Select_year = $(this).val();
+    let SelectRoom = $(this).val();
+    let KeyCheckYear = $('#KeyCheckYear').val();
     let term = $('#term').val();
     let year = $('#year').val();
-    window.location.href = '../' + Select_year;
+    window.location.href = '../../../' + KeyCheckYear + '/' + SelectRoom;
+    //alert(KeyCheckYear);
 
-       
+
 });
