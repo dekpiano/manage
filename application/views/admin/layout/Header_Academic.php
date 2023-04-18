@@ -115,7 +115,7 @@
         <ul class="submenu-list list-unstyled">
 
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="EditGrade" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/EditGrade');?>">จัดการผลการเรียน (0 ร)</a>
+                    href="<?=base_url('Admin/Acade/Evaluate/EditGrade/').$SchoolYear->schyear_year?>">จัดการผลการเรียน (0 ร)</a>
             </li>
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"

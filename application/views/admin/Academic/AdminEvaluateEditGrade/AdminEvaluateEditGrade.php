@@ -17,7 +17,6 @@
                 <?php if($check_student): ?>
                 <div class="card">
                     <div class="card-body">
-
                         <div>
                             <div class="form-group row justify-content-center mb-3">
                                 <div class="col-md-6 d-flex justify-content-center">

@@ -5,10 +5,23 @@
 </style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
-        <div class="container-xl">
+        <div class="container-xl d-flex align-items-center justify-content-between">
             <h1 class="app-page-title">จัดการข้อมูล<?=$title;?></h1>
-            <hr class="mb-4">
+            <div class="d-flex  align-items-center mt-2">
+                    <div>
+                        ปีการศึกษา
+                    </div>
+                    <div class="ms-3">
+                        <select name="onoff_year" id="onoff_year" class="form-select form-select-sm">
+                            <?php foreach ($CheckYearRegis as $key => $value) : ?>
+                            <option <?=$this->uri->segment(5).'/'.$this->uri->segment(6) ==$value->RegisterYear ?"selected":"" ?>
+                                value="<?=$value->RegisterYear?>"><?=$value->RegisterYear?></option>  
+                                <?php endforeach; ?>                          
+                        </select>
+                    </div>
+                </div>
         </div>
+        <hr class="mb-4">
 
         <div class="app-card  mt-5">
             <div class="app-card-body p-3">

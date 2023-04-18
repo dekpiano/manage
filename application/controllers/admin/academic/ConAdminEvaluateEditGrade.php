@@ -44,7 +44,7 @@ var  $title = "แผงควบคุม";
         return $grade;
     }
     
-    public function AdminEvaluateEditGradeMain(){   
+    public function AdminEvaluateEditGradeMain($Term,$Year){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
@@ -52,6 +52,7 @@ var  $title = "แผงควบคุม";
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['OnOffSaveScore'] = $this->db->where('onoff_id >= 2')->where('onoff_id <= 5')->get('tb_register_onoff')->result();
         $data['OnOffSaveScoreSystem'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();
+        $data['CheckYearRegis'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
         
         $data['result'] = $this->db->select('
                             skjacth_academic.tb_register.SubjectCode,
@@ -66,7 +67,7 @@ var  $title = "แผงควบคุม";
                             ->from('skjacth_academic.tb_register')
                             ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
-                            ->where('RegisterYear','1/2565')
+                            ->where('RegisterYear',$Term.'/'.$Year)
                             ->group_by('SubjectCode')
                             ->get()->result();
         
