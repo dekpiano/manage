@@ -15,7 +15,8 @@ var  $title = "ผลการเรียน";
 
     function getClient()
     {
-        require_once APPPATH. '../vendor/google_sheet/vendor/autoload.php';
+        $path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+		require $path . '/librarie_skj/google_sheet/vendor/autoload.php';
     
         // configure the Google Client
         $client = new \Google_Client();

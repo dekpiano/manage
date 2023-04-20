@@ -25,7 +25,8 @@ class ConAdminStudents extends CI_Controller {
 
     function getClient()
 {
-    require_once APPPATH. '../vendor/google_sheet/vendor/autoload.php';
+    $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+		require $path . '/librarie_skj/google_sheet/vendor/autoload.php';
 
      // Our service account access key
      $googleAccountKeyFilePath = 'service_key.json';
