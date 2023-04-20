@@ -26,7 +26,10 @@ class Welcome extends CI_Controller {
 	}
 
 	public function LoginMenager(){
-		include_once APPPATH . "../vendor/google_sheet/vendor/autoload.php";
+		
+		$path = dirname(dirname(dirname((dirname(__FILE__)))));
+		require $path . '/librarie_skj/google_sheet/vendor/autoload.php';
+
 		$google_client = new Google_Client();
 
 		$redirect_uri = base_url('LoginMenager_callback');
