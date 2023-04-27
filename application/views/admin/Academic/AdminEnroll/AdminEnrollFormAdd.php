@@ -49,7 +49,7 @@
                                         <option value="">เลือกปีการศึกษา</option>
                                         <?php $d = date('Y')+543; 
                                         for ($i=$d-2; $i<=$d; $i++): 
-                                            for($j=1; $j<=3; $j++):
+                                            for($j=1; $j<=4; $j++):
                                         ?>
                                         <option <?=$this->uri->segment(6).'/'.$this->uri->segment(7) == $j.'/'.$i ?"selected":""?> value="<?=$j.'/'.$i;?>"><?=$j.'/'.$i;?></option>
                                         <?php endfor; endfor; ?>

@@ -70,6 +70,7 @@
                                                 <option value="1/<?=$i;?>">1/<?=$i;?></option>
                                                 <option value="2/<?=$i;?>">2/<?=$i;?></option>
                                                 <option value="3/<?=$i;?>">3/<?=$i;?></option>
+                                                <option value="4/<?=$i;?>">4/<?=$i;?></option>
                                                 <?php endfor; ?>
                                             </select>
                                         </div>
