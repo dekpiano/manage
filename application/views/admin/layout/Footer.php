@@ -141,12 +141,14 @@ new SlimSelect({
 
 <script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=54"></script>
 
-<?php if($this->uri->segment(3) ==="Registration"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=13"></script>    
+<?php if($this->uri->segment(3) ==="Registration"): ?>   
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=25"></script>  
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisRepeat.js?v=6"></script>  
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=15"></script>
 <?php endif; ?>
+<?php if($this->uri->segment(3) ==="Course"): ?>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=13"></script> 
+<?php endif; ?>  
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=17"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=20"></script>

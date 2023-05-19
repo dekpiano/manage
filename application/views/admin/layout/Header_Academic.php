@@ -52,10 +52,7 @@
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="Repeat" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Registration/Repeat');?>">ลงทะเบียนเรียน (ซ้ำ)</a>
             </li>
-            <li class="submenu-item"><a
-                    class="submenu-link <?=$this->uri->segment('4')=="RegisterSubject" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Registration/RegisterSubject');?>">จัดการวิชาเรียน</a>
-            </li>
+
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="ClassRoom" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Registration/ClassRoom');?>">จัดการห้องเรียน /
                     ที่ปรึกษา</a>
@@ -70,10 +67,6 @@
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="ExamSchedule" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Registration/ExamSchedule');?>">จัดการตารางสอบ</a>
-            </li>
-            <li class="submenu-item"><a
-                    class="submenu-link <?=$this->uri->segment('4')=="ClassSchedule" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Registration/ClassSchedule');?>">จัดการตารางเรียน</a>
             </li>
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="ExtraSubject" ? "active" :""?>"
@@ -115,7 +108,8 @@
         <ul class="submenu-list list-unstyled">
 
             <li class="submenu-item"><a class="submenu-link <?=$this->uri->segment('4')=="EditGrade" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/Evaluate/EditGrade/').$SchoolYear->schyear_year?>">จัดการผลการเรียน (0 ร)</a>
+                    href="<?=base_url('Admin/Acade/Evaluate/EditGrade/').$SchoolYear->schyear_year?>">จัดการผลการเรียน
+                    (0 ร)</a>
             </li>
             <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="AcademicRepeat" ? "active" :""?>"
@@ -194,8 +188,17 @@
     <div id="submenu-3" class="collapse submenu submenu-3 <?=$this->uri->segment('3')=="Course" ? "show" :""?>"
         data-bs-parent="#menu-accordion">
         <ul class="submenu-list list-unstyled">
+            <li class="submenu-item"><a
+                    class="submenu-link <?=$this->uri->segment('4')=="RegisterSubject" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Course/RegisterSubject');?>">จัดการวิชาเรียน</a>
+            </li>
+
+            <li class="submenu-item"><a
+                    class="submenu-link <?=$this->uri->segment('4')=="ClassSchedule" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Course/ClassSchedule');?>">จัดการตารางเรียน</a>
+            </li>
             <li class="submenu-item ">
-                <a class="submenu-link <?=$this->uri->segment('3')=="Course" ? "active" :""?>"
+                <a class="submenu-link <?=$this->uri->segment('3')=="SendPlan" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Course/SendPlan');?>">จัดการส่งแผน</a>
 
             </li>

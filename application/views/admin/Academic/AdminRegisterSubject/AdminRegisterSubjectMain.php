@@ -19,7 +19,8 @@
                             <div class="page-utilities">
                                 <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                                     <div class="col-auto">
-                                        <input type="text" name="CheckYearNow" id="CheckYearNow" value="<?=$SchoolYear->schyear_year;?>" style="display:none">
+                                        <input type="text" name="CheckYearNow" id="CheckYearNow"
+                                            value="<?=$SchoolYear->schyear_year;?>" style="display:none">
 
                                         <?php foreach ($GroupYear as $key => $v_GroupYear): 
                                 // $GG = substr($v_GroupYear->SubjectYear, 2, 6);
@@ -31,7 +32,7 @@
                                         <?php endforeach; ?>
 
                                     </div>
-                                  
+
                                 </div>
                                 <!--//row-->
                             </div>
@@ -66,11 +67,12 @@
                                             <label for="setting-input-1" class="form-label">ปีการศึกษา</label>
                                             <select class="form-select" required="" name="SubjectYear" id="SubjectYear">
                                                 <option value="">เลือกปีการศึกษา</option>
-                                                <?php $d = date('Y')+541; for ($i=$d; $i <= $d+2 ; $i++) :?>
-                                                <option value="1/<?=$i;?>">1/<?=$i;?></option>
-                                                <option value="2/<?=$i;?>">2/<?=$i;?></option>
-                                                <option value="3/<?=$i;?>">3/<?=$i;?></option>
-                                                <option value="4/<?=$i;?>">4/<?=$i;?></option>
+                                                <?php $d = date('Y')+541; 
+                                                for($j=1; $j<=3; $j++):
+                                                for ($i=$d; $i <= $d+2 ; $i++) :
+                                                ?>
+                                                <option <?=$SchoolYear->schyear_year == $j.'/'.$i ?"selected":""?> value="<?=$j?>/<?=$i;?>"><?=$j?>/<?=$i;?></option>
+                                                <?php endfor; ?>
                                                 <?php endfor; ?>
                                             </select>
                                         </div>
@@ -101,14 +103,27 @@
                                         <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">หน่วยกิต
                                             </label>
-                                            <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="" name="SubjectUnit" id="SubjectUnit">
+                                            <select class="form-select" required="" name="SubjectUnit"
+                                                id="SubjectUnit">
+                                                <option value="">เลือกหน่วยกิต</option>
+                                                <?php $Unit = array("0.5","1.0","1.5","2.0");
+                                                foreach ($Unit as $key => $v_Unit):?>
+                                                <option value="<?=$v_Unit?>"><?=$v_Unit?></option>
+                                                <?php endforeach; ?>
+                                            </select>
                                         </div>
                                         <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">จำนวนชั่วโมง
-                                            </label>
-                                            <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="" name="SubjectHour" id="SubjectHour">
+                                            </label>                                          
+
+                                                <select class="form-select" required="" name="SubjectHour"
+                                                id="SubjectHour">
+                                                <option value="">เลือกชั่วโมง</option>
+                                                <?php $Hour = array("20","40","60");
+                                                foreach ($Hour as $key => $v_Hour):?>
+                                                <option value="<?=$v_Hour?>"><?=$v_Hour?></option>
+                                                <?php endforeach; ?>
+                                            </select>
                                         </div>
                                         <div class="mb-3 col-6 col-lg-4">
                                             <label for="setting-input-1" class="form-label">ประเภทวิชา</label>
@@ -149,18 +164,18 @@
                     </div>
                     <div class="row mt-3">
                         <div class="row mb-2 justify-content-start justify-content-md-end align-items-center">
-                           
                             <div class="col-auto d-flex">
-                                <label for="" class="align-self-center">เลือกดู</label> 
+                                <label for="" class="align-self-center">เลือกดู</label>
                                 <select class="form-select w-auto SelectSubject ms-2 ">
                                     <option selected value="">เลือกปีการศึกษา</option>
                                     <?php foreach ($GroupYear as $key => $v_GroupYear): ?>
-                                    <option <?=$v_GroupYear->SubjectYear == $SchoolYear->schyear_year ?"selected":""?>  value="<?=$v_GroupYear->SubjectYear?>"><?=$v_GroupYear->SubjectYear?></option>
+                                    <option <?=$v_GroupYear->SubjectYear == $SchoolYear->schyear_year ?"selected":""?>
+                                        value="<?=$v_GroupYear->SubjectYear?>"><?=$v_GroupYear->SubjectYear?></option>
                                     <?php endforeach; ?>
 
                                 </select>
                             </div>
-                         
+
                         </div>
                         <div class="col-md-12">
                             <div class="app-card app-card-orders-table shadow-sm mb-5">

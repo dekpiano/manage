@@ -65,18 +65,20 @@ $route['Admin/Acade/Registration/Enroll/Delete/(:any)/(:any)'] = "admin/academic
 $route['Admin/Acade/Registration/Repeat'] = "admin/academic/ConAdminRegisRepeat/AdminRegisRepeatMain";
 $route['Admin/Acade/Registration/Repeat/Detail/(:any)/(:any)/(:any)'] = "admin/academic/ConAdminRegisRepeat/AdminRegisRepeatDetail/$1/$2/$3";
 $route['Admin/Acade/Registration/Repeat/Add'] = "admin/academic/ConAdminRegisRepeat/AdminRegisRepeatAdd";
-$route['Admin/Acade/Registration/ClassSchedule'] = "admin/academic/ConAdminClassSchedule/AdminClassScheduleMain";
-$route['Admin/Acade/Registration/ClassSchedule/add'] = "admin/academic/ConAdminClassSchedule/add";
+
 $route['Admin/Acade/Registration/ExamSchedule'] = "admin/academic/ConAdminExamSchedule/AdminExamScheduleMain";
 $route['Admin/Acade/Registration/ExamSchedule/add'] = "admin/academic/ConAdminExamSchedule/add";
 $route['Admin/Acade/Registration/ClassRoom'] = "admin/academic/ConAdminClassRoom/AdminClassMain";
 $route['Admin/Acade/Registration/Students/(:any)'] = "admin/academic/ConAdminStudents/AdminStudentsMain/$1";
 $route['Admin/Acade/Registration/StudentsUpdate'] = "admin/academic/ConAdminStudents/AdminStudentsUpdate";
-$route['Admin/Acade/Registration/RegisterSubject'] = "admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectMain";
+
 $route['Admin/Acade/Registration/ExtraSubject'] = "admin/academic/ConAdminExtraSubject";
 $route['Admin/Acade/Registration/SettingSystem'] = "admin/academic/ConAdminExtraSubject/SystemMainExtraSubject";
 $route['Admin/Acade/Registration/RoomOnline'] = "admin/academic/ConAdminRoomOnline/RoomOnlineMain";
 
+$route['Admin/Acade/Course/ClassSchedule'] = "admin/academic/ConAdminClassSchedule/AdminClassScheduleMain";
+$route['Admin/Acade/Course/ClassSchedule/add'] = "admin/academic/ConAdminClassSchedule/add";
+$route['Admin/Acade/Course/RegisterSubject'] = "admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectMain";
 $route['Admin/Acade/Course/SendPlan'] = "admin/academic/ConAdminCourse/SendPlanMain";
 
 $route['Admin/Acade/Report'] = "admin/academic/ConAdminExtraSubject/ExtraReport";
