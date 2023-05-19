@@ -65,8 +65,13 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php  $SumUnit = 0; $SumGrade = 0; $scoreLevel=0; $CountSubjectAll = 0;
-                                        foreach ($scoreStudent as $key => $score ):                                         
-                                            if($v_scoreYear->RegisterYear == $score->RegisterYear && $v_scoreYear->RegisterYear == $score->SubjectYear):
+                                            $Name = array();
+                                            
+                                        foreach ($scoreStudent as $key => $score):          
+                                            //    $v_scoreYear->RegisterYear == $score->RegisterYear && $v_scoreYear->RegisterYear == $score->SubjectYear
+                                          
+                                            if($v_scoreYear->RegisterYear == $score->SubjectYear):
+                                                $Name[] = $score->SubjectCode;
                                             $c = floatval($score->Score100);
                                             $type = explode("/",$score->SubjectType);
                                             $CountSubjectAll += 1;
@@ -74,7 +79,12 @@
                                                     <tr>
                                                         <th scope="row" class="text-center"><?=$score->SubjectCode;?>
                                                         </th>
-                                                        <td><?=$score->SubjectName;?></td>
+                                                        <td>
+                                                            <div>
+                                                            <?=$score->SubjectName;?>
+                                                            </div>                                                            
+                                                            <small><?=$score->RegisterYear;?></small>
+                                                        </td>
                                                         <td class="text-center"><?=$type[1]?></td>
                                                         <td class="text-center">
                                                             <?=number_format(floatval($score->SubjectUnit),1);?></td>
@@ -111,6 +121,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <?=print_r( array_count_values( $Name ) );?>
                                         </div>
                                     </div>
                                     <div class="col-md-4">

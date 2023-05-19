@@ -56,16 +56,16 @@ var  $title = "ผลการเรียน";
                                     ->group_by('tb_register.RegisterYear')
                                     ->order_by('tb_register.RegisterClass asc','tb_register.RegisterYear asc')
                                     ->get()->result();
-         //echo '<pre>';print_r($data['scoreYear']); exit();
+        
         $data['scoreStudent'] = $this->db->select('tb_register.StudentID,
                                         tb_register.SubjectCode,
                                         tb_register.Score100,
                                         tb_register.Grade,
-                                        tb_register.RegisterYear,
+                                        (tb_register.RegisterYear),
                                         tb_register.RegisterClass,
                                         tb_subjects.SubjectName,
                                         tb_subjects.SubjectUnit,
-                                        tb_subjects.SubjectYear,
+                                        (tb_subjects.SubjectYear),
                                         tb_subjects.SubjectType,
                                         tb_subjects.FirstGroup')
                                     ->from('tb_register')
@@ -73,10 +73,12 @@ var  $title = "ผลการเรียน";
                                     ->where('StudentID',$this->session->userdata('login_id'))
                                     ->where('tb_register.SubjectCode !=','I30301')
                                     ->where('tb_register.SubjectCode !=','I20201')
+                                    ->where('tb_subjects.SubjectYear','2/2565')                                  
                                     ->order_by('tb_subjects.SubjectType asc')
-                                    ->order_by('tb_subjects.FirstGroup asc','tb_subjects.SubjectCode asc')
+                                    ->order_by('tb_subjects.FirstGroup asc')
+                                    ->order_by('tb_register.RegisterYear asc')
                                     ->get()->result();
-      
+        echo '<pre>';print_r($data['scoreStudent']); exit();
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
        // echo '<pre>'; print_r($data['scoreStudent']); exit();
         $data['stu'] =  $this->db->select('
