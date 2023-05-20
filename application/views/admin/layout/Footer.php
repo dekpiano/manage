@@ -51,7 +51,8 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
@@ -74,6 +75,7 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
     "responsive": true,
     "ordering": false,
 });
+
 </script>
 
 <script> 
@@ -148,6 +150,7 @@ new SlimSelect({
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Course"): ?>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=13"></script> 
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSendPlan.js?v=7"></script>
 <?php endif; ?>  
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=17"></script>

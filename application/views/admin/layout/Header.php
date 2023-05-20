@@ -28,9 +28,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -160,18 +164,18 @@
                                 <span class="nav-link-text">หน้าแรก</span>
                             </a>
                             <!--//nav-link-->
-                        </li>                      
+                        </li>
 
                         <?php if($this->session->userdata('CheckrloesAcademic') === 'เจ้าหน้าที่วิชาการ' || $this->session->userdata('CheckrloesAcademic') === 'หัวหน้าวิชาการ' || $this->session->userdata('CheckrloesAcademic') === 'รองวิชาการ'): ?>
                         <?php $this->load->view('admin/layout/Header_Academic.php'); ?>
                         <hr>
                         <?php endif; ?>
-                        
+
                         <?php if($this->session->userdata('CheckrloesGeneral') === 'เจ้าหน้าที่ทั่วไป'): ?>
                         <?php $this->load->view('admin/layout/Header_General.php'); ?>
                         <hr>
                         <?php endif; ?>
-                        
+
                         <?php if($this->session->userdata('CheckrloesAcademic') == 'ผู้บริหาร' && $this->session->userdata('status') === 'manager' || $this->session->userdata('login_id') === 'pers_021' || $this->session->userdata('CheckrloesAcademic') == 'รองวิชาการ'): ?>
                         <?php $this->load->view('admin/layout/Header_executive.php'); ?>
                         <?php endif; ?>
