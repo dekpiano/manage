@@ -127,6 +127,18 @@ var  $title = "แผงควบคุม";
     }
 
 
+    public function DeleteSettingSendPlan(){
+
+        $DelPlanCode = $this->input->post('PlanCode');
+        $DelPlanTerm = $this->input->post('PlanTerm');
+        $DelPlanYear = $this->input->post('PlanYear');
+        $DelPlanName = $this->input->post('PlanName');
+
+        $result = $this->ModTeacherCourse->plan_setting_delete_teacher($DelPlanCode,$DelPlanTerm,$DelPlanYear,$DelPlanName);
+            
+        echo $result;
+    }
+
 }
 
 
