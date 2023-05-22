@@ -173,3 +173,19 @@ $(document).on('click', '.delete_subject', function() {
         }
     })
 });
+
+$(document).on('change', '#SubjectUnit', function() {
+    console.log($(this).val());
+    $('#SubjectHour option').removeAttr('selected');
+    if ($(this).val() == 0.5) {
+        $('#SubjectHour option[value=20]').attr('selected', 'selected');
+    } else if ($(this).val() == 1.0) {
+        $('#SubjectHour option[value=40]').attr('selected', 'selected');
+    } else if ($(this).val() == 1.0) {
+        $('#SubjectHour option[value=40]').attr('selected', 'selected');
+    } else if ($(this).val() == 1.5) {
+        $('#SubjectHour option[value=60]').attr('selected', 'selected');
+    } else if ($(this).val() == 2.0) {
+        $('#SubjectHour option[value=80]').attr('selected', 'selected');
+    }
+});

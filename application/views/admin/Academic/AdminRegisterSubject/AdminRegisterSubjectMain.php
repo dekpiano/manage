@@ -117,9 +117,9 @@
                                             </label>                                          
 
                                                 <select class="form-select" required="" name="SubjectHour"
-                                                id="SubjectHour">
+                                                id="SubjectHour" disabled>
                                                 <option value="">เลือกชั่วโมง</option>
-                                                <?php $Hour = array("20","40","60");
+                                                <?php $Hour = array("20","40","60","80");
                                                 foreach ($Hour as $key => $v_Hour):?>
                                                 <option value="<?=$v_Hour?>"><?=$v_Hour?></option>
                                                 <?php endforeach; ?>
