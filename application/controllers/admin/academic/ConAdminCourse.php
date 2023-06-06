@@ -126,6 +126,44 @@ var  $title = "แผงควบคุม";
        // print_r($this->input->post());
     }
 
+    function EditSettingSendPlan(){     
+        $PlanCode = $this->input->post('PlanCode');
+        $PlanYear = $this->input->post('PlanYear');
+        $PlanTerm = $this->input->post('PlanTerm');
+    
+        $json = $this->db->select('seplan_namesubject,
+                                    seplan_coursecode,
+                                    seplan_gradelevel,
+                                    seplan_typesubject,
+                                    seplan_year,
+                                    seplan_term,
+                                    seplan_usersend')
+                                    ->where('seplan_coursecode',$PlanCode)
+                                    ->where('seplan_year',$PlanYear)
+                                    ->where('seplan_term',$PlanTerm)
+                                    ->limit(1)
+                                    ->get('tb_send_plan')
+                                    ->result();
+        echo json_encode($json);
+     }
+
+     function UpdateSettingSendPlanTeacher(){     
+        $DBpersonnel = $this->load->database('personnel', TRUE); 
+        $Teacher = $DBpersonnel->select('pers_id,pers_learning')->where('pers_id',$this->input->post('up_seplan_usersend'))
+        ->get('tb_personnel')->result();
+
+
+         $data = array('seplan_namesubject' => $this->input->post('up_seplan_namesubject'),
+                             'seplan_gradelevel' => $this->input->post('up_seplan_gradelevel'),
+                             'seplan_typesubject' => $this->input->post('up_seplan_typesubject'),
+                             'seplan_usersend' => $this->input->post('up_seplan_usersend'),
+                             'seplan_learning' => $Teacher[0]->pers_learning
+         );
+         $IF = array('seplan_coursecode'=>$this->input->post('up_seplan_coursecode'),'seplan_year' => $this->input->post('up_seplan_year'),'seplan_term' => $this->input->post('up_seplan_term'));
+         $result = $this->db->update('tb_send_plan',$data,$IF);         
+         
+         echo ($result);
+      }
 
     public function DeleteSettingSendPlan(){
 

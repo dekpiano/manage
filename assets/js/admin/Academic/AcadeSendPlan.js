@@ -137,3 +137,55 @@ $(document).on("click", ".DeleteTeach", function() {
         //     $('#up_seplan_term').val(data[0].seplan_term);
         // }, "json");
 });
+
+$(document).on('click', '.EditTeach', function() {
+    console.log($(this).attr('PlanYear'));
+    $('#editteacher').modal('show');
+
+    $.post("../../../admin/academic/ConAdminCourse/EditSettingSendPlan", {
+        PlanCode: $(this).attr('PlanCode'),
+        PlanYear: $(this).attr('PlanYear'),
+        PlanTerm: $(this).attr('PlanTerm')
+    }, function(data, status) {
+        $('#up_seplan_coursecode').val(data[0].seplan_coursecode);
+        $('#up_seplan_namesubject').val(data[0].seplan_namesubject);
+        $('#up_seplan_gradelevel').val(data[0].seplan_gradelevel);
+        $('#up_seplan_typesubject').val(data[0].seplan_typesubject);
+        $('#up_seplan_usersend').val(data[0].seplan_usersend);
+        $('#up_seplan_year').val(data[0].seplan_year);
+        $('#up_seplan_term').val(data[0].seplan_term);
+    }, "json");
+
+});
+
+$(document).on('submit', '#FromUpdateTeacher', function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '../../../admin/academic/ConAdminCourse/UpdateSettingSendPlanTeacher',
+        type: "post",
+        data: new FormData(this), //this is formData
+        processData: false,
+        contentType: false,
+        cache: false,
+        async: false,
+        success: function(data) {
+            console.log(data);
+            if (data > 0) {
+                $('#editteacher').modal('hide');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'แก้ไขข้อมูลสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        window.location.reload();
+                    }
+                })
+            } else {
+                window.location.reload();
+            }
+        }
+    });
+});

@@ -112,7 +112,7 @@
                                     </td>
                                     <td width="10%"><a class="EditTeach" PlanCode="<?=$v_Plan->seplan_coursecode?>"
                                             PlanYear="<?=$v_Plan->seplan_year?>" PlanTerm="<?=$v_Plan->seplan_term?>"
-                                            href="#" data-toggle="modal" data-target="#editteacher">แก้ไข</a> |
+                                            href="#">แก้ไข</a> |
                                         <a href="javascript:void(0)" class="DeleteTeach"
                                             delplancode="<?=$v_Plan->seplan_coursecode?>"
                                             delplanyear="<?=$v_Plan->seplan_year?>"
@@ -140,16 +140,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล</h5>              
             </div>
             <div class="modal-body">
                 <form class="needs-validation" novalidate id="FromUpdateTeacher">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="up_seplan_year">ปีการศึกษา</label>
                                 <input readonly type="text" class="form-control" placeholder="รหัสวิชา"
                                     id="up_seplan_year" name="up_seplan_year" required>
@@ -157,7 +154,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="up_seplan_term">ภาคเรียน</label>
                                 <input readonly type="text" class="form-control" placeholder="รหัสวิชา"
                                     id="up_seplan_term" name="up_seplan_term" required>
@@ -166,7 +163,7 @@
                         </div>
 
                         <div class="col-sm-12">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="up_seplan_coursecode">รหัสวิชา</label>
                                 <input readonly type="text" class="form-control" placeholder="รหัสวิชา"
                                     id="up_seplan_coursecode" name="up_seplan_coursecode" required>
@@ -174,18 +171,18 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="up_seplan_namesubject">ชื่อวิชา</label>
                                 <input type="text" class="form-control" placeholder="ชื่อวิชา"
-                                    id="up_seplan_namesubject" name="up_seplan_namesubject" required>
+                                    id="up_seplan_namesubject" name="up_seplan_namesubject" required disabled>
                                 <div class="invalid-feedback">กรุณากรอกชื่อวิชา</div>
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="up_seplan_gradelevel">ระดับชั้น</label>
-                                <select class="form-control" id="up_seplan_gradelevel" name="up_seplan_gradelevel"
-                                    required>
+                                <select class="form-select" id="up_seplan_gradelevel" name="up_seplan_gradelevel"
+                                    required disabled>
                                     <option value="">เลือกระดับชั้น</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -198,10 +195,10 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="seplan_typesubject">ประเภท</label>
-                                <select class="form-control" id="up_seplan_typesubject" name="up_seplan_typesubject"
-                                    required>
+                                <select class="form-select" id="up_seplan_typesubject" name="up_seplan_typesubject"
+                                    required disabled>
                                     <option value="">เลือกประเภท</option>
                                     <option value="พื้นฐาน">พื้นฐาน</option>
                                     <option value="เพิ่มเติม">เพิ่มเติม</option>
@@ -210,13 +207,13 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="up_seplan_usersend">ครูผู้สอน</label>
-                                <select class="form-control" id="up_seplan_usersend" name="up_seplan_usersend" required>
+                                <select class="form-select" id="up_seplan_usersend" name="up_seplan_usersend" required>
                                     <option value="">เลือกครูผู้สอน</option>
-                                    <?php foreach ($pers as $key => $v_pers): ?>
-                                    <option value="<?=$v_pers->pers_id;?>">
-                                        <?=$v_pers->pers_prefix.$v_pers->pers_firstname.' '.$v_pers->pers_lastname;?>
+                                    <?php foreach ($Teacher as $key => $v_Teacher): ?>
+                                    <option value="<?=$v_Teacher->pers_id;?>">
+                                        <?=$v_Teacher->pers_prefix.$v_Teacher->pers_firstname.' '.$v_Teacher->pers_lastname;?>
                                     </option>
                                     <?php endforeach; ?>
                                 </select>

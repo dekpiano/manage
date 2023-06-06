@@ -198,7 +198,7 @@
                     href="<?=base_url('Admin/Acade/Course/ClassSchedule');?>">จัดการตารางเรียน</a>
             </li>
             <li class="submenu-item ">
-                <a class="submenu-link <?=$this->uri->segment('3')=="SendPlan" ? "active" :""?>"
+                <a class="submenu-link <?=$this->uri->segment('4')=="SendPlan" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Course/SendPlan');?>">จัดการส่งแผน</a>
 
             </li>
