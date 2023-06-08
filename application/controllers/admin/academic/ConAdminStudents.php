@@ -50,20 +50,21 @@ class ConAdminStudents extends CI_Controller {
     public function AdminStudentsMain($Key = null){ 
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['CountAllStu'] = $this->db->select('COUNT(StudentBehavior) AS stuall')
-        ->where('StudentBehavior','ปกติ')
-        ->or_where('StudentBehavior','ขาดเรียนนาน')
+        ->where('StudentStatus','1/ปกติ')
         ->get('tb_students')->result();
         $data['CountNormalStu'] = $this->db->select('COUNT(StudentBehavior) AS stunormal')
-        ->where('StudentBehavior','ปกติ')
+        ->where('StudentStatus','1/ปกติ')
+        ->where('StudentBehavior !=','ขาดเรียนนาน')
         ->get('tb_students')->result();
         $data['CountAbsentStu'] = $this->db->select('COUNT(StudentBehavior) AS stuabsent')
         ->where('StudentBehavior','ขาดเรียนนาน')
+        ->where('StudentStatus','1/ปกติ')
         ->get('tb_students')->result();
 
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
 
         if(urldecode($Key) == "ปกติ"){
-           $ta = "StudentBehavior='ปกติ' OR StudentBehavior='ขาดเรียนนาน'";           
+           $ta = "StudentStatus='1/ปกติ'";           
         } elseif(urldecode($Key) == 'จำหน่าย'){
             $ta = "StudentBehavior!='ปกติ'  AND StudentBehavior = ''";            
         }else{
@@ -214,6 +215,18 @@ class ConAdminStudents extends CI_Controller {
             echo $this->input->post('ValueBehavior');
         }else{
             $data = array('StudentBehavior' => $this->input->post('ValueBehavior'));
+            echo $this->db->update('tb_students',$data,'StudentID="'.$this->input->post('KeyStuId').'"');
+        }
+        
+    }
+
+    public function AdminUpdateStudentStatus(){
+        if($this->input->post('ValueStudentStatus') == 'ขาดเรียนนาน' || $this->input->post('ValueStudentStatus') == 'ปกติ'){
+            $data = array('StudentStatus' => $this->input->post('ValueStudentStatus'));
+            $this->db->update('tb_students',$data,'StudentID="'.$this->input->post('KeyStuId').'"');
+            echo $this->input->post('ValueStudentStatus');
+        }else{
+            $data = array('StudentStatus' => $this->input->post('ValueStudentStatus'));
             echo $this->db->update('tb_students',$data,'StudentID="'.$this->input->post('KeyStuId').'"');
         }
         

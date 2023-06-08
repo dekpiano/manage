@@ -201,16 +201,28 @@
                                     <td class="text-center"><?=$v_stu->StudentNumber?></td>
                                     <td class="text-center"><?=$v_stu->StudentStudyLine?></td>
                                     <td class="text-center">
-                                        <span class="badge rounded-pill bg-success">
+                                        <?php $Status = array('1/ปกติ','2/ย้ายสถานศึกษา','3/ขาดประจำ','4/พักการเรียน','5/จบการศึกษา' ); ?>
+                                    <select class="form-select w-auto StudentStatus" id="StudentStatus" name="StudentStatus" data-stuid="<?=$v_stu->StudentID?>">
+                                        <?php foreach ($Status as $key => $v_Status) : ?>
+										  <option <?=$v_stu->StudentStatus == $v_Status ?"selected":""?> value="<?=$v_Status;?>"><?=$v_Status;?></option>
+                                          <?php endforeach; ?>		  
+									</select>
+                                        <!-- <span class="badge rounded-pill bg-success">
                                             <?=$v_stu->StudentStatus?>
-                                        </span>
+                                        </span> -->
                                     </td>
                                     <td class="text-center">
-                                        <?php if($v_stu->StudentBehavior == 'ปกติ'): ?>
+                                    <?php $Status1 = array('ปกติ','ขาดเรียนนาน','จำหน่าย','ย้าย','จบการศึกษา' ); ?>
+                                    <select class="form-select w-auto StudentBehavior" id="StudentBehavior" name="StudentBehavior" data-stuid="<?=$v_stu->StudentID?>">
+                                        <?php foreach ($Status1 as $key => $v_Status) : ?>
+										  <option <?=$v_stu->StudentBehavior == $v_Status ?"selected":""?> value="<?=$v_Status;?>"><?=$v_Status;?></option>
+                                          <?php endforeach; ?>		  
+									</select>
+                                        <!-- <?php if($v_stu->StudentBehavior == 'ปกติ'): ?>
                                         <span class="badge rounded-pill bg-success"><?=$v_stu->StudentBehavior?></span>
                                         <?php else: ?>
                                         <span class="badge rounded-pill bg-warning "><?=$v_stu->StudentBehavior?></span>
-                                        <?php endif;?>                                       
+                                        <?php endif;?>                                        -->
                                     </td>
 
                                 </tr>

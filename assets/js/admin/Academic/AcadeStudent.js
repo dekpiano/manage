@@ -50,7 +50,7 @@ $(document).on('change', '.StudentBehavior', function() {
         function(data, status) {
             console.log(data);
             if (data == 1) {
-                $('#tbStudent tr.' + KeyStuId).remove();
+                // $('#tbStudent tr.' + KeyStuId).remove();
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -69,9 +69,39 @@ $(document).on('change', '.StudentBehavior', function() {
                 })
 
             }
-
         });
+});
 
+$(document).on('change', '.StudentStatus', function() {
+    let StudentStatus = $(this).val();
+    let KeyStuId = $(this).attr('data-stuid');
+    $.post("../../../../admin/academic/ConAdminStudents/AdminUpdateStudentStatus", {
+            KeyStuId: KeyStuId,
+            ValueStudentStatus: StudentStatus
+        },
+        function(data, status) {
+            console.log(data);
+            if (data == 1) {
+                // $('#tbStudent tr.' + KeyStuId).remove();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'เปลี่ยนแปลงสถานะเป็น' + StudentStatus,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'เปลี่ยนแปลงสถานะเป็น' + StudentStatus,
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+
+            }
+        });
 });
 
 function calculateColumnUnit(index) {
