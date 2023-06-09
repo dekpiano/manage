@@ -96,7 +96,9 @@ var  $title = "แผงควบคุม";
     }
 
     public function StudentsPrintRoom($Class,$Room,$StudyLine = 0){
-        require_once (APPPATH. '../vendor/vendor/autoload.php');
+        
+        $path = (dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+		require $path . '/librarie_skj/mpdf/vendor/autoload.php';
 
         $live_mpdf = new \Mpdf\Mpdf(
             array(

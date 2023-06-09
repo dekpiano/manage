@@ -5,7 +5,45 @@ $('#tbStudent').DataTable({
     ],
     lengthMenu: [45, 100],
     processing: true,
+    "ajax": {
+        url: "../../../../admin/academic/ConAdminStudents/AdminStudentsNormalShow",
+        "type": "POST"
+    },
+    'columns': [
+        { data: 'StudentCode' },
+        { data: 'Fullname' },
+        { data: 'StudentClass' },
+        { data: 'StudentNumber' },
+        { data: 'StudentStudyLine' },
+        {
+            data: 'StudentStatus',
+            render: function(data, type, row) {
+                if (data != "1/ปกติ") {
+                    return '<a class="btn-sm btn-danger EditStudentStatus" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" key-stu="' + row.StudentID + '">' + data + '</a>';
+                } else {
+                    return '<a class="btn-sm app-btn-primary EditStudentStatus" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" key-stu="' + row.StudentID + '">' + data + '</a>';
+                }
+            }
+        },
+        {
+            data: 'StudentBehavior',
+            render: function(data, type, row) {
+                if (data != "ปกติ") {
+                    return '<a class="btn-sm btn-danger" href="#">' + data + '</a>';
+                } else {
+                    return '<a class="btn-sm app-btn-primary" href="#">' + data + '</a>';
+                }
+
+            }
+        }
+    ]
 });
+
+$(document).on('click', '.EditStudentStatus', function() {
+    console.log($(this).attr('key-stu'));
+    $('#keystu').val($(this).attr('key-stu'));
+});
+
 // จัดการนักเรียน
 $(document).on('click', '.delete_student', function() {
     var id = $(this).attr("idStu");
@@ -74,7 +112,7 @@ $(document).on('change', '.StudentBehavior', function() {
 
 $(document).on('change', '.StudentStatus', function() {
     let StudentStatus = $(this).val();
-    let KeyStuId = $(this).attr('data-stuid');
+    let KeyStuId = $('#keystu').val();
     $.post("../../../../admin/academic/ConAdminStudents/AdminUpdateStudentStatus", {
             KeyStuId: KeyStuId,
             ValueStudentStatus: StudentStatus
@@ -133,7 +171,7 @@ function calculateColumnGrade(index) {
 
     });
     averageGrade = totalGrade / totalUnit;
-    console.log(parseFloat(String(averageGrade).substring(0, 4)).toFixed(2));
+    // console.log(parseFloat(String(averageGrade).substring(0, 4)).toFixed(2));
     $('.ShowGrade .tfoot th').eq(index).text(parseFloat(String(averageGrade).substring(0, 4)).toFixed(2));
 }
 

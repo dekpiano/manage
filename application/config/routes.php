@@ -69,7 +69,8 @@ $route['Admin/Acade/Registration/Repeat/Add'] = "admin/academic/ConAdminRegisRep
 $route['Admin/Acade/Registration/ExamSchedule'] = "admin/academic/ConAdminExamSchedule/AdminExamScheduleMain";
 $route['Admin/Acade/Registration/ExamSchedule/add'] = "admin/academic/ConAdminExamSchedule/add";
 $route['Admin/Acade/Registration/ClassRoom'] = "admin/academic/ConAdminClassRoom/AdminClassMain";
-$route['Admin/Acade/Registration/Students/(:any)'] = "admin/academic/ConAdminStudents/AdminStudentsMain/$1";
+$route['Admin/Acade/Registration/Students'] = "admin/academic/ConAdminStudents/AdminStudentsMain";
+$route['Admin/Acade/Registration/Students/(:any)'] = "admin/academic/ConAdminStudents/AdminStudentsNormal/$1";
 $route['Admin/Acade/Registration/StudentsUpdate'] = "admin/academic/ConAdminStudents/AdminStudentsUpdate";
 
 $route['Admin/Acade/Registration/ExtraSubject'] = "admin/academic/ConAdminExtraSubject";

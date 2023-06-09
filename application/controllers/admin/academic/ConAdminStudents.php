@@ -71,31 +71,67 @@ class ConAdminStudents extends CI_Controller {
             $ta = 1;
         }       
         if($Key != 'All'){
-            $DBpersonnel = $this->load->database('personnel', TRUE); 
-            $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
-            $data['stu'] = $this->db->select('StudentID,
-                                            StudentNumber,
-                                            StudentClass,
-                                            StudentCode,
-                                            StudentPrefix,
-                                            StudentFirstName,
-                                            StudentLastName,
-                                            StudentIDNumber,
-                                            StudentStatus,
-                                            StudentBehavior,
-                                            StudentStudyLine')
-                                            ->where($ta) 
-                                            ->get('tb_students')->result();     
+              
                                            
         }
 
- //echo '<pre>'; print_r($data['stu']);  exit(); 
+
        
 		$data['title'] = "จัดการข้อมูลนักเรียน";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminStudents/AdminStudentsMain.php');
         $this->load->view('admin/layout/Footer.php');
+
+    }
+
+    public function AdminStudentsNormal(){
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+             
+       
+
+            // echo '<pre>'; print_r($data['stu']);  exit(); 
+            $data['title'] = "จัดการข้อมูลนักเรียนปกติ";
+            $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+            $this->load->view('admin/layout/Header.php',$data);
+            $this->load->view('admin/Academic/AdminStudents/AdminStudentsNormal.php');
+            $this->load->view('admin/layout/Footer.php');
+
+    }
+
+    public function AdminStudentsNormalShow(){
+        $data = [];
+        $stu = $this->db->select('StudentID,
+        StudentNumber,
+        StudentClass,
+        StudentCode,
+        StudentPrefix,
+        StudentFirstName,
+        StudentLastName,
+        StudentIDNumber,
+        StudentStatus,
+        StudentBehavior,
+        StudentStudyLine')
+        ->where('StudentStatus','1/ปกติ') 
+        ->get('tb_students')->result();   
+
+        foreach($stu as $record){
+            $data[] = array( 
+                "StudentCode" => $record->StudentCode,
+                "StudentID" => $record->StudentID,
+                "Fullname" => $record->StudentPrefix.$record->StudentFirstName.' '.$record->StudentLastName,
+                "StudentClass" => $record->StudentClass,
+                "StudentNumber" => $record->StudentNumber,
+                "StudentStudyLine" => $record->StudentStudyLine,
+                "StudentStatus" => $record->StudentStatus,
+                "StudentBehavior" => $record->StudentBehavior
+            );
+
+        }
+        $output = array(
+            "data" =>  $data,           
+        );
+        echo json_encode($output);
 
     }
 

@@ -11,7 +11,7 @@
 
     <meta name="description" content="ระบบงานวิชาการสำหรับนักเรียน">
     <meta name="author" content="Dekpiano">
-    <link rel="shortcut icon" href="favicon.ico">
+    <!-- /<link rel="shortcut icon" href="favicon.ico"> -->
 
     <!-- FontAwesome JS-->
     <script defer src="<?=base_url();?>assets/plugins/fontawesome/js/all.min.js"></script>

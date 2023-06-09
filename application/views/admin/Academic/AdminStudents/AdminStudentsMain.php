@@ -133,8 +133,8 @@
 
                             </div>
                             <!--//app-card-body-->
-                            <a class="app-card-link-mask clickLoder"
-                                href="<?=base_url('Admin/Acade/Registration/Students/ปกติ')?>"></a>
+                            <a class="app-card-link-mask"
+                                href="<?=base_url('Admin/Acade/Registration/Students/Normal')?>"></a>
                         </div>
                         <!--//app-card-->
                     </div>
@@ -176,8 +176,6 @@
                         สถานะนักเรียน<?=$stu[0]->StudentBehavior?>
                     </div>
                     <div class="card-body">
-
-
                         <table class="table table-bordered" id="tbStudent">
                             <thead>
                                 <tr>
