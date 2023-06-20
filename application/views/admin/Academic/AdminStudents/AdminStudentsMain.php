@@ -19,16 +19,31 @@
                 <!--//container-->
             </section>
             <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-4 mb-4">
+                        <div class="app-card app-card-chart h-100 shadow-sm">
+                            <div class="app-card-header p-3 border-0">
+                                <h4 class="app-card-title">นักเรียนทั้งหมด</h4>
+                            </div>
+                            <!--//app-card-header-->
+                            <div class="app-card-body p-4">
+                                <div class="chart-container">
+                                    <canvas id="chart-doughnut" style="width: 100px;"></canvas>
+                                </div>
+                            </div>
+                            <!--//app-card-body-->
+                        </div>
+                        <!--//app-card-->
+                    </div>
 
-                <div class="row g-4 mb-4">
-                    <div class="col-12 col-lg-4">
-                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-                            <div class="app-card-header p-3 border-bottom-0 w-100">
+                    <div class="col-12 col-lg-8">
+                        <div class="app-card d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 w-100">
                                 <div class="align-items-center gx-3 d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
                                         <div class="col-auto">
                                             <div class="app-icon-holder">
-                                            <i class="bi bi-people-fill"></i>
+                                                <i class="bi bi-people-fill"></i>
                                             </div>
                                             <!--//icon-holder-->
 
@@ -53,15 +68,15 @@
 
                         </div>
                         <!--//app-card-->
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-                            <div class="app-card-header p-3 border-bottom-0 w-100">
+
+
+                        <div class="app-card d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 w-100">
                                 <div class="align-items-center gx-3 d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
                                         <div class="col-auto">
                                             <div class="app-icon-holder">
-                                            <i class="bi bi-people-fill"></i>
+                                                <i class="bi bi-people-fill"></i>
                                             </div>
                                             <!--//icon-holder-->
 
@@ -69,7 +84,8 @@
                                         <!--//col-->
                                         <div class="col-auto">
                                             <h4 class="app-card-title">นักเรียน ปกติ</h4>
-                                            <p style="margin-bottom: auto">ปีการศึกษา <?=$SchoolYear->schyear_year?></p>
+                                            <p style="margin-bottom: auto">ปีการศึกษา <?=$SchoolYear->schyear_year?>
+                                            </p>
                                         </div>
                                         <!--//col-->
                                     </div>
@@ -86,16 +102,14 @@
 
                         </div>
                         <!--//app-card-->
-                    </div>
 
-                    <div class="col-12 col-lg-4">
-                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-                            <div class="app-card-header p-3 border-bottom-0 w-100">
+                        <div class="app-card d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3  w-100">
                                 <div class="align-items-center gx-3 d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
                                         <div class="col-auto">
                                             <div class="app-icon-holder">
-                                            <i class="bi bi-people-fill"></i>
+                                                <i class="bi bi-people-fill"></i>
                                             </div>
                                             <!--//icon-holder-->
 
@@ -103,7 +117,8 @@
                                         <!--//col-->
                                         <div class="col-auto">
                                             <h4 class="app-card-title">นักเรียน ขาดเรียนนาน</h4>
-                                            <p style="margin-bottom: auto">ปีการศึกษา <?=$SchoolYear->schyear_year?></p>
+                                            <p style="margin-bottom: auto">ปีการศึกษา <?=$SchoolYear->schyear_year?>
+                                            </p>
                                         </div>
                                         <!--//col-->
                                     </div>
@@ -119,27 +134,23 @@
                             <!--//app-card-header-->
 
                         </div>
-                        <!--//app-card-->
-                    </div>
+                        <hr>
+                        <div class="row g-4 mb-4">
+                            <div class="col-6 col-lg-6">
+                                <div class="app-card app-card-stat shadow-sm h-100">
+                                    <div class="app-card-body p-3 p-lg-4">
+                                        <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
+                                        <div class="stats-figure">นักเรียน ปกติ</div>
 
-                </div>
-
-                <div class="row g-4 mb-4">
-                    <div class="col-6 col-lg-6">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
-                                <div class="stats-figure">นักเรียน ปกติ</div>
-
+                                    </div>
+                                    <!--//app-card-body-->
+                                    <a class="app-card-link-mask"
+                                        href="<?=base_url('Admin/Acade/Registration/Students/Normal')?>"></a>
+                                </div>
+                                <!--//app-card-->
                             </div>
-                            <!--//app-card-body-->
-                            <a class="app-card-link-mask"
-                                href="<?=base_url('Admin/Acade/Registration/Students/Normal')?>"></a>
-                        </div>
-                        <!--//app-card-->
-                    </div>
 
-                    <!-- <div class="col-6 col-lg-4">
+                            <!-- <div class="col-6 col-lg-4">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
@@ -151,87 +162,41 @@
                         
                     </div> -->
 
-                    <div class="col-6 col-lg-6">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
-                                <div class="stats-figure">นักเรียน จำหน่าย</div>
+                            <div class="col-6 col-lg-6">
+                                <div class="app-card app-card-stat shadow-sm h-100">
+                                    <div class="app-card-body p-3 p-lg-4">
+                                        <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
+                                        <div class="stats-figure">นักเรียน จำหน่าย</div>
 
+                                    </div>
+                                    <!--//app-card-body-->
+                                    <a class="app-card-link-mask clickLoder"
+                                        href="<?=base_url('Admin/Acade/Registration/Students/จำหน่าย')?>"></a>
+                                </div>
+                                <!--//app-card-->
                             </div>
-                            <!--//app-card-body-->
-                            <a class="app-card-link-mask clickLoder"
-                                href="<?=base_url('Admin/Acade/Registration/Students/จำหน่าย')?>"></a>
+                            <!--//col-->
                         </div>
-                        <!--//app-card-->
+
                     </div>
-                    <!--//col-->
-
-
 
                 </div>
 
-                <?php if(@$stu) :?>
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        สถานะนักเรียน<?=$stu[0]->StudentBehavior?>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered" id="tbStudent">
-                            <thead>
-                                <tr>
-                                    <th>เลขประจำตัว</th>
-                                    <th>ชื่อ - นามสกุล</th>
-                                    <th>ชั้น</th>
-                                    <th>เลขที่</th>
-                                    <th>สายการเรียน</th>
-                                    <th>สถานะนักเรียน</th>
-                                    <th>สถานะพฤติกรรม</th>
-                                    <!-- <th>คำสั่ง</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($stu as $key => $v_stu): ?>
-                                <tr class="<?=$v_stu->StudentCode?> <?=$v_stu->StudentID?>">
-                                    <td class="text-center"><?=$v_stu->StudentCode?></td>
-                                    <td><?=$v_stu->StudentPrefix?><?=$v_stu->StudentFirstName?>
-                                        <?=$v_stu->StudentLastName?></td>
-                                    <td class="text-center"><?=$v_stu->StudentClass?></td>
-                                    <td class="text-center"><?=$v_stu->StudentNumber?></td>
-                                    <td class="text-center"><?=$v_stu->StudentStudyLine?></td>
-                                    <td class="text-center">
-                                        <?php $Status = array('1/ปกติ','2/ย้ายสถานศึกษา','3/ขาดประจำ','4/พักการเรียน','5/จบการศึกษา' ); ?>
-                                    <select class="form-select w-auto StudentStatus" id="StudentStatus" name="StudentStatus" data-stuid="<?=$v_stu->StudentID?>">
-                                        <?php foreach ($Status as $key => $v_Status) : ?>
-										  <option <?=$v_stu->StudentStatus == $v_Status ?"selected":""?> value="<?=$v_Status;?>"><?=$v_Status;?></option>
-                                          <?php endforeach; ?>		  
-									</select>
-                                        <!-- <span class="badge rounded-pill bg-success">
-                                            <?=$v_stu->StudentStatus?>
-                                        </span> -->
-                                    </td>
-                                    <td class="text-center">
-                                    <?php $Status1 = array('ปกติ','ขาดเรียนนาน','จำหน่าย','ย้าย','จบการศึกษา' ); ?>
-                                    <select class="form-select w-auto StudentBehavior" id="StudentBehavior" name="StudentBehavior" data-stuid="<?=$v_stu->StudentID?>">
-                                        <?php foreach ($Status1 as $key => $v_Status) : ?>
-										  <option <?=$v_stu->StudentBehavior == $v_Status ?"selected":""?> value="<?=$v_Status;?>"><?=$v_Status;?></option>
-                                          <?php endforeach; ?>		  
-									</select>
-                                        <!-- <?php if($v_stu->StudentBehavior == 'ปกติ'): ?>
-                                        <span class="badge rounded-pill bg-success"><?=$v_stu->StudentBehavior?></span>
-                                        <?php else: ?>
-                                        <span class="badge rounded-pill bg-warning "><?=$v_stu->StudentBehavior?></span>
-                                        <?php endif;?>                                        -->
-                                    </td>
+                <hr>
+                <h1 class="app-page-title mb-3">รายละเอียดข้อมูลนักเรียน</h1>
+                <div class="col-6 col-lg-6">
+                    <div class="app-card app-card-stat shadow-sm h-100">
+                        <div class="app-card-body p-3 p-lg-4">
+                            <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
+                            <div class="stats-figure">นักเรียน LEC</div>
 
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-
+                        </div>
+                        <!--//app-card-body-->
+                        <a class="app-card-link-mask clickLoder" href="#"></a>
                     </div>
+                    <!--//app-card-->
                 </div>
-                <?php endif; ?>
-
+                <!--//col-->
 
             </div>
         </div>

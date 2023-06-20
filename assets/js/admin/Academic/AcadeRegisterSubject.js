@@ -67,14 +67,14 @@ $(document).on('click', '.EditSubject', function() {
 
 $(document).on('submit', '#form-subject', function(e) {
     e.preventDefault();
-    //console.log($(this).serialize());
+    // console.log($(this).serialize());
 
     $.ajax({
         url: '../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectInsert',
         type: 'post',
         data: $(this).serialize(),
-        error: function() {
-            alert('Something is wrong');
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
         },
         success: function(data) {
             console.log(data);
@@ -156,8 +156,8 @@ $(document).on('click', '.delete_subject', function() {
             $.ajax({
                 url: '../../../admin/academic/ConAdminRegisterSubject/AdminRegisterSubjectDelete/' + id,
                 type: 'DELETE',
-                error: function() {
-                    alert('Something is wrong');
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
                 },
                 success: function(data) {
                     Swal.fire({

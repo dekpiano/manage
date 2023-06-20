@@ -273,7 +273,28 @@ class ConAdminStudents extends CI_Controller {
         print_r($this->ModAdminStudents->Students_Delete($id));
     }
 
-   
+  
+    
+    // Chart นักเรียนทั้งหมด
+    public function ChartStudentsAll(){
+        $ChartStuAll = [];
+        $CheckStuAll = $this->db->select('
+           SUM(CASE WHEN StudentPrefix = "นาย" OR StudentPrefix = "เด็กชาย" THEN 1 ELSE 0 END) AS Man, 
+           SUM(CASE WHEN StudentPrefix = "นางสาว" OR StudentPrefix = "เด็กหญิง" THEN 1 ELSE 0 END) AS Girl           
+        ')
+        ->where('StudentStatus','1/ปกติ')
+        ->get('tb_students')->result();
+
+        foreach ($CheckStuAll as $key => $value) {
+            $ChartStuAll[] = $value->Man;
+            $ChartStuAll[] = $value->Girl;
+        }
+
+        echo json_encode($ChartStuAll);
+    }
+
+
+
 }
 
 
