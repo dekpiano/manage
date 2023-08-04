@@ -93,12 +93,12 @@ $(document).on("change", "#Room", function() {
     $('#multiselect option').remove();
 
     $.post("../../../../../../admin/academic/ConAdminEnroll/AdminEnrollSelect", { KeyRoom: $(this).val() }, function(data, status) {
-
+        //console.log(data);
         $.each(data, function(index, value) {
-            //console.log(value);
+            //console.log(index);
             // trHTML = '<tr><td></td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix+value.StudentFirstName+' '+value.StudentLastName + '</td></tr>';
-            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber.padStart(2, '0') + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
-            $('#multiselect').append(trHTML);
+            // trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber.padStart(2, '0') + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
+            // $('#multiselect').append(trHTML);
         });
     }, 'json');
 
@@ -113,8 +113,8 @@ $(document).on("change", "#RoomEdit", function() {
         $.each(data, function(index, value) {
             //console.log(value);
             // trHTML = '<tr><td></td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix+value.StudentFirstName+' '+value.StudentLastName + '</td></tr>';
-            trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber.padStart(2, '0') + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
-            $('#multiselect').append(trHTML);
+            // trHTML = '<option value="' + value.StudentID + '">' + value.StudentClass + ' ' + value.StudentNumber.padStart(2, '0') + ' ' + value.StudentPrefix + value.StudentFirstName + ' ' + value.StudentLastName + '</option>';
+            // $('#multiselect').append(trHTML);
         });
 
 

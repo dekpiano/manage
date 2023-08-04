@@ -125,8 +125,8 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
     });
 
  
-
 $('#multiselect').multiselect();
+
 
 new SlimSelect({
     select: '#teacher'
@@ -144,7 +144,7 @@ new SlimSelect({
 <script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=54"></script>
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>   
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=25"></script>  
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=28"></script>  
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisRepeat.js?v=6"></script>  
     <?php if($this->uri->segment(4) ==="Students"): ?> 
         <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=17"></script>

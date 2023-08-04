@@ -293,6 +293,15 @@ class ConAdminStudents extends CI_Controller {
         echo json_encode($ChartStuAll);
     }
 
+    public function AdminStudentsData(){
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['title'] = "จัดการข้อมูลนักเรียน LEC";
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminStudents/AdminStudentsDataLEC.php');
+        $this->load->view('admin/layout/Footer.php');
+
+    }
 
 
 }

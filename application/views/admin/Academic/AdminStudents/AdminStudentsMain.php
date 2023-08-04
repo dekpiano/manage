@@ -3,7 +3,7 @@
         <div class="container-xl">
             <section class="cta-section theme-bg-light py-5">
                 <div class="container text-center">
-                    <h2 class="heading">จัดการข้อมูล<?=$title;?></h2>
+                    <h2 class="heading"><?=$title;?></h2>
                     <div class="mt-4">
                         <a href="https://docs.google.com/spreadsheets/d/1Je4jmVm3l84xDMAJDqQtdrRB13wWwFl2Fy2b7FvX1Ec/edit#gid=0"
                             target="_blank" class="btn btn-primary btn-sm float-right mb-3">
@@ -192,7 +192,7 @@
 
                         </div>
                         <!--//app-card-body-->
-                        <a class="app-card-link-mask clickLoder" href="#"></a>
+                        <a class="app-card-link-mask clickLoder" href="<?=base_url('Admin/Acade/Registration/Students/Data')?>"></a>
                     </div>
                     <!--//app-card-->
                 </div>
