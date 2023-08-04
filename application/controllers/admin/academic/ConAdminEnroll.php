@@ -256,6 +256,7 @@ var  $title = "แผงควบคุม";
                                 ->where('tb_register.RegisterYear',$keyYear)
                                 ->group_by('tb_register.SubjectCode')
                                 ->group_by('tb_register.RegisterClass')
+                                ->group_by('tb_register.TeacherID')
                                 ->get()->result();
 
         //echo '<pre>'; print_r($Register);   exit();    
