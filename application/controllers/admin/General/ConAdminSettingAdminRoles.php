@@ -42,30 +42,30 @@ var  $title = "แผงควบคุม";
 
   
     public function GeneralSettingManager() {      
- 
+        $DBgeneral = $this->load->database('general', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
-        $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id=1');
+        $result = $DBgeneral->update('tb_admin_rloes',$data,'admin_rloes_id=1');
         echo $result;
     }
 
     public function GeneralSettingDeputy() {      
- 
+        $DBgeneral = $this->load->database('general', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
-        $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id=2');
+        $result = $DBgeneral->update('tb_admin_rloes',$data,'admin_rloes_id=2');
         echo $result;
     }
 
     public function GeneralSettingLeader() {      
- 
+        $DBgeneral = $this->load->database('general', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
-        $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id=3');
+        $result = $DBgeneral->update('tb_admin_rloes',$data,'admin_rloes_id=3');
         echo $result;
     }
 
     public function GeneralSettingAdmin() {      
- 
+        $DBgeneral = $this->load->database('general', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
         $data = array('admin_rloes_userid' => $this->input->post('TeachID'));
-        $result = $this->db->update('tb_admin_rloes',$data,'admin_rloes_id="'.$this->input->post('AdminID').'"');
+        $result = $DBgeneral->update('tb_admin_rloes',$data,'admin_rloes_id="'.$this->input->post('AdminID').'"');
         echo $result;
     }
 

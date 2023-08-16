@@ -209,7 +209,7 @@
 <!--//nav-item-->
 <li class="nav-item ">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-    <a class="nav-link <?=$this->uri->segment('4')=="AdminRoles" ? "active" :""?>"
+    <a class="nav-link <?=$this->uri->segment('2')=="Acade" && $this->uri->segment('4')=="AdminRoles" ? "active" :""?>"
         href="<?=base_url('Admin/Acade/Setting/AdminRoles');?>">
         <span class="nav-icon">
             <i class="bi bi-gear-fill" style="font-size: 1.2rem;"></i>

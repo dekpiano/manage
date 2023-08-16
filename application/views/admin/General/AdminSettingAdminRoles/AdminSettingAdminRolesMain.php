@@ -102,7 +102,7 @@
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3" aria-label=".form-select-lg example"
-                            id="set_executive" name="set_executive">
+                            id="set_General_executive" name="set_General_executive">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -122,7 +122,7 @@
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3" aria-label=".form-select-lg example"
-                            id="set_deputy" name="set_deputy">
+                            id="set_General_deputy" name="set_General_deputy">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-12 col-md-8">
                         <select class="mb-3" aria-label=".form-select-lg example"
-                            id="set_leader" name="set_leader">
+                            id="set_General_leader" name="set_General_leader">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -162,8 +162,8 @@
                         <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminone" name="set_admin" admin-id="<?=$Manager[3]->admin_rloes_id;?>">
+                        <select class="mb-3 set_General_admin" aria-label=".form-select-lg example"
+                            id="set_General_adminone" name="set_General_admin" admin-id="<?=$Manager[3]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -181,8 +181,8 @@
                         <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_admintwo" name="set_admin" admin-id="<?=$Manager[4]->admin_rloes_id;?>">
+                        <select class="mb-3 set_General_admin" aria-label=".form-select-lg example"
+                            id="set_General_admintwo" name="set_General_admin" admin-id="<?=$Manager[4]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -200,8 +200,8 @@
                         <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_admintheer" name="set_admin" admin-id="<?=$Manager[5]->admin_rloes_id;?>">
+                        <select class="mb-3 set_General_admin" aria-label=".form-select-lg example"
+                            id="set_General_admintheer" name="set_General_admin" admin-id="<?=$Manager[5]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -219,8 +219,8 @@
                         <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminfour" name="set_admin" admin-id="<?=$Manager[6]->admin_rloes_id;?>">
+                        <select class="mb-3 set_General_admin" aria-label=".form-select-lg example"
+                            id="set_General_adminfour" name="set_General_admin" admin-id="<?=$Manager[6]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -237,8 +237,8 @@
                         <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminfive" name="set_admin" admin-id="<?=$Manager[7]->admin_rloes_id;?>">
+                        <select class="mb-3 set_General_admin" aria-label=".form-select-lg example"
+                            id="set_General_adminfive" name="set_General_admin" admin-id="<?=$Manager[7]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option
@@ -255,8 +255,8 @@
                         <h3 class="section-title">เจ้าหน้าที่<?=$title;?></h3>                      
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminsix" name="set_admin" admin-id="<?=$Manager[8]->admin_rloes_id;?>">
+                        <select class="mb-3 set_General_admin" aria-label=".form-select-lg example"
+                            id="set_General_adminsix" name="set_General_admin" admin-id="<?=$Manager[8]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
                             <option

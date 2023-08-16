@@ -170,6 +170,10 @@ new SlimSelect({
 <script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>
 <?php endif; ?>
 
+<?php if($this->uri->segment(2) ==="General"): ?>
+<script src="<?=base_url();?>assets/js/admin/General/GeneralAdminRoles.js?v=4"></script>
+<?php endif; ?>
+
 <script>
 // ตั้งค่าปีการศึกษาที่ใช้ปัจจุบัน
 $(document).on("change", "#schyear_year", function() {
