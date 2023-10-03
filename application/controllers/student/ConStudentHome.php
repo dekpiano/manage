@@ -52,7 +52,7 @@ var  $title = "ผลการเรียน";
                                     ')
                                     ->from('tb_register')
                                     ->where('StudentID',$this->session->userdata('login_id'))
-                                    ->where('tb_register.RegisterYear','2/2565')
+                                    ->where('tb_register.RegisterYear','1/2566')
                                     ->group_by('tb_register.RegisterYear')
                                     ->order_by('tb_register.RegisterClass asc','tb_register.RegisterYear asc')
                                     ->get()->result();
@@ -61,24 +61,33 @@ var  $title = "ผลการเรียน";
                                         tb_register.SubjectCode,
                                         tb_register.Score100,
                                         tb_register.Grade,
+                                        tb_register.TeacherID,
                                         (tb_register.RegisterYear),
                                         tb_register.RegisterClass,
                                         tb_subjects.SubjectName,
                                         tb_subjects.SubjectUnit,
                                         (tb_subjects.SubjectYear),
                                         tb_subjects.SubjectType,
-                                        tb_subjects.FirstGroup')
+                                        tb_subjects.FirstGroup,
+                                        skjacth_personnel.tb_personnel.pers_prefix,
+                                        skjacth_personnel.tb_personnel.pers_firstname,
+                                        skjacth_personnel.tb_personnel.pers_lastname,'
+                                        )
                                     ->from('tb_register')
                                     ->join('tb_subjects', 'tb_register.SubjectCode = tb_subjects.SubjectCode')
+                                    ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID','left')
                                     ->where('StudentID',$this->session->userdata('login_id'))
                                     ->where('tb_register.SubjectCode !=','I30301')
                                     ->where('tb_register.SubjectCode !=','I20201')
-                                    ->where('tb_subjects.SubjectYear','2/2565')                                  
+                                    ->where('tb_subjects.SubjectYear','1/2566')   
+                                    ->where('tb_register.RegisterYear','1/2566')                               
                                     ->order_by('tb_subjects.SubjectType asc')
                                     ->order_by('tb_subjects.FirstGroup asc')
                                     ->order_by('tb_register.RegisterYear asc')
                                     ->get()->result();
-        echo '<pre>';print_r($data['scoreStudent']); exit();
+
+        //echo '<pre>';print_r($data['scoreStudent']); exit();
+
         $data['CheckOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
        // echo '<pre>'; print_r($data['scoreStudent']); exit();
         $data['stu'] =  $this->db->select('

@@ -31,8 +31,8 @@
                             </div>
                         </div> -->
 
-                        <img class="img-fluid" src="<?=base_url('uploads/academic/exam_schedule/Tb2566-2-2.jpg')?>" alt="">
-                        <img class="img-fluid" src="<?=base_url('uploads/academic/exam_schedule/Tb2566-2-1.jpg')?>" alt="">
+                        <img class="img-fluid" src="<?=base_url('uploads/academic/exam_schedule/main1.jpg')?>" alt="">
+                        <img class="img-fluid" src="<?=base_url('uploads/academic/exam_schedule/main2.jpg')?>" alt="">
                     </div>
                     <?php endforeach; ?>
                 </div>

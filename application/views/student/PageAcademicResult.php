@@ -81,20 +81,21 @@
                                                         </th>
                                                         <td>
                                                             <div>
-                                                            <?=$score->SubjectName;?>
+                                                            <strong><?=$score->SubjectName;?></strong>
                                                             </div>                                                            
-                                                            <small><?=$score->RegisterYear;?></small>
+                                                            <small>ครูผู้สอน : <?=$score->pers_prefix.$score->pers_firstname.' '.$score->pers_lastname;?></small>
                                                         </td>
                                                         <td class="text-center"><?=$type[1]?></td>
                                                         <td class="text-center">
-                                                            <?=number_format(floatval($score->SubjectUnit),1);?></td>
-
+                                                            <?=number_format(floatval($score->SubjectUnit),1);?>
+                                                        </td>
+                                                        
                                                         <?php if($score->Grade == 'ร' || $score->Grade == 'มส' || $score->Grade == ''){ ?>
-                                                        <td class="text-center"><?=$score->Grade?></td>
+                                                        <td class="text-center"><strong><?=$score->Grade?></strong></td>
                                                         <?php }else{ ?>
-                                                        <td class="text-center"><?=$score->Grade?></td>
+                                                        <td class="text-center"><strong><?=$score->Grade?></strong></td>
                                                         <?php } ?>
-
+                                                        
 
                                                     </tr>
                                                     <?php $SumUnit += floatval($score->SubjectUnit);
@@ -121,7 +122,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <?=print_r( array_count_values( $Name ) );?>
+                                           
                                         </div>
                                     </div>
                                     <div class="col-md-4">
