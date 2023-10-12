@@ -145,7 +145,7 @@ new SlimSelect({
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>   
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=28"></script>  
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisRepeat.js?v=6"></script>  
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisRepeat.js?v=9"></script>  
     <?php if($this->uri->segment(4) ==="Students"): ?> 
         <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=17"></script>
     <?php endif; ?>

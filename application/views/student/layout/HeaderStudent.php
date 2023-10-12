@@ -88,7 +88,7 @@
                     <ul class="app-menu list-unstyled accordion" id="menu-accordion">
                         <li class="nav-item">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link  <?=$this->uri->segment('2')=="Home" ? "active" :""?>"
+                            <a class="Loader nav-link  <?=$this->uri->segment('2')=="Home" ? "active" :""?>"
                                 href="<?=base_url('Student/Home');?>">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
@@ -105,7 +105,7 @@
                         </li>
                         <li class="nav-item">
                            
-                            <a class="nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
+                            <a class="Loader nav-link <?=$this->uri->segment('2')=="AcademicResult" ? "active" :""?>"
                                 href="<?=base_url('Student/AcademicResult');?>">
                                 <span class="nav-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

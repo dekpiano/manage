@@ -45,6 +45,7 @@ var  $title = "ผลการเรียน";
     public function score(){      
         $data['title'] = "ผลการเรียน";
         $data['ExtraSetting'] = $this->db->get('tb_extra_setting')->result();
+        $Year = '1/2566';
         $data['scoreYear'] = $this->db->select('
                                     tb_register.RegisterClass,
                                     tb_register.RegisterYear,
@@ -52,11 +53,12 @@ var  $title = "ผลการเรียน";
                                     ')
                                     ->from('tb_register')
                                     ->where('StudentID',$this->session->userdata('login_id'))
-                                    ->where('tb_register.RegisterYear','1/2566')
+                                    ->where('tb_register.RegisterYear',$Year)
                                     ->group_by('tb_register.RegisterYear')
                                     ->order_by('tb_register.RegisterClass asc','tb_register.RegisterYear asc')
                                     ->get()->result();
         
+       
         $data['scoreStudent'] = $this->db->select('tb_register.StudentID,
                                         tb_register.SubjectCode,
                                         tb_register.Score100,
@@ -79,8 +81,8 @@ var  $title = "ผลการเรียน";
                                     ->where('StudentID',$this->session->userdata('login_id'))
                                     ->where('tb_register.SubjectCode !=','I30301')
                                     ->where('tb_register.SubjectCode !=','I20201')
-                                    ->where('tb_subjects.SubjectYear','1/2566')   
-                                    ->where('tb_register.RegisterYear','1/2566')                               
+                                    ->where('tb_subjects.SubjectYear',$Year)   
+                                    ->where('tb_register.RegisterYear',$Year)                               
                                     ->order_by('tb_subjects.SubjectType asc')
                                     ->order_by('tb_subjects.FirstGroup asc')
                                     ->order_by('tb_register.RegisterYear asc')

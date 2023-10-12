@@ -81,21 +81,22 @@
                                                         </th>
                                                         <td>
                                                             <div>
-                                                            <strong><?=$score->SubjectName;?></strong>
-                                                            </div>                                                            
-                                                            <small>ครูผู้สอน : <?=$score->pers_prefix.$score->pers_firstname.' '.$score->pers_lastname;?></small>
+                                                                <strong><?=$score->SubjectName;?></strong>
+                                                            </div>
+                                                            <small>ครูผู้สอน :
+                                                                <?=$score->pers_prefix.$score->pers_firstname.' '.$score->pers_lastname;?></small>
                                                         </td>
                                                         <td class="text-center"><?=$type[1]?></td>
                                                         <td class="text-center">
                                                             <?=number_format(floatval($score->SubjectUnit),1);?>
                                                         </td>
-                                                        
+
                                                         <?php if($score->Grade == 'ร' || $score->Grade == 'มส' || $score->Grade == ''){ ?>
                                                         <td class="text-center"><strong><?=$score->Grade?></strong></td>
                                                         <?php }else{ ?>
                                                         <td class="text-center"><strong><?=$score->Grade?></strong></td>
                                                         <?php } ?>
-                                                        
+
 
                                                     </tr>
                                                     <?php $SumUnit += floatval($score->SubjectUnit);
@@ -113,8 +114,8 @@
                                          endif; 
                                          endforeach;?>
                                                     <tr class="text-center tfoot">
-                                                        <th ></th>
-                                                        <th >วิชาทั้งหมด <?=$CountSubjectAll;?> วิชา</th>
+                                                        <th></th>
+                                                        <th>วิชาทั้งหมด <?=$CountSubjectAll;?> วิชา</th>
                                                         <th colspan=2>หน่วยกิตทั้งหมด <?=$SumUnit;?></th>
                                                         <th>
                                                             <?=substr($SumGrade/$SumUnit,0,4);?>
@@ -122,7 +123,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                           
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -140,53 +141,30 @@
                                                 <tr>
                                                     <th>กิจกรรมแนะแนว</th>
                                                     <td class="text-center">
-                                                        <span class="text-success">
-                                                        
-                                                        
-                                                    </span>
-                                                    <?=$v_scoreYear->RegisterYear == '1/2565' ?"ผ่าน":"รอประมวลผล..."?>
+                                                        รอประมวลผล...
                                                     </td>
                                                 </tr>
                                                 <?php if($stu->StudentClass <= 'ม.4/1') : ?>
                                                 <tr>
                                                     <th scope="row">ลูกเสือ/เนตรนารี/ยุวฯ/บพ.</th>
                                                     <td class="text-center">
-                                                    <?php 
-                                                    if($v_scoreYear->RegisterYear == '1/2565' ) : ?>
-                                                        <?php 
-                                                                if(in_array($stu->StudentCode,$checkChunum)){
-                                                                    echo '<span class="text-danger">ไม่ผ่าน</span>';
-                                                                }else{
-                                                                    echo '<span class="text-success">ผ่าน</span>';
-                                                                }
-                                                            ?>
-                                                            <?php else : ?>
-                                                            รอประมวลผล...
-                                                            <?php endif; ?>
+
+                                                        รอประมวลผล...
                                                     </td>
                                                 </tr>
                                                 <?php endif; ?>
                                                 <tr>
                                                     <th scope="row">กิจรรมชุมชน</th>
                                                     <td class="text-center">
-                                                    <?php 
-                                                    if($v_scoreYear->RegisterYear == '1/2565' ) : ?>
-                                                        <?php 
-                                                                if(in_array($stu->StudentCode,$checkRuksun)){
-                                                                    echo '<span class="text-danger">ไม่ผ่าน</span>';
-                                                                }else{
-                                                                    echo '<span class="text-success">ผ่าน</span>';
-                                                                }
-                                                            ?>
-                                                            <?php else : ?>
-                                                            รอประมวลผล...
-                                                            <?php endif; ?>
+
+                                                        รอประมวลผล...
+
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>กิจกรรมเพื่อสังคม</th>
-                                                    <td class="text-center"><span class="text-success"></span>
-                                                    <?=$v_scoreYear->RegisterYear == '1/2565' ?"ผ่าน":"รอประมวลผล..."?>
+                                                    <td class="text-center">
+                                                        รอประมวลผล...
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -267,43 +245,32 @@
                 <?php else: ?>
                 <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
                     <div class="inner">
-                        <div class="app-card-body p-3 p-lg-4">
-                            <h3 class="mb-3">ระบบแสดงผลการเรียน</h3>
-                            <div class="row gx-5 gy-3">
-                                <div class="col-12 col-lg-9">
-
-                                    <div>
-                                        ผลการเรียน ระบบจะเปิดให้ดูในวันที่ 15 ตุลาคม 2565 เป็นต้นไป
-                                    </div>
-                                </div>
-                                <!--//col-->
-
-                            </div>
-                            <!--//row-->
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <!--//app-card-body-->
-
-                    </div>
-                    <!--//inner-->
-                </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="text-center">
-                            <img src="<?=base_url('assets/images/academicResult/img-update.svg')?>" alt="" srcset=""
-                                class="img-fluid">
-                            <h1>อยู่ระหว่างการอัพเดต...</h1>
+                        <div class="app-card-body">
+                            <h3 class="mb-3">ผลการเรียน</h3>
                         </div>
                     </div>
-                </div>
+                    <!--//app-card-body-->
 
-                <?php endif; ?>
+                </div>
+                <!--//inner-->
             </div>
 
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <img src="<?=base_url('assets/images/academicResult/img-update.svg')?>" alt="" srcset=""
+                            class="img-fluid">
+                        <h1 class="mt-3">อยู่ระหว่างการอัพเดตข้อมูล... รอสักครู่</h1>
+                    </div>
+                </div>
+            </div>
 
-
+            <?php endif; ?>
         </div>
-        <!--//container-fluid-->
+
+
+
     </div>
-    <!--//app-content-->
+    <!--//container-fluid-->
+</div>
+<!--//app-content-->
