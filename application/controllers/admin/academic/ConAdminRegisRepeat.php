@@ -57,6 +57,7 @@ var  $title = "แผงควบคุม";
         tb_students.StudentClass,
         tb_students.StudentCode,
         tb_students.StudentNumber,
+        tb_students.StudentStatus,
         tb_subjects.SubjectName,
         tb_subjects.SubjectYear,
         tb_register.SubjectCode,

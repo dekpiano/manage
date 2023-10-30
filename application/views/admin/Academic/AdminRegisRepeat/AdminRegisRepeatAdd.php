@@ -40,12 +40,13 @@
                                             <th>รหัสประจำตัว</th>
                                             <th>ชื่อนักเรียน</th>
                                             <th>คะแนน</th>
-                                            <th>สถานะ</th>
+                                            <th>การเรียน</th>
+                                            <th>สถานะ นร</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($DataRepeat as $key => $v_DataRepeat) : ?>
-                                        <tr class="<?=$v_DataRepeat->Grade == "มส" ?"table-danger":""?>">
+                                        <tr class="<?=$v_DataRepeat->Grade == "มส" ||  $v_DataRepeat->Grade <= 0?"table-danger":""?>">
                                             <td class="text-center">
                                                 <input type="checkbox" name="SelRepeat[]" id="SelRepeat" value="<?=$v_DataRepeat->StudentID?>"
                                                     class="form-check-input"
@@ -58,10 +59,12 @@
                                             <td class="text-left">
                                                 <?=$v_DataRepeat->StudentPrefix.$v_DataRepeat->StudentFirstName.' '.$v_DataRepeat->StudentLastName?>
                                             </td>
-                                            <td class="text-center"><?=$v_DataRepeat->Grade?></td>
+                                            <td class="text-center">
+                                                <?=$v_DataRepeat->Grade?></td>
                                             <td class="text-center">
                                                 <?=$v_DataRepeat->Grade_Type == "" ?"เรียนปกติ":"$v_DataRepeat->Grade_Type"?>
-                                            </td>
+                                            </td >
+                                            <td class="text-center"></td><?=$v_DataRepeat->StudentStatus;?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
