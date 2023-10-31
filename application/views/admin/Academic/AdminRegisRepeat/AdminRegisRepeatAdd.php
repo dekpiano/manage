@@ -22,20 +22,40 @@
                 </div>
             </div>
             <hr>
-<?php if($DataRepeat) :?>
+            <?php if($DataRepeat) :?>
             <section class="we-offer-area">
                 <div class="app-card app-card-orders-table pt-2">
                     <div class="app-card-body">
                         <div class="table-responsive  p-3">
                             <form id="FormRegisRepeatUpdate" method="post">
-                            <input type="text" name="YearRepeat" value="<?=$DataRepeat[0]->RegisterYear?>" style="display:none;">
-                            <input type="text" name="SubjectRepeat" value="<?=$DataRepeat[0]->SubjectCode?>" style="display:none;">
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-md-6 d-flex align-items-center">
+                                        <div class="w-25">ครูสอน</div>
+                                        <div>
+                                        <select name="RepeatTeacher" id="RepeatTeacher" class="form-select">
+                                            <option value="">เลือกครูสอน...</option>
+                                            <?php foreach ($Teacher as $key => $v_Teache):?>
+                                                <option <?=$DataRepeat[0]->TeacherID==$v_Teache->pers_id?"selected":""?> value="<?=$v_Teache->pers_id?>"><?=$v_Teache->pers_prefix.$v_Teache->pers_firstname.' '.$v_Teache->pers_lastname?></option>
+                                                <?php endforeach;?>
+                                        </select>
+                                        <br>                                       
+                                        <small>เลือกครูผู้สอนใหม่กรณีที่ไม่ใช่ครูคนเก่า</small>
+                                        </div>
+                                        
+                                    </div>                                    
+                                </div>
+                                <hr>
+
+                                <input type="text" name="YearRepeat" value="<?=$DataRepeat[0]->RegisterYear?>"
+                                    style="display:none;">
+                                <input type="text" name="SubjectRepeat" value="<?=$DataRepeat[0]->SubjectCode?>"
+                                    style="display:none;">
                                 <table class="table app-table-hover mb-0 text-left" id="">
                                     <thead>
                                         <tr class="text-center">
                                             <th>เลือกที่เรียนซ้ำ</th>
                                             <th>ปีการศึกษา</th>
-                                            <th >ห้อง</th>
+                                            <th>ห้อง</th>
                                             <th>เลขที่</th>
                                             <th>รหัสประจำตัว</th>
                                             <th>ชื่อนักเรียน</th>
@@ -47,12 +67,13 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($DataRepeat as $key => $v_DataRepeat) : ?>
-                                        <tr class="<?=$v_DataRepeat->Grade == "มส" ||  $v_DataRepeat->Grade <= 0?"table-danger":""?>">
+                                        <tr
+                                            class="<?=$v_DataRepeat->Grade == "มส" ||  $v_DataRepeat->Grade <= 0?"table-danger":""?>">
                                             <td class="text-center">
-                                                <input type="checkbox" name="SelRepeat[]" id="SelRepeat" value="<?=$v_DataRepeat->StudentID?>"
-                                                    class="form-check-input"
-                                                <?=($v_DataRepeat->Grade_Type != "" ?"checked":"")?> >
-                                                </td>
+                                                <input type="checkbox" name="SelRepeat[]" id="SelRepeat"
+                                                    value="<?=$v_DataRepeat->StudentID?>" class="form-check-input"
+                                                    <?=($v_DataRepeat->Grade_Type != "" ?"checked":"")?>>
+                                            </td>
                                             <td class="text-center"><?=$v_DataRepeat->RegisterYear?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentClass?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentNumber?></td>
@@ -86,25 +107,33 @@
 
             </section>
             <?php else :  ?>
-                <div class="app-card shadow-sm mb-4 border-left-decoration">
-				    <div class="inner">
-					    <div class="app-card-body p-4">
-						    <div class="row gx-5 gy-3">
-						        <div class="col-12 col-lg-9">
-							        
-							        <div> <h3>ยังไม่มีข้อมูลการลงทะเบียนเรียน</h3> </div>
-							    </div><!--//col-->
-							    <div class="col-12 col-lg-3">
-								    <a class="btn app-btn-primary" href="<?=base_url('Admin/Acade/Registration/Repeat')?>">ย้อนกลับ</a>
-							    </div><!--//col-->
-						    </div><!--//row-->
-	
-					    </div><!--//app-card-body-->
-					    
-				    </div><!--//inner-->
-			    </div>
-                
-<?php endif; ?>
+            <div class="app-card shadow-sm mb-4 border-left-decoration">
+                <div class="inner">
+                    <div class="app-card-body p-4">
+                        <div class="row gx-5 gy-3">
+                            <div class="col-12 col-lg-9">
+
+                                <div>
+                                    <h3>ยังไม่มีข้อมูลการลงทะเบียนเรียน</h3>
+                                </div>
+                            </div>
+                            <!--//col-->
+                            <div class="col-12 col-lg-3">
+                                <a class="btn app-btn-primary"
+                                    href="<?=base_url('Admin/Acade/Registration/Repeat')?>">ย้อนกลับ</a>
+                            </div>
+                            <!--//col-->
+                        </div>
+                        <!--//row-->
+
+                    </div>
+                    <!--//app-card-body-->
+
+                </div>
+                <!--//inner-->
+            </div>
+
+            <?php endif; ?>
 
             <!--//row-->
         </div>

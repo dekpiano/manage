@@ -59,6 +59,10 @@ $('#RoomEdit').select2({
     width: 300
 });
 
+$('#RepeatTeacher').select2({
+
+});
+
 $(document).on("change", "#SelectYearRegister", function() {
     window.location.href = '../' + $(this).val();
 });
