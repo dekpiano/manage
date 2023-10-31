@@ -57,12 +57,13 @@ var  $title = "แผงควบคุม";
         tb_students.StudentClass,
         tb_students.StudentCode,
         tb_students.StudentNumber,
-        tb_students.StudentStatus,
+        tb_students.StudentStatus,       
         tb_subjects.SubjectName,
         tb_subjects.SubjectYear,
         tb_register.SubjectCode,
         tb_register.RegisterYear,
         tb_register.Grade,
+        tb_register.RepeatStatus,
         tb_register.Grade_Type")
         ->from('tb_register')
         ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
@@ -90,7 +91,7 @@ var  $title = "แผงควบคุม";
         $DBpersonnel = $this->load->database('personnel', TRUE);
         $CheckYear = $this->db->get('tb_schoolyear')->result();
 
-        $CheckRepeat = $this->db->select('onoff_detail')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
+        $CheckRepeat = $this->db->select('onoff_detail,onoff_year')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
         
         $CheckStudent = $this->db->select('StudentID')
         ->where('RegisterYear',$this->input->post('YearRepeat'))
@@ -106,7 +107,7 @@ var  $title = "แผงควบคุม";
             }
             foreach ($CheckStudent as $key => $v_CheckStudent) {
                 if(in_array($v_CheckStudent->StudentID,$IdStuRepeat)){
-                     $DataUpdateRepeat = array('Grade_Type' => $CheckRepeat[0]->onoff_detail);
+                     $DataUpdateRepeat = array('Grade_Type' => $CheckRepeat[0]->onoff_detail,'RepeatStatus'=>'ไม่ผ่าน','RepeatYear'=>$CheckRepeat[0]->onoff_year);
                      $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
                      $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
                      $this->db->where('StudentID',$v_CheckStudent->StudentID);

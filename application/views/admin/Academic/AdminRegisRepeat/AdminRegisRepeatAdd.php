@@ -40,7 +40,8 @@
                                             <th>รหัสประจำตัว</th>
                                             <th>ชื่อนักเรียน</th>
                                             <th>คะแนน</th>
-                                            <th>การเรียน</th>
+                                            <th>ผลการเรียน</th>
+                                            <th>สถานะเรียนซำ</th>
                                             <th>สถานะ นร</th>
                                         </tr>
                                     </thead>
@@ -64,6 +65,7 @@
                                             <td class="text-center">
                                                 <?=$v_DataRepeat->Grade_Type == "" ?"เรียนปกติ":"$v_DataRepeat->Grade_Type"?>
                                             </td>
+                                            <td class="text-center"><?=$v_DataRepeat->RepeatStatus;?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentStatus;?></td>
                                         </tr>
                                         <?php endforeach; ?>
