@@ -119,7 +119,7 @@ var  $title = "แผงควบคุม";
                      $this->db->where('StudentID',$v_CheckStudent->StudentID);
                     $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
                 }else{
-                    $DataUpdateRepeat = array('Grade_Type' => "");
+                    $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
                     $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
                     $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
                     $this->db->where('StudentID',$v_CheckStudent->StudentID);
@@ -127,7 +127,7 @@ var  $title = "แผงควบคุม";
                 }
             }
         }else{
-                 $DataUpdateRepeat = array('Grade_Type' => "");
+            $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
                  $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
                  $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
                 $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
