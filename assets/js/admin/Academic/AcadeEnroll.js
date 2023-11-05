@@ -40,8 +40,8 @@ function TB_ErollSubject(Year) {
             {
                 data: 'SubjectID',
                 render: function(data, type, row) {
-                    return '<a href="../../../Admin/Acade/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a>' +
-                        ' <a href="../../../Admin/Acade/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ</a>' +
+                    return '<a href="../../../Admin/Acade/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a><br>' +
+                        ' <a href="../../../Admin/Acade/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ / เปลี่ยนครูสอน</a><br>' +
                         ' <a href="#" class="btn btn-danger btn-sm text-white CancelEnroll" key-subject="' + row.SubjectCode + '" key-teacher="' + row.TeacherID + '">ลบลงทะเบียน</a>';
                 }
             }
@@ -49,23 +49,46 @@ function TB_ErollSubject(Year) {
     });
 }
 
+$(document).on("change", "#subjectregis", function() {
+    var IDsubjectregis = $(this).val();
+    var IDSelectYearRegister = $('#SelectYearRegister').val();
+
+    $.post('../../../../../../admin/academic/ConAdminEnroll/AdminEnrollChangeSubjectToTeacher',{
+        Keysubjectregis:IDsubjectregis,
+        KeySelectYearRegister:IDSelectYearRegister
+    },function(data, status){
+        console.log(data);
+        $('#teacherregis').val(data);
+        $('#teacherregis').trigger('change');
+    });
+  
+});
+
 
 $('#SelectYearRegister').select2({
+    theme: 'bootstrap-5',
     width: 300
 });
 
 $('#teacherregis').select2({
+    theme: 'bootstrap-5',
     width: 300
 });
 $('#subjectregis').select2({
+    theme: 'bootstrap-5',
     width: 300
 });
 $('#Room').select2({
+    theme: 'bootstrap-5',
     width: 300
 });
 $('#RoomEdit').select2({
+    theme: 'bootstrap-5',
     width: 300
 });
+
+
+
 
 $(document).on("change", "#SelectYearRegister", function() {
     window.location.href = '../' + $(this).val();

@@ -14,7 +14,7 @@
 
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
-                    <h1 class="app-page-title mb-0">จัดการข้อมูล<?=$title;?></h1>
+                    <h1 class="app-page-title mb-0"><?=$title;?></h1>
                 </div>
                 <div class="col-auto">
                     <div class="page-utilities">
@@ -75,7 +75,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select class="" name="subjectregis" id="subjectregis" class="subjectregis" required autocomplete="off">
+                                    <select name="subjectregis" id="subjectregis" class="subjectregis" required autocomplete="off">
                                         <option value="">เลือกวิชาเรียน</option>
                                         <?php foreach ($subject as $key => $v_subject): ?>
                                         <option value="<?=$v_subject->SubjectID?>">
@@ -102,7 +102,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="teacherregis" id="teacherregis" calss="teacherregis" required>
+                                    <select name="teacherregis" id="teacherregis" class="teacherregis1" required>
                                         <option value="">เลือกครูผู้สอน</option>
                                         <?php foreach ($teacher as $key => $v_teacher): ?>
                                         <option value="<?=$v_teacher->pers_id?>">

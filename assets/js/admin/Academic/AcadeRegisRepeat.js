@@ -42,26 +42,26 @@ function TB_RegisRepeatSubject(Year) {
 }
 
 
-$('#SelectYearRegister').select2({
-    width: 300
-});
+// $('#SelectYearRegister').select2({
+//     width: 300
+// });
 
-$('#teacherregis').select2({
-    width: 300
-});
-$('#subjectregis').select2({
-    width: 300
-});
-$('#Room').select2({
-    width: 300
-});
-$('#RoomEdit').select2({
-    width: 300
-});
+// $('#teacherregis').select2({
+//     width: 300
+// });
+// $('#subjectregis').select2({
+//     width: 300
+// });
+// $('#Room').select2({
+//     width: 300
+// });
+// $('#RoomEdit').select2({
+//     width: 300
+// });
 
-$('#RepeatTeacher').select2({
+// $('#RepeatTeacher').select2({
 
-});
+// });
 
 $(document).on("change", "#SelectYearRegister", function() {
     window.location.href = '../' + $(this).val();

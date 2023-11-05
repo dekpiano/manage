@@ -305,6 +305,15 @@ var  $title = "แผงควบคุม";
         echo $UpdateChangeTeacher = $this->db->update('tb_register',$data);
      }
 
+     public function AdminEnrollChangeSubjectToTeacher(){
+        
+        $CheckIdSubject = $this->db->select('SubjectCode')->where('SubjectID',$this->input->post('Keysubjectregis'))->get('tb_subjects')->result();
+        //echo $CheckIdSubject[0]->SubjectCode;
+        $TacherId = $this->db->select('seplan_usersend')->where('seplan_coursecode',$CheckIdSubject[0]->SubjectCode)->get('tb_send_plan')->result();
+        print_r($TacherId[0]->seplan_usersend);
+       
+     }
+
 }
 
 

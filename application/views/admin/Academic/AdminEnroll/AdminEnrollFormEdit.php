@@ -87,7 +87,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="teacherregis" id="teacherregis" class="teacherregis" required>
+                                    <select name="teacherregis" id="teacherregis" class="teacherregis1" required>
                                         <option value="">เลือกครูผู้สอน</option>
                                         <?php foreach ($teacher as $key => $v_teacher): ?>
                                         <option <?=$v_teacher->pers_id == $Register[0]->TeacherID?"selected":""?>
