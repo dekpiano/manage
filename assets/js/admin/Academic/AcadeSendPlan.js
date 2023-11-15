@@ -118,12 +118,20 @@ $(document).on("click", ".DeleteTeach", function() {
             if (result.isConfirmed) {
                 $.post("../../../admin/academic/ConAdminCourse/DeleteSettingSendPlan", {
                     PlanCode: $(this).attr('delplancode'),
-                    PlanTerm: $(this).attr('delplanyear'),
-                    PlanYear: $(this).attr('delplanterm'),
+                    PlanTerm: $(this).attr('delplanterm'),
+                    PlanYear: $(this).attr('delplanyear'),
                     PlanName: $(this).attr('delplanname')
                 }, function(data, status) {
                     console.log(data);
-                    $('tr#' + data).remove();
+                    Swal.fire({
+                        title: "ลบข้อมูลเรียบร้อย!",
+                        text: "^_^",
+                        icon: "success"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
                 });
             }
         })

@@ -171,9 +171,18 @@ var  $title = "แผงควบคุม";
         $DelPlanTerm = $this->input->post('PlanTerm');
         $DelPlanYear = $this->input->post('PlanYear');
         $DelPlanName = $this->input->post('PlanName');
-
-        $result = $this->ModTeacherCourse->plan_setting_delete_teacher($DelPlanCode,$DelPlanTerm,$DelPlanYear,$DelPlanName);
             
+        $IF = array('seplan_coursecode'=>$DelPlanCode,'seplan_year' => $DelPlanYear,'seplan_term' => $DelPlanTerm);
+        $result = $this->db->delete('tb_send_plan',$IF);
+
+        $dir_path = 'uploads/academic/course/plan/'.$DelPlanYear.'/'.$DelPlanTerm.'/'.$DelPlanName;
+        $del_path = './uploads/academic/course/plan/'.$DelPlanYear.'/'.$DelPlanTerm.'/'.$DelPlanName;
+        if(is_dir($dir_path))
+        {
+            delete_files($del_path, true);
+            rmdir($del_path);
+        }   
+
         echo $result;
     }
 
