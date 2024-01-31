@@ -3,36 +3,55 @@
 
         <div class="container-xl d-flex align-items-center justify-content-between">
             <h1 class="app-page-title">จัดการ<?=$title?></h1>
-            <div class="d-flex align-items-center mt-2">
+        </div>
 
-                <form action="#" method="post" id="FormSettingSendPlan">
-                    <div class="ms-3 row">
-                        <div class="col-auto">
-                            เริ่มต้น <input type="datetime-local" name="seplanset_startdate" id="seplanset_startdate" value="<?=$CheckYear[0]->seplanset_startdate?>">
-                        </div>
-                        <div class="col-auto">
-                            สิ้นสุด <input type="datetime-local" name="seplanset_enddate" id="seplanset_enddate" value="<?=$CheckYear[0]->seplanset_enddate?>">
-                        </div>
-                        <div class="col-auto d-flex align-items-center">
-                            <div class="me-2">ปีการศึกษา</div>
-                            <select name="seplanset_term" id="seplanset_term" class="form-select form-select-sm me-2 w-auto">
-                                <?php for ($i=1; $i <=3 ; $i++):?>
-                                <option <?=$CheckYear[0]->seplanset_term == $i?'selected':''?> value="<?=$i?>"><?=$i?></option>
-                                <?php endfor; ?>
-                            </select>
-                            <select name="seplanset_year" id="seplanset_year" class="form-select form-select-sm me-2 w-auto">
-                                <?php $d = date("Y")+543; for ($i=$d; $i <= $d+1 ; $i++):?>
-                                <option <?=$CheckYear[0]->seplanset_year == $i?'selected':''?> value="<?=$i?>"><?=$i?></option>
-                                <?php endfor; ?>
-                            </select>
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary w-100 BtnUpdateSendPlan">บันทึก</button>
-                        </div>
+        <div class="container-xl">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    ตั้งค่าส่งแผน
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mt-2">
+                        <form action="#" method="post" id="FormSettingSendPlan">
+                            <div class="ms-3 row">
+                                <div class="col-auto">
+                                    เริ่มต้น <input type="datetime-local" name="seplanset_startdate"
+                                        id="seplanset_startdate" value="<?=$CheckYear[0]->seplanset_startdate?>">
+                                </div>
+                                <div class="col-auto">
+                                    สิ้นสุด <input type="datetime-local" name="seplanset_enddate" id="seplanset_enddate"
+                                        value="<?=$CheckYear[0]->seplanset_enddate?>">
+                                </div>
+                                <div class="col-auto d-flex align-items-center">
+                                    <div class="me-2">ปีการศึกษา</div>
+                                    <select name="seplanset_term" id="seplanset_term"
+                                        class="form-select form-select-sm me-2 w-auto">
+                                        <?php for ($i=1; $i <=3 ; $i++):?>
+                                        <option <?=$CheckYear[0]->seplanset_term == $i?'selected':''?> value="<?=$i?>">
+                                            <?=$i?>
+                                        </option>
+                                        <?php endfor; ?>
+                                    </select>
+                                    <select name="seplanset_year" id="seplanset_year"
+                                        class="form-select form-select-sm me-2 w-auto">
+                                        <?php $d = date("Y")+543; for ($i=$d-1; $i <= $d+1 ; $i++):?>
+                                        <option <?=$CheckYear[0]->seplanset_year == $i?'selected':''?> value="<?=$i?>">
+                                            <?=$i?>
+                                        </option>
+                                        <?php endfor; ?>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit"
+                                        class="btn btn-primary w-100 BtnUpdateSendPlan">บันทึก</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
+
 
 
         <hr>
@@ -42,6 +61,9 @@
             <div class="container-fluid">
 
                 <div class="card  mb-3">
+                    <div class="card-header bg-primary text-white">
+                        เพิ่มครูกับวิชา
+                    </div>
                     <div class="card-body">
                         <form class="row" id="FormUpdateSendPlan">
                             <div class="col-md-4">
@@ -73,19 +95,31 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="d-flex justify-content-center">
-                        <select name="onoff_year" id="onoff_year" class="form-select form-select-sm w-auto">
-                            <?php foreach ($CheckYearSendPlan as $key => $value):?>
-                            <option value="<?=$value->seplan_term?>/<?=$value->seplan_year?>">
-                                <?=$value->seplan_term?>/<?=$value->seplan_year?></option>
-                            <?php endforeach; ?>
-                        </select>
+
+                <div class="card mt-4">
+                    <div class="card-header text-white bg-primary d-flex justify-content-between">
+                        <div>
+                          ข้อมูลจับคู่ครูกับวิชา
+                        </div>
+                        <div class="d-flex">
+                            <div class="me-3">
+                                เลือกปีการศึกษา
+                            </div>
+                            <div>
+                                <form method="get">
+                                <select name="onoff_year" id="onoff_year" class="form-select form-select-sm w-auto">
+                                    <?php foreach ($CheckYearSendPlan as $key => $value):?>
+                                    <option <?=($term.'/'.$year == $value->seplan_term.'/'.$value->seplan_year ?"selected":"")?>  value="<?=$value->seplan_term?>/<?=$value->seplan_year?>">
+                                        <?=$value->seplan_term?>/<?=$value->seplan_year?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                </form>
+                               
+                            </div>
+
+                        </div>
+
                     </div>
-
-                </div>
-
-                <div class="card">
                     <div class="card-body">
                         <table class="table table-hover" id="TbSendPlan">
                             <thead>
@@ -140,7 +174,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล</h5>              
+                <h5 class="modal-title" id="exampleModalLongTitle">แก้ไขข้อมูล</h5>
             </div>
             <div class="modal-body">
                 <form class="needs-validation" novalidate id="FromUpdateTeacher">

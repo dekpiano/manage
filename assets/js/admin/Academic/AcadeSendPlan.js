@@ -11,6 +11,9 @@ $('.SelectSubject').select2({
 
 $('#TbSendPlan').DataTable();
 
+$(document).on('change','#onoff_year', function() {
+    $(this).closest('form').submit(); // ส่งฟอร์มเมื่อมีการเลือกตัวเลือกใหม่
+  });
 
 $('#FormUpdateSendPlan').submit(function(e) {
     e.preventDefault();

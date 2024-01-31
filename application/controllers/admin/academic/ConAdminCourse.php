@@ -41,8 +41,15 @@ var  $title = "แผงควบคุม";
         ->group_by('seplan_year,seplan_term')
         ->get('tb_send_plan')->result();        
         $data['CheckYear'] = $this->db->get('tb_send_plan_setup')->result();
-        $data['year'] = $data['CheckYear'][0]->seplanset_year;
-        $data['term'] = $data['CheckYear'][0]->seplanset_term;
+
+        if($_GET['onoff_year']){
+            $SubYear = explode('/',$_GET['onoff_year']);
+            $data['year'] =  $SubYear[1];
+            $data['term'] =  $SubYear[0];
+        }else{
+            $data['year'] = $data['CheckYear'][0]->seplanset_year;
+            $data['term'] = $data['CheckYear'][0]->seplanset_term;
+        }        
 
         $data['Subject'] = $this->db->where('SubjectYear',$data['CheckYear'][0]->seplanset_term.'/'.$data['CheckYear'][0]->seplanset_year)->get('tb_subjects')->result();
 
