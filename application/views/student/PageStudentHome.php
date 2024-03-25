@@ -48,7 +48,7 @@
                          </h4>
                          <div class="app-doc-meta">
                              <ul class="list-unstyled mb-0">
-                                 <li><span class="text-muted">Update:</span> 1/2566, 9/10/2566</li>
+                                 <li><span class="text-muted">Update:</span> 2/2566, 25/3/2567</li>
                              </ul>
                          </div>
                          <!--//app-doc-meta-->

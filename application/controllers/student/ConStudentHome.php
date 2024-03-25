@@ -15,7 +15,7 @@ var  $title = "ผลการเรียน";
 
     function getClient()
     {
-        $path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+        $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
 		require $path . '/librarie_skj/google_sheet/vendor/autoload.php';
     
         // configure the Google Client
@@ -45,7 +45,7 @@ var  $title = "ผลการเรียน";
     public function score(){      
         $data['title'] = "ผลการเรียน";
         $data['ExtraSetting'] = $this->db->get('tb_extra_setting')->result();
-        $Year = '1/2566';
+        $Year = '2/2566';
         $data['scoreYear'] = $this->db->select('
                                     tb_register.RegisterClass,
                                     tb_register.RegisterYear,
