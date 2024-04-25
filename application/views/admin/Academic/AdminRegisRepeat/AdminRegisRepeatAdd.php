@@ -87,7 +87,7 @@
                                                 <?=$v_DataRepeat->Grade_Type == "" ?"เรียนปกติ":"$v_DataRepeat->Grade_Type"?>
                                             </td>
                                             <td class="text-center"><?=$v_DataRepeat->RepeatStatus;?></td>
-                                            <td class="text-center"><?=$v_DataRepeat->StudentStatus;?></td>
+                                            <td class="text-center"><?=$v_DataRepeat->StudentBehavior;?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
