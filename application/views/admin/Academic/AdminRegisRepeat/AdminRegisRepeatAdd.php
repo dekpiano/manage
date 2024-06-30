@@ -54,7 +54,7 @@
                                     <thead>
                                         <tr class="text-center">
                                             <th>เลือกที่เรียนซ้ำ</th>
-                                            <th>ปีการศึกษา</th>
+                                            <th>เรียนปี</th>
                                             <th>ห้อง</th>
                                             <th>เลขที่</th>
                                             <th>รหัสประจำตัว</th>
@@ -84,7 +84,7 @@
                                             <td class="text-center">
                                                 <?=$v_DataRepeat->Grade?></td>
                                             <td class="text-center">
-                                                <?=$v_DataRepeat->Grade_Type == "" ?"เรียนปกติ":"$v_DataRepeat->Grade_Type"?>
+                                                <?=$v_DataRepeat->Grade_Type == "" ?"เรียนปกติ":$v_DataRepeat->Grade_Type.' ('.$v_DataRepeat->RepeatYear.')'?>
                                             </td>
                                             <td class="text-center"><?=$v_DataRepeat->RepeatStatus;?>  <?=$v_DataRepeat->RepeatStatus == "ผ่าน" ? '('.$v_DataRepeat->RepeatYear.')':""?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentBehavior;?></td>

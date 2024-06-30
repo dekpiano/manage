@@ -16,8 +16,11 @@
         <div class="container-xl">
 
             <div class="row g-3 mb-4 align-items-center justify-content-between">
-                <div class="col-auto">
+                <div class="d-flex justify-content-between">
                     <h1 class="app-page-title mb-0">จัดการข้อมูล<?=$title;?></h1>
+                    <div>
+                    <h4>ปีการศึกษา <?=$SchoolYear->schyear_year?></h4> 
+                    </div>
                 </div>      
             </div>
             <hr>
@@ -27,7 +30,7 @@
                     <div class="app-card-body">
                         <input type="text" name="schyear_year" id="schyear_year" value="<?=$SchoolYear->schyear_year?>" style="display:none;">
                         <div class="mt-2 d-flex align-items-center justify-content-center">
-                            <label for="">เลือกดูปี</label>
+                            <label for="">เลือกปีลงทะเบียนเรียนซ้ำ </label>
                             <select class="form-select w-auto ms-2" id="CheckYearRegisRepeat" name="CheckYearRegisRepeat">
                                 <?php foreach ($GroupYear as $key => $v_GroupYear) : ?>
                                 <option <?=$SchoolYear->schyear_year == $v_GroupYear->SubjectYear ?"selected":""?> value="<?=$v_GroupYear->SubjectYear?>"><?=$v_GroupYear->SubjectYear?></option>
@@ -39,7 +42,7 @@
                             <table class="table app-table-hover mb-0 text-left" id="tbRegisRepeatSubject">
                                 <thead>
                                     <tr>
-                                        <th class="cell">ปีการศึกษา</th>
+                                        <th class="cell">เรียนปี</th>
                                         <th class="cell">รหัสวิชา</th>
                                         <th class="cell">ชื่อวิชา</th>
                                         <th class="cell">กลุ่มสาระ</th>
