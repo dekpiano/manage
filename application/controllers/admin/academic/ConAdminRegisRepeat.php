@@ -71,7 +71,8 @@ var  $title = "แผงควบคุม";
         tb_register.Grade,
         tb_register.RepeatStatus,
         tb_register.Grade_Type,
-        tb_register.TeacherID")
+        tb_register.TeacherID,
+        tb_register.RepeatYear")
         ->from('tb_register')
         ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
         ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
@@ -334,7 +335,8 @@ var  $title = "แผงควบคุม";
                                     skjacth_academic.tb_subjects.SubjectYear,
                                     skjacth_personnel.tb_personnel.pers_firstname,
                                     skjacth_personnel.tb_personnel.pers_prefix,
-                                    skjacth_personnel.tb_personnel.pers_lastname")
+                                    skjacth_personnel.tb_personnel.pers_lastname,
+                                    SUM(CASE WHEN skjacth_academic.tb_register.RepeatStatus = 'ไม่ผ่าน' THEN 1 ELSE 0 END) AS SumRepeat")
                                 ->from('tb_register')
                                 ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
                                 ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
@@ -357,7 +359,8 @@ var  $title = "แผงควบคุม";
                 "SubjectClass" => $record->RegisterClass,
                 "SubjectID" => $record->SubjectID,
                 "TeacherName" =>  $record->pers_prefix.$record->pers_firstname.' '.$record->pers_lastname,
-                "TeacherID" => $record->TeacherID
+                "TeacherID" => $record->TeacherID,
+                "SumRepeat" => $record->SumRepeat
             );
            
         }   

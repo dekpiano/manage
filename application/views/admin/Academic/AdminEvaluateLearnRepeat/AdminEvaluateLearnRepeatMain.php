@@ -31,8 +31,9 @@
                         <select name="onoff_year" id="onoff_year" class="form-select form-select-sm">
                             <?php foreach ($CountYear as $key => $value) : ?>
                             <option <?=$this->uri->segment(5).'/'.$this->uri->segment(6) ==$value->RegisterYear ?"selected":"" ?>
-                                value="<?=$value->RegisterYear?>"><?=$value->RegisterYear?></option>  
-                                <?php endforeach; ?>                          
+                                value="<?=$value->RegisterYear?>"><?=$value->RegisterYear?></option>                               
+                                <?php endforeach; ?>      
+                                <option value="1/2567">1/2567</option>                    
                         </select>
                     </div>
                 </div>

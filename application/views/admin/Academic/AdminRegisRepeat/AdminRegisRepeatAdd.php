@@ -61,7 +61,7 @@
                                             <th>ชื่อนักเรียน</th>
                                             <th>คะแนน</th>
                                             <th>ผลการเรียน</th>
-                                            <th>สถานะเรียนซำ</th>
+                                            <th>สถานะเรียนซ้ำ</th>
                                             <th>สถานะ นร</th>
                                         </tr>
                                     </thead>
@@ -72,7 +72,7 @@
                                             <td class="text-center">
                                                 <input type="checkbox" name="SelRepeat[]" id="SelRepeat"
                                                     value="<?=$v_DataRepeat->StudentID?>" class="form-check-input"
-                                                    <?=($v_DataRepeat->Grade_Type != "" ?"checked":"")?>>
+                                                    <?=($v_DataRepeat->Grade_Type != "" && $v_DataRepeat->RepeatStatus == "ไม่ผ่าน"?"checked":"")?>>
                                             </td>
                                             <td class="text-center"><?=$v_DataRepeat->RegisterYear?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentClass?></td>
@@ -86,7 +86,7 @@
                                             <td class="text-center">
                                                 <?=$v_DataRepeat->Grade_Type == "" ?"เรียนปกติ":"$v_DataRepeat->Grade_Type"?>
                                             </td>
-                                            <td class="text-center"><?=$v_DataRepeat->RepeatStatus;?></td>
+                                            <td class="text-center"><?=$v_DataRepeat->RepeatStatus;?>  <?=$v_DataRepeat->RepeatStatus == "ผ่าน" ? '('.$v_DataRepeat->RepeatYear.')':""?></td>
                                             <td class="text-center"><?=$v_DataRepeat->StudentBehavior;?></td>
                                         </tr>
                                         <?php endforeach; ?>

@@ -46,6 +46,7 @@
                                         <th class="cell">ชั้น</th>
                                         <th class="cell">ครูผู้สอน</th>
                                         <th class="cell">คำสั่ง</th>
+                                        <th class="cell">เรียนซ้ำ</th>
                                     </tr>
                                 </thead>
 

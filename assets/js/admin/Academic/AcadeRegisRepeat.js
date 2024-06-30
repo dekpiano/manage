@@ -11,7 +11,7 @@ function TB_RegisRepeatSubject(Year) {
     tbRegisRepeatSubject = $('#tbRegisRepeatSubject').DataTable({
         destroy: true,
         "order": [
-            [1, "asc"]
+            [7, "desc"]
         ],
         'processing': true,
         "ajax": {
@@ -35,6 +35,12 @@ function TB_RegisRepeatSubject(Year) {
                 data: 'SubjectID',
                 render: function(data, type, row) {
                     return '<a class="btn-sm app-btn-primary" href="Repeat/Detail/' + row.SubjectYear + '/' + row.SubjectCode + '">ลงทะเบียนเรียนซ้ำ</a>';
+                }
+            },
+            {
+                data: 'SumRepeat',
+                render: function(data, type, row) {
+                    return '<span class="badge bg-warning text-black-50">' +data +' คน </span>';
                 }
             }
         ]
