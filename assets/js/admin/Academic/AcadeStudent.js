@@ -128,7 +128,7 @@ $(document).on('change', '.StudentStatus', function() {
                     showConfirmButton: false,
                     timer: 3000
                 })
-
+                document.getElementById("StudentStatus").selectedIndex = 0;
             } else {
                 Swal.fire({
                     position: 'top-end',
@@ -137,7 +137,7 @@ $(document).on('change', '.StudentStatus', function() {
                     showConfirmButton: false,
                     timer: 3000
                 })
-
+                document.getElementById("StudentStatus").selectedIndex = 0;
             }
         });
 });
