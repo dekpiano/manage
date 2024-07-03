@@ -147,33 +147,33 @@ class ConAdminStudents extends CI_Controller {
         $numRows = $response->getValues() != null ? count($response->getValues()) : 0;
        
         $checkStu = [];
-        $re = $this->db->select('StudentIDNumber,StudentStatus')        
+        $re = $this->db->select('StudentCode,StudentIDNumber,StudentStatus')        
         ->where('StudentStatus','1/ปกติ')
         ->get('tb_students')->result();
         foreach ($re as $key => $v_re) {
-            $checkStu[] = $v_re->StudentIDNumber;
+            $checkStu[] = $v_re->StudentCode;
         }
         
-       //echo '<pre>';print_r($checkStu);exit();
+        //echo '<pre>';print_r($response);exit();
         for ($i=0; $i < $numRows; $i++) { 
             if(isset($response->values[$i][10]) == 1){
                $StudyLine = $response->values[$i][10];
             }else{
                 $StudyLine = '';
             }
-            if (in_array($response->values[$i][7], $checkStu))
+            if (in_array($response->values[$i][2], $checkStu))
             {
              $arrayName = array('StudentNumber' => $response->values[$i][0], 
                                 'StudentClass' => $response->values[$i][1],
-                                'StudentCode' => $response->values[$i][2], 
+                                //'StudentCode' => $response->values[$i][2], 
                                 'StudentPrefix' => $response->values[$i][3], 
                                 'StudentFirstName' => $response->values[$i][4], 
                                 'StudentLastName' => $response->values[$i][5],
-                                'StudentDateBirth' => $response->values[$i][6],
+                                //'StudentDateBirth' => $response->values[$i][6],
                                 'StudentStatus' => $response->values[$i][8],
                                 'StudentBehavior' => $response->values[$i][9],
                                 'StudentStudyLine' => $StudyLine);
-            $this->ModAdminStudents->Students_Update($arrayName,$response->values[$i][7]);
+            $this->ModAdminStudents->Students_Update($arrayName,$response->values[$i][2]);
             }
           else
             {

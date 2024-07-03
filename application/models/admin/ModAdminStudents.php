@@ -14,7 +14,7 @@ class ModAdminStudents extends CI_Model
 
 	public function Students_Update($data,$ID)
 	{	
-		return $this->db->update('tb_students',$data,'StudentIDNumber='.$ID);
+		return $this->db->update('tb_students',$data,'StudentCode='.$ID);
 	}
 
 	public function Students_Delete($id)

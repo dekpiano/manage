@@ -36,7 +36,7 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="keystu" name="" value="">
-                <?php $Status = array('1/ปกติ','2/ย้ายสถานศึกษา','3/ขาดประจำ','4/พักการเรียน','5/จบการศึกษา' ); ?>
+                <?php $Status = array('เลือกสถานะ','1/ปกติ','2/ย้ายสถานศึกษา','3/ขาดประจำ','4/พักการเรียน','5/จบการศึกษา' ); ?>
                 <select class="form-select StudentStatus" id="StudentStatus" name="StudentStatus">
                     <?php foreach ($Status as $key => $v_Status) : ?>
                     <option value="<?=$v_Status;?>"><?=$v_Status;?></option>
