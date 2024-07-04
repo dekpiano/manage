@@ -135,8 +135,15 @@
 
                         </div>
                         <hr>
+                        <style>
+                            .app-card-stat:hover{
+                                background:#5cb377;
+                                color:#fff; 
+                            }
+                            
+                        </style>
                         <div class="row g-4 mb-4">
-                            <div class="col-6 col-lg-6">
+                            <div class="col-6 col-lg-12">
                                 <div class="app-card app-card-stat shadow-sm h-100">
                                     <div class="app-card-body p-3 p-lg-4">
                                         <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
@@ -162,16 +169,16 @@
                         
                     </div> -->
 
-                            <div class="col-6 col-lg-6">
+                            <div class="col-6 col-lg-12">
                                 <div class="app-card app-card-stat shadow-sm h-100">
                                     <div class="app-card-body p-3 p-lg-4">
                                         <h4 class="stats-type mb-1">จัดการข้อมูล</h4>
-                                        <div class="stats-figure">นักเรียน จำหน่าย</div>
+                                        <div class="stats-figure">นักเรียนทั้งหมด</div>
 
                                     </div>
                                     <!--//app-card-body-->
                                     <a class="app-card-link-mask clickLoder"
-                                        href="<?=base_url('Admin/Acade/Registration/Students/จำหน่าย')?>"></a>
+                                        href="<?=base_url('Admin/Acade/Registration/Students/All')?>"></a>
                                 </div>
                                 <!--//app-card-->
                             </div>

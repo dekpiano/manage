@@ -99,7 +99,14 @@ class ConAdminStudents extends CI_Controller {
 
     }
 
-    public function AdminStudentsNormalShow(){
+    public function AdminStudentsNormalShow($Key){
+        if(urlencode($Key) == "Normal"){
+            $Keyword = "StudentStatus = '1/ปกติ'";
+        }else{
+            $Keyword = "StudentStatus != '1/ปกติ'";
+        }
+       
+
         $data = [];
         $stu = $this->db->select('StudentID,
         StudentNumber,
@@ -112,9 +119,9 @@ class ConAdminStudents extends CI_Controller {
         StudentStatus,
         StudentBehavior,
         StudentStudyLine')
-        ->where('StudentStatus','1/ปกติ') 
+        ->where($Keyword) 
         ->get('tb_students')->result();   
-
+      
         foreach($stu as $record){
             $data[] = array( 
                 "StudentCode" => $record->StudentCode,
@@ -131,6 +138,8 @@ class ConAdminStudents extends CI_Controller {
         $output = array(
             "data" =>  $data,           
         );
+
+
         echo json_encode($output);
 
     }

@@ -6,7 +6,7 @@ $('#tbStudent').DataTable({
     lengthMenu: [45, 100],
     processing: true,
     "ajax": {
-        url: "../../../../admin/academic/ConAdminStudents/AdminStudentsNormalShow",
+        url: "../../../../admin/academic/ConAdminStudents/AdminStudentsNormalShow/"+$('#KeyStatus').val(),
         "type": "POST"
     },
     'columns': [
