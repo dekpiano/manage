@@ -66,7 +66,8 @@ var  $title = "แผงควบคุม";
         tb_students.StudentBehavior,       
         tb_subjects.SubjectName,
         tb_subjects.SubjectYear,
-        tb_register.SubjectCode,
+        tb_register.SubjectID,
+        tb_subjects.SubjectCode,
         tb_register.RegisterYear,
         tb_register.Grade,
         tb_register.RepeatStatus,
@@ -74,11 +75,11 @@ var  $title = "แผงควบคุม";
         tb_register.TeacherID,
         tb_register.RepeatYear")
         ->from('tb_register')
-        ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+        ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
         ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
         ->where('tb_register.RegisterYear',$Term.'/'.$Year)
         ->where('tb_subjects.SubjectYear',$Term.'/'.$Year)
-        ->where('tb_register.SubjectCode',urldecode($IDSubject))
+        ->where('tb_subjects.SubjectCode',urldecode($IDSubject))
         ->order_by('StudentClass','ASC')
         ->order_by('StudentNumber','ASC')
         ->get()->result();
@@ -103,7 +104,7 @@ var  $title = "แผงควบคุม";
         
         $CheckStudent = $this->db->select('StudentID')
         ->where('RegisterYear',$this->input->post('YearRepeat'))
-        ->where('SubjectCode',$this->input->post('SubjectRepeat'))
+        ->where('SubjectID',$this->input->post('SubjectRepeat'))
         ->get('tb_register')->result();   
 
         $IdStuRepeat = array();
@@ -117,13 +118,13 @@ var  $title = "แผงควบคุม";
                 if(in_array($v_CheckStudent->StudentID,$IdStuRepeat)){
                      $DataUpdateRepeat = array('Grade_Type' => $CheckRepeat[0]->onoff_detail,'RepeatStatus'=>'ไม่ผ่าน','RepeatYear'=>$CheckRepeat[0]->onoff_year,'RepeatTeacher' => $this->input->post('RepeatTeacher'));
                      $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
-                     $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
+                     $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
                      $this->db->where('StudentID',$v_CheckStudent->StudentID);
                     $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
                 }else{
                     $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
                     $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
-                    $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
+                    $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
                     $this->db->where('StudentID',$v_CheckStudent->StudentID);
                    $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
                 }
@@ -131,7 +132,7 @@ var  $title = "แผงควบคุม";
         }else{
             $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
                  $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
-                 $this->db->where('SubjectCode',$this->input->post('SubjectRepeat'));
+                 $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
                 $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
            
              
@@ -162,7 +163,7 @@ var  $title = "แผงควบคุม";
         $data['Register'] = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
                                     tb_students.StudentCode,
@@ -173,7 +174,7 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentLastName   
                                     ")
                                     ->from('tb_register')
-                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
                                     //->where('RegisterYear',$CheckYear[0]->schyear_year) 
                                     ->where('TeacherID',$TeachID)
@@ -200,7 +201,7 @@ var  $title = "แผงควบคุม";
         $data['Register'] = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
                                     tb_students.StudentCode,
@@ -211,7 +212,7 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentLastName   
                                     ")
                                     ->from('tb_register')
-                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
                                     //->where('RegisterYear',$CheckYear[0]->schyear_year) 
                                     ->where('TeacherID',$TeachID)
@@ -239,7 +240,7 @@ var  $title = "แผงควบคุม";
         $Register = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
                                     tb_students.StudentCode,
@@ -253,7 +254,7 @@ var  $title = "แผงควบคุม";
                                     skjacth_personnel.tb_personnel.pers_lastname   
                                     ")
                                     ->from('tb_register')
-                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
                                     ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                                     //->where('RegisterYear',$CheckYear[0]->schyear_year) 
@@ -326,19 +327,20 @@ var  $title = "แผงควบคุม";
         //$subject = $this->db->where('SubjectYear','1/2565')->get('tb_subjects')->result();
        
         $Register = $this->db->select("
-                                    skjacth_academic.tb_register.SubjectCode,
+                                    skjacth_academic.tb_register.SubjectID,
                                     skjacth_academic.tb_subjects.SubjectName,
                                     skjacth_academic.tb_subjects.FirstGroup,
                                     skjacth_academic.tb_register.RegisterClass,
                                     skjacth_academic.tb_register.TeacherID,
                                     skjacth_academic.tb_subjects.SubjectID,
+                                    skjacth_academic.tb_subjects.SubjectCode,
                                     skjacth_academic.tb_subjects.SubjectYear,
                                     skjacth_personnel.tb_personnel.pers_firstname,
                                     skjacth_personnel.tb_personnel.pers_prefix,
                                     skjacth_personnel.tb_personnel.pers_lastname,
                                     SUM(CASE WHEN skjacth_academic.tb_register.RepeatStatus = 'ไม่ผ่าน' THEN 1 ELSE 0 END) AS SumRepeat")
                                 ->from('tb_register')
-                                ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                                 ->where('tb_register.RegisterYear',$keyYear)
                                 ->where('tb_subjects.SubjectYear',$keyYear)

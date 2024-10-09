@@ -48,7 +48,7 @@
 
                                 <input type="text" name="YearRepeat" value="<?=$DataRepeat[0]->RegisterYear?>"
                                     style="display:none;">
-                                <input type="text" name="SubjectRepeat" value="<?=$DataRepeat[0]->SubjectCode?>"
+                                <input type="text" name="SubjectRepeat" value="<?=$DataRepeat[0]->SubjectID?>"
                                     style="display:none;">
                                 <table class="table app-table-hover mb-0 text-left" id="">
                                     <thead>

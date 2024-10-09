@@ -46,7 +46,7 @@
                                     <?=$v_result->pers_prefix.$v_result->pers_firstname.' '.$v_result->pers_lastname?>
                                 </td>
                                 <td class="cell">
-                                    <a href="<?=base_url('Admin/Acade/Evaluate/EditGrade/'.$v_result->RegisterYear.'/'.$v_result->SubjectCode)?>"
+                                    <a href="<?=base_url('Admin/Acade/Evaluate/EditGrade/'.$v_result->RegisterYear.'/'.$v_result->SubjectID)?>"
                                         class="badge bg-warning">แก้ไข</a>
                                 </td>
                             </tr>

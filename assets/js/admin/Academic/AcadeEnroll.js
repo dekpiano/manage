@@ -42,7 +42,7 @@ function TB_ErollSubject(Year) {
                 render: function(data, type, row) {
                     return '<a href="../../../Admin/Acade/Registration/Enroll/Edit/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-success btn-sm text-white">เพิ่มรายชื่อ</a><br>' +
                         ' <a href="../../../Admin/Acade/Registration/Enroll/Delete/' + row.SubjectID + '/' + row.TeacherID + '" class="btn btn-warning btn-sm">ถอนราชื่อ / เปลี่ยนครูสอน</a><br>' +
-                        ' <a href="#" class="btn btn-danger btn-sm text-white CancelEnroll" key-subject="' + row.SubjectCode + '" key-teacher="' + row.TeacherID + '">ลบลงทะเบียน</a>';
+                        ' <a href="#" class="btn btn-danger btn-sm text-white CancelEnroll" key-subject="' + row.SubjectID + '" key-teacher="' + row.TeacherID + '">ลบลงทะเบียน</a>';
                 }
             }
         ]
@@ -102,13 +102,39 @@ $(document).on("change", ".teacherregis", function() {
     let SubjectYear = $('#SubjectYearregisupdate').val();
     let SubjectCode = $('#SubjectCode').val();
 
-    $.post("../../../../../../admin/academic/ConAdminEnroll/AdminEnrollChangeTeacher", {
-        KeyTeacher: teacherregis,
-        KeySubjectYear: SubjectYear,
-        KeySubjectCode: SubjectCode
-    }, function(data, status) {
-        window.location.href = '../' + subjectregisupdate + '/' + teacherregis;
-    });
+    Swal.fire({
+        title: "แจ้งเตือน?",
+        text: "คุณต้องการเปลี่ยนครูผู้สอนหรือไม่!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "ใช่ ฉันต้องการ!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("../../../../../../admin/academic/ConAdminEnroll/AdminEnrollChangeTeacher", {
+                KeyTeacher: teacherregis,
+                KeySubjectYear: SubjectYear,
+                KeySubjectID: subjectregisupdate
+            }, function(data, status) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'เปลี่ยนครูผู้สอนใหม่แล้ว!',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                setTimeout(
+                    function() 
+                    {
+                        window.location.href = '../' + subjectregisupdate + '/' + teacherregis;
+                    }, 2000);
+                
+            });
+        }
+      });
+
+    
 });
 
 $(document).on("change", "#Room", function() {

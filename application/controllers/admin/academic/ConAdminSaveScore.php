@@ -54,20 +54,21 @@ var  $title = "แผงควบคุม";
         $data['OnOffSaveScoreSystem'] = $this->db->where('onoff_id',6)->get('tb_register_onoff')->result();
         
         $data['result'] = $this->db->select('
-                            skjacth_academic.tb_register.SubjectCode,
+                            skjacth_academic.tb_register.SubjectID,
                             skjacth_academic.tb_register.RegisterYear,
                             skjacth_academic.tb_register.TeacherID,
                             skjacth_personnel.tb_personnel.pers_prefix,
                             skjacth_personnel.tb_personnel.pers_firstname,
                             skjacth_personnel.tb_personnel.pers_lastname,
                             skjacth_academic.tb_subjects.SubjectName,
+                            skjacth_academic.tb_subjects.SubjectCode,
                             skjacth_academic.tb_register.RegisterClass
                             ')
                             ->from('skjacth_academic.tb_register')
-                            ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
+                            ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectID = skjacth_academic.tb_register.SubjectID')
                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                             ->where('RegisterYear','1/2565')
-                            ->group_by('SubjectCode')
+                            ->group_by('tb_register.subjectID')
                             ->get()->result();
         
         $this->load->view('admin/layout/Header.php',$data);
@@ -138,9 +139,10 @@ var  $title = "แผงควบคุม";
     public function insert_score_0W(){ 
         $checkOnOff = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $TimeNum = $this->input->post('TimeNum');
+       
         foreach ($this->input->post('StudentID') as $num => $value) {
            //print_r($this->input->post('TimeNum'));
-            // print_r($this->input->post('SubjectCode'));
+            //print_r($value);
             $study_time = $this->input->post('study_time');
             
             if((($TimeNum*80)/100) > $study_time[$num]){
@@ -153,7 +155,7 @@ var  $title = "แผงควบคุม";
                 }
             }
 
-            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
+            $key = array('StudentID' => $value,'SubjectID' => $this->input->post('SubjectID'), 'RegisterYear' => $this->input->post('RegisterYear'));
           
 
             $checkScore100 = $this->db->select('Score100')->where($key)->get('tb_register')->result();
@@ -162,7 +164,7 @@ var  $title = "แผงควบคุม";
             }else{
                 $data = array('Score100' => implode("|",$this->input->post($value)),'Grade'  => $Grade,'StudyTime' => $study_time[$num],'Grade_Type'=> 'แก้ 0 ร','Grade_UpdateTime'=>date('Y-m-d H:i:s'));
             }
-           
+            
           echo $this->db->update('tb_register',$data,$key);
         }
 

@@ -21,15 +21,58 @@ var  $title = "แผงควบคุม";
 
     }
 
+    public function update_row($RegisterYear,$SubjectCode, $data) {
+        // อัปเดตข้อมูลของแถวเดียวโดยใช้ ID เป็นเงื่อนไข
+        $this->db->where('RegisterYear', $RegisterYear);
+        $this->db->where('SubjectCode', $SubjectCode);
+        $this->db->update('tb_register', $data);
+    }
+
+    public function update_data_with_foreach() {
+        
+
+        // เริ่มต้น transaction
+        $this->db->trans_start();
+
+
+        $da = $this->db->select('SubjectYear,SubjectCode,SubjectID')->get('tb_subjects')->result();
+        // เตรียมข้อมูลตัวอย่าง
+        $data = [];
+        for ($i = 1301; $i <= 1546; $i++) {
+            $data[] = [
+                'SubjectID' => $da[$i]->SubjectID,
+                'SubjectCode' => $da[$i]->SubjectCode,
+                'SubjectYear' => $da[$i]->SubjectYear
+            ];
+        }
+
+        //echo '<pre>';print_r($data);exit();
+        // ใช้ foreach อัปเดตข้อมูลทีละแถว
+        foreach ($data as $row) {
+            //echo '<pre>';print_r($row);
+            $this->update_row($row['SubjectYear'], $row['SubjectCode'],['SubjectCode' => $row['SubjectID']]);
+        }
+        //exit();
+        
+        // สรุป transaction (commit หรือ rollback)
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE) {
+            // กรณีอัปเดตล้มเหลว
+            echo "Error updating data";
+        } else {
+            // กรณีอัปเดตสำเร็จ
+            echo "Data updated successfully";
+        }
+    }
+
     public function AdminRegisterSubjectMain(){   
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['GroupYear'] = $this->db->select('SubjectYear')->group_by('SubjectYear')->order_by('SubjectYear','ASC')->get('tb_subjects')->result();
 
-
-
-        
-        echo '<pre>';print_r($data['GroupYear']); exit();
+        //$this->update_data_with_foreach(); exit();
+       
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "วิชาเรียน";	

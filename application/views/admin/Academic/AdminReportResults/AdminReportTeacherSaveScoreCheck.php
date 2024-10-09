@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($CheckScore as $key => $v_CheckScore) : 
-                                if($v_checkSubject->SubjectCode == $v_CheckScore->SubjectCode) :
+                                if($v_checkSubject->SubjectID == $v_CheckScore->SubjectID) :
                                    $subScore = explode('|',$v_CheckScore->Score100);?>
                                 <tr>
                                     <td class="text-center"><?=$v_CheckScore->StudentClass?></td>

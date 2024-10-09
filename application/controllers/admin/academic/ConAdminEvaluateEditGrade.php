@@ -55,17 +55,18 @@ var  $title = "แผงควบคุม";
         $data['CheckYearRegis'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
         
         $data['result'] = $this->db->select('
-                            skjacth_academic.tb_register.SubjectCode,
+                            skjacth_academic.tb_register.SubjectID,
                             skjacth_academic.tb_register.RegisterYear,
                             skjacth_academic.tb_register.TeacherID,
                             skjacth_personnel.tb_personnel.pers_prefix,
                             skjacth_personnel.tb_personnel.pers_firstname,
                             skjacth_personnel.tb_personnel.pers_lastname,
                             skjacth_academic.tb_subjects.SubjectName,
+                            skjacth_academic.tb_subjects.SubjectCode,
                             skjacth_academic.tb_register.RegisterClass
                             ')
                             ->from('skjacth_academic.tb_register')
-                            ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectCode = skjacth_academic.tb_register.SubjectCode')
+                            ->join('skjacth_academic.tb_subjects','skjacth_academic.tb_subjects.SubjectID = skjacth_academic.tb_register.SubjectID')
                             ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                             ->where('RegisterYear',$Term.'/'.$Year)
                             ->group_by('SubjectCode')
@@ -86,11 +87,12 @@ var  $title = "แผงควบคุม";
         $data['title'] = "บันทึกคะแนนผลการเรียน 0 ร";	
        
         $data['check_student'] = $this->db->select('
-                                    tb_register.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.RegisterYear,
                                     tb_register.RegisterClass,
                                     tb_register.Score100,
                                     tb_register.TeacherID,
+                                    tb_subjects.SubjectCode,
                                     tb_subjects.SubjectName,
                                     tb_register.StudyTime,
                                     tb_subjects.SubjectID,
@@ -109,14 +111,14 @@ var  $title = "แผงควบคุม";
                                     tb_register.Grade_Type
                                 ')
                                 ->from('tb_register')
-                                ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                                 //->where('TeacherID',$this->session->userdata('login_id'))
                                 //>where('tb_register.Grade <=',0)
                                 ->where('tb_students.StudentBehavior !=','จำหน่าย')
                                 ->where('tb_register.RegisterYear',$term.'/'.$yaer)
                                 ->where('tb_subjects.SubjectYear',$term.'/'.$yaer)
-                                ->where('tb_register.SubjectCode',urldecode($subject))                                
+                                ->where('tb_register.SubjectID',urldecode($subject))                                
                                 //->or_where('tb_register.Grade_Type','เรียนซ้ำครั้งที่ 1')
                                 ->order_by('tb_students.StudentClass','ASC')
                                 ->order_by('tb_students.StudentNumber','ASC')
@@ -125,7 +127,7 @@ var  $title = "แผงควบคุม";
         $data['Teacher'] = $DBpersonnel->select('pers_prefix,pers_firstname,pers_lastname')->where('pers_id',@$data['check_student'][0]->TeacherID)->get('tb_personnel')->row();            
         
 
-        $check_idSubject = $this->db->where('SubjectCode',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
+        $check_idSubject = $this->db->where('SubjectID',urldecode($subject))->where('SubjectYear',$term.'/'.$yaer)->get('tb_subjects')->row();
         
         $data['set_score'] = $this->db->where('regscore_subjectID',$check_idSubject->SubjectID)->get('tb_register_score')->result();
         $data['onoff_savescore'] = $this->db->where('onoff_id >=',2)->where('onoff_id <=',5)->get('tb_register_onoff')->result();
@@ -155,7 +157,7 @@ var  $title = "แผงควบคุม";
                 }
             }
 
-            $key = array('StudentID' => $value,'SubjectCode' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
+            $key = array('StudentID' => $value,'SubjectID' => $this->input->post('SubjectCode'), 'RegisterYear' => $this->input->post('RegisterYear'));
           
 
             $checkScore100 = $this->db->select('Score100')->where($key)->get('tb_register')->result();

@@ -72,7 +72,8 @@ var  $title = "แผงควบคุม";
         $data['Register'] = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
-                                    tb_register.SubjectCode,
+                                    tb_subjects.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
                                     tb_students.StudentCode,
@@ -83,11 +84,11 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentLastName   
                                     ")
                                     ->from('tb_register')
-                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
                                     //->where('RegisterYear',$CheckYear[0]->schyear_year) 
                                     ->where('TeacherID',$TeachID)
-                                    ->where('SubjectID',$codeSub)
+                                    ->where('tb_subjects.SubjectID',$codeSub)
                                     ->get()->result();
 
         
@@ -112,7 +113,8 @@ var  $title = "แผงควบคุม";
         $data['Register'] = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
-                                    tb_register.SubjectCode,
+                                    tb_subjects.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
                                     tb_students.StudentCode,
@@ -123,12 +125,12 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentLastName   
                                     ")
                                     ->from('tb_register')
-                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
                                     ->where('tb_register.RegisterYear',$data['CheckYearSubject'][0]->SubjectYear) 
                                     ->where('tb_subjects.SubjectYear',$data['CheckYearSubject'][0]->SubjectYear)
                                     ->where('TeacherID',$TeachID)
-                                    ->where('SubjectID',$codeSub)
+                                    ->where('tb_subjects.SubjectID',$codeSub)
                                     ->get()->result();
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminEnroll/AdminEnrollFormDelete.php');
@@ -152,7 +154,8 @@ var  $title = "แผงควบคุม";
         $Register = $this->db->select("tb_register.RegisterYear,
                                     tb_subjects.SubjectName,
                                     tb_subjects.SubjectID,
-                                    tb_register.SubjectCode,
+                                    tb_subjects.SubjectCode,
+                                    tb_register.SubjectID,
                                     tb_register.StudentID,
                                     tb_register.TeacherID,
                                     tb_students.StudentCode,
@@ -166,12 +169,12 @@ var  $title = "แผงควบคุม";
                                     skjacth_personnel.tb_personnel.pers_lastname   
                                     ")
                                     ->from('tb_register')
-                                    ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                    ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                     ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
                                     ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                                     ->where('RegisterYear',$this->input->post('yearid')) 
                                     ->where('TeacherID',$this->input->post('teachid'))
-                                    ->where('SubjectID',$this->input->post('subid'))
+                                    ->where('tb_subjects.SubjectID',$this->input->post('subid'))
                                     ->order_by('StudentClass')
                                     ->order_by('StudentNumber')                                    
                                     ->get()->result();
@@ -184,7 +187,7 @@ var  $title = "แผงควบคุม";
     public function AdminEnrollInsert(){
 
        $chk_Subject = $this->db->where('SubjectID',$this->input->post('subjectregis'))->get('tb_subjects')->result();       
-       print_r($chk_Subject[0]->SubjectCode);
+       print_r($chk_Subject[0]->SubjectID);
        print_r($chk_Subject[0]->SubjectYear);
        print_r($chk_Subject[0]->SubjectClass);
        print_r($this->input->post('teacherregis'));
@@ -192,7 +195,7 @@ var  $title = "แผงควบคุม";
         
        foreach ($this->input->post('to') as $key => $value) {
         $a =  array('StudentID' => $value,
-        'SubjectCode' => $chk_Subject[0]->SubjectCode,
+        'SubjectID' => $chk_Subject[0]->SubjectID,
         'RegisterYear' => $chk_Subject[0]->SubjectYear,
         'RegisterClass' => $chk_Subject[0]->SubjectClass,
         'TeacherID' => $this->input->post('teacherregis')
@@ -207,7 +210,7 @@ var  $title = "แผงควบคุม";
 
         foreach ($this->input->post('to') as $key => $value) {
          $a =  array('StudentID' => $value,
-         'SubjectCode' => $chk_Subject[0]->SubjectCode,
+         'SubjectID' => $chk_Subject[0]->SubjectID,
          'RegisterYear' => $chk_Subject[0]->SubjectYear,
          'RegisterClass' => $chk_Subject[0]->SubjectClass,
          'TeacherID' => $this->input->post('teacherregis')
@@ -222,7 +225,7 @@ var  $title = "แผงควบคุม";
 
         foreach ($this->input->post('to') as $key => $value) {
          $a =  array('StudentID' => $value,
-         'SubjectCode' => $chk_Subject[0]->SubjectCode,
+         'SubjectID' => $chk_Subject[0]->SubjectID,
          'RegisterYear' => $chk_Subject[0]->SubjectYear,
          'RegisterClass' => $chk_Subject[0]->SubjectClass,
          'TeacherID' => $this->input->post('teacherregis')
@@ -239,7 +242,8 @@ var  $title = "แผงควบคุม";
         //$subject = $this->db->where('SubjectYear','1/2565')->get('tb_subjects')->result();
        
         $Register = $this->db->select("
-                                    skjacth_academic.tb_register.SubjectCode,
+                                    skjacth_academic.tb_register.SubjectID,
+                                    skjacth_academic.tb_subjects.SubjectCode,
                                     skjacth_academic.tb_subjects.SubjectName,
                                     skjacth_academic.tb_subjects.FirstGroup,
                                     skjacth_academic.tb_register.RegisterClass,
@@ -250,11 +254,11 @@ var  $title = "แผงควบคุม";
                                     skjacth_personnel.tb_personnel.pers_prefix,
                                     skjacth_personnel.tb_personnel.pers_lastname")
                                 ->from('tb_register')
-                                ->join('tb_subjects', 'tb_subjects.SubjectCode = tb_register.SubjectCode')
+                                ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
                                 ->join('skjacth_personnel.tb_personnel', 'skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_register.TeacherID')
                                 ->where('tb_subjects.SubjectYear',$keyYear)
                                 ->where('tb_register.RegisterYear',$keyYear)
-                                ->group_by('tb_register.SubjectCode')
+                                ->group_by('tb_register.SubjectID')
                                 ->group_by('tb_register.RegisterClass')
                                 ->group_by('tb_register.TeacherID')
                                 ->get()->result();
@@ -286,21 +290,18 @@ var  $title = "แผงควบคุม";
     }
 
     public function AdminEnrollCancel(){
-
-      
          $a =  array(
-         'SubjectCode' => $this->input->post('KeySubject'),
+         'SubjectID' => $this->input->post('KeySubject'),
          'TeacherID' => $this->input->post('KeyTeacher')
          );   
              $this->db->where($a);
         echo $this->db->delete('tb_register');
-            
      }
 
      public function AdminEnrollChangeTeacher(){
        
         $data = array('TeacherID' => $this->input->post('KeyTeacher'));
-        $this->db->where('SubjectCode',$this->input->post('KeySubjectCode'));
+        $this->db->where('SubjectID',$this->input->post('KeySubjectID'));
         $this->db->where('RegisterYear',$this->input->post('KeySubjectYear'));
         echo $UpdateChangeTeacher = $this->db->update('tb_register',$data);
      }
