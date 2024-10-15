@@ -79,13 +79,19 @@ th {
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <div class="col-auto">
+                                        <div class="col-auto  me-2">
                                             <select class="form-select w-auto" name="keyroom" id="keyroom">
                                                 <option selected="" value="">ห้อง...</option>
                                                 <?php foreach ($this->classroom->ListRoom() as $key => $v_ListRoom) : ?>
                                                 <option <?=$keyroom == "ม.".$v_ListRoom ?"selected":""?>
                                                     value="ม.<?=$v_ListRoom;?>"><?=$v_ListRoom;?></option>
                                                 <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <select class="form-select w-auto" name="StudyLine" id="StudyLine">
+                                                <option selected="" value="">เป็นเลิศ...</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -122,6 +128,11 @@ th {
                                     <tr class="text-center table-success">
                                         <th class="cell align-middle" style="width:20px">ลำดับที่</th>
                                         <th class="cell align-middle" style="width:230px">ชื่อ - นามสกุล</th>
+                                        <th class="rotated-text" style="width: 10px;">
+                                            <div>
+                                                <span>ความเป็นเลิศ </span>
+                                            </div>
+                                        </th>
                                         <?php foreach ($subject as $key => $v_subject):?>
                                         <th class="rotated-text">
                                             <div>
@@ -143,6 +154,7 @@ th {
                                     <tr>
                                         <td class="text-center "> <?=$v_stu[1]?></td>
                                         <td class="text-nowrap "><?=$v_stu[2]?></td>
+                                        <td class="text-nowrap "><?=$v_stu[3]?></td>
                                         <?php $i = 4;
                                         
                                         foreach ($subject as $key1 => $v_RegisSubject): 
@@ -155,7 +167,7 @@ th {
                                         <?php $i++; endforeach; ?>
                                         <td class="cell totalGrade text-center">
 
-                                        </td> 
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

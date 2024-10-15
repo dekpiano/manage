@@ -155,24 +155,37 @@ var  $title = "แผงควบคุม";
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['CheckYear'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
         $keyroom = $this->input->post("keyroom");
+        $StudyLine = urldecode($this->input->post("StudyLine")); 
+       
         $SubRoom1 = explode('.',$keyroom);
         $SubRoom2 = explode('/',@$SubRoom1[1]);        
-        $KeyCheckYear = $this->input->post("KeyCheckYear");
+        $KeyCheckYear = $this->input->post("KeyCheckYear");       
         $SubKeyCheckYear = explode('/',$KeyCheckYear);
         $Term = @$SubKeyCheckYear[0];
         $year = @$SubKeyCheckYear[1];
         $Class = @$SubRoom2[0];
         $Room = @$SubRoom2[1];
+
+      
         if(!isset($keyroom)){
             $data["Nodata"] = 0;
             $data['totip'] = "";
             $data['keyroom'] = '';
             $data['KeyCheckYear'] = $KeyCheckYear;
+            $data['KeyStudyLine'] = $StudyLine;
         }else{
             $data["Nodata"] = 1;
             $data['keyroom'] = $keyroom;
             $data['KeyCheckYear'] = $KeyCheckYear;
+            $data['KeyStudyLine'] = $StudyLine;
             $data['totip'] = "ระดับชั้น ".$keyroom;
+
+            if($StudyLine === '0'){
+                $array = array('StudentClass' => $keyroom);
+            }else{
+                $array = ("StudentClass ='$keyroom'AND StudentStudyLine = '$StudyLine'");
+            }
+            //print_r( $StudyLine ); exit();
             
             $data['stu'] = $this->db->select("tb_students.StudentID,
                                     tb_students.StudentNumber,
@@ -180,34 +193,40 @@ var  $title = "แผงควบคุม";
                                     tb_students.StudentCode,
                                     tb_students.StudentPrefix,
                                     tb_students.StudentFirstName,
-                                    tb_students.StudentLastName")
+                                    tb_students.StudentLastName,
+                                    tb_students.StudentStudyLine")
                             ->where('StudentStatus','1/ปกติ')
-                            ->where('StudentClass',$keyroom)     
+                            ->where($array)
                             ->order_by('tb_students.StudentNumber','ASC')
                             ->get('tb_students')->result();
 
             $data['subject'] = $this->db->select("
                             tb_register.SubjectCode,
                             tb_subjects.SubjectName,
-                            tb_subjects.SubjectUnit")
+                            tb_subjects.SubjectUnit,
+                            tb_subjects.SubjectType")
                     ->from('tb_register')
                     ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
                     ->join('tb_subjects','tb_subjects.SubjectCode = tb_register.SubjectCode')
-                    ->where('RegisterYear',$KeyCheckYear)
+                    ->where('tb_subjects.SubjectYear',$KeyCheckYear)
+                    ->where('tb_register.RegisterYear',$KeyCheckYear)
                     ->where('StudentStatus','1/ปกติ')
                     ->where('StudentClass',$keyroom)                                
                     ->where('tb_register.SubjectCode !=','I30301')
                     ->where('tb_register.SubjectCode !=','I20201')
-                    ->group_by('tb_register.SubjectCode')                                
+                    ->group_by('tb_register.SubjectCode')   
+                    ->order_by('tb_subjects.SubjectType',"ASC")
+                    ->order_by('tb_subjects.FirstGroup',"ASC") 
+                    ->order_by('tb_subjects.SubjectCode',"ASC")     
                     ->get()->result();
-
+                   
                             $CheckSub = [];
                             foreach ($data['stu'] as $key => $value) {
                                 
                                 $CheckSub[$key][] = $value->StudentID;
                                 $CheckSub[$key][] = $value->StudentNumber;
                                 $CheckSub[$key][] = $value->StudentPrefix.$value->StudentFirstName.' '.$value->StudentLastName;
-                                $CheckSub[$key][] = $value->StudentCode;
+                                $CheckSub[$key][] = $value->StudentStudyLine;
                     
                     
                                 $check_sub = array();
@@ -233,7 +252,7 @@ var  $title = "แผงควบคุม";
                     
                             $data['CheckSub'] = $CheckSub;
 
-                           // echo '<pre>';print_r($CheckSub); exit();   
+                            //echo '<pre>';print_r($data['subject']); exit();   
                                 
 
 
@@ -247,6 +266,19 @@ var  $title = "แผงควบคุม";
         $this->load->view('admin/layout/Footer.php');
         
     }
+
+    public function CkeckStudentStudyLine(){
+
+        $data['CkeckStudentStudyLine'] = $this->db->select("tb_students.StudentStudyLine")
+        ->where('StudentStatus','1/ปกติ')
+        ->where('StudentClass',$this->input->post('roomID'))   
+        ->group_by('StudentStudyLine')
+        ->order_by('tb_students.StudentNumber','ASC')
+        ->get('tb_students')->result();
+
+        echo json_encode($data['CkeckStudentStudyLine']);
+    }
+    
 
     public function AdminStudentsScore($IdStudent){      
         $data['title'] = "ผลการเรียนนักเรียนรายบุคคล";

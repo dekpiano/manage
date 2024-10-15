@@ -15,6 +15,34 @@ $('.tblGrade').DataTable({
     ]
 });
 
+CkeckStudentStudyLine($('#keyroom').val());
+
+$(document).on("change", "#keyroom", function() {
+    
+    CkeckStudentStudyLine($(this).val());
+    
+});
+
+function CkeckStudentStudyLine($keyRoom = null){
+
+    $.post('../../../admin/academic/ConAdminReportResult/CkeckStudentStudyLine', {roomID:$keyRoom}, function(response) {
+        // Log the response to the console
+        $('#StudyLine').empty();
+        $.each(response, function(index, item) {
+            $('#StudyLine').append($('<option>', {
+                value: item.StudentStudyLine,
+                text: item.StudentStudyLine
+            }));
+            console.log(item.StudentStudyLine);
+        });
+        $('#StudyLine').append($('<option>', {
+            value: 0,
+            text: "ทั้งหมด"
+        }));
+
+    },'json');
+}
+
 // $('#ReportSummaryTeacher').DataTable({
 //     "scrollX": "300px",
 //     "order": [
@@ -39,19 +67,25 @@ $('#tblGradeSumRoom tbody tr').each(function() {
     $(this).find('.showGrade').each(function() {
         var valueUnit = parseFloat($(this).attr('data_unit'));
         var valueGrade = parseFloat($(this).text());
-
+        
+      
+        
         if (!isNaN(valueGrade)) {
+           
             if (!isNaN(valueUnit)) {
+               
                 totalUnit += valueUnit;
+                totalGrade += valueGrade
+                value += valueUnit * valueGrade;
             }
-
-
-            value += valueUnit * valueGrade;
-
+            
         }
-        averageGrade = value / totalUnit;
-
+       
+        
+       
     });
+    averageGrade = value / totalUnit;
+    
     //console.log(averageGrade);
     $(this).find('.totalGrade').html(parseFloat(String(averageGrade).substring(0, 4)).toFixed(2));
 });
