@@ -153,6 +153,9 @@ new SlimSelect({
 <?php if($this->uri->segment(3) ==="Course"): ?>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=15"></script> 
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSendPlan.js?v=12"></script>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=2"></script>
+    
+
 <?php endif; ?>  
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=17"></script>
@@ -166,6 +169,7 @@ new SlimSelect({
 <script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=13"></script>
 <?php endif; ?>
 
+
 <?php if($this->uri->segment(2) ==="Affairs"): ?>
 <script src="<?=base_url();?>assets/js/admin/AffairsHomeRoom.js?v=8"></script>
 <?php endif; ?>
@@ -173,6 +177,7 @@ new SlimSelect({
 <?php if($this->uri->segment(2) ==="General"): ?>
 <script src="<?=base_url();?>assets/js/admin/General/GeneralAdminRoles.js?v=4"></script>
 <?php endif; ?>
+
 
 <script>
 // ตั้งค่าปีการศึกษาที่ใช้ปัจจุบัน

@@ -9,14 +9,21 @@
             </section>
             <section class="we-offer-area text-center ">
                 <div class="container-fluid">
+                    <div class="d-flex justify-content-between mb-3">
+                    <select name="" id="" class="form-select w-auto">
+                        <option value="">เลือกปี</option>
+                    </select>
+                    <a href="<?=base_url('Admin/Acade/Course/ClassSchedule/add');?>"
+                        class="btn app-btn-primary"> <i class="far fa-plus-square"></i>
+                        เพิ่ม<?=$title;?></a>
+                    </div>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <a href="<?=base_url('Admin/ClassSchedule/add');?>"
-                                    class="btn btn-primary btn-sm float-right mb-3"> <i class="far fa-plus-square"></i>
-                                    เพิ่ม<?=$title;?></a>
+
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -39,7 +46,7 @@
                                                 <?=$v_class_schedule->schestu_classname;?></a></td>
                                         <td><?=$v_class_schedule->schestu_datetime;?></td>
                                         <td>
-                                            <a href="<?=base_url('admin/ConAdminClassSchedule/delete_class_schedule/').$v_class_schedule->schestu_id.'/'.$v_class_schedule->schestu_filename;?>"
+                                            <a href="<?=base_url('admin/academic/ConAdminClassSchedule/delete_class_schedule/').$v_class_schedule->schestu_id.'/'.$v_class_schedule->schestu_filename;?>"
                                                 class="btn btn-danger btn-sm"
                                                 onClick="return confirm('ต้องการลบข้อมูลหรือไม่?')"><i
                                                     class="fas fa-trash-alt"></i> ลบ</a>

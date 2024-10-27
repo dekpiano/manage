@@ -6,6 +6,10 @@ var  $title = "แผงควบคุม";
 	public function __construct() {
 		parent::__construct();
 		
+		 // โหลดไลบรารี upload และ image_lib
+		 $this->load->library('upload');
+		 $this->load->library('image_lib');
+
 		$this->load->model('admin/ModAdminClassSchedule');
 		if (empty($this->session->userdata('fullname'))) {		
 			redirect('LoginAdmin','refresh');
@@ -77,39 +81,57 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
 	
 	public function insert_class_schedule()
 	{
-		//print_r($_FILES);
+		// print_r($_FILES); 
+		// print_r($_POST); 
+		// exit();
 		
 		$config['upload_path']   = 'uploads/academic/class_schedule/'; //Folder สำหรับ เก็บ ไฟล์ที่  Upload
-         $config['allowed_types'] = 'pdf|PDF|JPG|jpg|png|PNG'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
-         $config['max_size']      = 2048; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
+         $config['allowed_types'] = 'pdf|PDF|JPG|jpg|png|PNG|jpeg'; //รูปแบบไฟล์ที่ อนุญาตให้ Upload ได้
+         $config['max_size']      = 0; //ขนาดไฟล์สูงสุดที่ Upload ได้ (กรณีไม่จำกัดขนาด กำหนดเป็น 0)
          $config['encrypt_name']  = true; //กำหนดเป็น true ให้ระบบ เปลียนชื่อ ไฟล์  อัตโนมัติ  ป้องกันกรณีชื่อไฟล์ซ้ำกัน
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
 			if($this->upload->do_upload('schestu_filename'))
 			{
-				$data = array('upload_data' => $this->upload->data());
+				$data = $this->upload->data();
 
-				$data_insert = array(
+				 // ปรับขนาดรูปภาพ
+				 $resize_config['image_library'] = 'gd2';
+				 $resize_config['source_image'] = $data['full_path'];
+				 $resize_config['maintain_ratio'] = TRUE;
+				 $resize_config['width'] = 2048;
+				 $resize_config['height'] = 1080;
+	 
+				 $this->image_lib->initialize($resize_config);
+
+				 if (!$this->image_lib->resize()) {
+					echo $this->image_lib->display_errors();
+				 }else{
+					$data_insert = array(
 						'schestu_id' => $this->input->post('schestu_id'),
 						'schestu_name' => $this->input->post('schestu_name'),
 						'schestu_classname' => $this->input->post('schestu_classname'),
-						'schestu_filename' => $data['upload_data']['file_name'],
+						'schestu_filename' => $data['file_name'],
 						'schestu_term' => $this->input->post('schestu_term'),
 						'schestu_year' => $this->input->post('schestu_year'),
 						'schestu_datetime' => date('Y-m-d H:i:s'),
 						'schestu_user' => $this->session->userdata('login_id')
 					);
-				if($this->ModAdminClassSchedule->class_schedule_insert($data_insert) == 1){
-					$this->session->set_flashdata(array('alert'=> 'success','messge' => 'บันทึกข้อมูลสำเร็จ'));
-					redirect('Admin/ClassSchedule', 'refresh');
-				}
+					if($this->ModAdminClassSchedule->class_schedule_insert($data_insert) == 1){
+						echo 1;
+					}
+				 }
+			
+				$this->image_lib->clear();
+
+				
 			}
 			else
 			{
 				$error = array('error' => $this->upload->display_errors());
-				//print_r($error['error']);
-				$this->session->set_flashdata(array('alert'=> 'error','messge' => 'เพิ่มได้แค่ไฟล์ PDF ไม่เกิ้น 2 mb'.$error['error']));
-				redirect('Admin/ClassSchedule/add', 'refresh');
+				print_r($error['error']);
+				
+				
 			}
 		
 	}
@@ -119,7 +141,7 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
 		@unlink("./uploads/academic/class_schedule/".$img);
 		if($this->ModAdminClassSchedule->class_schedule_delete($data) == 1){
 			$this->session->set_flashdata(array('alert'=> 'success','messge' => 'ลบข้อมูลสำเร็จ'));
-			redirect('Admin/ClassSchedule', 'refresh');
+			redirect('Admin/Acade/Course/ClassSchedule', 'refresh');
 		}
 	}
 

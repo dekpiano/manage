@@ -38,7 +38,7 @@ var  $title = "แผงควบคุม";
         $da = $this->db->select('SubjectYear,SubjectCode,SubjectID')->get('tb_subjects')->result();
         // เตรียมข้อมูลตัวอย่าง
         $data = [];
-        for ($i = 1301; $i <= 1546; $i++) {
+        for ($i = 1501; $i <= 1793; $i++) {
             $data[] = [
                 'SubjectID' => $da[$i]->SubjectID,
                 'SubjectCode' => $da[$i]->SubjectCode,
