@@ -29,21 +29,24 @@ var  $title = "แผงควบคุม";
 		$DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
 		$data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
-$data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
-		$data['title'] = "ตารางเรียน";		
+		$data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+		$data['title'] = "ตารางเรียน";	
+		
+		$eX = explode('/',$data['SchoolYear']->schyear_year);
 		$this->db->select('*');
 		$this->db->from('tb_class_schedule');
 		$this->db->order_by('schestu_classname','ASC');
 		$data['class_schedule'] = $this->db->get()->result();
 
+
+		$data['YearAll'] =  $this->db->select('CONCAT(schestu_term,"/",schestu_year) AS Year')->group_by('schestu_term','schestu_year')->get('tb_class_schedule')->result();
+		//print_r( $data['YearAll']); exit();
+		$this->session->set_userdata(['SchoolYear' => $data['SchoolYear']->schyear_year]);
 		
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminClassSchedule/AdminClassScheduleMain.php');
         $this->load->view('admin/layout/Footer.php');
 
-        // delete_cookie('username_cookie'); 
-		// delete_cookie('password_cookie'); 
-        // $this->session->sess_destroy();
         
     }
     
@@ -145,7 +148,19 @@ $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->
 		}
 	}
 
-    
+    public function getDataByYear()
+    {
+        $year = $this->input->post('year');
+		$Ex = explode('/',$year);
+		$this->db->where('schestu_term', $Ex[0]);
+		$this->db->where('schestu_year', $Ex[1]);
+        $query = $this->db->get('tb_class_schedule'); // เปลี่ยน your_table เป็นชื่อจริงของตารางที่ใช้
+        $data =  $query->result_array();
+
+		header('Content-Type: application/json');
+        // ส่งข้อมูลกลับไปในรูปแบบ JSON
+        echo json_encode(array('data' => $data));
+    }
 
 }
 

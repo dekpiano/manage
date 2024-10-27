@@ -40,3 +40,43 @@ $(document).on('submit','.FormAddClassSchedule', function (e) {
         }
     });
 });
+
+$(document).on('change','#SelYearClassSchedule', function() {
+    var selectedYear = $(this).val();
+
+    // ส่ง AJAX ไปยังเซิร์ฟเวอร์เพื่อนำข้อมูลของปีที่เลือก
+    $.ajax({
+        url: "../../../admin/academic/ConAdminClassSchedule/getDataByYear",
+        type: "POST",
+        data: { year: selectedYear },
+        success: function(response) {
+            // เคลียร์ข้อมูลเก่าในตาราง
+            $('#TbClassSchedule tbody').empty();
+            $('#TbClassSchedule tbody').append('<tr class="loading"><td colspan="3">Loading data, please wait...</td></tr>');
+            $('.loading').show();
+
+            // เติมข้อมูลใหม่ที่ได้จากเซิร์ฟเวอร์ลงในตาราง
+            $.each(response.data, function(index, item) {
+                var row = '<tr>' +
+                    '<td>' + item.schestu_name + '</td>' +
+                    '<td>' + item.schestu_classname + '</td>' +
+                    '<td>' + item.schestu_term+'/'+item.schestu_year + '</td>' +
+                    '<td> <a target="_blank" href="../../../uploads/academic/class_schedule/' + item.schestu_filename + '">เปิดดู</a></td>' +
+                    '<td>' + item.schestu_datetime + '</td>' +
+                    '<td><a href="../../../admin/academic/ConAdminClassSchedule/delete_class_schedule/' + item.schestu_id + '/' + item.schestu_filename + '" class="btn btn-danger btn-sm" onClick="return confirm(\'ต้องการลบข้อมูลหรือไม่?\')"><i class="fas fa-trash-alt"></i> ลบ</a></td>' +
+                    '</tr>';
+                $('#TbClassSchedule tbody').append(row);
+            });
+        },
+        complete: function() {
+            // ซ่อน loading message เสมอไม่ว่าจะ success หรือ error
+            $('.loading').hide();
+        },        
+        error: function(xhr, status, error) {
+            console.error("Error: " + error);
+        }
+    });
+});
+
+// โหลดข้อมูลเมื่อหน้าเพจเริ่มต้น
+$('#SelYearClassSchedule').trigger('change');

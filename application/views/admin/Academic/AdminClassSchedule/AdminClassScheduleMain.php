@@ -10,21 +10,24 @@
             <section class="we-offer-area text-center ">
                 <div class="container-fluid">
                     <div class="d-flex justify-content-between mb-3">
-                    <select name="" id="" class="form-select w-auto">
-                        <option value="">เลือกปี</option>
-                    </select>
-                    <a href="<?=base_url('Admin/Acade/Course/ClassSchedule/add');?>"
-                        class="btn app-btn-primary"> <i class="far fa-plus-square"></i>
-                        เพิ่ม<?=$title;?></a>
+                        <select name="SelYearClassSchedule" id="SelYearClassSchedule" class="form-select w-auto">
+                            <?php foreach ($YearAll as $key => $v_YearAll) : ?>
+                            <option <?=$this->session->userdata('SchoolYear') == $v_YearAll->Year ? "selected":"";?>
+                                value="<?=$v_YearAll->Year?>"><?=$v_YearAll->Year?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <a href="<?=base_url('Admin/Acade/Course/ClassSchedule/add');?>" class="btn app-btn-primary"> <i
+                                class="far fa-plus-square"></i>
+                            เพิ่ม<?=$title;?></a>
                     </div>
-                    
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
 
                         <div class="card-body">
                             <div class="table-responsive">
 
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="TbClassSchedule" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>ชื่อห้องเรียน</th>
@@ -35,24 +38,19 @@
                                             <th>คำสั่ง</th>
                                         </tr>
                                     </thead>
-                                    <?php foreach ($class_schedule as $key => $v_class_schedule) : ?>
-                                    <tr>
-                                        <td><?=$v_class_schedule->schestu_name;?></td>
-                                        <td><?=$v_class_schedule->schestu_classname;?></td>
-                                        <td><?=$v_class_schedule->schestu_term.'/'.$v_class_schedule->schestu_year;?>
-                                        </td>
-                                        <td><a href="<?=base_url('uploads/academic/class_schedule/'.$v_class_schedule->schestu_filename);?>"
-                                                target="_blank" rel="noopener noreferrer">ดูไฟล์
-                                                <?=$v_class_schedule->schestu_classname;?></a></td>
-                                        <td><?=$v_class_schedule->schestu_datetime;?></td>
-                                        <td>
-                                            <a href="<?=base_url('admin/academic/ConAdminClassSchedule/delete_class_schedule/').$v_class_schedule->schestu_id.'/'.$v_class_schedule->schestu_filename;?>"
-                                                class="btn btn-danger btn-sm"
-                                                onClick="return confirm('ต้องการลบข้อมูลหรือไม่?')"><i
-                                                    class="fas fa-trash-alt"></i> ลบ</a>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
+                                    <tbody>
+                                        <style>
+                                        .loading {
+                                            display: none;
+                                            /* ซ่อน loading ไว้ก่อน */
+                                            text-align: center;
+                                            font-weight: bold;
+                                            color: blue;
+                                        }
+                                        </style>
+                                        <tr class="loading">
+                                            <td colspan="3">Loading data, please wait...</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
