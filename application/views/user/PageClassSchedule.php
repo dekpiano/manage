@@ -7,7 +7,7 @@
                 <div class="d-flex mt-3">
                    
                     <select class="w-auto countries" id="SearchClassSchedule">
-                        <option selected="" value="option-1">เลือกตารางเรียน...</option>
+                        <option selected="" value="">เลือกตารางเรียน...</option>
                     </select>
                 </div>
 
@@ -23,8 +23,10 @@
   height: 50px;
   font-size: 18px;
   font-weight: bold;
+ 
 }
 .ss-main .ss-single-selected {
     height: 50px;
+    width: 200px;
 }
 </style>

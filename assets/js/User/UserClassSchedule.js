@@ -1,16 +1,19 @@
  // โหลดข้อมูลรูปภาพจากฐานข้อมูล
  $.ajax({
-    url: 'ClassSchedule/Search',
+    url: 'user/ConStudents/SearchClassSchedule',
     method: 'GET',
+    dataType: 'json',
     success: function(data) {
         console.log(data);
         
         $.each(data, function(index, image) {
-            $('#SearchClassSchedule').append('<option value="' + image.schestu_filename + '"> ม.' + image.schestu_classname +' '+image.schestu_name +'</option>');
+            $('#SearchClassSchedule').append('<option value="' + image.schestu_filename + '"> ม.' + image.schestu_classname +' ('+image.schestu_name +')</option>');
         });
     },
-    error: function() {
-        alert('เกิดข้อผิดพลาดในการดึงข้อมูล');
+    error: function(xhr, status, error) {
+        console.error("Status:", status);
+        console.error("Error:", error);
+        console.error("Response Text:", xhr.responseText);
     }
 });
 

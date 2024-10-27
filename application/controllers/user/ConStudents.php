@@ -201,7 +201,15 @@ var  $title = "แผงควบคุม";
     }
 
     public function SearchClassSchedule(){
-        $data['schedule'] = $this->db->get('tb_class_schedule')->result();
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+
+        $Ex = explode('/',$data['SchoolYear']->schyear_year);
+
+        $data['schedule'] = $this->db
+        ->where('schestu_term', $Ex[0])
+        ->where('schestu_year', $Ex[1])
+        ->order_by('schestu_classname','ASC')
+        ->get('tb_class_schedule')->result();
         header('Content-Type: application/json');
         echo json_encode($data['schedule']);
 
