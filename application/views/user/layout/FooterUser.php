@@ -24,6 +24,10 @@
 
 <script src="<?=base_url();?>assets/js/CountdownTimer.js?v=16"></script>
 
+<?php if($this->uri->segment(1) == "ClassSchedule"):?>
+<script src="<?=base_url();?>assets/js/User/UserClassSchedule.js?v=2"></script>
+<?php  endif; ?>
+
 <script>
     $('.TB-roomonline').DataTable({
         "responsive": true,

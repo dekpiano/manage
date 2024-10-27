@@ -201,6 +201,11 @@ var  $title = "แผงควบคุม";
     }
 
     public function SearchClassSchedule(){
+        $data['schedule'] = $this->db->get('tb_class_schedule')->result();
+        header('Content-Type: application/json');
+        echo json_encode($data['schedule']);
+
+        exit();
 
        $key_studentList = $this->input->get('studentList');
        $data['schedule'] = $this->db->where('schestu_classname', $key_studentList)->get('tb_class_schedule')->result();

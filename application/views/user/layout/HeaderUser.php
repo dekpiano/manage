@@ -156,7 +156,7 @@
                                 <ul class="submenu-list list-unstyled">
                                     <li class="submenu-item "><a
                                             class="submenu-link <?=$this->uri->segment(1) == 'ClassSchedule'?'active':''?> "
-                                            href="https://timetable.skj.ac.th/">ตารางเรียน</a></li>
+                                            href="<?=base_url('ClassSchedule');?>">ตารางเรียน</a></li>
                                     <!-- <li class="submenu-item">ClassSchedule');?>
                                             class="submenu-link <?=$this->uri->segment(1) == 'ExamSchedule'?'active':''?>"
                                             href="<?=base_url('ExamSchedule');?>">ตารางสอบ</ahttp:></li> -->
