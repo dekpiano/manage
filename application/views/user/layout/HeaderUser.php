@@ -82,6 +82,8 @@
                                     <li><a class="dropdown-item" href="http://teacher.skj.ac.th/">ครูผู้สอน</a>
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">ผู้บริหาร</a>
                                     </li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">เจ้าหน้าที่</a>
+                                    </li>
                                 </ul>
                             </div>
                             <!--//app-user-dropdown-->
@@ -96,6 +98,7 @@
         </div>
         <!--//app-header-inner-->
         <div id="app-sidepanel" class="app-sidepanel">
+            
             <div id="sidepanel-drop" class="sidepanel-drop"></div>
             <div class="sidepanel-inner d-flex flex-column">
                 <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
@@ -257,33 +260,31 @@
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Login</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="auth-form login-form" method="post" action="<?=base_url('Control_login/LoginAdmin')?>">
+                    <!-- <form class="auth-form login-form" method="post" action="<?=base_url('Control_login/LoginAdmin')?>">
                         <div class="email mb-3">
                             <label class="sr-only" for="username">Email</label>
                             <input id="username" name="username" type="email" class="form-control signin-email"
                                 placeholder="Email address" required="required">
-                        </div>
-                        <!--//form-group-->
+                        </div>                      
                         <div class="password mb-3">
                             <label class="sr-only" for="password">Password</label>
                             <input id="password" name="password" type="password" class="form-control signin-password"
                                 placeholder="Password" required="required">
 
                         </div>
-                        <!--//form-group-->
                         <div class="text-center">
                             <button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto">Log
                                 In</button>
                         </div>
-                    </form>
-                    <hr>
+                    </form> -->
+                
                     <div class="text-center">
                         <a href="<?=base_url('LoginMenager')?>">
                             <img src="<?=base_url('assets/images/btn_google_signin.png')?>" alt="" srcset="">
