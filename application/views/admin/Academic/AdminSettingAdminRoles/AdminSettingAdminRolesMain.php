@@ -151,8 +151,31 @@
                 </div>
                 <hr>
 
-                <?php for ($i=3; $i <= 8; $i++):?>
+                <?php   $studentTasks = [];
 
+                        // $studentTasks = [
+                        //     'pers_073' => ['งานทะเบียน'],
+                        //     'pers_015' => ['งานทะเบียน'],
+                        //     'pers_005' => ['งานทะเบียน', 'งานวัดและประเมินผล']
+                        // ];
+
+                     for ($j=3; $j <= 7; $j++){
+                        $AdminID = strval($Manager[$j]->admin_rloes_userid);
+                                if (!isset($studentTasks[$AdminID])) {
+                                    $studentTasks[$AdminID] = [];
+                                }
+        
+                                $Ex = explode(',',@$Manager[$j]->admin_rloes_nanetype); 
+                                foreach ($Ex as $key => $v_Ex) {
+                                    $studentTasks[$AdminID][] = $v_Ex;
+                                }
+                    }
+                    print_r($studentTasks);
+                    
+                ?>
+               
+                <?php for ($i=3; $i <= 7; $i++):?>
+                
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
                         <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>
@@ -169,23 +192,21 @@
                             <?php endforeach; ?>
                         </select>
 
-                        <?php $NameWork = array('งานทะเบียน','งานวัดและประเมินผล','งานหลักสูตร'); 
-                            $Ex = explode(',',$Manager[$i]->admin_rloes_nanetype);
-                            print_r($Ex);
-                        
-                        ?>
-                        <div class="d-flex mb-3">
-                            <?php  foreach ($NameWork as $k_NameWork => $v_NameWork) :  
-                                if($Ex[$k_NameWork]) : ?>
-                                
+                        <div class=" mb-3">
+                            <?php 
+                            $NameWork = ['งานทะเบียน','งานวัดและประเมินผล','งานหลักสูตร']; 
+                             foreach ($NameWork as $k_NameWork => $v_NameWork) : 
+                               print_r($studentTasks[$Manager[$i]->admin_rloes_userid]);
+                                $isChecked = isset($studentTasks[$Manager[$i]->admin_rloes_userid]) && in_array($v_NameWork, $studentTasks[$Manager[$i]->admin_rloes_userid]) ? 'checked' : '';
+                                ?>
+                         
                             <div class="form-check me-3">
-                                <input class="form-check-input" type="checkbox" value="<?=$v_NameWork;?>" id="opt_<?=$i?>_<?=$k_NameWork?>" name="opt[<?=$i?>][]" >
+                                <input class="form-check-input" type="checkbox" value="<?=$v_NameWork;?>"
+                                    id="opt_<?=$i?>_<?=$k_NameWork?>" name="opt[<?=$i?>][]" <?=$isChecked;?>>
                                 <label class="form-check-label" for="opt_<?=$i?>_<?=$k_NameWork?>">
                                     <?=$v_NameWork;?>
                                 </label>
                             </div>
-
-                            <?php endif;?>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -198,9 +219,6 @@
             </div>
         </div>
 
-
-
-
     </div>
-
 </div>
+
