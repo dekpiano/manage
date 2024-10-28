@@ -70,6 +70,21 @@ var  $title = "แผงควบคุม";
     }
 
 
+    public function SelectWork(){
+        $option = $this->input->post('option');
+        foreach ($option as $key => $value) {
+
+            $mainKey = $value['mainKey']; // Key หลัก
+            $checkboxValues = @$value['options']; // ค่า checkbox ที่ถูกติ๊ก
+           
+            if (!empty($checkboxValues)) {
+                $data = array('admin_rloes_nanetype'=>implode(", ", $checkboxValues));
+                $this->db->where('admin_rloes_userid', $mainKey);
+                $update = $this->db->update('tb_admin_rloes',$data);
+            }
+        }
+        
+    }
 
 
 }

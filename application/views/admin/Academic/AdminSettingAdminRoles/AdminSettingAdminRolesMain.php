@@ -77,12 +77,11 @@
     margin: 10px 0 10px 0;
 }
 
-.ss-main .ss-single-selected{
-  height:50px;
-  padding-left: 12px;
+.ss-main .ss-single-selected {
+    height: 50px;
+    padding-left: 12px;
     font-size: 1.2rem;
 }
-
 </style>
 <div class="app-wrapper">
 
@@ -101,12 +100,11 @@
                         <h3 class="section-title">ผู้อำนวยการ</h3>
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3" aria-label=".form-select-lg example"
-                            id="set_executive" name="set_executive">
+                        <select class="mb-3" aria-label=".form-select-lg example" id="set_executive"
+                            name="set_executive">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[0]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
+                            <option <?=$Manager[0]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
                                 value="<?=$v_NameTeacher->pers_id?>">
                                 <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
                             </option>
@@ -118,15 +116,13 @@
 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">รองฯ วิชาการ</h3>                      
+                        <h3 class="section-title">รองฯ วิชาการ</h3>
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3" aria-label=".form-select-lg example"
-                            id="set_deputy" name="set_deputy">
+                        <select class="mb-3" aria-label=".form-select-lg example" id="set_deputy" name="set_deputy">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[1]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
+                            <option <?=$Manager[1]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
                                 value="<?=$v_NameTeacher->pers_id?>">
                                 <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
                             </option>
@@ -136,18 +132,16 @@
                 </div>
                 <hr>
 
-                
+
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">หัวหน้างานวิชาการ</h3>                      
+                        <h3 class="section-title">หัวหน้างานวิชาการ</h3>
                     </div>
                     <div class="col-12 col-md-8">
-                        <select class="mb-3" aria-label=".form-select-lg example"
-                            id="set_leader" name="set_leader">
+                        <select class="mb-3" aria-label=".form-select-lg example" id="set_leader" name="set_leader">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[2]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
+                            <option <?=$Manager[2]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
                                 value="<?=$v_NameTeacher->pers_id?>">
                                 <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
                             </option>
@@ -157,117 +151,48 @@
                 </div>
                 <hr>
 
-                <div class="row g-4 settings-section">
-                    <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminone" name="set_admin" admin-id="<?=$Manager[3]->admin_rloes_id;?>">
-                            <option value="">กรุณาเลือกหัวหน้างาน</option>
-                            <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[3]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
-                                value="<?=$v_NameTeacher->pers_id?>">
-                                <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
+                <?php for ($i=3; $i <= 8; $i++):?>
 
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
+                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>
                     </div>
-                    <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_admintwo" name="set_admin" admin-id="<?=$Manager[4]->admin_rloes_id;?>">
+                    <div class="col-12 col-md-8 person">
+                        <select class="set_admin" aria-label=".form-select-lg example" id="set_admin<?=$i;?>"
+                            name="set_admin" admin-id="<?=$Manager[$i]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[4]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
+                            <option <?=$Manager[$i]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
                                 value="<?=$v_NameTeacher->pers_id?>">
                                 <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
                             </option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
-                </div>
 
-                <div class="row g-4 settings-section">
-                    <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_admintheer" name="set_admin" admin-id="<?=$Manager[5]->admin_rloes_id;?>">
-                            <option value="">กรุณาเลือกหัวหน้างาน</option>
-                            <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[5]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
-                                value="<?=$v_NameTeacher->pers_id?>">
-                                <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
+                        <?php $NameWork = array('งานทะเบียน','งานวัดและประเมินผล','งานหลักสูตร'); 
+                            $Ex = explode(',',$Manager[$i]->admin_rloes_nanetype);
+                            print_r($Ex);
+                        
+                        ?>
+                        <div class="d-flex mb-3">
+                            <?php  foreach ($NameWork as $k_NameWork => $v_NameWork) :  
+                                if($Ex[$k_NameWork]) : ?>
+                                
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="<?=$v_NameWork;?>" id="opt_<?=$i?>_<?=$k_NameWork?>" name="opt[<?=$i?>][]" >
+                                <label class="form-check-label" for="opt_<?=$i?>_<?=$k_NameWork?>">
+                                    <?=$v_NameWork;?>
+                                </label>
+                            </div>
 
-                <div class="row g-4 settings-section">
-                    <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminfour" name="set_admin" admin-id="<?=$Manager[6]->admin_rloes_id;?>">
-                            <option value="">กรุณาเลือกหัวหน้างาน</option>
-                            <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[6]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
-                                value="<?=$v_NameTeacher->pers_id?>">
-                                <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
-                            </option>
+                            <?php endif;?>
                             <?php endforeach; ?>
-                        </select>
+                        </div>
                     </div>
                 </div>
-                <div class="row g-4 settings-section">
-                    <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminfive" name="set_admin" admin-id="<?=$Manager[7]->admin_rloes_id;?>">
-                            <option value="">กรุณาเลือกหัวหน้างาน</option>
-                            <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[7]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
-                                value="<?=$v_NameTeacher->pers_id?>">
-                                <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="row g-4 settings-section">
-                    <div class="col-12 col-md-4">
-                        <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>                      
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <select class="mb-3 set_admin" aria-label=".form-select-lg example"
-                            id="set_adminsix" name="set_admin" admin-id="<?=$Manager[8]->admin_rloes_id;?>">
-                            <option value="">กรุณาเลือกหัวหน้างาน</option>
-                            <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option
-                                <?=$Manager[8]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
-                                value="<?=$v_NameTeacher->pers_id?>">
-                                <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
+                <?php endfor; ?>
+
+
                 <hr>
 
             </div>

@@ -141,7 +141,11 @@ new SlimSelect({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=54"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=55"></script>
+
+<?php if($this->uri->segment(3) ==="Setting"): ?>  
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdminRoles.js?v=3"></script>
+<?php endif; ?> 
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>   
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=35"></script>  

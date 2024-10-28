@@ -128,25 +128,13 @@ $(document).ready(function() {
         });
     });
 
-    new SlimSelect({
-        select: '#set_adminone'
-    })
-    new SlimSelect({
-        select: '#set_admintwo'
-    })
-    new SlimSelect({
-        select: '#set_admintheer'
-    })
-    new SlimSelect({
-        select: '#set_adminfour'
-    })
-    new SlimSelect({
-        select: '#set_adminfive'
-    })
-    new SlimSelect({
-        select: '#set_adminsix'
-    })
-
+    for (let index = 3; index <= 8; index++) {
+        new SlimSelect({
+            select: '#set_admin'+index
+        })
+    }
+    
+  
 
 
 
