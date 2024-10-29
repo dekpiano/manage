@@ -27,7 +27,7 @@ var  $title = "แผงควบคุม";
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $DBpersonnel = $this->load->database('personnel', TRUE); //ฐานข้อมูลบุคลากร
         $DBaffairs = $this->load->database('affairs', TRUE); //ฐานข้อมูลงานกิจการนักเรียน
-        $data['Manager'] = $this->db->select('admin_rloes_userid,admin_rloes_id,admin_rloes_nanetype')->get('tb_admin_rloes')->result();
+        $data['Manager'] = $this->db->select('admin_rloes_userid,admin_rloes_id,admin_rloes_nanetype,admin_rloes_status')->get('tb_admin_rloes')->result();
         //echo '<pre>'; print_r($data['Manager']); exit();
         $data['NameTeacher'] = $DBpersonnel->select('pers_id,pers_prefix,pers_firstname,pers_lastname,pers_position,pers_learning')
          ->from('tb_personnel')
@@ -78,7 +78,7 @@ var  $title = "แผงควบคุม";
             $checkboxValues = @$value['options']; // ค่า checkbox ที่ถูกติ๊ก
            
             if (!empty($checkboxValues)) {
-                $data = array('admin_rloes_nanetype'=>implode(", ", $checkboxValues));
+                $data = array('admin_rloes_nanetype'=>implode("|", $checkboxValues));
                 $this->db->where('admin_rloes_userid', $mainKey);
                 $update = $this->db->update('tb_admin_rloes',$data);
             }

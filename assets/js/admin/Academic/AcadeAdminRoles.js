@@ -14,7 +14,7 @@
                 options.push($(this).val());
             } else {
                 // ถ้า checkbox ไม่ถูกติ๊ก ให้เก็บค่าเป็น 0
-               
+               // options.push('x');
             }
         });
 

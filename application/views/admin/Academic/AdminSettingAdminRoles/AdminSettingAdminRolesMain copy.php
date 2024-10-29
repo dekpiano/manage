@@ -159,59 +159,52 @@
                         //     'pers_015' => ['งานทะเบียน', 'งานวัดและประเมินผล']
                         // ];
 
-                        foreach ($Manager as $k_Manager => $v_Manager){
-                            if($v_Manager->admin_rloes_status === "admin"){
-                                $AdminID = strval($Manager[$k_Manager]->admin_rloes_userid);
+                     for ($j=3; $j <= 7; $j++){
+                        $AdminID = strval($Manager[$j]->admin_rloes_userid);
                                 if (!isset($studentTasks[$AdminID])) {
                                     $studentTasks[$AdminID] = [];
-                                    
-                                }
-                                $db_value = $Manager[$k_Manager]->admin_rloes_nanetype;
-                                $Ex = explode('|',$db_value);                              
+                                    $Ex = explode(',',@$Manager[$j]->admin_rloes_nanetype); 
                                     foreach ($Ex as $key => $v_Ex) {
                                         $studentTasks[$AdminID][] = $v_Ex;
                                     }
-                            }
-                            
-                        }
-                        
-                            //print_r($studentTasks);
+                                }
+        
+                               
+                    }
+                    print_r($studentTasks);
                     
                 ?>
-
-                <?php foreach ($Manager as $k_Manager => $v_Manager):
-                    if($v_Manager->admin_rloes_status === "admin"):
-                ?>
-
+               
+                <?php for ($i=3; $i <= 7; $i++):?>
+                
                 <div class="row g-4 settings-section">
                     <div class="col-12 col-md-4">
                         <h3 class="section-title">เจ้าหน้าที่วิชาการ</h3>
                     </div>
                     <div class="col-12 col-md-8 person">
-                        <select class="set_admin" aria-label=".form-select-lg example" id="set_admin<?=$k_Manager;?>"
-                            name="set_admin" admin-id="<?=$v_Manager->admin_rloes_id;?>">
+                        <select class="set_admin" aria-label=".form-select-lg example" id="set_admin<?=$i;?>"
+                            name="set_admin" admin-id="<?=$Manager[$i]->admin_rloes_id;?>">
                             <option value="">กรุณาเลือกหัวหน้างาน</option>
                             <?php  foreach ($NameTeacher as $key => $v_NameTeacher) : ?>
-                            <option <?=$v_Manager->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
+                            <option <?=$Manager[$i]->admin_rloes_userid == $v_NameTeacher->pers_id ? 'selected' : '';?>
                                 value="<?=$v_NameTeacher->pers_id?>">
                                 <?=$v_NameTeacher->pers_prefix.$v_NameTeacher->pers_firstname." ".$v_NameTeacher->pers_lastname?>
                             </option>
                             <?php endforeach; ?>
                         </select>
 
-                        <div class="d-flex mb-3">
+                        <div class=" mb-3">
                             <?php 
                             $NameWork = ['งานทะเบียน','งานวัดและประเมินผล','งานหลักสูตร']; 
                             
                              foreach ($NameWork as $k_NameWork => $v_NameWork) : 
-                                $k_ManagersChecked = isset($studentTasks[$v_Manager->admin_rloes_userid]) && in_array($v_NameWork, $studentTasks[$v_Manager->admin_rloes_userid]) ? 'checked' : '';
+                                $isChecked = isset($studentTasks[$Manager[$i]->admin_rloes_userid]) && in_array($v_NameWork, $studentTasks[$Manager[$i]->admin_rloes_userid]) ? 'checked' : '';
                                 ?>
-
+                         
                             <div class="form-check me-3">
                                 <input class="form-check-input" type="checkbox" value="<?=$v_NameWork;?>"
-                                    id="opt_<?=$k_Manager?>_<?=$k_NameWork?>" name="opt[<?=$k_Manager?>][]"
-                                    <?=$k_ManagersChecked;?>>
-                                <label class="form-check-label" for="opt_<?=$k_Manager?>_<?=$k_NameWork?>">
+                                    id="opt_<?=$i?>_<?=$k_NameWork?>" name="opt[<?=$i?>][]" <?=$isChecked;?>>
+                                <label class="form-check-label" for="opt_<?=$i?>_<?=$k_NameWork?>">
                                     <?=$v_NameWork;?>
                                 </label>
                             </div>
@@ -219,9 +212,7 @@
                         </div>
                     </div>
                 </div>
-
-                <?php endif; ?>
-                <?php endforeach; ?>
+                <?php endfor; ?>
 
 
                 <hr>
@@ -231,3 +222,4 @@
 
     </div>
 </div>
+
