@@ -200,6 +200,10 @@
                         </select>
 
                         <div class="d-flex mb-3">
+                            <div class="me-3">
+                            <b>งานหลัก : </b>
+                            </div>
+                        
                             <?php 
                             $NameWork = ['งานทะเบียน','งานวัดและประเมินผล','งานหลักสูตร']; 
                             
@@ -207,7 +211,7 @@
                                 $k_ManagersChecked = isset($studentTasks[$v_Manager->admin_rloes_userid]) && in_array($v_NameWork, $studentTasks[$v_Manager->admin_rloes_userid]) ? 'checked' : '';
                                 ?>
 
-                            <div class="form-check me-3">
+                            <div class="form-check me-3">                               
                                 <input class="form-check-input" type="checkbox" value="<?=$v_NameWork;?>"
                                     id="opt_<?=$k_Manager?>_<?=$k_NameWork?>" name="opt[<?=$k_Manager?>][]"
                                     <?=$k_ManagersChecked;?>>
