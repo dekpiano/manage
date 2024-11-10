@@ -42,7 +42,7 @@ var  $title = "แผงควบคุม";
         
     }
 
-    public function AdminRegisRepeatDetail($Term,$Year,$IDSubject){
+    public function AdminRegisRepeatDetail($Term,$Year,$IDSubject,$TechID){
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['admin'] = $DBpersonnel->select('pers_id,pers_img')->where('pers_id',$this->session->userdata('login_id'))->get('tb_personnel')->result();
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
@@ -73,6 +73,7 @@ var  $title = "แผงควบคุม";
         tb_register.RepeatStatus,
         tb_register.Grade_Type,
         tb_register.TeacherID,
+        tb_register.RepeatTeacher,
         tb_register.RepeatYear")
         ->from('tb_register')
         ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
@@ -80,13 +81,25 @@ var  $title = "แผงควบคุม";
         ->where('tb_register.RegisterYear',$Term.'/'.$Year)
         ->where('tb_subjects.SubjectYear',$Term.'/'.$Year)
         ->where('tb_subjects.SubjectCode',urldecode($IDSubject))
+        ->where('tb_register.TeacherID',$TechID)
         ->order_by('StudentClass','ASC')
         ->order_by('StudentNumber','ASC')
         ->get()->result();
 
+        $data['DataRepeatTeacher'] = $this->db->select("       
+        tb_register.RepeatTeacher")
+        ->from('tb_register')
+        ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
+        ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
+        ->where('tb_register.RegisterYear',$Term.'/'.$Year)
+        ->where('tb_subjects.SubjectYear',$Term.'/'.$Year)
+        ->where('tb_subjects.SubjectCode',urldecode($IDSubject))
+        ->where('tb_register.RepeatTeacher !=','')
+        ->group_by("RepeatTeacher")
+        ->get()->result();
         
 
-        //echo '<pre>'; print_r($data['DataRepeat']); exit();
+       // echo '<pre>'; print_r($data['DataRepeatTeacher']); exit();
 
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminRegisRepeat/AdminRegisRepeatAdd.php');
@@ -102,7 +115,7 @@ var  $title = "แผงควบคุม";
 
         $CheckRepeat = $this->db->select('onoff_detail,onoff_year')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
         
-        $CheckStudent = $this->db->select('StudentID')
+        $CheckStudent = $this->db->select('StudentID,RepeatConfirm')
         ->where('RegisterYear',$this->input->post('YearRepeat'))
         ->where('SubjectID',$this->input->post('SubjectRepeat'))
         ->get('tb_register')->result();   
@@ -122,18 +135,21 @@ var  $title = "แผงควบคุม";
                      $this->db->where('StudentID',$v_CheckStudent->StudentID);
                     $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
                 }else{
-                    $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
-                    $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
-                    $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
-                    $this->db->where('StudentID',$v_CheckStudent->StudentID);
-                   $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
+                    if($v_CheckStudent->RepeatConfirm ==""){
+                        $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
+                        $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+                        $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
+                        $this->db->where('StudentID',$v_CheckStudent->StudentID);
+                       $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
+                    }
+                    
                 }
             }
         }else{
-            $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
-                 $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
-                 $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
-                $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
+            // $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
+            //      $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+            //      $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
+            //     $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
            
              
         }

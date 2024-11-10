@@ -34,7 +34,7 @@ function TB_RegisRepeatSubject(Year) {
             {
                 data: 'SubjectID',
                 render: function(data, type, row) {
-                    return '<a class="btn-sm app-btn-primary" href="Repeat/Detail/' + row.SubjectYear + '/' + row.SubjectCode + '">ลงทะเบียนเรียนซ้ำ</a>';
+                    return '<a class="btn-sm app-btn-primary" href="Repeat/Detail/' + row.SubjectYear + '/' + row.SubjectCode + '/' + row.TeacherID +'">ลงทะเบียนเรียนซ้ำ</a>';
                 }
             },
             {

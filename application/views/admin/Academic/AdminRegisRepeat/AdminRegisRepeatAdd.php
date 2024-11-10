@@ -35,7 +35,7 @@
                                         <select name="RepeatTeacher" id="RepeatTeacher" class="form-select">
                                             <option value="">เลือกครูสอน...</option>
                                             <?php foreach ($Teacher as $key => $v_Teache):?>
-                                                <option <?=$DataRepeat[0]->TeacherID==$v_Teache->pers_id?"selected":""?> value="<?=$v_Teache->pers_id?>"><?=$v_Teache->pers_prefix.$v_Teache->pers_firstname.' '.$v_Teache->pers_lastname?></option>
+                                                <option <?=$this->uri->segment(9)==$v_Teache->pers_id?"selected":""?> value="<?=$v_Teache->pers_id?>"><?=$v_Teache->pers_prefix.$v_Teache->pers_firstname.' '.$v_Teache->pers_lastname?></option>
                                                 <?php endforeach;?>
                                         </select>
                                         <br>                                       
