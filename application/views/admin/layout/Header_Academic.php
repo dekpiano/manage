@@ -20,6 +20,9 @@
 
 </li>
 <div class="mx-3">บริหารงานวิชาการ</div>
+<?php $Exp_Checkrloes = explode('|', $this->session->userdata('CheckrloesAcademic'))?>
+
+<?php if(in_array("งานทะเบียน",$Exp_Checkrloes)): ?>
 <li class="nav-item has-submenu">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
     <a class="nav-link submenu-toggle <?=$this->uri->segment('3')=="Registration" ? "active" :""?>" href="#"
@@ -77,7 +80,8 @@
     </div>
 </li>
 <!--//nav-item-->
-
+<?php endif; ?>
+<?php if(in_array("งานวัดและประเมินผล",$Exp_Checkrloes)): ?>
 <li class="nav-item has-submenu">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
     <a class="nav-link submenu-toggle <?=$this->uri->segment('3')=="Evaluate" ? "active" :""?>" href="#"
@@ -159,7 +163,8 @@
     </div>
 </li>
 <!--//nav-item-->
-
+<?php endif; ?>
+<?php if(in_array("งานหลักสูตร",$Exp_Checkrloes)): ?>
 <li class="nav-item has-submenu">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
     <a class="nav-link submenu-toggle <?=$this->uri->segment('2')=="Extra" ? "active" :""?>" href="#"
@@ -185,6 +190,7 @@
         <!--//submenu-arrow-->
     </a>
     <!--//nav-link-->
+  
     <div id="submenu-3" class="collapse submenu submenu-3 <?=$this->uri->segment('3')=="Course" ? "show" :""?>"
         data-bs-parent="#menu-accordion">
         <ul class="submenu-list list-unstyled">
@@ -207,6 +213,8 @@
     </div>
 </li>
 <!--//nav-item-->
+<?php endif; ?>
+<?php if($this->session->userdata('status') === "manager" || $this->session->userdata('login_id') == "pers_021"):?>
 <li class="nav-item ">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
     <a class="nav-link <?=$this->uri->segment('2')=="Acade" && $this->uri->segment('4')=="AdminRoles" ? "active" :""?>"
@@ -218,3 +226,4 @@
     </a>
     <!--//nav-link-->
 </li>
+<?php endif; ?>
