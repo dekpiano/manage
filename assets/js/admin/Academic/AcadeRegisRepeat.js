@@ -139,7 +139,7 @@ $(document).on("change", "#RoomEdit", function() {
 $(document).on("submit", "#FormRegisRepeatUpdate", function(e) {
     e.preventDefault();
     $.ajax({
-        url: '../../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatAdd',
+        url: '../../../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatAdd',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
