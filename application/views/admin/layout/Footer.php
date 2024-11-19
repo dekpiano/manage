@@ -54,6 +54,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
+
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -158,9 +159,11 @@ new SlimSelect({
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=15"></script> 
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSendPlan.js?v=12"></script>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=3"></script>
-    
-
 <?php endif; ?>  
+<?php if($this->uri->segment(3) ==="DevelopStudents"): ?>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents.js?v=1"></script>
+    <?php endif; ?> 
+
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=17"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeReport.js?v=21"></script>

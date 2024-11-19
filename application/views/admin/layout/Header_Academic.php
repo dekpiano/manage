@@ -190,7 +190,7 @@
         <!--//submenu-arrow-->
     </a>
     <!--//nav-link-->
-  
+
     <div id="submenu-3" class="collapse submenu submenu-3 <?=$this->uri->segment('3')=="Course" ? "show" :""?>"
         data-bs-parent="#menu-accordion">
         <ul class="submenu-list list-unstyled">
@@ -214,6 +214,48 @@
 </li>
 <!--//nav-item-->
 <?php endif; ?>
+
+<?php //if(in_array("งานพัฒนาผู้เรียน",$Exp_Checkrloes)): ?>
+<li class="nav-item has-submenu">
+    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+    <a class="nav-link submenu-toggle <?=$this->uri->segment('3')=="DevelopStudents" ? "active" :""?>" href="#"
+        data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-4">
+        <span class="nav-icon">
+            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z" />
+                <path
+                    d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z" />
+            </svg>
+        </span>
+        <span class="nav-link-text">งานพัฒนาผู้เรียน</span>
+        <span class="submenu-arrow">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>
+        </span>
+        <!--//submenu-arrow-->
+    </a>
+    <!--//nav-link-->
+
+    <div id="submenu-4" class="collapse submenu submenu-4 <?=$this->uri->segment('3')=="DevelopStudents" ? "show" :""?>"
+        data-bs-parent="#menu-accordion">
+        <ul class="submenu-list list-unstyled">
+            <li class="submenu-item"><a
+                    class="submenu-link <?=$this->uri->segment('4')=="ClubsMain" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/DevelopStudents/ClubsMain');?>">ชุมนุม</a>
+            </li>
+
+        </ul>
+    </div>
+</li>
+<!--//nav-item-->
+<?php //endif; ?>
+
 <?php if($this->session->userdata('status') === "manager" || $this->session->userdata('login_id') == "pers_021"):?>
 <li class="nav-item ">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
