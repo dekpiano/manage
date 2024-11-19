@@ -6,10 +6,11 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
                     <div>รายชื่อชุมนุม</div>
-                    <div><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#ModalAddClubs">+
+                    <div><a class="btn btn-secondary BtnAddClub" href="#">+
                             เพิ่มชุมนุม</a></div>
                 </div>
                 <div class="card-body">
+                <div class="table-responsive">
                     <table class="table table-hover" id="TbClubs">
                         <thead>
                             <tr>
@@ -26,6 +27,7 @@
                             
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
 
@@ -38,16 +40,17 @@
         }
     </style>
 <!-- Modal -->
-<div class="modal fade" id="ModalAddClubs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalAddClubs" tabindex="-1" aria-labelledby="clubModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">เพิ่มชุมนุม</h5>
+                <h5 class="modal-title" id="clubModalLabel">เพิ่มชุมนุม</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Club Form -->
-                <form action="/add_club" method="POST" id="FormAddClubs">
+                <form  method="POST" id="FormAddClubs">
+                <input type="hidden" name="club_id" id="club_id">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">

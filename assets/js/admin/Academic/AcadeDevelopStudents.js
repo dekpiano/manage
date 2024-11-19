@@ -18,19 +18,43 @@ $('#TbClubs').DataTable({
         },
         { "data": "club_name" },
         { "data": "club_description" },
-        { "data": "club_faculty_advisor" },
+        { 
+          "data": null, "render": function (data, type, row, meta) {
+                return row.pers_prefix+row.pers_firstname+' '+row.pers_lastname; // แสดงเลขลำดับ
+            }
+         },
         { "data": "club_max_participants" },
-        { "data": "club_status" }
+        { "data": null, "render": function (data, type, row) {
+          return `
+              <div class="text-center d-flex">
+                  <button class="btn-sm btn-primary edit-btn" data-id="${row.club_id}" title="แก้ไข">
+                      <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-sm btn-danger delete-btn" data-id="${row.club_id}" title="ลบ">
+                      <i class="fas fa-trash"></i>
+                  </button>
+              </div>
+          `;
+      }}
     ]
 });
 
-
+$(document).on('click', '.BtnAddClub', function() {
+   $('#ModalAddClubs').modal('show');
+   $('#FormAddClubs')[0].reset();
+   faculty.set('');
+   $('#clubModalLabel').text('เพิ่มชุมนุม');
+});
 
 $(document).on('submit','#FormAddClubs',function (e) {
     e.preventDefault(); // Prevent default form submission
-    
+
+    const url = $('#club_id').val() 
+    ? "../../../admin/academic/ConAdminDevelopStudents/ClubsUpdate" // แก้ไข
+    : "../../../admin/academic/ConAdminDevelopStudents/ClubsInsert"; // เพิ่มใหม่
+
     $.ajax({
-      url: '../../../admin/academic/ConAdminDevelopStudents/ClubsInsert', // Controller method for saving data
+      url: url, // Controller method for saving data
       type: 'POST',
       data: $(this).serialize(), // Serialize form data
       success: function (response) {
@@ -44,6 +68,8 @@ $(document).on('submit','#FormAddClubs',function (e) {
           // Reset form
           $('#FormAddClubs')[0].reset();
           faculty.set('');
+
+          $('#TbClubs').DataTable().ajax.reload(); // รีเฟรช DataTable
         } else {
             console.log('ผิดพลาด');
         }
@@ -53,3 +79,30 @@ $(document).on('submit','#FormAddClubs',function (e) {
       }
     });
   });
+
+   // เปิด Modal เพื่อแก้ไขข้อมูล
+   $(document).on('click', '.edit-btn', function() {
+    
+    const clubId = $(this).data('id');
+   
+    $.ajax({
+        url: "../../../admin/academic/ConAdminDevelopStudents/ClubsEdit/" + clubId,
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $('#clubModalLabel').text('แก้ไขชุมนุม'); // เปลี่ยน Title
+            $('#club_id').val(data.club_id); 
+            $('#club_year').val(data.club_year); 
+            $('#club_trem').val(data.club_trem); 
+            $('#club_name').val(data.club_name); 
+            $('#club_description').val(data.club_description); 
+            $('#club_max_participants').val(data.club_max_participants);            
+            faculty.set(data.club_faculty_advisor);
+
+            $('#ModalAddClubs').modal('show'); // เปิด Modal
+        },
+        error: function() {
+            alert('Error fetching data.');
+        }
+    });
+});

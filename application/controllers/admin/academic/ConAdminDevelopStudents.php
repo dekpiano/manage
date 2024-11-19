@@ -62,8 +62,15 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
     }
 
     public function ClubsShow(){
+        $DBpersonnel = $this->load->database('personnel', TRUE); 
 
-        $clubs = $this->db->get('tb_clubs')->result();
+        $clubs = $this->db->select('skjacth_academic.tb_clubs.*,
+        skjacth_personnel.tb_personnel.pers_prefix,
+        skjacth_personnel.tb_personnel.pers_firstname,
+        skjacth_personnel.tb_personnel.pers_lastname')
+        ->from('skjacth_academic.tb_clubs')
+        ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_clubs.club_faculty_advisor')
+        ->get()->result();
         echo json_encode(['data' => $clubs]); // ส่งข้อมูลกลับในรูปแบบ JSON
 
     }
@@ -86,8 +93,29 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         } else{
             echo 0;
         }
-      
+    }
 
+    public function ClubsEdit($id){
+
+        $data = $this->db->get_where('tb_clubs', ['club_id' => $id])->row_array();
+        echo json_encode($data);
+    }
+
+    public function ClubsUpdate(){
+
+        $data = [
+            'club_name' => $this->input->post('club_name'),
+            'club_description' => $this->input->post('club_description'),
+            'club_faculty_advisor' => $this->input->post('club_faculty_advisor'),
+            'club_year' => $this->input->post('club_year'),
+            'club_trem' => $this->input->post('club_trem'),
+            'club_max_participants' => $this->input->post('club_max_participants'),
+        ];
+        $id = $this->input->post('club_id');
+        $this->db->where('club_id', $id);
+        $Update = $this->db->update('tb_clubs', $data);
+
+        echo $Update;
     }
 
 
