@@ -55,6 +55,8 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         ->where('pers_status','กำลังใช้งาน')
         ->get('tb_personnel')->result();
 
+        $data['YearAll'] = $this->ClubsViweYearAll();
+
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubsAll.php');
         $this->load->view('admin/layout/Footer.php');
@@ -63,15 +65,23 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
 
     public function ClubsShow(){
         $DBpersonnel = $this->load->database('personnel', TRUE); 
-
+        $year = urldecode($this->input->get('year')); // รับค่าปีการศึกษาจาก AJAX
+        $ExYear = explode("/",$year);
         $clubs = $this->db->select('skjacth_academic.tb_clubs.*,
         skjacth_personnel.tb_personnel.pers_prefix,
         skjacth_personnel.tb_personnel.pers_firstname,
         skjacth_personnel.tb_personnel.pers_lastname')
         ->from('skjacth_academic.tb_clubs')
         ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_clubs.club_faculty_advisor')
+        ->where('club_year',$ExYear[1])
+        ->where('club_trem',$ExYear[0])
         ->get()->result();
-        echo json_encode(['data' => $clubs]); // ส่งข้อมูลกลับในรูปแบบ JSON
+
+        
+        echo json_encode([ "filters" => [
+            "year" => $year
+        ],
+        'data' => $clubs]); // ส่งข้อมูลกลับในรูปแบบ JSON
 
     }
 
@@ -118,5 +128,39 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         echo $Update;
     }
 
+    public function ClubsDelete($id){
 
+        $this->db->where('club_id', $id);
+        $result = $this->db->delete('tb_clubs');
+        if ($result) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error']);
+        }
+    }
+
+    public function ClubsViweYearAll(){
+
+        $this->db->select('club_year,club_trem');
+        $this->db->from('tb_clubs');
+        $this->db->group_by(['club_year', 'club_trem']); // รวมปีและเทอมที่ไม่ซ้ำ
+        $this->db->order_by('club_year', 'DESC'); // เรียงปีการศึกษาล่าสุดลงไป
+        $this->db->order_by('club_trem', 'ASC'); // เรียงเทอม
+        return $this->db->get()->result_array();
+
+        
+    }
+
+    public function ClubsStudentList(){
+
+        $this->db->select('StudentID, CONCAT(StudentPrefix,StudentFirstName," ",StudentLastName," ",StudentClass," เลขที่ ",StudentNumber) AS FullName,StudentClass');
+        $this->db->where('StudentStatus','1/ปกติ');
+        $this->db->order_by('StudentClass','ASC');
+        $this->db->order_by('StudentNumber','ASC');
+        $query = $this->db->get('tb_students');
+        $students = $query->result_array();
+
+
+        echo json_encode($students);
+    }
 }

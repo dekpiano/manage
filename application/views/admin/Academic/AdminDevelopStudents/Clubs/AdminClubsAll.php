@@ -6,27 +6,35 @@
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
                     <div>รายชื่อชุมนุม</div>
+                    <select id="academicYearFilter" name="academicYearFilter" class="form-select w-auto">
+
+                        <?php foreach ($YearAll as $key => $v_YearAll) : ?>
+                        <option value="<?=$v_YearAll['club_trem']?>/<?=$v_YearAll['club_year']?>">
+                            <?=$v_YearAll['club_trem']?>/<?=$v_YearAll['club_year']?></option>
+                        <?php endforeach; ?>
+                    </select>
                     <div><a class="btn btn-secondary BtnAddClub" href="#">+
                             เพิ่มชุมนุม</a></div>
                 </div>
                 <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover" id="TbClubs">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>ปีการศึกษา</th>
-                                <th>ชื่อชุมนุม</th>
-                                <th>ราละเอียดชุมนุม</th>
-                                <th>ครูที่ปรึกษาชุมนุม</th>
-                                <th>จำนวนที่รับ</th>
-                                <th>คำสั่ง</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="TbClubs">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ปีการศึกษา</th>
+                                    <th>ชื่อชุมนุม</th>
+                                    <th>ราละเอียดชุมนุม</th>
+                                    <th>ครูที่ปรึกษาชุมนุม</th>
+                                    <th>จำนวนที่รับ</th>
+                                    <th>ลงเรียน</th>
+                                    <th>คำสั่ง</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -34,11 +42,11 @@
         </div>
     </div>
 </div>
-<style>       
-        .ss-main .ss-single-selected{
-            height: 40px;
-        }
-    </style>
+<style>
+.ss-main .ss-single-selected {
+    height: 40px;
+}
+</style>
 <!-- Modal -->
 <div class="modal fade" id="ModalAddClubs" tabindex="-1" aria-labelledby="clubModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -49,8 +57,8 @@
             </div>
             <div class="modal-body">
                 <!-- Club Form -->
-                <form  method="POST" id="FormAddClubs">
-                <input type="hidden" name="club_id" id="club_id">
+                <form method="POST" id="FormAddClubs">
+                    <input type="hidden" name="club_id" id="club_id">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
@@ -99,10 +107,13 @@
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="club_faculty_advisor" class="form-label">ครูที่ปรึกษาชุมนุม</label>
-                            <select class="club_faculty_advisor" id="club_faculty_advisor"  name="club_faculty_advisor" required1 style="width: 100%;">
+                            <select class="club_faculty_advisor" id="club_faculty_advisor" name="club_faculty_advisor"
+                                required1 style="width: 100%;">
                                 <option value="" disabled selected>เลือกครูที่ปรึกษาชุมนุม</option>
                                 <?php foreach ($Teacher as $key => $v_Teacher) : ?>
-                                <option value="<?=$v_Teacher->pers_id?>"><?=$v_Teacher->pers_prefix.$v_Teacher->pers_firstname.' '.$v_Teacher->pers_lastname?></option>
+                                <option value="<?=$v_Teacher->pers_id?>">
+                                    <?=$v_Teacher->pers_prefix.$v_Teacher->pers_firstname.' '.$v_Teacher->pers_lastname?>
+                                </option>
                                 <?php endforeach;?>
                             </select>
                         </div>
@@ -113,6 +124,48 @@
                         <button type="submit" class="btn btn-primary">บันทึกชุมนุม</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalAddStudents" tabindex="-1" aria-labelledby="AddStudents" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddStudentsTitle">จัดการนักเรียน</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addStudentForm">
+                    <div class="mb-3">
+                        <label for="studentSelect" class="form-label">เลือกนักเรียน</label>
+                        <select id="studentSelect" name="student_ids[]" multiple>
+                            <!-- ตัวเลือกจะถูกเพิ่มผ่าน JavaScript -->
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary text-center ">เพิ่มนักเรียนเข้าชุมนุม</button>
+                    </div>
+                    
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <div class="w-100">
+                    <!-- Card Footer สำหรับแสดงรายชื่อนักเรียน -->
+                    <div class="card">
+                        <div class="card-header">นักเรียนที่เพิ่มล่าสุด</div>
+                        <div class="card-body">
+                            <ul id="addedStudentsList" class="list-group">
+                                <!-- รายการนักเรียนจะถูกเพิ่มที่นี่ -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

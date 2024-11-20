@@ -4,11 +4,22 @@ let faculty = new SlimSelect({
     showSearch: true // เปิดให้สามารถค้นหาได้
 });
 
-$('#TbClubs').DataTable({
+
+$('#academicYearFilter').change(function () {   
+   table.ajax.reload();
+});
+
+const table = $('#TbClubs').DataTable({
+  processing: true,
     "ajax": {
         "url": "../../../admin/academic/ConAdminDevelopStudents/ClubsShow", // URL ที่จะดึงข้อมูล
         "type": "GET",
-        "dataSrc": "data" // บอก DataTable ว่าจะใช้ข้อมูลจากคีย์ 'data'
+        "dataSrc": "data",
+        data: function(d) {
+          
+          console.log('Selected Year:', $('#academicYearFilter').val());
+          d.year = decodeURIComponent($('#academicYearFilter').val());  // ส่ง year ไปใน ajax data
+      }
     },
     "columns": [
         { "data": "club_id" },
@@ -24,6 +35,15 @@ $('#TbClubs').DataTable({
             }
          },
         { "data": "club_max_participants" },
+        { 
+          "data": null, "render": function (data, type, row, meta) {
+                return `
+                 <button class="btn-sm btn-warning BtnAddStudents" data-id="${row.club_id}" title="แก้ไข">
+                      ลงเรียน
+                  </button>
+                `
+            }
+         },
         { "data": null, "render": function (data, type, row) {
           return `
               <div class="text-center d-flex">
@@ -36,7 +56,10 @@ $('#TbClubs').DataTable({
               </div>
           `;
       }}
-    ]
+    ],
+    error: function (settings, helpPage, message) {
+       console.error('DataTable Error:', message);
+    }
 });
 
 $(document).on('click', '.BtnAddClub', function() {
@@ -58,7 +81,6 @@ $(document).on('submit','#FormAddClubs',function (e) {
       type: 'POST',
       data: $(this).serialize(), // Serialize form data
       success: function (response) {
-        console.log(response);
 
         if (response > 0) {
           // Close modal
@@ -70,6 +92,14 @@ $(document).on('submit','#FormAddClubs',function (e) {
           faculty.set('');
 
           $('#TbClubs').DataTable().ajax.reload(); // รีเฟรช DataTable
+          Swal.fire({
+            icon: 'success', // ไอคอน
+            title: 'แจ้งเตือน!',
+            text: 'บันทึกข้อมูลสำเร็จ',
+            showConfirmButton: false,
+            timer: 2000 
+        });
+
         } else {
             console.log('ผิดพลาด');
         }
@@ -106,3 +136,88 @@ $(document).on('submit','#FormAddClubs',function (e) {
         }
     });
 });
+
+$(document).on('click', '.delete-btn', function () {
+  const clubId = $(this).data('id'); // ดึง ID ชุมนุม
+
+  // ใช้ SweetAlert2 สำหรับยืนยัน
+  Swal.fire({
+      title: 'คุณต้องการลบข้อมูลหรือไม่?',
+      text: "ถ้าคุณเลือกลบข้อมูล ข้อมูลทั้งชุมนุมจะหายหมด พร้อมด้วยเวลาทั้งหมด!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          // ส่งคำขอลบข้อมูลไปที่เซิร์ฟเวอร์
+          $.ajax({
+              url: "../../../admin/academic/ConAdminDevelopStudents/ClubsDelete/" + clubId,
+              type: "POST",
+              success: function (response) {
+                  // แจ้งเตือนสำเร็จ
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'แจ้งเตือน!',
+                      text: 'ข้อมูลชุมนุมได้ถูกลบทั้งหมดแล้ว!',
+                      showConfirmButton: false,
+                      timer: 2000
+                  });
+
+                  // รีเฟรช DataTable
+                  $('#TbClubs').DataTable().ajax.reload();
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                  // แจ้งเตือนข้อผิดพลาด
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Error!',
+                      text: textStatus,
+                      confirmButtonText: 'OK'
+                  });
+              }
+          });
+      }
+  });
+});
+
+let slimSelectInstance;
+$(document).on('click', '.BtnAddStudents', function () {
+    $('#AddStudentsTitle').val("จัดการนักเรียน")
+    $('#ModalAddStudents').modal('show');
+
+    // ตรวจสอบและทำลาย SlimSelect เดิม หากมี
+    if (slimSelectInstance) {
+        slimSelectInstance.destroy();
+    }
+
+    // กำหนด SlimSelect ใหม่
+    slimSelectInstance = new SlimSelect({
+      select: '#studentSelect',
+      placeholder: 'ค้นหาและเลือกนักเรียน',
+      closeOnSelect: false, // ให้เลือกได้หลายรายการ
+      allowDeselect: true, // อนุญาตให้ยกเลิกการเลือก
+      searchPlaceholder: 'พิมพ์เพื่อค้นหา...',
+    });
+
+    // โหลดข้อมูลนักเรียนผ่าน AJAX
+    $.ajax({
+      url: "../../../admin/academic/ConAdminDevelopStudents/ClubsStudentList",
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+          const options = data.map(student => ({
+              text: student.FullName,
+              value: student.StudentID,
+          }));
+          slimSelectInstance.setData(options);
+      },
+      error: function (xhr, status, error) {
+          console.error("Error fetching student list:", error);
+      }
+  });
+
+ 
+});
+

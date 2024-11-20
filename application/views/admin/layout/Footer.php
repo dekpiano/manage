@@ -35,8 +35,8 @@
 <script src="<?=base_url();?>assets/plugins/popper.min.js"></script>
 <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
@@ -161,7 +161,7 @@ new SlimSelect({
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=3"></script>
 <?php endif; ?>  
 <?php if($this->uri->segment(3) ==="DevelopStudents"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents.js?v=1"></script>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents.js?v=2.5"></script>
     <?php endif; ?> 
 
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
