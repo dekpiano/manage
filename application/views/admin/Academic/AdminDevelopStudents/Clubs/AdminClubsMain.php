@@ -14,7 +14,7 @@
                                 <h3 class="card-text text-center">12</h3>
                             </div>
                             <div class="card-footer text-center bg-secondary">
-                               <a href="<?=base_url('Admin/Acade/DevelopStudents/ClubsAll')?>" class="text-white "> + เพิ่มชุมนุม</a>
+                               <a href="<?=base_url('Admin/Acade/DevelopStudents/Clubs/All')?>" class="text-white "> + เพิ่มชุมนุม</a>
                             </div>
                         </div>
                     </div>

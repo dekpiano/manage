@@ -67,16 +67,23 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $year = urldecode($this->input->get('year')); // รับค่าปีการศึกษาจาก AJAX
         $ExYear = explode("/",$year);
+        $clubs = array();
         $clubs = $this->db->select('skjacth_academic.tb_clubs.*,
+        GROUP_CONCAT(CONCAT(pers_prefix,pers_firstname," ",pers_lastname) SEPARATOR ", ") as advisor_names,
         skjacth_personnel.tb_personnel.pers_prefix,
         skjacth_personnel.tb_personnel.pers_firstname,
         skjacth_personnel.tb_personnel.pers_lastname')
         ->from('skjacth_academic.tb_clubs')
-        ->join('skjacth_personnel.tb_personnel','skjacth_personnel.tb_personnel.pers_id = skjacth_academic.tb_clubs.club_faculty_advisor')
+        ->join('skjacth_personnel.tb_personnel','FIND_IN_SET(skjacth_personnel.tb_personnel.pers_id , REPLACE(club_faculty_advisor, "|", ",")) > 0','LEFT')
         ->where('club_year',$ExYear[1])
         ->where('club_trem',$ExYear[0])
+        ->group_by('club_id')
         ->get()->result();
 
+        foreach ($clubs as $club) {
+          
+            //$clubs['advisor_names'] = $club->club_faculty_advisor;
+        }
         
         echo json_encode([ "filters" => [
             "year" => $year
@@ -87,10 +94,12 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
 
 
     public function ClubsInsert(){
+        $advisors = json_decode($this->input->post('advisors'));
+        
         $data = [
             'club_name' => $this->input->post('club_name'),
             'club_description' => $this->input->post('club_description'),
-            'club_faculty_advisor' => $this->input->post('club_faculty_advisor'),
+            'club_faculty_advisor' => implode('|',$advisors),
             'club_year' => $this->input->post('club_year'),
             'club_trem' => $this->input->post('club_trem'),
             'club_max_participants' => $this->input->post('club_max_participants'),
@@ -112,11 +121,11 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
     }
 
     public function ClubsUpdate(){
-
+        $advisors = json_decode($this->input->post('advisors'));
         $data = [
             'club_name' => $this->input->post('club_name'),
             'club_description' => $this->input->post('club_description'),
-            'club_faculty_advisor' => $this->input->post('club_faculty_advisor'),
+            'club_faculty_advisor' => implode('|',$advisors),
             'club_year' => $this->input->post('club_year'),
             'club_trem' => $this->input->post('club_trem'),
             'club_max_participants' => $this->input->post('club_max_participants'),
@@ -159,8 +168,104 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         $this->db->order_by('StudentNumber','ASC');
         $query = $this->db->get('tb_students');
         $students = $query->result_array();
-
-
         echo json_encode($students);
+    }
+
+
+    public function ClubsAddStudentToClub(){
+        
+        $student_ids = $this->input->post('student_ids'); 
+        $club_id = $this->input->post('club_id');
+        
+
+        if (empty($student_ids)) {
+            echo json_encode(['status' => false, 'message' => 'กรุณาเลือกนักเรียน']);
+            return;
+        }
+
+        //เช็ดข้อมูลซ้ำ
+        $this->db->select('
+        CONCAT(StudentCode," ",StudentPrefix,StudentFirstName," ",StudentLastName," ",tb_students.StudentClass) AS Fullname,        
+        tb_students.StudentID,
+        tb_students.StudentNumber,
+        tb_club_members.member_club_id,
+        tb_club_members.member_student_id');
+        $this->db->from('tb_club_members');
+        $this->db->join('tb_students', 'tb_students.StudentID = tb_club_members.member_student_id');
+        $this->db->where('member_club_id',$club_id);
+        $this->db->where_in('member_student_id',$student_ids);
+        $result = $this->db->get()->result_array();
+        $duplicate_students = array_column($result, 'Fullname');
+
+        if (!empty($duplicate_students)) {
+            echo json_encode([
+                'status' => 'duplicate',
+                'duplicate_students' => $duplicate_students,
+            ]);
+            return;
+        }
+
+        $data = [];
+        foreach ($student_ids as $student_id) {
+            $data[] = [
+                'member_club_id ' => $club_id, 
+                'member_student_id' => $student_id,
+                'member_join_date' => date('Y-m-d'),
+                'member_role' => 'Member'
+            ];
+        }
+        // เพิ่มนักเรียนเข้าชุมนุม
+        $result = $this->db->insert_batch('tb_club_members', $data);
+        
+        if ($result) {
+           
+            $this->db->where('member_club_id',$club_id);
+            $all_students = $this->db->get('tb_club_members')->result_array();
+
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'บันทึกสำเร็จ',
+                'all_students' => $all_students,
+            ]);
+        } else {
+            echo json_encode(['status' => false, 'message' => 'เกิดข้อผิดพลาด']);
+        }
+
+    }
+
+    public function ClubsTbShowStudentList(){
+
+    $club_id = $this->input->get('club_id');
+
+    $this->db->select('
+    CONCAT(StudentPrefix,StudentFirstName," ",StudentLastName) AS Fullname,
+    tb_students.StudentCode,
+    tb_students.StudentID,
+    tb_students.StudentClass,
+    tb_students.StudentNumber,
+    tb_club_members.member_club_id');
+    $this->db->from('tb_club_members');
+    $this->db->join('tb_students', 'tb_students.StudentID = tb_club_members.member_student_id');
+    $this->db->where('member_club_id', $club_id);
+    $this->db->order_by('StudentClass,StudentNumber','ASC');
+    $query = $this->db->get();
+    echo json_encode($query->result_array());
+
+    }
+
+    public function ClubDeleteStudentToClub(){
+
+        $club_id = $this->input->post('club_id');
+        $student_id = $this->input->post('student_id');
+        // ลบข้อมูลนักเรียนออกจากชุมนุม
+        $this->db->where('member_club_id', $club_id);
+        $this->db->where('member_student_id', $student_id);
+        $this->db->delete('tb_club_members');
+
+        if ($this->db->affected_rows() > 0) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'ไม่สามารถลบข้อมูลได้']);
+        }
     }
 }

@@ -107,9 +107,8 @@
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="club_faculty_advisor" class="form-label">ครูที่ปรึกษาชุมนุม</label>
-                            <select class="club_faculty_advisor" id="club_faculty_advisor" name="club_faculty_advisor"
+                            <select class="club_faculty_advisor" id="club_faculty_advisor" name="club_faculty_advisor[]" multiple
                                 required1 style="width: 100%;">
-                                <option value="" disabled selected>เลือกครูที่ปรึกษาชุมนุม</option>
                                 <?php foreach ($Teacher as $key => $v_Teacher) : ?>
                                 <option value="<?=$v_Teacher->pers_id?>">
                                     <?=$v_Teacher->pers_prefix.$v_Teacher->pers_firstname.' '.$v_Teacher->pers_lastname?>
@@ -140,7 +139,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addStudentForm">
+                <form id="FormAddStudentToClub">
+                    <input type="hidden" name="club_id" id="club_id" class="club_id" value="">
                     <div class="mb-3">
                         <label for="studentSelect" class="form-label">เลือกนักเรียน</label>
                         <select id="studentSelect" name="student_ids[]" multiple>
@@ -148,9 +148,9 @@
                         </select>
                     </div>
                     <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary text-center ">เพิ่มนักเรียนเข้าชุมนุม</button>
+                        <button type="submit" class="btn btn-primary text-center ">เพิ่มนักเรียนเข้าชุมนุม</button>
                     </div>
-                    
+
                 </form>
             </div>
 
@@ -158,11 +158,25 @@
                 <div class="w-100">
                     <!-- Card Footer สำหรับแสดงรายชื่อนักเรียน -->
                     <div class="card">
-                        <div class="card-header">นักเรียนที่เพิ่มล่าสุด</div>
+                        <div class="card-header" id="registeredCount">นักเรียนที่ลงทะเบียนแล้ว:</div>
                         <div class="card-body">
-                            <ul id="addedStudentsList" class="list-group">
-                                <!-- รายการนักเรียนจะถูกเพิ่มที่นี่ -->
-                            </ul>
+                            <!-- Registered Students -->
+                         
+                                <table class="table table-striped" id="TbShowStudentRegisClub">
+                                    <thead>
+                                        <tr>
+                                            <th>ชั้น</th>
+                                            <th>เลขที่</th>
+                                            <th>รหัสนักเรียน</th>
+                                            <th>ชื่อ-สกุล</th>
+                                            <th>การกระทำ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="addedStudentsList">
+                                        <!-- ข้อมูลจะถูกโหลดที่นี่ -->
+                                    </tbody>
+                                </table>
+                          
                         </div>
                     </div>
                 </div>

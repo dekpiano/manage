@@ -246,8 +246,8 @@
         data-bs-parent="#menu-accordion">
         <ul class="submenu-list list-unstyled">
             <li class="submenu-item"><a
-                    class="submenu-link <?=$this->uri->segment('4')=="ClubsMain" ? "active" :""?>"
-                    href="<?=base_url('Admin/Acade/DevelopStudents/ClubsMain');?>">ชุมนุม</a>
+                    class="submenu-link <?=$this->uri->segment('4')=="Clubs" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/DevelopStudents/Clubs/Main');?>">จัดการชุมนุม</a>
             </li>
 
         </ul>

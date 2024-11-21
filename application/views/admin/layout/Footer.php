@@ -50,7 +50,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slim-select@1.26.0/dist/slimselect.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
@@ -161,7 +161,7 @@ new SlimSelect({
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=3"></script>
 <?php endif; ?>  
 <?php if($this->uri->segment(3) ==="DevelopStudents"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents.js?v=2.5"></script>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents.js?v=3.4"></script>
     <?php endif; ?> 
 
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
@@ -182,7 +182,7 @@ new SlimSelect({
 <?php endif; ?>
 
 <?php if($this->uri->segment(2) ==="General"): ?>
-<script src="<?=base_url();?>assets/js/admin/General/GeneralAdminRoles.js?v=4"></script>
+<script src="<?=base_url();?>assets/js/admin/General/GeneralAdminRoles.js?v=5"></script>
 <?php endif; ?>
 
 
