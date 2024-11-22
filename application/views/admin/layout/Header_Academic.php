@@ -215,7 +215,7 @@
 <!--//nav-item-->
 <?php endif; ?>
 
-<?php //if(in_array("งานพัฒนาผู้เรียน",$Exp_Checkrloes)): ?>
+<?php if(in_array("งานพัฒนาผู้เรียน",$Exp_Checkrloes)): ?>
 <li class="nav-item has-submenu">
     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
     <a class="nav-link submenu-toggle <?=$this->uri->segment('3')=="DevelopStudents" ? "active" :""?>" href="#"
@@ -254,7 +254,7 @@
     </div>
 </li>
 <!--//nav-item-->
-<?php //endif; ?>
+<?php endif; ?>
 
 <?php if($this->session->userdata('status') === "manager" || $this->session->userdata('login_id') == "pers_021"):?>
 <li class="nav-item ">

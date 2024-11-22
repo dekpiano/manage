@@ -35,16 +35,23 @@
 <script src="<?=base_url();?>assets/plugins/popper.min.js"></script>
 <script src="<?=base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<!-- DataTable JS -->
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js
+
+<!-- DataTable Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<!-- JSZip for Excel Export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- pdfmake for PDF Export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
 "></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
@@ -142,10 +149,10 @@ new SlimSelect({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=55"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=10"></script>
 
 <?php if($this->uri->segment(3) ==="Setting"): ?>  
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdminRoles.js?v=4.2"></script>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdminRoles.js?v=5"></script>
 <?php endif; ?> 
 
 <?php if($this->uri->segment(3) ==="Registration"): ?>   
@@ -160,9 +167,12 @@ new SlimSelect({
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSendPlan.js?v=12"></script>
     <script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=3"></script>
 <?php endif; ?>  
-<?php if($this->uri->segment(3) ==="DevelopStudents"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents.js?v=3.4"></script>
-    <?php endif; ?> 
+
+<?php if($this->uri->segment(5) ==="All"): ?>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-club.js?v=5"></script>
+<?php elseif($this->uri->segment(5) ==="Main") : ?>
+    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-dashborad.js?v=6"></script>
+<?php endif; ?> 
 
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=17"></script>

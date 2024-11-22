@@ -36,6 +36,33 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         $data = $this->AllData();
         $data['title'] = "หน้าแรกชุมนุม";
 
+        // ชื่อตารางชุมนุม
+        $data['TotalClubs'] = $this->db->where('club_year', '2567')
+        ->where('club_trem', '1')
+        ->get('tb_clubs')->result();
+        // จำนวนนักเรียนลงทะเบียน
+        $data['TotalStudent'] = $this->db->select('COUNT(tb_club_members.member_student_id) AS StudentAll')
+        ->from('tb_club_members')
+        ->join('tb_clubs','tb_club_members.member_club_id = tb_clubs.club_id')
+        ->where('club_year', '2567')->where('club_trem', '1')
+        ->get()->result();
+        //นับจำนวนครู
+        $data['TotalTeacher'] = $this->db->select("SUM(LENGTH(club_faculty_advisor) - LENGTH(REPLACE(club_faculty_advisor, '|', '')) + 1) AS total_advisors")
+        ->where('club_year', '2567')
+        ->where('club_trem', '1')
+        ->get('tb_clubs')->result();
+        // ชุมนุมยอดนิยม
+        $data['ClubPopula'] = $this->db->select('
+        tb_clubs.club_id,
+        tb_clubs.club_name,
+        COUNT(tb_club_members.member_student_id) AS total_members
+        ')->from('tb_clubs')
+        ->join('tb_club_members','tb_club_members.member_club_id = tb_clubs.club_id','left')
+        ->group_by('tb_clubs.club_id')
+        ->order_by('total_members','DESC')
+        ->limit(1)->get()->row();
+
+
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubsMain.php');
         $this->load->view('admin/layout/Footer.php');
@@ -268,4 +295,40 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
             echo json_encode(['status' => 'error', 'message' => 'ไม่สามารถลบข้อมูลได้']);
         }
     }
+
+    //------------------------ แดชบอร์ด --------------------------
+    // ดูนักเรียนลงทะเบียน
+    public function ClubGetClassroom(){
+
+        $query = $this->db->query("SELECT DISTINCT StudentClass FROM tb_students WHERE StudentStatus = '1/ปกติ' ORDER BY StudentClass ASC");
+        $classrooms = $query->result_array();
+        echo json_encode(['classrooms' => $classrooms]);
+    }
+
+    public function ClubGetStudentRegisterClub(){
+        $classFilter = $this->input->get('classFilter');
+        $this->db->select('
+            IFNULL(tb_clubs.club_name, "ยังไม่ได้เลือกชุมนุม") AS club_status,
+            tb_clubs.club_id,
+            tb_clubs.club_name,
+            tb_students.StudentClass,
+            tb_students.StudentCode,
+            tb_students.StudentNumber,
+            CONCAT(StudentPrefix,StudentFirstName," ",StudentLastName) AS Fullname
+        ');
+        $this->db->from('tb_students');
+        $this->db->join('tb_club_members','tb_club_members.member_student_id = tb_students.StudentID','left');
+        $this->db->join('tb_clubs','tb_club_members.member_club_id = tb_clubs.club_id','left');
+        $this->db->where('tb_students.StudentStatus', '1/ปกติ');
+        if (!empty($classFilter)) {
+            $this->db->where('tb_students.StudentClass', $classFilter); // กรองตามห้องเรียน
+        }
+        $query =  $this->db->get()->result_array();
+        echo json_encode(['data' => $query]);
+    }
+
+
+
 }
+
+

@@ -39,7 +39,7 @@ const table = $('#TbClubs').DataTable({
         { 
           "data": null, "render": function (data, type, row, meta) {
                 return `
-                 <button class="btn-sm btn-warning BtnAddStudents" data-id="${row.club_id}" title="แก้ไข" clubname="${row.club_name}">
+                 <button class="btn-sm btn-warning BtnAddStudents" data-id="${row.club_id}" title="ลงทะเบียนเรียนชุมนุม" clubname="${row.club_name}">
                       ลงเรียน
                   </button>
                 `

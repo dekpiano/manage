@@ -205,7 +205,7 @@
                             </div>
                         
                             <?php 
-                            $NameWork = ['งานทะเบียน','งานวัดและประเมินผล','งานหลักสูตร']; 
+                            $NameWork = ['งานทะเบียน','งานวัดและประเมินผล','งานหลักสูตร','งานพัฒนาผู้เรียน']; 
                             
                              foreach ($NameWork as $k_NameWork => $v_NameWork) : 
                                 $k_ManagersChecked = isset($studentTasks[$v_Manager->admin_rloes_userid]) && in_array($v_NameWork, $studentTasks[$v_Manager->admin_rloes_userid]) ? 'checked' : '';

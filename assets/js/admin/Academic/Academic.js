@@ -128,12 +128,13 @@ $(document).ready(function() {
         });
     });
 
-    for (let index = 3; index <= 8; index++) {
-        new SlimSelect({
-            select: '#set_admin'+index
-        })
-    }
+    // for (let index = 3; index <= 8; index++) {
+    //     new SlimSelect({
+    //         select: '#set_admin'+index
+    //     })
+    // }
     
+
   
 
 

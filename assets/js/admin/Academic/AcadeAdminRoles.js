@@ -1,3 +1,10 @@
+     // ใช้ querySelectorAll เพื่อเลือกทุก select ที่มี class .my-select
+document.querySelectorAll('.set_admin').forEach(function(selectElement) {
+    new SlimSelect({
+        select: selectElement
+    });
+});
+ 
  // ฟังก์ชันเพื่อส่งข้อมูลไปยังเซิร์ฟเวอร์
  function sendData() {
     // สร้างอาเรย์เก็บค่าที่เลือกสำหรับทุกบุคคล
@@ -24,7 +31,6 @@
         };
     });
     
-    console.log(selectedOptions);
     
     // ส่งค่าผ่าน AJAX
     $.ajax({

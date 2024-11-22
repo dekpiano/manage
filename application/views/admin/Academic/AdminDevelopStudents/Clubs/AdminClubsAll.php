@@ -1,20 +1,38 @@
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
-        <div class="container-xl">
+        <div class="container">
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">จัดการชุมนุม</h1>
+                </div>
+                <div class="col-auto">
+                    <div class="page-utilities">
+                        <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 
+                            <div class="col-auto">
+                                <select id="academicYearFilter" name="academicYearFilter" class="form-select w-auto">
+
+                                    <?php foreach ($YearAll as $key => $v_YearAll) : ?>
+                                    <option value="<?=$v_YearAll['club_trem']?>/<?=$v_YearAll['club_year']?>">
+                                        <?=$v_YearAll['club_trem']?>/<?=$v_YearAll['club_year']?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <a class="btn app-btn-primary BtnAddClub" href="#">+ เพิ่มชุมนุม</a>
+                            </div>
+                        </div>
+                        <!--//row-->
+                    </div>
+                    <!--//table-utilities-->
+                </div>
+                <!--//col-auto-->
+            </div>
             <!-- Activities Table -->
             <div class="card">
                 <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
                     <div>รายชื่อชุมนุม</div>
-                    <select id="academicYearFilter" name="academicYearFilter" class="form-select w-auto">
 
-                        <?php foreach ($YearAll as $key => $v_YearAll) : ?>
-                        <option value="<?=$v_YearAll['club_trem']?>/<?=$v_YearAll['club_year']?>">
-                            <?=$v_YearAll['club_trem']?>/<?=$v_YearAll['club_year']?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <div><a class="btn btn-secondary BtnAddClub" href="#">+
-                            เพิ่มชุมนุม</a></div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -107,8 +125,8 @@
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="club_faculty_advisor" class="form-label">ครูที่ปรึกษาชุมนุม</label>
-                            <select class="club_faculty_advisor" id="club_faculty_advisor" name="club_faculty_advisor[]" multiple
-                                required1 style="width: 100%;">
+                            <select class="club_faculty_advisor" id="club_faculty_advisor" name="club_faculty_advisor[]"
+                                multiple required1 style="width: 100%;">
                                 <?php foreach ($Teacher as $key => $v_Teacher) : ?>
                                 <option value="<?=$v_Teacher->pers_id?>">
                                     <?=$v_Teacher->pers_prefix.$v_Teacher->pers_firstname.' '.$v_Teacher->pers_lastname?>
@@ -161,22 +179,22 @@
                         <div class="card-header" id="registeredCount">นักเรียนที่ลงทะเบียนแล้ว:</div>
                         <div class="card-body">
                             <!-- Registered Students -->
-                         
-                                <table class="table table-striped" id="TbShowStudentRegisClub">
-                                    <thead>
-                                        <tr>
-                                            <th>ชั้น</th>
-                                            <th>เลขที่</th>
-                                            <th>รหัสนักเรียน</th>
-                                            <th>ชื่อ-สกุล</th>
-                                            <th>การกระทำ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="addedStudentsList">
-                                        <!-- ข้อมูลจะถูกโหลดที่นี่ -->
-                                    </tbody>
-                                </table>
-                          
+
+                            <table class="table table-striped" id="TbShowStudentRegisClub">
+                                <thead>
+                                    <tr>
+                                        <th>ชั้น</th>
+                                        <th>เลขที่</th>
+                                        <th>รหัสนักเรียน</th>
+                                        <th>ชื่อ-สกุล</th>
+                                        <th>การกระทำ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="addedStudentsList">
+                                    <!-- ข้อมูลจะถูกโหลดที่นี่ -->
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>
