@@ -62,11 +62,20 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         ->order_by('total_members','DESC')
         ->limit(1)->get()->row();
 
+        
 
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubsMain.php');
         $this->load->view('admin/layout/Footer.php');
 
+    }
+
+    public function ClubGetDateRegister(){
+        date_default_timezone_set('Asia/Bangkok');
+        $Dete = $this->db->select('c_onoff_regisstart,c_onoff_regisend')
+        ->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+    
+        echo json_encode(['datetime' => $Dete]);
     }
 
     public function ClubsAll(){  
@@ -327,6 +336,53 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         echo json_encode(['data' => $query]);
     }
 
+    // ตั้งค่าปีการศึกษา
+    public function ClubSetOnoffYear(){
+        // รับค่าจาก AJAX
+        $c_onoff_term = $this->input->post('c_onoff_term');
+        $c_onoff_year = $this->input->post('c_onoff_year');
+
+        $all = $c_onoff_year.'/'.$c_onoff_term;
+
+        $this->db->where('c_onoff_id', 1);
+        $result =  $this->db->update('tb_club_onoff', ['c_onoff_year' => $all]);
+        if ($result) {
+            echo json_encode(['status' => 'success', 'message' => 'บันทึกข้อมูลสำเร็จ']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล']);
+        }
+
+    }
+
+    // ตั้งค่าวันลงทะเบียน
+    public function ClubSetDateRegister(){
+    
+         // แปลงชื่อเดือนจากภาษาไทยเป็นภาษาอังกฤษ
+         $thaiMonthFull = [
+            'มกราคม' => 'January', 'กุมภาพันธ์' => 'February', 'มีนาคม' => 'March', 'เมษายน' => 'April',
+            'พฤษภาคม' => 'May', 'มิถุนายน' => 'June', 'กรกฎาคม' => 'July', 'สิงหาคม' => 'August',
+            'กันยายน' => 'September', 'ตุลาคม' => 'October', 'พฤศจิกายน' => 'November', 'ธันวาคม' => 'December'
+        ];
+
+        $c_onoff_regisstart = $this->input->post('c_onoff_regisstart');
+        $c_onoff_regisend = $this->input->post('c_onoff_regisend');
+
+        $dateString1 = strtr($c_onoff_regisstart, $thaiMonthFull);
+        $start = DateTime::createFromFormat('d F Y H:i', $dateString1);
+        $dateString2 = strtr($c_onoff_regisend, $thaiMonthFull);
+        $end = DateTime::createFromFormat('d F Y H:i', $dateString2);
+        $start1 = $start->format('Y-m-d H:i:s');
+        $end1 = $end->format('Y-m-d H:i:s');
+
+        $this->db->where('c_onoff_id', 1);
+        $result =  $this->db->update('tb_club_onoff', ['c_onoff_regisstart' => $start1,'c_onoff_regisend'=> $end1]);
+        if ($result) {
+            echo json_encode(['status' => 'success', 'message' => 'บันทึกข้อมูลสำเร็จ']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล']);
+        }
+
+    }
 
 
 }

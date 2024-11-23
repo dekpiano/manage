@@ -1,33 +1,33 @@
 </div>
 <!--//app-wrapper-->
- <!-- Modal -->
- <div class="modal fade" id="ShowStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">รายชื่อนักเรียน</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body">
-                          <table class="table table-hover" id="TB_showstudent">
-                              <thead>
-                                  <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">เลขประจำตัว</th>
-                                      <th scope="col">ชื่อ - นามสกุล</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
+<!-- Modal -->
+<div class="modal fade" id="ShowStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">รายชื่อนักเรียน</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover" id="TB_showstudent">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">เลขประจำตัว</th>
+                            <th scope="col">ชื่อ - นามสกุล</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="<?=base_url();?>assets/plugins/jquery-3.4.1.min.js"></script>
@@ -61,6 +61,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
@@ -79,60 +81,59 @@ Swal.fire("แจ้งเตือน", "<?=$this->session->flashdata('messge')
 <?php endif; $this->session->mark_as_temp('msg',20); ?>
 
 <script>
-    $('#example').DataTable({
+$('#example').DataTable({
     "responsive": true,
     "ordering": false,
 });
-
 </script>
 
-<script> 
- $.datetimepicker.setLocale('th');
-    $("#pers_britday").datetimepicker({
-        timepicker:false,
-        format:'d-m-Y',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000            
-        lang:'th',  // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
-        onSelectDate:function(dp,$input){
-            var yearT=new Date(dp).getFullYear()-0;  
-            var yearTH=yearT+543;
-            var fulldate=$input.val();
-            var fulldateTH=fulldate.replace(yearT,yearTH);
-            $input.val(fulldateTH);
-        },
-    });
-     // กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
-     $("#pers_britday").on("mouseenter mouseleave",function(e){
-        var dateValue=$(this).val();
-        if(dateValue!=""){
-                var arr_date=dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
-                // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
-                //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0 
-                if(e.type=="mouseenter"){
-                    var yearT=arr_date[2]-543;
-                }       
-                if(e.type=="mouseleave"){
-                    var yearT=parseInt(arr_date[2])+543;
-                }   
-                dateValue=dateValue.replace(arr_date[2],yearT);
-                $(this).val(dateValue);                                                 
-        }       
-    });
+<script>
+$.datetimepicker.setLocale('th');
+$("#pers_britday").datetimepicker({
+    timepicker: false,
+    format: 'd-m-Y', // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000            
+    lang: 'th', // ต้องกำหนดเสมอถ้าใช้ภาษาไทย และ เป็นปี พ.ศ.
+    onSelectDate: function(dp, $input) {
+        var yearT = new Date(dp).getFullYear() - 0;
+        var yearTH = yearT + 543;
+        var fulldate = $input.val();
+        var fulldateTH = fulldate.replace(yearT, yearTH);
+        $input.val(fulldateTH);
+    },
+});
+// กรณีใช้กับ input ต้องกำหนดส่วนนี้ด้วยเสมอ เพื่อปรับปีให้เป็น ค.ศ. ก่อนแสดงปฏิทิน
+$("#pers_britday").on("mouseenter mouseleave", function(e) {
+    var dateValue = $(this).val();
+    if (dateValue != "") {
+        var arr_date = dateValue.split("-"); // ถ้าใช้ตัวแบ่งรูปแบบอื่น ให้เปลี่ยนเป็นตามรูปแบบนั้น
+        // ในที่นี้อยู่ในรูปแบบ 00-00-0000 เป็น d-m-Y  แบ่งด่วย - ดังนั้น ตัวแปรที่เป็นปี จะอยู่ใน array
+        //  ตัวที่สอง arr_date[2] โดยเริ่มนับจาก 0 
+        if (e.type == "mouseenter") {
+            var yearT = arr_date[2] - 543;
+        }
+        if (e.type == "mouseleave") {
+            var yearT = parseInt(arr_date[2]) + 543;
+        }
+        dateValue = dateValue.replace(arr_date[2], yearT);
+        $(this).val(dateValue);
+    }
+});
 
 
-    $(function() {
-        $("#show_date").datepicker({
-            dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
-            yearOffset:543,
-            changeMonth: true, // กำหนดให้เปลี่ยนเดือนได้
-            changeYear: true, //กำหนดให้เปลี่ยนปีได้
-            dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], //กำหนดชื่อย่อของวัน เป็น ภาษาไทย
-            monthNamesShort: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม",
-                "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-            ],
-        });
+$(function() {
+    $("#show_date").datepicker({
+        dateFormat: "dd-mm-yy", //กำหนดรูปแบบวันที่ ปี - เดือน - วัน
+        yearOffset: 543,
+        changeMonth: true, // กำหนดให้เปลี่ยนเดือนได้
+        changeYear: true, //กำหนดให้เปลี่ยนปีได้
+        dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], //กำหนดชื่อย่อของวัน เป็น ภาษาไทย
+        monthNamesShort: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม",
+            "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+        ],
     });
+});
 
- 
+
 $('#multiselect').multiselect();
 
 
@@ -142,37 +143,34 @@ new SlimSelect({
 new SlimSelect({
     select: '#classroom'
 })
-
-
-
 </script>
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
 <script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=10"></script>
 
-<?php if($this->uri->segment(3) ==="Setting"): ?>  
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdminRoles.js?v=5"></script>
-<?php endif; ?> 
+<?php if($this->uri->segment(3) ==="Setting"): ?>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdminRoles.js?v=5"></script>
+<?php endif; ?>
 
-<?php if($this->uri->segment(3) ==="Registration"): ?>   
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=35"></script>  
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisRepeat.js?v=14"></script>  
-    <?php if($this->uri->segment(4) ==="Students"): ?> 
-        <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=19"></script>
-    <?php endif; ?>
+<?php if($this->uri->segment(3) ==="Registration"): ?>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeEnroll.js?v=35"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisRepeat.js?v=14"></script>
+<?php if($this->uri->segment(4) ==="Students"): ?>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=19"></script>
+<?php endif; ?>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Course"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=15"></script> 
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSendPlan.js?v=12"></script>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=3"></script>
-<?php endif; ?>  
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=15"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeSendPlan.js?v=12"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=3"></script>
+<?php endif; ?>
 
 <?php if($this->uri->segment(5) ==="All"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-club.js?v=5"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-club.js?v=5"></script>
 <?php elseif($this->uri->segment(5) ==="Main") : ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-dashborad.js?v=6"></script>
-<?php endif; ?> 
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-dashborad.js?v=7.6"></script>
+<?php endif; ?>
 
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSaveScore.js?v=17"></script>
@@ -180,8 +178,8 @@ new SlimSelect({
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeStudent.js?v=13"></script>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Executive"): ?>
-    <script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdmission.js?v=1"></script>
-<?php endif; ?>   
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdmission.js?v=1"></script>
+<?php endif; ?>
 <?php if($this->uri->segment(3) ==="Personnel"): ?>
 <script src="<?=base_url();?>assets/js/admin/General/GeneralPersonnel.js?v=13"></script>
 <?php endif; ?>
@@ -219,8 +217,8 @@ $(document).on("change", "#schyear_year", function() {
         });
 })
 
-$(".clickLoder").click(function(){
-  $('.loader').show();
+$(".clickLoder").click(function() {
+    $('.loader').show();
 });
 
 $(document).on('click', '.clickLoad-spin', function() {
@@ -231,12 +229,10 @@ $(document).on('click', '.clickLoad-spin', function() {
         '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> loading...'
     );
 });
-
-
 </script>
 
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
     'use strict'
 
@@ -260,3 +256,4 @@ $(document).on('click', '.clickLoad-spin', function() {
 </body>
 
 </html>
+

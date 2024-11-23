@@ -10,7 +10,18 @@
                         <p class="text-muted">ภาพรวมข้อมูลเกี่ยวกับชุมนุม</p>
 
                     </div>
-                    <div>
+
+                    <div class="d-flex">
+                        <div class="app-utility-item app-user-dropdown dropdown">
+                            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-expanded="false"><i class="bi bi-gear-fill icon"></i> ตั้งค่าระบบ</a>
+                            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle" style="">
+                                <li><a class="dropdown-item" href="#" id="MenuSetYear">ตั้งค่าปีการศึกษา</a></li>
+                                <li><a class="dropdown-item" href="#" id="MenuSetDateRegister">ตั้งค่าเปิด-ปิดระบบ</a></li>
+                            
+                            </ul>
+                        </div>
+
                         <a class="btn app-btn-primary"
                             href="<?=base_url('Admin/Acade/DevelopStudents/Clubs/All')?>">จัดการชุมนุม</a>
                     </div>
@@ -30,8 +41,8 @@
                                 <h2><?=count($TotalClubs);?></h2>
                                 <p class="text-muted">ปีการศึกษา 2567</p>
                                 <p>
-                                <a class="btn btn-primary"
-                                href="<?=base_url('Admin/Acade/DevelopStudents/Clubs/All')?>">ดูทั้งหมด</a>
+                                    <a class="btn btn-primary"
+                                        href="<?=base_url('Admin/Acade/DevelopStudents/Clubs/All')?>">ดูทั้งหมด</a>
                                 </p>
                             </div>
                         </div>
@@ -60,7 +71,7 @@
                                 <div class="card-icon bg-warning mb-3">
                                     <i class="fas fa-chalkboard-teacher"></i>
                                 </div>
-                                <h5 class="card-title">ครูที่ปรึกษา</h5>
+                                <h5 class="card-title">ครูที่ปรึกษาชุมนุม</h5>
                                 <h2><?=($TotalTeacher[0]->total_advisors);?></h2>
                                 <p class="text-muted">ในระบบ</p>
                             </div>
@@ -82,7 +93,7 @@
                     </div>
                 </div>
 
-              
+
             </div>
 
 
@@ -119,7 +130,11 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                </div>         
+                </div>
             </div>
         </div>
     </div>
+
+    
+    <?php  $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubSetYear.php'); ?>
+    <?php  $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubSetDateRegister.php'); ?>
