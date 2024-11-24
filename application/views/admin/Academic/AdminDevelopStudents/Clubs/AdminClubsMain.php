@@ -12,22 +12,65 @@
                     </div>
 
                     <div class="d-flex">
+                    <div class="app-utility-item app-user-dropdown dropdown">
+                            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-expanded="false"><i class="bi bi-gear-fill icon"></i> ตั้งค่าพื้นฐาน</a>
+                            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle" style="">
+                                <li><a class="dropdown-item" href="#" id="MenuSetDateAttendancer">ตั้งค่าเวลาเรียน</a></li>
+                            </ul>
+                        </div>
+
                         <div class="app-utility-item app-user-dropdown dropdown">
                             <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
                                 role="button" aria-expanded="false"><i class="bi bi-gear-fill icon"></i> ตั้งค่าระบบ</a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle" style="">
                                 <li><a class="dropdown-item" href="#" id="MenuSetYear">ตั้งค่าปีการศึกษา</a></li>
-                                <li><a class="dropdown-item" href="#" id="MenuSetDateRegister">ตั้งค่าเปิด-ปิดระบบ</a></li>
-                            
+                                <li><a class="dropdown-item" href="#" id="MenuSetDateRegister">ตั้งค่าเปิด-ปิดระบบ</a>
+                                </li>
+
                             </ul>
                         </div>
 
                         <a class="btn app-btn-primary"
-                            href="<?=base_url('Admin/Acade/DevelopStudents/Clubs/All')?>">จัดการชุมนุม</a>
+                            href="<?=base_url('Admin/Acade/DevelopStudents/Clubs/All')?>"><i class="bi bi-menu-button-wide"></i> จัดการชุมนุม</a>
                     </div>
                 </div>
 
+                <?php $Status = $StatusOnoffClub == "เปิด"?"success":"danger";
+                $Icon = $StatusOnoffClub == "เปิด"?'<i class="bi bi-check-circle"></i>':'<i class="bi bi-x-circle"></i>';
+                ?>
+                <div class="">
+                    <div class="app-card app-card-chart h-100 shadow-sm mb-3 ">
+                        <div class="app-card-header p-3 bg-<?=$Status?> text-white">
+                            <?php $ExYearClub = explode('/',$CheckOnoffClub->c_onoff_year); ?>
+                            กำหนดการลงทะเบียนกิจกรรมชุมนุม ภาคเรียนที่ <?=$ExYearClub[1]?> ปีการศึกษา
+                            <?=$ExYearClub[0]?>
+                        </div>
+                        <div class="app-card-body p-3 p-lg-4 d-flex justify-content-between align-items-center">
+                            <div>
+                                <div>เปิดวันที่
+                                    <span class="fw-bold">
+                                        <?php echo $this->datethai->thai_date_and_time(strtotime($CheckOnoffClub->c_onoff_regisstart)) ?>
+                                    </span>
 
+                                </div>
+                                <div>ถึงวันที่
+                                    <span class="fw-bold">
+                                        <?php echo $this->datethai->thai_date_and_time(strtotime($CheckOnoffClub->c_onoff_regisend)) ?>
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                
+                                <a class=" text-white btn btn-<?=$Status;?>"
+                                    href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">สถานะ
+                                    : <?=$Icon?> <?=$StatusOnoffClub;?>ลงทะเบียน</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
                 <!-- Cards Section -->
                 <div class="row">
                     <!-- Card 1: ชุมนุมทั้งหมด -->
@@ -135,6 +178,7 @@
         </div>
     </div>
 
-    
+
     <?php  $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubSetYear.php'); ?>
     <?php  $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubSetDateRegister.php'); ?>
+    <?php  $this->load->view('admin/Academic/AdminDevelopStudents/Clubs/AdminClubSetDateAttendance.php'); ?>

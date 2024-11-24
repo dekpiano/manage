@@ -64,8 +64,6 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
 
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
 <script src="https://cdn.rawgit.com/crlcu/multiselect/v2.5.1/dist/js/multiselect.min.js"></script>
@@ -169,7 +167,7 @@ new SlimSelect({
 <?php if($this->uri->segment(5) ==="All"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-club.js?v=5"></script>
 <?php elseif($this->uri->segment(5) ==="Main") : ?>
-<script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-dashborad.js?v=7.6"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeDevelopStudents-dashborad.js?v=8.3"></script>
 <?php endif; ?>
 
 <?php if($this->uri->segment(3) ==="Evaluate" || $this->uri->segment(3) ==="Executive"): ?>

@@ -28,6 +28,9 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();       
         $data['CheckYear'] = $this->db->get('tb_send_plan_setup')->result();
 
+        $data['CheckOnoffClub'] = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+
+       $data['StatusOnoffClub'] =  $data['CheckOnoffClub']->c_onoff_regisend <= date("Y-m-d H:i:s") ?"ปิด":"เปิด";
         return $data;
     }
 
@@ -61,6 +64,7 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
         ->group_by('tb_clubs.club_id')
         ->order_by('total_members','DESC')
         ->limit(1)->get()->row();
+
 
         
 
@@ -384,6 +388,91 @@ var  $title = "กิจกรรมพัฒนาผู้เรียน";
 
     }
 
+    //-----------------------------  ข้อมูลพื้นฐานระบบ ------------------------------
+    // -------------- สร้างเวลาเรียน 20 สัปดาห์ ------------------------
+    public function ClubCreateWeeks(){
+
+        $CheckYear = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+        $CheckYeaDuplicater = $this->db->where('tcs_academic_year',$CheckYear->c_onoff_year)->get('tb_club_settings_schedule')->row();
+
+        if(!$CheckYeaDuplicater){
+        $data = [];
+        for ($i = 0; $i < 20; $i++) {
+           
+            $data[] = [
+                'tcs_academic_year' => $CheckYear->c_onoff_year,
+                'tcs_week_number' => $i + 1,
+                'tcs_week_status' => 'เปิด'
+            ];
+        }
+
+        // บันทึกข้อมูล
+        $this->db->insert_batch('tb_club_settings_schedule', $data);
+
+        echo json_encode(['status' => 'success', 'message' => 'เพิ่มข้อมูลสัปดาห์สำเร็จ']);
+        }else{
+            echo json_encode(['status' => 'success', 'message' => 'เคยเพิ่มข้อมูลแล้ว']);
+        }
+    }
+
+    public function ClubGetWeeksToUpdate(){
+        $CheckYear = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+        $this->db->select('tcs_schedule_id,tcs_start_date, tcs_week_number, tcs_week_status');
+        $this->db->from('tb_club_settings_schedule'); // ชื่อ Table
+        $this->db->where('tcs_academic_year',$CheckYear->c_onoff_year);
+        $this->db->order_by('tcs_week_number', 'ASC'); // เรียงลำดับตามสัปดาห์
+        $weeks = $this->db->get()->result_array(); // คืนค่าข้อมูล
+        if (!empty($weeks)) {
+            echo json_encode(['status' => 'success', 'data' => $weeks]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'ไม่มีข้อมูล']);
+        }
+    }
+
+    public function ClubUpdateSchedule(){
+        $CheckYear = $this->db->where('c_onoff_id',1)->get('tb_club_onoff')->row();
+        $id = $this->input->post('id'); // รับค่า ID
+        $date = $this->input->post('date'); // รับค่าวันที่ใหม่ในรูปแบบ Y-m-d
+    
+        if (!empty($id) && !empty($date)) {
+            $this->db->where('tcs_academic_year', $CheckYear->c_onoff_year);
+            $this->db->where('tcs_schedule_id', $id);
+            $result = $this->db->update('tb_club_settings_schedule', ['tcs_start_date' => $date]); // อัปเดตวันที่
+    
+            if ($result) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'ไม่สามารถอัปเดตได้']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'ข้อมูลไม่ครบถ้วน']);
+        }
+    }
+
+    public function ClubUpdateStatus(){
+        $id = $this->input->post('id');
+        $status = $this->input->post('status');
+        
+        // ตรวจสอบค่าที่ส่งมาว่าถูกต้อง
+        if (empty($id) || empty($status)) {
+            echo json_encode(['status' => 'error', 'message' => 'ข้อมูลไม่ถูกต้อง']);
+            return;
+        }
+    
+        // ทำการอัพเดตข้อมูลในฐานข้อมูล
+        $data = [
+            'tcs_week_status' => $status
+        ];
+        
+        $this->db->where('tcs_schedule_id', $id);
+        $update_result = $this->db->update('tb_club_settings_schedule', $data);
+        
+        if ($update_result) {
+            echo json_encode(['status' => 'success', 'message' => 'สถานะถูกอัพเดตแล้ว']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'การอัพเดตล้มเหลว']);
+        }
+    }
 
 }
 

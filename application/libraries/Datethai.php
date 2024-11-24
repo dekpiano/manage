@@ -10,7 +10,7 @@ class Datethai {
             $thai_date_return = date("j",$time);   
             $thai_date_return.=" ".$monthTH[date("n",$time)];   
             $thai_date_return.= " ".(date("Y",$time)+543);   
-            $thai_date_return.= " เวลา ".date("H:i:s",$time);
+            $thai_date_return.= " เวลา ".date("H:i",$time);
             return $thai_date_return;   
         } 
         function thai_date_and_time_short($time){   // 19  ธ.ค. 2556 10:10:4

@@ -6,6 +6,31 @@ const classFilter = new SlimSelect({
     allowDeselect: true, // สามารถเลือกได้มากกว่า 1
 });
 
+
+// ฟังก์ชันแปลงวันที่จาก "24 พฤศจิกายน 2024" เป็น "2024/11/24"
+function convertThaiDateToISO(dateString) {
+    // รายชื่อเดือนภาษาไทย
+    const thaiMonths = [
+        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    ];
+
+    // แยกส่วนวันที่
+    const dateParts = dateString.split(" "); // [ "24", "พฤศจิกายน", "2024" ]
+    const day = dateParts[0]; // วันที่
+    const month = thaiMonths.indexOf(dateParts[1]) + 1; // เดือน (หาค่าดัชนีจากเดือน)
+    const year = dateParts[2]; // ปี ค.ศ.
+
+    // ตรวจสอบว่าแปลงสำเร็จหรือไม่
+    if (!day || !month || !year) {
+        console.error("รูปแบบวันที่ไม่ถูกต้อง!");
+        return null;
+    }
+
+    // คืนค่ารูปแบบ "YYYY/MM/DD"
+    return `${year}/${month.toString().padStart(2, '0')}/${day.padStart(2, '0')}`;
+}
+
 //ดูข้อมูลนักเรียน
 $(document).on('click', '.BtnShowStudent', function () {   
     $('#ModalShowStudentRegisterToClub').modal('show');
@@ -108,13 +133,19 @@ $(document).on('click', '#MenuSetYear', function () {
         },
         success: function (response) {
             if (response.status === 'success') {
-                Swal.fire({
-                    icon: "success",
-                    title: "แจ้งเตือน!",
-                    text: response.message
-                });           
+                        
                 $('#ModalClubSetYear').modal('hide');
-                $('.modal-backdrop').remove();   
+                $('.modal-backdrop').remove();  
+                Swal.fire({
+                    title: "แจ้งเตือน?",
+                    text: response.message,
+                    icon: "success",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                  });
+ 
             } else {
                 Swal.fire({
                     icon: "error",
@@ -176,8 +207,6 @@ $(document).on('submit','#FormClubSetDateRegister',function (e) {
     // ดึงค่าจากฟอร์ม
     const c_onoff_regisstart = $('#c_onoff_regisstart').val();
     const c_onoff_regisend = $('#c_onoff_regisend').val();
-
-    console.log(c_onoff_regisstart);
     
     // ตรวจสอบค่าก่อนส่ง
     if (!c_onoff_regisstart || !c_onoff_regisend) {
@@ -196,14 +225,21 @@ $(document).on('submit','#FormClubSetDateRegister',function (e) {
         },
         success: function (response) {
             if (response.status === 'success') {
-                Swal.fire({
-                    icon: "success",
-                    title: "แจ้งเตือน!",
-                    text: response.message
-                });           
+                       
                 $('#ClubSetDateRegister').modal('hide');
                 $('#FormClubSetDateRegister')[0].reset();
                 $('.modal-backdrop').remove();   
+                Swal.fire({
+                    title: "แจ้งเตือน?",
+                    text: response.message,
+                    icon: "success",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                  });
+
+                
             } else {
                 Swal.fire({
                     icon: "error",
@@ -218,4 +254,171 @@ $(document).on('submit','#FormClubSetDateRegister',function (e) {
     });
 });
 
+
+$(document).on('click', '#MenuSetDateAttendancer', function () { 
+    $('#ClubSetDateAttendance').modal('show');
+    
+
+    $.ajax({
+        url: '../../../../admin/academic/ConAdminDevelopStudents/ClubGetWeeksToUpdate', // URL ของ Controller
+        type: 'GET',                    // ประเภทคำขอ
+        dataType: 'json',               // ประเภทข้อมูลที่รับมา
+        success: function (response) {
+            
+            if (response.status === 'success') {
+                response.data.forEach(function (week, index) {
+
+                    var TimeEnd = new Date(week.tcs_start_date);
+
+                    flatpickr("#tcs_academic_year"+(index+1), {
+                        altFormat: "d m Y",
+                        dateFormat: "d F Y", // กำหนดรูปแบบวันที่เวลา
+                        locale: "th", // ตั้งค่าภาษาไทย
+                        disableMobile: true ,
+                        defaultDate: TimeEnd,
+                        onChange: function (selectedDates, dateStr, instance) {
+                            // แสดงวันที่ใน console สำหรับตรวจสอบ
+                            const isoDate = convertThaiDateToISO(dateStr); 
+                            let id = $(instance.input).data('id');
+                            console.log("Selected Date:", id);
+                            updateClubDateSchedule(id, isoDate);
+                        }
+                    });
+                });
+              
+            } 
+        }
+    });
+    
+   
+
+    $.ajax({
+        url: `../../../../admin/academic/ConAdminDevelopStudents/ClubCreateWeeks`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            //console.log(data); // เช็คข้อมูลที่ดึงมา
+        },
+        error: function () {
+            console.error('ไม่สามารถดึงข้อมูลได้');
+        }
+    });
+});
+
+function loadWeeksData() {
+    $.ajax({
+        url: '../../../../admin/academic/ConAdminDevelopStudents/ClubGetWeeksToUpdate', // URL ของ Controller
+        type: 'GET',                    // ประเภทคำขอ
+        dataType: 'json',               // ประเภทข้อมูลที่รับมา
+        success: function (response) {
+            let rows = '';
+            if (response.status === 'success') {
+                response.data.forEach(function (week, index) {
+                    
+                    if(week.tcs_week_status == "เปิด"){
+                        var Ckecked = "checked";
+                    }else{
+                        var Ckecked = "";
+                    }
+                    rows += `
+                        <tr>
+                            <td>สัปดาห์ที่ ${index + 1}</td>
+                            <td><input type="date" class="form-control tcs_academic_year" name="tcs_academic_year" id="tcs_academic_year${index + 1}" value="" data-id="${week.tcs_schedule_id}"></td>
+                            <td>
+                                <div class="form-check form-switch d-flex">
+                                    <input class="form-check-input status-btn" type="checkbox" data-status="${week.tcs_week_status}" data-id="${week.tcs_schedule_id}" ${Ckecked} id="customSwitch${index + 1}" >
+                                    <label class="form-check-switch-label" for="customSwitch${index + 1}"></label>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    `;
+
+                });
+
+            } else {
+                rows = '<tr><td colspan="3" class="text-center">ไม่มีข้อมูล</td></tr>';
+            }
+            $('#TbDateWeeks tbody').html(rows); // แสดงข้อมูลในตาราง
+        },
+        error: function () {
+            alert('ไม่สามารถโหลดข้อมูลได้');
+        }
+    });
+}
+
+// อัปเดตวันที่เวลาเรียนในฐานข้อมูล
+function updateClubDateSchedule(id, newDate) {
+    $.ajax({
+        url: '../../../../admin/academic/ConAdminDevelopStudents/ClubUpdateSchedule', // URL ของ Controller
+        type: 'POST',
+        data: {
+            id: id, // ID ของข้อมูลที่จะแก้ไข
+            date: newDate // วันที่ใหม่ในรูปแบบ Y-m-d
+        },
+        dataType:'json',
+        success: function (response) {
+            if (response.status === 'success') {
+                
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "อัปเดตวันที่สำเร็จ",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            } else {
+                alert('เกิดข้อผิดพลาด: ' + response.message);
+            }
+        },
+        error: function () {
+            alert('ไม่สามารถอัปเดตวันที่ได้');
+        }
+    });
+}
+
+// เรียกฟังก์ชันโหลดข้อมูล
+loadWeeksData();
+
+// --------- เปิด-ปิด ปุ่มสถานะชุมนุม ---------------
+$(document).on('click', '.status-btn', function() {
+    var statusButton = $(this);
+    var Id = statusButton.data('id');  // id ของชุมนุม
+    var currentStatus = statusButton.data('status');  // สถานะปัจจุบัน (เปิดหรือปิด)
+
+    // สลับสถานะ
+    var newStatus = (currentStatus === 'เปิด') ? 'ปิด' : 'เปิด';  // เปลี่ยนสถานะ
+
+    // ส่งคำขอ AJAX ไปอัพเดตสถานะในฐานข้อมูล
+    $.ajax({
+        url: '../../../../admin/academic/ConAdminDevelopStudents/ClubUpdateStatus',  // URL สำหรับอัพเดตสถานะ
+        method: 'POST',
+        data: {
+            id: Id,  // ส่ง id ของชุมนุม
+            status: newStatus  // ส่งสถานะใหม่
+        },
+        dataType:'json',
+        success: function(response) {
+            console.log(response.status);
+            
+            // เมื่ออัพเดตสำเร็จ, เปลี่ยนสถานะใน UI
+            if (response.status === "success") {
+                // เปลี่ยนข้อความในปุ่มตามสถานะใหม่
+                statusButton.data('status', newStatus);  // อัพเดตสถานะใน data attribute
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "สถานะถูกอัพเดตแล้ว",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            } else {
+                alert('เกิดข้อผิดพลาดในการอัพเดตสถานะ');
+            }
+        },
+        error: function() {
+            alert('ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์');
+        }
+    });
+});
 

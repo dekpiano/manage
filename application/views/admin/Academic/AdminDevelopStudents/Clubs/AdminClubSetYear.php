@@ -22,7 +22,7 @@
                             <label for="c_onoff_term" class="me-2">ภาคเรียน:</label>
                             <select class="form-select  w-auto" id="c_onoff_term" name="c_onoff_term" required>
                                 <option value="1">1</option>
-                                <option value="1">2</option>
+                                <option value="2">2</option>
                             </select>
                         </div>
 
