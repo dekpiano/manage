@@ -20,7 +20,8 @@
                     <div class="page-utilities">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?=base_url('Admin/Acade/Registration/Enroll')?>">หน้าหลัก</a></li>
+                                <li class="breadcrumb-item"><a
+                                        href="<?=base_url('Admin/Acade/Registration/Enroll')?>">หน้าหลัก</a></li>
                                 <li class="breadcrumb-item active" aria-current="page"><?=$title;?></li>
                             </ol>
                         </nav>
@@ -36,7 +37,7 @@
             <section class="we-offer-area">
                 <form id="FormEnroll" method="post" class="needs-validation" novalidate>
 
-                <div class="row g-4 settings-section">
+                    <div class="row g-4 settings-section">
                         <div class="col-12 col-md-4">
                             <h3 class="section-title">ปีการศึกษา</h3>
                             <div class="section-intro">ให้เลือกปีการศึกษาที่จะลงทะเบียน </div>
@@ -44,14 +45,17 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                   
-                                    <select  name="SelectYearRegister" id="SelectYearRegister" class="" required autocomplete="off">
+
+                                    <select name="SelectYearRegister" id="SelectYearRegister" class="" required
+                                        autocomplete="off">
                                         <option value="">เลือกปีการศึกษา</option>
                                         <?php $d = date('Y')+543; 
                                         for ($i=$d-2; $i<=$d; $i++): 
                                             for($j=1; $j<=4; $j++):
                                         ?>
-                                        <option <?=$this->uri->segment(6).'/'.$this->uri->segment(7) == $j.'/'.$i ?"selected":""?> value="<?=$j.'/'.$i;?>"><?=$j.'/'.$i;?></option>
+                                        <option
+                                            <?=$this->uri->segment(6).'/'.$this->uri->segment(7) == $j.'/'.$i ?"selected":""?>
+                                            value="<?=$j.'/'.$i;?>"><?=$j.'/'.$i;?></option>
                                         <?php endfor; endfor; ?>
                                     </select>
                                     <div class="invalid-feedback">
@@ -75,11 +79,12 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="subjectregis" id="subjectregis" class="subjectregis" required autocomplete="off">
+                                    <select name="subjectregis" id="subjectregis" class="subjectregis" required
+                                        autocomplete="off">
                                         <option value="">เลือกวิชาเรียน</option>
                                         <?php foreach ($subject as $key => $v_subject): ?>
                                         <option value="<?=$v_subject->SubjectID?>">
-                                        <?=$v_subject->SubjectCode?> <?=$v_subject->SubjectName?>
+                                            <?=$v_subject->SubjectCode?> <?=$v_subject->SubjectName?>
                                         </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -138,18 +143,25 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="Room" id="Room" class="mb-3 Room" required>
-                                        <option value="">เลือกห้องเรียน</option>
-                                        <?php $ListRoom = $this->classroom->ListRoom();
-                                    foreach ($ListRoom as $key => $v_ListRoom): ?>
-                                        <option value="<?=$v_ListRoom?>">
-                                            ม.<?=$v_ListRoom?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือห้องเรียน
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <select name="Room" id="Room" class="mb-3 Room" required>
+                                                <option value="">เลือกห้องเรียน</option>
+                                                <?php $ListRoom = $this->classroom->ListRoom();
+                                            foreach ($ListRoom as $key => $v_ListRoom): ?>
+                                                <option value="<?=$v_ListRoom?>">
+                                                    ม.<?=$v_ListRoom?>
+                                                </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                กรุณาเลือห้องเรียน
+                                            </div>
+                                        </div>
+
+                                        <div id="StudyLines"></div>
                                     </div>
+
                                     <!-- <div class="table-responsive">
                                     <table class="table mb-0 text-left" id="TB_showStudent">
                                         <thead>

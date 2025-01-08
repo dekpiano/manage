@@ -124,7 +124,7 @@
                         <div class="col-12 col-md-8">
                             <div class="app-card app-card-settings shadow-sm p-4">
                                 <div class="app-card-body">
-                                    <select name="RoomEdit" id="RoomEdit" class="mb-3 w-auto" required>
+                                    <select name="RoomEdit" id="Room" class="mb-3 w-auto" required>
                                         <option value="">เลือกห้องเรียน</option>
                                         <?php $ListRoom = $this->classroom->ListRoom();
                                     foreach ($ListRoom as $key => $v_ListRoom): ?>

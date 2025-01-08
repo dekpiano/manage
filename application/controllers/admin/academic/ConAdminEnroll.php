@@ -308,9 +308,15 @@ var  $title = "แผงควบคุม";
 
      public function AdminEnrollChangeSubjectToTeacher(){
         
+        $Ex = explode("/",$this->input->post('KeySelectYearRegister'));        
+
         $CheckIdSubject = $this->db->select('SubjectCode')->where('SubjectID',$this->input->post('Keysubjectregis'))->get('tb_subjects')->result();
         //echo $CheckIdSubject[0]->SubjectCode;
-        $TacherId = $this->db->select('seplan_usersend')->where('seplan_coursecode',$CheckIdSubject[0]->SubjectCode)->get('tb_send_plan')->result();
+        $TacherId = $this->db->select('seplan_usersend')
+        ->where('seplan_coursecode',$CheckIdSubject[0]->SubjectCode)
+        ->where('seplan_year',$Ex[1])
+        ->where('seplan_term',$Ex[0])
+        ->get('tb_send_plan')->result();
         print_r($TacherId[0]->seplan_usersend);
        
      }

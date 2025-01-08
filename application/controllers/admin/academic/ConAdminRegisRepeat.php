@@ -240,12 +240,28 @@ var  $title = "แผงควบคุม";
     }
 
     public function AdminRegisRepeatSelect(){
-
-        $subject = $this->db->select('StudentID,StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentClass')
+        $KeyStudyLines = $this->input->post('KeyStudyLines');
+        if($KeyStudyLines === "All"){
+            $subject = $this->db->select('StudentID,StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentClass,StudentStudyLine,
+            (SELECT GROUP_CONCAT(DISTINCT StudentStudyLine SEPARATOR "|") 
+            FROM tb_students WHERE StudentClass = "ม.'.$this->input->post('KeyRoom').'" AND StudentStatus="1/ปกติ") AS StudyLines
+            ')
+                                ->where('StudentClass','ม.'.$this->input->post('KeyRoom'))
+                                ->where('StudentStatus','1/ปกติ')
+                                ->order_by('StudentNumber')
+                                ->get('tb_students')->result();
+        }else{
+            $subject = $this->db->select('StudentID,StudentNumber,StudentCode,StudentPrefix,StudentFirstName,StudentLastName,StudentClass,StudentStudyLine,
+        (SELECT GROUP_CONCAT(DISTINCT StudentStudyLine SEPARATOR "|") 
+        FROM tb_students WHERE StudentClass = "ม.'.$this->input->post('KeyRoom').'" AND StudentStatus="1/ปกติ") AS StudyLines
+        ')
                             ->where('StudentClass','ม.'.$this->input->post('KeyRoom'))
+                            ->where('StudentStudyLine',$KeyStudyLines)
                             ->where('StudentStatus','1/ปกติ')
                             ->order_by('StudentNumber')
                             ->get('tb_students')->result();
+        }
+        
        
         echo json_encode($subject);
         

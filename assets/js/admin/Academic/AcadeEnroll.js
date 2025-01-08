@@ -57,7 +57,7 @@ $(document).on("change", "#subjectregis", function() {
         Keysubjectregis:IDsubjectregis,
         KeySelectYearRegister:IDSelectYearRegister
     },function(data, status){
-        console.log(data);
+        //console.log(data);
         $('#teacherregis').val(data);
         $('#teacherregis').trigger('change');
     });
@@ -188,13 +188,18 @@ $(document).on("submit", "#FormEnroll", function(e) {
             })
         },
         success: function(data) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'บันทึกข้อมูลสำเร็จ',
-                showConfirmButton: false,
-                timer: 3000
-            })
+      
+              Swal.fire({
+                title: "แจ้งเตือน?",
+                text: "บันทึกข้อมูลสำเร็จ!",
+                icon: "success",
+                showCancelButton: true,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+              });
+
         }
     });
 });

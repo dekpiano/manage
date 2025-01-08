@@ -75,11 +75,42 @@ $(document).on("change", "#SelectYearRegister", function() {
 
 
 $(document).on("change", "#Room", function() {
+    filterByStudyLine($(this).val(),'All');
+});
 
+$(document).on("click", 'input[name="btnradio"]', function() {
+    var selectedStudyLine = $(this).next('label').text(); // ดึงค่าจาก label ที่อยู่ถัดจาก input
+     // ทำให้ปุ่ม checked
+     $('input[name="btnradio"]').prop('checked', false); // ยกเลิก checked ทุกปุ่ม
+     $(this).prop('checked', true); // ตั้ง checked ให้ปุ่มที่เลือก
+     $('label.btn').removeClass('active'); // ลบคลาส active จากทุกปุ่ม
+    $(this).next('label').addClass('active'); // เพิ่มคลาส active ให้ปุ่มที่เลือก
+    
+    filterByStudyLine($('#Room').val(),selectedStudyLine);
+});
+
+function filterByStudyLine(KeyRoom,KeyStudyLines) {
     $('#multiselect option').remove();
 
-    $.post("../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatSelect", { KeyRoom: $(this).val() }, function(data, status) {
+    $.post("../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatSelect", { KeyRoom: KeyRoom, KeyStudyLines:KeyStudyLines }, function(data, status) {
+        console.log(data);
+        var SplitStudyLines = data[0].StudyLines.split("|");
 
+        var html = `
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio99" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" style="border: 1px solid;" for="btnradio99">All</label>
+        `;
+                $.each(SplitStudyLines, function(index, value){
+        html +=  `
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio${index}" autocomplete="off" ${value === KeyStudyLines ?"checked":""}>
+            <label class="btn btn-outline-primary" style="border: 1px solid;" for="btnradio${index}">${value}</label>
+        `;
+                });
+        html +=  `</div>`;
+
+        $('#StudyLines').html(html);
+        
         $.each(data, function(index, value) {
             //console.log(value);
             // trHTML = '<tr><td></td><td>' + value.StudentCode + '</td><td>' + value.StudentPrefix+value.StudentFirstName+' '+value.StudentLastName + '</td></tr>';
@@ -87,8 +118,7 @@ $(document).on("change", "#Room", function() {
             $('#multiselect').append(trHTML);
         });
     }, 'json');
-
-});
+}
 
 $(document).on("change", "#RoomEdit", function() {
 
