@@ -189,3 +189,58 @@ $(document).on('change', '#SubjectUnit', function() {
         $('#SubjectHour option[value=80]').attr('selected', 'selected');
     }
 });
+
+
+let subjects = []; // เก็บข้อมูลที่โหลดมา
+let api_url = "https://sheets.googleapis.com/v4/spreadsheets/1RbMq3N-4itgCJCnnc8TsZ8k4XZNlEz_kOLkKBvEsajQ/values/main1?key=AIzaSyATVgVTJM7ou3XdyBH-FsxVd9uj_A32tCc";
+
+function loadSubjects() {
+    $.getJSON(api_url, function (data) {
+        let rows = data.values;
+        rows.shift(); // ลบแถวหัวตาราง (Header)
+
+        subjects = rows.map(row => ({
+            id: row[0],   // รหัสวิชา
+            text: row[0], // แสดง รหัสวิชา + ชื่อวิชา
+            SubjectName: row[1], // ชื่อวิชา
+            SubjectUnit: row[2], // หน่วยกิต
+            SubjectHour: row[3], // ชั่วโมง
+            SubjectType: row[4],  // ประเภทวิชา
+            FirstGroup: row[5],
+            SecondGroup: row[6],
+            SubjectClass: row[7] 
+        }));
+
+       // console.log("โหลดข้อมูลสำเร็จ", subjects);
+        
+        // อัปเดต Select2
+        $("#SubjectCode").select2({
+            placeholder: "พิมพ์รหัสวิชาเพื่อค้นหา",
+            allowClear: true,
+            minimumInputLength: 2,
+            data: subjects,
+            matcher: function (params, data) {
+                if (!params.term || !data.text) return null;
+                if (data.text.toLowerCase().includes(params.term.toLowerCase())) {
+                    return data;
+                }
+                return null;
+            }
+        });
+    });
+}
+
+loadSubjects(); // โหลดข้อมูลตอนเริ่มต้น
+
+
+// เมื่อเลือกค่า
+$("#SubjectCode").on("select2:select", function (e) {
+    let selected = e.params.data;
+    $("#SubjectName").val(selected.SubjectName);
+    $("#SubjectUnit").val(selected.SubjectUnit);
+    $("#SubjectHour").val(selected.SubjectHour);
+    $("#SubjectType").val(selected.SubjectType);
+    $("#FirstGroup").val(selected.FirstGroup);
+    $("#SecondGroup").val(selected.SecondGroup);
+    $("#SubjectClass").val(selected.SubjectClass);
+});

@@ -2,6 +2,16 @@
 .border-left-primary {
     border-left: .25rem solid #5BC3D5 !important;
 }
+ /* ปรับ Select2 ให้เข้ากับ Bootstrap */
+ .select2-container .select2-selection--single {
+            height: 38px; /* ให้เท่ากับ .form-control */
+            padding: 6px 12px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 1.5;
+        }
 </style>
 <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -71,7 +81,8 @@
                                                 for($j=1; $j<=3; $j++):
                                                 for ($i=$d; $i <= $d+2 ; $i++) :
                                                 ?>
-                                                <option <?=$SchoolYear->schyear_year == $j.'/'.$i ?"selected":""?> value="<?=$j?>/<?=$i;?>"><?=$j?>/<?=$i;?></option>
+                                                <option <?=$SchoolYear->schyear_year == $j.'/'.$i ?"selected":""?>
+                                                    value="<?=$j?>/<?=$i;?>"><?=$j?>/<?=$i;?></option>
                                                 <?php endfor; ?>
                                                 <?php endfor; ?>
                                             </select>
@@ -91,20 +102,22 @@
                                         <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">รหัสวิชา
                                             </label>
-                                            <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="" name="SubjectCode" id="SubjectCode">
+                                            <select id="SubjectCode" name="SubjectCode" class="form-select">
+                                                <option value="">-- พิมพ์เพื่อค้นหา --</option>
+                                            </select>
+                                            <!-- <input type="text" class=""  value=""
+                                                required="" name="SubjectCode" id="SubjectCode"> -->
                                         </div>
                                         <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">ชื่อวิชา
                                             </label>
-                                            <input type="text" class="form-control" id="setting-input-1" value=""
-                                                required="" name="SubjectName" id="SubjectName">
+                                            <input type="text" class="form-control" value="" required=""
+                                                name="SubjectName" id="SubjectName">
                                         </div>
                                         <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">หน่วยกิต
                                             </label>
-                                            <select class="form-select" required="" name="SubjectUnit"
-                                                id="SubjectUnit">
+                                            <select class="form-select" required="" name="SubjectUnit" id="SubjectUnit">
                                                 <option value="">เลือกหน่วยกิต</option>
                                                 <?php $Unit = array("0.5","1.0","1.5","2.0");
                                                 foreach ($Unit as $key => $v_Unit):?>
@@ -114,10 +127,9 @@
                                         </div>
                                         <div class="mb-3 col-6 col-lg-3">
                                             <label for="setting-input-1" class="form-label">จำนวนชั่วโมง
-                                            </label>                                          
+                                            </label>
 
-                                                <select class="form-select" required="" name="SubjectHour"
-                                                id="SubjectHour" >
+                                            <select class="form-select" required="" name="SubjectHour" id="SubjectHour">
                                                 <option value="">เลือกชั่วโมง</option>
                                                 <?php $Hour = array("20","40","60","80");
                                                 foreach ($Hour as $key => $v_Hour):?>

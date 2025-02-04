@@ -159,7 +159,7 @@ new SlimSelect({
 <?php endif; ?>
 <?php endif; ?>
 <?php if($this->uri->segment(3) ==="Course"): ?>
-<script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=15"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/AcadeRegisterSubject.js?v=16.1"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeSendPlan.js?v=12"></script>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeClassSchedule.js?v=3"></script>
 <?php endif; ?>
