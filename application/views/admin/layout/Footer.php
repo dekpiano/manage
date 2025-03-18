@@ -145,7 +145,7 @@ new SlimSelect({
 
 <script src="<?=base_url();?>assets/js/student/ExtraSubject_js.js?v=1"></script>
 
-<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=10"></script>
+<script src="<?=base_url();?>assets/js/admin/Academic/Academic.js?v=11"></script>
 
 <?php if($this->uri->segment(3) ==="Setting"): ?>
 <script src="<?=base_url();?>assets/js/admin/Academic/AcadeAdminRoles.js?v=5"></script>

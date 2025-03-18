@@ -27,16 +27,38 @@ var  $title = "แผงควบคุม";
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
         $data['title'] = "ดูผลการเรียนของนักเรียน";	
-        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+
+        $data['checkYear'] = $this->db->select('SubjectYear')
+        ->from('tb_subjects')
+        ->group_by('SubjectYear')
+        ->get()->result();
+
+        // ฟังก์ชันเรียงลำดับ
+        usort($data['checkYear'], function($a, $b) {
+            list($termA, $yearA) = explode('/', $a->SubjectYear);
+            list($termB, $yearB) = explode('/', $b->SubjectYear);
+
+            if ($yearA == $yearB) {
+                return $termA <=> $termB; // เรียงตามภาคเรียน
+            }
+            return $yearA <=> $yearB; // เรียงตามปี
+        });
+
+        //echo '<pre>';print_r($data['checkYear']); exit();
+
         $this->load->view('admin/layout/Header.php',$data);
         $this->load->view('admin/Academic/AdminAcademicResult/AdminAcademicResultMain.php');
         $this->load->view('admin/layout/Footer.php');
 
     }
     
-    public function CheckOnOff(){   
+    public function CheckOnOffDoGrade(){   
         echo $this->ModAdminAcademinResult->UpdateOnOff($this->input->post('check'));
-
+    }
+    public function CheckOnOffOpenYear(){   
+        
+        $this->db->where('onoff_ID',1);
+		echo $this->db->update('tb_register_onoff',array('onoff_year' => $this->input->post('check')));
     }
 
     public function add(){   

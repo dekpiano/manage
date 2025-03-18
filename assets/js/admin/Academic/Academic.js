@@ -6,11 +6,34 @@ Tb_Repeat = $('#Tb_Repeat').DataTable({
 });
 $(document).on("change", "#checkOnOffDoGrade", function() {
     //alert($(this).prop('checked'));
-    $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOff", {
+    $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOffDoGrade", {
             check: $(this).prop('checked')
         },
         function(data, status) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'เปลี่ยนข้อมูลแสดงผลการเรียนของนักเรียนสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+})
 
+$(document).on("change", "#OpenYear", function() {
+    //alert($(this).val());
+    $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOffOpenYear", {
+            check:$(this).val()
+        },
+        function(data, status) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'เปลี่ยนปีที่แสดงข้อมูลสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+            })
             //alert("Data: " + data + "\nStatus: " + status);
         });
 })

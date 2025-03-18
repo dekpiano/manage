@@ -132,8 +132,8 @@
                     </div>
                     <div class="col-12 col-md-8">
                         <div class="app-card app-card-settings shadow-sm p-3">
-                            <div class="app-card-body">
-                                <div class="col-auto">
+                            <div class="app-card-body d-flex">
+                                <div class="col-auto align-self-center">
                                     <div class="button r" id="button-1">
                                         <input class="checkbox" type="checkbox" id="checkOnOffDoGrade"
                                             name="checkOnOffDoGrade" value="<?=$checkOnOff[0]->onoff_status;?>"
@@ -142,7 +142,22 @@
                                         <div class="layer"></div>
                                     </div>
                                 </div>
+                                <div class="col-auto d-flex ms-4">
+                                    <!-- <div class="align-self-center me-2">ตั้งแต่</div>                                    
+                                    <select name="" id="" class="form-select me-2">
+                                        <?php foreach ($checkYear as $key => $v_checkYear):?>
+                                        <option value="<?=$v_checkYear->SubjectYear;?>"><?=$v_checkYear->SubjectYear;?></option>
+                                        <?php endforeach;?>
+                                    </select> -->
+                                    <div class="align-self-center me-2">ถึง</div> 
+                                    <select name="OpenYear" id="OpenYear" class="form-select me-2">
+                                        <?php foreach ($checkYear as $key => $v_checkYear):?>
+                                        <option <?=$checkOnOff[0]->onoff_year === $v_checkYear->SubjectYear?"selected":""?> value="<?=$v_checkYear->SubjectYear;?>"><?=$v_checkYear->SubjectYear;?></option>
+                                        <?php endforeach;?>
+                                    </select> 
+                                </div>
                             </div>
+                            
                             <!--//app-card-body-->
 
                         </div>
