@@ -115,23 +115,52 @@ var  $title = "แผงควบคุม";
 
         $CheckRepeat = $this->db->select('onoff_detail,onoff_year')->where('onoff_name','เรียนซ้ำ')->get('tb_register_onoff')->result();
         
-        $CheckStudent = $this->db->select('StudentID,RepeatConfirm,TeacherID')
+        
+        $CheckStudentCheck = $this->db->select('StudentID,RepeatConfirm,TeacherID,RepeatTeacher')
         ->where('RegisterYear',$this->input->post('YearRepeat'))
         ->where('SubjectID',$this->input->post('SubjectRepeat'))
         ->where('TeacherID',$this->input->post('RepeatTeacher'))
         ->get('tb_register')->result();   
 
+        if($CheckStudentCheck){
+            $CheckStudent = $this->db->select('StudentID,RepeatConfirm,TeacherID,RepeatTeacher')
+            ->where('RegisterYear',$this->input->post('YearRepeat'))
+            ->where('SubjectID',$this->input->post('SubjectRepeat'))
+            ->where('TeacherID',$this->input->post('RepeatTeacher'))
+            ->get('tb_register')->result(); 
+        }else{
+            $CheckStudent = $this->db->select('StudentID,RepeatConfirm,TeacherID,RepeatTeacher')
+            ->where('RegisterYear',$this->input->post('YearRepeat'))
+            ->where('SubjectID',$this->input->post('SubjectRepeat'))
+            ->where('RepeatTeacher',$this->input->post('RepeatTeacher'))
+            ->get('tb_register')->result(); 
+        }
+
         $IdStuRepeat = array();
         $CountUpSucceed =0;
-
         //print_r($CheckStudent); exit();
+
+        
+        if(!$CheckStudent){
+            // echo "555";
+
+             $UpdateRepeatTeacher = array('RepeatTeacher' => $this->input->post('RepeatTeacher'));
+                     $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+                     $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
+                     $this->db->where('RepeatStatus','ไม่ผ่าน');
+                     $this->db->update('tb_register',$UpdateRepeatTeacher);
+
+             return;
+         }
 
         if($this->input->post('SelRepeat')){        
             foreach ($this->input->post('SelRepeat') as $key => $value) {
                 array_push($IdStuRepeat,$value);
             }
             foreach ($CheckStudent as $key => $v_CheckStudent) {
-                if(in_array($v_CheckStudent->StudentID,$IdStuRepeat) && $v_CheckStudent->TeacherID === $this->input->post('RepeatTeacher')){
+
+
+                if(in_array($v_CheckStudent->StudentID,$IdStuRepeat) ){
                      $DataUpdateRepeat = array('Grade_Type' => $CheckRepeat[0]->onoff_detail,'RepeatStatus'=>'ไม่ผ่าน','RepeatYear'=>$CheckRepeat[0]->onoff_year,'RepeatTeacher' => $this->input->post('RepeatTeacher'));
                      $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
                      $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
@@ -147,6 +176,9 @@ var  $title = "แผงควบคุม";
                     }
                     
                 }
+
+                
+                   
             }
         }else{
             // $DataUpdateRepeat = array('Grade_Type' => '','RepeatStatus'=>'','RepeatYear'=>'','RepeatTeacher' =>'');
