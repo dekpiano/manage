@@ -4,12 +4,12 @@ Tb_Repeat = $('#Tb_Repeat').DataTable({
         [1, "asc"]
     ],
 });
-$(document).on("change", "#checkOnOffDoGrade", function() {
+$(document).on("change", "#checkOnOffDoGrade", function () {
     //alert($(this).prop('checked'));
     $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOffDoGrade", {
-            check: $(this).prop('checked')
-        },
-        function(data, status) {
+        check: $(this).prop('checked')
+    },
+        function (data, status) {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -21,12 +21,37 @@ $(document).on("change", "#checkOnOffDoGrade", function() {
         });
 })
 
-$(document).on("change", "#OpenYear", function() {
+$(document).on("change", ".checkOnOffLevel", function () {    
+    
+    
+    let selectedLevels = [];
+        $(".checkOnOffLevel:checked").each(function() {
+            selectedLevels.push($(this).val());  // เก็บเฉพาะค่าที่ checked
+        });
+        let dataString = selectedLevels.join("|");
+        console.log(dataString);
+
+    $.post("../../../admin/academic/ConAdminAcademinResult/OnOffLevel", {
+        data: dataString
+    },
+        function (data, status) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'กำหนดการแสดงผลการเรียนในระดับชั้นเรียบร้อยแล้ว',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+})
+
+$(document).on("change", "#OpenYear", function () {
     //alert($(this).val());
     $.post("../../../admin/academic/ConAdminAcademinResult/CheckOnOffOpenYear", {
-            check:$(this).val()
-        },
-        function(data, status) {
+        check: $(this).val()
+    },
+        function (data, status) {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -38,20 +63,20 @@ $(document).on("change", "#OpenYear", function() {
         });
 })
 
-$(document).on('submit', '#AddClassRoom', function(e) {
+$(document).on('submit', '#AddClassRoom', function (e) {
     e.preventDefault();
     var formadd = $('#AddClassRoom').serialize();
     $.ajax({
         type: 'post',
         url: "../../../admin/academic/ConAdminClassRoom/AddClassRoom",
         data: formadd,
-        beforeSend: function() {
+        beforeSend: function () {
             console.log("กำลังโหลด");
         },
-        complete: function() {
+        complete: function () {
             //console.log("คือไรว่ะ");
         },
-        success: function(result) {
+        success: function (result) {
             $('#myModal').modal('hide');
             console.log(result);
             Swal.fire({
@@ -67,14 +92,14 @@ $(document).on('submit', '#AddClassRoom', function(e) {
             })
 
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
         }
     });
 
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     var ta = $('#tb-classroom').DataTable({
         "order": [
@@ -94,9 +119,9 @@ $(document).ready(function() {
 
 
     // บทบาทในวิชาการ
-    $(document).on("change", "#set_executive", function() {
+    $(document).on("change", "#set_executive", function () {
 
-        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function(data, status) {
+        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingManager", { TeachID: $(this).val() }, function (data, status) {
             if (data == 1) {
                 alertify.success('เลือก ผอ.โรงเรียน สำเร็จ');
             } else {
@@ -109,8 +134,8 @@ $(document).ready(function() {
         select: '#set_executive'
     })
 
-    $(document).on("change", "#set_deputy", function() {
-        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function(data, status) {
+    $(document).on("change", "#set_deputy", function () {
+        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingDeputy", { TeachID: $(this).val() }, function (data, status) {
             if (data == 1) {
                 alertify.success('เลือก รองฯ วิชการ สำเร็จ');
             } else {
@@ -123,8 +148,8 @@ $(document).ready(function() {
         select: '#set_deputy'
     })
 
-    $(document).on("change", "#set_leader", function() {
-        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function(data, status) {
+    $(document).on("change", "#set_leader", function () {
+        $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingLeader", { TeachID: $(this).val() }, function (data, status) {
             if (data == 1) {
                 alertify.success('เลือกหัวหน้างานสำเร็จ');
             } else {
@@ -137,12 +162,12 @@ $(document).ready(function() {
         select: '#set_leader'
     })
 
-    $(document).on("change", ".set_admin", function() {
+    $(document).on("change", ".set_admin", function () {
         //alert($(this).attr('admin-id'));
         $.post("../../../admin/academic/ConAdminSettingAdminRoles/AcademicSettingAdmin", {
             TeachID: $(this).val(),
             AdminID: $(this).attr('admin-id')
-        }, function(data, status) {
+        }, function (data, status) {
             if (data == 1) {
                 alertify.success('เลือก เจ้าหน้าที่วิชาการ สำเร็จ');
             } else {
@@ -156,9 +181,9 @@ $(document).ready(function() {
     //         select: '#set_admin'+index
     //     })
     // }
-    
 
-  
+
+
 
 
 
@@ -182,7 +207,7 @@ $(document).ready(function() {
 
 
     // ----------------------------วิชาเพิ่มติม-----------------------------------
-    $('#ModalAddExtraSubject').on('click', function() {
+    $('#ModalAddExtraSubject').on('click', function () {
         $('#myModal').modal('show');
         $("#UpdateExtraSubject").attr('id', "AddExtraSubject");
         $("#AddExtraSubject")[0].reset();
@@ -195,7 +220,7 @@ $(document).ready(function() {
         select: '.single'
     })
 
-    $('.ModalExtraSubject').on('click', function(e) {
+    $('.ModalExtraSubject').on('click', function (e) {
         e.preventDefault();
         $('#myModal').modal('show');
         $('.extra_grade_level').prop('checked', false);
@@ -204,10 +229,10 @@ $(document).ready(function() {
             url: "../../admin/ConAdminExtraSubject/EditExtraSubject",
             data: { Extraid: $(this).attr('Extraid') },
             dataType: "json",
-            beforeSend: function() {
+            beforeSend: function () {
 
             },
-            success: function(data) {
+            success: function (data) {
                 //console.log(data[0].extra_year);
                 $('#extra_id').val(data[0].extra_id);
                 $('#extra_year').val(data[0].extra_year);
@@ -225,24 +250,24 @@ $(document).ready(function() {
 
                 $("#AddExtraSubject").attr('id', "UpdateExtraSubject");
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 alert("Error occured.please try again");
                 console.log(xhr.statusText + xhr.responseText);
             }
         });
     });
 
-    $(document).on("submit", "#AddExtraSubject", function(e) {
+    $(document).on("submit", "#AddExtraSubject", function (e) {
         e.preventDefault();
         var formadd = $('#AddExtraSubject').serialize();
         $.ajax({
             type: 'POST',
             url: "../../admin/ConAdminExtraSubject/AddExtraSubject",
             data: formadd,
-            beforeSend: function() {
+            beforeSend: function () {
 
             },
-            success: function(data) {
+            success: function (data) {
                 if (data == 1) {
                     Swal.fire(
                         'แจ้งเตือน',
@@ -260,14 +285,14 @@ $(document).ready(function() {
                     })
                 }
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 alert("Error occured.please try again");
                 console.log(xhr.statusText + xhr.responseText);
             }
         });
     });
 
-    $(document).on("submit", "#UpdateExtraSubject", function(e) {
+    $(document).on("submit", "#UpdateExtraSubject", function (e) {
         e.preventDefault();
         var formadd = $('#UpdateExtraSubject').serialize();
 
@@ -275,10 +300,10 @@ $(document).ready(function() {
             type: 'POST',
             url: "../../admin/ConAdminExtraSubject/UpdateExtraSubject",
             data: formadd,
-            beforeSend: function() {
+            beforeSend: function () {
 
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
                 if (data == 1) {
 
@@ -298,7 +323,7 @@ $(document).ready(function() {
                     })
                 }
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 alert("Error occured.please try again");
                 console.log(xhr.statusText + xhr.responseText);
             }
@@ -307,8 +332,8 @@ $(document).ready(function() {
 
 });
 
-$(document).on("change", "#extra_setting_onoff", function() {
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingOnoff", { onoff: $(this).prop('checked') }, function(data, status) {
+$(document).on("change", "#extra_setting_onoff", function () {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingOnoff", { onoff: $(this).prop('checked') }, function (data, status) {
         if (data == 1) {
             alertify.success('เปลี่ยนแปลงข้อมูลเปิด - ปิดระบบสำเร็จ');
         } else {
@@ -317,8 +342,8 @@ $(document).on("change", "#extra_setting_onoff", function() {
     });
 });
 
-$(document).on("change", "#extra_setting_term", function() {
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingTerm", { Term: $(this).val() }, function(data, status) {
+$(document).on("change", "#extra_setting_term", function () {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingTerm", { Term: $(this).val() }, function (data, status) {
         if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
         } else {
@@ -327,8 +352,8 @@ $(document).on("change", "#extra_setting_term", function() {
     });
 });
 
-$(document).on("change", "#extra_setting_year", function() {
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingYear", { Year: $(this).val() }, function(data, status) {
+$(document).on("change", "#extra_setting_year", function () {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingYear", { Year: $(this).val() }, function (data, status) {
         if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
         } else {
@@ -337,8 +362,8 @@ $(document).on("change", "#extra_setting_year", function() {
     });
 });
 
-$(document).on("change", "#extra_setting_datestart", function() {
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateStart", { DateStart: $(this).val() }, function(data, status) {
+$(document).on("change", "#extra_setting_datestart", function () {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateStart", { DateStart: $(this).val() }, function (data, status) {
         console.log(data);
         if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
@@ -348,8 +373,8 @@ $(document).on("change", "#extra_setting_datestart", function() {
     });
 });
 
-$(document).on("change", "#extra_setting_dateend", function() {
-    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateEnd", { DateEnd: $(this).val() }, function(data, status) {
+$(document).on("change", "#extra_setting_dateend", function () {
+    $.post("../../admin/ConAdminExtraSubject/ExtraSettingDateEnd", { DateEnd: $(this).val() }, function (data, status) {
         console.log(data);
         if (data == 0) {
             alertify.error('เปลี่ยนแปลงข้อมูลไม่สำเร็จ');
@@ -362,7 +387,7 @@ $(document).on("change", "#extra_setting_dateend", function() {
 
 //----------------- ห้องเรียนออนไลน์ --------------------------------
 
-$(document).on("click", ".ShowAddRoomOnline", function() {
+$(document).on("click", ".ShowAddRoomOnline", function () {
     $('#AddRoomOnline').modal('show');
     $('#FormRoomOnline').addClass('Add_RoomOnline');
     $('#FormRoomOnline').removeClass('Update_RoomOnline');
@@ -373,12 +398,12 @@ var classlevel = new SlimSelect({
     select: '#roomon_classlevel'
 })
 
-$(document).on("click", ".ShowEditRoomOnline", function() {
+$(document).on("click", ".ShowEditRoomOnline", function () {
     $('#AddRoomOnline').modal('show');
     $('#FormRoomOnline').addClass('Update_RoomOnline');
     $('#FormRoomOnline').removeClass('Add_RoomOnline');
     //alert($(this).attr('roomid'));
-    $.post("../../admin/ConAdminRoomOnline/EditRoomOnline", { roomid: $(this).attr('roomid') }, function(data, status) {
+    $.post("../../admin/ConAdminRoomOnline/EditRoomOnline", { roomid: $(this).attr('roomid') }, function (data, status) {
         // console.log(data[0].roomon_id);
         $('#roomon_id').val(data[0].roomon_id);
         $('#roomon_coursecode').val(data[0].roomon_coursecode);
@@ -396,16 +421,16 @@ $(document).on("click", ".ShowEditRoomOnline", function() {
 
     }, "json");
 });
-$(document).on("click", ".ShowDeleteRoomOnline", function() {
+$(document).on("click", ".ShowDeleteRoomOnline", function () {
     $('#DeleteRoomOnline').modal('show');
     $('#del_roomon_id').val($(this).attr('roomid'));
 });
 
-$(document).on("click", ".btn-out", function() {
+$(document).on("click", ".btn-out", function () {
     window.location.reload();
 });
 
-$(document).on("submit", ".Add_RoomOnline", function(e) {
+$(document).on("submit", ".Add_RoomOnline", function (e) {
     e.preventDefault(e);
     $.ajax({
         url: '../../admin/ConAdminRoomOnline/AddRoomOnline',
@@ -415,7 +440,7 @@ $(document).on("submit", ".Add_RoomOnline", function(e) {
         contentType: false,
         cache: false,
         async: false,
-        success: function(data) {
+        success: function (data) {
             console.log(data);
             if (data != 2) {
                 Swal.fire({
@@ -446,7 +471,7 @@ $(document).on("submit", ".Add_RoomOnline", function(e) {
     });
 });
 
-$(document).on("submit", ".Update_RoomOnline", function(e) {
+$(document).on("submit", ".Update_RoomOnline", function (e) {
     e.preventDefault(e);
     $.ajax({
         url: '../../admin/ConAdminRoomOnline/UpdateRoomOnline',
@@ -456,7 +481,7 @@ $(document).on("submit", ".Update_RoomOnline", function(e) {
         contentType: false,
         cache: false,
         async: false,
-        success: function(data) {
+        success: function (data) {
             //console.log(data);
             if (data > 0) {
                 Swal.fire({
@@ -475,9 +500,9 @@ $(document).on("submit", ".Update_RoomOnline", function(e) {
     });
 });
 
-$(document).on("submit", ".FormDeleteRoomOnline", function(e) {
+$(document).on("submit", ".FormDeleteRoomOnline", function (e) {
     e.preventDefault(e);
-    $.post("../../admin/ConAdminRoomOnline/DeleteRoomOnline", { roomid: $("#del_roomon_id").val() }, function(data, status) {
+    $.post("../../admin/ConAdminRoomOnline/DeleteRoomOnline", { roomid: $("#del_roomon_id").val() }, function (data, status) {
         if (data == 1) {
             Swal.fire({
                 position: 'top-end',

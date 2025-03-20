@@ -149,15 +149,18 @@
                                         <option value="<?=$v_checkYear->SubjectYear;?>"><?=$v_checkYear->SubjectYear;?></option>
                                         <?php endforeach;?>
                                     </select> -->
-                                    <div class="align-self-center me-2">ถึง</div> 
+                                    <div class="align-self-center me-2">ถึง</div>
                                     <select name="OpenYear" id="OpenYear" class="form-select me-2">
                                         <?php foreach ($checkYear as $key => $v_checkYear):?>
-                                        <option <?=$checkOnOff[0]->onoff_year === $v_checkYear->SubjectYear?"selected":""?> value="<?=$v_checkYear->SubjectYear;?>"><?=$v_checkYear->SubjectYear;?></option>
+                                        <option
+                                            <?=$checkOnOff[0]->onoff_year === $v_checkYear->SubjectYear?"selected":""?>
+                                            value="<?=$v_checkYear->SubjectYear;?>"><?=$v_checkYear->SubjectYear;?>
+                                        </option>
                                         <?php endforeach;?>
-                                    </select> 
+                                    </select>
                                 </div>
                             </div>
-                            
+
                             <!--//app-card-body-->
 
                         </div>
@@ -165,6 +168,37 @@
                     </div>
                 </div>
 
+                <div class="row g-4 settings-section mt-1">
+                    <div class="col-12 col-md-4">
+                        <h3 class="section-title">ระดับชั้นที่แสดงผลการเรียน</h3>
+                        <div class="section-intro">สามารถเลือกระดับชั้นในการแสดงผลการเรียนได้ (ในกรณีอยากที่จะเปิดผลการเรียนให้ดูเฉพาะชั้นเรียน)</div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="app-card app-card-settings shadow-sm p-3">
+                            <?php $checkValueLevel = explode("|",$checkOnOff[0]->onoff_Level);?>
+                            <?php for($i = 1; $i <=6; $i++): ?>
+                            <div class="app-card-body d-flex mt-1">
+                                <div class="col-auto align-self-center">
+                                    <div class="button r" id="button-1">
+                                        <input class="checkbox checkOnOffLevel" type="checkbox" id="checkOnOffLevel"
+                                            name="checkOnOffLevel[]" value="<?=$i;?>"
+                                            <?php echo in_array($i, $checkValueLevel) ? 'checked' : '';?>>
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
+                                </div>
+                                <div class="col-auto d-flex ms-4">
+                                    <div class="align-self-center me-2">ชั้นมัธยมศึกษาปีที่ <?=$i;?></div>
+                                </div>
+                            </div>
+                            <?php endfor; ?>
+
+                            <!--//app-card-body-->
+
+                        </div>
+                        <!--//app-card-->
+                    </div>
+                </div>
 
             </div>
         </section>

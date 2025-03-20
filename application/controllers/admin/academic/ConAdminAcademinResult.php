@@ -60,6 +60,12 @@ var  $title = "แผงควบคุม";
         $this->db->where('onoff_ID',1);
 		echo $this->db->update('tb_register_onoff',array('onoff_year' => $this->input->post('check')));
     }
+    public function OnOffLevel(){ 
+        $this->db->where('onoff_ID',1);
+		echo $this->db->update('tb_register_onoff',array('onoff_Level' => $this->input->post('data')));
+     }
+
+
 
     public function add(){   
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
