@@ -157,7 +157,7 @@ class ConAdminStudents extends CI_Controller {
        
         $checkStu = [];
         $re = $this->db->select('StudentCode,StudentIDNumber,StudentStatus')        
-        ->where('StudentStatus','1/ปกติ')
+        //->where('StudentStatus','1/ปกติ')
         ->get('tb_students')->result();
         foreach ($re as $key => $v_re) {
             $checkStu[] = $v_re->StudentCode;
@@ -170,6 +170,7 @@ class ConAdminStudents extends CI_Controller {
             }else{
                 $StudyLine = '';
             }
+
             if (in_array($response->values[$i][2], $checkStu))
             {
              $arrayName = array('StudentNumber' => $response->values[$i][0], 
