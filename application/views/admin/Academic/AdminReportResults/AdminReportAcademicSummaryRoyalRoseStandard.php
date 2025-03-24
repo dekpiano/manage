@@ -1,3 +1,14 @@
+<?php // ฟังก์ชันเรียงลำดับ
+usort($CheckYear, function($a, $b) {
+    list($termA, $yearA) = explode('/', $a->RegisterYear);
+    list($termB, $yearB) = explode('/', $b->RegisterYear);
+
+    if ($yearA == $yearB) {
+        return $termA <=> $termB; // เรียงตามภาคเรียน
+    }
+    return $yearA <=> $yearB; // เรียงตามปี
+});?>
+
 <div class="app-wrapper" style="overflow-x: overlay;">
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -12,26 +23,27 @@
                             <div class="col-auto">
                             <?php if($this->uri->segment(3) === "Executive") :?>
                                 <form class="docs-search-form row gx-1 align-items-center" method="get"
-                                    action="<?=base_url('Admin/Acade/Executive/ReportSummaryTeacher');?>">
+                                    action="<?=base_url('Admin/Acade/Executive/ReportAcademicSummaryRoyalRoseStandard');?>">
                                     <?php else: ?>
                                         <form class="docs-search-form row gx-1 align-items-center" method="get"
-                                    action="<?=base_url('Admin/Acade/Evaluate/ReportSummaryTeacher');?>">
+                                    action="<?=base_url('Admin/Acade/Evaluate/ReportAcademicSummaryRoyalRoseStandard');?>">
                                     <?php endif; ?>
+                                    <div class="col-auto">
+                                        <?php $Level = array('ม.1','ม.2','ม.3','ม.4','ม.5','ม.6') ?>
+                                        <select class="form-select w-auto" name="SelLevel" id="SelLevel">
+                                            <option value="0">เลือกระดับชั้น...</option>
+                                            <?php foreach ($Level as $key => $v_Level) : ?>
+                                            <option <?=$this->input->get('SelLevel') == $v_Level ?"selected":""?>
+                                                value="<?=$v_Level?>"><?=$v_Level?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <div class="col-auto">
                                         <select class="form-select w-auto" name="KeyYear" id="KeyYear">
                                             <option value="0">เลือกปีการศึกษา...</option>
                                             <?php foreach ($CheckYear as $key => $v_CheckYear) : ?>
                                             <option <?=$KeyYear == $v_CheckYear->RegisterYear ?'selected':''?>
                                                 value="<?=$v_CheckYear->RegisterYear?>"><?=$v_CheckYear->RegisterYear?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-auto">
-                                        <select class="form-select w-auto" name="SelLern" id="SelLern">
-                                            <option value="0">เลือกกลุ่มสาระ...</option>
-                                            <?php foreach ($lern as $key => $v_lern) : ?>
-                                            <option <?=$this->input->get('SelLern') == $v_lern->lear_id ?"selected":""?>
-                                                value="<?=$v_lern->lear_id?>"><?=$v_lern->lear_namethai?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -92,20 +104,17 @@
                 <!--//inner-->
             </div>
             <?php else: ?>
-            <div class="app-card  shadow-sm mb-5 p-2 " style="width: 1600px;">
+            <div class="app-card  shadow-sm mb-5 p-2 " style="width: 100%;">
                 <div class="app-card-body">
                     <div class="table-responsive fixTableHead">
                         <table class="table app-table-hover mb-0 text-left table-bordered scrollit"
-                            id="ReportSummaryTeacher" style="">
+                            id="ReportSummaryRoyalRoseStandard" style="">
                             <!--ReportSummaryTeacher-->
                                 <thead>
                                     <tr class="text-center table-success">
-                                        <th class="cell text-center" style="width:230px">ครูผู้สอน</th>
-                                        <th class="cell text-center" style="width:280px">วิชา</th>
-                                        <th class="cell text-center">ชั้น</th>
-                                        <th class="cell text-center" style="width:120px">สาระ</th>
-                                        <th class="cell text-center">หน่วย</th>
-                                        <th class="cell text-center">นักเรียน</th>
+                                        <th class="cell text-center">กลุ่มสาระฯ</th>
+                                        <th class="cell text-center">วิชา</th>
+                                        <th class="cell text-center">จำนวนนักเรียน</th>
                                         <th class="cell text-center">4</th>
                                         <th class="cell text-center">3.5</th>
                                         <th class="cell text-center">3</th>
@@ -113,48 +122,29 @@
                                         <th class="cell text-center">2</th>
                                         <th class="cell text-center">1.5</th>
                                         <th class="cell text-center">1</th>
-                                        <th class="cell text-center text-danger">0</th>
-                                        <th class="cell text-center">รวม</th>
-                                        <th class="cell text-center text-danger">ร</th>
-                                        <th class="cell text-center text-danger">มส</th>
-                                        <th class="cell text-center">รวม</th>
-                                        <th class="cell text-center ">ร้อยละผลการเรียนดี</th>
-                                        <th class="cell text-center ">ค่าเฉลี่ย</th>
-                                        <th class="cell text-center ">SD</th>
+                                        <th class="cell text-center">0,ร,มส</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($Showdata as $key => $v_data):?>
                                     <tr>
                                         <td class="cell">
-                                            <?=$v_data->pers_prefix.$v_data->pers_firstname.' '.$v_data->pers_lastname?>
+                                            <?=$v_data->FirstGroup?>
                                         </td>
                                         <td class="cell">
-                                            <?=$v_data->SubjectCode.' '.$v_data->SubjectName;?>
+                                        <?=$v_data->SubjectCode.' '.$v_data->SubjectName?>
                                         </td>
-                                        <td class="cell text-center text-center"><?=$v_data->StudentClass;?></td>
-                                        <td class="cell text-center text-center">
-                                            <?=$v_data->SubjectType;?>
+                                        <td class="cell row-total text-center">
+                                            
                                         </td>
-                                        <td class="cell text-center text-center">
-                                            <?=$v_data->SubjectUnit;?>
-                                        </td>
-                                        <td class="cell text-center"><?=$v_data->SumStu?></td>
-                                        <td class="cell text-center showGradeGood PC_Good"><?=$v_data->G4_0?></td>
-                                        <td class="cell text-center showGradeGood PC_Good"><?=$v_data->G3_5?></td>
-                                        <td class="cell text-center showGradeGood PC_Good"><?=$v_data->G3_0?></td>
-                                        <td class="cell text-center showGradeGood"><?=$v_data->G2_5?></td>
-                                        <td class="cell text-center showGradeGood"><?=$v_data->G2_0?></td>
-                                        <td class="cell text-center showGradeGood"><?=$v_data->G1_5?></td>
-                                        <td class="cell text-center showGradeGood"><?=$v_data->G1_0?></td>
-                                        <td class="cell text-center text-danger showGradeGood"><?=$v_data->G0?></td>
-                                        <td class="cell text-center SumGradeGood"></td>
-                                        <td class="cell text-center text-danger showGradeNoGood"><?=$v_data->G_W?></td>
-                                        <td class="cell text-center text-danger showGradeNoGood"><?=$v_data->G_MS?></td>
-                                        <td class="cell text-center SumGradeNoGood"></td>
-                                        <td class="cell text-center SumPcGood"></td>
-                                        <td class="cell text-center AvgGrade"></td>
-                                        <td class="cell text-center SumAvgSD"></td>
+                                        <td class="cell text-center sum-cell PC_Good"><?=$v_data->G4_0?></td>
+                                        <td class="cell text-center sum-cell PC_Good"><?=$v_data->G3_5?></td>
+                                        <td class="cell text-center sum-cell PC_Good"><?=$v_data->G3_0?></td>
+                                        <td class="cell text-center sum-cell"><?=$v_data->G2_5?></td>
+                                        <td class="cell text-center sum-cell"><?=$v_data->G2_0?></td>
+                                        <td class="cell text-center sum-cell"><?=$v_data->G1_5?></td>
+                                        <td class="cell text-center sum-cell"><?=$v_data->G1_0?></td>
+                                        <td class="cell text-center sum-cell"><?=$v_data->G0?></td>
                                     </tr>
                                     <?php endforeach; ?>
 
@@ -162,7 +152,7 @@
                         </table>
                     </div>
                     <!--//table-responsive-->
-
+                   
                 </div>
                 <!--//app-card-body-->
             </div>

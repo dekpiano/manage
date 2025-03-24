@@ -152,6 +152,11 @@
                     รายงานสรุปผลสัมฤทธิ์ทางการเรียน</a>
             </li>
             <li class="submenu-item"><a
+                    class="submenu-link <?=$this->uri->segment('4')=="ReportAcademicSummaryRoyalRoseStandard" && $this->uri->segment('3')=="Evaluate" ? "active" :""?>"
+                    href="<?=base_url('Admin/Acade/Evaluate/ReportAcademicSummaryRoyalRoseStandard?SelLern=0');?>">
+                    รายการผลสัมฤทธิ์ทางการเรียนตามมาตรฐานกุหลาบหลวง</a>
+            </li>
+            <li class="submenu-item"><a
                     class="submenu-link <?=$this->uri->segment('4')=="AcademicResult" ? "active" :""?>"
                     href="<?=base_url('Admin/Acade/Evaluate/AcademicResult');?>">ตั้งค่าแสดงผลการเรียนนักเรียน</a>
             </li>

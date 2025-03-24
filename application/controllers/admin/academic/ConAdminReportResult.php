@@ -385,6 +385,50 @@ var  $title = "แผงควบคุม";
 
     }
 
+    public function AdminReportAcademicSummaryRoyalRoseStandard(){
+        $DBSkj = $this->load->database('skj', TRUE);
+        $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
+        $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
+        $data['title'] = "รายงานสรุปผลสัมฤทธิ์ทางการเรียนตามมาตรฐานกุหลาบหลวง";
+        $data['CheckYear'] = $this->db->select('RegisterYear')->group_by('RegisterYear')->get('tb_register')->result();
+        $data['lern'] = $DBSkj->get('tb_learning')->result();
+
+        $data['KeyLevel'] = $this->input->get('SelLevel');
+        $data['KeyYear'] = urldecode($this->input->get('KeyYear'));
+       // echo  $data['KeyYear']; exit();      
+       
+        $data['Showdata'] = $this->db->select('
+                            tb_subjects.FirstGroup,
+                            tb_register.RegisterYear,
+                            tb_register.RegisterClass,
+                            tb_subjects.SubjectCode,
+                            tb_subjects.SubjectName,
+                            SUM(CASE WHEN tb_register.Grade = 4 THEN 1 ELSE 0 END) AS G4_0,
+                            SUM(CASE WHEN tb_register.Grade = 3.5 THEN 1 ELSE 0 END) AS G3_5,
+                            SUM(CASE WHEN tb_register.Grade = 3 THEN 1 ELSE 0 END) AS G3_0,
+                            SUM(CASE WHEN tb_register.Grade = 2.5 THEN 1 ELSE 0 END) AS G2_5,
+                            SUM(CASE WHEN tb_register.Grade = 2 THEN 1 ELSE 0 END) AS G2_0,
+                            SUM(CASE WHEN tb_register.Grade = 1.5 THEN 1 ELSE 0 END) AS G1_5,
+                            SUM(CASE WHEN tb_register.Grade = 1 THEN 1 ELSE 0 END) AS G1_0,
+                            SUM(CASE WHEN tb_register.Grade = 0 or tb_register.Grade = "มส" or tb_register.Grade = "ร" THEN 1 ELSE 0 END) AS G0                                 
+                            ')
+                            ->from('tb_register')
+                            ->join('tb_subjects','tb_subjects.SubjectID = tb_register.SubjectID')
+                            ->join('tb_students','tb_students.StudentID = tb_register.StudentID')
+                            ->where('tb_subjects.SubjectYear',$data['KeyYear'])
+                            ->where('tb_register.RegisterYear',$data['KeyYear'])
+                            ->where('tb_register.RegisterClass',$data['KeyLevel'])
+                            ->group_by('tb_subjects.FirstGroup,tb_subjects.SubjectCode')
+                            ->get()->result();        
+
+        $this->load->view('admin/layout/Header.php',$data);
+        $this->load->view('admin/Academic/AdminReportResults/AdminReportAcademicSummaryRoyalRoseStandard.php');
+        $this->load->view('admin/layout/Footer.php');
+
+    }
+
+    
+
     public function ReportScoreRoomMain($Term,$year,$Class,$Room){
         $DBpersonnel = $this->load->database('personnel', TRUE); 
         $data['title'] = "รายงานผลการบันทึกคะแนน (รายห้องเรียน)"; 

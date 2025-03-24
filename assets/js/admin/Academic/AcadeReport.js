@@ -29,14 +29,14 @@ $('.tblGrade').DataTable({
 // });
 
 //admin เกรด นักเรียน
-$('#tblGradeSumRoom tbody tr').each(function() {
+$('#tblGradeSumRoom tbody tr').each(function () {
 
     var totalGrade = 0;
     var totalUnit = 0;
     var averageGrade = 0;
     var value = 0;
 
-    $(this).find('.showGrade').each(function() {
+    $(this).find('.showGrade').each(function () {
         var valueUnit = parseFloat($(this).attr('data_unit'));
         var valueGrade = parseFloat($(this).text());
 
@@ -58,9 +58,9 @@ $('#tblGradeSumRoom tbody tr').each(function() {
 
 //สรุปผลสัมฤทธื์ คะแนนรวมดี ครู
 //หาจำนวนคนของเกรดรวม
-$('#ReportSummaryTeacher tbody tr').each(function() {
+$('#ReportSummaryTeacher tbody tr').each(function () {
     var SumGradeGood = 0;
-    $(this).find('.showGradeGood').each(function() {
+    $(this).find('.showGradeGood').each(function () {
         var ValueGradeGood = parseInt($(this).text())
         if (!isNaN(ValueGradeGood)) {
             SumGradeGood += ValueGradeGood;
@@ -71,9 +71,9 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
 });
 
 // หาผลรวม ร กับ มส
-$('#ReportSummaryTeacher tbody tr').each(function() {
+$('#ReportSummaryTeacher tbody tr').each(function () {
     var SumGradeNoGood = 0;
-    $(this).find('.showGradeNoGood').each(function() {
+    $(this).find('.showGradeNoGood').each(function () {
         var ValueGradeNoGood = parseInt($(this).text())
         if (!isNaN(ValueGradeNoGood)) {
             SumGradeNoGood += ValueGradeNoGood;
@@ -85,9 +85,9 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
 });
 
 //หาร้อยละผลการเรียนดี
-$('#ReportSummaryTeacher tbody tr').each(function() {
+$('#ReportSummaryTeacher tbody tr').each(function () {
     var SumPcGood = 0;
-    $(this).find('.PC_Good').each(function() {
+    $(this).find('.PC_Good').each(function () {
         var PcGood = parseFloat($(this).text())
         if (!isNaN(PcGood)) {
             SumPcGood += PcGood;
@@ -99,10 +99,10 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
 });
 
 // หาค่าเฉลี่ย
-$('#ReportSummaryTeacher tbody tr').each(function() {
+$('#ReportSummaryTeacher tbody tr').each(function () {
     var AvgGrade = 0;
     var G = [4, 3.5, 3, 2.5, 2, 1.5, 1, 0];
-    $(this).find('.showGradeGood').each(function(key, val) {
+    $(this).find('.showGradeGood').each(function (key, val) {
         var ValueGradeGood = parseInt($(this).text())
         if (!isNaN(ValueGradeGood)) {
             AvgGrade += G[key] * ValueGradeGood;
@@ -114,7 +114,7 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
 });
 
 // หา SD
-$('#ReportSummaryTeacher tbody tr').each(function() {
+$('#ReportSummaryTeacher tbody tr').each(function () {
     var AvgSD = 0;
     var G = [4, 3.5, 3, 2.5, 2, 1.5, 1, 0];
     var v_19 = parseFloat($('td', this).eq(19).text()); //ค่าเฉลี่ย
@@ -122,7 +122,7 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
     var v_16 = parseFloat($('td', this).eq(16).text()); //มส
     var v_15 = parseFloat($('td', this).eq(15).text()); //ร
 
-    $(this).find('.showGradeGood').each(function(key, val) {
+    $(this).find('.showGradeGood').each(function (key, val) {
         var ValueGradeGood = parseInt($(this).text())
         if (!isNaN(ValueGradeGood)) {
             AvgSD += ValueGradeGood * (G[key] - v_19) ** 2;
@@ -134,13 +134,13 @@ $('#ReportSummaryTeacher tbody tr').each(function() {
 
 });
 
-$(document).on("change", "#CheckYearSaveScore", function() {
+$(document).on("change", "#CheckYearSaveScore", function () {
     let Select_year = $(this).val();
     window.location.href = '../' + Select_year;
 
 });
 
-$(document).on("change", "#SelectRoomReportScore", function() {
+$(document).on("change", "#SelectRoomReportScore", function () {
 
     $('.loader').show();
     let SelectRoom = $(this).val();
@@ -151,4 +151,16 @@ $(document).on("change", "#SelectRoomReportScore", function() {
     //alert(KeyCheckYear);
 
 
+});
+
+$("#ReportSummaryRoyalRoseStandard tbody tr").each(function () {
+    let rowTotal = 0;
+    $(this).find(".sum-cell").each(function () {
+        let value = parseInt($(this).text(), 10);
+        if (!isNaN(value)) {
+            rowTotal += value;
+        }
+    });
+
+    $(this).find(".row-total").text(rowTotal); // ใส่ผลรวมไว้ที่คอลัมน์แรก
 });
