@@ -202,7 +202,11 @@ var  $title = "แผงควบคุม";
                     ->where('StudentClass',$keyroom)                                
                     ->where('tb_subjects.SubjectCode !=','I30301')
                     ->where('tb_subjects.SubjectCode !=','I20201')
-                    ->group_by('tb_register.SubjectID')                                
+                    ->group_by('tb_register.SubjectID')  
+                    ->order_by('SubjectType',"ASC")  
+                    ->order_by('FirstGroup',"ASC")   
+                    ->order_by('SubjectCode',"ASC")                 
+                    ->order_by('SecondGroup',"ASC")
                     ->get()->result();
 
                             $CheckSub = [];
