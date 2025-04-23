@@ -168,12 +168,12 @@ $(document).on("change", "#RoomEdit", function() {
 
 $(document).on("submit", "#FormRegisRepeatUpdate", function(e) {
     e.preventDefault();
+    //console.log($(this).serialize());
     $.ajax({
         url: '../../../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatAdd',
         type: 'post',
         data: $(this).serialize(),
         error: function() {
-            //console.log(data);
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
@@ -184,7 +184,7 @@ $(document).on("submit", "#FormRegisRepeatUpdate", function(e) {
         },
         success: function(data) {
             console.log(data);
-            if (data === "สำเร็จ") {
+            if (data) {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
