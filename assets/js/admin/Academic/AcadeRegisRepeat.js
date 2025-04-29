@@ -139,6 +139,98 @@ $(document).on("change", "#RoomEdit", function() {
 });
 
 
+    var lastCheckedCheckbox = null; // ตัวแปรเก็บ checkbox ล่าสุดที่ถูกติ๊ก
+    // เมื่อ checkbox ถูกคลิก
+    $('.SelRepeat').change(function() {
+        var targetModal = $(this).data('bs-target'); // ได้ค่าจาก data-bs-target (เช่น .myModal)
+
+        if ($(this).is(':checked')) {
+            $('#StuID').val($(this).val()); // ได้ค่าจาก data-bs-target (เช่น .myModal)
+           
+            $(targetModal).modal('show'); // ใช้ jQuery เปิดโมเดล
+            lastCheckedCheckbox = $(this); // เก็บ checkbox ที่ถูกติ๊ก
+        } else {
+            // ถ้า checkbox ไม่ถูกเลือกให้ปิดโมเดล
+            lastCheckedCheckbox = $(this);
+            Swal.fire({
+                title: 'คำถาม?',
+                text: "คุณต้องการถอนเรียนออกจากเรียนซ้ำหรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+              
+                  $.ajax({
+                    url: '../../../../../../../../admin/academic/ConAdminRegisRepeat/AdminRegisRepeatAdd',
+                    type: 'post',
+                    data: {
+                        DelStuID:$(this).val(),
+                        YearRepeat: $('#YearRepeat').val(),
+                        SubjectRepeat: $('#SubjectRepeat').val(),
+                        DelStatus:"Del"
+                    },
+                    error: function() {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'ระบบผิดพลาด ลองใหม่อีกครั้ง!',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if (data) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'ถอนการลงทะเบียนเรียนซ้ำ สำเร็จ!',
+                                showConfirmButton: false,
+                                timer: 3000
+                            }).then((result) => {
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    location.reload(true);
+                                }
+                            });
+            
+                        } else {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'warning',
+                                title: 'คุณไม่ได้เลือกนักเรียนในการลงทะเบียนเรียนซ้ำ!',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                        }
+            
+                    }
+                });
+                
+                }else{
+                    lastCheckedCheckbox.prop('checked', true);
+                    lastCheckedCheckbox = null;
+                }
+              });
+
+            $(targetModal).modal('hide'); // ใช้ jQuery ปิดโมเดล
+        }
+    });
+
+     // เมื่อโมเดลถูกปิด (ทั้งจากปุ่มปิดหรือคลิกภายนอก)
+     $('.myModal').on('hidden.bs.modal', function() {
+        // รีเซ็ต checkbox ที่เกี่ยวข้องกับโมเดลนั้นๆ ที่ถูกเลือกเท่านั้น
+        if (lastCheckedCheckbox) {
+            lastCheckedCheckbox.prop('checked', false); // รีเซ็ต checkbox ที่ถูกติ๊ก
+            lastCheckedCheckbox = null; // รีเซ็ตตัวแปรเพื่อไม่ให้เก็บค่าไว้
+        }
+        
+    });
+
+
+
 // $(document).on("submit", "#FormRegisRepeat", function(e) {
 //     e.preventDefault();
 //     $.ajax({

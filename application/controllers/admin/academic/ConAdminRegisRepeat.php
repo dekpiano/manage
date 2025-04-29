@@ -74,10 +74,14 @@ var  $title = "แผงควบคุม";
         tb_register.Grade_Type,
         tb_register.TeacherID,
         tb_register.RepeatTeacher,
-        tb_register.RepeatYear")
+        tb_register.RepeatYear,
+        CONCAT(teacher.pers_prefix,teacher.pers_firstname,' ',teacher.pers_lastname) AS TeacherName,
+        CONCAT(repeat_teacher.pers_prefix,repeat_teacher.pers_firstname,' ',repeat_teacher.pers_lastname) AS RepeatTeacherName")
         ->from('tb_register')
         ->join('tb_subjects', 'tb_subjects.SubjectID = tb_register.SubjectID')
         ->join('tb_students', 'tb_students.StudentID = tb_register.StudentID')
+        ->join('skjacth_personnel.tb_personnel AS teacher', 'teacher.pers_id = tb_register.TeacherID','LEFT')
+        ->join('skjacth_personnel.tb_personnel AS repeat_teacher', 'repeat_teacher.pers_id = tb_register.RepeatTeacher','LEFT')
         ->where('tb_register.RegisterYear',$Term.'/'.$Year)
         ->where('tb_subjects.SubjectYear',$Term.'/'.$Year)
         ->where('tb_subjects.SubjectCode',urldecode($IDSubject))
@@ -119,24 +123,32 @@ var  $title = "แผงควบคุม";
         $IdStuRepeat = array();
         $CountUpSucceed =0;
      
-        $DataDelete = array('Grade_Type' => "",'RepeatStatus'=>'','RepeatYear'=>"",'RepeatTeacher' => "");                    
-            $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
-            $this->db->where('RepeatConfirm',"");
-           $CountUpSucceed += $this->db->update('tb_register',$DataDelete);
+        // $DataDelete = array('Grade_Type' => "",'RepeatStatus'=>'','RepeatYear'=>"",'RepeatTeacher' => "");                    
+        //     $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
+        //     $this->db->where('RepeatConfirm',"");
+        //    $CountUpSucceed += $this->db->update('tb_register',$DataDelete);
 
-         if($this->input->post('SelRepeat')){
+         if($this->input->post('StuID')){
 
-            foreach ($this->input->post('SelRepeat') as $key => $value) {   
+           // foreach ($this->input->post('StuID') as $key => $value) {   
 
                $DataUpdateRepeat = array('Grade_Type' => $CheckRepeat[0]->onoff_detail,'RepeatStatus'=>'ไม่ผ่าน','RepeatYear'=>$CheckRepeat[0]->onoff_year,'RepeatTeacher' => $this->input->post('RepeatTeacher'));
                      $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
                      $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
-                     $this->db->where('StudentID',$value);
+                     $this->db->where('StudentID',$this->input->post('StuID'));
                     $CountUpSucceed += $this->db->update('tb_register',$DataUpdateRepeat);
-            }
-        }else{
-
+            //}
         }
+
+        if($this->input->post('DelStatus') == "Del"){
+            $DataDelete = array('Grade_Type' => "",'RepeatStatus'=>'','RepeatYear'=>"",'RepeatTeacher' => "");                    
+            $this->db->where('SubjectID',$this->input->post('SubjectRepeat'));
+            $this->db->where('RepeatConfirm',"");
+            $this->db->where('StudentID',$this->input->post('DelStuID'));
+            $this->db->where('RegisterYear',$this->input->post('YearRepeat'));
+           $CountUpSucceed += $this->db->update('tb_register',$DataDelete);
+        }
+
         
         echo 1;
     }
