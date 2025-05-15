@@ -39,7 +39,7 @@ var  $title = "แผงควบคุม";
 		$data['class_schedule'] = $this->db->get()->result();
 
 
-		$data['YearAll'] =  $this->db->select('CONCAT(schestu_term,"/",schestu_year) AS Year')->group_by('schestu_term','schestu_year')->get('tb_class_schedule')->result();
+		$data['YearAll'] =  $this->db->select('CONCAT(schestu_term,"/",schestu_year) AS Year')->group_by('schestu_year')->get('tb_class_schedule')->result();
 		//print_r( $data['YearAll']); exit();
 		$this->session->set_userdata(['SchoolYear' => $data['SchoolYear']->schyear_year]);
 		

@@ -3,7 +3,7 @@
         <div class="container-xl">
 
             <div class="d-flex flex-column justify-content-center align-items-center">
-                <h2>ตารางเรียน </h2>
+                <h2>ตารางเรียน 1/2568 <small>(ฉบับทดลอง)</small> </h2>
                 <div class="d-flex mt-3">
                    
                     <select class="w-auto countries" id="SearchClassSchedule">

@@ -12,7 +12,7 @@
                     <div class="d-flex justify-content-between mb-3">
                         <select name="SelYearClassSchedule" id="SelYearClassSchedule" class="form-select w-auto">
                             <?php foreach ($YearAll as $key => $v_YearAll) : ?>
-                            <option <?=$this->session->userdata('SchoolYear') == $v_YearAll->Year ? "selected":"";?>
+                            <option <?='1/2568' == $v_YearAll->Year ? "selected":"";?>
                                 value="<?=$v_YearAll->Year?>"><?=$v_YearAll->Year?></option>
                             <?php endforeach; ?>
                         </select>

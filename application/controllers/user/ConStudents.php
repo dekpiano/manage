@@ -189,8 +189,8 @@ var  $title = "แผงควบคุม";
     }
 
     public function ClassSchedule(){
-        $data['title'] = "ตารางเรียน";
-        $data['description'] = "ตารางเรียน";  
+        $data['title'] = "ตารางเรียน 1/2568";
+        $data['description'] = "ตารางเรียน 1/2568";  
         $data['full_url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $data['banner'] = base_url("uploads/banner/class_schedule/banner.png");;
         
@@ -203,11 +203,11 @@ var  $title = "แผงควบคุม";
     public function SearchClassSchedule(){
         $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
 
-        $Ex = explode('/',$data['SchoolYear']->schyear_year);
+        //$Ex = explode('/',$data['SchoolYear']->schyear_year);
 
         $data['schedule'] = $this->db
-        ->where('schestu_term', $Ex[0])
-        ->where('schestu_year', $Ex[1])
+        ->where('schestu_term', '1')
+        ->where('schestu_year', '2568')
         ->order_by('schestu_classname','ASC')
         ->get('tb_class_schedule')->result();
         header('Content-Type: application/json');

@@ -7,7 +7,7 @@
         console.log(data);
         
         $.each(data, function(index, image) {
-            $('#SearchClassSchedule').append('<option value="' + image.schestu_filename + '"> ม.' + image.schestu_classname +' ('+image.schestu_name +')</option>');
+            $('#SearchClassSchedule').append('<option value="' + image.schestu_filename + '"> ม.' + image.schestu_classname +' </option>');
         });
     },
     error: function(xhr, status, error) {
