@@ -39,7 +39,7 @@
 Swal.fire({
     icon: '<?=$this->session->flashdata('alert');?>',
     title: "แจ้งเตือน",
-    html: '<?=$this->session->flashdata('messge');?><br/>ติดต่องานวิชาการ',
+    html: '<?=$this->session->flashdata('messge');?>',
     confirmButtonText: "ตกลง",
 });
 </script>

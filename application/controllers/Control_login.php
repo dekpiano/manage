@@ -292,7 +292,7 @@ class Control_login extends CI_Controller {
 				}else{
 					$this->session->unset_userdata('access_token');
 
-					$this->session->set_flashdata(array('msg'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียนที่ลงทะเบียนเท่านั้น กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
+					$this->session->set_flashdata(array('status'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียนที่ลงทะเบียนเท่านั้น กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
 				
 				}
 			}
@@ -302,6 +302,7 @@ class Control_login extends CI_Controller {
 			if(!$this->session->userdata('access_token'))
 			{
 			// header('Location: '.$google_client->createAuthUrl());
+			$this->session->set_flashdata(array('status'=>'OK','messge'=> 'ระบบนี้ใช้ได้แค่อีเมลโรงเรียนที่ลงทะเบียนเท่านั้น<br>กรุณาติดต่อเจ้าหน้าที่คอม','alert'=>'error'));
 			redirect('welcome');
 			}
 			else
