@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Control_login extends CI_Controller {
@@ -254,7 +258,7 @@ class Control_login extends CI_Controller {
 
 	public function LoginMenager_callback(){
 		
-		$path = dirname(dirname(dirname(dirname((dirname(__FILE__))))));
+		$path = dirname(dirname(dirname(dirname(dirname((dirname(__FILE__)))))));
 		require $path . '/librarie_skj/google_sheet/vendor/autoload.php';
 		
 		$google_client = new Google_Client();

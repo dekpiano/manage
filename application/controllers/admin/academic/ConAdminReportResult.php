@@ -23,7 +23,7 @@ var  $title = "แผงควบคุม";
 
     function getClient()
     {
-        $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+        $path = dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))));
 		require $path . '/librarie_skj/google_sheet/vendor/autoload.php';
         //require_once APPPATH. '../vendor/google_sheet/vendor/autoload.php';    
         // configure the Google Client
