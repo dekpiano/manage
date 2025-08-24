@@ -279,8 +279,8 @@ class Control_login extends CI_Controller {
 				$data = $google_service->userinfo->get();
 				$current_datetime = date('Y-m-d H:i:s');			
 
-				// echo $this->Model_login->check_login_teacher($data['email']); 
-				if($this->Model_login->check_login_teacher($data['email']) == 1)
+				//echo $this->Model_login->check_login_teacher($data['email']); exit();
+				if($this->Model_login->check_login_teacher($data['email']) >= 1)
    				 {
 					$google_client->setAccessToken($token['access_token']);
 					$user_data = array(				 

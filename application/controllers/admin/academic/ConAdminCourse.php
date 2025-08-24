@@ -42,7 +42,7 @@ var  $title = "แผงควบคุม";
         ->get('tb_send_plan')->result();        
         $data['CheckYear'] = $this->db->get('tb_send_plan_setup')->result();
 
-        if($_GET['onoff_year']){
+        if(@$_GET['onoff_year']){
             $SubYear = explode('/',$_GET['onoff_year']);
             $data['year'] =  $SubYear[1];
             $data['term'] =  $SubYear[0];
