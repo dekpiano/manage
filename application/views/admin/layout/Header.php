@@ -17,7 +17,8 @@
     <script defer src="<?=base_url();?>assets/plugins/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/portal.css?v=1">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/custom.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">

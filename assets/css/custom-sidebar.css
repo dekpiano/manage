@@ -1,0 +1,22 @@
+.app-sidebar {
+  background: #A0C4A4 !important;
+  color: #333 !important;
+}
+
+.app-sidebar .nav-link {
+    color: #333;
+}
+
+.app-sidebar .nav-link:hover {
+    background: #B8D8BA;
+    color: #333;
+}
+
+.app-sidebar .nav-link.active {
+    color: #333;
+    background: #B8D8BA;
+}
+
+.app-header .app-sidebar-toggler {
+    color: #333;
+}

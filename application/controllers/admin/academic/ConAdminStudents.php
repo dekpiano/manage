@@ -25,7 +25,7 @@ class ConAdminStudents extends CI_Controller {
 
     function getClient()
 {
-    $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+    $path = dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))));
 		require $path . '/librarie_skj/google_sheet/vendor/autoload.php';
 
      // Our service account access key
@@ -202,7 +202,7 @@ class ConAdminStudents extends CI_Controller {
             }
         }
         $this->session->set_flashdata(array('status'=> 'success','messge' => 'อัพเดพข้อมูลสำเร็จ','msg'=>'YES'));
-        redirect('Admin/Acade/Registration/Students/ปกติ', 'location');
+        redirect('Admin/Acade/Registration/Students/Normal', 'location');
     }
 
     public function AdminStudentsMain1(){   
@@ -286,21 +286,72 @@ class ConAdminStudents extends CI_Controller {
   
     
     // Chart นักเรียนทั้งหมด
-    public function ChartStudentsAll(){
-        $ChartStuAll = [];
-        $CheckStuAll = $this->db->select('
-           SUM(CASE WHEN StudentPrefix = "นาย" OR StudentPrefix = "เด็กชาย" THEN 1 ELSE 0 END) AS Man, 
-           SUM(CASE WHEN StudentPrefix = "นางสาว" OR StudentPrefix = "เด็กหญิง" THEN 1 ELSE 0 END) AS Girl           
-        ')
-        ->where('StudentStatus','1/ปกติ')
-        ->get('tb_students')->result();
+    public function getDashboardData(){
+        header('Content-Type: application/json');
 
-        foreach ($CheckStuAll as $key => $value) {
-            $ChartStuAll[] = $value->Man;
-            $ChartStuAll[] = $value->Girl;
+        // 1. ดึงข้อมูลสรุปเพศ
+        $gender_count = $this->ModAdminStudents->get_gender_count();
+
+        // 2. ดึงข้อมูลนักเรียนตามระดับชั้น (แยกชาย/หญิง)
+        $students_by_class_from_db = $this->ModAdminStudents->get_students_by_class();
+        
+        //print_r($students_by_class_from_db); exit();
+        // สร้างโครงข้อมูล 6 ระดับชั้น โดยให้มีค่าเริ่มต้นเป็น 0
+        $class_counts = [
+            '1' => ['male' => 0, 'female' => 0],
+            '2' => ['male' => 0, 'female' => 0],
+            '3' => ['male' => 0, 'female' => 0],
+            '4' => ['male' => 0, 'female' => 0],
+            '5' => ['male' => 0, 'female' => 0],
+            '6' => ['male' => 0, 'female' => 0]
+        ];
+
+        // นำข้อมูลจากฐานข้อมูลมาอัปเดตในโครงที่เตรียมไว้
+        foreach($students_by_class_from_db as $class) {
+            if (array_key_exists($class->class_level, $class_counts)) {
+                $class_counts[$class->class_level]['male'] = (int)$class->male_count;
+                $class_counts[$class->class_level]['female'] = (int)$class->female_count;
+            }
         }
 
-        echo json_encode($ChartStuAll);
+        // เตรียมข้อมูลสำหรับส่งให้ Chart.js
+        $class_labels = [];
+        $male_data = [];
+        $female_data = [];
+        foreach ($class_counts as $level => $counts) {
+            $class_labels[] = 'ม.' . $level;
+            $male_data[] = $counts['male'];
+            $female_data[] = $counts['female'];
+        }
+
+        // 3. ดึงข้อมูลนักเรียนล่าสุด
+        $recent_students = $this->ModAdminStudents->get_recent_students(5);
+
+        // จัดรูปแบบข้อมูลสำหรับส่งกลับเป็น JSON
+        $data = [
+            'gender_count' => [
+                'male' => $gender_count->male_students ?? '0',
+                'female' => $gender_count->female_students ?? '0'
+            ],
+            'students_by_class' => [
+                'labels' => $class_labels,
+                'datasets' => [
+                    [
+                        'label' => 'ชาย',
+                        'data' => $male_data,
+                        'backgroundColor' => 'rgba(54, 162, 235, 0.5)'
+                    ],
+                    [
+                        'label' => 'หญิง',
+                        'data' => $female_data,
+                        'backgroundColor' => 'rgba(255, 99, 132, 0.5)'
+                    ]
+                ]
+            ],
+            'recent_students' => $recent_students
+        ];
+
+        echo json_encode($data);
     }
 
     public function AdminStudentsData(){
@@ -312,7 +363,6 @@ class ConAdminStudents extends CI_Controller {
         $this->load->view('admin/layout/Footer.php');
 
     }
-
 
 }
 

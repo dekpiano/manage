@@ -18,6 +18,7 @@
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="<?=base_url();?>assets/css/portal.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/custom-sidebar.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400&display=swap" rel="stylesheet">
 
 </head>

@@ -1,1 +1,38 @@
 /* your styles go here */
+
+/* Student Status Cards with Hover Effect */
+.app-card.normal-student-card {
+    background-color: #c8e6c9; /* Medium green */
+    transition: background-color 0.3s ease;
+}
+
+.app-card.normal-student-card:hover {
+    background-color: #a5d6a7; /* Darker green on hover */
+}
+
+.app-card.absent-student-card {
+    background-color: #ffcdd2; /* Medium red */
+    transition: background-color 0.3s ease;
+}
+
+.app-card.absent-student-card:hover {
+    background-color: #ef9a9a; /* Darker red on hover */
+}
+
+.app-card.dismissed-student-card {
+    background-color: #ffe082; /* Medium yellow */
+    transition: background-color 0.3s ease;
+}
+
+.app-card.dismissed-student-card:hover {
+    background-color: #ffd54f; /* Darker yellow on hover */
+}
+
+.app-card.all-student-card {
+    background-color: #cfd8dc; /* Medium gray */
+    transition: background-color 0.3s ease;
+}
+
+.app-card.all-student-card:hover {
+    background-color: #b0bec5; /* Darker gray on hover */
+}
