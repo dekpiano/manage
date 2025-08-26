@@ -63,4 +63,31 @@ class ModAdminStudents extends CI_Model
         return $students;
     }
 
+    public function get_student_by_id($student_id)
+    {
+        $DBpersonnel = $this->load->database('personnel', TRUE);
+        $this->db->select('s1.*, s2.*');
+        $this->db->from('skjacth_academic.tb_students s1');
+        $this->db->join('skjacth_personnel.tb_students s2', 's1.StudentIDNumber = REPLACE(s2.stu_iden, "-", "")', 'left');
+        $this->db->where('s1.StudentID', $student_id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    public function update_student_data($student_id, $student_id_number, $data_main, $data_personnel)
+    {
+        // Update data in the main 'manage' database
+        $this->db->where('StudentID', $student_id);
+        $this->db->update('tb_students', $data_main);
+        $main_success = $this->db->affected_rows() >= 0;
+
+        // Update data in the 'personnel' database
+        $DBpersonnel = $this->load->database('personnel', TRUE);
+        $DBpersonnel->where("REPLACE(stu_idStu, '-', '') = '" . $DBpersonnel->escape_str($student_id_number) . "'");
+        $DBpersonnel->update('tb_students', $data_personnel);
+        $personnel_success = $DBpersonnel->affected_rows() >= 0;
+
+        return $main_success && $personnel_success;
+    }
+
 }

@@ -88,27 +88,27 @@ class ConAdminStudents extends CI_Controller {
     public function AdminStudentsNormal(){
         $data['checkOnOff'] = $this->db->select('*')->from('tb_register_onoff')->get()->result();
              
-       
+        $this->load->library('classroom');
+		$data['class_list'] = $this->classroom->ListRoom();
+        $data['school_years'] = $this->db->order_by('schyear_year','desc')->get('tb_schoolyear')->result();
 
             // echo '<pre>'; print_r($data['stu']);  exit(); 
             $data['title'] = "จัดการข้อมูลนักเรียนปกติ";
             $data['SchoolYear'] = $this->db->get('tb_schoolyear')->row();
             $this->load->view('admin/layout/Header.php',$data);
-            $this->load->view('admin/Academic/AdminStudents/AdminStudentsNormal.php');
+            $this->load->view('admin/Academic/AdminStudents/AdminStudentsNormal.php',$data);
             $this->load->view('admin/layout/Footer.php');
 
     }
 
     public function AdminStudentsNormalShow($Key){
-        if(urlencode($Key) == "Normal"){
+        if(urldecode($Key) == "Normal"){
             $Keyword = "StudentStatus = '1/ปกติ'";
         }else{
             $Keyword = "StudentStatus != '1/ปกติ'";
         }
        
-
-        $data = [];
-        $stu = $this->db->select('StudentID,
+        $this->db->select('StudentID,
         StudentNumber,
         StudentClass,
         StudentCode,
@@ -118,10 +118,22 @@ class ConAdminStudents extends CI_Controller {
         StudentIDNumber,
         StudentStatus,
         StudentBehavior,
-        StudentStudyLine')
-        ->where($Keyword) 
-        ->get('tb_students')->result();   
-      
+        StudentStudyLine');
+        $this->db->where($Keyword); 
+
+        $classFilter = $this->input->post('classFilter');
+        if(!empty($classFilter)){
+            $this->db->where('StudentClass', $classFilter);
+        }
+
+        $school_year = $this->input->post('school_year');
+        if(!empty($school_year)){
+            $this->db->where('StudentSchoolYear', $school_year);
+        }
+
+        $stu = $this->db->get('tb_students')->result();   
+
+        $data = [];
         foreach($stu as $record){
             $data[] = array( 
                 "StudentCode" => $record->StudentCode,
@@ -362,6 +374,103 @@ class ConAdminStudents extends CI_Controller {
         $this->load->view('admin/Academic/AdminStudents/AdminStudentsDataLEC.php');
         $this->load->view('admin/layout/Footer.php');
 
+    }
+
+    
+
+    public function get_student_details($student_id)
+    {
+        header('Content-Type: application/json');
+        $student_data = $this->ModAdminStudents->get_student_by_id($student_id);
+        
+        if ($student_data && !empty($student_data->StudentDateBirth)) {
+            // Convert Buddhist year to Gregorian year for input type="date"
+            $Ex = explode('/', $student_data->StudentDateBirth);
+            $gregorian_year = $Ex[2];
+            $student_data->StudentDateBirth = sprintf("%04d-%02d-%02d", $gregorian_year,$Ex[1],$Ex[0]);
+        }
+        //print_r($student_data);exit();
+        echo json_encode($student_data);
+        exit; // Ensure no further output
+    }
+
+    public function update_student_details()
+    {
+        header('Content-Type: application/json');
+
+        $student_id = $this->input->post('StudentID');
+        $student_id_number = $this->input->post('StudentIDNumber'); // Use StudentIDNumber
+
+        if (empty($student_id) || empty($student_id_number)) {
+            echo json_encode(['status' => 'error', 'message' => 'Missing Student ID or National ID Number.']);
+            return;
+        }
+
+        // Convert Gregorian year from form to Buddhist year for database
+        $student_date_birth_gregorian = $this->input->post('StudentDateBirth');
+        $student_date_birth_buddhist = null;
+        if (!empty($student_date_birth_gregorian)) {
+            list($gregorian_year, $month, $day) = explode('-', $student_date_birth_gregorian);
+            $buddhist_year = (int)$gregorian_year + 543;
+            $student_date_birth_buddhist = sprintf('%04d-%02d-%02d', $buddhist_year, $month, $day);
+        }
+
+        // Data for default tb_students
+        $data_main = [
+            'StudentPrefix' => $this->input->post('StudentPrefix'),
+            'StudentFirstName' => $this->input->post('StudentFirstName'),
+            'StudentLastName' => $this->input->post('StudentLastName'),
+            'StudentClass' => $this->input->post('StudentClass'),
+            'StudentNumber' => $this->input->post('StudentNumber'),
+            'StudentStudyLine' => $this->input->post('StudentStudyLine'),
+            'StudentStatus' => $this->input->post('StudentStatus'),
+            'StudentBehavior' => $this->input->post('StudentBehavior'),
+            'StudentIDNumber' => $this->input->post('StudentIDNumber'),
+            'StudentDateBirth' => $student_date_birth_buddhist // Use converted Buddhist year
+        ];
+
+        // Data for personnel.tb_students
+        $data_personnel = [
+            'stu_nickName' => $this->input->post('stu_nickName'),
+            'stu_phone' => $this->input->post('stu_phone'),
+            'stu_email' => $this->input->post('stu_email'),
+            'stu_bloodType' => $this->input->post('stu_bloodType'),
+            'stu_diseaes' => $this->input->post('stu_diseaes'),
+            'stu_nationality' => $this->input->post('stu_nationality'),
+            'stu_race' => $this->input->post('stu_race'),
+            'stu_religion' => $this->input->post('stu_religion'),
+            'stu_wieght' => $this->input->post('stu_wieght'),
+            'stu_hieght' => $this->input->post('stu_hieght'),
+            // Home Address
+            'stu_hCode' => $this->input->post('stu_hCode'),
+            'stu_hNumber' => $this->input->post('stu_hNumber'),
+            'stu_hMoo' => $this->input->post('stu_hMoo'),
+            'stu_hRoad' => $this->input->post('stu_hRoad'),
+            'stu_hTambon' => $this->input->post('stu_hTambon'),
+            'stu_hDistrict' => $this->input->post('stu_hDistrict'),
+            'stu_hProvince' => $this->input->post('stu_hProvince'),
+            'stu_hPostCode' => $this->input->post('stu_hPostCode'),
+            // Current Address
+            'stu_cNumber' => $this->input->post('stu_cNumber'),
+            'stu_cMoo' => $this->input->post('stu_cMoo'),
+            'stu_cRoad' => $this->input->post('stu_cRoad'),
+            'stu_cTumbao' => $this->input->post('stu_cTumbao'),
+            'stu_cDistrict' => $this->input->post('stu_cDistrict'),
+            'stu_cProvince' => $this->input->post('stu_cProvince'),
+            'stu_cPostcode' => $this->input->post('stu_cPostcode')
+        ];
+
+        // Remove null values to avoid overwriting existing data with empty strings
+        $data_main = array_filter($data_main, function($value) { return $value !== null && $value !== ''; });
+        $data_personnel = array_filter($data_personnel, function($value) { return $value !== null && $value !== ''; });
+
+        $success = $this->ModAdminStudents->update_student_data($student_id, $student_id_number, $data_main, $data_personnel);
+
+        if ($success) {
+            echo json_encode(['status' => 'success', 'message' => 'บันทึกข้อมูลนักเรียนเรียบร้อยแล้ว']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล']);
+        }
     }
 
 }
