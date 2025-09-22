@@ -37,7 +37,7 @@
 </div>
 
 
-<style>
+'''<style>
     #studentDetailModal .form-floating label {
         color: black !important;
     }
@@ -57,7 +57,30 @@
         min-width: 100px;
         text-align: center;
     }
-</style>
+
+    /* Custom Modal Styles */
+    #studentDetailModal .modal-content {
+        background-color: #f8f9fa; /* A light gray background */
+        border-radius: 0.5rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* A more prominent shadow */
+        border: none;
+    }
+    #studentDetailModal .modal-header {
+        background-color: #4e73df; /* A nice blue for the header */
+        color: white;
+        border-bottom: none;
+    }
+    #studentDetailModal .modal-header .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
+    #studentDetailModal .modal-body {
+        background-color: #ffffff; /* White background for the form area */
+    }
+    #studentDetailModal .modal-footer {
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+    }
+</style>'''
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

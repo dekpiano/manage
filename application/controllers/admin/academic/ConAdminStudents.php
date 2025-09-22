@@ -381,7 +381,11 @@ class ConAdminStudents extends CI_Controller {
     public function get_student_details($student_id)
     {
         header('Content-Type: application/json');
+        $this->load->library('classroom');
+
         $student_data = $this->ModAdminStudents->get_student_by_id($student_id);
+        $class_list = $this->classroom->ListRoom();
+        $study_line_list = $this->classroom->studentStudyLineOptions();
         
         if ($student_data && !empty($student_data->StudentDateBirth)) {
             // Convert Buddhist year to Gregorian year for input type="date"
@@ -389,8 +393,14 @@ class ConAdminStudents extends CI_Controller {
             $gregorian_year = $Ex[2];
             $student_data->StudentDateBirth = sprintf("%04d-%02d-%02d", $gregorian_year,$Ex[1],$Ex[0]);
         }
-        //print_r($student_data);exit();
-        echo json_encode($student_data);
+        
+        $response_data = [
+            'student_data' => $student_data,
+            'class_list'   => $class_list,
+            'study_line_list' => $study_line_list
+        ];
+
+        echo json_encode($response_data);
         exit; // Ensure no further output
     }
 
@@ -457,7 +467,34 @@ class ConAdminStudents extends CI_Controller {
             'stu_cTumbao' => $this->input->post('stu_cTumbao'),
             'stu_cDistrict' => $this->input->post('stu_cDistrict'),
             'stu_cProvince' => $this->input->post('stu_cProvince'),
-            'stu_cPostcode' => $this->input->post('stu_cPostcode')
+            'stu_cPostcode' => $this->input->post('stu_cPostcode'),
+            // General Info
+            'stu_birthTambon' => $this->input->post('stu_birthTambon'),
+            'stu_birthDistrict' => $this->input->post('stu_birthDistrict'),
+            'stu_birthProvirce' => $this->input->post('stu_birthProvirce'),
+            'stu_birthHospital' => $this->input->post('stu_birthHospital'),
+            'stu_numberSibling' => $this->input->post('stu_numberSibling'),
+            'stu_firstChild' => $this->input->post('stu_firstChild'),
+            'stu_numberSiblingSkj' => $this->input->post('stu_numberSiblingSkj'),
+            'stu_parenalStatus' => $this->input->post('stu_parenalStatus'),
+            'stu_presentLife' => $this->input->post('stu_presentLife'),
+            'stu_personOther' => $this->input->post('stu_personOther'),
+            'stu_disablde' => $this->input->post('stu_disablde'),
+            'stu_talent' => $this->input->post('stu_talent'),
+            'stu_natureRoom' => $this->input->post('stu_natureRoom'),
+            'stu_farSchool' => $this->input->post('stu_farSchool'),
+            'stu_travel' => $this->input->post('stu_travel'),
+            'stu_gradLevel' => $this->input->post('stu_gradLevel'),
+            'stu_schoolfrom' => $this->input->post('stu_schoolfrom'),
+            'stu_schoolTambao' => $this->input->post('stu_schoolTambao'),
+            'stu_schoolDistrict' => $this->input->post('stu_schoolDistrict'),
+            'stu_schoolProvince' => $this->input->post('stu_schoolProvince'),
+            'stu_usedStudent' => $this->input->post('stu_usedStudent'),
+            'stu_inputLevel' => $this->input->post('stu_inputLevel'),
+            'stu_phoneUrgent' => $this->input->post('stu_phoneUrgent'),
+            'stu_phoneFriend' => $this->input->post('stu_phoneFriend'),
+            'stu_future_education' => $this->input->post('stu_future_education'),
+            'stu_career_interest' => $this->input->post('stu_career_interest')
         ];
 
         // Remove null values to avoid overwriting existing data with empty strings
